@@ -1,0 +1,153 @@
+#search-files {
+  margin-bottom: 20px;
+  width: 280px;
+  height: 36px;
+  padding: 8px 12px;
+}
+
+#shared-files-all-files {
+  display: none;
+}
+
+.shared-files-category-select {
+  margin-bottom: 20px;
+  height: 36px;
+}
+
+#shared-files-search > ul ul,
+#shared-files-search > ul ol {
+  padding-left: 32px;
+}
+
+#shared-files-search > ul {
+  list-style: none;
+  margin: 0;
+  padding-top: 10px;
+}
+
+#shared-files-search > ul > li {
+  margin-left: 0;
+  margin-bottom: 24px;
+  list-style: none;
+}
+
+#shared-files-search > ul > li h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 10px 0 0 0;
+}
+
+#shared-files-search > ul > li a {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#shared-files-search > ul > li p {
+  margin-bottom: 12px;
+}
+
+#shared-files-search > ul > li .shared-file-size {
+  background: #f7f7f7;
+  padding: 2px 8px;
+  font-size: 14px;
+  margin-left: 6px;
+}
+
+#shared-files-search > ul > li .shared-file-date {
+  display: block;
+  font-size: 14px;
+}
+
+#shared-files-search > ul > li .shared-file-category {
+  display: block;
+  font-size: 12px;
+  font-style: italic;
+}
+
+#shared-files-search > ul > li .shared-file-description {
+  margin-top: 8px;
+  font-size: 0.9rem;
+}
+
+#shared-files-files-found {
+  display: none;
+  margin-bottom: 20px;
+}
+
+#shared-files-nothing-found {
+  display: none;
+}
+
+.shared-files-more-files {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.shared-files-pagination {
+  padding: 10px;
+}
+
+.shared-files-pagination a {
+  padding: 10px;
+  background: #f7f7f7;
+  display: inline-block;
+}
+
+.shared-files-main-elements {
+  display: table;
+  width: 100%;
+}
+
+.shared-files-main-elements-left {
+  background: url('/wp-content/plugins/shared-files/img/generic.png') top right no-repeat;
+  display: table-cell;
+  width: 60px;
+  height: 64px;
+  vertical-align: top;
+}
+
+.shared-files-main-elements-right {
+  display: table-cell;
+  padding-left: 10px;
+  vertical-align: top;
+}
+
+.shared-files-search-form-container .shared-files-search-input-container {
+  float: left;
+  padding-right: 10px;
+}
+
+.shared-files-search-form-container .shared-files-category-select-container {
+  float: left;
+}
+
+#shared-files-one-file-found {
+  display: none;
+}
+
+#shared-files-more-than-one-file-found {
+  display: none;
+}
+
+.sf_error {
+  color: #cd0000;
+  text-align: center;
+  border: 1px solid #cd0000;
+  padding: 10px;
+  font-weight: bold;
+}
+
+hr.clear {
+  background: none;
+  border: 0;
+  clear: both;
+  display: block;
+  float: none;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
