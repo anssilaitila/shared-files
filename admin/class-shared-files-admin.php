@@ -107,9 +107,9 @@ class Shared_Files_Admin
         );
         wp_editor( $description, '_sf_description', $settings );
         $html = '';
-        $html .= "\n    <script>\n      jQuery( document ).ready( function(\$) {\n        \$( 'form#post' ).attr( 'enctype', 'multipart/form-data' );\n      });\n    </script>\n    ";
+        $html .= "\n    <script>\n      jQuery(document).ready(function(\$) {\n        \$('form#post').attr('enctype', 'multipart/form-data');\n      });\n    </script>\n    ";
         if ( !$file ) {
-            $html .= "\n      <script>\n        jQuery( document ).ready( function(\$) {\n          \$('#post').submit(function() {\n            if (\$('#shared-file-external-url').val().length == 0 && \$('#sf_file').prop('files').length == 0) {\n              alert('" . __( 'Please insert the file first or define an external URL.', 'shared-files' ) . "');\n              return false;\n            }\n          });\n        });\n      </script>\n      ";
+            $html .= "\n      <script>\n        jQuery(document).ready(function(\$) {\n          \$('#post').submit(function() {\n            if (\$('#shared-file-external-url').val().length == 0 && \$('#sf_file').prop('files').length == 0) {\n              alert('" . __( 'Please insert the file first or define an external URL.', 'shared-files' ) . "');\n              return false;\n            }\n          });\n        });\n      </script>\n      ";
         }
         echo  $html ;
     }
@@ -245,6 +245,7 @@ class Shared_Files_Admin
             'public'             => true,
             'has_archive'        => false,
             'publicly_queryable' => false,
+            'menu_icon'          => 'dashicons-index-card',
         ] );
         remove_post_type_support( 'shared_file', 'editor' );
         function human_filesize( $bytes, $decimals = 2 )
@@ -297,7 +298,7 @@ class Shared_Files_Admin
                 echo  '<a href="' . $file_url . '" target="_blank">' . $file_url . '</a>' ;
                 break;
             case 'file_shortcode':
-                echo  '[shared_files file_id=' . $post_ID . ']' ;
+                echo  '<span class="shared-files-shortcode">[shared_files file_id=' . $post_ID . ']</span>' ;
                 break;
             case 'filesize':
                 
@@ -501,11 +502,18 @@ class Shared_Files_Admin
         }
     }
     
-    /**
-     * Adds a submenu page under a custom post type parent.
-     *
-     * @since    1.0.0
-     */
+    public function register_categories_info_page()
+    {
+        add_submenu_page(
+            'edit.php?post_type=shared_file',
+            __( 'Categories', 'shared-files' ),
+            __( 'Categories', 'shared-files' ),
+            'manage_options',
+            'shared-files-categories-info',
+            [ $this, 'register_categories_info_page_callback' ]
+        );
+    }
+    
     public function register_support_page()
     {
         add_submenu_page(
@@ -538,38 +546,36 @@ class Shared_Files_Admin
         );
     }
     
-    /**
-     * Display callback for the submenu page.
-     *
-     * @since    1.0.0
-     */
-    public function register_support_page_callback()
+    public function register_categories_info_page_callback()
     {
         ?>
 
-    <style>
-      .shared-files-feedback-form-container {
-        padding: 10px;
-        background: #fff;
-      }
-      .shared-files-help-list-level-2 {
-        list-style: circle;
-        padding: .25rem 0 0 1.5rem;
-      }
-      .shared-files-shortcode {
-        background: #fff;
-        padding: 0 .5rem;
-        font-weight: 300;
-      }
-      .wrap > ol > li > ul > li {
-         padding-bottom: .25rem;
-      }
-    </style>
+    <div class="wrap">
+      <h1><?php 
+        echo  __( 'Categories', 'shared-files' ) ;
+        ?></h1>
+
+      <?php 
+        echo  sfProFeatureMarkup() ;
+        ?>
+
+    </div>
+    <?php 
+    }
+    
+    public function register_support_page_callback()
+    {
+        ?>
 
     <div class="wrap">
       <h1><?php 
         echo  __( 'How to use the Shared Files plugin', 'shared-files' ) ;
         ?></h1>
+      <div class="shared-files-examples"><?php 
+        echo  __( 'Some examples on how you can use different views available', 'shared-files' ) ;
+        ?> <a href="https://www.sharedfilespro.com/shared-files/" target="_blank"><?php 
+        echo  __( 'here', 'shared-files' ) ;
+        ?></a>.</div>
       <ol>
         <li><?php 
         echo  __( 'Add the files via the File Management page', 'shared-files' ) ;
@@ -589,11 +595,32 @@ class Shared_Files_Admin
                 <li><?php 
         echo  __( 'Using the parameter hide_search you may hide the search form like so:', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files hide_search=1]</span></li>
+                <li><?php 
+        echo  __( 'More additional parameters:', 'shared-files' ) ;
+        ?> <span class="shared-files-pro-only-inline">Pro</span>
+                  <ul class="shared-files-help-list-level-3">
+                    <li><?php 
+        echo  __( 'Hide file description:', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files hide_description=1]</li>
+                    <li><?php 
+        echo  __( 'Layout as "2 cards on the same row":', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files layout=2-cards-on-the-same-row]</li>
+                    <li><?php 
+        echo  __( 'Layout as "3 cards on the same row":', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files layout=3-cards-on-the-same-row]</li>
+                    <li><?php 
+        echo  __( 'Layout as "4 cards on the same row":', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files layout=4-cards-on-the-same-row]</li>
+                    <li><?php 
+        echo  __( 'You can also use multiple parameters:', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files layout=2-cards-on-the-same-row hide_description=1]</li>
+                  </ul>
+                </li>
               </ul>
             </li>
             <li><b><?php 
         echo  __( 'List only files in certain category:', 'shared-files' ) ;
-        ?></b><br /><?php 
+        ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
         echo  __( 'Insert the shortcode', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files category="category_slug"]</span>. <?php 
         echo  __( 'You can find / define the category slug by editing the category.', 'shared-files' ) ;

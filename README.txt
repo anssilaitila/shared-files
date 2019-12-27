@@ -17,6 +17,8 @@ Very easy to use and no complex settings to mind on, but also very scalable for 
 
 **14 days trial available for Pro version, no credit card required.**
 
+Demo available [here](https://www.sharedfilespro.com/shared-files/).
+
 = Some use cases for this plugin: =
 * List any number of files and track downloads
 * Share files like using Dropbox or Google Drive
@@ -37,8 +39,6 @@ Very easy to use and no complex settings to mind on, but also very scalable for 
 * Alternatively define an external URL for file and track those loads
 * Optionally receive an email notify when a file is downloaded
 
-Demo available [here](https://demo.anssilaitila.fi/shared-files/).
-
 Contact author [here](https://anssilaitila.fi/).
 
 Thanks to Luciano Del Fico for translating the Italian version.
@@ -54,6 +54,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 2. File management in admin area
 
 == Changelog ==
+
+= 1.5.3 =
+* Free and Pro: New settings for file list layout
 
 = 1.5.2 =
 * Minor improvements

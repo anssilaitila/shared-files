@@ -1,17 +1,46 @@
-#search-files {
-  margin-bottom: 20px;
-  width: 280px;
-  height: 36px;
-  padding: 8px 12px;
-}
-
 #shared-files-all-files {
   display: none;
 }
 
-.shared-files-category-select {
-  margin-bottom: 20px;
+.shared-files-search-form-container {
+  margin-bottom: 15px;
+  max-width: 590px;
+}
+
+.shared-files-search-form-container .shared-files-search-input-container {
+}
+
+#search-files {
+  margin-bottom: 8px;
+  width: 100%;
   height: 36px;
+  padding: 8px 12px;
+}
+
+.shared-files-search-form-container .shared-files-category-select-container {
+}
+
+.shared-files-category-select {
+}
+
+.select_v2 {
+  font-size: 13px;
+  color: #32373c;
+  border: 1px solid #7e8993;
+  box-shadow: none;
+  border-radius: 3px;
+  padding: 4px 24px 3px 8px;
+  min-height: 28px;
+  max-width: 250px;
+  vertical-align: middle;
+  -webkit-appearance: none;
+  background:
+  #fff url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E') no-repeat right 5px top 55%;
+  background-size: auto;
+  background-size: 16px 16px;
+  cursor: pointer;  
+  margin-right: 8px;
+  margin-bottom: 10px;
 }
 
 #shared-files-search > ul ul,
@@ -47,10 +76,13 @@
 }
 
 #shared-files-search > ul > li .shared-file-size {
-  background: #f7f7f7;
-  padding: 2px 8px;
+  background: #fafafa;
+  border: 1px solid #eee;
+  padding: 0 8px;
   font-size: 14px;
-  margin-left: 6px;
+  margin-left: 8px;
+  border-radius: 2px;
+  display: inline-block;
 }
 
 #shared-files-search > ul > li .shared-file-date {
@@ -60,7 +92,7 @@
 
 #shared-files-search > ul > li .shared-file-category {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
 }
 
@@ -112,15 +144,6 @@
   vertical-align: top;
 }
 
-.shared-files-search-form-container .shared-files-search-input-container {
-  float: left;
-  padding-right: 10px;
-}
-
-.shared-files-search-form-container .shared-files-category-select-container {
-  float: left;
-}
-
 #shared-files-one-file-found {
   display: none;
 }
@@ -137,7 +160,8 @@
   font-weight: bold;
 }
 
-hr.clear {
+hr.clear,
+.entry-content hr.clear {
   background: none;
   border: 0;
   clear: both;
@@ -150,4 +174,87 @@ hr.clear {
   visibility: hidden;
   width: 0;
   height: 0;
+}
+
+.shared-files-2-cards-on-the-same-row #myList li {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+.shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements {
+  height: 380px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.shared-files-3-cards-on-the-same-row #myList li {
+  float: left;
+  width: 33.333%;
+  padding: 10px;
+}
+
+.shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements {
+  height: 380px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.shared-files-4-cards-on-the-same-row #myList li {
+  float: left;
+  width: 25%;
+  padding: 10px;
+}
+
+.shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements {
+  height: 380px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+@media (max-width: 820px) {
+
+  .shared-files-3-cards-on-the-same-row #myList li {
+    width: 50%;
+  }
+  
+  .shared-files-4-cards-on-the-same-row #myList li {
+    width: 50%;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .shared-files-2-cards-on-the-same-row #myList li {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements {
+    height: auto;
+  }  
+  
+  .shared-files-3-cards-on-the-same-row #myList li {
+    float: left;
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements {
+    height: auto;
+  }  
+  
+  .shared-files-4-cards-on-the-same-row #myList li {
+    float: left;
+    width: 100%;
+    padding: 0;
+  }
+
+  .shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements {
+    height: auto;
+  }  
 }

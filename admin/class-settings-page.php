@@ -24,6 +24,62 @@ class Shared_Files_Settings
         );
         // ...
         add_settings_field(
+            'shared-files-layout',
+            __( 'Layout', 'shared-files' ),
+            array( $this, 'layout_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-layout',
+            'field_name' => 'layout',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_height',
+            __( 'Card height in pixels', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-card_height',
+            'field_name'  => 'card_height',
+            'placeholder' => '380',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_background',
+            __( 'Card background', 'shared-files' ),
+            array( $this, 'card_background_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-card_background',
+            'field_name' => 'card_background',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_font',
+            __( 'Card font', 'shared-files' ),
+            array( $this, 'card_font_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-card_font',
+            'field_name' => 'card_font',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_small_font_size',
+            __( 'Small font size on card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-card_small_font_size',
+            'field_name' => 'card_small_font_size',
+        )
+        );
+        add_settings_field(
             'shared-files-wp_location',
             __( 'WordPress location', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -152,6 +208,107 @@ class Shared_Files_Settings
 
     </form>
     <?php 
+    }
+    
+    public function layout_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $layout = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $layout = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value=""><?php 
+            echo  __( 'Default list', 'shared-files' ) ;
+            ?></option>
+          <option value="2-cards-on-the-same-row" <?php 
+            echo  ( $layout == '2-cards-on-the-same-row' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( '2 cards on the same row', 'shared-files' ) ;
+            ?></option>
+          <option value="3-cards-on-the-same-row" <?php 
+            echo  ( $layout == '3-cards-on-the-same-row' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( '3 cards on the same row', 'shared-files' ) ;
+            ?></option>
+          <option value="4-cards-on-the-same-row" <?php 
+            echo  ( $layout == '4-cards-on-the-same-row' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( '4 cards on the same row', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function card_background_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $card_background = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $card_background = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+        <option value=""><?php 
+            echo  __( 'Transparent', 'shared-files' ) ;
+            ?></option>
+        <option value="white" <?php 
+            echo  ( $card_background == 'white' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'White', 'shared-files' ) ;
+            ?></option>
+        <option value="light_gray" <?php 
+            echo  ( $card_background == 'light_gray' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Light gray', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function card_font_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $card_font = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $card_font = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+        <option value=""><?php 
+            echo  __( 'Default', 'shared-files' ) ;
+            ?></option>
+        <option value="roboto" <?php 
+            echo  ( $card_font == 'roboto' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Roboto', 'shared-files' ) ;
+            ?></option>
+        <option value="ubuntu" <?php 
+            echo  ( $card_font == 'ubuntu' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Ubuntu', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
     }
 
 }

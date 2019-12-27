@@ -194,7 +194,7 @@ class Shared_Files_Public
                         $html .= '<span class="shared-file-size">' . human_filesize( $c['_sf_filesize'][0] ) . '</span>';
                     }
                     $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
-                    if ( isset( $c['_sf_description'] ) ) {
+                    if ( isset( $c['_sf_description'] ) && !isset( $atts['hide_description'] ) ) {
                         $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
                     }
                     $html .= '</div>';
@@ -209,7 +209,52 @@ class Shared_Files_Public
             $html .= '</div>';
             return $html;
         } else {
+            $layout = '';
+            
+            if ( isset( $atts['layout'] ) ) {
+                $layout = $atts['layout'];
+            } elseif ( isset( $s['layout'] ) && $s['layout'] ) {
+                $layout = $s['layout'];
+            }
+            
             $html = '';
+            if ( isset( $s['card_small_font_size'] ) && $s['card_small_font_size'] ) {
+                $html .= '<style>.shared-files-main-elements p { font-size: 15px; }</style>';
+            }
+            if ( isset( $s['card_font'] ) && $s['card_font'] ) {
+                
+                if ( $s['card_font'] == 'roboto' ) {
+                    $html .= '<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">';
+                    $html .= '<style>.shared-files-main-elements * { font-family: "Roboto", sans-serif; }</style>';
+                } elseif ( $s['card_font'] == 'ubuntu' ) {
+                    $html .= '<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">';
+                    $html .= '<style>.shared-files-main-elements * { font-family: "Ubuntu", sans-serif; }</style>';
+                }
+            
+            }
+            
+            if ( isset( $s['card_background'] ) && $s['card_background'] ) {
+                $html .= '<style>.shared-files-container #myList li { margin-bottom: 5px; } </style>';
+                
+                if ( $s['card_background'] == 'white' ) {
+                    $html .= '<style>.shared-files-main-elements { background: #fff; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
+                } elseif ( $s['card_background'] == 'light_gray' ) {
+                    $html .= '<style>.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
+                }
+            
+            }
+            
+            
+            if ( isset( $s['card_height'] ) && $s['card_height'] ) {
+                $html .= '<style>.shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . $s['card_height'] . 'px; } </style>';
+                $html .= '<style>.shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . $s['card_height'] . 'px; } </style>';
+                $html .= '<style>.shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . $s['card_height'] . 'px; } </style>';
+                $html .= '<style> @media (max-width: 500px) { .shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
+                $html .= '<style> @media (max-width: 500px) { .shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
+                $html .= '<style> @media (max-width: 500px) { .shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
+            }
+            
+            $html .= '<div class="shared-files-container ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
             $html .= '<div id="shared-files-search">';
             
             if ( isset( $atts['category'] ) ) {
@@ -323,12 +368,16 @@ class Shared_Files_Public
                         }
                     } else {
                         $file = get_post_meta( get_the_ID(), '_sf_file', true );
-                        $filetype = $file['type'];
-                        if ( array_key_exists( $filetype, $filetypes ) ) {
-                            if ( isset( $filetypes[$filetype] ) ) {
-                                $imagefile = $filetypes[$filetype] . '.png';
+                        
+                        if ( isset( $file['type'] ) ) {
+                            $filetype = $file['type'];
+                            if ( array_key_exists( $filetype, $filetypes ) ) {
+                                if ( isset( $filetypes[$filetype] ) ) {
+                                    $imagefile = $filetypes[$filetype] . '.png';
+                                }
                             }
                         }
+                    
                     }
                     
                     $html .= '<li>';
@@ -340,7 +389,7 @@ class Shared_Files_Public
                         $html .= '<span class="shared-file-size">' . human_filesize( $c['_sf_filesize'][0] ) . '</span>';
                     }
                     $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
-                    if ( isset( $c['_sf_description'] ) ) {
+                    if ( isset( $c['_sf_description'] ) && !isset( $atts['hide_description'] ) ) {
                         $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
                     }
                     $html .= '</div>';
