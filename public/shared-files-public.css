@@ -51,13 +51,41 @@
 #shared-files-search > ul {
   list-style: none;
   margin: 0;
-  padding-top: 10px;
+  padding: 10px 0 0 0;
+}
+
+.shared-files-all-files-and-categories {
+  display: none;
+}
+
+#shared-files-search > ul.shared-files-all-files-and-categories {
+  padding-top: 0;
+}
+
+#shared-files-search .shared-files-search-form-container-all-files {
+  margin-bottom: 0;
+}
+
+#shared-files-search .shared-files-all-files-and-categories h4 {
+  margin: 40px 0 20px 0;
+}
+
+#shared-files-search .shared-files-all-files-and-categories ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#shared-files-search .shared-files-all-files-and-categories ul li {
+  margin: 0;
+  padding-left: 0;
 }
 
 #shared-files-search > ul > li {
   margin-left: 0;
   margin-bottom: 24px;
   list-style: none;
+  padding-left: 0;
 }
 
 #shared-files-search > ul > li h3 {
@@ -142,6 +170,7 @@
   display: table-cell;
   padding-left: 10px;
   vertical-align: top;
+  line-height: 1.5;
 }
 
 #shared-files-one-file-found {

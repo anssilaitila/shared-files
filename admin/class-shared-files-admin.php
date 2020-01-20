@@ -161,8 +161,7 @@ class Shared_Files_Admin
                     update_post_meta( $file_id, '_sf_last_access', current_time( 'Y-m-d H:i:s' ) );
                     header( 'Location: ' . $external_url );
                     die;
-                } else {
-                    $file = get_post_meta( $file_id, '_sf_file', true );
+                } elseif ( $file = get_post_meta( $file_id, '_sf_file', true ) ) {
                     $filename = $file['file'];
                     $file_mime = mime_content_type( $filename );
                     // Update load counter, last access and bandwidth usage
@@ -618,6 +617,11 @@ class Shared_Files_Admin
                 </li>
               </ul>
             </li>
+            <li><b><?php 
+        echo  __( 'Search form only that targets all the files, sorted by category', 'shared-files' ) ;
+        ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
+        echo  __( 'Insert the shortcode', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files_search]</span></li>
             <li><b><?php 
         echo  __( 'List only files in certain category:', 'shared-files' ) ;
         ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 

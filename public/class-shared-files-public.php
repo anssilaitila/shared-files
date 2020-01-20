@@ -90,6 +90,13 @@ class Shared_Files_Public
     public function register_shortcodes()
     {
         add_shortcode( 'shared_files', array( 'Shared_Files_Public', 'shared_files_search' ) );
+        add_shortcode( 'shared_files_search', array( 'Shared_Files_Public', 'shared_files_search_only' ) );
+    }
+    
+    public static function shared_files_search_only( $atts = array(), $content = null, $tag = '' )
+    {
+        $html = sfProFeaturePublicMarkup();
+        return $html;
     }
     
     /**
@@ -417,7 +424,7 @@ class Shared_Files_Public
             $html .= '<div id="shared-files-nothing-found">';
             $html .= __( 'No files found.', 'shared-files' );
             $html .= '</div>';
-            $html .= '</div>';
+            $html .= '</div></div><hr class="clear" />';
             wp_reset_postdata();
             return $html;
         }

@@ -1,5 +1,5 @@
-=== WordPress File Sharing and Download Plugin – Shared Files ===
-Contributors: anssilaitila
+=== WordPress File Sharing Plugin and Download Manager – Shared Files ===
+Contributors: anssilaitila, freemius
 Tags: google drive, sharing, downloads, file manager, dropbox
 Requires at least: 4.0.0
 Tested up to: 5.3
@@ -7,13 +7,13 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Share files like Dropbox or Google Drive! Track file downloads, receive email notifications and more!
+Share files like on Dropbox or Google Drive! Track file downloads, receive email notifications and more!
 
 == Description ==
 = The Best WordPress file sharing plugin on the market =
-The Shared Files plugin allows you to easily list and manage downloadable files on your site. Just add the files in the admin area and insert the shortcode to the page you wish to list the files.
+The Shared Files plugin allows you to list and manage downloadable files on your site easily. Just add the files in the admin area and insert the shortcode to the page you wish to list the files.
 
-Very easy to use and no complex settings to mind on, but also very scalable for large group of files.
+Very easy to use and no complex settings to mind on, but also very scalable for a large group of files.
 
 **14 days trial available for Pro version, no credit card required.**
 
@@ -29,17 +29,17 @@ Demo available [here](https://www.sharedfilespro.com/shared-files/).
 = Features in Free version: =
 * Simple and clean user interface
 * No options to set, ready to use right away
-* Separated from media library
+* Separated from the media library
 
 = Features in Pro version: =
 * Sort files into categories
 * Fast search targeting file names and descriptions
 * File load counter
 * Bandwidth usage estimate
-* Alternatively define an external URL for file and track those loads
-* Optionally receive an email notify when a file is downloaded
+* Alternatively, define an external URL for file and track those loads
+* Optionally receive an email notification when a file is downloaded
 
-Contact author [here](https://anssilaitila.fi/).
+Contact the author [here](https://anssilaitila.fi/).
 
 Thanks to Luciano Del Fico for translating the Italian version.
 
@@ -54,6 +54,12 @@ Thanks to Luciano Del Fico for translating the Italian version.
 2. File management in admin area
 
 == Changelog ==
+
+= 1.5.5 =
+* Bug fixes
+
+= 1.5.4 =
+* New feature (Pro): A new shortcode [shared_files_search] that displays only a search form, that targets all files from all categories
 
 = 1.5.3 =
 * Free and Pro: New settings for file list layout
