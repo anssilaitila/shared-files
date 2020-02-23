@@ -1,5 +1,5 @@
 === WordPress File Sharing Plugin and Download Manager – Shared Files ===
-Contributors: anssilaitila
+Contributors: anssilaitila, freemius
 Tags: google drive, sharing, downloads, file manager, dropbox
 Requires at least: 4.0.0
 Tested up to: 5.3
@@ -57,6 +57,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 2. File management in admin area
 
 == Changelog ==
+
+= 1.5.7 =
+* New feature (Free and Pro): options to set custom images for file type icons (see settings)
+* New feature (Pro): a new view to list categories / list files by category (see Help / Support -page)
+* Column made sortable: Expiration date
 
 = 1.5.6 =
 * New feature (Pro): Password protected files

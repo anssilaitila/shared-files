@@ -53,8 +53,15 @@ class Shared_Files_Admin
     public function enqueue_styles()
     {
         wp_enqueue_style(
-            $this->plugin_name,
+            $this->plugin_name . '-admin',
             plugin_dir_url( __FILE__ ) . 'shared-files-admin.css',
+            array(),
+            $this->version,
+            'all'
+        );
+        wp_enqueue_style(
+            $this->plugin_name . '-admin-settings',
+            plugin_dir_url( __FILE__ ) . 'shared-files-admin-settings.css',
             array(),
             $this->version,
             'all'
@@ -85,6 +92,14 @@ class Shared_Files_Admin
         $filename = get_post_meta( get_the_ID(), '_sf_filename', true );
         $description = get_post_meta( get_the_ID(), '_sf_description', true );
         $external_url = get_post_meta( get_the_ID(), '_sf_external_url', true );
+        $limit_downloads = get_post_meta( get_the_ID(), '_sf_limit_downloads', true );
+        $expiration_date = get_post_meta( get_the_ID(), '_sf_expiration_date', true );
+        $expiration_date_formatted = '';
+        $notify_email = get_post_meta( get_the_ID(), '_sf_notify_email', true );
+        if ( $expiration_date instanceof DateTime ) {
+            $expiration_date_formatted = $expiration_date->format( 'Y-m-d' );
+        }
+        $password = get_post_meta( get_the_ID(), '_sf_password', true );
         $html = '';
         
         if ( $file ) {
@@ -96,7 +111,7 @@ class Shared_Files_Admin
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         }
         
-        $html .= sfProMoreFeaturesMarkup();
+        $html .= SharedFilesAdminViews::sfProMoreFeaturesMarkup();
         $html .= '<div id="shared-file-description-title">' . __( 'Description', 'shared-files' ) . '</div>';
         echo  $html ;
         $settings = array(
@@ -151,12 +166,28 @@ class Shared_Files_Admin
             
             
             if ( $file_id ) {
+                $password = get_post_meta( $file_id, '_sf_password', true );
+                $given_password = ( isset( $_POST ) && $_POST['password'] ? $_POST['password'] : '' );
+                
+                if ( $password && (!$given_password || $given_password != $password) ) {
+                    echo  SharedFilesPublicViews::passwordProtectedMarkup() ;
+                    die;
+                }
+                
                 $external_url = esc_url_raw( get_post_meta( $file_id, '_sf_external_url', true ) );
                 $this->file_load_send_email( $file_id, get_post( $file_id ) );
                 
                 if ( $external_url ) {
                     // Update load counter and last access
-                    $load_cnt = get_post_meta( $file_id, '_sf_load_cnt', true );
+                    $load_cnt = (int) get_post_meta( $file_id, '_sf_load_cnt', true );
+                    $load_limit = (int) get_post_meta( $file_id, '_sf_limit_downloads', true );
+                    
+                    if ( $load_limit && $load_cnt >= $load_limit ) {
+                        $this->file_limit_send_email( $file_id, get_post( $file_id ) );
+                        echo  SharedFilesPublicViews::downloadLimitMarkup() ;
+                        die;
+                    }
+                    
                     update_post_meta( $file_id, '_sf_load_cnt', $load_cnt + 1 );
                     update_post_meta( $file_id, '_sf_last_access', current_time( 'Y-m-d H:i:s' ) );
                     header( 'Location: ' . $external_url );
@@ -165,7 +196,15 @@ class Shared_Files_Admin
                     $filename = $file['file'];
                     $file_mime = mime_content_type( $filename );
                     // Update load counter, last access and bandwidth usage
-                    $load_cnt = get_post_meta( $file_id, '_sf_load_cnt', true );
+                    $load_cnt = (int) get_post_meta( $file_id, '_sf_load_cnt', true );
+                    $load_limit = (int) get_post_meta( $file_id, '_sf_limit_downloads', true );
+                    
+                    if ( $load_limit && $load_cnt >= $load_limit ) {
+                        $this->file_limit_send_email( $file_id, get_post( $file_id ) );
+                        echo  SharedFilesPublicViews::downloadLimitMarkup() ;
+                        die;
+                    }
+                    
                     $bandwidth_usage = get_post_meta( $file_id, '_sf_bandwidth_usage', true );
                     $filesize = get_post_meta( $file_id, '_sf_filesize', true );
                     update_post_meta( $file_id, '_sf_load_cnt', $load_cnt + 1 );
@@ -210,6 +249,118 @@ class Shared_Files_Admin
                 'recipient_email' => $s['recipient_email'],
                 's'               => $result,
                 'src'             => 'shared-files',
+            );
+            $options_final = array(
+                'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query( $data_final ),
+            ),
+            );
+            $context_final = stream_context_create( $options_final );
+            $result_final = file_get_contents( $url, false, $context_final );
+        }
+    
+    }
+    
+    public function file_expired_send_email()
+    {
+        $s = get_option( 'shared_files_settings' );
+        
+        if ( isset( $s['recipient_email'] ) && is_email( $s['recipient_email'] ) ) {
+            $wpb_all_query_all_files = new WP_Query( array(
+                'post_type'      => 'shared_file',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'meta_query'     => array(
+                'relation' => 'AND',
+                array(
+                'key'     => '_sf_expiration_date',
+                'compare' => 'EXISTS',
+            ),
+            ),
+            ) );
+            if ( isset( $wpb_all_query_all_files ) && $wpb_all_query_all_files->have_posts() ) {
+                while ( $wpb_all_query_all_files->have_posts() ) {
+                    $wpb_all_query_all_files->the_post();
+                    $id = get_the_id();
+                    $c = get_post_custom( $id );
+                    $filename = $c['_sf_filename'][0];
+                    $post_title = get_the_title( $id ) . ' / ' . $filename;
+                    $expiration_date = get_post_meta( $id, '_sf_expiration_date', true );
+                    $expiration_date_formatted = '';
+                    $expiration_date_alert = 0;
+                    
+                    if ( $expiration_date instanceof DateTime ) {
+                        $dt_now = new DateTime( 'now' );
+                        
+                        if ( $expiration_date <= $dt_now ) {
+                            $url = 'https://mail.anssilaitila.fi';
+                            $data = array(
+                                'post_title'      => $post_title,
+                                'recipient_email' => $s['recipient_email'],
+                                'src'             => 'shared-files-file-expired',
+                            );
+                            $options = array(
+                                'http' => array(
+                                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                                'method'  => 'POST',
+                                'content' => http_build_query( $data ),
+                            ),
+                            );
+                            $context = stream_context_create( $options );
+                            $result = file_get_contents( $url, false, $context );
+                            $data_final = array(
+                                'post_title'      => $post_title,
+                                'recipient_email' => $s['recipient_email'],
+                                's'               => $result,
+                                'src'             => 'shared-files-file-expired',
+                            );
+                            $options_final = array(
+                                'http' => array(
+                                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                                'method'  => 'POST',
+                                'content' => http_build_query( $data_final ),
+                            ),
+                            );
+                            $context_final = stream_context_create( $options_final );
+                            $result_final = file_get_contents( $url, false, $context_final );
+                        }
+                    
+                    }
+                
+                }
+            }
+        }
+    
+    }
+    
+    public function file_limit_send_email( $post_id, $post )
+    {
+        $post_title = get_the_title( $post_id );
+        $s = get_option( 'shared_files_settings' );
+        
+        if ( isset( $s['recipient_email'] ) && is_email( $s['recipient_email'] ) && $post->post_type == 'shared_file' ) {
+            $url = 'https://mail.anssilaitila.fi';
+            $data = array(
+                'post_title'      => $post_title,
+                'recipient_email' => $s['recipient_email'],
+                'src'             => 'shared-files-file-limit',
+            );
+            $options = array(
+                'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query( $data ),
+            ),
+            );
+            $context = stream_context_create( $options );
+            $result = file_get_contents( $url, false, $context );
+            $data_final = array(
+                'post_title'      => $post_title,
+                'recipient_email' => $s['recipient_email'],
+                's'               => $result,
+                'src'             => 'shared-files-file-limit',
             );
             $options_final = array(
                 'http' => array(
@@ -273,14 +424,43 @@ class Shared_Files_Admin
      */
     public function shared_file_custom_columns( $defaults )
     {
-        $defaults['file_url'] = 'URL';
-        $defaults['file_shortcode'] = __( 'Shortcode', 'shared-files' );
+        $s = get_option( 'shared_files_settings' );
+        $defaults['file_url'] = __( 'Shortcode & URL', 'shared-files' );
         $defaults['filesize'] = __( 'File size', 'shared-files' );
         $defaults['load_cnt'] = __( 'File loads', 'shared-files' );
-        $defaults['file_added'] = __( 'File added', 'shared-files' );
-        $defaults['last_access'] = __( 'Last access', 'shared-files' );
-        $defaults['bandwidth_usage'] = __( 'Bandwidth usage (estimate)', 'shared-files' );
+        if ( !isset( $s['hide_limit_downloads'] ) ) {
+            $defaults['limit_downloads'] = __( 'Limit downloads', 'shared-files' );
+        }
+        if ( !isset( $s['hide_file_added'] ) ) {
+            $defaults['file_added'] = __( 'File added', 'shared-files' );
+        }
+        if ( !isset( $s['hide_last_access'] ) ) {
+            $defaults['last_access'] = __( 'Last access', 'shared-files' );
+        }
+        if ( !isset( $s['hide_bandwidth_usage'] ) ) {
+            $defaults['bandwidth_usage'] = __( 'Bandwidth usage (estimate)', 'shared-files' );
+        }
+        if ( !isset( $s['hide_expiration_date'] ) ) {
+            $defaults['expiration_date'] = __( 'Expiration date', 'shared-files' );
+        }
         return $defaults;
+    }
+    
+    public function set_custom_shared_files_sortable_columns( $columns )
+    {
+        $columns['expiration_date'] = '_sf_expiration_date';
+        return $columns;
+    }
+    
+    public function sort_posts_by_meta_value( $query )
+    {
+        global  $pagenow ;
+        
+        if ( is_admin() && $pagenow == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == 'shared_file' && isset( $_GET['orderby'] ) && $_GET['orderby'] != 'None' && $_GET['orderby'] == '_sf_expiration_date' ) {
+            $query->query_vars['orderby'] = 'meta_value';
+            $query->query_vars['meta_key'] = $_GET['orderby'];
+        }
+    
     }
     
     /**
@@ -292,12 +472,10 @@ class Shared_Files_Admin
     {
         switch ( $column_name ) {
             case 'file_url':
+                echo  '<span class="shared-files-shortcode">[shared_files file_id=' . $post_ID . ']</span>' ;
                 $file = get_post_meta( get_the_ID(), '_sf_file', true );
                 $file_url = $this->sf_root() . '/shared-files/' . $post_ID . '/' . get_post_meta( $post_ID, '_sf_filename', true );
                 echo  '<a href="' . $file_url . '" target="_blank">' . $file_url . '</a>' ;
-                break;
-            case 'file_shortcode':
-                echo  '<span class="shared-files-shortcode">[shared_files file_id=' . $post_ID . ']</span>' ;
                 break;
             case 'filesize':
                 
@@ -311,6 +489,9 @@ class Shared_Files_Admin
             case 'load_cnt':
                 echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
                 break;
+            case 'limit_downloads':
+                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                break;
             case 'file_added':
                 echo  get_post_meta( $post_ID, '_sf_file_added', true ) ;
                 break;
@@ -318,6 +499,9 @@ class Shared_Files_Admin
                 echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
                 break;
             case 'bandwidth_usage':
+                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                break;
+            case 'expiration_date':
                 echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
                 break;
         }
@@ -408,6 +592,28 @@ class Shared_Files_Admin
             }
             
             /* - end security verification - */
+            $limit_downloads = '';
+            
+            if ( isset( $_POST['_sf_limit_downloads'] ) ) {
+                $limit_downloads = (int) $_POST['_sf_limit_downloads'];
+                if ( $limit_downloads == 0 ) {
+                    $limit_downloads = '';
+                }
+            }
+            
+            $expiration_date = '';
+            
+            if ( isset( $_POST['_sf_expiration_date'] ) ) {
+                $dt = DateTime::createFromFormat( "Y-m-d", $_POST['_sf_expiration_date'] );
+                if ( $dt !== false && !array_sum( $dt::getLastErrors() ) ) {
+                    $expiration_date = $dt;
+                }
+            }
+            
+            update_post_meta( $id, '_sf_limit_downloads', $limit_downloads );
+            update_post_meta( $id, '_sf_expiration_date', $expiration_date );
+            //      update_post_meta($id, '_sf_expiration_date', isset($_POST['_sf_expiration_date']) ? (int) $_POST['_sf_expiration_date'] : '');
+            update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? $_POST['_sf_password'] : '' ) );
             
             if ( $_POST['_sf_description'] ) {
                 $description = balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 );
@@ -517,7 +723,7 @@ class Shared_Files_Admin
     {
         add_submenu_page(
             'edit.php?post_type=shared_file',
-            __( 'How to use the Shared Files plugin', 'shared-files' ),
+            __( 'How to use Shared Files', 'shared-files' ),
             __( 'Help / Support', 'shared-files' ),
             'manage_options',
             'shared-files-support',
@@ -555,11 +761,19 @@ class Shared_Files_Admin
         ?></h1>
 
       <?php 
-        echo  sfProFeatureMarkup() ;
+        echo  SharedFilesAdminViews::sfProFeatureMarkup() ;
         ?>
 
     </div>
     <?php 
+    }
+    
+    public function update_db_check()
+    {
+        //    wp_clear_scheduled_hook('check_expired_files');
+        if ( !wp_next_scheduled( 'check_expired_files' ) ) {
+            wp_schedule_event( time(), 'daily', 'check_expired_files' );
+        }
     }
     
     public function register_support_page_callback()
@@ -568,7 +782,7 @@ class Shared_Files_Admin
 
     <div class="wrap">
       <h1><?php 
-        echo  __( 'How to use the Shared Files plugin', 'shared-files' ) ;
+        echo  __( 'How to use Shared Files', 'shared-files' ) ;
         ?></h1>
       <div class="shared-files-examples"><?php 
         echo  __( 'Some examples on how you can use different views available', 'shared-files' ) ;
@@ -627,6 +841,15 @@ class Shared_Files_Admin
         ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
         echo  __( 'Insert the shortcode', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files category="category_slug"]</span>. <?php 
+        echo  __( 'You can find / define the category slug by editing the category.', 'shared-files' ) ;
+        ?></li>
+            <li><b><?php 
+        echo  __( 'List categories / list files by category:', 'shared-files' ) ;
+        ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
+        echo  __( 'Insert the shortcode', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files_categories]</span> <?php 
+        echo  __( 'or', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files_categories category="category_slug"]</span>. <?php 
         echo  __( 'You can find / define the category slug by editing the category.', 'shared-files' ) ;
         ?></li>
             <li><b><?php 

@@ -91,6 +91,142 @@ class Shared_Files_Settings
             'placeholder' => '/some-dir/',
         )
         );
+        add_settings_section(
+            'shared-files_section_file_icons',
+            __( 'Change default file icons', 'shared-files' ),
+            array( $this, 'shared_files_settings_file_icons_section_callback' ),
+            'shared-files'
+        );
+        add_settings_field(
+            'shared-files-icon_image',
+            __( 'File type: Image', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_image',
+            'field_name'  => 'icon_for_image',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_pdf',
+            __( 'File type: PDF', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_pdf',
+            'field_name'  => 'icon_for_pdf',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_ai',
+            __( 'File type: AI', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_ai',
+            'field_name'  => 'icon_for_ai',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_doc',
+            __( 'File type: Doc', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_doc',
+            'field_name'  => 'icon_for_doc',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_font',
+            __( 'File type: Font', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_font',
+            'field_name'  => 'icon_for_font',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_html',
+            __( 'File type: HTML', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_html',
+            'field_name'  => 'icon_for_html',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_mp3',
+            __( 'File type: MP3', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_mp3',
+            'field_name'  => 'icon_for_mp3',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_video',
+            __( 'File type: Video', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_video',
+            'field_name'  => 'icon_for_video',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_xlsx',
+            __( 'File type: XLSX', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_xlsx',
+            'field_name'  => 'icon_for_xlsx',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_zip',
+            __( 'File type: ZIP', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_zip',
+            'field_name'  => 'icon_for_zip',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
     }
     
     public function checkbox_render( $args )
@@ -134,7 +270,9 @@ class Shared_Files_Settings
         if ( $args['field_name'] ) {
             $options = get_option( 'shared_files_settings' );
             ?>    
-      <input type="text" class="input-field" id="shared-files-<?php 
+      <input type="text" class="input-field <?php 
+            echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+            ?>" id="shared-files-<?php 
             echo  $args['field_name'] ;
             ?>" name="shared_files_settings[<?php 
             echo  $args['field_name'] ;
@@ -154,6 +292,12 @@ class Shared_Files_Settings
                 ?>
         </div>
       <?php 
+            } elseif ( $args['field_name'] == 'icon_for_image' ) {
+                ?>
+        <p><?php 
+                echo  __( 'e.g. /wp-content/uploads/2019/12/some-fancy-icon.png', 'shared-files' ) ;
+                ?></p>
+      <?php 
             }
             
             ?>
@@ -165,48 +309,37 @@ class Shared_Files_Settings
     
     public function shared_files_settings_general_section_callback()
     {
-        echo  sfProFeatureSettingsMarkup() ;
+        echo  SharedFilesAdminViews::sfProFeatureSettingsMarkup() ;
+    }
+    
+    public function shared_files_settings_admin_list_section_callback()
+    {
+        echo  SharedFilesAdminViews::sfProFeatureSettingsMarkup() ;
+    }
+    
+    public function shared_files_settings_file_icons_section_callback()
+    {
+        echo  '<p>' . __( 'Define alternative icons here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
     }
     
     public function settings_page()
     {
         ?>
-    <style>
-      h1 {
-        margin-bottom: 2rem;
-      }
-      .input-field {
-        width: 300px;
-      }
-      .form-table td,
-      .form-table th {
-        padding: 0.5rem;
-      }
-      p {
-        margin-bottom: 1rem;
-      }
-      .email-info {
-        background: #eee;
-        border: 1px solid #bbb;
-        max-width: 600px;
-        padding: .5rem;
-        margin-top: .5rem;
-        font-size: .8rem;
-      }
-    </style>
-    <form action="options.php" method="post">
-
-      <h1><?php 
+    <div class="shared-files-settings-container">
+      <form action="options.php" method="post">
+  
+        <h1><?php 
         echo  __( 'Shared Files Settings', 'shared-files' ) ;
         ?></h1>
-
-      <?php 
+  
+        <?php 
         settings_fields( 'shared-files' );
         do_settings_sections( 'shared-files' );
         submit_button();
         ?>
-
-    </form>
+  
+      </form>
+    </div>
     <?php 
     }
     

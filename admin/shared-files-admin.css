@@ -98,6 +98,63 @@
   background: #fff;
   padding: 0 .5rem;
   font-weight: 300;
+  display: inline-block;
+  margin-bottom: 3px;
+  margin-right: 5px;
+  font-size: 11px;
+  border: 1px solid #eee;
+}
+
+#shared-file-notify-email-title {
+  margin-top: 10px;
+}
+
+.shared-files-admin-small-fields {
+  background: rgb(251, 251, 251);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.shared-files-admin-small-fields > div {
+  width: 50%;
+  float: left;
+}
+
+@media (max-width: 600px) {
+
+  .shared-files-admin-small-fields > div {
+    width: 100%;
+    float: none;
+  }
+
+  #shared-file-expiration-date-title {
+    margin-top: 10px;
+  }
+
+}
+
+.shared-files-admin-small-fields span {
+  font-weight: bold;
+}
+
+#shared-file-password-title {
+  margin-top: 10px;
+}
+
+.shared-files-expiration-date-alert {
+  background: crimson;
+  color: #fff;
+  font-weight: bold;
+  padding: 3px 5px;
+}
+
+.shared-files-admin-small-fields input {
+  margin-top: 8px;
+  width: 160px;
+}
+
+.shared-files-admin-small-fields input[type="email"] {
+  width: 300px;
 }
 
 .wrap > ol > li > ul > li {
@@ -111,4 +168,19 @@
   margin-top: 10px;
   margin-bottom: 20px;
   font-size: 14px;
+}
+
+hr.clear {
+  background: none;
+  border: 0;
+  clear: both;
+  display: block;
+  float: none;
+  font-size: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }

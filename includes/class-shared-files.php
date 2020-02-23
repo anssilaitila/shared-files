@@ -101,10 +101,15 @@ class Shared_Files
          * of the plugin.
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-i18n.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-shared-files-admin.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-shared-files-admin-views.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-settings-page.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shared-files-public.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'partials/helper-functions.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shared-files-public-views.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
         $this->loader = new Shared_Files_Loader();
     }
     
@@ -134,6 +139,8 @@ class Shared_Files
     {
         $plugin_admin = new Shared_Files_Admin( $this->get_plugin_name(), $this->get_version() );
         $plugin_settings = new Shared_Files_Settings();
+        $this->loader->add_action( 'plugins_loaded', $plugin_admin, 'update_db_check' );
+        $this->loader->add_action( 'check_expired_files', $plugin_admin, 'file_expired_send_email' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'save_post', $plugin_admin, 'save_custom_meta_data' );
         $this->loader->add_action( 'add_meta_boxes_shared_file', $plugin_admin, 'adding_custom_meta_boxes' );
@@ -165,6 +172,8 @@ class Shared_Files
             'shared_file_custom_columns',
             10
         );
+        $this->loader->add_filter( 'manage_edit-shared_file_sortable_columns', $plugin_admin, 'set_custom_shared_files_sortable_columns' );
+        $this->loader->add_filter( 'parse_query', $plugin_admin, 'sort_posts_by_meta_value' );
     }
     
     /**

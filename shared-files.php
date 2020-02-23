@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.5.5
+ * Version:           1.5.7
  * Author:            Anssi Laitila
  * Author URI:        https://anssilaitila.fi
  * License:           GPL-2.0+
@@ -77,7 +77,7 @@ if ( function_exists( 'sf_fs' ) ) {
     
     function sf_fs_custom_connect_message( $message, $user_first_name )
     {
-        return sprintf( __( 'Hey %1$s' ) . ',<br>' . __( 'never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.', 'user-magic' ), $user_first_name );
+        return sprintf( __( 'Hey %1$s' ) . ',<br>' . __( 'never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.' ), $user_first_name );
     }
     
     sf_fs()->add_filter(
@@ -96,7 +96,7 @@ if ( function_exists( 'sf_fs' ) ) {
     )
     {
         return sprintf(
-            __( 'Hey %1$s' ) . ',<br>' . __( 'Please help us improve %2$s! If you opt-in, some data about your usage of %2$s will be sent to %5$s. If you skip this, that\'s okay! %2$s will still work just fine.', 'user-magic' ),
+            __( 'Hey %1$s' ) . ',<br>' . __( 'Please help us improve %2$s! If you opt-in, some data about your usage of %2$s will be sent to %5$s. If you skip this, that\'s okay! %2$s will still work just fine.' ),
             $user_first_name,
             '<b>' . $plugin_title . '</b>',
             '<b>' . $user_login . '</b>',
@@ -116,7 +116,7 @@ if ( function_exists( 'sf_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.5.5' );
+    define( 'SHARED_FILES_VERSION', '1.5.7' );
     /**
      * The code that runs during plugin activation.
      * This action is documented in includes/class-shared-files-activator.php
