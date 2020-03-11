@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.5.7
+ * Version:           1.5.8
  * Author:            Anssi Laitila
  * Author URI:        https://anssilaitila.fi
  * License:           GPL-2.0+
@@ -116,7 +116,7 @@ if ( function_exists( 'sf_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.5.7' );
+    define( 'SHARED_FILES_VERSION', '1.5.8' );
     /**
      * The code that runs during plugin activation.
      * This action is documented in includes/class-shared-files-activator.php

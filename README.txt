@@ -58,6 +58,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.5.8 =
+* Search form is now visible when a category is defined for shortcode, and the dropdown contains only the subcategories of the defined category.
+  You may hide the search using the hide_search=1 parameter with the shortcode. (Pro)
+* Custom icon for YouTube-links (Free)
+
 = 1.5.7 =
 * New feature (Free and Pro): options to set custom images for file type icons (see settings)
 * New feature (Pro): a new view to list categories / list files by category (see Help / Support -page)

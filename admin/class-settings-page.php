@@ -227,6 +227,19 @@ class Shared_Files_Settings
             'wide'        => 1,
         )
         );
+        add_settings_field(
+            'shared-files-icon_youtube',
+            __( 'YouTube-link (External URL)', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_youtube',
+            'field_name'  => 'icon_for_youtube',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
     }
     
     public function checkbox_render( $args )

@@ -43,33 +43,33 @@ class SharedFilesHelpers {
     $s = get_option('shared_files_settings');
 
     $filetypes = array(
-      'image/png' => $s['icon_for_image'],
-      'image/jpg' => $s['icon_for_image'],
-      'image/jpeg' => $s['icon_for_image'],
-      'application/pdf' => $s['icon_for_pdf'],
-      'application/postscript' => $s['icon_for_ai'],
-      'application/msword' => $s['icon_for_doc'],
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => $s['icon_for_doc'],
-      'application/vnd.ms-fontobject' => $s['icon_for_font'],
-      'font/otf' => $s['icon_for_font'],
-      'font/ttf' => $s['icon_for_font'],
-      'font/woff' => $s['icon_for_font'],
-      'font/woff2' => $s['icon_for_font'],
-      'text/html' => $s['icon_for_html'],
-      'audio/mpeg3' => $s['icon_for_mp3'],
-      'audio/x-mpeg-3' => $s['icon_for_mp3'],
-      'audio/mpeg' => $s['icon_for_mp3'],
-      'video/x-msvideo' => $s['icon_for_video'],
-      'video/mpeg' => $s['icon_for_video'],
-      'video/x-mpeg' => $s['icon_for_video'],
-      'video/ogg' => $s['icon_for_video'],
-      'video/webm' => $s['icon_for_video'],
-      'video/3gpp' => $s['icon_for_video'],
-      'video/3gpp2' => $s['icon_for_video'],
-      'application/vnd.ms-excel' => $s['icon_for_xlsx'],
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => $s['icon_for_xlsx'],
-      'application/zip' => $s['icon_for_zip'],
-      'application/x-7z-compressed' => $s['icon_for_zip']
+      'image/png' => isset($s['icon_for_image']) ? $s['icon_for_image'] : '',
+      'image/jpg' => isset($s['icon_for_image']) ? $s['icon_for_image'] : '',
+      'image/jpeg' => isset($s['icon_for_image']) ? $s['icon_for_image'] : '',
+      'application/pdf' => isset($s['icon_for_pdf']) ? $s['icon_for_pdf'] : '',
+      'application/postscript' => isset($s['icon_for_ai']) ? $s['icon_for_ai'] : '',
+      'application/msword' => isset($s['icon_for_doc']) ? $s['icon_for_doc'] : '',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => isset($s['icon_for_doc']) ? $s['icon_for_doc'] : '',
+      'application/vnd.ms-fontobject' => isset($s['icon_for_font']) ? $s['icon_for_font'] : '',
+      'font/otf' => isset($s['icon_for_font']) ? $s['icon_for_font'] : '',
+      'font/ttf' => isset($s['icon_for_font']) ? $s['icon_for_font'] : '',
+      'font/woff' => isset($s['icon_for_font']) ? $s['icon_for_font'] : '',
+      'font/woff2' => isset($s['icon_for_font']) ? $s['icon_for_font'] : '',
+      'text/html' => isset($s['icon_for_html']) ? $s['icon_for_html'] : '',
+      'audio/mpeg3' => isset($s['icon_for_mp3']) ? $s['icon_for_mp3'] : '',
+      'audio/x-mpeg-3' => isset($s['icon_for_mp3']) ? $s['icon_for_mp3'] : '',
+      'audio/mpeg' => isset($s['icon_for_mp3']) ? $s['icon_for_mp3'] : '',
+      'video/x-msvideo' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'video/mpeg' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'video/x-mpeg' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'video/ogg' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'video/webm' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'video/3gpp' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'video/3gpp2' => isset($s['icon_for_video']) ? $s['icon_for_video'] : '',
+      'application/vnd.ms-excel' => isset($s['icon_for_xlsx']) ? $s['icon_for_xlsx'] : '',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => isset($s['icon_for_xlsx']) ? $s['icon_for_xlsx'] : '',
+      'application/zip' => isset($s['icon_for_zip']) ? $s['icon_for_zip'] : '',
+      'application/x-7z-compressed' => isset($s['icon_for_zip']) ? $s['icon_for_zip'] : ''
     );
     
     return $filetypes;
@@ -101,6 +101,8 @@ class SharedFilesHelpers {
 
   public static function getImageFile($file_id, $external_url) {
 
+    $s = get_option('shared_files_settings');
+
     $filetypes = SharedFilesHelpers::getFiletypes();
     $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
     $custom_icons = SharedFilesHelpers::getCustomIcons();
@@ -110,12 +112,21 @@ class SharedFilesHelpers {
 
     if ($external_url) {
 
-      $ext = pathinfo($external_url, PATHINFO_EXTENSION);
+      if (substr($external_url, 0, strlen('https://www.youtube.com')) === 'https://www.youtube.com' && isset($s['icon_for_youtube'])) {
 
-      if (array_key_exists($ext, $external_filetypes)) {
-        if (isset($external_filetypes[$ext])) {
-          $imagefile = $external_filetypes[$ext] . '.png';
+        $file_type_icon_url = $s['icon_for_youtube'];
+
+      } else {
+
+        $ext = pathinfo($external_url, PATHINFO_EXTENSION);
+  
+        if (array_key_exists($ext, $external_filetypes)) {
+          if (isset($external_filetypes[$ext])) {
+            $imagefile = $external_filetypes[$ext] . '.png';
+            $file_type_icon_url = plugins_url('../img/' . $imagefile, __FILE__);
+          }
         }
+
       }
 
     } else {

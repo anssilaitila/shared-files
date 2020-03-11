@@ -117,8 +117,9 @@ class ShortcodeSharedFiles
                     $c = get_post_custom( $id );
                     $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
                     $filetype = '';
+                    $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
                     $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                    $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $atts['hide_description'] );
+                    $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $hide_description );
                 }
             }
             $html .= '</ul>';
