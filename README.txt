@@ -1,28 +1,27 @@
-=== WordPress File Sharing Plugin and Download Manager – Shared Files ===
+=== Shared Files for WordPress ===
 Contributors: anssilaitila, freemius
-Tags: google drive, sharing, downloads, file manager, dropbox
+Tags: google drive, sharing, downloads, file manager, dropbox, download manager
 Requires at least: 4.0.0
-Tested up to: 5.3
+Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Share files like on Dropbox or Google Drive! Track file downloads, receive email notifications and more!
+List downloadable files on your site using multiple different views. Includes statistics and password protection.
 
 == Description ==
-= The Best WordPress file sharing plugin on the market =
-The Shared Files plugin allows you to list and manage downloadable files on your site easily. Just add the files in the admin area and insert the shortcode to the page you wish to list the files.
+Using Shared Files you can to easily list and manage downloadable files on your site. Just add the files in the admin area and insert the shortcode(s) to the page(s) you wish to list the files.
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files.
 
 **14 days trial available for Pro version, no credit card required.**
 
-Demo available [here](https://www.sharedfilespro.com/shared-files/).
+See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
 = Some use cases for this plugin: =
-* List any number of files and track downloads
+* List any number of files and keep statistics on downloads
 * Share files like using Dropbox or Google Drive
-* Add a single file to any post using a shortcode
+* Add a single file to any article/post using a simple shortcode
 * Receive a notification when a file is downloaded
 * Sort files and documents to multiple categories
 
@@ -30,8 +29,9 @@ Demo available [here](https://www.sharedfilespro.com/shared-files/).
 * Simple and clean user interface
 * No options to set, ready to use right away
 * Separated from the media library
+* Custom images/icons for file types
 
-= Features in Pro version: =
+= Additional features in Pro version: =
 * Sort files into categories
 * Fast search targeting file names and descriptions
 * File load counter
@@ -41,6 +41,7 @@ Demo available [here](https://www.sharedfilespro.com/shared-files/).
 * Password protected files
 * Set expiration date to a file
 * Limit number of downloads per file
+* More features on the way based on user feedback
 
 Contact the author [here](https://anssilaitila.fi/).
 
@@ -58,6 +59,15 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+<<<<<<< HEAD
+= 1.5.9 =
+* More columns made sortable in the admin list
+* Files can now be filtered by a category in the admin list
+* Mail delivery is now handled locally by WordPress
+* Bug fixes
+
+=======
+>>>>>>> bb414ad207d1867e4272ef0dc6fbc424fda22e5d
 = 1.5.8 =
 * Search form is now visible when a category is defined for shortcode, and the dropdown contains only the subcategories of the defined category.
   You may hide the search using the hide_search=1 parameter with the shortcode. (Pro)
@@ -91,76 +101,6 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 = 1.5.0 =
 * New licensing model
-
-= 1.4.9 =
-* A new option added to optionally define WP location
-
-= 1.4.8 =
-* The plugin now supports the case when WP is installed in a subdirectory
-
-= 1.4.7 =
-* A few more texts made translatable
-
-= 1.4.6 =
-* New parameter for shortcode [shared_files] to hide search: "hide_search". Can be used like so: [shared_files hide_search=1]
-* Settings page added. You may now define an email address and when a file is downloaded, an email notify is sent to that email.
-
-= 1.4.5 =
-* Bug fix to enable use with ie. Elementor
-
-= 1.4.4 =
-* Bug fix for deleting file
-
-= 1.4.3 =
-* Bug fix for displaying files from specific category
-* Date added to the file list (item created)
-
-= 1.4.2 =
-* Donation links added
-
-= 1.4.1 =
-* Bug fix for pagination
-
-= 1.4.0 =
-* Added pagination to all files view (20 files per page). The search still targets all files.
-
-= 1.3.0 =
-* Added feedback form to Help / Support page
-
-= 1.2.9 =
-* Shortcode for displaying a single file added. Using this you can insert a file to e.g. a post or a page.
-
-= 1.2.8 =
-* File description field converted to wysiwyg editor
-
-= 1.2.7 =
-* Missing strings made translatable
-
-= 1.2.6 =
-* Translation support added
-
-= 1.2.5 =
-* New feature: External URL. Instead of adding a locally hosted file, you may now add an external URL.
-
-= 1.1.5 =
-* Categories added. A category can now be assigned to a file and it's possible to list files from a certain category.
-
-= 1.0.5 =
-* Support page updated
-
-= 1.0.4 =
-* Bug fixes
-* Housekeeping
-* Testing on Gutenberg
-
-= 1.0.3 =
-* File type icons added
-
-= 1.0.2 =
-* CSS fix
-
-= 1.0.1 =
-* Minor fixes
 
 = 1.0.0 =
 * Initial release / 2018-07-15

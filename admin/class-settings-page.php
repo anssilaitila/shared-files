@@ -257,22 +257,6 @@ class Shared_Files_Settings
             ?>>      
 
       <?php 
-            
-            if ( $args['field_name'] == 'send_email' ) {
-                ?>
-        <div class="email-info">
-          <b><?php 
-                echo  __( 'Note:' ) ;
-                ?></b> <?php 
-                echo  __( 'By activating this you agree that the email sending is handled by the plugin developers own server and using <a href="https://www.mailgun.com" target="_blank">Mailgun</a>. The server is a DigitalOcean Droplet hosted in the EU. This method was chosen to ensure reliable mail delivery.', 'shared-files' ) ;
-                ?>
-        </div>
-      <?php 
-            }
-            
-            ?>
-
-      <?php 
         }
     
     }

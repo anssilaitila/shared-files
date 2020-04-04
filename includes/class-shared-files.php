@@ -153,6 +153,13 @@ class Shared_Files
             2
         );
         $this->loader->add_action( 'before_delete_post', $plugin_admin, 'delete_shared_file' );
+        $this->loader->add_action(
+            'restrict_manage_posts',
+            $plugin_admin,
+            'filter_files_by_taxonomies',
+            10,
+            2
+        );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'register_categories_info_page' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'register_support_page' );

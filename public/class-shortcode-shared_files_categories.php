@@ -23,7 +23,8 @@ class ShortcodeSharedFilesCategories
             $category_slug = sanitize_title( $atts['category'] );
         }
         
-        if ( $cat = $_GET['cat'] ) {
+        if ( isset( $_GET['cat'] ) ) {
+            $cat = $_GET['cat'];
             $parent_cat = get_term_by( 'slug', $cat, 'shared-file-category' );
             $subcategories = get_terms( array(
                 'taxonomy'   => 'shared-file-category',
@@ -65,8 +66,9 @@ class ShortcodeSharedFilesCategories
                         $c = get_post_custom( $id );
                         $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
                         $filetype = '';
+                        $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
                         $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                        $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $atts['hide_description'] );
+                        $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $hide_description );
                     }
                     $html .= '</ul>';
                 } else {
@@ -85,7 +87,7 @@ class ShortcodeSharedFilesCategories
             $categories = get_terms( array(
                 'taxonomy'   => 'shared-file-category',
                 'hide_empty' => false,
-                'parent'     => $category->term_id,
+                'parent'     => ( isset( $category->term_id ) ? $category->term_id : 0 ),
                 'terms'      => $terms,
             ) );
             if ( sizeof( $categories ) > 0 ) {

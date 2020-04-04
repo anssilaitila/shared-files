@@ -36,7 +36,8 @@ class ShortcodeSharedFiles
                     $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
                     $filetype = '';
                     $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                    $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $atts['hide_description'] );
+                    $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
+                    $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $hide_description );
                 }
             } else {
                 $html .= '<div class="sf_error">' . __( 'File not found', 'shared-files' ) . '</div>';
