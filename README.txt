@@ -59,15 +59,15 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
-<<<<<<< HEAD
+= 1.5.10 =
+* Category made sortable in the admin list
+
 = 1.5.9 =
 * More columns made sortable in the admin list
 * Files can now be filtered by a category in the admin list
 * Mail delivery is now handled locally by WordPress
 * Bug fixes
 
-=======
->>>>>>> bb414ad207d1867e4272ef0dc6fbc424fda22e5d
 = 1.5.8 =
 * Search form is now visible when a category is defined for shortcode, and the dropdown contains only the subcategories of the defined category.
   You may hide the search using the hide_search=1 parameter with the shortcode. (Pro)

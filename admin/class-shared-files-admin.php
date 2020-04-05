@@ -390,6 +390,7 @@ class Shared_Files_Admin
     
     public function set_custom_shared_files_sortable_columns( $columns )
     {
+        $columns['taxonomy-shared-file-category'] = 'shared-file-category';
         $columns['expiration_date'] = '_sf_expiration_date';
         $columns['file_added'] = '_sf_file_added';
         $columns['last_access'] = '_sf_last_access';
@@ -761,6 +762,21 @@ class Shared_Files_Admin
     <?php 
     }
     
+    public function sort_by_custom_taxonomy( $clauses, $wp_query )
+    {
+        global  $wpdb ;
+        
+        if ( isset( $wp_query->query['orderby'] ) && $wp_query->query['orderby'] == 'shared-file-category' ) {
+            $clauses['join'] .= "\n        LEFT OUTER JOIN {$wpdb->term_relationships} ON {$wpdb->posts}.ID={$wpdb->term_relationships}.object_id\n        LEFT OUTER JOIN {$wpdb->term_taxonomy} USING (term_taxonomy_id)\n        LEFT OUTER JOIN {$wpdb->terms} USING (term_id)\n        ";
+            $clauses['where'] .= " AND (taxonomy = 'shared-file-category' OR taxonomy IS NULL)";
+            $clauses['groupby'] = "object_id";
+            $clauses['orderby'] = "GROUP_CONCAT({$wpdb->terms}.name ORDER BY name ASC) ";
+            $clauses['orderby'] .= ( 'ASC' == strtoupper( $wp_query->get( 'order' ) ) ? 'ASC' : 'DESC' );
+        }
+        
+        return $clauses;
+    }
+    
     public function update_db_check()
     {
         //    wp_clear_scheduled_hook('check_expired_files');
@@ -860,6 +876,8 @@ class Shared_Files_Admin
           </ul>
         </li>
       </ol>
+
+      <hr class="style-one" />
 
       <h2><?php 
         echo  __( 'Give a rating for the plugin', 'shared-files' ) ;

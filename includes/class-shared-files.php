@@ -181,6 +181,13 @@ class Shared_Files
         );
         $this->loader->add_filter( 'manage_edit-shared_file_sortable_columns', $plugin_admin, 'set_custom_shared_files_sortable_columns' );
         $this->loader->add_filter( 'parse_query', $plugin_admin, 'sort_posts_by_meta_value' );
+        $this->loader->add_filter(
+            'posts_clauses',
+            $plugin_admin,
+            'sort_by_custom_taxonomy',
+            10,
+            2
+        );
     }
     
     /**
