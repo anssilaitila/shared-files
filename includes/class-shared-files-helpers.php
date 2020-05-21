@@ -8,6 +8,7 @@ class SharedFilesHelpers {
       'image/png' => 'image',
       'image/jpg' => 'image',
       'image/jpeg' => 'image',
+      'image/svg+xml' => 'image',
       'application/pdf' => 'pdf',
       'application/postscript' => 'ai',
       'application/msword' => 'doc',
@@ -31,7 +32,8 @@ class SharedFilesHelpers {
       'application/vnd.ms-excel' => 'xlsx',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => 'xlsx',
       'application/zip' => 'zip',
-      'application/x-7z-compressed' => 'zip'
+      'application/x-7z-compressed' => 'zip',
+      'application/x-indesign' => 'indd'
     );
     
     return $filetypes;
@@ -69,7 +71,16 @@ class SharedFilesHelpers {
       'application/vnd.ms-excel' => isset($s['icon_for_xlsx']) ? $s['icon_for_xlsx'] : '',
       'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' => isset($s['icon_for_xlsx']) ? $s['icon_for_xlsx'] : '',
       'application/zip' => isset($s['icon_for_zip']) ? $s['icon_for_zip'] : '',
-      'application/x-7z-compressed' => isset($s['icon_for_zip']) ? $s['icon_for_zip'] : ''
+      'application/x-7z-compressed' => isset($s['icon_for_zip']) ? $s['icon_for_zip'] : '',
+      'application/mspowerpoint' => isset($s['icon_for_pptx']) ? $s['icon_for_pptx'] : '',
+      'application/powerpoint' => isset($s['icon_for_pptx']) ? $s['icon_for_pptx'] : '',
+      'application/vnd.ms-powerpoint' => isset($s['icon_for_pptx']) ? $s['icon_for_pptx'] : '',
+      'application/x-mspowerpoint' => isset($s['icon_for_pptx']) ? $s['icon_for_pptx'] : '',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation' => isset($s['icon_for_pptx']) ? $s['icon_for_pptx'] : '',
+      'application/x-indesign' => isset($s['icon_for_indd']) ? $s['icon_for_indd'] : '',
+      'image/vnd.adobe.photoshop' => isset($s['icon_for_psd']) ? $s['icon_for_psd'] : '',
+      'application/photoshop' => isset($s['icon_for_psd']) ? $s['icon_for_psd'] : '',
+      'image/svg+xml' => isset($s['icon_for_svg']) ? $s['icon_for_svg'] : '',
     );
     
     return $filetypes;
@@ -103,12 +114,19 @@ class SharedFilesHelpers {
 
     $s = get_option('shared_files_settings');
 
+    $file = get_post_meta($file_id, '_sf_file', true);
+
     $filetypes = SharedFilesHelpers::getFiletypes();
     $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
     $custom_icons = SharedFilesHelpers::getCustomIcons();
 
     $imagefile = 'generic.png';
     $file_type_icon_url = '';
+    $file_ext = '';
+
+    if (isset($file['file'])) {
+      $file_ext = pathinfo($file['file'], PATHINFO_EXTENSION);
+    }
 
     if ($external_url) {
 
@@ -123,30 +141,41 @@ class SharedFilesHelpers {
         if (array_key_exists($ext, $external_filetypes)) {
           if (isset($external_filetypes[$ext])) {
             $imagefile = $external_filetypes[$ext] . '.png';
-            $file_type_icon_url = plugins_url('../img/' . $imagefile, __FILE__);
+            $file_type_icon_url = SHARED_FILES_URI . 'img/' . $imagefile;
           }
         }
 
       }
 
     } else {
+            
+      if (isset($file_ext) && $file_ext == 'psd') {
 
-      $file = get_post_meta($file_id, '_sf_file', true);
-      
-      if (isset($file['type'])) {
+        $file_type_icon_url = $s['icon_for_psd'];
+        
+      } elseif (isset($file['type'])) {
 
         $filetype = $file['type'];
-        
-        if (array_key_exists($filetype, $filetypes)) {
-          if (isset($custom_icons[$filetype]) && $custom_icons[$filetype]) {
-            $file_type_icon_url = $custom_icons[$filetype];
-          } elseif (isset($filetypes[$filetype])) {
-            $imagefile = $filetypes[$filetype] . '.png';
-            $file_type_icon_url = plugins_url('../img/' . $imagefile, __FILE__);
-          }
+
+        if (isset($custom_icons[$filetype]) && $custom_icons[$filetype]) {
+          $file_type_icon_url = $custom_icons[$filetype];
+        } elseif (array_key_exists($filetype, $filetypes) && isset($filetypes[$filetype])) {
+          $imagefile = $filetypes[$filetype] . '.png';
+          $file_type_icon_url = SHARED_FILES_URI . 'img/' . $imagefile;
+        } elseif (isset($s['icon_for_other'])) {
+          $file_type_icon_url = $s['icon_for_other'];
         }
+
       }
 
+    }
+
+    if (!$file_type_icon_url) {
+      if (isset($s['icon_for_other']) && strlen($s['icon_for_other']) > 0) {
+        $file_type_icon_url = $s['icon_for_other'];
+      } else {
+        $file_type_icon_url = SHARED_FILES_URI . 'img/generic.png';
+      }
     }
         
     return $file_type_icon_url;

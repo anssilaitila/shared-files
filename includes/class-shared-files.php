@@ -161,8 +161,8 @@ class Shared_Files
             2
         );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'register_categories_info_page' );
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'register_support_page' );
+        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         $this->loader->add_action(
             'init',
             $plugin_admin,

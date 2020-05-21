@@ -14,37 +14,7 @@ class ShortcodeSharedFiles
         $s = get_option( 'shared_files_settings' );
         
         if ( isset( $atts['file_id'] ) ) {
-            $file_id = (int) $atts['file_id'];
-            $html = '';
-            $html .= SharedFilesHelpers::initLayout( $s );
-            $wpb_all_query = new WP_Query( array(
-                'post_type'      => 'shared_file',
-                'post_status'    => 'publish',
-                'posts_per_page' => -1,
-                'p'              => $file_id,
-            ) );
-            $filetypes = SharedFilesHelpers::getFiletypes();
-            $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
-            $html .= '<div id="shared-files-search">';
-            $html .= '<ul id="myList">';
-            
-            if ( $wpb_all_query->have_posts() ) {
-                while ( $wpb_all_query->have_posts() ) {
-                    $wpb_all_query->the_post();
-                    $id = get_the_id();
-                    $c = get_post_custom( $id );
-                    $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
-                    $filetype = '';
-                    $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                    $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
-                    $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $hide_description );
-                }
-            } else {
-                $html .= '<div class="sf_error">' . __( 'File not found', 'shared-files' ) . '</div>';
-            }
-            
-            $html .= '</ul>';
-            $html .= '</div>';
+            $html = SharedFilesPublicViews::sfProFeaturePublicMarkup();
             return $html;
         } else {
             $layout = '';

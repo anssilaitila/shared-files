@@ -488,17 +488,19 @@ class Shared_Files_Admin
         }
         $taxonomy_slug = 'shared-file-category';
         $current_category_slug = ( isset( $_GET['shared-file-category'] ) ? $_GET['shared-file-category'] : '' );
-        wp_dropdown_categories( [
-            'show_option_all' => get_taxonomy( $taxonomy_slug )->labels->all_items,
-            'hide_empty'      => 1,
-            'hierarchical'    => 1,
-            'show_count'      => 1,
-            'orderby'         => 'name',
-            'name'            => $taxonomy_slug,
-            'value_field'     => 'slug',
-            'taxonomy'        => $taxonomy_slug,
-            'selected'        => $current_category_slug,
-        ] );
+        if ( get_taxonomy( $taxonomy_slug ) ) {
+            wp_dropdown_categories( [
+                'show_option_all' => get_taxonomy( $taxonomy_slug )->labels->all_items,
+                'hide_empty'      => 1,
+                'hierarchical'    => 1,
+                'show_count'      => 1,
+                'orderby'         => 'name',
+                'name'            => $taxonomy_slug,
+                'value_field'     => 'slug',
+                'taxonomy'        => $taxonomy_slug,
+                'selected'        => $current_category_slug,
+            ] );
+        }
     }
     
     /**
@@ -520,7 +522,7 @@ class Shared_Files_Admin
             'YB'
         );
         $factor = floor( (strlen( $bytes ) - 1) / 3 );
-        return sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . ' ' . @$size[$factor];
+        return ( $bytes ? sprintf( "%.{$decimals}f", $bytes / pow( 1024, $factor ) ) . ' ' . @$size[$factor] : 0 );
     }
     
     public function sf_root()
@@ -612,6 +614,8 @@ class Shared_Files_Admin
             if ( $_POST['_sf_description'] ) {
                 $description = balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 );
                 update_post_meta( $id, '_sf_description', $description );
+            } else {
+                update_post_meta( $id, '_sf_description', '' );
             }
             
             
@@ -729,7 +733,7 @@ class Shared_Files_Admin
     {
         global  $submenu ;
         $permalink = './options-general.php?page=shared-files';
-        $submenu['edit.php?post_type=shared_file'][] = array( __( 'Settings', 'shared-files' ), 'manage_options', $permalink );
+        $submenu['edit.php?post_type=shared_file'][] = array( __( 'Settings&nbsp;&nbsp;➤', 'shared-files' ), 'manage_options', $permalink );
     }
     
     public function add_upgrade_link()
@@ -824,7 +828,16 @@ class Shared_Files_Admin
         ?> <span class="shared-files-shortcode">[shared_files hide_search=1]</span></li>
                 <li><?php 
         echo  __( 'More additional parameters:', 'shared-files' ) ;
-        ?> <span class="shared-files-pro-only-inline">Pro</span>
+        ?>
+
+                  <?php 
+        ?>
+                    <a href="<?php 
+        echo  get_admin_url() ;
+        ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+                  <?php 
+        ?>
+
                   <ul class="shared-files-help-list-level-3">
                     <li><?php 
         echo  __( 'Hide file description:', 'shared-files' ) ;
@@ -847,19 +860,49 @@ class Shared_Files_Admin
             </li>
             <li><b><?php 
         echo  __( 'Search form only that targets all the files, sorted by category', 'shared-files' ) ;
-        ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
+        ?></b>
+            
+            <?php 
+        ?>
+              <a href="<?php 
+        echo  get_admin_url() ;
+        ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <?php 
+        ?>
+            
+            <br /><?php 
         echo  __( 'Insert the shortcode', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files_search]</span></li>
             <li><b><?php 
         echo  __( 'List only files in certain category:', 'shared-files' ) ;
-        ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
+        ?></b> 
+
+            <?php 
+        ?>
+              <a href="<?php 
+        echo  get_admin_url() ;
+        ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <?php 
+        ?>
+
+            <br /><?php 
         echo  __( 'Insert the shortcode', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files category="category_slug"]</span>. <?php 
         echo  __( 'You can find / define the category slug by editing the category.', 'shared-files' ) ;
         ?></li>
             <li><b><?php 
         echo  __( 'List categories / list files by category:', 'shared-files' ) ;
-        ?></b> <span class="shared-files-pro-only-inline">Pro</span><br /><?php 
+        ?></b> 
+            
+            <?php 
+        ?>
+              <a href="<?php 
+        echo  get_admin_url() ;
+        ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <?php 
+        ?>
+            
+            <br /><?php 
         echo  __( 'Insert the shortcode', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files_categories]</span> <?php 
         echo  __( 'or', 'shared-files' ) ;
@@ -868,7 +911,17 @@ class Shared_Files_Admin
         ?></li>
             <li><b><?php 
         echo  __( 'List a single file:', 'shared-files' ) ;
-        ?></b><br /><?php 
+        ?></b>
+
+            <?php 
+        ?>
+              <a href="<?php 
+        echo  get_admin_url() ;
+        ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <?php 
+        ?>
+            
+            <br /><?php 
         echo  __( 'Insert the shortcode', 'shared-files' ) ;
         ?> <span class="shared-files-shortcode">[shared_files file_id=12345]</span>. <?php 
         echo  __( 'The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page.', 'shared-files' ) ;

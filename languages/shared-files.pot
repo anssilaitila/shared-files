@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.5.7\n"
+"Project-Id-Version: Shared Files 1.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-02-23T17:37:03+02:00\n"
+"POT-Creation-Date: 2020-05-20T23:44:42+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.1.0\n"
 "X-Domain: shared-files\n"
@@ -30,291 +30,286 @@ msgstr ""
 msgid "https://anssilaitila.fi"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:101
+#: admin/class-shared-files-admin.php:100
 msgid "Current file:"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:102
+#: admin/class-shared-files-admin.php:101
 msgid "Replace with a new file"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:109
+#: admin/class-shared-files-admin.php:108
 msgid "External URL"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:109
+#: admin/class-shared-files-admin.php:108
 msgid "Instead of adding a local file, you may provide an external URL to a file located elsewhere."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:109
+#: admin/class-shared-files-admin.php:108
 msgid "Note: if the external URL is defined, the file above will not be saved."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:111
-#: admin/class-shared-files-admin.php:463
+#: admin/class-shared-files-admin.php:110
+#: admin/class-shared-files-admin.php:417
 msgid "Limit downloads"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:111
+#: admin/class-shared-files-admin.php:110
 msgid "When this number is reached, the file can't be downloaded anymore and an email notify is sent to the administrator."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:113
+#: admin/class-shared-files-admin.php:112
 msgid "Password protection"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:113
+#: admin/class-shared-files-admin.php:112
 msgid "Define a password here to enable password protection."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:117
-#: admin/class-shared-files-admin.php:479
+#: admin/class-shared-files-admin.php:116
+#: admin/class-shared-files-admin.php:433
 msgid "Expiration date"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:117
+#: admin/class-shared-files-admin.php:116
 msgid "When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:117
+#: admin/class-shared-files-admin.php:116
 msgid "Notification email"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:117
+#: admin/class-shared-files-admin.php:116
 msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:123
+#: admin/class-shared-files-admin.php:122
 msgid "Description"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:146
+#: admin/class-shared-files-admin.php:145
 msgid "Please insert the file first or define an external URL."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:425
+#: admin/class-shared-files-admin.php:379
 msgid "File"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:426
+#: admin/class-shared-files-admin.php:380
 msgid "Add New File"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:427
+#: admin/class-shared-files-admin.php:381
 msgid "Edit File"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:428
+#: admin/class-shared-files-admin.php:382
 #: public/class-shortcode-shared_files_search.php:46
-#: public/class-shortcode-shared_files.php:267
+#: public/class-shortcode-shared_files.php:289
 msgid "No files found."
 msgstr ""
 
-#: admin/class-shared-files-admin.php:429
+#: admin/class-shared-files-admin.php:383
 msgid "File Management"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:430
+#: admin/class-shared-files-admin.php:384
 msgid "Add New"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:458
+#: admin/class-shared-files-admin.php:412
 msgid "Shortcode & URL"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:459
+#: admin/class-shared-files-admin.php:413
 msgid "File size"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:460
+#: admin/class-shared-files-admin.php:414
 msgid "File loads"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:467
+#: admin/class-shared-files-admin.php:421
 msgid "File added"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:471
+#: admin/class-shared-files-admin.php:425
 msgid "Last access"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:475
+#: admin/class-shared-files-admin.php:429
 msgid "Bandwidth usage (estimate)"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:631
-#: admin/class-shared-files-admin.php:632
+#: admin/class-shared-files-admin.php:643
+#: admin/class-shared-files-admin.php:644
 msgid "Category"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:633
+#: admin/class-shared-files-admin.php:645
 msgid "Search Categories"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:634
+#: admin/class-shared-files-admin.php:646
 msgid "All Categories"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:635
+#: admin/class-shared-files-admin.php:647
 msgid "Parent Category"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:636
+#: admin/class-shared-files-admin.php:648
 msgid "Parent Category:"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:637
+#: admin/class-shared-files-admin.php:649
 msgid "Edit Category"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:638
+#: admin/class-shared-files-admin.php:650
 msgid "Update Category"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:639
+#: admin/class-shared-files-admin.php:651
 msgid "Add New Category"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:640
+#: admin/class-shared-files-admin.php:652
 msgid "New Type Name"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:641
-#: admin/class-shared-files-admin.php:824
-#: admin/class-shared-files-admin.php:825
-#: admin/class-shared-files-admin.php:859
+#: admin/class-shared-files-admin.php:653
+#: admin/class-shared-files-admin.php:838
+#: admin/class-shared-files-admin.php:839
+#: admin/class-shared-files-admin.php:873
 msgid "Categories"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:835
-#: admin/class-shared-files-admin.php:881
+#: admin/class-shared-files-admin.php:849
+#: admin/class-shared-files-admin.php:915
 msgid "How to use Shared Files"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:836
+#: admin/class-shared-files-admin.php:850
 msgid "Help / Support"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:846
-msgid "Settings"
+#: admin/class-shared-files-admin.php:860
+msgid "Settings&nbsp;&nbsp;➤"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:852
+#: admin/class-shared-files-admin.php:866
 msgid "Upgrade&nbsp;&nbsp;➤"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:882
-msgid "Some examples on how you can use different views available"
+#: admin/class-shared-files-admin.php:917
+msgid "Some examples on how you can use different views available at"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:882
-#: admin/class-shared-files-admin.php:911
-msgid "here"
+#: admin/class-shared-files-admin.php:917
+msgid "sharedfilespro.com"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:884
-msgid "Add the files via the File Management page"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:885
-msgid "Choose one of the following methods:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:887
-msgid "List all the files:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:887
-#: admin/class-shared-files-admin.php:901
-#: admin/class-shared-files-admin.php:902
-#: admin/class-shared-files-admin.php:903
-#: admin/class-shared-files-admin.php:904
-msgid "Insert the shortcode"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:887
-msgid "to the content editor of any page you wish the file list to appear. If there are more than one category, a dropdown of categories will appear above the file list."
-msgstr ""
-
-#: admin/class-shared-files-admin.php:889
-msgid "Using the parameter hide_search you may hide the search form like so:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:890
-msgid "More additional parameters:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:892
-msgid "Hide file description:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:893
-msgid "Layout as \"2 cards on the same row\":"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:894
-msgid "Layout as \"3 cards on the same row\":"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:895
-msgid "Layout as \"4 cards on the same row\":"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:896
-msgid "You can also use multiple parameters:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:901
-msgid "Search form only that targets all the files, sorted by category"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:902
-msgid "List only files in certain category:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:902
-#: admin/class-shared-files-admin.php:903
-msgid "You can find / define the category slug by editing the category."
-msgstr ""
-
-#: admin/class-shared-files-admin.php:903
-msgid "List categories / list files by category:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:903
-msgid "or"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:904
-msgid "List a single file:"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:904
-msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page."
-msgstr ""
-
-#: admin/class-shared-files-admin.php:908
+#: admin/class-shared-files-admin.php:918
 msgid "Any feedback is welcome. You may contact the author at"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:908
-msgid "or e-mail directly:"
+#: admin/class-shared-files-admin.php:918
+msgid "or by email:"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:910
+#: admin/class-shared-files-admin.php:921
+msgid "Add the files via the File Management page"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:922
+msgid "Choose one of the following methods:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:924
+msgid "List all the files:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:924
+#: admin/class-shared-files-admin.php:953
+#: admin/class-shared-files-admin.php:962
+#: admin/class-shared-files-admin.php:971
+#: admin/class-shared-files-admin.php:980
+msgid "Insert the shortcode"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:924
+msgid "to the content editor of any page you wish the file list to appear. If there are more than one category, a dropdown of categories will appear above the file list."
+msgstr ""
+
+#: admin/class-shared-files-admin.php:926
+msgid "Using the parameter hide_search you may hide the search form like so:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:927
+msgid "More additional parameters:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:936
+msgid "Hide file description:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:937
+msgid "Layout as \"2 cards on the same row\":"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:938
+msgid "Layout as \"3 cards on the same row\":"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:939
+msgid "Layout as \"4 cards on the same row\":"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:940
+msgid "You can also use multiple parameters:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:945
+msgid "Search form only that targets all the files, sorted by category"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:954
+msgid "List only files in certain category:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:962
+#: admin/class-shared-files-admin.php:971
+msgid "You can find / define the category slug by editing the category."
+msgstr ""
+
+#: admin/class-shared-files-admin.php:963
+msgid "List categories / list files by category:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:971
+msgid "or"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:972
+msgid "List a single file:"
+msgstr ""
+
+#: admin/class-shared-files-admin.php:980
+msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page."
+msgstr ""
+
+#: admin/class-shared-files-admin.php:987
 msgid "Give a rating for the plugin"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:911
+#: admin/class-shared-files-admin.php:988
 msgid "Whether it's 1 star or 5 stars, I'm grateful for your rating. You may rate the plugin"
 msgstr ""
 
-#: admin/class-shared-files-admin.php:913
-msgid "Send direct feedback to the author"
-msgstr ""
-
-#: admin/class-shared-files-admin.php:914
-msgid "Fill out the form below to send feedback or questions to the author. Only the information provided below is sent. Thanks!"
+#: admin/class-shared-files-admin.php:988
+msgid "here"
 msgstr ""
 
 #: admin/class-settings-page.php:15
@@ -418,124 +413,144 @@ msgid "File type: XLSX"
 msgstr ""
 
 #: admin/class-settings-page.php:246
+msgid "File type: PPT(X)"
+msgstr ""
+
+#: admin/class-settings-page.php:255
 msgid "File type: ZIP"
 msgstr ""
 
 #: admin/class-settings-page.php:264
-msgid "By activating this you agree that the email sending is handled by the plugin developers own server and using <a href=\"https://www.mailgun.com\" target=\"_blank\">Mailgun</a>. The server is a DigitalOcean Droplet hosted in the EU. This method was chosen to ensure reliable mail delivery."
+msgid "File type: INDD"
+msgstr ""
+
+#: admin/class-settings-page.php:273
+msgid "File type: PSD"
 msgstr ""
 
 #: admin/class-settings-page.php:282
+msgid "File type: SVG"
+msgstr ""
+
+#: admin/class-settings-page.php:291
+msgid "File type: Other files"
+msgstr ""
+
+#: admin/class-settings-page.php:300
+msgid "YouTube-link (External URL)"
+msgstr ""
+
+#: admin/class-settings-page.php:330
 msgid "If you're getting 404 from file URLs, it may be necessary to set this to the same directory that your WordPress is installed to. If this is set, the file URLs are formatted like so:<br /><b>/some-dir/shared-files/123/this-is-a-file.pdf</b>"
 msgstr ""
 
-#: admin/class-settings-page.php:285
+#: admin/class-settings-page.php:333
 msgid "e.g. /wp-content/uploads/2019/12/some-fancy-icon.png"
 msgstr ""
 
-#: admin/class-settings-page.php:313
+#: admin/class-settings-page.php:361
 msgid "Define alternative icons here. You may add the files to the media library and then copy the URL to the appropriate field below."
 msgstr ""
 
-#: admin/class-settings-page.php:321
+#: admin/class-settings-page.php:369
 msgid "Shared Files Settings"
 msgstr ""
 
-#: admin/class-settings-page.php:345
+#: admin/class-settings-page.php:393
 msgid "Default list"
 msgstr ""
 
-#: admin/class-settings-page.php:346
+#: admin/class-settings-page.php:394
 msgid "2 cards on the same row"
 msgstr ""
 
-#: admin/class-settings-page.php:347
+#: admin/class-settings-page.php:395
 msgid "3 cards on the same row"
 msgstr ""
 
-#: admin/class-settings-page.php:348
+#: admin/class-settings-page.php:396
 msgid "4 cards on the same row"
 msgstr ""
 
-#: admin/class-settings-page.php:366
+#: admin/class-settings-page.php:414
 msgid "Transparent"
 msgstr ""
 
-#: admin/class-settings-page.php:367
+#: admin/class-settings-page.php:415
 msgid "White"
 msgstr ""
 
-#: admin/class-settings-page.php:368
+#: admin/class-settings-page.php:416
 msgid "Light gray"
 msgstr ""
 
-#: admin/class-settings-page.php:386
+#: admin/class-settings-page.php:434
 msgid "Default"
 msgstr ""
 
-#: admin/class-settings-page.php:387
+#: admin/class-settings-page.php:435
 msgid "Roboto"
 msgstr ""
 
-#: admin/class-settings-page.php:388
+#: admin/class-settings-page.php:436
 msgid "Ubuntu"
 msgstr ""
 
-#: public/class-shared-files-public-views.php:93
+#: public/class-shared-files-public-views.php:100
 msgid "Password protected file"
 msgstr ""
 
-#: public/class-shared-files-public-views.php:216
+#: public/class-shared-files-public-views.php:223
 msgid "Password"
 msgstr ""
 
-#: public/class-shared-files-public-views.php:221
+#: public/class-shared-files-public-views.php:228
 msgid "Invalid password"
 msgstr ""
 
-#: public/class-shared-files-public-views.php:224
+#: public/class-shared-files-public-views.php:231
 msgid "Submit"
 msgstr ""
 
-#: public/class-shared-files-public-views.php:243
+#: public/class-shared-files-public-views.php:250
 msgid "Download limit reached"
 msgstr ""
 
-#: public/class-shared-files-public-views.php:363
+#: public/class-shared-files-public-views.php:369
 msgid "This file is no longer available for download."
 msgstr ""
 
-#: public/class-shortcode-shared_files_categories.php:37
+#: public/class-shortcode-shared_files_categories.php:46
 msgid "<< Back"
 msgstr ""
 
-#: public/class-shortcode-shared_files_categories.php:95
+#: public/class-shortcode-shared_files_categories.php:103
 msgid "No files in this category."
 msgstr ""
 
 #: public/class-shortcode-shared_files_search.php:35
-#: public/class-shortcode-shared_files.php:82
+#: public/class-shortcode-shared_files.php:91
 msgid "Search files..."
 msgstr ""
 
 #: public/class-shortcode-shared_files_search.php:43
-#: public/class-shortcode-shared_files.php:201
+#: public/class-shortcode-shared_files.php:221
 msgid "file found."
 msgstr ""
 
 #: public/class-shortcode-shared_files_search.php:43
-#: public/class-shortcode-shared_files.php:201
+#: public/class-shortcode-shared_files.php:221
 msgid "files found."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:52
+#: public/class-shortcode-shared_files.php:55
 msgid "File not found"
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:93
+#: public/class-shortcode-shared_files.php:113
 msgid "Choose category"
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:261
+#: public/class-shortcode-shared_files.php:283
 msgid "Browse more files:"
 msgstr ""

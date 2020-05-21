@@ -32,6 +32,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Custom images/icons for file types
 
 = Additional features in Pro version: =
+* Multiple different shortcodes/views for various use cases
 * Sort files into categories
 * Fast search targeting file names and descriptions
 * File load counter
@@ -58,6 +59,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 2. File management in admin area
 
 == Changelog ==
+
+= 1.6.0 =
+* Custom icons can now be added for .ppt(x), .indd, .psd and .svg files.
+* Bug fixed: file description can now be emptied
+* Some issues regarding displaying correct file type icon fixed
 
 = 1.5.10 =
 * Category made sortable in the admin list

@@ -33,11 +33,12 @@ class SharedFilesPublicViews
     public static function fileListItem( $c, $imagefile, $hide_description )
     {
         $html = '';
+        //    $html .= $imagefile;
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements">';
-        $html .= '<div class="shared-files-main-elements-left" style="background: url(' . $imagefile . ') right top no-repeat; background-size: contain;"></div>';
+        $html .= '<div class="shared-files-main-elements-left" style="background: url(' . $imagefile . ') right top no-repeat; background-size: 48px;"></div>';
         $html .= '<div class="shared-files-main-elements-right">';
-        $html .= '<a href="' . SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) ) {
             $html .= '<span class="shared-file-size">' . human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
@@ -198,6 +199,7 @@ class SharedFilesPublicViews
         $html .= '<link rel="profile" href="https://gmpg.org/xfn/11">';
         $html .= '<title>' . __( 'Download limit reached', 'shared-files' ) . '</title>';
         //	$html .= '<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>';
+        $html .= '<link href="https://fonts.googleapis.com/css?family=Oswald|Quattrocento" rel="stylesheet">';
         $html .= '</head>';
         $html .= '<body>';
         $html .= '
@@ -305,7 +307,6 @@ class SharedFilesPublicViews
   
   </style>
     ';
-        $html .= '<link href="https://fonts.googleapis.com/css?family=Oswald|Quattrocento" rel="stylesheet">';
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
         $html .= '<h1>' . __( 'Download limit reached', 'contact-list' ) . '</h1>';

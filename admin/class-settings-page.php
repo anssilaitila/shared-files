@@ -215,6 +215,19 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-icon_pptx',
+            __( 'File type: PPT(X)', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_pptx',
+            'field_name'  => 'icon_for_pptx',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
             'shared-files-icon_zip',
             __( 'File type: ZIP', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -223,6 +236,58 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-icon_for_zip',
             'field_name'  => 'icon_for_zip',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_indd',
+            __( 'File type: INDD', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_indd',
+            'field_name'  => 'icon_for_indd',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_psd',
+            __( 'File type: PSD', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_psd',
+            'field_name'  => 'icon_for_psd',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_svg',
+            __( 'File type: SVG', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_svg',
+            'field_name'  => 'icon_for_svg',
+            'placeholder' => '',
+            'wide'        => 1,
+        )
+        );
+        add_settings_field(
+            'shared-files-icon_other',
+            __( 'File type: Other files', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_file_icons',
+            array(
+            'label_for'   => 'shared-files-icon_for_other',
+            'field_name'  => 'icon_for_other',
             'placeholder' => '',
             'wide'        => 1,
         )
