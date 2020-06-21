@@ -80,6 +80,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-hide_date_from_card',
+            __( 'Hide file date / publish date from card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-hide_date_from_card',
+            'field_name' => 'hide_date_from_card',
+        )
+        );
+        add_settings_field(
             'shared-files-wp_location',
             __( 'WordPress location', 'shared-files' ),
             array( $this, 'input_render' ),

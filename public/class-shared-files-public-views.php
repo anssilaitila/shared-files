@@ -32,6 +32,9 @@ class SharedFilesPublicViews
     
     public static function fileListItem( $c, $imagefile, $hide_description )
     {
+        $s = get_option( 'shared_files_settings' );
+        $file_id = get_the_id();
+        $date_format = get_option( 'date_format' );
         $html = '';
         //    $html .= $imagefile;
         $html .= '<li>';
@@ -42,7 +45,20 @@ class SharedFilesPublicViews
         if ( isset( $c['_sf_filesize'] ) ) {
             $html .= '<span class="shared-file-size">' . human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
-        $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
+        
+        if ( !isset( $s['hide_date_from_card'] ) ) {
+            $main_date = get_post_meta( $file_id, '_sf_main_date', true );
+            $expiration_date_formatted = '';
+            
+            if ( $main_date instanceof DateTime ) {
+                $main_date_formatted = $main_date->format( $date_format );
+                $html .= '<span class="shared-file-date">' . $main_date_formatted . '</span>';
+            } else {
+                $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
+            }
+        
+        }
+        
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
             $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
         }

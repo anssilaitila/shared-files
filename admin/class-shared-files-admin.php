@@ -88,9 +88,14 @@ class Shared_Files_Admin
         $limit_downloads = get_post_meta( get_the_ID(), '_sf_limit_downloads', true );
         $expiration_date = get_post_meta( get_the_ID(), '_sf_expiration_date', true );
         $expiration_date_formatted = '';
+        $main_date = get_post_meta( get_the_ID(), '_sf_main_date', true );
+        $main_date_formatted = '';
         $notify_email = get_post_meta( get_the_ID(), '_sf_notify_email', true );
         if ( $expiration_date instanceof DateTime ) {
             $expiration_date_formatted = $expiration_date->format( 'Y-m-d' );
+        }
+        if ( $main_date instanceof DateTime ) {
+            $main_date_formatted = $main_date->format( 'Y-m-d' );
         }
         $password = get_post_meta( get_the_ID(), '_sf_password', true );
         $html = '';
@@ -104,6 +109,7 @@ class Shared_Files_Admin
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         }
         
+        $html .= '<div id="shared-file-main-date-title"><strong>' . __( 'File date', 'shared-files' ) . '</strong><br /><i>' . __( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '">';
         $html .= SharedFilesAdminViews::sfProMoreFeaturesMarkup();
         $html .= '<div id="shared-file-description-title">' . __( 'Description', 'shared-files' ) . '</div>';
         echo  $html ;
@@ -334,7 +340,8 @@ class Shared_Files_Admin
             'all_items'     => __( 'File Management', 'shared-files' ),
             'add_new'       => __( 'Add New', 'shared-files' ),
         ],
-            'public'             => true,
+            'public'             => false,
+            'show_ui'            => true,
             'has_archive'        => false,
             'publicly_queryable' => false,
             'menu_icon'          => 'dashicons-index-card',
@@ -606,8 +613,18 @@ class Shared_Files_Admin
                 }
             }
             
+            $main_date = '';
+            
+            if ( isset( $_POST['_sf_main_date'] ) ) {
+                $dt = DateTime::createFromFormat( "Y-m-d", $_POST['_sf_main_date'] );
+                if ( $dt !== false && !array_sum( $dt::getLastErrors() ) ) {
+                    $main_date = $dt;
+                }
+            }
+            
             update_post_meta( $id, '_sf_limit_downloads', $limit_downloads );
             update_post_meta( $id, '_sf_expiration_date', $expiration_date );
+            update_post_meta( $id, '_sf_main_date', $main_date );
             //      update_post_meta($id, '_sf_expiration_date', isset($_POST['_sf_expiration_date']) ? (int) $_POST['_sf_expiration_date'] : '');
             update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? $_POST['_sf_password'] : '' ) );
             
@@ -940,6 +957,109 @@ class Shared_Files_Admin
         ?> <a href="https://wordpress.org/support/plugin/shared-files/reviews/" target="_blank"><?php 
         echo  __( 'here', 'shared-files' ) ;
         ?></a>.</p>
+
+      <hr class="style-one" />
+
+      <script>
+        jQuery(function ($) {
+          $('.shared-files-toggle-debug-info').on('click', function() {
+            if ($('.shared-files-debug-info-container').is(':hidden')) {
+              $('.shared-files-debug-info-container').show();
+              $(this).text("<?php 
+        echo  __( 'Close', 'shared-files' ) ;
+        ?>");
+            } else {
+              $('.shared-files-debug-info-container').hide();
+              $(this).text("<?php 
+        echo  __( 'Open', 'shared-files' ) ;
+        ?>");
+            }
+          });
+        });
+      </script>
+
+      <h1><?php 
+        echo  __( 'Debug Info', 'shared-files' ) ;
+        ?> <button class="shared-files-toggle-debug-info">Open</button></h1>
+
+      <div class="shared-files-debug-info-container">
+
+        <div class="shared-files-info-small">
+          <p><?php 
+        echo  __( 'This section contains some debug info, which may be useful when trying to solve abnormal behaviour of the plugin.', 'shared-files' ) ;
+        ?></a></p>
+        </div>
+  
+        <?php 
+        global  $wp ;
+        ?>
+  
+        <h3><?php 
+        echo  __( 'Variables', 'shared-files' ) ;
+        ?></h3>
+        site_url(): <?php 
+        echo  site_url() ;
+        ?><br />
+        home_url(): <?php 
+        echo  home_url() ;
+        ?><br />
+        wp_upload_dir()['path']: <?php 
+        echo  wp_upload_dir()['path'] ;
+        ?><br />
+        wp_upload_dir()['url']: <?php 
+        echo  wp_upload_dir()['url'] ;
+        ?><br />
+        wp_upload_dir()['subdir']: <?php 
+        echo  wp_upload_dir()['subdir'] ;
+        ?><br />
+        wp_upload_dir()['basedir']: <?php 
+        echo  wp_upload_dir()['basedir'] ;
+        ?><br />
+        wp_upload_dir()['baseurl']: <?php 
+        echo  wp_upload_dir()['baseurl'] ;
+        ?><br />
+        wp_upload_dir()['error']: <?php 
+        echo  wp_upload_dir()['error'] ;
+        ?><br />
+        sf_root: <?php 
+        echo  ( SharedFilesHelpers::sf_root() ? SharedFilesHelpers::sf_root() : '(not set)' ) ;
+        ?><br />
+        <br />
+  
+        <?php 
+        $wp_query = new WP_Query( array(
+            'post_type'      => 'shared_file',
+            'post_status'    => 'publish',
+            'posts_per_page' => 5,
+            'orderby'        => 'date',
+            'order'          => 'DESC',
+        ) );
+        ?>
+  
+        <h3><?php 
+        echo  __( 'Sample file data (5 newest files)', 'shared-files' ) ;
+        ?></h3>
+        <?php 
+        if ( $wp_query->have_posts() ) {
+            while ( $wp_query->have_posts() ) {
+                $wp_query->the_post();
+                $id = get_the_id();
+                $c = get_post_custom( $id );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' );
+                ?>
+    
+            <?php 
+                echo  $file ;
+                ?> | <?php 
+                echo  get_the_date() ;
+                ?><br />
+  
+            <?php 
+            }
+        }
+        ?>
+
+      </div>
 
     </div>
     <?php 

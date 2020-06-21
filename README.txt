@@ -60,6 +60,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.1 =
+* New feature: file has got a new date field, which is displayed instead of the publish date
+* New option: hide file date / publish date from file list item
+* Debug info -section added to Help / Support -page
+
 = 1.6.0 =
 * Custom icons can now be added for .ppt(x), .indd, .psd and .svg files.
 * Bug fixed: file description can now be emptied
