@@ -230,7 +230,16 @@ class SharedFilesHelpers {
   
       $html .= '<style>.shared-files-container #myList li { margin-bottom: 5px; } </style>';
   
-      if ($s['card_background'] == 'white') {
+      if ($s['card_background'] == 'custom_color' && isset($s['card_background_custom_color']) && $s['card_background_custom_color']) {
+        $custom_color = '#' . $s['card_background_custom_color'];
+        
+        if ($custom_color && preg_match('/^#([0-9A-F]{3}){1,2}$/i', $custom_color)) {
+          $html .= '<style>.shared-files-main-elements { background: ' . $custom_color . '; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
+        } else {
+          $html .= '<style>.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
+        }
+
+      } elseif ($s['card_background'] == 'white') {
         $html .= '<style>.shared-files-main-elements { background: #fff; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
       } elseif ($s['card_background'] == 'light_gray') {
         $html .= '<style>.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';

@@ -28,7 +28,7 @@ class ShortcodeSharedFilesCategories
             $parent_cat = get_term_by( 'slug', $cat, 'shared-file-category' );
             $subcategories = get_terms( array(
                 'taxonomy'   => 'shared-file-category',
-                'hide_empty' => false,
+                'hide_empty' => true,
                 'parent'     => $parent_cat->term_id,
             ) );
             $html .= '<a href="javascript:history.back()">' . (( isset( $s['back_link_title'] ) && $s['back_link_title'] ? $s['back_link_title'] : __( '<< Back', 'shared-files' ) )) . '</a>';
@@ -86,7 +86,7 @@ class ShortcodeSharedFilesCategories
             }
             $categories = get_terms( array(
                 'taxonomy'   => 'shared-file-category',
-                'hide_empty' => false,
+                'hide_empty' => true,
                 'parent'     => ( isset( $category->term_id ) ? $category->term_id : 0 ),
                 'terms'      => $terms,
             ) );

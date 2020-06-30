@@ -35,8 +35,8 @@ class ShortcodeSharedFiles
                 return $html;
             } else {
                 
-                if ( isset( $_GET['c'] ) && $_GET['c'] != 'all_files' ) {
-                    $term_slug = sanitize_title( $_GET['c'] );
+                if ( isset( $_GET['sf_category'] ) && $_GET['sf_category'] != '0' ) {
+                    $term_slug = sanitize_title( $_GET['sf_category'] );
                     $wpb_all_query = new WP_Query( array(
                         'post_type'      => 'shared_file',
                         'post_status'    => 'publish',
@@ -60,18 +60,46 @@ class ShortcodeSharedFiles
                     ) ),
                     ) );
                 } else {
-                    $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
-                    $wpb_all_query = new WP_Query( array(
-                        'post_type'      => 'shared_file',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => 20,
-                        'paged'          => $paged,
-                    ) );
-                    $wpb_all_query_all_files = new WP_Query( array(
-                        'post_type'      => 'shared_file',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => -1,
-                    ) );
+                    
+                    if ( isset( $_GET['c'] ) && $_GET['c'] != 'all_files' ) {
+                        $term_slug = sanitize_title( $_GET['c'] );
+                        $wpb_all_query = new WP_Query( array(
+                            'post_type'      => 'shared_file',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => -1,
+                            'tax_query'      => array( array(
+                            'taxonomy'         => 'shared-file-category',
+                            'field'            => 'slug',
+                            'terms'            => $term_slug,
+                            'include_children' => true,
+                        ) ),
+                        ) );
+                        $wpb_all_query_all_files = new WP_Query( array(
+                            'post_type'      => 'shared_file',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => -1,
+                            'tax_query'      => array( array(
+                            'taxonomy'         => 'shared-file-category',
+                            'field'            => 'slug',
+                            'terms'            => $term_slug,
+                            'include_children' => true,
+                        ) ),
+                        ) );
+                    } else {
+                        $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
+                        $wpb_all_query = new WP_Query( array(
+                            'post_type'      => 'shared_file',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => 20,
+                            'paged'          => $paged,
+                        ) );
+                        $wpb_all_query_all_files = new WP_Query( array(
+                            'post_type'      => 'shared_file',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => -1,
+                        ) );
+                    }
+                
                 }
             
             }
@@ -80,7 +108,7 @@ class ShortcodeSharedFiles
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
             $html .= '<div id="shared-files-files-found"></div>';
             $html .= '<span id="shared-files-one-file-found">' . __( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . __( 'files found.', 'shared-files' ) . '</span>';
-            $html .= '<ul id="myList">';
+            $html .= '<ul id="myList" class="shared-files-ajax-list">';
             if ( $wpb_all_query->have_posts() ) {
                 while ( $wpb_all_query->have_posts() ) {
                     $wpb_all_query->the_post();

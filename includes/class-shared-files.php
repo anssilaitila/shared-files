@@ -203,6 +203,9 @@ class Shared_Files
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
         $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+        $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public, 'sf_get_files' );
+        $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public, 'sf_get_files' );
+        $this->loader->add_action( 'wp_footer', $plugin_public, 'my_ajax_without_file' );
     }
     
     /**

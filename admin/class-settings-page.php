@@ -58,6 +58,18 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-card_background_custom_color',
+            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">See <a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-card_background_custom_color',
+            'field_name'  => 'card_background_custom_color',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
             'shared-files-card_font',
             __( 'Card font', 'shared-files' ),
             array( $this, 'card_font_render' ),
@@ -343,17 +355,40 @@ class Shared_Files_Settings
         if ( $args['field_name'] ) {
             $options = get_option( 'shared_files_settings' );
             ?>    
-      <input type="text" class="input-field <?php 
-            echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
-            ?>" id="shared-files-<?php 
-            echo  $args['field_name'] ;
-            ?>" name="shared_files_settings[<?php 
-            echo  $args['field_name'] ;
-            ?>]" value="<?php 
-            echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
-            ?>" placeholder="<?php 
-            echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
-            ?>">
+
+      <?php 
+            
+            if ( $args['field_name'] == 'card_background_custom_color' ) {
+                ?>
+        # <input type="text" style="width: 100px;" class="input-field <?php 
+                echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+                ?>" id="shared-files-<?php 
+                echo  $args['field_name'] ;
+                ?>" name="shared_files_settings[<?php 
+                echo  $args['field_name'] ;
+                ?>]" value="<?php 
+                echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
+                ?>" placeholder="<?php 
+                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                ?>">
+      <?php 
+            } else {
+                ?>
+        <input type="text" class="input-field <?php 
+                echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+                ?>" id="shared-files-<?php 
+                echo  $args['field_name'] ;
+                ?>" name="shared_files_settings[<?php 
+                echo  $args['field_name'] ;
+                ?>]" value="<?php 
+                echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
+                ?>" placeholder="<?php 
+                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                ?>">
+      <?php 
+            }
+            
+            ?>
 
       <?php 
             
@@ -478,6 +513,11 @@ class Shared_Files_Settings
             echo  ( $card_background == 'light_gray' ? 'selected' : '' ) ;
             ?>><?php 
             echo  __( 'Light gray', 'shared-files' ) ;
+            ?></option>
+        <option value="custom_color" <?php 
+            echo  ( $card_background == 'custom_color' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Custom color', 'shared-files' ) ;
             ?></option>
       </select>
       <?php 

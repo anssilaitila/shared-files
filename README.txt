@@ -60,6 +60,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.2 =
+* Custom color option for card background
+* File list is now reloaded using ajax request when choosing category
+* Bug fixes
+
 = 1.6.1 =
 * New feature: file has got a new date field, which is displayed instead of the publish date
 * New option: hide file date / publish date from file list item
