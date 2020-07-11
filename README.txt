@@ -1,6 +1,6 @@
 === Shared Files for WordPress ===
 Contributors: anssilaitila, freemius
-Tags: google drive, sharing, downloads, file manager, dropbox, download manager
+Tags: file manager, download, download counter, download counter, google drive
 Requires at least: 4.0.0
 Tested up to: 5.4
 Stable tag: trunk
@@ -10,17 +10,19 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 List downloadable files on your site using multiple different views. Includes statistics and password protection.
 
 == Description ==
-Using Shared Files you can to easily list and manage downloadable files on your site. Just add the files in the admin area and insert the shortcode(s) to the page(s) you wish to list the files.
+Using Shared Files you can to easily list and manage downloadable files on your site.
 
-Very easy to use and no complex settings to mind on, but also very scalable for a large group of files.
+Just add the files in the admin area and insert the shortcode(s) to the page(s) you wish to list the files.
 
-**14 days trial available for Pro version, no credit card required.**
+Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts.
+
+**14 days free trial available for Pro version, no credit card required.**
 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
 = Some use cases for this plugin: =
 * List any number of files and keep statistics on downloads
-* Share files like using Dropbox or Google Drive
+* Share downloadable files like using Dropbox or Google Drive
 * Add a single file to any article/post using a simple shortcode
 * Receive a notification when a file is downloaded
 * Sort files and documents to multiple categories
@@ -56,7 +58,13 @@ Thanks to Luciano Del Fico for translating the Italian version.
 == Screenshots ==
 
 1. List of files on your site
-2. File management in admin area
+2. Files listed in 3 columns (more layout options available)
+3. Search from all files
+4. Display only 1 specific file on page, using shortcode in post content
+5. Opening a password protected file
+6. Opening a file that's download limit has been reached
+7. File management in admin area
+8. Edit a single file
 
 == Changelog ==
 
@@ -116,7 +124,7 @@ Thanks to Luciano Del Fico for translating the Italian version.
 * Bug fixes
 
 = 1.5.0 =
-* New licensing model
+* New licensing model / 2019-12-09
 
 = 1.0.0 =
 * Initial release / 2018-07-15
