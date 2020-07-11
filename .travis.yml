@@ -25,9 +25,9 @@ matrix:
   fast_finish: true
   include:
     # Run PHP_CodeSniffer
-    - name: Coding standards
-      php: 7.3
-      env: WP_VERSION=latest WP_TRAVISCI=phpcs
+#    - name: Coding standards
+#      php: 7.3
+#      env: WP_VERSION=latest WP_TRAVISCI=phpcs
 
     # Canary for our oldest-supported version
     - name: Legacy
