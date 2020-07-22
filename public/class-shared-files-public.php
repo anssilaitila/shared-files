@@ -47,7 +47,7 @@ class Shared_Files_Public {
    * @param    string    $plugin_name       The name of the plugin.
    * @param    string    $version           The version of this plugin.
    */
-  public function __construct( $plugin_name, $version ) {
+  public function __construct($plugin_name, $version) {
     $this->plugin_name = $plugin_name;
     $this->version = $version;
   }
