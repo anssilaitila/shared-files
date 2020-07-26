@@ -22,75 +22,6 @@ class Shared_Files_Settings
             array( $this, 'shared_files_settings_general_section_callback' ),
             'shared-files'
         );
-        // ...
-        add_settings_field(
-            'shared-files-layout',
-            __( 'Layout', 'shared-files' ),
-            array( $this, 'layout_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-layout',
-            'field_name' => 'layout',
-        )
-        );
-        add_settings_field(
-            'shared-files-card_height',
-            __( 'Card height in pixels', 'shared-files' ),
-            array( $this, 'input_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'   => 'shared-files-card_height',
-            'field_name'  => 'card_height',
-            'placeholder' => '380',
-        )
-        );
-        add_settings_field(
-            'shared-files-card_background',
-            __( 'Card background', 'shared-files' ),
-            array( $this, 'card_background_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-card_background',
-            'field_name' => 'card_background',
-        )
-        );
-        add_settings_field(
-            'shared-files-card_background_custom_color',
-            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">See <a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
-            array( $this, 'input_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'   => 'shared-files-card_background_custom_color',
-            'field_name'  => 'card_background_custom_color',
-            'placeholder' => '',
-        )
-        );
-        add_settings_field(
-            'shared-files-card_font',
-            __( 'Card font', 'shared-files' ),
-            array( $this, 'card_font_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-card_font',
-            'field_name' => 'card_font',
-        )
-        );
-        add_settings_field(
-            'shared-files-card_small_font_size',
-            __( 'Small font size on card', 'shared-files' ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-card_small_font_size',
-            'field_name' => 'card_small_font_size',
-        )
-        );
         add_settings_field(
             'shared-files-hide_date_from_card',
             __( 'Hide file date / publish date from card', 'shared-files' ),
@@ -114,10 +45,86 @@ class Shared_Files_Settings
             'placeholder' => '/some-dir/',
         )
         );
+        $tab = 2;
         add_settings_section(
-            'shared-files_section_file_icons',
-            __( 'Change default file icons', 'shared-files' ),
-            array( $this, 'shared_files_settings_file_icons_section_callback' ),
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        add_settings_field(
+            'shared-files-layout',
+            __( 'Layout', 'shared-files' ),
+            array( $this, 'layout_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-layout',
+            'field_name' => 'layout',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_font',
+            __( 'Card font', 'shared-files' ),
+            array( $this, 'card_font_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-card_font',
+            'field_name' => 'card_font',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_small_font_size',
+            __( 'Small font size on card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-card_small_font_size',
+            'field_name' => 'card_small_font_size',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_height',
+            __( 'Card height in pixels', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-card_height',
+            'field_name'  => 'card_height',
+            'placeholder' => '380',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_background',
+            __( 'Card background', 'shared-files' ),
+            array( $this, 'card_background_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-card_background',
+            'field_name' => 'card_background',
+        )
+        );
+        add_settings_field(
+            'shared-files-card_background_custom_color',
+            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">See <a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-card_background_custom_color',
+            'field_name'  => 'card_background_custom_color',
+            'placeholder' => '',
+        )
+        );
+        $tab = 3;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
         add_settings_field(
@@ -125,7 +132,7 @@ class Shared_Files_Settings
             __( 'File type: Image', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_image',
             'field_name'  => 'icon_for_image',
@@ -138,7 +145,7 @@ class Shared_Files_Settings
             __( 'File type: PDF', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_pdf',
             'field_name'  => 'icon_for_pdf',
@@ -151,7 +158,7 @@ class Shared_Files_Settings
             __( 'File type: AI', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_ai',
             'field_name'  => 'icon_for_ai',
@@ -164,7 +171,7 @@ class Shared_Files_Settings
             __( 'File type: Doc', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_doc',
             'field_name'  => 'icon_for_doc',
@@ -177,7 +184,7 @@ class Shared_Files_Settings
             __( 'File type: Font', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_font',
             'field_name'  => 'icon_for_font',
@@ -190,7 +197,7 @@ class Shared_Files_Settings
             __( 'File type: HTML', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_html',
             'field_name'  => 'icon_for_html',
@@ -203,7 +210,7 @@ class Shared_Files_Settings
             __( 'File type: MP3', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_mp3',
             'field_name'  => 'icon_for_mp3',
@@ -216,7 +223,7 @@ class Shared_Files_Settings
             __( 'File type: Video', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_video',
             'field_name'  => 'icon_for_video',
@@ -229,7 +236,7 @@ class Shared_Files_Settings
             __( 'File type: XLSX', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_xlsx',
             'field_name'  => 'icon_for_xlsx',
@@ -242,7 +249,7 @@ class Shared_Files_Settings
             __( 'File type: PPT(X)', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_pptx',
             'field_name'  => 'icon_for_pptx',
@@ -255,7 +262,7 @@ class Shared_Files_Settings
             __( 'File type: ZIP', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_zip',
             'field_name'  => 'icon_for_zip',
@@ -268,7 +275,7 @@ class Shared_Files_Settings
             __( 'File type: INDD', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_indd',
             'field_name'  => 'icon_for_indd',
@@ -281,7 +288,7 @@ class Shared_Files_Settings
             __( 'File type: PSD', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_psd',
             'field_name'  => 'icon_for_psd',
@@ -294,7 +301,7 @@ class Shared_Files_Settings
             __( 'File type: SVG', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_svg',
             'field_name'  => 'icon_for_svg',
@@ -307,7 +314,7 @@ class Shared_Files_Settings
             __( 'File type: Other files', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_other',
             'field_name'  => 'icon_for_other',
@@ -320,13 +327,28 @@ class Shared_Files_Settings
             __( 'YouTube-link (External URL)', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
-            'shared-files_section_file_icons',
+            'shared-files_tab_' . $tab,
             array(
             'label_for'   => 'shared-files-icon_for_youtube',
             'field_name'  => 'icon_for_youtube',
             'placeholder' => '',
             'wide'        => 1,
         )
+        );
+        $tab = 4;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        // ...
+        //    $tab = 5;
+        add_settings_section(
+            'shared-files_section_admin_list',
+            '',
+            array( $this, 'shared_files_settings_admin_list_section_callback' ),
+            'shared-files'
         );
     }
     
@@ -417,37 +439,90 @@ class Shared_Files_Settings
     
     public function shared_files_settings_general_section_callback()
     {
-        echo  SharedFilesAdminViews::sfProFeatureSettingsMarkup() ;
+        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+    }
+    
+    public function contact_list_settings_tab_2_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-2">' ;
+        echo  '<h2>' . __( 'Layout settings', 'shared-files' ) . '</h2>' ;
+        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+    }
+    
+    public function contact_list_settings_tab_3_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-3">' ;
+        echo  '<h2>' . __( 'Change default file icons', 'shared-files' ) . '</h2>' ;
+        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+    }
+    
+    public function contact_list_settings_tab_4_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-4">' ;
+        echo  '<h2>' . __( 'Email settings', 'shared-files' ) . '</h2>' ;
+        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
     }
     
     public function shared_files_settings_admin_list_section_callback()
     {
-        echo  SharedFilesAdminViews::sfProFeatureSettingsMarkup() ;
-    }
-    
-    public function shared_files_settings_file_icons_section_callback()
-    {
-        echo  '<p>' . __( 'Define alternative icons here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-5">' ;
+        echo  '<h2>' . __( 'Admin list', 'shared-files' ) . '</h2>' ;
+        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
     }
     
     public function settings_page()
     {
         ?>
-    <div class="shared-files-settings-container">
-      <form action="options.php" method="post">
-  
-        <h1><?php 
+
+    <form action="options.php" method="post" class="shared-files-settings-form">
+
+      <h1><?php 
         echo  __( 'Shared Files Settings', 'shared-files' ) ;
         ?></h1>
-  
-        <?php 
+
+      <div class="shared-files-settings-tabs-container">
+        <ul class="shared-files-settings-tabs">
+          <li class="active" data-settings-container="shared-files-settings-tab-1"><span><?php 
+        echo  __( 'General settings', 'shared-files' ) ;
+        ?></span></li>
+          <li data-settings-container="shared-files-settings-tab-2"><span><?php 
+        echo  __( 'Layout', 'shared-files' ) ;
+        ?></span></li>
+          <li data-settings-container="shared-files-settings-tab-3"><span><?php 
+        echo  __( 'File type icons', 'shared-files' ) ;
+        ?></span></li>
+          <li data-settings-container="shared-files-settings-tab-4"><span><?php 
+        echo  __( 'Email', 'shared-files' ) ;
+        ?></span></li>
+          <li data-settings-container="shared-files-settings-tab-5"><span><?php 
+        echo  __( 'Admin list & columns', 'shared-files' ) ;
+        ?></span></li>
+          <hr class="clear" />
+        </ul>
+      </div>
+
+      <div class="shared-files-settings-container">
+
+        <div class="shared-files-settings-tab-1">
+          <?php 
         settings_fields( 'shared-files' );
+        ?>
+          <?php 
         do_settings_sections( 'shared-files' );
+        ?>  
+        </div>
+        
+        <?php 
         submit_button();
         ?>
-  
-      </form>
-    </div>
+      
+      </div>
+
+    </form>
     <?php 
     }
     

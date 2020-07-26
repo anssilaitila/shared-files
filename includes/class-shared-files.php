@@ -102,11 +102,20 @@ class Shared_Files
          */
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-i18n.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-helpers.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-shared-files-admin.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-shared-files-admin-views.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-settings-page.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shared-files-public.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shared-files-public-views.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-cpt.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-taxonomy.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-maintenance.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-send-mail.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-query.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-list.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-metadata.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-help-support.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-helpers.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-settings.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-ajax.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
@@ -138,56 +147,75 @@ class Shared_Files
     private function define_admin_hooks()
     {
         $plugin_admin = new Shared_Files_Admin( $this->get_plugin_name(), $this->get_version() );
+        $plugin_admin_cpt = new SharedFilesAdminCPT();
+        $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
+        $plugin_admin_maintenance = new SharedFilesAdminMaintenance();
+        $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
+        $plugin_admin_query = new SharedFilesAdminQuery();
+        $plugin_admin_send_mail = new SharedFilesAdminSendMail();
+        $plugin_admin_list = new SharedFilesAdminList();
+        $plugin_admin_metadata = new SharedFilesAdminMetadata();
         $plugin_settings = new Shared_Files_Settings();
-        $this->loader->add_action( 'plugins_loaded', $plugin_admin, 'update_db_check' );
-        $this->loader->add_action( 'check_expired_files', $plugin_admin, 'file_expired_send_email' );
+        // Enqueue CSS + JS (+ other)
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-        $this->loader->add_action( 'save_post', $plugin_admin, 'save_custom_meta_data' );
-        $this->loader->add_action( 'add_meta_boxes_shared_file', $plugin_admin, 'adding_custom_meta_boxes' );
-        $this->loader->add_action( 'init', $plugin_admin, 'create_custom_post_type' );
+        $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $this->loader->add_action( 'before_delete_post', $plugin_admin, 'delete_shared_file' );
+        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
+        // Maintenance
+        $this->loader->add_action( 'plugins_loaded', $plugin_admin_maintenance, 'update_db_check' );
+        // Send mail
+        $this->loader->add_action( 'check_expired_files', $plugin_admin_send_mail, 'file_expired_send_email' );
+        // CPT
+        $this->loader->add_action( 'init', $plugin_admin_cpt, 'create_custom_post_type' );
+        // Custom metadata for a file
+        $this->loader->add_action( 'save_post', $plugin_admin_metadata, 'save_custom_meta_data' );
+        $this->loader->add_action( 'add_meta_boxes_shared_file', $plugin_admin_metadata, 'adding_custom_meta_boxes' );
+        // Help & support
+        $this->loader->add_action( 'admin_menu', $plugin_admin_help_support, 'register_support_page' );
+        // Custom taxonomy
+        $this->loader->add_action(
+            'init',
+            $plugin_admin_taxonomy,
+            'create_shared_files_custom_taxonomy',
+            0
+        );
+        // Settings
+        $this->loader->add_action( 'admin_menu', $plugin_settings, 'shared_files_add_admin_menu' );
+        $this->loader->add_action( 'admin_init', $plugin_settings, 'shared_files_settings_init' );
+        // Query
+        $this->loader->add_filter( 'request', $plugin_admin_query, 'alter_the_query' );
+        // Admin list
         $this->loader->add_action(
             'manage_shared_file_posts_custom_column',
-            $plugin_admin,
+            $plugin_admin_list,
             'shared_file_custom_columns_content',
             10,
             2
         );
-        $this->loader->add_action( 'before_delete_post', $plugin_admin, 'delete_shared_file' );
         $this->loader->add_action(
             'restrict_manage_posts',
-            $plugin_admin,
+            $plugin_admin_list,
             'filter_files_by_taxonomies',
             10,
             2
         );
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'register_categories_info_page' );
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'register_support_page' );
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
-        $this->loader->add_action(
-            'init',
-            $plugin_admin,
-            'create_shared_files_custom_taxonomy',
-            0
-        );
-        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_upgrade_link' );
-        $this->loader->add_action( 'admin_menu', $plugin_settings, 'shared_files_add_admin_menu' );
-        $this->loader->add_action( 'admin_init', $plugin_settings, 'shared_files_settings_init' );
-        $this->loader->add_filter( 'request', $plugin_admin, 'alter_the_query' );
         $this->loader->add_filter(
             'manage_shared_file_posts_columns',
-            $plugin_admin,
+            $plugin_admin_list,
             'shared_file_custom_columns',
             10
         );
-        $this->loader->add_filter( 'manage_edit-shared_file_sortable_columns', $plugin_admin, 'set_custom_shared_files_sortable_columns' );
-        $this->loader->add_filter( 'parse_query', $plugin_admin, 'sort_posts_by_meta_value' );
+        $this->loader->add_filter( 'manage_edit-shared_file_sortable_columns', $plugin_admin_list, 'set_custom_shared_files_sortable_columns' );
+        $this->loader->add_filter( 'parse_query', $plugin_admin_list, 'sort_posts_by_meta_value' );
         $this->loader->add_filter(
             'posts_clauses',
-            $plugin_admin,
+            $plugin_admin_list,
             'sort_by_custom_taxonomy',
             10,
             2
         );
+        $this->loader->add_action( 'admin_menu', $plugin_admin_taxonomy, 'register_categories_info_page' );
+        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_upgrade_link' );
     }
     
     /**
@@ -200,12 +228,15 @@ class Shared_Files
     private function define_public_hooks()
     {
         $plugin_public = new Shared_Files_Public( $this->get_plugin_name(), $this->get_version() );
+        $plugin_public_ajax = new SharedFilesPublicAjax();
+        // Enqueue CSS + JS + register shortcodes
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
         $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
-        $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public, 'sf_get_files' );
-        $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public, 'sf_get_files' );
-        $this->loader->add_action( 'wp_footer', $plugin_public, 'my_ajax_without_file' );
+        // Ajax
+        $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
+        $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
+        $this->loader->add_action( 'wp_footer', $plugin_public_ajax, 'my_ajax_without_file' );
     }
     
     /**

@@ -4,7 +4,7 @@ class ShortcodeSharedFilesCategories
 {
     public static function shared_files_categories( $atts = array(), $content = null, $tag = '' )
     {
-        $html = SharedFilesAdminViews::sfProFeatureMarkup();
+        $html = SharedFilesAdminHelpers::sfProFeatureMarkup();
         return $html;
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
@@ -34,7 +34,7 @@ class ShortcodeSharedFilesCategories
             $html .= '<a href="javascript:history.back()">' . (( isset( $s['back_link_title'] ) && $s['back_link_title'] ? $s['back_link_title'] : __( '<< Back', 'shared-files' ) )) . '</a>';
             
             if ( sizeof( $subcategories ) > 0 ) {
-                $html .= SharedFilesPublicViews::listCategories( $subcategories );
+                $html .= SharedFilesPublicHelpers::listCategories( $subcategories );
             } else {
                 $category = get_term_by( 'slug', $category_slug, 'shared-file-category' );
                 if ( $category ) {
@@ -68,7 +68,7 @@ class ShortcodeSharedFilesCategories
                         $filetype = '';
                         $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
                         $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                        $html .= SharedFilesPublicViews::fileListItem( $c, $imagefile, $hide_description );
+                        $html .= SharedFilesPublicHelpers::fileListItem( $c, $imagefile, $hide_description );
                     }
                     $html .= '</ul>';
                 } else {
@@ -91,7 +91,7 @@ class ShortcodeSharedFilesCategories
                 'terms'      => $terms,
             ) );
             if ( sizeof( $categories ) > 0 ) {
-                $html .= SharedFilesPublicViews::listCategories( $categories );
+                $html .= SharedFilesPublicHelpers::listCategories( $categories );
             }
         }
         

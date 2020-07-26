@@ -1,6 +1,6 @@
 <?php
 
-class SharedFilesPublicViews
+class SharedFilesPublicHelpers
 {
     public static function sfProFeaturePublicMarkup()
     {

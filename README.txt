@@ -68,6 +68,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.4 =
+* Settings made more usable
+
 = 1.6.3 =
 * Bug fix: there are now several different ways to detect a file type, which means no more crashes on certain server configurations when opening a file
 
