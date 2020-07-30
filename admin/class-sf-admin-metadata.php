@@ -130,7 +130,7 @@ class SharedFilesAdminMetadata
             //      update_post_meta($id, '_sf_expiration_date', isset($_POST['_sf_expiration_date']) ? (int) $_POST['_sf_expiration_date'] : '');
             update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? $_POST['_sf_password'] : '' ) );
             
-            if ( $_POST['_sf_description'] ) {
+            if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
                 $description = balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 );
                 update_post_meta( $id, '_sf_description', $description );
             } else {
@@ -138,7 +138,7 @@ class SharedFilesAdminMetadata
             }
             
             
-            if ( $_POST['_sf_external_url'] ) {
+            if ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
                 $external_url = esc_url_raw( $_POST['_sf_external_url'] );
                 update_post_meta( $id, '_sf_external_url', $external_url );
                 $filename = basename( $external_url );
@@ -195,6 +195,20 @@ class SharedFilesAdminMetadata
         
         }
     
+    }
+    
+    /**
+     * Set the custom upload directory.
+     *
+     * @since    1.0.0
+     */
+    public function set_upload_dir( $dir )
+    {
+        return array(
+            'path'   => $dir['basedir'] . '/shared-files',
+            'url'    => $dir['baseurl'] . '/shared-files',
+            'subdir' => '/shared-files',
+        ) + $dir;
     }
 
 }

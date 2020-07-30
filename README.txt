@@ -68,6 +68,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.5 =
+* Adding new file was broken in the last update, this is now fixed
+
 = 1.6.4 =
 * Settings made more usable
 

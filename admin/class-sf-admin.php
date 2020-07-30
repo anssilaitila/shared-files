@@ -61,20 +61,6 @@ class Shared_Files_Admin {
   }
 
   /**
-   * Set the custom upload directory.
-   *
-   * @since    1.0.0
-   */
-  public function set_upload_dir($dir) {
-
-    return array(
-      'path'   => $dir['basedir'] . '/shared-files',
-      'url'    => $dir['baseurl'] . '/shared-files',
-      'subdir' => '/shared-files',
-    ) + $dir;
-  }
-
-  /**
    * Set the file itself when permanentyly deleting post.
    *
    * @since    1.0.0
