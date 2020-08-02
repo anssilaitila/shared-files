@@ -134,6 +134,7 @@ class SharedFilesAdminHelpSupport
         ?> <span class="shared-files-shortcode">[shared_files_categories category="category_slug"]</span>. <?php 
         echo  __( 'You can find / define the category slug by editing the category.', 'shared-files' ) ;
         ?></li>
+
             <li><b><?php 
         echo  __( 'List a single file:', 'shared-files' ) ;
         ?></b>
@@ -151,6 +152,37 @@ class SharedFilesAdminHelpSupport
         ?> <span class="shared-files-shortcode">[shared_files file_id=12345]</span>. <?php 
         echo  __( 'The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page.', 'shared-files' ) ;
         ?></li>
+
+            <li><b><?php 
+        echo  __( 'Front-end uploader:', 'shared-files' ) ;
+        ?></b>
+
+            <?php 
+        ?>
+              <a href="<?php 
+        echo  get_admin_url() ;
+        ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <?php 
+        ?>
+            
+            <span class="sf-new-feature-inline"><?php 
+        echo  __( 'New', 'contact-list' ) ;
+        ?></span>
+            
+            <br /><?php 
+        echo  __( 'To enable the uploader insert the shortcode', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files file_upload=1]</span>
+
+            <br /><?php 
+        echo  __( 'To hide other files use parameter "only_uploaded_files" like so:', 'shared-files' ) ;
+        ?> <span class="shared-files-shortcode">[shared_files file_upload=1 only_uploaded_files=1]</span>
+
+            <br /><?php 
+        echo  __( 'See live demo at', 'shared-files' ) ;
+        ?> <a href="https://www.sharedfilespro.com/shared-files/file-upload-1/" style="font-weight: bold;" target="_blank">sharedfilespro.com</a>
+
+            </li>
+
           </ul>
         </li>
       </ol>

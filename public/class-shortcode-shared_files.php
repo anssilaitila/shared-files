@@ -9,9 +9,58 @@ class ShortcodeSharedFiles
      */
     public static function shared_files( $atts = array(), $content = null, $tag = '' )
     {
+        $post_id = get_the_id();
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $meta_query_hide_not_public = array(
+            'relation' => 'OR',
+        );
+        $meta_query_hide_not_public[] = array(
+            'key'     => '_sf_not_public',
+            'compare' => '=',
+            'value'   => '',
+        );
+        $meta_query_hide_not_public[] = array(
+            'key'     => '_sf_not_public',
+            'compare' => 'NOT EXISTS',
+        );
+        //    $meta_query_hide_not_public = array();
+        $html = '';
+        
+        if ( isset( $atts['file_upload'] ) ) {
+            
+            if ( isset( $atts['only_uploaded_files'] ) ) {
+                $meta_query_hide_not_public = array(
+                    'relation' => 'AND',
+                );
+                $meta_query_hide_not_public[] = array(
+                    'key'     => '_sf_embed_post_id',
+                    'compare' => '=',
+                    'value'   => $post_id,
+                );
+                $meta_query_hide_not_public[] = array(
+                    'key'     => '_sf_not_public',
+                    'compare' => 'EXISTS',
+                );
+            } else {
+                $meta_query_hide_not_public = array(
+                    'relation' => 'OR',
+                );
+                $meta_query_hide_not_public[] = array(
+                    'key'     => '_sf_embed_post_id',
+                    'compare' => '=',
+                    'value'   => $post_id,
+                );
+                $meta_query_hide_not_public[] = array(
+                    'key'     => '_sf_not_public',
+                    'compare' => 'NOT EXISTS',
+                );
+            }
+            
+            $html .= SharedFilesFileUpload::fileUploadMarkup();
+        }
+        
         
         if ( isset( $atts['file_id'] ) ) {
             $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
@@ -25,7 +74,6 @@ class ShortcodeSharedFiles
                 $layout = $s['layout'];
             }
             
-            $html = '';
             $html .= SharedFilesHelpers::initLayout( $s );
             $html .= '<div class="shared-files-container ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
             $html .= '<div id="shared-files-search">';
@@ -47,6 +95,7 @@ class ShortcodeSharedFiles
                         'terms'            => $term_slug,
                         'include_children' => true,
                     ) ),
+                        'meta_query'     => $meta_query_hide_not_public,
                     ) );
                     $wpb_all_query_all_files = new WP_Query( array(
                         'post_type'      => 'shared_file',
@@ -58,6 +107,7 @@ class ShortcodeSharedFiles
                         'terms'            => $term_slug,
                         'include_children' => true,
                     ) ),
+                        'meta_query'     => $meta_query_hide_not_public,
                     ) );
                 } else {
                     
@@ -73,6 +123,7 @@ class ShortcodeSharedFiles
                             'terms'            => $term_slug,
                             'include_children' => true,
                         ) ),
+                            'meta_query'     => $meta_query_hide_not_public,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
                             'post_type'      => 'shared_file',
@@ -84,6 +135,7 @@ class ShortcodeSharedFiles
                             'terms'            => $term_slug,
                             'include_children' => true,
                         ) ),
+                            'meta_query'     => $meta_query_hide_not_public,
                         ) );
                     } else {
                         $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
@@ -92,11 +144,13 @@ class ShortcodeSharedFiles
                             'post_status'    => 'publish',
                             'posts_per_page' => 20,
                             'paged'          => $paged,
+                            'meta_query'     => $meta_query_hide_not_public,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
                             'posts_per_page' => -1,
+                            'meta_query'     => $meta_query_hide_not_public,
                         ) );
                     }
                 

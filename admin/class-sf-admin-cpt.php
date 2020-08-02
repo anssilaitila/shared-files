@@ -30,12 +30,6 @@ class SharedFilesAdminCPT {
 
     remove_post_type_support('shared_file', 'editor');
 
-    function human_filesize($bytes, $decimals = 2) {
-      $size = array('bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-      $factor = floor((strlen($bytes) - 1) / 3);
-      return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' ' . @$size[$factor];
-    }
-
   }
 
 }

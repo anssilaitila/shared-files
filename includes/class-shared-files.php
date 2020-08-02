@@ -116,6 +116,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-ajax.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-helpers.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-upload.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
@@ -229,6 +230,7 @@ class Shared_Files
     {
         $plugin_public = new Shared_Files_Public( $this->get_plugin_name(), $this->get_version() );
         $plugin_public_ajax = new SharedFilesPublicAjax();
+        $plugin_public_file_upload = new SharedFilesFileUpload();
         // Enqueue CSS + JS + register shortcodes
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -237,6 +239,8 @@ class Shared_Files
         $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_footer', $plugin_public_ajax, 'my_ajax_without_file' );
+        // Front-end file upload
+        $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload' );
     }
     
     /**

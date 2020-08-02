@@ -22,16 +22,20 @@ class SharedFilesAdminMetadata
     public function custom_metadata()
     {
         wp_nonce_field( plugin_basename( __FILE__ ), '_sf_file_nonce' );
-        $file = get_post_meta( get_the_ID(), '_sf_file', true );
-        $filename = get_post_meta( get_the_ID(), '_sf_filename', true );
-        $description = get_post_meta( get_the_ID(), '_sf_description', true );
-        $external_url = get_post_meta( get_the_ID(), '_sf_external_url', true );
-        $limit_downloads = get_post_meta( get_the_ID(), '_sf_limit_downloads', true );
-        $expiration_date = get_post_meta( get_the_ID(), '_sf_expiration_date', true );
+        $post_id = get_the_ID();
+        $file = get_post_meta( $post_id, '_sf_file', true );
+        $filename = get_post_meta( $post_id, '_sf_filename', true );
+        $description = get_post_meta( $post_id, '_sf_description', true );
+        $external_url = get_post_meta( $post_id, '_sf_external_url', true );
+        $limit_downloads = get_post_meta( $post_id, '_sf_limit_downloads', true );
+        $expiration_date = get_post_meta( $post_id, '_sf_expiration_date', true );
         $expiration_date_formatted = '';
-        $main_date = get_post_meta( get_the_ID(), '_sf_main_date', true );
+        $main_date = get_post_meta( $post_id, '_sf_main_date', true );
         $main_date_formatted = '';
-        $notify_email = get_post_meta( get_the_ID(), '_sf_notify_email', true );
+        $notify_email = get_post_meta( $post_id, '_sf_notify_email', true );
+        $embed_post_id = get_post_meta( $post_id, '_sf_embed_post_id', true );
+        $embed_post_title = get_post_meta( $post_id, '_sf_embed_post_title', true );
+        $not_public = get_post_meta( $post_id, '_sf_not_public', true );
         if ( $expiration_date instanceof DateTime ) {
             $expiration_date_formatted = $expiration_date->format( 'Y-m-d' );
         }
@@ -40,6 +44,23 @@ class SharedFilesAdminMetadata
         }
         $password = get_post_meta( get_the_ID(), '_sf_password', true );
         $html = '';
+        
+        if ( $embed_post_id ) {
+            $permalink = get_permalink( $embed_post_id );
+            $html .= '<div style="padding: 18px; margin: 10px 0; background: rgb(252, 252, 252); border: 1px solid rgb(240, 240, 240);">';
+            $html .= '<span style="font-size: 14px;">';
+            
+            if ( $permalink ) {
+                $html .= __( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . $permalink . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a>.';
+            } else {
+                $html .= __( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . $embed_post_title . ').';
+            }
+            
+            $html .= '</span>';
+            $html .= '<br /><br /><label><input type="checkbox" name="_sf_not_public"' . (( $not_public ? 'checked="checked"' : '' )) . ' /> ' . __( 'Hide from other pages', 'shared-files' ) . '</label>';
+            $html .= '</div>';
+        }
+        
         
         if ( $file ) {
             $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . get_the_ID() . '/' . $filename;
@@ -124,6 +145,11 @@ class SharedFilesAdminMetadata
                 }
             }
             
+            $not_public = '';
+            if ( isset( $_POST['_sf_not_public'] ) ) {
+                $not_public = $_POST['_sf_not_public'];
+            }
+            update_post_meta( $id, '_sf_not_public', $not_public );
             update_post_meta( $id, '_sf_limit_downloads', $limit_downloads );
             update_post_meta( $id, '_sf_expiration_date', $expiration_date );
             update_post_meta( $id, '_sf_main_date', $main_date );

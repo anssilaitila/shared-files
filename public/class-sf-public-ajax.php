@@ -12,6 +12,19 @@ class SharedFilesPublicAjax {
       $term_slug = sanitize_title($_POST['sf_category']);
     }
 
+    $meta_query_hide_not_public = array('relation' => 'OR');
+
+    $meta_query_hide_not_public[] = array(
+			'key'		  => '_sf_not_public',
+			'compare'	=> '=',
+			'value'   => ''
+		);
+
+    $meta_query_hide_not_public[] = array(
+			'key'		  => '_sf_not_public',
+			'compare'	=> 'NOT EXISTS',
+		);
+
     if ($term_slug) {
 
       $wp_query = new WP_Query(array(
@@ -25,7 +38,9 @@ class SharedFilesPublicAjax {
             'terms' => $term_slug,
             'include_children' => true
           )
-      )));
+        ),
+        'meta_query' => $meta_query_hide_not_public,
+      ));
 
     } else {
 
@@ -33,6 +48,7 @@ class SharedFilesPublicAjax {
         'post_type' => 'shared_file',
         'post_status' => 'publish',
         'posts_per_page' => -1,
+        'meta_query' => $meta_query_hide_not_public,
       ));
 
     }

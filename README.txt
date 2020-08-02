@@ -2,7 +2,7 @@
 Contributors: anssilaitila, freemius
 Tags: file manager, download, download counter, download counter, google drive
 Requires at least: 4.0.0
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -44,6 +44,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Password protected files
 * Set expiration date to a file
 * Limit number of downloads per file
+* Front-end file uploader
 * More features on the way based on user feedback
 
 Contact the author [here](https://anssilaitila.fi/).
@@ -67,6 +68,10 @@ Thanks to Luciano Del Fico for translating the Italian version.
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.6 =
+* New feature: front-end file uploader (see Help / Support page and live demo at https://www.sharedfilespro.com/shared-files/file-upload-1/)
+* Missing translatable terms added
 
 = 1.6.5 =
 * Adding new file was broken in the last update, this is now fixed
