@@ -69,6 +69,10 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.7 =
+* Freemius SDK update
+* Tested up to: WP 5.5
+
 = 1.6.6 =
 * New feature: front-end file uploader (see Help / Support page and live demo at https://www.sharedfilespro.com/shared-files/file-upload-1/)
 * Missing translatable terms added
