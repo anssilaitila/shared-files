@@ -63,7 +63,9 @@ class ShortcodeSharedFiles
         
         
         if ( isset( $atts['file_id'] ) ) {
-            $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+            if ( SharedFilesHelpers::isPremium() == 0 ) {
+                $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+            }
             return $html;
         } else {
             $layout = '';
@@ -79,8 +81,12 @@ class ShortcodeSharedFiles
             $html .= '<div id="shared-files-search">';
             
             if ( isset( $atts['category'] ) ) {
-                $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
-                return $html;
+                
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+                    return $html;
+                }
+            
             } else {
                 
                 if ( isset( $_GET['sf_category'] ) && $_GET['sf_category'] != '0' ) {

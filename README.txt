@@ -69,6 +69,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.8 =
+* Bug fixes
+
 = 1.6.7 =
 * Freemius SDK update
 * Tested up to: WP 5.5

@@ -103,22 +103,32 @@ class SharedFilesAdminList
                 
                 break;
             case 'load_cnt':
-                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                }
                 break;
             case 'limit_downloads':
-                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                }
                 break;
             case 'file_added':
                 echo  get_post_meta( $post_ID, '_sf_file_added', true ) ;
                 break;
             case 'last_access':
-                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                }
                 break;
             case 'bandwidth_usage':
-                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                }
                 break;
             case 'expiration_date':
-                echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                }
                 break;
         }
     }

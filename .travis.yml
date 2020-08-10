@@ -11,7 +11,7 @@ cache:
 #
 # Reference: https://www.php.net/supported-versions.php
 php:
-  - 7.4snapshot
+#  - 7.4snapshot
   - 7.3
   - 7.2
 

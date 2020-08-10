@@ -4,8 +4,12 @@ class ShortcodeSharedFilesSearch
 {
     public static function shared_files_search( $atts = array(), $content = null, $tag = '' )
     {
-        $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
-        return $html;
+        
+        if ( SharedFilesHelpers::isPremium() == 0 ) {
+            $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+            return $html;
+        }
+    
     }
 
 }

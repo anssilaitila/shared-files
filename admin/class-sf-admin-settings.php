@@ -342,7 +342,6 @@ class Shared_Files_Settings
             array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
-        // ...
         //    $tab = 5;
         add_settings_section(
             'shared-files_section_admin_list',
@@ -439,7 +438,13 @@ class Shared_Files_Settings
     
     public function shared_files_settings_general_section_callback()
     {
-        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
+        } else {
+            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        }
+    
     }
     
     public function contact_list_settings_tab_2_callback()
@@ -447,7 +452,13 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-2">' ;
         echo  '<h2>' . __( 'Layout settings', 'shared-files' ) . '</h2>' ;
-        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
+        } else {
+            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        }
+    
     }
     
     public function contact_list_settings_tab_3_callback()
@@ -455,7 +466,13 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-3">' ;
         echo  '<h2>' . __( 'Change default file icons', 'shared-files' ) . '</h2>' ;
-        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            echo  '<p>' . __( 'Define alternative icons here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
+        } else {
+            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        }
+    
     }
     
     public function contact_list_settings_tab_4_callback()
@@ -463,7 +480,13 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-4">' ;
         echo  '<h2>' . __( 'Email settings', 'shared-files' ) . '</h2>' ;
-        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            echo  '<p>' . '</p>' ;
+        } else {
+            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        }
+    
     }
     
     public function shared_files_settings_admin_list_section_callback()
@@ -471,7 +494,13 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-5">' ;
         echo  '<h2>' . __( 'Admin list', 'shared-files' ) . '</h2>' ;
-        echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
+        } else {
+            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        }
+    
     }
     
     public function settings_page()
