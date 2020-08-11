@@ -1,18 +1,17 @@
-=== Shared Files for WordPress ===
+=== WordPress File Sharing Plugin and Download Manager – Shared Files ===
 Contributors: anssilaitila, freemius
-Tags: file manager, download, download counter, download counter, google drive
+Tags: google drive, sharing, downloads, file manager, dropbox
 Requires at least: 4.0.0
 Tested up to: 5.5
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-List downloadable files on your site using multiple different views. Includes statistics and password protection.
+Share files like on Dropbox or Google Drive! Track file downloads, receive email notifications and more!
 
 == Description ==
-Using Shared Files you can to easily list and manage downloadable files on your site.
-
-Just add the files in the admin area and insert the shortcode(s) to the page(s) you wish to list the files.
+= The Best WordPress file sharing plugin on the market =
+The Shared Files plugin allows you to list and manage downloadable files on your site easily. Just add the files in the admin area and insert the shortcode to the page you wish to list the files.
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts.
 
