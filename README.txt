@@ -68,6 +68,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.9 =
+* New feature: custom file type icons. You can now set icons for all files with specific filename extensions (see the "Custom file types"-tab in settings).
+* New feature: file-specific icons. You can now define a custom file type icon for a single file by adding a featured image.
+* New settings: "Hide file size from card" and "Hide file type icon from card"
+
 = 1.6.8 =
 * Bug fixes
 

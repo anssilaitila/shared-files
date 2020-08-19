@@ -16,19 +16,27 @@ class SharedFilesAdminHelpSupport {
   public function register_support_page_callback() {
     ?>
 
-    <div class="wrap">
+    <div class="shared-files-help-support wrap">
       <h1><?= __('How to use Shared Files', 'shared-files'); ?></h1>
       <div class="shared-files-examples">
         <p><?= __('Some examples on how you can use different views available at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/shared-files/" target="_blank"><?= __('sharedfilespro.com', 'shared-files') ?></a>.</p>
-        <p><?= __('Any feedback is welcome. You may contact the author at', 'shared-files') . ' <a href="https://anssilaitila.fi/" target="_blank">anssilaitila.fi</a> ' . __('or by email:', 'shared-files') .  ' <a href="mailto:&#97;&#110;&#115;&#115;&#105;&#46;&#108;&#97;&#105;&#116;&#105;&#108;&#97;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#97;&#110;&#115;&#115;&#105;&#46;&#108;&#97;&#105;&#116;&#105;&#108;&#97;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;</a>'; ?></p>
+        <p><?= __('Any feedback is welcome. You may contact the author at', 'shared-files') . ' <a href="https://www.tammersoft.com/" target="_blank">tammersoft.com</a> ' . __('or by email:', 'shared-files') ?> <a href="javascript:location='mailto:\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d';void 0"><script type="text/javascript">document.write('\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d')</script></a></p>
       </div>
       <ol>
         <li><?= __('Add the files via the File Management page', 'shared-files'); ?></li>
         <li><?= __('Choose one of the following methods:', 'shared-files'); ?>
+
           <ul style="list-style: disc; padding-left: 20px; padding-top: 8px;">
-            <li><b><?= __('List all the files:', 'shared-files') ?></b><br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files]</span> <?= __('to the content editor of any page you wish the file list to appear. If there are more than one category, a dropdown of categories will appear above the file list.', 'shared-files'); ?>
+
+            <li>
+              <h2><?= __('List all the files:', 'shared-files') ?></h2><br />
+              
+              <?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files]</span> <?= __('to the content editor of any page you wish the file list to appear. If there are more than one category, a dropdown of categories will appear above the file list.', 'shared-files'); ?>
+
               <ul class="shared-files-help-list-level-2">
+
                 <li><?= __('Using the parameter hide_search you may hide the search form like so:', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files hide_search=1]</span></li>
+
                 <li><?= __('More additional parameters:', 'shared-files') ?>
 
                   <?php if (SharedFilesHelpers::isPremium() == 1): ?>
@@ -46,60 +54,76 @@ class SharedFilesAdminHelpSupport {
                   </ul>
                 </li>
               </ul>
+
             </li>
-            <li><b><?= __('Search form only that targets all the files, sorted by category', 'shared-files') ?></b>
+            <li>
+              
+              <h2><?= __('Search form only that targets all the files, sorted by category', 'shared-files') ?></h2>
             
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
-            <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-            <?php endif; ?>
+              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+                <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <?php else: ?>
+                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <?php endif; ?>
             
-            <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_search]</span></li>
-            <li><b><?= __('List only files in certain category:', 'shared-files') ?></b> 
-
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
-            <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-            <?php endif; ?>
-
-            <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files category="category_slug"]</span>. <?= __('You can find / define the category slug by editing the category.', 'shared-files'); ?></li>
-            <li><b><?= __('List categories / list files by category:', 'shared-files') ?></b> 
+              <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_search]</span>
             
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
-            <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-            <?php endif; ?>
+            </li>
+            <li>
             
-            <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_categories]</span> <?= __('or', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_categories category="category_slug"]</span>. <?= __('You can find / define the category slug by editing the category.', 'shared-files'); ?></li>
+              <h2><?= __('List only files in certain category:', 'shared-files') ?></h2> 
 
-            <li><b><?= __('List a single file:', 'shared-files') ?></b>
+              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+                <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <?php else: ?>
+                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <?php endif; ?>
 
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
-            <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-            <?php endif; ?>
+              <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files category="category_slug"]</span>. <?= __('You can find / define the category slug by editing the category.', 'shared-files'); ?>
+              
+            </li>
+            <li>
             
-            <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files file_id=12345]</span>. <?= __('The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page.', 'shared-files'); ?></li>
-
-            <li><b><?= __('Front-end uploader:', 'shared-files') ?></b>
-
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
-            <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-            <?php endif; ?>
+              <h2><?= __('List categories / list files by category:', 'shared-files') ?></h2> 
             
-            <span class="sf-new-feature-inline"><?= __('New', 'contact-list') ?></span>
-            
-            <br /><?= __('To enable the uploader insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files file_upload=1]</span>
+              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+                <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <?php else: ?>
+                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <?php endif; ?>
+              
+              <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_categories]</span> <?= __('or', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_categories category="category_slug"]</span>. <?= __('You can find / define the category slug by editing the category.', 'shared-files'); ?>
+            </li>
 
-            <br /><?= __('To hide other files use parameter "only_uploaded_files" like so:', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files file_upload=1 only_uploaded_files=1]</span>
+            <li>
+              <h2><?= __('List a single file:', 'shared-files') ?></h2>
 
-            <br /><?= __('See live demo at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/shared-files/file-upload-1/" style="font-weight: bold;" target="_blank">sharedfilespro.com</a>
+              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+                <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <?php else: ?>
+                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <?php endif; ?>
+              
+              <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files file_id=12345]</span>. <?= __('The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page.', 'shared-files'); ?>
+              
+            </li>
+
+            <li>
+              <h2><?= __('Front-end uploader:', 'shared-files') ?></h2>
+
+              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+                <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <?php else: ?>
+                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <?php endif; ?>
+              
+              <span class="sf-new-feature-inline"><?= __('New', 'contact-list') ?></span>
+              
+              <br /><?= __('To enable the uploader insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files file_upload=1]</span>
+  
+              <br /><?= __('To hide other files use parameter "only_uploaded_files" like so:', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files file_upload=1 only_uploaded_files=1]</span>
+  
+              <br /><?= __('See live demo at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/shared-files/file-upload-1/" style="font-weight: bold;" target="_blank">sharedfilespro.com</a>
 
             </li>
 

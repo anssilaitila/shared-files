@@ -116,6 +116,30 @@ class SharedFilesHelpers
         if ( isset( $file['file'] ) ) {
             $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
         }
+        // Featured image override
+        if ( $featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' ) ) {
+            return $featured_img_url;
+        }
+        // Custom file type definition overrides everything else
+        
+        if ( $file_ext ) {
+            $num = [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
+            ];
+            foreach ( $num as $n ) {
+                $custom_ext = 'custom_' . $n . '_ext';
+                $custom_icon_url = 'custom_' . $n . '_icon';
+                if ( isset( $s[$custom_ext] ) && $file_ext == $s[$custom_ext] && isset( $s[$custom_icon_url] ) && $s[$custom_icon_url] ) {
+                    return $s[$custom_icon_url];
+                }
+            }
+        }
+        
         
         if ( $external_url ) {
             

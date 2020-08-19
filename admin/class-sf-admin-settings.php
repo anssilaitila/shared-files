@@ -34,6 +34,28 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-hide_file_size_from_card',
+            __( 'Hide file size from card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-hide_file_size_from_card',
+            'field_name' => 'hide_file_size_from_card',
+        )
+        );
+        add_settings_field(
+            'shared-files-hide_file_type_icon_from_card',
+            __( 'Hide file type icon from card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-hide_file_type_icon_from_card',
+            'field_name' => 'hide_file_type_icon_from_card',
+        )
+        );
+        add_settings_field(
             'shared-files-wp_location',
             __( 'WordPress location', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -342,6 +364,13 @@ class Shared_Files_Settings
             array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
+        $tab = 5;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
         //    $tab = 5;
         add_settings_section(
             'shared-files_section_admin_list',
@@ -393,6 +422,20 @@ class Shared_Files_Settings
                 echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
                 ?>">
       <?php 
+            } elseif ( isset( $args['ext'] ) ) {
+                ?>
+        filename.<input type="text" class="input-field <?php 
+                echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+                ?>" id="shared-files-<?php 
+                echo  $args['field_name'] ;
+                ?>" name="shared_files_settings[<?php 
+                echo  $args['field_name'] ;
+                ?>]" value="<?php 
+                echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
+                ?>" placeholder="<?php 
+                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                ?>" style="width: 80px;">
+      <?php 
             } else {
                 ?>
         <input type="text" class="input-field <?php 
@@ -421,7 +464,7 @@ class Shared_Files_Settings
                 ?>
         </div>
       <?php 
-            } elseif ( $args['field_name'] == 'icon_for_image' ) {
+            } elseif ( $args['field_name'] == 'icon_for_image' || $args['field_name'] == 'custom_1_icon' ) {
                 ?>
         <p><?php 
                 echo  __( 'e.g. /wp-content/uploads/2019/12/some-fancy-icon.png', 'shared-files' ) ;
@@ -479,6 +522,20 @@ class Shared_Files_Settings
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-4">' ;
+        echo  '<h2>' . __( 'Custom file types', 'shared-files' ) . '</h2>' ;
+        
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            echo  '<p>' . __( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
+        } else {
+            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+        }
+    
+    }
+    
+    public function contact_list_settings_tab_5_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-5">' ;
         echo  '<h2>' . __( 'Email settings', 'shared-files' ) . '</h2>' ;
         
         if ( SharedFilesHelpers::isPremium() == 1 ) {
@@ -492,7 +549,7 @@ class Shared_Files_Settings
     public function shared_files_settings_admin_list_section_callback()
     {
         echo  '</div>' ;
-        echo  '<div class="shared-files-settings-tab-5">' ;
+        echo  '<div class="shared-files-settings-tab-6">' ;
         echo  '<h2>' . __( 'Admin list', 'shared-files' ) . '</h2>' ;
         
         if ( SharedFilesHelpers::isPremium() == 1 ) {
@@ -525,9 +582,12 @@ class Shared_Files_Settings
         echo  __( 'File type icons', 'shared-files' ) ;
         ?></span></li>
           <li data-settings-container="shared-files-settings-tab-4"><span><?php 
-        echo  __( 'Email', 'shared-files' ) ;
+        echo  __( 'Custom file types', 'shared-files' ) ;
         ?></span></li>
           <li data-settings-container="shared-files-settings-tab-5"><span><?php 
+        echo  __( 'Email', 'shared-files' ) ;
+        ?></span></li>
+          <li data-settings-container="shared-files-settings-tab-6"><span><?php 
         echo  __( 'Admin list & columns', 'shared-files' ) ;
         ?></span></li>
           <hr class="clear" />

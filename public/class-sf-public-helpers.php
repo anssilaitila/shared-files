@@ -37,12 +37,20 @@ class SharedFilesPublicHelpers
         $date_format = get_option( 'date_format' );
         $html = '';
         //    $html .= $imagefile;
+        $left_style = '';
+        
+        if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
+            $left_style = 'width: 6px;';
+        } else {
+            $left_style = 'background: url(' . $imagefile . ') right top no-repeat; background-size: 48px;';
+        }
+        
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements">';
-        $html .= '<div class="shared-files-main-elements-left" style="background: url(' . $imagefile . ') right top no-repeat; background-size: 48px;"></div>';
+        $html .= '<div class="shared-files-main-elements-left" style="' . $left_style . '"></div>';
         $html .= '<div class="shared-files-main-elements-right">';
         $html .= '<a href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
-        if ( isset( $c['_sf_filesize'] ) ) {
+        if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
         

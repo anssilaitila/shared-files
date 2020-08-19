@@ -20,6 +20,7 @@ class SharedFilesAdminCPT {
                             'all_items'        => __('File Management', 'shared-files'),
                             'add_new'          => __('Add New', 'shared-files')
                           ],
+                          'supports'           => array('title', 'thumbnail'),
                           'public'             => false,
                           'show_ui'            => true,
                           'has_archive'        => false,
