@@ -108,6 +108,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-card_featured_image_as_extra',
+            __( 'Show featured image in addition to file type icon', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'Featured image will be displayed next to file description', 'shared-files' ) . '</div>',
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-card_featured_image_as_extra',
+            'field_name' => 'card_featured_image_as_extra',
+        )
+        );
+        add_settings_field(
             'shared-files-card_height',
             __( 'Card height in pixels', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -132,7 +143,7 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-card_background_custom_color',
-            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">See <a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
+            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'See', 'shared-files' ) . '<a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
             array( $this, 'input_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,

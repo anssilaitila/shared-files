@@ -46,7 +46,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Front-end file uploader
 * More features on the way based on user feedback
 
-Contact the author [here](https://anssilaitila.fi/).
+Contact the author [here](https://tammersoft.com/).
 
 Thanks to Luciano Del Fico for translating the Italian version.
 
@@ -67,6 +67,12 @@ Thanks to Luciano Del Fico for translating the Italian version.
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.10 =
+* Bug fix: hide empty dropdown when there are no subcategories present (for shortcode [shared_files])
+* New parameter: hide_category_dropdown (for [shared_files])
+* New parameter: not_sorted_by_categories (for [shared_files_search])
+* New option: "Show featured image in addition to file type icon"
 
 = 1.6.9 =
 * New feature: custom file type icons. You can now set icons for all files with specific filename extensions (see the "Custom file types"-tab in settings).

@@ -71,6 +71,9 @@ class SharedFilesPublicHelpers
             $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
         }
         $html .= '</div>';
+        if ( isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
+        }
         $html .= '</div>';
         $html .= '</li>';
         return $html;

@@ -37,7 +37,7 @@ class SharedFilesAdminHelpSupport {
 
                 <li><?= __('Using the parameter hide_search you may hide the search form like so:', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files hide_search=1]</span></li>
 
-                <li><?= __('More additional parameters:', 'shared-files') ?>
+                <li><b><?= __('More parameters:', 'shared-files') ?></b>
 
                   <?php if (SharedFilesHelpers::isPremium() == 1): ?>
                     <span class="shared-files-pro-only-inline-inactive">Pro</span>
@@ -47,6 +47,7 @@ class SharedFilesAdminHelpSupport {
 
                   <ul class="shared-files-help-list-level-3">
                     <li><?= __('Hide file description:', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files hide_description=1]</li>
+                    <li><?= __('Hide category dropdown:', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files hide_category_dropdown=1]</li>
                     <li><?= __('Layout as "2 cards on the same row":', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files layout=2-cards-on-the-same-row]</li>
                     <li><?= __('Layout as "3 cards on the same row":', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files layout=3-cards-on-the-same-row]</li>
                     <li><?= __('Layout as "4 cards on the same row":', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files layout=4-cards-on-the-same-row]</li>
@@ -67,6 +68,12 @@ class SharedFilesAdminHelpSupport {
               <?php endif; ?>
             
               <br /><?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode">[shared_files_search]</span>
+
+              <h4><?= __('Additional parameters:', 'shared-files') ?></h4>
+
+              <ul class="shared-files-help-list-level-3">
+                <li><?= __('Don\'t sort by categories', 'shared-files') ?>: <span class="shared-files-shortcode">[shared_files_seach not_sorted_by_categories=1]</li>
+              </ul>
             
             </li>
             <li>

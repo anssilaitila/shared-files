@@ -117,7 +117,7 @@ class SharedFilesHelpers
             $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
         }
         // Featured image override
-        if ( $featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' ) ) {
+        if ( !isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             return $featured_img_url;
         }
         // Custom file type definition overrides everything else
