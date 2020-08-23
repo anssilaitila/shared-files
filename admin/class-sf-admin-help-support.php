@@ -72,7 +72,7 @@ class SharedFilesAdminHelpSupport {
               <h4><?= __('Additional parameters:', 'shared-files') ?></h4>
 
               <ul class="shared-files-help-list-level-3">
-                <li><?= __('Don\'t sort by categories', 'shared-files') ?>: <span class="shared-files-shortcode">[shared_files_seach not_sorted_by_categories=1]</li>
+                <li><?= __('Don\'t sort by categories', 'shared-files') ?>: <span class="shared-files-shortcode">[shared_files_search not_sorted_by_categories=1]</li>
               </ul>
             
             </li>
