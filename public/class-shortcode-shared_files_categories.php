@@ -39,6 +39,10 @@ class ShortcodeSharedFilesCategories {
         'taxonomy'   => 'shared-file-category',
         'hide_empty' => true,
         'parent' => $parent_cat->term_id,
+
+        'orderby' => 'description',
+        'order' => 'ASC'
+
       ));
 
       $html .='<a href="javascript:history.back()">' . (isset($s['back_link_title']) && $s['back_link_title'] ? $s['back_link_title'] : __('<< Back', 'shared-files')) . '</a>';
@@ -55,7 +59,7 @@ class ShortcodeSharedFilesCategories {
   
         $html .= SharedFilesHelpers::initLayout($s);
       
-        $html .= '<div class="shared-files-container ' . ($layout ? 'shared-files-' . $layout : '') . '">';  
+        $html .= '<div class="shared-files-container shared-files-categories-container ' . ($layout ? 'shared-files-' . $layout : '') . '">';  
         $html .= '<div id="shared-files-search">';
         
         $term_slug = sanitize_title($cat);
@@ -71,7 +75,13 @@ class ShortcodeSharedFilesCategories {
               'terms' => $term_slug,
               'include_children' => true
             )
-        )));
+          ),
+          
+          'orderby' => SharedFilesHelpers::getOrderBy($atts),
+          'order' => SharedFilesHelpers::getOrder($atts),
+          'meta_key' => SharedFilesHelpers::getMetaKey($atts),
+          
+        ));
     
         $filetypes = SharedFilesHelpers::getFiletypes();
         $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
@@ -120,7 +130,11 @@ class ShortcodeSharedFilesCategories {
         'taxonomy'   => 'shared-file-category',
         'hide_empty' => true,
         'parent' => isset($category->term_id) ? $category->term_id : 0,
-        'terms' => $terms,
+        'terms' => $terms,      
+
+        'orderby' => 'description',
+        'order' => 'ASC'
+    
       ));
     
       if (sizeof($categories) > 0):

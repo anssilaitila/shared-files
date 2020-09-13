@@ -101,6 +101,9 @@ class ShortcodeSharedFiles
                         'terms'            => $term_slug,
                         'include_children' => true,
                     ) ),
+                        'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+                        'order'          => SharedFilesHelpers::getOrder( $atts ),
+                        'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                         'meta_query'     => $meta_query_hide_not_public,
                     ) );
                     $wpb_all_query_all_files = new WP_Query( array(
@@ -113,6 +116,9 @@ class ShortcodeSharedFiles
                         'terms'            => $term_slug,
                         'include_children' => true,
                     ) ),
+                        'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+                        'order'          => SharedFilesHelpers::getOrder( $atts ),
+                        'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                         'meta_query'     => $meta_query_hide_not_public,
                     ) );
                 } else {
@@ -129,6 +135,9 @@ class ShortcodeSharedFiles
                             'terms'            => $term_slug,
                             'include_children' => true,
                         ) ),
+                            'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+                            'order'          => SharedFilesHelpers::getOrder( $atts ),
+                            'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                             'meta_query'     => $meta_query_hide_not_public,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
@@ -141,6 +150,9 @@ class ShortcodeSharedFiles
                             'terms'            => $term_slug,
                             'include_children' => true,
                         ) ),
+                            'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+                            'order'          => SharedFilesHelpers::getOrder( $atts ),
+                            'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                             'meta_query'     => $meta_query_hide_not_public,
                         ) );
                     } else {
@@ -150,12 +162,18 @@ class ShortcodeSharedFiles
                             'post_status'    => 'publish',
                             'posts_per_page' => 20,
                             'paged'          => $paged,
+                            'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+                            'order'          => SharedFilesHelpers::getOrder( $atts ),
+                            'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                             'meta_query'     => $meta_query_hide_not_public,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
                             'posts_per_page' => -1,
+                            'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+                            'order'          => SharedFilesHelpers::getOrder( $atts ),
+                            'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                             'meta_query'     => $meta_query_hide_not_public,
                         ) );
                     }

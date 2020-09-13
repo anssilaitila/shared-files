@@ -68,6 +68,10 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.11 =
+* New settings: order and order by. You can now define the order of the files in the file list. These can be defined from the settings or directly using shortcode parameters.
+* Categories' description field can now be used to sort the categories in [shared_files_categories]-shortcode.
+
 = 1.6.10 =
 * Bug fix: hide empty dropdown when there are no subcategories present (for shortcode [shared_files])
 * New parameter: hide_category_dropdown (for [shared_files])

@@ -263,5 +263,51 @@ class SharedFilesHelpers
         $is_premium = 0;
         return $is_premium;
     }
+    
+    public static function getOrder( $atts )
+    {
+        $order = 'DESC';
+        $s = get_option( 'shared_files_settings' );
+        
+        if ( isset( $atts['order'] ) && $atts['order'] ) {
+            $order = $atts['order'];
+        } elseif ( isset( $s['order'] ) && $s['order'] ) {
+            $order = $s['order'];
+        }
+        
+        return $order;
+    }
+    
+    public static function getOrderBy( $atts )
+    {
+        $order_by = 'post_date';
+        $s = get_option( 'shared_files_settings' );
+        
+        if ( isset( $atts['order_by'] ) && $atts['order_by'] == '_sf_main_date' ) {
+            $order_by = 'meta_value';
+        } elseif ( isset( $atts['order_by'] ) && $atts['order_by'] ) {
+            $order_by = $atts['order_by'];
+        } elseif ( isset( $s['order_by'] ) && $s['order_by'] == '_sf_main_date' ) {
+            $order_by = 'meta_value';
+        } elseif ( isset( $s['order_by'] ) && $s['order_by'] ) {
+            $order_by = $s['order_by'];
+        }
+        
+        return $order_by;
+    }
+    
+    public static function getMetaKey( $atts )
+    {
+        $meta_key = '';
+        $s = get_option( 'shared_files_settings' );
+        
+        if ( isset( $atts['order_by'] ) && $atts['order_by'] == '_sf_main_date' ) {
+            $meta_key = $atts['order_by'];
+        } elseif ( isset( $s['order_by'] ) && $s['order_by'] == '_sf_main_date' ) {
+            $meta_key = $s['order_by'];
+        }
+        
+        return $meta_key;
+    }
 
 }

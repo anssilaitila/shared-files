@@ -22,7 +22,7 @@ class SharedFilesAdminNotifications {
             <div class='shared-files-notice-text'>
                 <p style='padding-top: 4px;'>" . sprintf( __( "It's great to see that you've been using the %sShared Files%s plugin for a while now. Hopefully you're happy with it!&nbsp; If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!" ), '<strong style=\'font-weight: 700;\'>', '</strong>' ) . "</p>
                 <p class='links'>
-                    <a class='sf_notice_dismiss' href='https://wordpress.org/support/plugin/shared-files/reviews/' target='_blank'>" . __('Sure, I\'d love to!') . "</a>
+                    <a class='sf_notice_dismiss' href='https://wordpress.org/support/plugin/shared-files/reviews/?rate=5#new-post' target='_blank'>" . __('Sure, I\'d love to!') . "</a>
                     &middot;
                     <a class='sf_notice_dismiss' href='" . esc_url($dismiss_url) . "'>" . __('No thanks') . "</a>
                     &middot;
@@ -39,7 +39,7 @@ class SharedFilesAdminNotifications {
   	$sf_offer_notice = get_option('shared_files_offer_notice');
   	$should_show_offer_notice = ($sf_offer_notice !== 'dismissed');
 
-    if ($should_show_offer_notice && sf_fs()->is_not_paying() && current_user_can('administrator')) {
+    if (0 && $should_show_offer_notice && sf_fs()->is_not_paying() && current_user_can('administrator')) {
       
 			echo "
         <div class='sf_notice sf_review_notice sf_new_user_sale_notice'>

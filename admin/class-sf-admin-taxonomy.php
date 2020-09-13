@@ -47,5 +47,24 @@ class SharedFilesAdminTaxonomy
     </div>
     <?php 
     }
+    
+    function taxonomy_custom_fields( $term )
+    {
+        ?>
+
+    <tr class="form-field">  
+      <th scope="row" valign="top">  
+      </th>  
+      <td>  
+        <div class="shared-files-category-description-info"><b><?php 
+        echo  __( 'The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode.', 'shared-files' ) ;
+        ?></b><br /><br /><?php 
+        echo  __( 'If a value is entered, the categories are sorted by that.', 'shared-files' ) ;
+        ?></div>
+      </td>  
+    </tr>  
+    
+  <?php 
+    }
 
 }

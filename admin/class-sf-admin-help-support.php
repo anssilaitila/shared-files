@@ -26,6 +26,8 @@ class SharedFilesAdminHelpSupport {
         <li><?= __('Add the files via the File Management page', 'shared-files'); ?></li>
         <li><?= __('Choose one of the following methods:', 'shared-files'); ?>
 
+          <br /><span class="shared-files-shortcodes-link"><?= __('A complete list of available shortcodes can be found at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">https://www.sharedfilespro.com/support/shortcodes/</a></span>
+
           <ul style="list-style: disc; padding-left: 20px; padding-top: 8px;">
 
             <li>

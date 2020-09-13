@@ -196,6 +196,7 @@ class Shared_Files {
 
     // Custom taxonomy
     $this->loader->add_action('init', $plugin_admin_taxonomy, 'create_shared_files_custom_taxonomy', 0);
+    $this->loader->add_action('shared-file-category_edit_form_fields', $plugin_admin_taxonomy, 'taxonomy_custom_fields', 10, 2);  
 
     // Settings
     $this->loader->add_action('admin_menu', $plugin_settings, 'shared_files_add_admin_menu');

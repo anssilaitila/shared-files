@@ -56,6 +56,28 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-order_by',
+            __( 'Order by', 'shared-files' ),
+            array( $this, 'order_by_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-order_by',
+            'field_name' => 'order_by',
+        )
+        );
+        add_settings_field(
+            'shared-files-order',
+            __( 'Order', 'shared-files' ),
+            array( $this, 'order_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-order',
+            'field_name' => 'order',
+        )
+        );
+        add_settings_field(
             'shared-files-wp_location',
             __( 'WordPress location', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -143,7 +165,7 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-card_background_custom_color',
-            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'See', 'shared-files' ) . '<a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
+            __( 'Card background, custom color (HEX code)', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'See', 'shared-files' ) . ' <a href="https://htmlcolorcodes.com/" target="_blank">htmlcolorcodes.com</a></div>',
             array( $this, 'input_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
@@ -656,6 +678,69 @@ class Shared_Files_Settings
             echo  ( $layout == '4-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
             echo  __( '4 cards on the same row', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function order_by_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $order_by = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $order_by = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value="post_date" <?php 
+            echo  ( $order_by == 'post_date' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'File publish date (post date)', 'shared-files' ) ;
+            ?></option>
+          <option value="_sf_main_date" <?php 
+            echo  ( $order_by == '_sf_main_date' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'File date', 'shared-files' ) ;
+            ?></option>
+          <option value="title" <?php 
+            echo  ( $order_by == 'title' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'File title', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function order_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $order = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $order = $options[$args['field_name']];
+            }
+            ?>
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value="DESC" <?php 
+            echo  ( $order == 'DESC' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Descending', 'shared-files' ) ;
+            ?></option>
+          <option value="ASC" <?php 
+            echo  ( $order == 'ASC' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Ascending', 'shared-files' ) ;
             ?></option>
       </select>
       <?php 
