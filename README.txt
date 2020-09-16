@@ -68,6 +68,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.12 =
+* Free: fixed a bug, which caused the browser to constantly ask "Leave site? Changes that you made may not be saved." when adding a new file
+
 = 1.6.11 =
 * New settings: order and order by. You can now define the order of the files in the file list. These can be defined from the settings or directly using shortcode parameters.
 * Categories' description field can now be used to sort the categories in [shared_files_categories]-shortcode.

@@ -86,8 +86,9 @@ class SharedFilesAdminMetadata
         wp_editor( $description, '_sf_description', $settings );
         $html = '';
         $html .= "\n    <script>\n      jQuery(document).ready(function(\$) {\n        \$('form#post').attr('enctype', 'multipart/form-data');\n      });\n    </script>\n    ";
-        if ( !$file ) {
-            $html .= "\n      <script>\n        jQuery(document).ready(function(\$) {\n          \$('#post').submit(function() {\n            if (\$('#shared-file-external-url').val().length == 0 && \$('#sf_file').prop('files').length == 0) {\n              alert('" . __( 'Please insert the file first or define an external URL.', 'shared-files' ) . "');\n              return false;\n            }\n          });\n        });\n      </script>\n      ";
+        $file_check = 0;
+        if ( !$file_check ) {
+            $html .= "\n      <script>\n        jQuery(document).ready(function(\$) {\n          \$('#post').submit(function() {\n            if (\$('#sf_file').prop('files').length == 0) {\n              alert('" . __( 'Please insert the file first.', 'shared-files' ) . "');\n              return false;\n            }\n          });\n        });\n      </script>\n      ";
         }
         echo  $html ;
     }

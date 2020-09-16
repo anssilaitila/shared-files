@@ -186,8 +186,9 @@ class ShortcodeSharedFiles
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
             $html .= '<div id="shared-files-files-found"></div>';
             $html .= '<span id="shared-files-one-file-found">' . __( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . __( 'files found.', 'shared-files' ) . '</span>';
-            $html .= '<ul id="myList" class="shared-files-ajax-list">';
+            
             if ( $wpb_all_query->have_posts() ) {
+                $html .= '<ul id="myList" class="shared-files-ajax-list">';
                 while ( $wpb_all_query->have_posts() ) {
                     $wpb_all_query->the_post();
                     $id = get_the_id();
@@ -198,8 +199,11 @@ class ShortcodeSharedFiles
                     $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
                     $html .= SharedFilesPublicHelpers::fileListItem( $c, $imagefile, $hide_description );
                 }
+                $html .= '</ul>';
+            } else {
+                $html .= '<div class="shared-files-files-not-found">' . __( 'No published files found. You should add files first from WP admin: Shared Files / File Management.', 'shared-files' ) . '</div>';
             }
-            $html .= '</ul>';
+            
             $pagination_args = array(
                 'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
                 'total'        => $wpb_all_query->max_num_pages,
