@@ -68,6 +68,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.13 =
+* Bug fix: irrelevant alert dialog removed when saving a file
+* Folder icons added to [shared_files_categories]
+* CSS compatibility fixes
+
 = 1.6.12 =
 * Free: fixed a bug, which caused the browser to constantly ask "Leave site? Changes that you made may not be saved." when adding a new file
 
