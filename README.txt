@@ -68,6 +68,10 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.14 =
+* Bug fix: autofill is now disabled for file's password and notification email
+* New feature: custom number for pagination
+
 = 1.6.13 =
 * Bug fix: irrelevant alert dialog removed when saving a file
 * Folder icons added to [shared_files_categories]

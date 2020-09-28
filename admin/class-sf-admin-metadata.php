@@ -71,7 +71,7 @@ class SharedFilesAdminMetadata
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         }
         
-        $html .= '<div id="shared-file-main-date-title"><strong>' . __( 'File date', 'shared-files' ) . '</strong><br /><i>' . __( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '">';
+        $html .= '<div id="shared-file-main-date-title"><strong>' . __( 'File date', 'shared-files' ) . '</strong><br /><i>' . __( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '" />';
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $html .= SharedFilesAdminHelpers::sfProMoreFeaturesMarkup();
         }

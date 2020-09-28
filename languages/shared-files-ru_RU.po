@@ -1,0 +1,1014 @@
+# Copyright (C) 2020 Anssi Laitila
+# This file is distributed under the same license as the Shared Files plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Shared Files 1.6.14\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: shared-files\n"
+
+# automatic translation
+#: admin/class-sf-admin-notifications.php:21
+#: admin/class-sf-admin-notifications.php:46
+#. Plugin Name of the plugin
+msgid "Shared Files"
+msgstr "Общие файлы"
+
+# automatic translation
+#. Description of the plugin
+msgid "A simple yet effective tool to list downloadable files on your site."
+msgstr ""
+"Простой, но эффективный инструмент для вывода списка загружаемых файлов на "
+"ваш сайт."
+
+# automatic translation
+#. Author of the plugin
+msgid "Anssi Laitila"
+msgstr "Ансси Лайтила"
+
+# automatic translation
+#. Author URI of the plugin
+msgid "https://anssilaitila.fi"
+msgstr "https://anssilaitila.fi"
+
+# automatic translation
+#: admin/class-sf-admin-cpt.php:16
+msgid "File"
+msgstr "файл"
+
+# automatic translation
+#: admin/class-sf-admin-cpt.php:17
+msgid "Add New File"
+msgstr "Добавить новый файл"
+
+# automatic translation
+#: admin/class-sf-admin-cpt.php:18
+msgid "Edit File"
+msgstr "Редактировать файл"
+
+# automatic translation
+#: admin/class-sf-admin-cpt.php:19
+#: public/class-sf-public-ajax.php:74
+#: public/class-shortcode-shared_files.php:467
+#: public/class-shortcode-shared_files_search.php:47
+#: public/class-shortcode-shared_files_search.php:114
+msgid "No files found."
+msgstr "Файлы не найдены."
+
+# automatic translation
+#: admin/class-sf-admin-cpt.php:20
+msgid "File Management"
+msgstr "Управление файлами"
+
+# automatic translation
+#: admin/class-sf-admin-cpt.php:21
+msgid "Add New"
+msgstr "Добавить новое"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:8
+#: admin/class-sf-admin-help-support.php:20
+msgid "How to use Shared Files"
+msgstr "Как использовать общие файлы"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:9
+msgid "Help / Support"
+msgstr "Помощь / Поддержка"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:22
+msgid "Some examples on how you can use different views available at"
+msgstr "Некоторые примеры использования различных представлений доступны на"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:22
+msgid "sharedfilespro.com"
+msgstr "sharedfilespro.com"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:23
+msgid "Any feedback is welcome. You may contact the author at"
+msgstr "Любые отзывы приветствуются. Вы можете связаться с автором по адресу"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:23
+msgid "or by email:"
+msgstr "или по электронной почте:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:26
+msgid "Add the files via the File Management page"
+msgstr "Добавьте файлы через страницу управления файлами"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:27
+msgid "Choose one of the following methods:"
+msgstr "Выберите один из следующих способов:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:29
+msgid "A complete list of available shortcodes can be found at"
+msgstr "Полный список доступных шорткодов можно найти на"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:34
+msgid "List all the files:"
+msgstr "Перечислите все файлы:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:36
+#: admin/class-sf-admin-help-support.php:72
+#: admin/class-sf-admin-help-support.php:91
+#: admin/class-sf-admin-help-support.php:104
+#: admin/class-sf-admin-help-support.php:116
+msgid "Insert the shortcode"
+msgstr "Вставьте шорткод"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:36
+msgid ""
+"to the content editor of any page you wish the file list to appear. If "
+"there are more than one category, a dropdown of categories will appear "
+"above the file list."
+msgstr ""
+"в редактор содержимого любой страницы, на которой должен отображаться "
+"список файлов. Если имеется более одной категории, над списком файлов "
+"появится раскрывающийся список категорий."
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:40
+msgid "Using the parameter hide_search you may hide the search form like so:"
+msgstr ""
+"Используя параметр hide_search, вы можете скрыть форму поиска следующим "
+"образом:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:42
+msgid "More parameters:"
+msgstr "Дополнительные параметры:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:51
+msgid "Hide file description:"
+msgstr "Скрыть описание файла:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:52
+msgid "Hide category dropdown:"
+msgstr "Скрыть раскрывающийся список категорий:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:53
+msgid "Layout as \"2 cards on the same row\":"
+msgstr "Макет «2 карточки в одном ряду»:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:54
+msgid "Layout as \"3 cards on the same row\":"
+msgstr "Макет «3 карточки в одном ряду»:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:55
+msgid "Layout as \"4 cards on the same row\":"
+msgstr "Макет «4 карточки в одном ряду»:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:56
+msgid "You can also use multiple parameters:"
+msgstr "Вы также можете использовать несколько параметров:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:64
+msgid "Search form only that targets all the files, sorted by category"
+msgstr "Только форма поиска, нацеленная на все файлы, отсортированные по категориям"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:74
+msgid "Additional parameters:"
+msgstr "Дополнительные параметры:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:77
+msgid "Don't sort by categories"
+msgstr "Не сортировать по категориям"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:83
+msgid "List only files in certain category:"
+msgstr "Список только файлов в определенной категории:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:91
+#: admin/class-sf-admin-help-support.php:104
+msgid "You can find / define the category slug by editing the category."
+msgstr "Вы можете найти / определить ярлык категории, отредактировав категорию."
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:96
+msgid "List categories / list files by category:"
+msgstr "Список категорий / список файлов по категориям:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:104
+msgid "or"
+msgstr "или"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:108
+msgid "List a single file:"
+msgstr "Список одного файла:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:116
+msgid ""
+"The file_id parameter is unique for each file and can be found under the "
+"Shortcode column in File Management page."
+msgstr ""
+"Параметр file_id уникален для каждого файла и находится в столбце Shortcode "
+"на странице управления файлами."
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:121
+msgid "Front-end uploader:"
+msgstr "Фронтенд-загрузчик:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:131
+msgid "To enable the uploader insert the shortcode"
+msgstr "Чтобы включить загрузчик, вставьте шорткод"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:133
+msgid "To hide other files use parameter \"only_uploaded_files\" like so:"
+msgstr ""
+"Чтобы скрыть другие файлы, используйте параметр only_uploaded_files, "
+"например:"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:135
+msgid "See live demo at"
+msgstr "Смотрите живую демонстрацию на"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:150
+msgid "Close"
+msgstr "Закрыть"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:153
+msgid "Open"
+msgstr "открыто"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:159
+msgid "Debug Info"
+msgstr "Информация об отладке"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:164
+msgid ""
+"This section contains some debug info, which may be useful when trying to "
+"solve abnormal behaviour of the plugin."
+msgstr ""
+"В этом разделе содержится некоторая отладочная информация, которая может "
+"быть полезна при попытке устранить ненормальное поведение плагина."
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:169
+msgid "Variables"
+msgstr "Переменные"
+
+# automatic translation
+#: admin/class-sf-admin-help-support.php:191
+msgid "Sample file data (5 newest files)"
+msgstr "Данные образца файла (5 новейших файлов)"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:14
+msgid "Shortcode"
+msgstr "Короткий код"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:15
+msgid "File size"
+msgstr "Размер файла"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:16
+msgid "File loads"
+msgstr "Файл загружается"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:19
+msgid "Limit"
+msgstr "Предел"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:23
+msgid "File added"
+msgstr "Файл добавлен"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:27
+msgid "Last access"
+msgstr "Последний доступ"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:31
+msgid "Bandwidth usage (estimate)"
+msgstr "Использование полосы пропускания (оценка)"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:35
+msgid "Expires"
+msgstr "Истекает"
+
+# automatic translation
+#: admin/class-sf-admin-list.php:144
+msgid "Front-end uploader"
+msgstr "Фронтенд-загрузчик"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:65
+msgid "This file was uploaded on page"
+msgstr "Этот файл был загружен на страницу"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:67
+msgid "This file was uploaded on a page that has been deleted since"
+msgstr "Этот файл был загружен на страницу, которая была удалена с"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:72
+msgid "Hide from other pages"
+msgstr "Скрыть с других страниц"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:80
+msgid "Current file:"
+msgstr "Текущий файл:"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:81
+msgid "Replace with a new file"
+msgstr "Заменить новым файлом"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:87
+#: admin/class-sf-admin-settings.php:630
+msgid "File date"
+msgstr "Дата файла"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:87
+msgid ""
+"This date is displayed in the file list instead of the publish date. If "
+"empty, the publish date will be displayed. Both can be hidden from the "
+"settings."
+msgstr ""
+"Эта дата отображается в списке файлов вместо даты публикации. Если пусто, "
+"будет отображаться дата публикации. Оба могут быть скрыты в настройках."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:92
+msgid "External URL"
+msgstr "Внешний URL"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:92
+msgid ""
+"Instead of adding a local file, you may provide an external URL to a file "
+"located elsewhere."
+msgstr ""
+"Вместо добавления локального файла вы можете предоставить внешний URL-адрес "
+"файла, расположенного в другом месте."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:92
+msgid "Note: if the external URL is defined, the file above will not be saved."
+msgstr ""
+"Примечание: если внешний URL-адрес определен, указанный выше файл не будет "
+"сохранен."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:94
+msgid "Limit downloads"
+msgstr "Ограничить скачивание"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:94
+msgid ""
+"When this number is reached, the file can't be downloaded anymore and an "
+"email notify is sent to the administrator."
+msgstr ""
+"По достижении этого числа файл больше не может быть загружен, и "
+"администратору отправляется уведомление по электронной почте."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:96
+msgid "Password protection"
+msgstr "Защита паролем"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:96
+msgid "Define a password here to enable password protection."
+msgstr "Задайте здесь пароль, чтобы включить защиту паролем."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:100
+msgid "Expiration date"
+msgstr "Срок годности"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:100
+msgid ""
+"When this date is the current date, an email notify is sent to the "
+"administrator and the file is highlighted in the admin list."
+msgstr ""
+"Если эта дата является текущей датой, администратору отправляется "
+"уведомление по электронной почте, и файл выделяется в списке "
+"администраторов."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:100
+msgid "Notification email"
+msgstr "Уведомление по электронной почте"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:100
+msgid ""
+"This email address is used for notifications regarding this file. If this "
+"is not defined, the email defined in the settings will be used."
+msgstr ""
+"Этот адрес электронной почты используется для уведомлений об этом файле. "
+"Если это не определено, будет использоваться адрес электронной почты, "
+"указанный в настройках."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:109
+#: public/class-sf-public-file-upload.php:30
+msgid "Description"
+msgstr "Описание"
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:137
+msgid "Please insert the file first or define an external URL."
+msgstr "Сначала вставьте файл или определите внешний URL-адрес."
+
+# automatic translation
+#: admin/class-sf-admin-metadata.php:159
+msgid "Please insert the file first."
+msgstr "Пожалуйста, сначала вставьте файл."
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:15
+#: admin/class-sf-admin-settings.php:572
+msgid "General settings"
+msgstr "Общие настройки"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:22
+msgid "Hide file date / publish date from card"
+msgstr "Скрыть дату файла / дату публикации с карты"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:31
+msgid "Hide file size from card"
+msgstr "Скрыть размер файла с карты"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:40
+msgid "Hide file type icon from card"
+msgstr "Скрыть значок типа файла с карты"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:49
+msgid "Order by"
+msgstr "Сортировать по"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:58
+msgid "Order"
+msgstr "порядок"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:67
+msgid "WordPress location"
+msgstr "Расположение WordPress"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:76
+msgid "Pagination"
+msgstr "Пагинация"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:94
+#: admin/class-sf-admin-settings.php:573
+msgid "Layout"
+msgstr "Макет"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:103
+msgid "Card font"
+msgstr "Шрифт карты"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:112
+msgid "Small font size on card"
+msgstr "Мелкий шрифт на карточке"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:121
+msgid "Show featured image in addition to file type icon"
+msgstr "Показывать избранное изображение в дополнение к значку типа файла"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:121
+msgid "Featured image will be displayed next to file description"
+msgstr "Рекомендуемое изображение будет отображаться рядом с описанием файла."
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:130
+msgid "Card height in pixels"
+msgstr "Высота карты в пикселях"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:139
+msgid "Card background"
+msgstr "Фон карты"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:148
+msgid "Card background, custom color (HEX code)"
+msgstr "Фон карты, произвольный цвет (HEX-код)"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:148
+msgid "See"
+msgstr "Видеть"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:166
+msgid "File type: Image"
+msgstr "Тип файла: Изображение"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:175
+msgid "File type: PDF"
+msgstr "Тип файла: PDF"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:184
+msgid "File type: AI"
+msgstr "Тип файла: AI"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:193
+msgid "File type: Doc"
+msgstr "Тип файла: Doc"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:202
+msgid "File type: Font"
+msgstr "Тип файла: Шрифт"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:211
+msgid "File type: HTML"
+msgstr "Тип файла: HTML"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:220
+msgid "File type: MP3"
+msgstr "Тип файла: MP3"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:229
+msgid "File type: Video"
+msgstr "Тип файла: видео"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:238
+msgid "File type: XLSX"
+msgstr "Тип файла: XLSX"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:247
+msgid "File type: PPT(X)"
+msgstr "Тип файла: PPT (X)"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:256
+msgid "File type: ZIP"
+msgstr "Тип файла: ZIP"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:265
+msgid "File type: INDD"
+msgstr "Тип файла: INDD"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:274
+msgid "File type: PSD"
+msgstr "Тип файла: PSD"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:283
+msgid "File type: SVG"
+msgstr "Тип файла: SVG"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:292
+msgid "File type: Other files"
+msgstr "Тип файла: другие файлы"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:301
+msgid "YouTube-link (External URL)"
+msgstr "YouTube-ссылка (внешний URL)"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:324
+#: admin/class-sf-admin-settings.php:335
+msgid "Custom file type"
+msgstr "Пользовательский тип файла"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:324
+msgid "extension"
+msgstr "расширение"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:335
+msgid "icon file"
+msgstr "файл значка"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:365
+msgid "Send an email notify when a file is downloaded"
+msgstr "Отправить уведомление по электронной почте, когда файл загружен"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:374
+msgid "Notification recipient email"
+msgstr "Электронная почта получателя уведомления"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:398
+msgid "Hide \"Limit downloads\"-column"
+msgstr "Скрыть столбец «Ограничить загрузку»"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:407
+msgid "Hide \"File added\"-column"
+msgstr "Скрыть столбец «Файл добавлен»"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:416
+msgid "Hide \"Last access\"-column"
+msgstr "Скрыть столбец «Последний доступ»"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:425
+msgid "Hide \"Bandwidth usage\"-column"
+msgstr "Скрыть столбец «Использование пропускной способности»"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:434
+msgid "Hide \"Expiration date\"-column"
+msgstr "Скрыть столбец «Срок годности»"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:474
+msgid ""
+"If you're getting 404 from file URLs, it may be necessary to set this to "
+"the same directory that your WordPress is installed to. If this is set, the "
+"file URLs are formatted like so:<br "
+"/><b>/some-dir/shared-files/123/this-is-a-file.pdf</b>"
+msgstr ""
+"Если вы получаете 404 из URL-адресов файлов, может потребоваться установить "
+"его в тот же каталог, в который установлен ваш WordPress. Если это "
+"установлено, URL-адреса файлов имеют следующий формат:<br /> "
+"<b>/some-dir/shared-files/123/this-is-a-file.pdf</b>"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:477
+msgid "e.g. /wp-content/uploads/2019/12/some-fancy-icon.png"
+msgstr "например /wp-content/uploads/2019/12/some-fancy-icon.png"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:498
+msgid "Layout settings"
+msgstr "Настройки макета"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:512
+msgid "Change default file icons"
+msgstr "Изменить значки файлов по умолчанию"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:515
+msgid ""
+"Define alternative icons here. You may add the files to the media library "
+"and then copy the URL to the appropriate field below."
+msgstr ""
+"Определите здесь альтернативные значки. Вы можете добавить файлы в "
+"медиа-библиотеку, а затем скопировать URL-адрес в соответствующее поле ниже."
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:526
+#: admin/class-sf-admin-settings.php:575
+msgid "Custom file types"
+msgstr "Пользовательские типы файлов"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:529
+msgid ""
+"Define extensions and icons for custom file types here. You may add the "
+"files to the media library and then copy the URL to the appropriate field "
+"below."
+msgstr ""
+"Здесь можно определить расширения и значки для пользовательских типов "
+"файлов. Вы можете добавить файлы в медиа-библиотеку, а затем скопировать "
+"URL-адрес в соответствующее поле ниже."
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:540
+msgid "Email settings"
+msgstr "Настройки электронной почты"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:554
+msgid "Admin list"
+msgstr "Список администраторов"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:568
+msgid "Shared Files Settings"
+msgstr "Настройки общих файлов"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:574
+msgid "File type icons"
+msgstr "Значки типов файлов"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:576
+msgid "Email"
+msgstr "Эл. адрес"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:577
+msgid "Admin list & columns"
+msgstr "Список администраторов и столбцы"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:608
+msgid "Default list"
+msgstr "Список по умолчанию"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:609
+msgid "2 cards on the same row"
+msgstr "2 карты в одном ряду"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:610
+msgid "3 cards on the same row"
+msgstr "3 карты в одном ряду"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:611
+msgid "4 cards on the same row"
+msgstr "4 карты в одном ряду"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:629
+msgid "File publish date (post date)"
+msgstr "Дата публикации файла (дата публикации)"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:631
+msgid "File title"
+msgstr "Заголовок файла"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:649
+msgid "Descending"
+msgstr "По убыванию"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:650
+msgid "Ascending"
+msgstr "по возрастанию"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:668
+msgid "Transparent"
+msgstr "Прозрачный"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:669
+msgid "White"
+msgstr "Белый"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:670
+msgid "Light gray"
+msgstr "Светло-серый"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:671
+msgid "Custom color"
+msgstr "Пользовательский цвет"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:689
+msgid "Default"
+msgstr "По умолчанию"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:690
+msgid "Roboto"
+msgstr "Робот"
+
+# automatic translation
+#: admin/class-sf-admin-settings.php:691
+msgid "Ubuntu"
+msgstr "Ubuntu"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:8
+#: admin/class-sf-admin-taxonomy.php:9
+msgid "Category"
+msgstr "Категория"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:10
+msgid "Search Categories"
+msgstr "Категории поиска"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:11
+msgid "All Categories"
+msgstr "Все категории"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:12
+msgid "Parent Category"
+msgstr "родительская категория"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:13
+msgid "Parent Category:"
+msgstr "Родительская категория:"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:14
+msgid "Edit Category"
+msgstr "Изменить категорию"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:15
+msgid "Update Category"
+msgstr "Обновить категорию"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:16
+msgid "Add New Category"
+msgstr "Добавить новую категорию"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:17
+msgid "New Type Name"
+msgstr "Имя нового типа"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:18
+#: admin/class-sf-admin-taxonomy.php:42
+#: admin/class-sf-admin-taxonomy.php:43
+#: admin/class-sf-admin-taxonomy.php:54
+msgid "Categories"
+msgstr "Категории"
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:69
+msgid ""
+"The description field above can be used to alter the order of the "
+"categories in [shared_files_categories]-shortcode."
+msgstr ""
+"Поле описания выше можно использовать для изменения порядка категорий в "
+"сокращенном коде [shared_files_categories]."
+
+# automatic translation
+#: admin/class-sf-admin-taxonomy.php:69
+msgid "If a value is entered, the categories are sorted by that."
+msgstr "Если вводится значение, категории сортируются по нему."
+
+# automatic translation
+#: admin/class-sf-admin.php:78
+msgid "Settings&nbsp;&nbsp;➤"
+msgstr "Настройки & nbsp; & nbsp; ➤"
+
+# automatic translation
+#: admin/class-sf-admin.php:84
+msgid "Upgrade&nbsp;&nbsp;➤"
+msgstr "Обновить & nbsp; & nbsp; ➤"
+
+# automatic translation
+#: public/class-sf-public-file-upload.php:16
+msgid "File successfully uploaded."
+msgstr "Файл успешно загружен."
+
+# automatic translation
+#: public/class-sf-public-helpers.php:132
+msgid "Password protected file"
+msgstr "Файл, защищенный паролем"
+
+# automatic translation
+#: public/class-sf-public-helpers.php:255
+msgid "Password"
+msgstr "пароль"
+
+# automatic translation
+#: public/class-sf-public-helpers.php:260
+msgid "Invalid password"
+msgstr "Неправильный пароль"
+
+# automatic translation
+#: public/class-sf-public-helpers.php:263
+msgid "Submit"
+msgstr "Отправить"
+
+# automatic translation
+#: public/class-sf-public-helpers.php:282
+msgid "Download limit reached"
+msgstr "Достигнут предел скачивания"
+
+# automatic translation
+#: public/class-sf-public-helpers.php:401
+msgid "This file is no longer available for download."
+msgstr "Этот файл больше не доступен для загрузки."
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:113
+msgid "File not found"
+msgstr "Файл не найден"
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:149
+#: public/class-shortcode-shared_files_search.php:36
+#: public/class-shortcode-shared_files_search.php:103
+msgid "Search files..."
+msgstr "Поиск файлов..."
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:171
+#: public/class-shortcode-shared_files.php:188
+msgid "Choose category"
+msgstr "Выберите категорию"
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:389
+#: public/class-shortcode-shared_files_search.php:44
+#: public/class-shortcode-shared_files_search.php:111
+msgid "file found."
+msgstr "файл найден."
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:389
+#: public/class-shortcode-shared_files_search.php:44
+#: public/class-shortcode-shared_files_search.php:111
+msgid "files found."
+msgstr "файлы найдены."
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:414
+msgid ""
+"No published files found. You should add files first from WP admin: Shared "
+"Files / File Management."
+msgstr ""
+"Опубликованные файлы не найдены. Сначала вы должны добавить файлы из "
+"администратора WP: Общие файлы / Управление файлами."
+
+# automatic translation
+#: public/class-shortcode-shared_files.php:460
+msgid "Browse more files:"
+msgstr "Просмотреть другие файлы:"
+
+# automatic translation
+#: public/class-shortcode-shared_files_categories.php:48
+msgid "<< Back"
+msgstr "<< Назад"
+
+# automatic translation
+#: public/class-shortcode-shared_files_categories.php:111
+msgid "No files in this category."
+msgstr "В этой категории нет файлов."

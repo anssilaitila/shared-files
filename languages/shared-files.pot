@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.12\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
+"Project-Id-Version: Shared Files 1.6.13\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-09-16T15:51:26+00:00\n"
+"POT-Creation-Date: 2020-09-27T12:56:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: shared-files\n"
@@ -46,9 +46,7 @@ msgstr ""
 
 #: admin/class-sf-admin-cpt.php:19
 #: public/class-sf-public-ajax.php:74
-#: public/class-shortcode-shared_files.php:467
-#: public/class-shortcode-shared_files_search.php:47
-#: public/class-shortcode-shared_files_search.php:114
+#: public/class-shortcode-shared_files.php:224
 msgid "No files found."
 msgstr ""
 
@@ -222,405 +220,315 @@ msgstr ""
 msgid "Sample file data (5 newest files)"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:14
+#: admin/class-sf-admin-list.php:13
 msgid "Shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:15
+#: admin/class-sf-admin-list.php:14
 msgid "File size"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:16
+#: admin/class-sf-admin-list.php:15
 msgid "File loads"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:19
+#: admin/class-sf-admin-list.php:17
 msgid "Limit"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:23
+#: admin/class-sf-admin-list.php:20
 msgid "File added"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:27
+#: admin/class-sf-admin-list.php:23
 msgid "Last access"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:31
+#: admin/class-sf-admin-list.php:26
 msgid "Bandwidth usage (estimate)"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:35
+#: admin/class-sf-admin-list.php:29
 msgid "Expires"
 msgstr ""
 
-#: admin/class-sf-admin-list.php:144
-msgid "Front-end uploader"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:65
+#: admin/class-sf-admin-metadata.php:54
 msgid "This file was uploaded on page"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:67
+#: admin/class-sf-admin-metadata.php:56
 msgid "This file was uploaded on a page that has been deleted since"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:72
+#: admin/class-sf-admin-metadata.php:60
 msgid "Hide from other pages"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:80
+#: admin/class-sf-admin-metadata.php:67
 msgid "Current file:"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:81
+#: admin/class-sf-admin-metadata.php:68
 msgid "Replace with a new file"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:87
-#: admin/class-sf-admin-settings.php:621
+#: admin/class-sf-admin-metadata.php:74
+#: admin/class-sf-admin-settings.php:709
 msgid "File date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:87
+#: admin/class-sf-admin-metadata.php:74
 msgid "This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:92
-msgid "External URL"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:92
-msgid "Instead of adding a local file, you may provide an external URL to a file located elsewhere."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:92
-msgid "Note: if the external URL is defined, the file above will not be saved."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:94
-msgid "Limit downloads"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:94
-msgid "When this number is reached, the file can't be downloaded anymore and an email notify is sent to the administrator."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:96
-msgid "Password protection"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:96
-msgid "Define a password here to enable password protection."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:100
-msgid "Expiration date"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:100
-msgid "When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:100
-msgid "Notification email"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:100
-msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:109
-#: public/class-sf-public-file-upload.php:30
+#: admin/class-sf-admin-metadata.php:78
 msgid "Description"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:135
-msgid "Please insert the file first or define an external URL."
+#: admin/class-sf-admin-metadata.php:92
+msgid "Please insert the file first."
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:15
-#: admin/class-sf-admin-settings.php:563
+#: admin/class-sf-admin-settings.php:21
+#: admin/class-sf-admin-settings.php:609
 msgid "General settings"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:22
+#: admin/class-sf-admin-settings.php:27
 msgid "Hide file date / publish date from card"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:31
+#: admin/class-sf-admin-settings.php:38
 msgid "Hide file size from card"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:40
+#: admin/class-sf-admin-settings.php:49
 msgid "Hide file type icon from card"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:49
+#: admin/class-sf-admin-settings.php:60
 msgid "Order by"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:58
+#: admin/class-sf-admin-settings.php:71
 msgid "Order"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:67
+#: admin/class-sf-admin-settings.php:82
 msgid "WordPress location"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:85
-#: admin/class-sf-admin-settings.php:564
+#: admin/class-sf-admin-settings.php:101
+#: admin/class-sf-admin-settings.php:612
 msgid "Layout"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:94
+#: admin/class-sf-admin-settings.php:112
 msgid "Card font"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:103
+#: admin/class-sf-admin-settings.php:123
 msgid "Small font size on card"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:112
+#: admin/class-sf-admin-settings.php:134
 msgid "Show featured image in addition to file type icon"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:112
+#: admin/class-sf-admin-settings.php:134
 msgid "Featured image will be displayed next to file description"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:121
+#: admin/class-sf-admin-settings.php:145
 msgid "Card height in pixels"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:130
+#: admin/class-sf-admin-settings.php:157
 msgid "Card background"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:139
+#: admin/class-sf-admin-settings.php:168
 msgid "Card background, custom color (HEX code)"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:139
+#: admin/class-sf-admin-settings.php:168
 msgid "See"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:157
+#: admin/class-sf-admin-settings.php:187
 msgid "File type: Image"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:166
+#: admin/class-sf-admin-settings.php:200
 msgid "File type: PDF"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:175
+#: admin/class-sf-admin-settings.php:213
 msgid "File type: AI"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:184
+#: admin/class-sf-admin-settings.php:226
 msgid "File type: Doc"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:193
+#: admin/class-sf-admin-settings.php:239
 msgid "File type: Font"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:202
+#: admin/class-sf-admin-settings.php:252
 msgid "File type: HTML"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:211
+#: admin/class-sf-admin-settings.php:265
 msgid "File type: MP3"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:220
+#: admin/class-sf-admin-settings.php:278
 msgid "File type: Video"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:229
+#: admin/class-sf-admin-settings.php:291
 msgid "File type: XLSX"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:238
+#: admin/class-sf-admin-settings.php:304
 msgid "File type: PPT(X)"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:247
+#: admin/class-sf-admin-settings.php:317
 msgid "File type: ZIP"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:256
+#: admin/class-sf-admin-settings.php:330
 msgid "File type: INDD"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:265
+#: admin/class-sf-admin-settings.php:343
 msgid "File type: PSD"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:274
+#: admin/class-sf-admin-settings.php:356
 msgid "File type: SVG"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:283
+#: admin/class-sf-admin-settings.php:369
 msgid "File type: Other files"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:292
+#: admin/class-sf-admin-settings.php:382
 msgid "YouTube-link (External URL)"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:315
-#: admin/class-sf-admin-settings.php:326
-msgid "Custom file type"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:315
-msgid "extension"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:326
-msgid "icon file"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:356
-msgid "Send an email notify when a file is downloaded"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:365
-msgid "Notification recipient email"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:389
-msgid "Hide \"Limit downloads\"-column"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:398
-msgid "Hide \"File added\"-column"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:407
-msgid "Hide \"Last access\"-column"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:416
-msgid "Hide \"Bandwidth usage\"-column"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:425
-msgid "Hide \"Expiration date\"-column"
-msgstr ""
-
-#: admin/class-sf-admin-settings.php:465
+#: admin/class-sf-admin-settings.php:496
 msgid "If you're getting 404 from file URLs, it may be necessary to set this to the same directory that your WordPress is installed to. If this is set, the file URLs are formatted like so:<br /><b>/some-dir/shared-files/123/this-is-a-file.pdf</b>"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:468
+#: admin/class-sf-admin-settings.php:503
 msgid "e.g. /wp-content/uploads/2019/12/some-fancy-icon.png"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:489
+#: admin/class-sf-admin-settings.php:530
 msgid "Layout settings"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:503
+#: admin/class-sf-admin-settings.php:544
 msgid "Change default file icons"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:506
+#: admin/class-sf-admin-settings.php:547
 msgid "Define alternative icons here. You may add the files to the media library and then copy the URL to the appropriate field below."
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:517
-#: admin/class-sf-admin-settings.php:566
+#: admin/class-sf-admin-settings.php:558
+#: admin/class-sf-admin-settings.php:618
 msgid "Custom file types"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:520
+#: admin/class-sf-admin-settings.php:561
 msgid "Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below."
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:531
+#: admin/class-sf-admin-settings.php:572
 msgid "Email settings"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:545
+#: admin/class-sf-admin-settings.php:586
 msgid "Admin list"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:559
+#: admin/class-sf-admin-settings.php:603
 msgid "Shared Files Settings"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:565
+#: admin/class-sf-admin-settings.php:615
 msgid "File type icons"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:567
+#: admin/class-sf-admin-settings.php:621
 msgid "Email"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:568
+#: admin/class-sf-admin-settings.php:624
 msgid "Admin list & columns"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:599
+#: admin/class-sf-admin-settings.php:665
 msgid "Default list"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:600
+#: admin/class-sf-admin-settings.php:670
 msgid "2 cards on the same row"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:601
+#: admin/class-sf-admin-settings.php:675
 msgid "3 cards on the same row"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:602
+#: admin/class-sf-admin-settings.php:680
 msgid "4 cards on the same row"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:620
+#: admin/class-sf-admin-settings.php:704
 msgid "File publish date (post date)"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:622
+#: admin/class-sf-admin-settings.php:714
 msgid "File title"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:640
+#: admin/class-sf-admin-settings.php:738
 msgid "Descending"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:641
+#: admin/class-sf-admin-settings.php:743
 msgid "Ascending"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:659
+#: admin/class-sf-admin-settings.php:765
 msgid "Transparent"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:660
+#: admin/class-sf-admin-settings.php:770
 msgid "White"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:661
+#: admin/class-sf-admin-settings.php:775
 msgid "Light gray"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:662
+#: admin/class-sf-admin-settings.php:780
 msgid "Custom color"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:680
+#: admin/class-sf-admin-settings.php:802
 msgid "Default"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:681
+#: admin/class-sf-admin-settings.php:807
 msgid "Roboto"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:682
+#: admin/class-sf-admin-settings.php:812
 msgid "Ubuntu"
 msgstr ""
 
@@ -662,17 +570,17 @@ msgid "New Type Name"
 msgstr ""
 
 #: admin/class-sf-admin-taxonomy.php:18
-#: admin/class-sf-admin-taxonomy.php:42
-#: admin/class-sf-admin-taxonomy.php:43
-#: admin/class-sf-admin-taxonomy.php:54
+#: admin/class-sf-admin-taxonomy.php:26
+#: admin/class-sf-admin-taxonomy.php:27
+#: admin/class-sf-admin-taxonomy.php:40
 msgid "Categories"
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:69
+#: admin/class-sf-admin-taxonomy.php:60
 msgid "The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:69
+#: admin/class-sf-admin-taxonomy.php:62
 msgid "If a value is entered, the categories are sorted by that."
 msgstr ""
 
@@ -684,66 +592,43 @@ msgstr ""
 msgid "Upgrade&nbsp;&nbsp;➤"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:16
-msgid "File successfully uploaded."
-msgstr ""
-
-#: public/class-sf-public-helpers.php:132
+#: public/class-sf-public-helpers.php:90
 msgid "Password protected file"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:255
+#: public/class-sf-public-helpers.php:206
 msgid "Password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:260
+#: public/class-sf-public-helpers.php:210
 msgid "Invalid password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:263
+#: public/class-sf-public-helpers.php:212
 msgid "Submit"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:282
+#: public/class-sf-public-helpers.php:227
 msgid "Download limit reached"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:401
+#: public/class-sf-public-helpers.php:341
 msgid "This file is no longer available for download."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:113
-msgid "File not found"
-msgstr ""
-
-#: public/class-shortcode-shared_files.php:149
-#: public/class-shortcode-shared_files_search.php:36
-#: public/class-shortcode-shared_files_search.php:103
-msgid "Search files..."
-msgstr ""
-
-#: public/class-shortcode-shared_files.php:171
 #: public/class-shortcode-shared_files.php:188
-msgid "Choose category"
-msgstr ""
-
-#: public/class-shortcode-shared_files.php:389
-#: public/class-shortcode-shared_files_search.php:44
-#: public/class-shortcode-shared_files_search.php:111
 msgid "file found."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:389
-#: public/class-shortcode-shared_files_search.php:44
-#: public/class-shortcode-shared_files_search.php:111
+#: public/class-shortcode-shared_files.php:188
 msgid "files found."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:414
+#: public/class-shortcode-shared_files.php:204
 msgid "No published files found. You should add files first from WP admin: Shared Files / File Management."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:460
+#: public/class-shortcode-shared_files.php:220
 msgid "Browse more files:"
 msgstr ""
 
