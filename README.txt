@@ -68,6 +68,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.15 =
+* CSS fixes
+
 = 1.6.14 =
 * Bug fix: autofill is now disabled for file's password and notification email
 * New feature: custom number for pagination

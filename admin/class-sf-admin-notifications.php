@@ -39,7 +39,7 @@ class SharedFilesAdminNotifications {
   	$sf_offer_notice = get_option('shared_files_offer_notice');
   	$should_show_offer_notice = ($sf_offer_notice !== 'dismissed');
 
-    if (0 && $should_show_offer_notice && sf_fs()->is_not_paying() && current_user_can('administrator')) {
+    if (1 && $should_show_offer_notice && sf_fs()->is_not_paying() && current_user_can('administrator')) {
       
 			echo "
         <div class='sf_notice sf_review_notice sf_new_user_sale_notice'>
