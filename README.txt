@@ -43,10 +43,11 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Password protected files
 * Set expiration date to a file
 * Limit number of downloads per file
-* Front-end file uploader
+* Front-end file uploader, logged-in users can also delete their uploaded files
+* Multi-file upload to a specific category
 * More features on the way based on user feedback
 
-Contact the author [here](https://tammersoft.com/).
+Contact the author [here](https://www.sharedfilespro.com/support/).
 
 Thanks to Luciano Del Fico for translating the Italian version.
 
