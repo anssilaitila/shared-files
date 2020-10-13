@@ -68,6 +68,12 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.16 =
+* New feature (Pro): multi-file upload. You may now upload multiple files at once (there is a new button on the File Management page).
+* New feature (Pro): if a file is added from the front-end by a logged-in user, that particular user can delete the very same files.
+* New option: featured image can now be displayed on either left or right side of the file description.
+* Bug fix: pagination is now active also when using shortcode [shared_files category=category-slug]
+
 = 1.6.15 =
 * CSS fixes
 

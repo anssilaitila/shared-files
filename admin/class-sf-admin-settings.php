@@ -141,6 +141,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-card_featured_image_align',
+            __( 'Align featured image', 'shared-files' ),
+            array( $this, 'card_featured_image_align' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-card_featured_image_align',
+            'field_name' => 'card_featured_image_align',
+        )
+        );
+        add_settings_field(
             'shared-files-card_height',
             __( 'Card height in pixels', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -810,6 +821,33 @@ class Shared_Files_Settings
             echo  ( $card_font == 'ubuntu' ? 'selected' : '' ) ;
             ?>><?php 
             echo  __( 'Ubuntu', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function card_featured_image_align( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+        <option value=""><?php 
+            echo  __( 'Right', 'shared-files' ) ;
+            ?></option>
+        <option value="left" <?php 
+            echo  ( $val == 'left' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Left', 'shared-files' ) ;
             ?></option>
       </select>
       <?php 

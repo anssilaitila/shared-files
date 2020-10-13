@@ -48,6 +48,9 @@ class SharedFilesPublicHelpers
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements">';
         $html .= '<div class="shared-files-main-elements-left" style="' . $left_style . '"></div>';
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
+        }
         $html .= '<div class="shared-files-main-elements-right">';
         $html .= '<a href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
@@ -70,8 +73,17 @@ class SharedFilesPublicHelpers
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
             $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
         }
+        
+        if ( is_user_logged_in() ) {
+            $user = wp_get_current_user();
+            $bare_url = './?_sf_delete_file=' . $file_id;
+            if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
+            }
+        }
+        
         $html .= '</div>';
-        if ( isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
         }
         $html .= '</div>';

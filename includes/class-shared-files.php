@@ -122,6 +122,7 @@ class Shared_Files {
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-helpers.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-settings.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-notifications.php';
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-multiple-files-upload.php';
 
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-sf-public.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-sf-public-ajax.php';
@@ -170,6 +171,8 @@ class Shared_Files {
     $plugin_admin_list = new SharedFilesAdminList();
     $plugin_admin_metadata = new SharedFilesAdminMetadata();
     $plugin_admin_notifications = new SharedFilesAdminNotifications();
+    $plugin_admin_multiple_files_upload = new SharedFilesAdminMultipleFilesUpload();
+
     $plugin_settings = new Shared_Files_Settings();
 
     // Enqueue CSS + JS (+ other)    
@@ -216,6 +219,10 @@ class Shared_Files {
     // Notifications
     $this->loader->add_action('admin_notices', $plugin_admin_notifications, 'notifications_html', 8);
     $this->loader->add_action('admin_init', $plugin_admin_notifications, 'process_notifications');
+
+    // Multiple files upload
+    $this->loader->add_filter('request', $plugin_admin_multiple_files_upload, 'file_upload');
+    $this->loader->add_action('admin_print_footer_scripts', $plugin_admin_multiple_files_upload, 'add_multiple_files_view');
 
     if (SharedFilesHelpers::isPremium() == 0) {
       $this->loader->add_action('admin_menu', $plugin_admin_taxonomy, 'register_categories_info_page');
