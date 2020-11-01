@@ -71,7 +71,13 @@ class SharedFilesPublicHelpers
         }
         
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
-            $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
+            
+            if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+                $html .= '<p class="shared-file-description">' . nl2br( $c['_sf_description'][0] ) . '</p>';
+            } else {
+                $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
+            }
+        
         }
         
         if ( is_user_logged_in() ) {

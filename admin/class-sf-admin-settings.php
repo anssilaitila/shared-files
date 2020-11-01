@@ -56,6 +56,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-textarea_for_file_description',
+            __( 'Use textarea for file description (instead of rich text editor)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-textarea_for_file_description',
+            'field_name' => 'textarea_for_file_description',
+        )
+        );
+        add_settings_field(
             'shared-files-order_by',
             __( 'Order by', 'shared-files' ),
             array( $this, 'order_by_render' ),
@@ -408,6 +419,37 @@ class Shared_Files_Settings
             array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
+        $num = [ 1 ];
+        foreach ( $num as $n ) {
+            $field_title = __( 'Custom file type', 'shared-files' ) . ' ' . $n . ': ' . __( 'extension', 'shared-files' );
+            add_settings_field(
+                'shared-files-custom_' . $n . '_ext',
+                $field_title,
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-custom_' . $n . '_ext',
+                'field_name'  => 'custom_' . $n . '_ext',
+                'placeholder' => '',
+                'ext'         => 1,
+            )
+            );
+            $field_title = __( 'Custom file type', 'shared-files' ) . ' ' . $n . ': ' . __( 'icon file', 'shared-files' );
+            add_settings_field(
+                'shared-files-custom_' . $n . '_icon',
+                $field_title,
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-custom_' . $n . '_icon',
+                'field_name'  => 'custom_' . $n . '_icon',
+                'placeholder' => '',
+                'wide'        => 1,
+            )
+            );
+        }
         $tab = 5;
         add_settings_section(
             'shared-files_tab_' . $tab,
@@ -421,6 +463,39 @@ class Shared_Files_Settings
             '',
             array( $this, 'shared_files_settings_admin_list_section_callback' ),
             'shared-files'
+        );
+        add_settings_field(
+            'shared-files-hide_limit_downloads',
+            __( 'Hide "Limit downloads"-column', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_admin_list',
+            array(
+            'label_for'  => 'shared-files-hide_limit_downloads',
+            'field_name' => 'hide_limit_downloads',
+        )
+        );
+        add_settings_field(
+            'shared-files-hide_file_added',
+            __( 'Hide "File added"-column', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_admin_list',
+            array(
+            'label_for'  => 'shared-files-hide_file_added',
+            'field_name' => 'hide_file_added',
+        )
+        );
+        add_settings_field(
+            'shared-files-hide_last_access',
+            __( 'Hide "Last access"-column', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_admin_list',
+            array(
+            'label_for'  => 'shared-files-hide_last_access',
+            'field_name' => 'hide_last_access',
+        )
         );
     }
     
@@ -567,13 +642,10 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-4">' ;
         echo  '<h2>' . __( 'Custom file types', 'shared-files' ) . '</h2>' ;
-        
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
-            echo  '<p>' . __( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
-        } else {
+        if ( SharedFilesHelpers::isPremium() == 0 ) {
             echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
         }
-    
+        echo  '<p>' . __( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
     }
     
     public function contact_list_settings_tab_5_callback()

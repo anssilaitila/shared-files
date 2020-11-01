@@ -69,6 +69,11 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.17 =
+* New option (Pro): Only logged in users can add files using the front-end uploader
+* New option (Free and Pro): Use textarea for file description (instead of rich text editor)
+* Freemius SDK updated to 2.4.1 (https://github.com/Freemius/wordpress-sdk/releases/tag/2.4.1)
+
 = 1.6.16 =
 * New feature (Pro): multi-file upload. You may now upload multiple files at once (there is a new button on the File Management page).
 * New feature (Pro): if a file is added from the front-end by a logged-in user, that particular user can delete the very same files.

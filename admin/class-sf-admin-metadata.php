@@ -21,6 +21,7 @@ class SharedFilesAdminMetadata
     
     public function custom_metadata()
     {
+        $s = get_option( 'shared_files_settings' );
         wp_nonce_field( plugin_basename( __FILE__ ), '_sf_file_nonce' );
         $post_id = get_the_ID();
         $file = get_post_meta( $post_id, '_sf_file', true );
@@ -77,13 +78,19 @@ class SharedFilesAdminMetadata
         }
         $html .= '<div id="shared-file-description-title">' . __( 'Description', 'shared-files' ) . '</div>';
         echo  $html ;
-        $settings = array(
-            'media_buttons' => false,
-            'teeny'         => true,
-            'wpautop'       => false,
-            'textarea_rows' => 16,
-        );
-        wp_editor( $description, '_sf_description', $settings );
+        
+        if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+            echo  '<textarea name="_sf_description" class="shared-files-admin-field-file-description">' . $description . '</textarea>' ;
+        } else {
+            $settings = array(
+                'media_buttons' => false,
+                'teeny'         => true,
+                'wpautop'       => false,
+                'textarea_rows' => 16,
+            );
+            wp_editor( $description, '_sf_description', $settings );
+        }
+        
         $html = '';
         $html .= "\n    <script>\n      jQuery(document).ready(function(\$) {\n        \$('form#post').attr('enctype', 'multipart/form-data');\n      });\n    </script>\n    ";
         $file_check = 0;
@@ -162,8 +169,15 @@ class SharedFilesAdminMetadata
             update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? $_POST['_sf_password'] : '' ) );
             
             if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
-                $description = balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 );
-                update_post_meta( $id, '_sf_description', $description );
+                
+                if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+                    $description = strip_tags( $_POST['_sf_description'] );
+                    update_post_meta( $id, '_sf_description', $description );
+                } else {
+                    $description = balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 );
+                    update_post_meta( $id, '_sf_description', $description );
+                }
+            
             } else {
                 update_post_meta( $id, '_sf_description', '' );
             }

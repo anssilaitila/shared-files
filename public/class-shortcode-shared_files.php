@@ -28,7 +28,7 @@ class ShortcodeSharedFiles
         //    $meta_query_hide_not_public = array();
         $html = '';
         
-        if ( isset( $atts['file_upload'] ) ) {
+        if ( isset( $atts['file_upload'] ) && (is_user_logged_in() || !isset( $s['only_logged_in_users_can_add_files'] )) ) {
             
             if ( isset( $atts['only_uploaded_files'] ) ) {
                 $meta_query_hide_not_public = array(
@@ -82,7 +82,11 @@ class ShortcodeSharedFiles
             }
             
             $html .= SharedFilesHelpers::initLayout( $s );
-            $html .= '<div class="shared-files-container ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
+            $type = 'basic';
+            if ( isset( $atts['category'] ) ) {
+                $type = 'category';
+            }
+            $html .= '<div class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
             $html .= '<div id="shared-files-search">';
             
             if ( isset( $atts['category'] ) ) {
