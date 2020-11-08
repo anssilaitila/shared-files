@@ -74,6 +74,10 @@ class ShortcodeSharedFiles
             return $html;
         } else {
             $layout = '';
+            $tag_slug = '';
+            if ( isset( $_GET['sf_tag'] ) ) {
+                $tag_slug = $_GET['sf_tag'];
+            }
             
             if ( isset( $atts['layout'] ) ) {
                 $layout = $atts['layout'];
@@ -104,6 +108,7 @@ class ShortcodeSharedFiles
                         'post_type'      => 'shared_file',
                         'post_status'    => 'publish',
                         'posts_per_page' => -1,
+                        'tag'            => $tag_slug,
                         'tax_query'      => array( array(
                         'taxonomy'         => 'shared-file-category',
                         'field'            => 'slug',
@@ -138,6 +143,7 @@ class ShortcodeSharedFiles
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
                             'posts_per_page' => -1,
+                            'tag'            => $tag_slug,
                             'tax_query'      => array( array(
                             'taxonomy'         => 'shared-file-category',
                             'field'            => 'slug',
@@ -172,6 +178,7 @@ class ShortcodeSharedFiles
                             'post_status'    => 'publish',
                             'posts_per_page' => $posts_per_page,
                             'paged'          => $paged,
+                            'tag'            => $tag_slug,
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
@@ -196,6 +203,10 @@ class ShortcodeSharedFiles
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
             $html .= '<div id="shared-files-files-found"></div>';
             $html .= '<span id="shared-files-one-file-found">' . __( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . __( 'files found.', 'shared-files' ) . '</span>';
+            $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
+            if ( $tag_slug ) {
+                $html .= SharedFilesHelpers::tagTitleMarkup( $tag_slug, 'shared-files-non-ajax', $hide_description );
+            }
             
             if ( $wpb_all_query->have_posts() ) {
                 $html .= '<ul id="myList" class="shared-files-ajax-list">';
@@ -205,9 +216,24 @@ class ShortcodeSharedFiles
                     $c = get_post_custom( $id );
                     $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
                     $filetype = '';
-                    $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
                     $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                    $html .= SharedFilesPublicHelpers::fileListItem( $c, $imagefile, $hide_description );
+                    
+                    if ( isset( $atts['category'] ) || isset( $atts['file_upload'] ) ) {
+                        $html .= SharedFilesPublicHelpers::fileListItem(
+                            $c,
+                            $imagefile,
+                            $hide_description,
+                            0
+                        );
+                    } else {
+                        $html .= SharedFilesPublicHelpers::fileListItem(
+                            $c,
+                            $imagefile,
+                            $hide_description,
+                            1
+                        );
+                    }
+                
                 }
                 $html .= '</ul>';
             } else {

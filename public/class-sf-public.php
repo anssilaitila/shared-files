@@ -79,6 +79,16 @@ class Shared_Files_Public {
     add_shortcode('shared_files', array('ShortcodeSharedFiles', 'shared_files'));
     add_shortcode('shared_files_search', array('ShortcodeSharedFilesSearch', 'shared_files_search'));
     add_shortcode('shared_files_categories', array('ShortcodeSharedFilesCategories', 'shared_files_categories'));
+    add_shortcode('shared_files_simple', array('Shared_Files_Public', 'shared_files_simple'));
+  }
+
+  public static function shared_files_simple($atts = [], $content = null, $tag = '') {
+
+    $html = '';
+    
+    $html .= ShortcodeSharedFilesSimple::view($atts);
+    
+    return $html;
   }
     
 }

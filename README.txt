@@ -69,6 +69,14 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.18 =
+* New shortcode (Free and Pro): [shared_files_simple] (See https://www.sharedfilespro.com/shared-files/simple-list/)
+* New feature (Free and Pro): Tags. You can now add tag(s) to a file. (See https://www.sharedfilespro.com/shared-files/)
+* New feature (Free and Pro): Preview various file types. You can hide the button from the settings. (See https://www.sharedfilespro.com/shared-files/)
+* Copy to clipboard -buttons added to Help / Support -page, file management and category management
+* Category name(s) added to file card
+* New option (Pro): Hide category name(s) from card
+
 = 1.6.17 =
 * New option (Pro): Only logged in users can add files using the front-end uploader
 * New option (Free and Pro): Use textarea for file description (instead of rich text editor)

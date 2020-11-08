@@ -6,7 +6,7 @@ class SharedFilesPublicHelpers
     {
         $html = '';
         $html .= '<div class="pro-feature">';
-        $html .= '<span>' . __( 'This feature is available in the Pro version.', 'contact-list' ) . '</span>';
+        $html .= '<span>' . __( 'This feature is available in the Pro version.', 'shared-files' ) . '</span>';
         $html .= '</div>';
         return $html;
     }
@@ -30,7 +30,12 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
-    public static function fileListItem( $c, $imagefile, $hide_description )
+    public static function fileListItem(
+        $c,
+        $imagefile,
+        $hide_description,
+        $show_tags = 0
+    )
     {
         $s = get_option( 'shared_files_settings' );
         $file_id = get_the_id();
@@ -51,11 +56,13 @@ class SharedFilesPublicHelpers
         if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
         }
+        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' );
         $html .= '<div class="shared-files-main-elements-right">';
-        $html .= '<a href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a class="shared-files-file-title" href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
+        $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
         
         if ( !isset( $s['hide_date_from_card'] ) ) {
             $main_date = get_post_meta( $file_id, '_sf_main_date', true );
@@ -66,6 +73,20 @@ class SharedFilesPublicHelpers
                 $html .= '<span class="shared-file-date">' . $main_date_formatted . '</span>';
             } else {
                 $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
+            }
+        
+        }
+        
+        
+        if ( $show_tags ) {
+            $tags = get_the_tags();
+            
+            if ( $tags ) {
+                $html .= '<div class="shared-files-tags-container">';
+                foreach ( $tags as $tag ) {
+                    $html .= '<a href="?sf_tag=' . $tag->slug . '" data-tag-slug="' . $tag->slug . '" data-hide-description="' . $hide_description . '" class="shared-files-tag-link">' . $tag->name . '</a>';
+                }
+                $html .= '</div>';
             }
         
         }
@@ -218,7 +239,7 @@ class SharedFilesPublicHelpers
         $html .= '<form method="POST" action="">';
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
-        $html .= '<h1>' . __( 'Please enter password', 'contact-list' ) . '</h1>';
+        $html .= '<h1>' . __( 'Please enter password', 'shared-files' ) . '</h1>';
         //    $html .= wp_nonce_field('_CL_UPDATE', '_wpnonce', true, false);
         $html .= '<div class="form-field">';
         $html .= '<div class="form-field-left"><label for="password">' . __( 'Password', 'shared-files' ) . '</label></div>';
@@ -354,11 +375,57 @@ class SharedFilesPublicHelpers
     ';
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
-        $html .= '<h1>' . __( 'Download limit reached', 'contact-list' ) . '</h1>';
+        $html .= '<h1>' . __( 'Download limit reached', 'shared-files' ) . '</h1>';
         //    $html .= wp_nonce_field('_CL_UPDATE', '_wpnonce', true, false);
         $html .= '<p>' . __( 'This file is no longer available for download.', 'shared-files' ) . '</p>';
         $html .= '</body>';
         $html .= '</html>';
+        return $html;
+    }
+    
+    public static function sharedFilesSimpleMarkup( $wp_query, $include_children = 0 )
+    {
+        $html = '';
+        $html .= '<div class="shared-files-search">';
+        $html .= '<div class="shared-files-simple-list">';
+        if ( $wp_query->have_posts() ) {
+            while ( $wp_query->have_posts() ) {
+                $wp_query->the_post();
+                $id = get_the_id();
+                $html .= SharedFilesPublicHelpers::singleFileSimpleMarkup( $id );
+            }
+        }
+        $html .= '</div><hr class="clear" />';
+        $html .= '</div>';
+        wp_reset_postdata();
+        return $html;
+    }
+    
+    public static function singleFileSimpleMarkup( $id, $showGroups = 0 )
+    {
+        $s = get_option( 'shared_files_settings' );
+        $c = get_post_custom( $id );
+        $html = '';
+        $html .= '<div class="shared-files-simple-list-row">';
+        $contact_fullname = '';
+        $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name"><span>';
+        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' );
+        $html .= '<a href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
+        if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
+            $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
+        }
+        $html .= SharedFilesHelpers::getPreviewButton( $id, $file_url );
+        if ( isset( $c['_sf_description'] ) ) {
+            
+            if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+                $html .= nl2br( $c['_sf_description'][0] );
+            } else {
+                $html .= $c['_sf_description'][0];
+            }
+        
+        }
+        $html .= '</span></div>';
+        $html .= '</div>';
         return $html;
     }
 

@@ -114,6 +114,7 @@ class Shared_Files {
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-cpt.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-taxonomy.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-maintenance.php';
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-inline-scripts.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-send-mail.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-query.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-list.php';
@@ -132,6 +133,8 @@ class Shared_Files {
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-shortcode-shared_files.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-shortcode-shared_files_search.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-shortcode-shared_files_categories.php';
+
+    require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-shortcode_shared_files_simple.php';
 
     $this->loader = new Shared_Files_Loader();
 
@@ -165,6 +168,7 @@ class Shared_Files {
     $plugin_admin_cpt = new SharedFilesAdminCPT();
     $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
     $plugin_admin_maintenance = new SharedFilesAdminMaintenance();
+    $plugin_admin_inline_scripts = new SharedFilesAdminInlineScripts();
     $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
     $plugin_admin_query = new SharedFilesAdminQuery();
     $plugin_admin_send_mail = new SharedFilesAdminSendMail();
@@ -201,12 +205,18 @@ class Shared_Files {
     $this->loader->add_action('init', $plugin_admin_taxonomy, 'create_shared_files_custom_taxonomy', 0);
     $this->loader->add_action('shared-file-category_edit_form_fields', $plugin_admin_taxonomy, 'taxonomy_custom_fields', 10, 2);  
 
+    $this->loader->add_filter('manage_edit-shared-file-category_columns', $plugin_admin_taxonomy, 'theme_columns'); 
+    $this->loader->add_filter('manage_shared-file-category_custom_column', $plugin_admin_taxonomy, 'add_shared_file_category_column_content', 10, 3);
+
     // Settings
     $this->loader->add_action('admin_menu', $plugin_settings, 'shared_files_add_admin_menu');
     $this->loader->add_action('admin_init', $plugin_settings, 'shared_files_settings_init');
 
     // Query
     $this->loader->add_filter('request', $plugin_admin_query, 'alter_the_query');
+
+    // Inline
+    $this->loader->add_action('admin_head', $plugin_admin_inline_scripts, 'inline_scripts', 100);
 
     // Admin list
     $this->loader->add_action('manage_shared_file_posts_custom_column', $plugin_admin_list, 'shared_file_custom_columns_content', 10, 2);

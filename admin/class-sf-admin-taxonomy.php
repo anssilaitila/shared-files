@@ -66,5 +66,31 @@ class SharedFilesAdminTaxonomy
     
   <?php 
     }
+    
+    public function theme_columns( $theme_columns )
+    {
+        $new_columns = array(
+            'cb'          => '<input type="checkbox" />',
+            'name'        => __( 'Name' ),
+            'description' => __( 'Description' ),
+            'shortcode'   => __( 'Shortcode', 'shared-files' ),
+            'slug'        => __( 'Slug' ),
+            'posts'       => __( 'Posts' ),
+        );
+        return $new_columns;
+    }
+    
+    public function add_shared_file_category_column_content( $content, $column_name, $term_id )
+    {
+        $term = get_term( $term_id, 'shared-file-category' );
+        switch ( $column_name ) {
+            case 'shortcode':
+                $content = '<span class="shared-files-shortcode-admin-list shared-files-shortcode-' . $term->slug . '" title="[shared_files category=' . $term->slug . ']">[shared_files category=' . $term->slug . ']</span>' . '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $term->slug . '">' . __( 'Copy', 'shared-files' ) . '</button>';
+                break;
+            default:
+                break;
+        }
+        return $content;
+    }
 
 }

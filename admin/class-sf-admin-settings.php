@@ -45,6 +45,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-hide_preview_button',
+            __( 'Hide preview button', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-hide_preview_button',
+            'field_name' => 'hide_preview_button',
+        )
+        );
+        add_settings_field(
             'shared-files-hide_file_type_icon_from_card',
             __( 'Hide file type icon from card', 'shared-files' ),
             array( $this, 'checkbox_render' ),

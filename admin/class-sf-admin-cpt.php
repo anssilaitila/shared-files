@@ -25,7 +25,8 @@ class SharedFilesAdminCPT {
                           'show_ui'            => true,
                           'has_archive'        => false,
                           'publicly_queryable' => false,
-                          'menu_icon'          => 'dashicons-index-card'                          
+                          'menu_icon'          => 'dashicons-index-card',
+                          'taxonomies'         => array('post_tag')
                        ]
     );
 

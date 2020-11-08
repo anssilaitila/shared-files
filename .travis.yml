@@ -4,21 +4,22 @@ services:
   - mysql
 
 cache:
+  yarn: true
   directories:
-    - $HOME/.composer/cache
+    - $HOME/.composer/cache/files
 
 # Explicitly test against supported versions of PHP
 #
 # Reference: https://www.php.net/supported-versions.php
 php:
-#  - 7.4snapshot
+  - 7.4
   - 7.3
   - 7.2
 
 # Test against the latest version of WordPress and one version back.
 env:
   - WP_VERSION=latest
-  - WP_VERSION=5.2
+  - WP_VERSION=5.4
 
 # Customize the build matrix.
 matrix:
@@ -31,12 +32,12 @@ matrix:
 
     # Canary for our oldest-supported version
     - name: Legacy
-      php: 5.6
+      php: 7.2
       env: WP_VERSION=4.9
 
     # Nightly versions of PHP and WordPress.
     - name: Bleeding edge
-      php: 7.4snapshot
+      php: 7.4
       env: WP_VERSION=trunk
 
   # Jobs that are permitted to fail without breaking the build

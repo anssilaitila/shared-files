@@ -103,6 +103,51 @@ class SharedFilesHelpers
         return $external_filetypes;
     }
     
+    public static function tagTitleMarkup( $tag_slug, $type = '', $hide_description = 0 )
+    {
+        $html = '';
+        
+        if ( $tag_slug ) {
+            $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
+            $html .= '<div class="' . $type . '">';
+            $html .= '<span class="shared-files-tag-title">' . $current_tag->name . '</span>';
+            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . $hide_description . '" href="./?sf_tag=">' . __( 'Show all files', 'shared-files' ) . '</a>';
+            $html .= '</div>';
+        }
+        
+        return $html;
+    }
+    
+    public static function getPreviewButton( $file_id, $file_url )
+    {
+        $s = get_option( 'shared_files_settings' );
+        if ( isset( $s['hide_preview_button'] ) ) {
+            return '';
+        }
+        $file = get_post_meta( $file_id, '_sf_file', true );
+        $filetype = '';
+        if ( isset( $file['type'] ) ) {
+            $filetype = $file['type'];
+        }
+        $html = '';
+        $ok = array(
+            'application/msword',
+            'application/pdf',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/mspowerpoint',
+            'application/powerpoint',
+            'application/vnd.ms-powerpoint',
+            'application/x-mspowerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        );
+        if ( in_array( $filetype, $ok ) ) {
+            $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( get_site_url() . $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+        }
+        return $html;
+    }
+    
     public static function getImageFile( $file_id, $external_url )
     {
         $s = get_option( 'shared_files_settings' );
