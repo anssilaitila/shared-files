@@ -27,10 +27,10 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Sort files and documents to multiple categories
 
 = Features in Free version: =
-* Simple and clean user interface
-* No options to set, ready to use right away
-* Separated from the media library
-* Custom images/icons for file types
+* Files separated from the media library
+* High quality SVG icons for 25 different file types
+* Custom images/icons for many file types
+* Add tags to files
 
 = Additional features in Pro version: =
 * Multiple different shortcodes/views for various use cases
@@ -68,6 +68,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.19 =
+* Free and Pro: Completely new icon set, high quality SVG icons for 25 different file types. You can still use the old ones if you wish, the set can be changed from the settings.
 
 = 1.6.18 =
 * New shortcode (Free and Pro): [shared_files_simple] (See https://www.sharedfilespro.com/shared-files/simple-list/)

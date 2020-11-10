@@ -16,6 +16,17 @@ class Shared_Files_Settings
     public function shared_files_settings_init()
     {
         register_setting( 'shared-files', 'shared_files_settings' );
+        add_settings_field(
+            'shared-files-icon_set',
+            __( 'Icon set', 'shared-files' ),
+            array( $this, 'icon_set_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-icon_set',
+            'field_name' => 'icon_set',
+        )
+        );
         add_settings_section(
             'shared-files_section_general',
             __( 'General settings', 'shared-files' ),
@@ -773,6 +784,31 @@ class Shared_Files_Settings
             ?>><?php 
             echo  __( '4 cards on the same row', 'shared-files' ) ;
             ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function icon_set_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value="2020" <?php 
+            echo  ( $val == '2020' || $val == '' ? 'selected' : '' ) ;
+            ?>>2020</option>
+          <option value="2019" <?php 
+            echo  ( $val == '2019' ? 'selected' : '' ) ;
+            ?>>2019</option>
       </select>
       <?php 
         }

@@ -5,35 +5,50 @@ class SharedFilesHelpers
     public static function getFiletypes()
     {
         $filetypes = array(
-            'image/png'                                                               => 'image',
-            'image/jpg'                                                               => 'image',
-            'image/jpeg'                                                              => 'image',
-            'image/svg+xml'                                                           => 'image',
-            'application/pdf'                                                         => 'pdf',
-            'application/postscript'                                                  => 'ai',
-            'application/msword'                                                      => 'doc',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document' => 'doc',
-            'application/vnd.ms-fontobject'                                           => 'font',
-            'font/otf'                                                                => 'font',
-            'font/ttf'                                                                => 'font',
-            'font/woff'                                                               => 'font',
-            'font/woff2'                                                              => 'font',
-            'text/html'                                                               => 'html',
-            'audio/mpeg3'                                                             => 'mp3',
-            'audio/x-mpeg-3'                                                          => 'mp3',
-            'audio/mpeg'                                                              => 'mp3',
-            'video/x-msvideo'                                                         => 'video',
-            'video/mpeg'                                                              => 'video',
-            'video/x-mpeg'                                                            => 'video',
-            'video/ogg'                                                               => 'video',
-            'video/webm'                                                              => 'video',
-            'video/3gpp'                                                              => 'video',
-            'video/3gpp2'                                                             => 'video',
-            'application/vnd.ms-excel'                                                => 'xlsx',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'       => 'xlsx',
-            'application/zip'                                                         => 'zip',
-            'application/x-7z-compressed'                                             => 'zip',
-            'application/x-indesign'                                                  => 'indd',
+            'text/css'                                                                  => 'css',
+            'text/csv'                                                                  => 'csv',
+            'text/html'                                                                 => 'html',
+            'video/mp4'                                                                 => 'mp4',
+            'text/plain'                                                                => 'txt',
+            'audio/wave'                                                                => 'wav',
+            'audio/wav'                                                                 => 'wav',
+            'audio/x-wav'                                                               => 'wav',
+            'audio/x-pn-wav'                                                            => 'wav',
+            'image/png'                                                                 => 'png',
+            'image/jpg'                                                                 => 'jpg',
+            'image/jpeg'                                                                => 'jpg',
+            'image/gif'                                                                 => 'gif',
+            'image/svg+xml'                                                             => 'image',
+            'application/pdf'                                                           => 'pdf',
+            'application/postscript'                                                    => 'ai',
+            'application/msword'                                                        => 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'   => 'doc',
+            'application/vnd.ms-fontobject'                                             => 'font',
+            'application/mspowerpoint'                                                  => 'ppt',
+            'application/powerpoint'                                                    => 'ppt',
+            'application/vnd.ms-powerpoint'                                             => 'ppt',
+            'application/x-mspowerpoint'                                                => 'ppt',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => 'ppt',
+            'font/otf'                                                                  => 'font',
+            'font/ttf'                                                                  => 'font',
+            'font/woff'                                                                 => 'font',
+            'font/woff2'                                                                => 'font',
+            'text/html'                                                                 => 'html',
+            'audio/mpeg3'                                                               => 'mp3',
+            'audio/x-mpeg-3'                                                            => 'mp3',
+            'audio/mpeg'                                                                => 'mp3',
+            'video/x-msvideo'                                                           => 'video',
+            'video/mpeg'                                                                => 'video',
+            'video/x-mpeg'                                                              => 'video',
+            'video/ogg'                                                                 => 'video',
+            'video/webm'                                                                => 'video',
+            'video/3gpp'                                                                => 'video',
+            'video/3gpp2'                                                               => 'video',
+            'application/vnd.ms-excel'                                                  => 'xls',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'         => 'xls',
+            'application/zip'                                                           => 'zip',
+            'application/x-7z-compressed'                                               => 'zip',
+            'application/x-indesign'                                                    => 'indd',
         );
         return $filetypes;
     }
@@ -85,8 +100,8 @@ class SharedFilesHelpers
     public static function getExternalFiletypes()
     {
         $external_filetypes = array(
-            'png'  => 'image',
-            'jpg'  => 'image',
+            'png'  => 'png',
+            'jpg'  => 'jpg',
             'pdf'  => 'pdf',
             'ai'   => 'ai',
             'doc'  => 'doc',
@@ -96,11 +111,28 @@ class SharedFilesHelpers
             'mpg'  => 'video',
             'ogg'  => 'video',
             'webm' => 'video',
-            'xls'  => 'xlsx',
-            'xlsx' => 'xlsx',
+            'xls'  => 'xls',
+            'xlsx' => 'xls',
             'zip'  => 'zip',
         );
         return $external_filetypes;
+    }
+    
+    public static function filetypesExt()
+    {
+        $filetypes_ext = array(
+            'avi' => 'avi',
+            'dll' => 'dll',
+            'eml' => 'eml',
+            'vob' => 'vob',
+            'eps' => 'eps',
+            'exe' => 'exe',
+            'mov' => 'mov',
+            'psd' => 'psd',
+            'rar' => 'rar',
+            'raw' => 'raw',
+        );
+        return $filetypes_ext;
     }
     
     public static function tagTitleMarkup( $tag_slug, $type = '', $hide_description = 0 )
@@ -154,6 +186,7 @@ class SharedFilesHelpers
         $file = get_post_meta( $file_id, '_sf_file', true );
         $filetypes = SharedFilesHelpers::getFiletypes();
         $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
+        $filetypes_ext = SharedFilesHelpers::filetypesExt();
         $custom_icons = SharedFilesHelpers::getCustomIcons();
         $imagefile = 'generic.png';
         $file_type_icon_url = '';
@@ -164,6 +197,10 @@ class SharedFilesHelpers
         // Featured image override
         if ( !isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             return $featured_img_url;
+        }
+        $icon_set = 2020;
+        if ( isset( $s['icon_set'] ) && $s['icon_set'] == 2019 ) {
+            $icon_set = 2019;
         }
         // Custom file type definition overrides everything else
         
@@ -212,8 +249,27 @@ class SharedFilesHelpers
                 if ( isset( $custom_icons[$filetype] ) && $custom_icons[$filetype] ) {
                     $file_type_icon_url = $custom_icons[$filetype];
                 } elseif ( array_key_exists( $filetype, $filetypes ) && isset( $filetypes[$filetype] ) ) {
-                    $imagefile = $filetypes[$filetype] . '.png';
-                    $file_type_icon_url = SHARED_FILES_URI . 'img/' . $imagefile;
+                    $imagefile = $filetypes[$filetype] . '.svg';
+                    $file_type_icon_url = SHARED_FILES_URI . 'img/2020/' . $imagefile;
+                    
+                    if ( $icon_set == 2019 ) {
+                        $imagefile = $filetypes[$filetype] . '.png';
+                        $file_type_icon_url = SHARED_FILES_URI . 'img/' . $imagefile;
+                    }
+                
+                } elseif ( isset( $file_ext ) && array_key_exists( $file_ext, $filetypes_ext ) ) {
+                    
+                    if ( isset( $filetypes_ext[$file_ext] ) ) {
+                        $imagefile = $filetypes_ext[$file_ext] . '.svg';
+                        $file_type_icon_url = SHARED_FILES_URI . 'img/2020/' . $imagefile;
+                        
+                        if ( $icon_set == 2019 ) {
+                            $imagefile = $filetypes_ext[$file_ext] . '.png';
+                            $file_type_icon_url = SHARED_FILES_URI . 'img/' . $imagefile;
+                        }
+                    
+                    }
+                
                 } elseif ( isset( $s['icon_for_other'] ) ) {
                     $file_type_icon_url = $s['icon_for_other'];
                 }
