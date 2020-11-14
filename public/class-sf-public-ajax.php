@@ -4,9 +4,6 @@ class SharedFilesPublicAjax {
   
   public function sf_get_files() {
 
-    // normalize attribute keys, lowercase
-    $atts = array_change_key_case( (array) $atts, CASE_LOWER);
-
     $html = '';
 
     $tag_slug = '';

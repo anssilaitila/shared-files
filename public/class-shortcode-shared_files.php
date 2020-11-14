@@ -13,6 +13,7 @@ class ShortcodeSharedFiles
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $limit_posts = 0;
         $meta_query_hide_not_public = array(
             'relation' => 'OR',
         );
@@ -63,7 +64,7 @@ class ShortcodeSharedFiles
                 );
             }
             
-            $html .= SharedFilesFileUpload::fileUploadMarkup();
+            $html .= SharedFilesFileUpload::fileUploadMarkup( $atts );
         }
         
         
@@ -173,11 +174,13 @@ class ShortcodeSharedFiles
                     } else {
                         $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
                         $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 20 );
+                        if ( $limit_posts ) {
+                            $posts_per_page = $limit_posts;
+                        }
                         $wpb_all_query = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
                             'posts_per_page' => $posts_per_page,
-                            'paged'          => $paged,
                             'tag'            => $tag_slug,
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
@@ -251,11 +254,15 @@ class ShortcodeSharedFiles
                 'add_args'     => false,
                 'add_fragment' => '',
             );
-            $html .= '<div id="shared-files-pagination" class="shared-files-pagination">';
-            if ( paginate_links( $pagination_args ) ) {
-                $html .= '<span class="shared-files-more-files">' . __( 'Browse more files:', 'shared-files' ) . '</span>' . paginate_links( $pagination_args );
+            
+            if ( !$limit_posts ) {
+                $html .= '<div id="shared-files-pagination" class="shared-files-pagination">';
+                if ( paginate_links( $pagination_args ) ) {
+                    $html .= '<span class="shared-files-more-files">' . __( 'Browse more files:', 'shared-files' ) . '</span>' . paginate_links( $pagination_args );
+                }
+                $html .= '</div>';
             }
-            $html .= '</div>';
+            
             $html .= '<div id="shared-files-nothing-found">';
             $html .= __( 'No files found.', 'shared-files' );
             $html .= '</div>';

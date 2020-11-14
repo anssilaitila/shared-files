@@ -69,6 +69,12 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.20 =
+* (Free and Pro) New option: "Show download button on card"
+* (Pro) New option: "Align elements vertically and centered (inside card)" (this is useful when using the 3 or 4 cards layout and space is limited)
+* (Pro) New parameter for shortcode [shared_files]: [shared_files limit=5] (limit the number of files and hide pagination)
+* (Pro) New parameter for shortcode [shared_files]: [shared_files file_upload=1 category=CATEGORY_SLUG] (pre-define the category and hide category dropdown)
+
 = 1.6.19 =
 * Free and Pro: Completely new icon set, high quality SVG icons for 25 different file types. You can still use the old ones if you wish, the set can be changed from the settings.
 

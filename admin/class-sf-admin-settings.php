@@ -78,6 +78,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-show_download_button',
+            __( 'Show download button on card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-show_download_button',
+            'field_name' => 'show_download_button',
+        )
+        );
+        add_settings_field(
             'shared-files-textarea_for_file_description',
             __( 'Use textarea for file description (instead of rich text editor)', 'shared-files' ),
             array( $this, 'checkbox_render' ),

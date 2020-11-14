@@ -2,7 +2,7 @@
 
 class SharedFilesFileUpload
 {
-    public static function fileUploadMarkup()
+    public static function fileUploadMarkup( $atts )
     {
         $html = '';
         return $html;

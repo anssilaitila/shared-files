@@ -30,6 +30,101 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
+    public static function fileListItemV2(
+        $c,
+        $imagefile,
+        $hide_description,
+        $show_tags = 0
+    )
+    {
+        $s = get_option( 'shared_files_settings' );
+        $file_id = get_the_id();
+        $date_format = get_option( 'date_format' );
+        $left_style = '';
+        
+        if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
+            $left_style = 'width: 6px; background: none;';
+        } else {
+            $left_style = 'background: url(' . $imagefile . ') right top no-repeat; background-size: 48px;';
+        }
+        
+        $html .= '<li>';
+        $html .= '<div class="shared-files-main-elements shared-files-main-elements-v2">';
+        $html .= '<div class="shared-files-main-elements-top"><img src="' . $imagefile . '" /></div>';
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
+        }
+        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' );
+        $html .= '<div class="shared-files-main-elements-bottom">';
+        $html .= '<a class="shared-files-file-title" href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
+        if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
+            $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
+        }
+        $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
+        
+        if ( !isset( $s['hide_date_from_card'] ) ) {
+            $main_date = get_post_meta( $file_id, '_sf_main_date', true );
+            $expiration_date_formatted = '';
+            
+            if ( $main_date instanceof DateTime ) {
+                $main_date_formatted = $main_date->format( $date_format );
+                $html .= '<span class="shared-file-date">' . $main_date_formatted . '</span>';
+            } else {
+                $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
+            }
+        
+        }
+        
+        
+        if ( $show_tags ) {
+            $tags = get_the_tags();
+            
+            if ( $tags ) {
+                $html .= '<div class="shared-files-tags-container">';
+                foreach ( $tags as $tag ) {
+                    
+                    if ( $show_tags == 1 ) {
+                        $html .= '<a href="?sf_tag=' . $tag->slug . '" data-tag-slug="' . $tag->slug . '" data-hide-description="' . $hide_description . '" class="shared-files-tag-link">' . $tag->name . '</a>';
+                    } elseif ( $show_tags == 2 ) {
+                        $html .= '<span>' . $tag->name . '</span>';
+                    }
+                
+                }
+                $html .= '</div>';
+            }
+        
+        }
+        
+        if ( isset( $c['_sf_description'] ) && !$hide_description ) {
+            
+            if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+                $html .= '<p class="shared-file-description">' . nl2br( $c['_sf_description'][0] ) . '</p>';
+            } else {
+                $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
+            }
+        
+        }
+        if ( isset( $s['show_download_button'] ) ) {
+            $html .= '<hr class="clear" /><a href="' . $file_url . '" target="_blank" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+        }
+        
+        if ( is_user_logged_in() ) {
+            $user = wp_get_current_user();
+            $bare_url = './?_sf_delete_file=' . $file_id;
+            if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
+            }
+        }
+        
+        $html .= '</div>';
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
+        }
+        $html .= '</div>';
+        $html .= '</li>';
+        return $html;
+    }
+    
     public static function fileListItem(
         $c,
         $imagefile,
@@ -40,12 +135,22 @@ class SharedFilesPublicHelpers
         $s = get_option( 'shared_files_settings' );
         $file_id = get_the_id();
         $date_format = get_option( 'date_format' );
+        
+        if ( isset( $s['card_align_elements_vertically'] ) ) {
+            $html = SharedFilesPublicHelpers::fileListItemV2(
+                $c,
+                $imagefile,
+                $hide_description,
+                $show_tags
+            );
+            return $html;
+        }
+        
         $html = '';
-        //    $html .= $imagefile;
         $left_style = '';
         
         if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
-            $left_style = 'width: 6px;';
+            $left_style = 'width: 6px; background: none;';
         } else {
             $left_style = 'background: url(' . $imagefile . ') right top no-repeat; background-size: 48px;';
         }
@@ -84,7 +189,13 @@ class SharedFilesPublicHelpers
             if ( $tags ) {
                 $html .= '<div class="shared-files-tags-container">';
                 foreach ( $tags as $tag ) {
-                    $html .= '<a href="?sf_tag=' . $tag->slug . '" data-tag-slug="' . $tag->slug . '" data-hide-description="' . $hide_description . '" class="shared-files-tag-link">' . $tag->name . '</a>';
+                    
+                    if ( $show_tags == 1 ) {
+                        $html .= '<a href="?sf_tag=' . $tag->slug . '" data-tag-slug="' . $tag->slug . '" data-hide-description="' . $hide_description . '" class="shared-files-tag-link">' . $tag->name . '</a>';
+                    } elseif ( $show_tags == 2 ) {
+                        $html .= '<span>' . $tag->name . '</span>';
+                    }
+                
                 }
                 $html .= '</div>';
             }
@@ -99,6 +210,9 @@ class SharedFilesPublicHelpers
                 $html .= '<p class="shared-file-description">' . $c['_sf_description'][0] . '</p>';
             }
         
+        }
+        if ( isset( $s['show_download_button'] ) ) {
+            $html .= '<a href="' . $file_url . '" target="_blank" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
         }
         
         if ( is_user_logged_in() ) {
