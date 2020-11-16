@@ -69,6 +69,9 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.21 =
+* Fixed [shared-files] -> [shared_files] on Help / Support -page
+
 = 1.6.20 =
 * (Free and Pro) New option: "Show download button on card"
 * (Pro) New option: "Align elements vertically and centered (inside card)" (this is useful when using the 3 or 4 cards layout and space is limited)
