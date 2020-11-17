@@ -64,7 +64,7 @@ class SharedFilesAdminMetadata
         
         
         if ( $file ) {
-            $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . get_the_ID() . '/' . $filename;
+            $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . get_the_ID() . '/' . SharedFilesHelpers::wp_engine() . $filename;
             $html .= __( 'Current file:', 'shared-files' ) . ' <a href="' . $file_url . '" target="_blank">' . $file_url . '</a>';
             $html .= '<br /><br /><b>' . __( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';

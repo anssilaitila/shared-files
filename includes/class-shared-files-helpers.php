@@ -290,6 +290,16 @@ class SharedFilesHelpers
         return $file_type_icon_url;
     }
     
+    public static function wp_engine()
+    {
+        $s = get_option( 'shared_files_settings' );
+        $extra = '';
+        if ( isset( $s['wp_engine_compatibility_mode'] ) ) {
+            $extra = '?';
+        }
+        return $extra;
+    }
+    
     public static function sf_root()
     {
         $s = get_option( 'shared_files_settings' );

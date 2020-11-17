@@ -69,6 +69,10 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 == Changelog ==
 
+= 1.6.22 =
+* Some modifications made to the file opening process to solve issues on certain server configurations
+* New option: "WP Engine compatibility mode" (if you're using WP Engine to host your site, check this)
+
 = 1.6.21 =
 * Fixed [shared-files] -> [shared_files] on Help / Support -page
 

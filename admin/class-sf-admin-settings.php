@@ -133,6 +133,17 @@ class Shared_Files_Settings
             'placeholder' => '/some-dir/',
         )
         );
+        add_settings_field(
+            'shared-files-wp_engine_compatibility_mode',
+            __( 'WP Engine compatibility mode', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-wp_engine_compatibility_mode',
+            'field_name' => 'wp_engine_compatibility_mode',
+        )
+        );
         $tab = 2;
         add_settings_section(
             'shared-files_tab_' . $tab,
@@ -545,6 +556,26 @@ class Shared_Files_Settings
             ?>]" <?php 
             echo  ( isset( $options[$args['field_name']] ) ? 'checked="checked"' : '' ) ;
             ?>>      
+
+      <?php 
+            
+            if ( $args['field_name'] == 'wp_engine_compatibility_mode' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'This should be checked if you\'re using WP Engine to host your site.' ) ;
+                ?><br /><br />
+          <?php 
+                echo  __( 'When this option is checked, an extra "?" is automatically added to the URLs before the filename like so: <br /><b>/shared-files/123/?this-is-a-file.pdf</b>', 'shared-files' ) ;
+                ?><br /><br />
+          <?php 
+                echo  __( 'Can also be used with other hosting providers, may help solving 404 errors.', 'shared-files' ) ;
+                ?>
+        </div>
+      <?php 
+            }
+            
+            ?>
 
       <?php 
         }

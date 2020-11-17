@@ -91,7 +91,7 @@ class SharedFilesAdminList
                 echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . $post_ID . '" title="[shared_files file_id=' . $post_ID . ']">[shared_files file_id=' . $post_ID . ']</span>' ;
                 echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $post_ID . '">' . __( 'Copy', 'shared-files' ) . '</button>' ;
                 $file = get_post_meta( get_the_ID(), '_sf_file', true );
-                $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . get_post_meta( $post_ID, '_sf_filename', true );
+                $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . SharedFilesHelpers::wp_engine() . get_post_meta( $post_ID, '_sf_filename', true );
                 echo  '<a href="' . $file_url . '" target="_blank">' . $file_url . '</a>' ;
                 break;
             case 'filesize':

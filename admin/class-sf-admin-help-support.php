@@ -190,6 +190,7 @@ class SharedFilesAdminHelpSupport {
         wp_upload_dir()['baseurl']: <?= wp_upload_dir()['baseurl'] ?><br />
         wp_upload_dir()['error']: <?= wp_upload_dir()['error'] ?><br />
         sf_root: <?= SharedFilesHelpers::sf_root() ? SharedFilesHelpers::sf_root() : '(not set)' ?><br />
+        get_template_directory_uri(): <?= get_template_directory_uri() ?>
         <br />
   
         <?php
@@ -209,7 +210,7 @@ class SharedFilesAdminHelpSupport {
     
             $id = get_the_id();
             $c = get_post_custom($id);
-            $file = (isset($c['_sf_filename']) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . $c['_sf_filename'][0] : '');
+            $file = (isset($c['_sf_filename']) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '');
             ?>
     
             <?= $file ?> | <?= get_the_date() ?><br />

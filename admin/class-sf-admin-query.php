@@ -108,10 +108,33 @@ class SharedFilesAdminQuery {
           update_post_meta($file_id, '_sf_bandwidth_usage', $bandwidth_usage + $filesize);
 
           // Set headers
-          header('Content-type: ' . $file_mime);
+          header('Content-Type: ' . $file_mime);
+          
+          $path = pathinfo($filename); 
+          $header_filename = $path['filename'];
+          $header_extension = $path['extension'];
+          $header_filename_ext = '';
+
+          if ($header_filename && $header_extension) {
+            $header_filename_ext = $header_filename . '.' . $header_extension;
+          }
+
+          if ($header_filename_ext) {
+            header('Content-Disposition: inline; filename="' . $header_filename_ext . '"');
+          }
+          
+          header('Cache-Control: no-cache, must-revalidate');
+          header('X-Accel-Buffering: no');
+
+          header('Content-Length: ' . filesize($filename));
+
+          if (function_exists('ob_clean')) {
+            ob_clean();
+          }
+
           readfile($filename);
 
-          die();
+          exit;
         }
 
       }
