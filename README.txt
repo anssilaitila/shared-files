@@ -2,7 +2,7 @@
 Contributors: anssilaitila, freemius
 Tags: google drive, sharing, downloads, file manager, dropbox
 Requires at least: 4.0.0
-Tested up to: 5.5
+Tested up to: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -27,12 +27,14 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Sort files and documents to multiple categories
 
 = Features in Free version: =
+* Preview certain file types in the browser
 * Files separated from the media library
 * High quality SVG icons for 25 different file types
 * Custom images/icons for many file types
 * Add tags to files
 
 = Additional features in Pro version: =
+* Upload files using FTP and activate them for the plugin with a single click
 * Multiple different shortcodes/views for various use cases
 * Sort files into categories
 * Fast search targeting file names and descriptions
@@ -68,6 +70,12 @@ Thanks to Luciano Del Fico for translating the Italian version.
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.23 - 2020-12-02 =
+* New feature (Pro): Sync Files — you can now upload files directly using FTP and activate the files for the plugin from the Sync Files page.
+* New option (Free and Pro): "File opening method"
+* New option (Free and Pro): "Preview service"
+* Show-button added next to file password
 
 = 1.6.22 =
 * Some modifications made to the file opening process to solve issues on certain server configurations

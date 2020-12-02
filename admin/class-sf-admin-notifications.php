@@ -36,8 +36,8 @@ class SharedFilesAdminNotifications {
   
     }
 
-  	$sf_offer_notice = get_option('shared_files_offer_notice');
-  	$should_show_offer_notice = ($sf_offer_notice !== 'dismissed');
+    $sf_offer_show_notice = get_option('shared_files_offer_show_notice');
+    $should_show_offer_notice = $sf_offer_show_notice;
 
     if (1 && $should_show_offer_notice && sf_fs()->is_not_paying() && current_user_can('administrator')) {
       
@@ -75,9 +75,11 @@ class SharedFilesAdminNotifications {
   	$user_id = $current_user->ID;
   	$sf_statuses_option = get_option('sf_statuses', array());
 
+    // Rating notice
+
     if (!get_option('shared_files_rating_notice_date')) {
 
-      $dt = new DateTime('+2 weeks');
+      $dt = new DateTime('+8 weeks');
 
       if ($dt !== false && !array_sum($dt::getLastErrors())) {
         $notify_date = $dt;
@@ -115,8 +117,45 @@ class SharedFilesAdminNotifications {
   		}
   	}
 
+    // Offer notice
+
+    if (!get_option('shared_files_offer_notice_date')) {
+
+      $dt = new DateTime('+4 weeks');
+
+      if ($dt !== false && !array_sum($dt::getLastErrors())) {
+        $notify_date = $dt;
+        update_option('shared_files_offer_notice_date', $notify_date, false);
+      }
+
+    } else {
+
+      $notify_date = get_option('shared_files_offer_notice_date');
+
+      if ($notify_date instanceof DateTime) {
+        $dt_now = new DateTime('now');
+        
+        if ($notify_date <= $dt_now) {
+          update_option('shared_files_offer_show_notice', 1, false);
+        }
+
+      }
+      
+    }
+
   	if (isset($_GET['sf_ignore_offer_notice'])) {
 			update_option('shared_files_offer_notice', 'dismissed', false);
+			update_option('shared_files_offer_show_notice', 0, false);
+			$sf_statuses_option['offer_notice_dismissed'] = $this->sf_get_current_time();
+			update_option('sf_statuses', $sf_statuses_option, false);
+
+      $dt = new DateTime('+26 weeks');
+
+      if ($dt !== false && !array_sum($dt::getLastErrors())) {
+        $notify_date = $dt;
+        update_option('shared_files_offer_notice_date', $notify_date, false);
+      }
+
     }
     
   }

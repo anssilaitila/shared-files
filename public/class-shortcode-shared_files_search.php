@@ -6,7 +6,7 @@ class ShortcodeSharedFilesSearch
     {
         
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+            $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
             return $html;
         }
     

@@ -70,7 +70,7 @@ class ShortcodeSharedFiles
         
         if ( isset( $atts['file_id'] ) ) {
             if ( SharedFilesHelpers::isPremium() == 0 ) {
-                $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+                $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
             }
             return $html;
         } else {
@@ -97,7 +97,7 @@ class ShortcodeSharedFiles
             if ( isset( $atts['category'] ) ) {
                 
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    $html = SharedFilesPublicHelpers::sfProFeaturePublicMarkup();
+                    $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
                     return $html;
                 }
             

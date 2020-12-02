@@ -56,6 +56,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-preview_service',
+            __( 'Preview service', 'shared-files' ),
+            array( $this, 'preview_service_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-preview_service',
+            'field_name' => 'preview_service',
+        )
+        );
+        add_settings_field(
             'shared-files-hide_preview_button',
             __( 'Hide preview button', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -122,15 +133,14 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
-            'shared-files-wp_location',
-            __( 'WordPress location', 'shared-files' ),
-            array( $this, 'input_render' ),
+            'shared-files-file_open_method',
+            __( 'File opening method', 'shared-files' ),
+            array( $this, 'file_open_method_render' ),
             'shared-files',
             'shared-files_section_general',
             array(
-            'label_for'   => 'shared-files-wp_location',
-            'field_name'  => 'wp_location',
-            'placeholder' => '/some-dir/',
+            'label_for'  => 'shared-files-file_open_method',
+            'field_name' => 'file_open_method',
         )
         );
         add_settings_field(
@@ -144,11 +154,23 @@ class Shared_Files_Settings
             'field_name' => 'wp_engine_compatibility_mode',
         )
         );
+        add_settings_field(
+            'shared-files-wp_location',
+            __( 'WordPress location', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-wp_location',
+            'field_name'  => 'wp_location',
+            'placeholder' => '/some-dir/',
+        )
+        );
         $tab = 2;
         add_settings_section(
             'shared-files_tab_' . $tab,
             '',
-            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
         add_settings_field(
@@ -245,7 +267,7 @@ class Shared_Files_Settings
         add_settings_section(
             'shared-files_tab_' . $tab,
             '',
-            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
         add_settings_field(
@@ -460,7 +482,7 @@ class Shared_Files_Settings
         add_settings_section(
             'shared-files_tab_' . $tab,
             '',
-            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
         $num = [ 1 ];
@@ -498,7 +520,7 @@ class Shared_Files_Settings
         add_settings_section(
             'shared-files_tab_' . $tab,
             '',
-            array( $this, 'contact_list_settings_tab_' . $tab . '_callback' ),
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
         //    $tab = 5;
@@ -563,7 +585,7 @@ class Shared_Files_Settings
                 ?>
         <div class="email-info">
           <?php 
-                echo  __( 'This should be checked if you\'re using WP Engine to host your site.' ) ;
+                echo  __( 'This should be checked if you\'re using WP Engine to host your site.', 'shared-files' ) ;
                 ?><br /><br />
           <?php 
                 echo  __( 'When this option is checked, an extra "?" is automatically added to the URLs before the filename like so: <br /><b>/shared-files/123/?this-is-a-file.pdf</b>', 'shared-files' ) ;
@@ -644,6 +666,9 @@ class Shared_Files_Settings
         <div class="email-info">
           <?php 
                 echo  __( 'If you\'re getting 404 from file URLs, it may be necessary to set this to the same directory that your WordPress is installed to. If this is set, the file URLs are formatted like so:<br /><b>/some-dir/shared-files/123/this-is-a-file.pdf</b>', 'shared-files' ) ;
+                ?><br /><br />
+          <?php 
+                echo  __( 'You should only set this to be the first part of the url, like /some-dir/. This setting may be necessary, if you have installed WordPress in a subdirectory.', 'shared-files' ) ;
                 ?>
         </div>
       <?php 
@@ -668,12 +693,38 @@ class Shared_Files_Settings
         if ( SharedFilesHelpers::isPremium() == 1 ) {
             echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
         } else {
-            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
+            echo  '<div class="shared-files-how-to-get-started">' ;
+            echo  '<h2>' . __( 'How to get started', 'shared-files' ) . '</h2>' ;
+            echo  '<ol>' ;
+            echo  '<li><span>' ;
+            $url = get_admin_url() . 'edit.php?post_type=shared_file';
+            $text = sprintf( wp_kses(
+                /* translators: %s: link to file management */
+                __( 'Insert files from <a href="%s" target="_blank">file management</a>.', 'shared-files' ),
+                array(
+                    'a' => array(
+                    'href'   => array(),
+                    'target' => array(),
+                ),
+                )
+            ), esc_url( $url ) );
+            echo  $text ;
+            echo  '</span></li>' ;
+            echo  '<li><span>' ;
+            $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span> or <span class="shared-files-mini-shortcode">[shared_files_simple]</span> to the content editor of any page.', 'shared-files' ), array(
+                'span' => array(
+                'class' => array(),
+            ),
+            ) );
+            echo  $text ;
+            echo  '</span></li>' ;
+            echo  '</ol>' ;
+            echo  '</div>' ;
         }
     
     }
     
-    public function contact_list_settings_tab_2_callback()
+    public function shared_files_settings_tab_2_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-2">' ;
@@ -687,7 +738,7 @@ class Shared_Files_Settings
     
     }
     
-    public function contact_list_settings_tab_3_callback()
+    public function shared_files_settings_tab_3_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-3">' ;
@@ -701,7 +752,7 @@ class Shared_Files_Settings
     
     }
     
-    public function contact_list_settings_tab_4_callback()
+    public function shared_files_settings_tab_4_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-4">' ;
@@ -712,7 +763,7 @@ class Shared_Files_Settings
         echo  '<p>' . __( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
     }
     
-    public function contact_list_settings_tab_5_callback()
+    public function shared_files_settings_tab_5_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-5">' ;
@@ -851,6 +902,76 @@ class Shared_Files_Settings
           <option value="2019" <?php 
             echo  ( $val == '2019' ? 'selected' : '' ) ;
             ?>>2019</option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function file_open_method_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value="" <?php 
+            echo  ( $val == '' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Default', 'shared-files' ) ;
+            ?></option>
+          <option value="redirect" <?php 
+            echo  ( $val == 'redirect' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Redirect', 'shared-files' ) ;
+            ?></option>
+      </select>
+
+      <div class="email-info">
+        <?php 
+            echo  __( 'Default method means opening the files using the following url format:', 'shared-files' ) ;
+            ?><br />
+        <strong>/shared-files/123/this-is-a-file.pdf</strong><br /><br />
+        <?php 
+            echo  __( 'Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files' ) ;
+            ?><br />
+        <strong>/wp-content/uploads/shared-files/this-is-a-file.pdf</strong>
+      </div>
+
+      <?php 
+        }
+    
+    }
+    
+    public function preview_service_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value="" <?php 
+            echo  ( $val == '' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Google', 'shared-files' ) ;
+            ?></option>
+          <option value="microsoft" <?php 
+            echo  ( $val == 'microsoft' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Microsoft', 'shared-files' ) ;
+            ?></option>
       </select>
       <?php 
         }

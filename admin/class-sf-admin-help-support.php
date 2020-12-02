@@ -9,7 +9,8 @@ class SharedFilesAdminHelpSupport {
       __('Help / Support', 'shared-files'),
       'manage_options',
       'shared-files-support',
-      [$this, 'register_support_page_callback']
+      [$this, 'register_support_page_callback'],
+      999
     );
   }
 

@@ -27,7 +27,8 @@ class SharedFilesAdminTaxonomy
             __( 'Categories', 'shared-files' ),
             'manage_options',
             'shared-files-categories-info',
-            [ $this, 'register_categories_info_page_callback' ]
+            [ $this, 'register_categories_info_page_callback' ],
+            3
         );
     }
     

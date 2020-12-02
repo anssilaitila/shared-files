@@ -124,6 +124,8 @@ class Shared_Files {
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-settings.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-notifications.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-multiple-files-upload.php';
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-sync-files.php';
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-file-handling.php';
 
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-sf-public.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-sf-public-ajax.php';
@@ -176,6 +178,8 @@ class Shared_Files {
     $plugin_admin_metadata = new SharedFilesAdminMetadata();
     $plugin_admin_notifications = new SharedFilesAdminNotifications();
     $plugin_admin_multiple_files_upload = new SharedFilesAdminMultipleFilesUpload();
+    $plugin_admin_sync_files = new SharedFilesAdminSyncFiles();
+    $plugin_admin_file_handling = new SharedFilesFileHandling();
 
     $plugin_settings = new Shared_Files_Settings();
 
@@ -198,19 +202,12 @@ class Shared_Files {
     $this->loader->add_action('save_post', $plugin_admin_metadata, 'save_custom_meta_data');
     $this->loader->add_action('add_meta_boxes_shared_file', $plugin_admin_metadata, 'adding_custom_meta_boxes');
 
-    // Help & support    
-    $this->loader->add_action('admin_menu', $plugin_admin_help_support, 'register_support_page');
-
     // Custom taxonomy
     $this->loader->add_action('init', $plugin_admin_taxonomy, 'create_shared_files_custom_taxonomy', 0);
     $this->loader->add_action('shared-file-category_edit_form_fields', $plugin_admin_taxonomy, 'taxonomy_custom_fields', 10, 2);  
 
     $this->loader->add_filter('manage_edit-shared-file-category_columns', $plugin_admin_taxonomy, 'theme_columns'); 
     $this->loader->add_filter('manage_shared-file-category_custom_column', $plugin_admin_taxonomy, 'add_shared_file_category_column_content', 10, 3);
-
-    // Settings
-    $this->loader->add_action('admin_menu', $plugin_settings, 'shared_files_add_admin_menu');
-    $this->loader->add_action('admin_init', $plugin_settings, 'shared_files_settings_init');
 
     // Query
     $this->loader->add_filter('request', $plugin_admin_query, 'alter_the_query');
@@ -233,6 +230,19 @@ class Shared_Files {
     // Multiple files upload
     $this->loader->add_filter('request', $plugin_admin_multiple_files_upload, 'file_upload');
     $this->loader->add_action('admin_print_footer_scripts', $plugin_admin_multiple_files_upload, 'add_multiple_files_view');
+
+    // Sync files
+    $this->loader->add_action('admin_menu', $plugin_admin_sync_files, 'register_page');
+
+    // File handling
+    $this->loader->add_filter('admin_init', $plugin_admin_file_handling, 'activate_file');
+
+    // Settings
+    $this->loader->add_action('admin_menu', $plugin_settings, 'shared_files_add_admin_menu');
+    $this->loader->add_action('admin_init', $plugin_settings, 'shared_files_settings_init');
+
+    // Help & support    
+    $this->loader->add_action('admin_menu', $plugin_admin_help_support, 'register_support_page');
 
     if (SharedFilesHelpers::isPremium() == 0) {
       $this->loader->add_action('admin_menu', $plugin_admin_taxonomy, 'register_categories_info_page');

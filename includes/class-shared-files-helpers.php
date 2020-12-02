@@ -162,21 +162,58 @@ class SharedFilesHelpers
             $filetype = $file['type'];
         }
         $html = '';
-        $ok = array(
-            'application/msword',
-            'application/pdf',
-            'application/vnd.ms-excel',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'application/mspowerpoint',
-            'application/powerpoint',
-            'application/vnd.ms-powerpoint',
-            'application/x-mspowerpoint',
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-        );
-        if ( in_array( $filetype, $ok ) ) {
-            $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( get_site_url() . $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+        
+        if ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
+            $ok = array(
+                'application/msword',
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/mspowerpoint',
+                'application/powerpoint',
+                'application/vnd.ms-powerpoint',
+                'application/x-mspowerpoint',
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            );
+            
+            if ( in_array( $filetype, $ok ) ) {
+                
+                if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
+                    $file_url = $file['url'];
+                } else {
+                    $file_url = get_site_url() . $file_url;
+                }
+                
+                $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+            }
+        
+        } else {
+            $ok = array(
+                'application/msword',
+                'application/pdf',
+                'application/vnd.ms-excel',
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'application/mspowerpoint',
+                'application/powerpoint',
+                'application/vnd.ms-powerpoint',
+                'application/x-mspowerpoint',
+                'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+            );
+            
+            if ( in_array( $filetype, $ok ) ) {
+                
+                if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
+                    $file_url = $file['url'];
+                } else {
+                    $file_url = get_site_url() . $file_url;
+                }
+                
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+            }
+        
         }
+        
         return $html;
     }
     
@@ -282,6 +319,8 @@ class SharedFilesHelpers
             
             if ( isset( $s['icon_for_other'] ) && strlen( $s['icon_for_other'] ) > 0 ) {
                 $file_type_icon_url = $s['icon_for_other'];
+            } elseif ( $icon_set == 2020 ) {
+                $file_type_icon_url = SHARED_FILES_URI . 'img/2020/generic.svg';
             } else {
                 $file_type_icon_url = SHARED_FILES_URI . 'img/generic.png';
             }

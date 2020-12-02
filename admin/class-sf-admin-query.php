@@ -11,6 +11,8 @@ class SharedFilesAdminQuery {
 
     global $wp;
 
+    $s = get_option('shared_files_settings');
+
     $url = home_url($wp->request);
 
     $sf_query = 0;
@@ -101,11 +103,21 @@ class SharedFilesAdminQuery {
             die();
           }
 
-          $bandwidth_usage = get_post_meta($file_id, '_sf_bandwidth_usage', true);
-          $filesize = get_post_meta($file_id, '_sf_filesize', true);
+          $bandwidth_usage = get_post_meta($file_id, '_sf_bandwidth_usage', true) || 0;
+          $filesize = get_post_meta($file_id, '_sf_filesize', true) || 0;
           update_post_meta($file_id, '_sf_load_cnt', $load_cnt + 1);
           update_post_meta($file_id, '_sf_last_access', current_time( 'Y-m-d H:i:s' ));
           update_post_meta($file_id, '_sf_bandwidth_usage', $bandwidth_usage + $filesize);
+
+          if (isset($s['file_open_method']) && $s['file_open_method'] == 'redirect') {
+            $file = get_post_meta($file_id, '_sf_file', true);
+            $file_url = $file['url'];
+            
+//            wp_die($file_url);
+            
+            wp_redirect($file_url);
+            exit;
+          }
 
           // Set headers
           header('Content-Type: ' . $file_mime);
@@ -132,7 +144,26 @@ class SharedFilesAdminQuery {
             ob_clean();
           }
 
-          readfile($filename);
+          if (function_exists('ob_end_flush')) {
+            ob_end_flush();
+          }
+
+          if (isset($s['file_open_method']) && $s['file_open_method'] == 'alt') {
+
+            set_time_limit(0);
+            $file_alt = @fopen($filename, 'rb');
+
+            while (!feof($file_alt)) {
+              print(@fread($file_alt, 1024 * 8));
+              ob_flush();
+              flush();
+            }
+
+          } else {
+
+            readfile($filename);
+
+          }
 
           exit;
         }

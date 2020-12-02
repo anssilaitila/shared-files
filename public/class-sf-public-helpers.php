@@ -2,11 +2,19 @@
 
 class SharedFilesPublicHelpers
 {
-    public static function sfProFeaturePublicMarkup()
+    public static function proFeaturePublicMarkup()
     {
         $html = '';
-        $html .= '<div class="pro-feature">';
-        $html .= '<span>' . __( 'This feature is available in the Pro version.', 'shared-files' ) . '</span>';
+        $html .= '<div class="shared-files-public-pro-feature">';
+        $html .= '<span class="shared-files-public-pro-feature-title">';
+        $html .= __( 'This feature is available in the Pro version.', 'shared-files' );
+        $html .= '</span>';
+        $html .= '<span>';
+        $html .= __( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . __( 'and', 'shared-files' ) . ' [shared_files_simple].';
+        $html .= '</span>';
+        $html .= '<span>';
+        $html .= __( 'More info on shortcodes at', 'shared-files' ) . ' <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">sharedfilespro.com</a>.';
+        $html .= '</span>';
         $html .= '</div>';
         return $html;
     }
@@ -37,6 +45,7 @@ class SharedFilesPublicHelpers
         $show_tags = 0
     )
     {
+        $html = '';
         $s = get_option( 'shared_files_settings' );
         $file_id = get_the_id();
         $date_format = get_option( 'date_format' );
@@ -123,6 +132,16 @@ class SharedFilesPublicHelpers
         $html .= '</div>';
         $html .= '</li>';
         return $html;
+    }
+    
+    public static function getFileURL( $file_id = 0 )
+    {
+        $c = get_post_custom( $file_id );
+        $file_url = '';
+        if ( isset( $c['_sf_filename'] ) ) {
+            $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0];
+        }
+        return $file_url;
     }
     
     public static function fileListItem(
@@ -521,7 +540,6 @@ class SharedFilesPublicHelpers
         $c = get_post_custom( $id );
         $html = '';
         $html .= '<div class="shared-files-simple-list-row">';
-        $contact_fullname = '';
         $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name"><span>';
         $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
         $html .= '<a href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
