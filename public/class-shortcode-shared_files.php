@@ -221,7 +221,14 @@ class ShortcodeSharedFiles
                     $filetype = '';
                     $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
                     
-                    if ( isset( $atts['category'] ) || isset( $atts['file_upload'] ) ) {
+                    if ( isset( $atts['file_upload'] ) ) {
+                        $html .= SharedFilesPublicHelpers::fileListItem(
+                            $c,
+                            $imagefile,
+                            $hide_description,
+                            1
+                        );
+                    } elseif ( isset( $atts['category'] ) ) {
                         $html .= SharedFilesPublicHelpers::fileListItem(
                             $c,
                             $imagefile,

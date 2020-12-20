@@ -1,40 +1,53 @@
-=== WordPress File Sharing Plugin and Download Manager – Shared Files ===
+=== WordPress Download Manager and File Sharing Plugin with FTP upload – a better Media Library — Shared Files ===
 Contributors: anssilaitila, freemius
-Tags: google drive, sharing, downloads, file manager, dropbox
+Tags: download manager, file manager, ftp, google drive, dropbox, onedrive
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: trunk
+Stable tag: 1.6.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Share files like on Dropbox or Google Drive! Track file downloads, receive email notifications and more!
+A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring FTP upload, front-end file upload, an advanced file manager, better media library, file explorer and more...
 
 == Description ==
-= The Best WordPress file sharing plugin on the market =
-The Shared Files plugin allows you to list and manage downloadable files on your site easily. Just add the files in the admin area and insert the shortcode to the page you wish to list the files.
+= The best WordPress file sharing plugin on the market =
+This <strong>download manager</strong> allows you to list and manage downloadable files on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
 
-Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts.
+Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a file explorer to browse any number of files.
 
 **14 days free trial available for Pro version, no credit card required.**
 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
+= An easy to use download manager with file upload =
+* Store files using this download manager plugin instead of media library
+* Allow users and/or visitors to upload files
+* File manager allows administrators to upload files using FTP or single/multi-file uploader
+* Alternative to WP media library
+* Free version to use as a free file manager and download manager
+* More advanced file manager in the Pro version
+* Share folders and files
+
 = Some use cases for this plugin: =
 * List any number of files and keep statistics on downloads
-* Share downloadable files like using Dropbox or Google Drive
+* Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Add a single file to any article/post using a simple shortcode
 * Receive a notification when a file is downloaded
 * Sort files and documents to multiple categories
+* Use as an internet download manager, file explorer and file manager
 
-= Features in Free version: =
+= Key Features in Shared Files Free: =
 * Preview certain file types in the browser
 * Files separated from the media library
 * High quality SVG icons for 25 different file types
 * Custom images/icons for many file types
+* A free download manager
 * Add tags to files
 
-= Additional features in Pro version: =
+= Key Features in Shared Files Pro: =
 * Upload files using FTP and activate them for the plugin with a single click
+* FTP file upload allows you to upload any number of files easily
+* Front-end file upload with support for categories and tags, logged-in users can also delete their uploaded files
 * Multiple different shortcodes/views for various use cases
 * Sort files into categories
 * Fast search targeting file names and descriptions
@@ -45,8 +58,8 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Password protected files
 * Set expiration date to a file
 * Limit number of downloads per file
-* Front-end file uploader, logged-in users can also delete their uploaded files
 * Multi-file upload to a specific category
+* A full-featured download manager plugin
 * More features on the way based on user feedback
 
 Contact the author [here](https://www.sharedfilespro.com/support/).
@@ -70,6 +83,12 @@ Thanks to Luciano Del Fico for translating the Italian version.
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.24 - 2020-12-20 =
+* Pro: You can now check many categories and tags when uploading a file using the front-end file upload. See settings, Help / Support -page and demo: https://www.sharedfilespro.com/shared-files/file-upload-2/
+* Pro: You can now change the contents of the message that is displayed when the download limit has been reached (see the settings)
+* Added support for https://youtu.be -links (when the YouTube icon is displayed)
+* Bug fixes
 
 = 1.6.23 - 2020-12-02 =
 * New feature (Pro): Sync Files — you can now upload files directly using FTP and activate the files for the plugin from the Sync Files page.
@@ -219,6 +238,76 @@ Thanks to Luciano Del Fico for translating the Italian version.
 
 = 1.5.0 =
 * New licensing model / 2019-12-09
+
+= 1.4.9 =
+* A new option added to optionally define WP location
+
+= 1.4.8 =
+* The plugin now supports the case when WP is installed in a subdirectory
+
+= 1.4.7 =
+* A few more texts made translatable
+
+= 1.4.6 =
+* New parameter for shortcode [shared_files] to hide search: "hide_search". Can be used like so: [shared_files hide_search=1]
+* Settings page added. You may now define an email address and when a file is downloaded, an email notify is sent to that email.
+
+= 1.4.5 =
+* Bug fix to enable use with ie. Elementor
+
+= 1.4.4 =
+* Bug fix for deleting file
+
+= 1.4.3 =
+* Bug fix for displaying files from specific category
+* Date added to the file list (item created)
+
+= 1.4.2 =
+* Donation links added
+
+= 1.4.1 =
+* Bug fix for pagination
+
+= 1.4.0 =
+* Added pagination to all files view (20 files per page). The search still targets all files.
+
+= 1.3.0 =
+* Added feedback form to Help / Support page
+
+= 1.2.9 =
+* Shortcode for displaying a single file added. Using this you can insert a file to e.g. a post or a page.
+
+= 1.2.8 =
+* File description field converted to wysiwyg editor
+
+= 1.2.7 =
+* Missing strings made translatable
+
+= 1.2.6 =
+* Translation support added
+
+= 1.2.5 =
+* New feature: External URL. Instead of adding a locally hosted file, you may now add an external URL.
+
+= 1.1.5 =
+* Categories added. A category can now be assigned to a file and it's possible to list files from a certain category.
+
+= 1.0.5 =
+* Support page updated
+
+= 1.0.4 =
+* Bug fixes
+* Housekeeping
+* Testing on Gutenberg
+
+= 1.0.3 =
+* File type icons added
+
+= 1.0.2 =
+* CSS fix
+
+= 1.0.1 =
+* Minor fixes
 
 = 1.0.0 =
 * Initial release / 2018-07-15

@@ -114,14 +114,14 @@ class SharedFilesPublicHelpers
         
         }
         if ( isset( $s['show_download_button'] ) ) {
-            $html .= '<hr class="clear" /><a href="' . $file_url . '" target="_blank" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+            $html .= '<hr class="clear" /><a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
         }
         
         if ( is_user_logged_in() ) {
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
-                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
             }
         }
         
@@ -231,14 +231,14 @@ class SharedFilesPublicHelpers
         
         }
         if ( isset( $s['show_download_button'] ) ) {
-            $html .= '<a href="' . $file_url . '" target="_blank" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+            $html .= '<a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
         }
         
         if ( is_user_logged_in() ) {
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
-                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
             }
         }
         
@@ -439,8 +439,13 @@ class SharedFilesPublicHelpers
       padding: 40px 30px;
       border: 1px solid #ccc;
       border-radius: 3px;
+      color: #000;
     }
-  
+
+    .shared-files-password-protected a {
+      color: #000;
+    }
+    
     .shared-files-password-protected .form-field .form-field-left {
       width: 40%;
       float: left;
@@ -506,11 +511,19 @@ class SharedFilesPublicHelpers
   
   </style>
     ';
+        $s = get_option( 'shared_files_settings' );
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
         $html .= '<h1>' . __( 'Download limit reached', 'shared-files' ) . '</h1>';
-        //    $html .= wp_nonce_field('_CL_UPDATE', '_wpnonce', true, false);
-        $html .= '<p>' . __( 'This file is no longer available for download.', 'shared-files' ) . '</p>';
+        
+        if ( isset( $s['download_limit_msg'] ) && $s['download_limit_msg'] ) {
+            $str = $s['download_limit_msg'];
+            $str = preg_replace( '@(https?://([-\\w\\.]+[-\\w])+(:\\d+)?(/([\\w/_\\.#-~]*(\\?\\S+)?)?)?)@', '<a href="$1">$1</a>', $str );
+            $html .= '<p>' . nl2br( $str ) . '</p>';
+        } else {
+            $html .= '<p>' . __( 'This file is no longer available for download.', 'shared-files' ) . '</p>';
+        }
+        
         $html .= '</body>';
         $html .= '</html>';
         return $html;

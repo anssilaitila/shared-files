@@ -18,7 +18,7 @@ class SharedFilesAdminInlineScripts {
           
           jQuery(function ($) {
 
-            $('.shared-files-copy').on('click', function (e) {
+            $(document).on('click', '.shared-files-copy', function (e) {
               e.preventDefault();
             });
               

@@ -15,6 +15,7 @@ class Shared_Files_Settings
     
     public function shared_files_settings_init()
     {
+        $only_pro = '_FREE_';
         register_setting( 'shared-files', 'shared_files_settings' );
         add_settings_field(
             'shared-files-icon_set',
@@ -133,6 +134,62 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'hide_category_name_from_card',
+            __( 'Hide category name(s) from card', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'hide_category_name_from_card',
+            'field_name' => $only_pro . 'hide_category_name_from_card',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
+            __( 'Only logged in users can add files using the front-end file uploader', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
+            'field_name' => $only_pro . 'only_logged_in_users_can_add_files',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
+            __( 'Show category checkboxes for front-end file uploader (instead of dropdown)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
+            'field_name' => $only_pro . 'show_category_checkboxes_on_file_upload',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
+            __( 'Show tag checkboxes for front-end file uploader', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
+            'field_name' => $only_pro . 'show_tag_checkboxes_on_file_upload',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'pagination',
+            __( 'Pagination', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'pagination',
+            'field_name'  => $only_pro . 'pagination',
+            'placeholder' => '20',
+        )
+        );
+        add_settings_field(
             'shared-files-file_open_method',
             __( 'File opening method', 'shared-files' ),
             array( $this, 'file_open_method_render' ),
@@ -166,6 +223,18 @@ class Shared_Files_Settings
             'placeholder' => '/some-dir/',
         )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'download_limit_msg',
+            __( 'Message for download limit reached', 'shared-files' ),
+            array( $this, 'textarea_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'download_limit_msg',
+            'field_name'  => $only_pro . 'download_limit_msg',
+            'placeholder' => 'This file is no longer available for download.',
+        )
+        );
         $tab = 2;
         add_settings_section(
             'shared-files_tab_' . $tab,
@@ -196,6 +265,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'card_align_elements_vertically',
+            __( 'Align elements vertically and centered (inside card)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'card_align_elements_vertically',
+            'field_name' => $only_pro . 'card_align_elements_vertically',
+        )
+        );
+        add_settings_field(
             'shared-files-card_small_font_size',
             __( 'Small font size on card', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -208,7 +288,7 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-card_featured_image_as_extra',
-            __( 'Show featured image in addition to file type icon', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'Featured image will be displayed next to file description', 'shared-files' ) . '</div>',
+            __( 'Show featured image in addition to file type icon', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'Featured image will be displayed next to file description.', 'shared-files' ) . '<br />' . __( 'Normally it is displayed instead of file type icon.' ) . '</div>',
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
@@ -516,12 +596,72 @@ class Shared_Files_Settings
             )
             );
         }
+        $num = [
+            2,
+            3,
+            4,
+            5,
+            6
+        ];
+        foreach ( $num as $n ) {
+            $field_title = __( 'Custom file type', 'shared-files' ) . ' ' . $n . ': ' . __( 'extension', 'shared-files' );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'custom_' . $n . '_ext',
+                $field_title,
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'custom_' . $n . '_ext',
+                'field_name'  => $only_pro . 'custom_' . $n . '_ext',
+                'placeholder' => '',
+                'ext'         => 1,
+            )
+            );
+            $field_title = __( 'Custom file type', 'shared-files' ) . ' ' . $n . ': ' . __( 'icon file', 'shared-files' );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'custom_' . $n . '_icon',
+                $field_title,
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'custom_' . $n . '_icon',
+                'field_name'  => $only_pro . 'custom_' . $n . '_icon',
+                'placeholder' => '',
+                'wide'        => 1,
+            )
+            );
+        }
         $tab = 5;
         add_settings_section(
             'shared-files_tab_' . $tab,
             '',
             array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'send_email',
+            __( 'Send an email notify when a file is downloaded', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'send_email',
+            'field_name' => $only_pro . 'send_email',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'recipient_email',
+            __( 'Notification recipient email', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'recipient_email',
+            'field_name'  => $only_pro . 'recipient_email',
+            'placeholder' => '',
+        )
         );
         //    $tab = 5;
         add_settings_section(
@@ -563,21 +703,94 @@ class Shared_Files_Settings
             'field_name' => 'hide_last_access',
         )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'hide_bandwidth_usage',
+            __( 'Hide "Bandwidth usage"-column', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_admin_list',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'hide_bandwidth_usage',
+            'field_name' => $only_pro . 'hide_bandwidth_usage',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'hide_expiration_date',
+            __( 'Hide "Expiration date"-column', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_admin_list',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'hide_expiration_date',
+            'field_name' => $only_pro . 'hide_expiration_date',
+        )
+        );
     }
     
     public function checkbox_render( $args )
     {
         
-        if ( $args['field_name'] ) {
+        if ( $field_name = $args['field_name'] ) {
             $options = get_option( 'shared_files_settings' );
             ?>    
-      <input type="checkbox" id="shared-files-<?php 
-            echo  $args['field_name'] ;
-            ?>" name="shared_files_settings[<?php 
-            echo  $args['field_name'] ;
-            ?>]" <?php 
-            echo  ( isset( $options[$args['field_name']] ) ? 'checked="checked"' : '' ) ;
-            ?>>      
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+    
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+
+      <div class="shared-files-setting-container <?php 
+            echo  $free_class ;
+            ?>">
+
+        <?php 
+            
+            if ( $free ) {
+                ?>
+ 
+          <a href="<?php 
+                echo  get_admin_url() ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>
+          </a>
+ 
+        <?php 
+            } else {
+                ?>
+  
+          <div class="shared-files-setting">
+            <input type="checkbox" id="shared-files-<?php 
+                echo  $field_name ;
+                ?>" name="shared_files_settings[<?php 
+                echo  $field_name ;
+                ?>]" <?php 
+                echo  ( isset( $options[$field_name] ) ? 'checked="checked"' : '' ) ;
+                ?>>      
+          </div>
+          
+        <?php 
+            }
+            
+            ?>
+      
+      </div>
 
       <?php 
             
@@ -604,64 +817,190 @@ class Shared_Files_Settings
     
     }
     
-    public function input_render( $args )
+    public function textarea_render( $args )
     {
         
-        if ( $args['field_name'] ) {
+        if ( $field_name = $args['field_name'] ) {
             $options = get_option( 'shared_files_settings' );
             ?>    
 
       <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+    
+      <?php 
             
-            if ( $args['field_name'] == 'card_background_custom_color' ) {
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
                 ?>
-        # <input type="text" style="width: 100px;" class="input-field <?php 
-                echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
-                ?>" id="shared-files-<?php 
-                echo  $args['field_name'] ;
-                ?>" name="shared_files_settings[<?php 
-                echo  $args['field_name'] ;
-                ?>]" value="<?php 
-                echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
-                ?>" placeholder="<?php 
-                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
-                ?>">
-      <?php 
-            } elseif ( isset( $args['ext'] ) ) {
+        <?php 
+                $free = 1;
                 ?>
-        filename.<input type="text" class="input-field <?php 
-                echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
-                ?>" id="shared-files-<?php 
-                echo  $args['field_name'] ;
-                ?>" name="shared_files_settings[<?php 
-                echo  $args['field_name'] ;
-                ?>]" value="<?php 
-                echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
-                ?>" placeholder="<?php 
-                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
-                ?>" style="width: 80px;">
-      <?php 
-            } else {
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
                 ?>
-        <input type="text" class="input-field <?php 
-                echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
-                ?>" id="shared-files-<?php 
-                echo  $args['field_name'] ;
-                ?>" name="shared_files_settings[<?php 
-                echo  $args['field_name'] ;
-                ?>]" value="<?php 
-                echo  ( isset( $options[$args['field_name']] ) ? $options[$args['field_name']] : '' ) ;
-                ?>" placeholder="<?php 
-                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
-                ?>">
       <?php 
             }
             
             ?>
 
+      <div class="shared-files-setting-container <?php 
+            echo  $free_class ;
+            ?>">
+
+        <?php 
+            
+            if ( $free ) {
+                ?>
+ 
+          <a href="<?php 
+                echo  get_admin_url() ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>
+          </a>
+ 
+        <?php 
+            } else {
+                ?>
+  
+          <div class="shared-files-setting">
+
+              <textarea class="textarea-field" id="shared-files-<?php 
+                echo  $field_name ;
+                ?>" name="shared_files_settings[<?php 
+                echo  $field_name ;
+                ?>]" placeholder="<?php 
+                echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                ?>"><?php 
+                echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                ?></textarea>
+
+          </div>
+          
+        <?php 
+            }
+            
+            ?>
+      
+      </div>
+
+      <?php 
+        }
+    
+    }
+    
+    public function input_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            ?>    
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+    
       <?php 
             
-            if ( $args['field_name'] == 'wp_location' ) {
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+
+      <div class="shared-files-setting-container <?php 
+            echo  $free_class ;
+            ?>">
+
+        <?php 
+            
+            if ( $free ) {
+                ?>
+ 
+          <a href="<?php 
+                echo  get_admin_url() ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>
+          </a>
+ 
+        <?php 
+            } else {
+                ?>
+  
+          <div class="shared-files-setting">
+
+            <?php 
+                
+                if ( $field_name == 'card_background_custom_color' ) {
+                    ?>
+              # <input type="text" style="width: 100px;" class="input-field <?php 
+                    echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+                    ?>" id="shared-files-<?php 
+                    echo  $field_name ;
+                    ?>" name="shared_files_settings[<?php 
+                    echo  $field_name ;
+                    ?>]" value="<?php 
+                    echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                    ?>" placeholder="<?php 
+                    echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                    ?>">
+            <?php 
+                } elseif ( isset( $args['ext'] ) ) {
+                    ?>
+              filename.<input type="text" class="input-field <?php 
+                    echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+                    ?>" id="shared-files-<?php 
+                    echo  $field_name ;
+                    ?>" name="shared_files_settings[<?php 
+                    echo  $field_name ;
+                    ?>]" value="<?php 
+                    echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                    ?>" placeholder="<?php 
+                    echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                    ?>" style="width: 80px;">
+            <?php 
+                } else {
+                    ?>
+              <input type="text" class="input-field <?php 
+                    echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
+                    ?>" id="shared-files-<?php 
+                    echo  $field_name ;
+                    ?>" name="shared_files_settings[<?php 
+                    echo  $field_name ;
+                    ?>]" value="<?php 
+                    echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                    ?>" placeholder="<?php 
+                    echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                    ?>">
+            <?php 
+                }
+                
+                ?>
+
+          </div>
+          
+        <?php 
+            }
+            
+            ?>
+      
+      </div>
+
+      <?php 
+            
+            if ( $field_name == 'wp_location' ) {
                 ?>
         <div class="email-info">
           <?php 
@@ -672,7 +1011,7 @@ class Shared_Files_Settings
                 ?>
         </div>
       <?php 
-            } elseif ( $args['field_name'] == 'icon_for_image' || $args['field_name'] == 'custom_1_icon' ) {
+            } elseif ( $field_name == 'icon_for_image' || $field_name == 'custom_1_icon' ) {
                 ?>
         <p><?php 
                 echo  __( 'e.g. /wp-content/uploads/2019/12/some-fancy-icon.png', 'shared-files' ) ;
@@ -729,13 +1068,6 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-2">' ;
         echo  '<h2>' . __( 'Layout settings', 'shared-files' ) . '</h2>' ;
-        
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
-            echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
-        } else {
-            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
-        }
-    
     }
     
     public function shared_files_settings_tab_3_callback()
@@ -743,13 +1075,6 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-3">' ;
         echo  '<h2>' . __( 'Change default file icons', 'shared-files' ) . '</h2>' ;
-        
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
-            echo  '<p>' . __( 'Define alternative icons here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
-        } else {
-            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
-        }
-    
     }
     
     public function shared_files_settings_tab_4_callback()
@@ -757,9 +1082,6 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-4">' ;
         echo  '<h2>' . __( 'Custom file types', 'shared-files' ) . '</h2>' ;
-        if ( SharedFilesHelpers::isPremium() == 0 ) {
-            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
-        }
         echo  '<p>' . __( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
     }
     
@@ -768,13 +1090,6 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-5">' ;
         echo  '<h2>' . __( 'Email settings', 'shared-files' ) . '</h2>' ;
-        
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
-            echo  '<p>' . '</p>' ;
-        } else {
-            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
-        }
-    
     }
     
     public function shared_files_settings_admin_list_section_callback()
@@ -782,13 +1097,6 @@ class Shared_Files_Settings
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-6">' ;
         echo  '<h2>' . __( 'Admin list', 'shared-files' ) . '</h2>' ;
-        
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
-            echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
-        } else {
-            echo  SharedFilesAdminHelpers::sfProFeatureSettingsMarkup() ;
-        }
-    
     }
     
     public function settings_page()

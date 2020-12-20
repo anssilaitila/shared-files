@@ -25,12 +25,13 @@ class ShortcodeSharedFilesSimple
             'compare' => 'NOT EXISTS',
         );
         $wp_query = new WP_Query( array(
-            'post_type'   => 'shared_file',
-            'post_status' => 'publish',
-            'orderby'     => SharedFilesHelpers::getOrderBy( $atts ),
-            'order'       => SharedFilesHelpers::getOrder( $atts ),
-            'meta_key'    => SharedFilesHelpers::getMetaKey( $atts ),
-            'meta_query'  => $meta_query_hide_not_public,
+            'post_type'      => 'shared_file',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+            'order'          => SharedFilesHelpers::getOrder( $atts ),
+            'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
+            'meta_query'     => $meta_query_hide_not_public,
         ) );
         if ( !isset( $atts['hide_search'] ) ) {
             $html .= '<input type="text" class="shared-files-simple-search" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? $s['search_contacts'] : __( 'Search files...', 'shared-files' ) )) . '">';

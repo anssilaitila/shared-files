@@ -209,7 +209,7 @@ class SharedFilesHelpers
                     $file_url = get_site_url() . $file_url;
                 }
                 
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( $file_url ) . '" target="_blank" id="shared-files-preview-button" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
             }
         
         }
@@ -262,7 +262,7 @@ class SharedFilesHelpers
         
         if ( $external_url ) {
             
-            if ( substr( $external_url, 0, strlen( 'https://www.youtube.com' ) ) === 'https://www.youtube.com' && isset( $s['icon_for_youtube'] ) ) {
+            if ( (substr( $external_url, 0, strlen( 'https://www.youtube.com' ) ) === 'https://www.youtube.com' || substr( $external_url, 0, strlen( 'https://youtu.be' ) ) === 'https://youtu.be') && isset( $s['icon_for_youtube'] ) ) {
                 $file_type_icon_url = $s['icon_for_youtube'];
             } else {
                 $ext = pathinfo( $external_url, PATHINFO_EXTENSION );
