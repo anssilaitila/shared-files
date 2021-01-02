@@ -59,6 +59,7 @@ class Shared_Files_Public {
    */
   public function enqueue_styles() {
     wp_enqueue_style($this->plugin_name, SHARED_FILES_URI . 'dist/css/p.css', array(), $this->version, 'all');
+    wp_enqueue_style($this->plugin_name . '-basiclightbox', SHARED_FILES_URI . 'dist/basiclightbox/basicLightbox.min.css', array(), $this->version, 'all');
   }
 
   /**
@@ -68,6 +69,7 @@ class Shared_Files_Public {
    */
   public function enqueue_scripts() {
     wp_enqueue_script($this->plugin_name, SHARED_FILES_URI . 'dist/js/p.js', array('jquery'), $this->version, false);
+    wp_enqueue_script($this->plugin_name . '-basiclightbox', SHARED_FILES_URI . 'dist/basiclightbox/basicLightbox.min.js', array('jquery'), $this->version, false);
   }
 
   /**

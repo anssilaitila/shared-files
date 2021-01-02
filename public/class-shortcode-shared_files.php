@@ -73,19 +73,14 @@ class ShortcodeSharedFiles
                 $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
             }
             return $html;
+        } elseif ( isset( $atts['hide_file_list'] ) ) {
+            return $html;
         } else {
-            $layout = '';
+            $layout = SharedFilesHelpers::getLayout( $s, $atts );
             $tag_slug = '';
             if ( isset( $_GET['sf_tag'] ) ) {
                 $tag_slug = $_GET['sf_tag'];
             }
-            
-            if ( isset( $atts['layout'] ) ) {
-                $layout = $atts['layout'];
-            } elseif ( isset( $s['layout'] ) && $s['layout'] ) {
-                $layout = $s['layout'];
-            }
-            
             $html .= SharedFilesHelpers::initLayout( $s );
             $type = 'basic';
             if ( isset( $atts['category'] ) ) {

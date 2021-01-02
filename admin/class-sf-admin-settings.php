@@ -145,39 +145,6 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
-            __( 'Only logged in users can add files using the front-end file uploader', 'shared-files' ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
-            'field_name' => $only_pro . 'only_logged_in_users_can_add_files',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
-            __( 'Show category checkboxes for front-end file uploader (instead of dropdown)', 'shared-files' ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
-            'field_name' => $only_pro . 'show_category_checkboxes_on_file_upload',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
-            __( 'Show tag checkboxes for front-end file uploader', 'shared-files' ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
-            'field_name' => $only_pro . 'show_tag_checkboxes_on_file_upload',
-        )
-        );
-        add_settings_field(
             'shared-files-' . $only_pro . 'pagination',
             __( 'Pagination', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -663,7 +630,7 @@ class Shared_Files_Settings
             'placeholder' => '',
         )
         );
-        //    $tab = 5;
+        //    $tab = 6;
         add_settings_section(
             'shared-files_section_admin_list',
             '',
@@ -723,6 +690,57 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-' . $only_pro . 'hide_expiration_date',
             'field_name' => $only_pro . 'hide_expiration_date',
+        )
+        );
+        $tab = 7;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
+            __( 'Only logged in users can add files using the front-end file uploader', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
+            'field_name' => $only_pro . 'only_logged_in_users_can_add_files',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
+            __( 'Show category checkboxes for front-end file uploader (instead of dropdown)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
+            'field_name' => $only_pro . 'show_category_checkboxes_on_file_upload',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
+            __( 'Show tag checkboxes for front-end file uploader', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
+            'field_name' => $only_pro . 'show_tag_checkboxes_on_file_upload',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'uncheck_hide_from_other_pages',
+            __( 'Uncheck "Hide from other pages" for uploaded files', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'uncheck_hide_from_other_pages',
+            'field_name' => $only_pro . 'uncheck_hide_from_other_pages',
         )
         );
     }
@@ -806,6 +824,14 @@ class Shared_Files_Settings
           <?php 
                 echo  __( 'Can also be used with other hosting providers, may help solving 404 errors.', 'shared-files' ) ;
                 ?>
+        </div>
+      <?php 
+            } elseif ( $args['field_name'] == 'uncheck_hide_from_other_pages' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'If checked, all uploaded files will be instantly listed on other shortcodes/pages also.', 'shared-files' ) ;
+                ?><br />
         </div>
       <?php 
             }
@@ -1099,6 +1125,13 @@ class Shared_Files_Settings
         echo  '<h2>' . __( 'Admin list', 'shared-files' ) . '</h2>' ;
     }
     
+    public function shared_files_settings_tab_7_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-7">' ;
+        echo  '<h2>' . __( 'Front-end file uploader settings', 'shared-files' ) . '</h2>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -1111,23 +1144,26 @@ class Shared_Files_Settings
 
       <div class="shared-files-settings-tabs-container">
         <ul class="shared-files-settings-tabs">
-          <li class="active" data-settings-container="shared-files-settings-tab-1"><span><?php 
+          <li class="shared-files-settings-tab-1-title" data-settings-container="shared-files-settings-tab-1"><span><?php 
         echo  __( 'General settings', 'shared-files' ) ;
         ?></span></li>
-          <li data-settings-container="shared-files-settings-tab-2"><span><?php 
+          <li class="shared-files-settings-tab-2-title" data-settings-container="shared-files-settings-tab-2"><span><?php 
         echo  __( 'Layout', 'shared-files' ) ;
         ?></span></li>
-          <li data-settings-container="shared-files-settings-tab-3"><span><?php 
+          <li class="shared-files-settings-tab-3-title" data-settings-container="shared-files-settings-tab-3"><span><?php 
         echo  __( 'File type icons', 'shared-files' ) ;
         ?></span></li>
-          <li data-settings-container="shared-files-settings-tab-4"><span><?php 
+          <li class="shared-files-settings-tab-4-title" data-settings-container="shared-files-settings-tab-4"><span><?php 
         echo  __( 'Custom file types', 'shared-files' ) ;
         ?></span></li>
-          <li data-settings-container="shared-files-settings-tab-5"><span><?php 
+          <li class="shared-files-settings-tab-5-title" data-settings-container="shared-files-settings-tab-5"><span><?php 
         echo  __( 'Email', 'shared-files' ) ;
         ?></span></li>
-          <li data-settings-container="shared-files-settings-tab-6"><span><?php 
+          <li class="shared-files-settings-tab-6-title" data-settings-container="shared-files-settings-tab-6"><span><?php 
         echo  __( 'Admin list & columns', 'shared-files' ) ;
+        ?></span></li>
+          <li class="shared-files-settings-tab-7-title" data-settings-container="shared-files-settings-tab-7"><span><?php 
+        echo  __( 'File upload', 'shared-files' ) ;
         ?></span></li>
           <hr class="clear" />
         </ul>
@@ -1173,17 +1209,17 @@ class Shared_Files_Settings
           <option value="2-cards-on-the-same-row" <?php 
             echo  ( $layout == '2-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
-            echo  __( '2 cards on the same row', 'shared-files' ) ;
+            echo  __( '2 columns', 'shared-files' ) ;
             ?></option>
           <option value="3-cards-on-the-same-row" <?php 
             echo  ( $layout == '3-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
-            echo  __( '3 cards on the same row', 'shared-files' ) ;
+            echo  __( '3 columns', 'shared-files' ) ;
             ?></option>
           <option value="4-cards-on-the-same-row" <?php 
             echo  ( $layout == '4-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
-            echo  __( '4 cards on the same row', 'shared-files' ) ;
+            echo  __( '4 columns', 'shared-files' ) ;
             ?></option>
       </select>
       <?php 

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file manager, ftp, google drive, dropbox, onedrive
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.24
+Stable tag: 1.6.25
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,12 +15,13 @@ This <strong>download manager</strong> allows you to list and manage downloadabl
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a file explorer to browse any number of files.
 
-**14 days free trial available for Pro version, no credit card required.**
+**7-day free trial available for Pro version, no credit card required.**
 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
 = An easy to use download manager with file upload =
 * Store files using this download manager plugin instead of media library
+* Open images and YouTube-videos in a lightbox
 * Allow users and/or visitors to upload files
 * File manager allows administrators to upload files using FTP or single/multi-file uploader
 * Alternative to WP media library
@@ -38,6 +39,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 
 = Key Features in Shared Files Free: =
 * Preview certain file types in the browser
+* YouTube-videos and images are opened in a lightbox
 * Files separated from the media library
 * High quality SVG icons for 25 different file types
 * Custom images/icons for many file types
@@ -71,6 +73,44 @@ Thanks to Luciano Del Fico for translating the Italian version.
 1. Activate the plugin from WordPress plugin directory or manually upload it to your site
 2. See the Help / Support page for further instructions
 
+== Frequently Asked Questions ==
+
+= What happens to WordPress Media Library? =
+
+Nothing. The Shared Files plugin works completely outside WP media library and they do not have any kind of connection.
+
+= Can I use the plugin to share files? =
+
+Yes! The plugin's is main idea is to share files on your site. You can list files on any of your site's article or page by adding the appropriate shortcode there.
+
+= Do I have to pay for using the plugin? =
+
+The Pro version of Shared Files has many features that might interest you, but you can use the Free version without restrictions as long as you want.
+
+= Do you offer support? =
+
+Of course! We offer support in the forums here on WordPress.org and if you have a paid subscription we offer priority email support.
+
+= Does Shared Files Free or Shared Files Pro work with some other plugin? =
+
+You may contact us directly [here](https://www.sharedfilespro.com/support/) if there's any kind of compatibility issue with some other plugin. We will then do our best to solve that issue.
+
+= Is this a download manager, file sharing plugin, media library or what? =
+
+You can use the Shared Files plugin for any purpose that suits your needs. The basic idea is to present a user friendly list of downloadable files. :)
+
+= Can the visitors or logged in users upload files? =
+
+File upload is possible for any visitor or logged in user in the Pro version.
+
+= Can I use FTP to upload files? =
+
+You can use FTP in the Pro version. There is a feature that allows you to FTP upload files and then activate them for the plugin with a single click.
+
+= Can I use the plugin as a file manager? =
+
+Yes, you can use it as a file manager. You don't necessarily have to add any publicly available list of files on your site, you can just use the admin tools to manage files.
+
 == Screenshots ==
 
 1. List of files on your site
@@ -83,6 +123,14 @@ Thanks to Luciano Del Fico for translating the Italian version.
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.25 - 2021-01-01 =
+* New feature: Image modal/lightbox. Image files can now be viewed using a lightbox view and there's a separate "Download original"-button.
+* New feature: YouTube modal/lightbox. YouTube-videos are now opened in a lightbox rather than in a separate tab.
+* (Pro) New option: 'Uncheck "Hide from other pages" for uploaded files'
+* (Pro) New parameter "hide_file_list" to be used with [shared_files file_upload=1] like so: [shared_files file_upload=1 hide_file_list=1]
+* Various minor improvements
+* Bug fixes
 
 = 1.6.24 - 2020-12-20 =
 * Pro: You can now check many categories and tags when uploading a file using the front-end file upload. See settings, Help / Support -page and demo: https://www.sharedfilespro.com/shared-files/file-upload-2/

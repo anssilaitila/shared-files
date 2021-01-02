@@ -18,6 +18,27 @@ class SharedFilesAdminMaintenance {
       fclose($file);
     }
 
+
+//    delete_option('shared_files_settings');
+
+    $s = get_option('shared_files_settings');
+
+    if ($s === false) {
+
+//      register_setting('shared-files', 'shared_files_settings');
+
+      $default_settings = [
+        'hide_bandwidth_usage' => 'on',
+        'hide_expiration_date' => 'on',
+        'card_background'      => 'light_gray',
+        'preview_service'      => 'microsoft'
+      ];
+
+      add_option('shared_files_settings', $default_settings);
+      
+    }
+
+
   }
 
 }

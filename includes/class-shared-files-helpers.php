@@ -153,7 +153,8 @@ class SharedFilesHelpers
     public static function getPreviewButton( $file_id, $file_url )
     {
         $s = get_option( 'shared_files_settings' );
-        if ( isset( $s['hide_preview_button'] ) ) {
+        $password = get_post_meta( $file_id, '_sf_password', true );
+        if ( isset( $s['hide_preview_button'] ) || $password || SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             return '';
         }
         $file = get_post_meta( $file_id, '_sf_file', true );
@@ -162,8 +163,12 @@ class SharedFilesHelpers
             $filetype = $file['type'];
         }
         $html = '';
+        $image_types = array( 'image/jpeg', 'image/png', 'image/gif' );
         
-        if ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
+        if ( in_array( $filetype, $image_types ) ) {
+            $image_url = get_the_post_thumbnail_url( $file_id, 'large' );
+            $html .= '<a href="' . $image_url . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . __( 'Preview', 'shared-files' ) . '</a>';
+        } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
             $ok = array(
                 'application/msword',
                 'application/vnd.ms-excel',
@@ -209,7 +214,7 @@ class SharedFilesHelpers
                     $file_url = get_site_url() . $file_url;
                 }
                 
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( $file_url ) . '" target="_blank" id="shared-files-preview-button" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
             }
         
         }
@@ -225,6 +230,7 @@ class SharedFilesHelpers
         $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
         $filetypes_ext = SharedFilesHelpers::filetypesExt();
         $custom_icons = SharedFilesHelpers::getCustomIcons();
+        $password = get_post_meta( $file_id, '_sf_password', true );
         $imagefile = 'generic.png';
         $file_type_icon_url = '';
         $file_ext = '';
@@ -232,7 +238,7 @@ class SharedFilesHelpers
             $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
         }
         // Featured image override
-        if ( !isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( !isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             return $featured_img_url;
         }
         $icon_set = 2020;
@@ -263,7 +269,16 @@ class SharedFilesHelpers
         if ( $external_url ) {
             
             if ( (substr( $external_url, 0, strlen( 'https://www.youtube.com' ) ) === 'https://www.youtube.com' || substr( $external_url, 0, strlen( 'https://youtu.be' ) ) === 'https://youtu.be') && isset( $s['icon_for_youtube'] ) ) {
-                $file_type_icon_url = $s['icon_for_youtube'];
+                
+                if ( isset( $s['icon_for_youtube'] ) && $s['icon_for_youtube'] ) {
+                    $file_type_icon_url = $s['icon_for_youtube'];
+                } else {
+                    $file_type_icon_url = SHARED_FILES_URI . 'img/2020/video.svg';
+                    if ( $icon_set == 2019 ) {
+                        $file_type_icon_url = SHARED_FILES_URI . 'img/video.png';
+                    }
+                }
+            
             } else {
                 $ext = pathinfo( $external_url, PATHINFO_EXTENSION );
                 if ( array_key_exists( $ext, $external_filetypes ) ) {
@@ -355,6 +370,28 @@ class SharedFilesHelpers
         }
         
         return $sf_root;
+    }
+    
+    public static function getLayout( $s, $atts )
+    {
+        $layout = '';
+        
+        if ( isset( $atts['layout'] ) ) {
+            $layout = $atts['layout'];
+            
+            if ( $layout == '2-columns' ) {
+                $layout = '2-cards-on-the-same-row';
+            } elseif ( $layout == '3-columns' ) {
+                $layout = '3-cards-on-the-same-row';
+            } elseif ( $layout == '4-columns' ) {
+                $layout = '4-cards-on-the-same-row';
+            }
+        
+        } elseif ( isset( $s['layout'] ) && $s['layout'] ) {
+            $layout = $s['layout'];
+        }
+        
+        return $layout;
     }
     
     public static function initLayout( $s )
@@ -458,6 +495,40 @@ class SharedFilesHelpers
         }
         
         return $meta_key;
+    }
+    
+    public static function addFeaturedImage(
+        $file_id,
+        $upload,
+        $uploaded_type,
+        $filename
+    )
+    {
+        if ( !function_exists( 'wp_crop_image' ) ) {
+            include ABSPATH . 'wp-admin/includes/image.php';
+        }
+        // if ! x 2 ...
+        if ( $file_id && $upload && $uploaded_type && $filename ) {
+            switch ( $uploaded_type ) {
+                case 'image/jpeg':
+                case 'image/png':
+                case 'image/gif':
+                    $image_url = $upload['file'];
+                    // Prepare an array of post data for the attachment.
+                    $attachment = array(
+                        'guid'           => $image_url,
+                        'post_mime_type' => $uploaded_type,
+                        'post_title'     => $filename,
+                        'post_content'   => '',
+                        'post_status'    => 'inherit',
+                    );
+                    $attach_id = wp_insert_attachment( $attachment, $image_url, $file_id );
+                    $attach_data = wp_generate_attachment_metadata( $attach_id, $image_url );
+                    wp_update_attachment_metadata( $attach_id, $attach_data );
+                    set_post_thumbnail( $file_id, $attach_id );
+                    break;
+            }
+        }
     }
 
 }

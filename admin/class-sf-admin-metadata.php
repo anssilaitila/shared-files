@@ -111,6 +111,7 @@ class SharedFilesAdminMetadata
     {
         
         if ( !empty($_FILES) ) {
+            $s = get_option( 'shared_files_settings' );
             /* --- security verification --- */
             if ( !isset( $_POST['_sf_file_nonce'] ) || !wp_verify_nonce( $_POST['_sf_file_nonce'], plugin_basename( __FILE__ ) ) ) {
                 return $id;
@@ -214,6 +215,12 @@ class SharedFilesAdminMetadata
                     update_post_meta( $id, '_sf_load_cnt', 0 );
                     update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                     update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
+                    SharedFilesHelpers::addFeaturedImage(
+                        $id,
+                        $upload,
+                        $uploaded_type,
+                        $filename
+                    );
                     $post_title = $_POST['post_title'];
                     
                     if ( !$post_title ) {

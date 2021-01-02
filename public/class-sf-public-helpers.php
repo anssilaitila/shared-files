@@ -49,6 +49,8 @@ class SharedFilesPublicHelpers
         $s = get_option( 'shared_files_settings' );
         $file_id = get_the_id();
         $date_format = get_option( 'date_format' );
+        $password = get_post_meta( $file_id, '_sf_password', true );
+        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
         $left_style = '';
         
         if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
@@ -60,12 +62,24 @@ class SharedFilesPublicHelpers
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements shared-files-main-elements-v2">';
         $html .= '<div class="shared-files-main-elements-top"><img src="' . $imagefile . '" /></div>';
-        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
         }
         $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+        $data_file_type = '';
+        $data_file_url = '';
+        $data_external_url = '';
+        $data_image_url = '';
+        
+        if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            $data_file_type = ' data-file-type="' . self::getFileType( $file_id ) . '" ';
+            $data_file_url = ' data-file-url="' . self::getFileURL( $file_id ) . '" ';
+            $data_external_url = ' data-external-url="' . $external_url . '" ';
+            $data_image_url = ' data-image-url="' . get_the_post_thumbnail_url( $file_id, 'large' ) . '" ';
+        }
+        
         $html .= '<div class="shared-files-main-elements-bottom">';
-        $html .= '<a class="shared-files-file-title" href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a class="shared-files-file-title"' . $data_file_type . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
@@ -126,7 +140,7 @@ class SharedFilesPublicHelpers
         }
         
         $html .= '</div>';
-        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
         }
         $html .= '</div>';
@@ -144,6 +158,43 @@ class SharedFilesPublicHelpers
         return $file_url;
     }
     
+    public static function getFileType( $file_id = 0 )
+    {
+        $c = get_post_custom( $file_id );
+        $file = get_post_meta( $file_id, '_sf_file', true );
+        $file_type = '';
+        $file_ext = '';
+        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
+        
+        if ( $external_url && (substr( $external_url, 0, strlen( 'https://www.youtube.com' ) ) === 'https://www.youtube.com' || substr( $external_url, 0, strlen( 'https://youtu.be' ) ) === 'https://youtu.be') ) {
+            $file_type = 'youtube';
+        } elseif ( isset( $file['file'] ) ) {
+            $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
+            switch ( $file_ext ) {
+                case 'jpg':
+                case 'jpeg':
+                case 'jpe':
+                case 'png':
+                case 'gif':
+                    $file_type = 'image';
+                    break;
+            }
+        }
+        
+        return $file_type;
+    }
+    
+    public static function limitActive( $file_id )
+    {
+        $load_cnt = (int) get_post_meta( $file_id, '_sf_load_cnt', true );
+        $load_limit = (int) get_post_meta( $file_id, '_sf_limit_downloads', true );
+        $limit_active = 0;
+        if ( $load_limit && $load_cnt >= $load_limit ) {
+            $limit_active = 1;
+        }
+        return $limit_active;
+    }
+    
     public static function fileListItem(
         $c,
         $imagefile,
@@ -153,7 +204,10 @@ class SharedFilesPublicHelpers
     {
         $s = get_option( 'shared_files_settings' );
         $file_id = get_the_id();
+        $file_url = self::getFileURL( $file_id );
         $date_format = get_option( 'date_format' );
+        $password = get_post_meta( $file_id, '_sf_password', true );
+        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
         
         if ( isset( $s['card_align_elements_vertically'] ) ) {
             $html = SharedFilesPublicHelpers::fileListItemV2(
@@ -177,12 +231,23 @@ class SharedFilesPublicHelpers
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements">';
         $html .= '<div class="shared-files-main-elements-left" style="' . $left_style . '"></div>';
-        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
         }
-        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
         $html .= '<div class="shared-files-main-elements-right">';
-        $html .= '<a class="shared-files-file-title" href="' . (( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' )) . '" target="_blank">' . get_the_title() . '</a>';
+        $data_file_type = '';
+        $data_file_url = '';
+        $data_external_url = '';
+        $data_image_url = '';
+        
+        if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            $data_file_type = ' data-file-type="' . self::getFileType( $file_id ) . '" ';
+            $data_file_url = ' data-file-url="' . self::getFileURL( $file_id ) . '" ';
+            $data_external_url = ' data-external-url="' . $external_url . '" ';
+            $data_image_url = ' data-image-url="' . get_the_post_thumbnail_url( $file_id, 'large' ) . '" ';
+        }
+        
+        $html .= '<a class="shared-files-file-title"' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
@@ -230,9 +295,13 @@ class SharedFilesPublicHelpers
             }
         
         }
-        if ( isset( $s['show_download_button'] ) ) {
+        
+        if ( self::getFileType( $file_id ) == 'image' && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            $html .= '<a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image">' . __( 'Download original', 'shared-files' ) . '</a>';
+        } elseif ( isset( $s['show_download_button'] ) ) {
             $html .= '<a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
         }
+        
         
         if ( is_user_logged_in() ) {
             $user = wp_get_current_user();
@@ -243,7 +312,7 @@ class SharedFilesPublicHelpers
         }
         
         $html .= '</div>';
-        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
         }
         $html .= '</div>';

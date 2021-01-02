@@ -72,8 +72,10 @@ class SharedFilesAdminQuery {
           update_post_meta($file_id, '_sf_load_cnt', $load_cnt + 1);
           update_post_meta($file_id, '_sf_last_access', current_time('Y-m-d H:i:s'));
 
-          header('Location: ' . $external_url);
-
+          if (!isset($_POST['youtube'])) {
+            header('Location: ' . $external_url);
+          }
+          
           die();
 
         } elseif ($file = get_post_meta($file_id, '_sf_file', true)) {
