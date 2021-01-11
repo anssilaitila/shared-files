@@ -14,8 +14,26 @@ class SharedFilesAdminHelpSupport {
     );
   }
 
+  public static function permalinks_alert() {
+  
+    $html = '';
+  
+    if (!get_option('permalink_structure')) {
+    
+      $html = '<div class="shared-files-permalinks-alert"><strong>' . __('Please note', 'shared-files') . '</strong>: ' . __('you have currently "Plain" selected in the permalink settings. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!', 'shared-files') . '</div>';
+    
+    }
+    
+    return $html;
+
+  }
+
   public function register_support_page_callback() {
     ?>
+    
+    <?= $this::permalinks_alert() ?>
+    
+    <?php $num = 0 ?>
 
     <link rel="stylesheet" href="<?= SHARED_FILES_URI ?>dist/tipso.min.css">
     <script src="<?= SHARED_FILES_URI ?>dist/tipso.min.js"></script>
@@ -26,136 +44,47 @@ class SharedFilesAdminHelpSupport {
         <p><?= __('Some examples on how you can use different views available at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/shared-files/" target="_blank"><?= __('sharedfilespro.com', 'shared-files') ?></a>.</p>
         <p><?= __('Any feedback is welcome. You may contact the author at', 'shared-files') . ' <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a> ' . __('or by email:', 'shared-files') ?> <a href="javascript:location='mailto:\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d';void 0"><script type="text/javascript">document.write('\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d')</script></a></p>
       </div>
+      <h3><?= __('Instructions for basic usage:') ?></h3>
       <ol>
-        <li><?= __('Add the files via the File Management page', 'shared-files'); ?></li>
-        <li><?= __('Choose one of the following methods:', 'shared-files'); ?>
+        <li>
 
-          <br /><span class="shared-files-shortcodes-link"><?= __('A complete list of available shortcodes can be found at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">https://www.sharedfilespro.com/support/shortcodes/</a></span>
+        <?php
+        $url = get_admin_url() . 'edit.php?post_type=shared_file';
+        $text = sprintf(
+          wp_kses(
+            /* translators: %s: link to file management */
+            __('Add the files from the <a href="%s" target="_blank">file management</a> page.', 'shared-files'),
+            array('a' => array('href' => array(), 'target' => array()))
+          ),
+          esc_url($url) 
+        );
+        echo $text;
+        ?>
+      
+      </li>
+        <li>
+          <?= __('Insert either one of these shortcodes to any page or post:', 'shared-files'); ?><br />
 
-          <ul style="list-style: disc; padding-left: 20px; padding-top: 8px;">
-
-            <li>
-              <h2><?= __('Default file list:', 'shared-files') ?></h2><br />
-              
-              <?= __('Insert the shortcode', 'shared-files') ?> <span class="shared-files-shortcode shared-files-shortcode-1" data-tooltip-class="shared-files-shortcode-1">[shared_files]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-1"><?= __('Copy', 'shared-files') ?></button> <?= __('to the content editor of any page you wish the file list to appear. If there are more than one category, a dropdown of categories will appear above the file list.', 'shared-files'); ?>
-
-              <ul class="shared-files-help-list-level-2">
-
-                <li><?= __('Using the parameter hide_search you may hide the search form like so:', 'shared-files') ?> <span class="shared-files-shortcode shared-files-shortcode-2" data-tooltip-class="shared-files-shortcode-2">[shared_files hide_search=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-1"><?= __('Copy', 'shared-files') ?></button></li>
-
-                <li><b><?= __('More parameters:', 'shared-files') ?></b>
-
-                  <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                    <span class="shared-files-pro-only-inline-inactive">Pro</span>
-                  <?php else: ?>
-                    <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-                  <?php endif; ?>
-
-                  <?php $num = 3 ?>
-
-                  <ul class="shared-files-help-list-level-3">
-                    <li><?= __('Limit the number of files (and hide pagination):', 'shared-files') ?> <span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files limit=5]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                    <li><?= __('Hide file description:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files hide_description=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                    <li><?= __('Hide category dropdown:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files hide_category_dropdown=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                    <li><?= __('Layout as "2 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=2-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                    <li><?= __('Layout as "3 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=3-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                    <li><?= __('Layout as "4 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=4-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                    <li><?= __('You can also use multiple parameters:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=2-cards-on-the-same-row hide_description=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-                  </ul>
-                </li>
-              </ul>
-
-            </li>
-
-            <li>
-              <h2><?= __('Simple list', 'shared-files'); ?></h2><br />
-              <?= __('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_simple]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button> <?= __('to the content editor of any page you wish the file list to appear.', 'shared-files'); ?>
-            </li>
-
-            <li>
-              
-              <h2><?= __('Search form only that targets all the files, sorted by category', 'shared-files') ?></h2>
-            
-              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                <span class="shared-files-pro-only-inline-inactive">Pro</span>
-              <?php else: ?>
-                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-              <?php endif; ?>
-            
-              <br /><?= __('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_search]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></span>
-
-              <h4><?= __('Additional parameters:', 'shared-files') ?></h4>
-
-              <ul class="shared-files-help-list-level-3">
-                <li><?= __('Don\'t sort by categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_search not_sorted_by_categories=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
-              </ul>
-            
-            </li>
-            <li>
-            
-              <h2><?= __('List only files in certain category:', 'shared-files') ?></h2> 
-
-              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                <span class="shared-files-pro-only-inline-inactive">Pro</span>
-              <?php else: ?>
-                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-              <?php endif; ?>
-
-              <br /><?= __('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>. <?= __('You can find / define the category slug by editing the category.', 'shared-files'); ?>
-              
-            </li>
-            <li>
-            
-              <h2><?= __('List categories / list files by category:', 'shared-files') ?></h2> 
-            
-              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                <span class="shared-files-pro-only-inline-inactive">Pro</span>
-              <?php else: ?>
-                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-              <?php endif; ?>
-              
-              <br /><?= __('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button> <?= __('or', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>. <?= __('You can find / define the category slug by editing the category.', 'shared-files'); ?>
-            </li>
-
-            <li>
-              <h2><?= __('List a single file:', 'shared-files') ?></h2>
-
-              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                <span class="shared-files-pro-only-inline-inactive">Pro</span>
-              <?php else: ?>
-                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-              <?php endif; ?>
-              
-              <br /><?= __('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_id=12345]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>. <?= __('The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page.', 'shared-files'); ?>
-              
-            </li>
-
-            <li>
-              <h2><?= __('Front-end uploader:', 'shared-files') ?></h2>
-
-              <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                <span class="shared-files-pro-only-inline-inactive">Pro</span>
-              <?php else: ?>
-                <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
-              <?php endif; ?>
-              
-              <br /><?= __('To enable the uploader insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>
-  
-              <br /><?= __('To hide other files use parameter "only_uploaded_files" like so:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 only_uploaded_files=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>
-
-              <br /><?= __('Hide the file list and show only the file upload form:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 hide_file_list=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>
-
-              <br /><?= __('Pre-define the category and hide category dropdown:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 category=CATEGORY_SLUG]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>
-
-              <br /><?= __('Show category checkboxes for the uploader:', 'shared-files') ?> <span class="sf-new-feature-inline"><?= __('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 category_checkboxes=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>
-
-              <br /><?= __('Show tag checkboxes for the uploader:', 'shared-files') ?> <span class="sf-new-feature-inline"><?= __('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 tag_checkboxes=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button>
-  
-              <br /><br /><?= __('See live demo at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/shared-files/file-upload-1/" style="font-weight: bold;" target="_blank">sharedfilespro.com</a>
-
-            </li>
-
+          <ul class="shared-files-admin-ul">
+            <li><?= __('The default file list:', 'shared-files') ?><br /><?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
+            <li><?= __('A simpler list of files:', 'shared-files') ?><br /><?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_simple]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
           </ul>
+
+          <strong>
+          <?php
+          $url = get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-shortcodes';
+          $text = sprintf(
+            wp_kses(
+              /* translators: %s: link to the list of available shortcodes */
+              __('A complete list of available shortcodes can be found <a href="%s">here</a>.', 'shared-files'),
+              array('a' => array('href' => array(), 'target' => array()))
+            ),
+            esc_url($url) 
+          );
+          echo $text;
+          ?>
+          </strong>
+          
         </li>
       </ol>
 
@@ -195,7 +124,8 @@ class SharedFilesAdminHelpSupport {
         wp_upload_dir()['baseurl']: <?= wp_upload_dir()['baseurl'] ?><br />
         wp_upload_dir()['error']: <?= wp_upload_dir()['error'] ?><br />
         sf_root: <?= SharedFilesHelpers::sf_root() ? SharedFilesHelpers::sf_root() : '(not set)' ?><br />
-        get_template_directory_uri(): <?= get_template_directory_uri() ?>
+        get_template_directory_uri(): <?= get_template_directory_uri() ?><br />
+        permalinks: <?= get_option('permalink_structure') ?>
         <br />
   
         <?php

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file manager, ftp, google drive, dropbox, onedrive
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.25
+Stable tag: 1.6.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -123,6 +123,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.26 - 2021-01-11 =
+* Lightbox now supports video files (mp4, ogg, webm, mov)
+* External URL / YouTube URL can now be activated to the file upload form from the settings
+* Title field added to file upload form
+* There is now a separate Shortcodes page in the WP admin area
+* CSS & bug fixes
 
 = 1.6.25 - 2021-01-01 =
 * New feature: Image modal/lightbox. Image files can now be viewed using a lightbox view and there's a separate "Download original"-button.

@@ -21,6 +21,7 @@ class SharedFilesAdminMetadata
     
     public function custom_metadata()
     {
+        echo  SharedFilesAdminHelpSupport::permalinks_alert() ;
         $s = get_option( 'shared_files_settings' );
         wp_nonce_field( plugin_basename( __FILE__ ), '_sf_file_nonce' );
         $post_id = get_the_ID();

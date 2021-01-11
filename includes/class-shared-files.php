@@ -119,6 +119,7 @@ class Shared_Files {
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-query.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-list.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-metadata.php';
+    require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-shortcodes.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-help-support.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-helpers.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-settings.php';
@@ -171,6 +172,8 @@ class Shared_Files {
     $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
     $plugin_admin_maintenance = new SharedFilesAdminMaintenance();
     $plugin_admin_inline_scripts = new SharedFilesAdminInlineScripts();
+    $plugin_admin_shortcodes = new SharedFilesAdminShortcodes();
+    
     $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
     $plugin_admin_query = new SharedFilesAdminQuery();
     $plugin_admin_send_mail = new SharedFilesAdminSendMail();
@@ -240,6 +243,9 @@ class Shared_Files {
     // Settings
     $this->loader->add_action('admin_menu', $plugin_settings, 'shared_files_add_admin_menu');
     $this->loader->add_action('admin_init', $plugin_settings, 'shared_files_settings_init');
+
+    // Shortcodes
+    $this->loader->add_action('admin_menu', $plugin_admin_shortcodes, 'register_shortcodes_page');
 
     // Help & support    
     $this->loader->add_action('admin_menu', $plugin_admin_help_support, 'register_support_page');

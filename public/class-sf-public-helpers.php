@@ -178,6 +178,12 @@ class SharedFilesPublicHelpers
                 case 'gif':
                     $file_type = 'image';
                     break;
+                case 'mp4':
+                case 'webm':
+                case 'ogg':
+                case 'mov':
+                    $file_type = 'video/' . $file_ext;
+                    break;
             }
         }
         

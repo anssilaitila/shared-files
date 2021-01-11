@@ -743,6 +743,29 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'uncheck_hide_from_other_pages',
         )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_show_external_url',
+            __( 'Show External Url on file upload form', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_show_external_url',
+            'field_name' => $only_pro . 'file_upload_show_external_url',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_external_url_title',
+            __( 'Text for External URL', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_external_url_title',
+            'field_name'  => $only_pro . 'file_upload_external_url_title',
+            'placeholder' => 'Or enter a YouTube URL:',
+        )
+        );
     }
     
     public function checkbox_render( $args )
@@ -1134,6 +1157,10 @@ class Shared_Files_Settings
     
     public function settings_page()
     {
+        ?>
+
+    <?php 
+        echo  SharedFilesAdminHelpSupport::permalinks_alert() ;
         ?>
 
     <form action="options.php" method="post" class="shared-files-settings-form">

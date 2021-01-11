@@ -3,6 +3,13 @@
 class SharedFilesAdminSyncFiles {
 
   public function register_page() {
+
+    $menu_pos = 3;
+
+    if (SharedFilesHelpers::isPremium() == 1) {
+      $menu_pos = 4;
+    }
+
     add_submenu_page(
       'edit.php?post_type=shared_file',
       __('Sync Files', 'shared-files'),
@@ -10,7 +17,7 @@ class SharedFilesAdminSyncFiles {
       'manage_options',
       'shared-files-sync-files',
       [$this, 'register_page_callback'],
-      4
+      $menu_pos
     );
   }
 

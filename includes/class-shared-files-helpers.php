@@ -167,6 +167,9 @@ class SharedFilesHelpers
         
         if ( in_array( $filetype, $image_types ) ) {
             $image_url = get_the_post_thumbnail_url( $file_id, 'large' );
+            if ( !$image_url ) {
+                $image_url = $file['url'];
+            }
             $html .= '<a href="' . $image_url . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . __( 'Preview', 'shared-files' ) . '</a>';
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
             $ok = array(
