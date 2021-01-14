@@ -134,6 +134,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'order_by_category_list',
+            __( 'Order by (category list)', 'shared-files' ),
+            array( $this, 'order_by_category_list_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'order_by_category_list',
+            'field_name' => $only_pro . 'order_by_category_list',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'hide_category_name_from_card',
             __( 'Hide category name(s) from card', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -1078,7 +1089,7 @@ class Shared_Files_Settings
     public function shared_files_settings_general_section_callback()
     {
         
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
+        if ( SharedFilesHelpers::isPremium() == 0 ) {
             echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
         } else {
             echo  '<div class="shared-files-how-to-get-started">' ;
@@ -1088,7 +1099,7 @@ class Shared_Files_Settings
             $url = get_admin_url() . 'edit.php?post_type=shared_file';
             $text = sprintf( wp_kses(
                 /* translators: %s: link to file management */
-                __( 'Insert files from <a href="%s" target="_blank">file management</a>.', 'shared-files' ),
+                __( 'Insert files from the <a href="%s" target="_blank">file management</a>.', 'shared-files' ),
                 array(
                     'a' => array(
                     'href'   => array(),
@@ -1099,7 +1110,7 @@ class Shared_Files_Settings
             echo  $text ;
             echo  '</span></li>' ;
             echo  '<li><span>' ;
-            $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span> or <span class="shared-files-mini-shortcode">[shared_files_simple]</span> to the content editor of any page.', 'shared-files' ), array(
+            $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span> or <span class="shared-files-mini-shortcode">[shared_files_simple]</span> to the content editor of any page or post.', 'shared-files' ), array(
                 'span' => array(
                 'class' => array(),
             ),
@@ -1376,6 +1387,33 @@ class Shared_Files_Settings
             echo  ( $order_by == 'title' ? 'selected' : '' ) ;
             ?>><?php 
             echo  __( 'File title', 'shared-files' ) ;
+            ?></option>
+      </select>
+      <?php 
+        }
+    
+    }
+    
+    public function order_by_category_list_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $order_by = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $order_by = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value=""><?php 
+            echo  __( 'Description', 'shared-files' ) ;
+            ?></option>
+          <option value="name" <?php 
+            echo  ( $order_by == 'name' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  __( 'Category name', 'shared-files' ) ;
             ?></option>
       </select>
       <?php 

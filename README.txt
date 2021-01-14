@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file manager, ftp, google drive, dropbox, onedrive
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.26
+Stable tag: 1.6.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -40,6 +40,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 = Key Features in Shared Files Free: =
 * Preview certain file types in the browser
 * YouTube-videos and images are opened in a lightbox
+* Open local video files using a video player in a lightbox (mp4, webm, ogg, mov)
 * Files separated from the media library
 * High quality SVG icons for 25 different file types
 * Custom images/icons for many file types
@@ -51,6 +52,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * FTP file upload allows you to upload any number of files easily
 * Front-end file upload with support for categories and tags, logged-in users can also delete their uploaded files
 * Multiple different shortcodes/views for various use cases
+* Collect also YouTube video URLs using the front end file uploader
 * Sort files into categories
 * Fast search targeting file names and descriptions
 * File load counter
@@ -123,6 +125,10 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.27 - 2021-01-14 =
+* CSS & bug fixes
+* New setting: Order by (category list)
 
 = 1.6.26 - 2021-01-11 =
 * Lightbox now supports video files (mp4, ogg, webm, mov)

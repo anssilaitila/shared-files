@@ -12,7 +12,13 @@ class ShortcodeSharedFilesCategories {
     // normalize attribute keys, lowercase
     $atts = array_change_key_case( (array) $atts, CASE_LOWER);
     $s = get_option('shared_files_settings');
-  
+
+    $order_by_category_list = 'description';
+
+    if (isset($s['order_by_category_list']) && $s['order_by_category_list']) {
+      $order_by_category_list = $s['order_by_category_list'];
+    }
+
     $layout = '';
     
     if (isset($atts['layout'])) {
@@ -40,7 +46,7 @@ class ShortcodeSharedFilesCategories {
         'hide_empty' => true,
         'parent' => $parent_cat->term_id,
 
-        'orderby' => 'description',
+        'orderby' => $order_by_category_list,
         'order' => 'ASC'
 
       ));
@@ -54,7 +60,7 @@ class ShortcodeSharedFilesCategories {
         $category = get_term_by('slug', $category_slug, 'shared-file-category');
   
         if ($category):
-          $html .='<h3 class="contact-list-group-title">' . $category->name . '</h3>';
+          $html .='<h3 class="shared-files-group-title">' . $category->name . '</h3>';
         endif;
   
         $html .= SharedFilesHelpers::initLayout($s);
@@ -132,7 +138,7 @@ class ShortcodeSharedFilesCategories {
         'parent' => isset($category->term_id) ? $category->term_id : 0,
         'terms' => $terms,      
 
-        'orderby' => 'description',
+        'orderby' => $order_by_category_list,
         'order' => 'ASC'
     
       ));
