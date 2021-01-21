@@ -2,9 +2,8 @@
 
 class SharedFilesAdminMultipleFilesUpload
 {
-    public function file_upload( $request )
+    public function file_upload()
     {
-        return $request;
     }
     
     public function add_multiple_files_view()

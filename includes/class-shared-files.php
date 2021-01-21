@@ -167,6 +167,8 @@ class Shared_Files {
    */
   private function define_admin_hooks() {
 
+    $s = get_option('shared_files_settings');
+
     $plugin_admin = new Shared_Files_Admin($this->get_plugin_name(), $this->get_version());
     $plugin_admin_cpt = new SharedFilesAdminCPT();
     $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
@@ -190,7 +192,12 @@ class Shared_Files {
     $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
     $this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
     $this->loader->add_action('before_delete_post', $plugin_admin, 'delete_shared_file');
+
     $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_link');
+
+    if (!isset($s['hide_affiliation_link'])) {
+      $this->loader->add_action('admin_menu', $plugin_admin, 'add_affiliation_link');
+    }
 
     // Maintenance
     $this->loader->add_action('plugins_loaded', $plugin_admin_maintenance, 'update_db_check');
@@ -207,7 +214,7 @@ class Shared_Files {
 
     // Custom taxonomy
     $this->loader->add_action('init', $plugin_admin_taxonomy, 'create_shared_files_custom_taxonomy', 0);
-    $this->loader->add_action('shared-file-category_edit_form_fields', $plugin_admin_taxonomy, 'taxonomy_custom_fields', 10, 2);  
+    $this->loader->add_action('shared-file-category_edit_form_fields', $plugin_admin_taxonomy, 'taxonomy_custom_fields', 10, 2);
 
     $this->loader->add_filter('manage_edit-shared-file-category_columns', $plugin_admin_taxonomy, 'theme_columns'); 
     $this->loader->add_filter('manage_shared-file-category_custom_column', $plugin_admin_taxonomy, 'add_shared_file_category_column_content', 10, 3);
@@ -231,7 +238,7 @@ class Shared_Files {
     $this->loader->add_action('admin_init', $plugin_admin_notifications, 'process_notifications');
 
     // Multiple files upload
-    $this->loader->add_filter('request', $plugin_admin_multiple_files_upload, 'file_upload');
+    $this->loader->add_filter('admin_init', $plugin_admin_multiple_files_upload, 'file_upload');
     $this->loader->add_action('admin_print_footer_scripts', $plugin_admin_multiple_files_upload, 'add_multiple_files_view');
 
     // Sync files

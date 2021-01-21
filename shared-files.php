@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.6.27
+ * Version:           1.6.28
  * Author:            Tammersoft
  * Author URI:        https://www.tammersoft.com
  * License:           GPL-2.0+
@@ -37,32 +37,35 @@ if ( function_exists( 'sf_fs' ) ) {
         function sf_fs()
         {
             global  $sf_fs ;
+            $s = get_option( 'shared_files_settings' );
             
             if ( !isset( $sf_fs ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/freemius/start.php';
+                $has_affiliation = ( isset( $s['hide_affiliation_link'] ) ? false : 'selected' );
                 $sf_fs = fs_dynamic_init( array(
-                    'id'             => '5144',
-                    'slug'           => 'shared-files',
-                    'premium_slug'   => 'shared-files-pro',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_f414b8738adada8a01641686165dc',
-                    'is_premium'     => false,
-                    'premium_suffix' => 'Pro',
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'trial'          => array(
+                    'id'              => '5144',
+                    'slug'            => 'shared-files',
+                    'premium_slug'    => 'shared-files-pro',
+                    'type'            => 'plugin',
+                    'public_key'      => 'pk_f414b8738adada8a01641686165dc',
+                    'is_premium'      => false,
+                    'premium_suffix'  => 'Pro',
+                    'has_addons'      => false,
+                    'has_paid_plans'  => true,
+                    'trial'           => array(
                     'days'               => 7,
                     'is_require_payment' => false,
                 ),
-                    'menu'           => array(
+                    'has_affiliation' => $has_affiliation,
+                    'menu'            => array(
                     'slug'    => 'shared-files',
                     'contact' => false,
                     'parent'  => array(
                     'slug' => 'options-general.php',
                 ),
                 ),
-                    'is_live'        => true,
+                    'is_live'         => true,
                 ) );
             }
             
@@ -116,7 +119,7 @@ if ( function_exists( 'sf_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.6.27' );
+    define( 'SHARED_FILES_VERSION', '1.6.28' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**

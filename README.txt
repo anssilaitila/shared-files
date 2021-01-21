@@ -1,23 +1,29 @@
-=== WordPress Download Manager and File Sharing Plugin with FTP upload – a better Media Library — Shared Files ===
+=== WordPress Download Manager and File Sharing Plugin with frontend file upload – a better Media Library — Shared Files ===
 Contributors: anssilaitila, freemius
-Tags: download manager, file manager, ftp, google drive, dropbox, onedrive
+Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.27
+Stable tag: 1.6.28
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring FTP upload, front-end file upload, an advanced file manager, better media library, file explorer and more...
+A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring frontend file upload, FTP upload, download counter, better media library, file explorer and more...
 
 == Description ==
 = The best WordPress file sharing plugin on the market =
 This <strong>download manager</strong> allows you to list and manage downloadable files on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
 
-Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a file explorer to browse any number of files.
+Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a substitute to media library to manage files and share files for visitors.
 
 **7-day free trial available for Pro version, no credit card required.**
 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
+
+= Some of the most used features =
+* <strong>Frontend file upload</strong>
+* <strong>Multi-file upload</strong>
+* <strong>Upload files using FTP</strong>
+* <strong>Download counter</strong>
 
 = An easy to use download manager with file upload =
 * Store files using this download manager plugin instead of media library
@@ -125,6 +131,11 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.28 - 2021-01-20 =
+* (Free and Pro) Affiliation program introduced. Also a new setting (Pro): "Hide affiliation link"
+* (Free and Pro) Added notification / information regarding maximum file size
+* (Pro) Bug fixes regarding multi-file upload
 
 = 1.6.27 - 2021-01-14 =
 * CSS & bug fixes

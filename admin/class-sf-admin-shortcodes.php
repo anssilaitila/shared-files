@@ -19,6 +19,8 @@ class SharedFilesAdminShortcodes {
     
     <?= SharedFilesAdminHelpSupport::permalinks_alert() ?>
 
+    <?php $s = get_option('shared_files_settings') ?>
+
     <link rel="stylesheet" href="<?= SHARED_FILES_URI ?>dist/tipso.min.css">
     <script src="<?= SHARED_FILES_URI ?>dist/tipso.min.js"></script>
 
@@ -28,6 +30,33 @@ class SharedFilesAdminShortcodes {
 
       <div class="shared-files-examples">
         <p><?= __('If you have an idea for a new shortcode or parameter, you may contact the author at', 'shared-files') . ' <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a> ' . __('or by email:', 'shared-files') ?> <a href="javascript:location='mailto:\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d';void 0"><script type="text/javascript">document.write('\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d')</script></a></p>
+
+        <?php if (!isset($s['hide_review_box'])): ?>
+          <div class="shared-files-review-box">
+            <strong><?= __('I hope you\'re happy with the plugin!', 'shared-files') ?></strong> <?= __('If so, would you consider leaving a positive review? It really helps to support the plugin development and helps others to discover it too!', 'shared-files') ?>
+            <span>
+          
+              <?= __('Thank you for considering.', 'shared-files') ?>
+          
+              <?php
+              $url = get_admin_url() . 'options-general.php?page=shared-files';
+              $text = sprintf(
+                wp_kses(
+                  /* translators: %s: link to plugin settings */
+                  __('You can hide this notification from the <a href="%s" target="_blank">plugin settings</a> (last item).', 'shared-files'),
+                  array('a' => array('href' => array()))
+                ),
+                esc_url($url) 
+              );
+              echo $text;
+              ?>
+          
+            </span>
+            &mdash; Anssi Laitila, Tammersoft<br />
+            <a href="https://wordpress.org/support/plugin/shared-files/reviews/?rate=5#new-post" class="shared-files-review-button" target="_blank"><?= __('Leave a review', 'shared-files') ?></a>
+          </div>
+        <?php endif; ?>
+
       </div>
   
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">

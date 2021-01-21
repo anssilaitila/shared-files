@@ -213,6 +213,28 @@ class Shared_Files_Settings
             'placeholder' => 'This file is no longer available for download.',
         )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'hide_affiliation_link',
+            __( 'Hide affiliation link', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'hide_affiliation_link',
+            'field_name' => $only_pro . 'hide_affiliation_link',
+        )
+        );
+        add_settings_field(
+            'shared-files-hide_review_box',
+            __( 'Hide review box', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-hide_review_box',
+            'field_name' => 'hide_review_box',
+        )
+        );
         $tab = 2;
         add_settings_section(
             'shared-files_tab_' . $tab,

@@ -73,6 +73,8 @@ class SharedFilesAdminMetadata
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         }
         
+        $html .= '<p style="margin-bottom: 3px;">' . __( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . SharedFilesHelpers::maxUploadSize() . '</strong></p>';
+        $html .= '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . __( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
         $html .= '<div id="shared-file-main-date-title"><strong>' . __( 'File date', 'shared-files' ) . '</strong><br /><i>' . __( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '" />';
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $html .= SharedFilesAdminHelpers::sfProMoreFeaturesMarkup();

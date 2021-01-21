@@ -72,6 +72,13 @@ class Shared_Files_Admin {
     }
   }
 
+  public function add_affiliation_link() {
+    global $submenu;
+    $permalink = './options-general.php?page=shared-files-affiliation';
+    $menuitem = 'edit.php?post_type=shared_file';
+    $submenu[$menuitem][] = array(__('Affiliation&nbsp;&nbsp;➤', 'shared-files'), 'manage_options', $permalink);
+  }
+
   public function add_settings_link() {
     global $submenu;
     $permalink = './options-general.php?page=shared-files';
