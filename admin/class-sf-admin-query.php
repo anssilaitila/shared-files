@@ -80,6 +80,10 @@ class SharedFilesAdminQuery {
 
         } elseif ($file = get_post_meta($file_id, '_sf_file', true)) {
 
+          if (!isset($file['file']) || !file_exists($file['file'])) {
+            wp_die(__('File not found', 'shared-files'));
+          }
+
           $filename = $file['file'];
           $file_mime = '';
 
@@ -114,33 +118,49 @@ class SharedFilesAdminQuery {
           if (isset($s['file_open_method']) && $s['file_open_method'] == 'redirect') {
             $file = get_post_meta($file_id, '_sf_file', true);
             $file_url = $file['url'];
-            
-//            wp_die($file_url);
-            
             wp_redirect($file_url);
             exit;
           }
 
-          // Set headers
-          header('Content-Type: ' . $file_mime);
-          
           $path = pathinfo($filename); 
           $header_filename = $path['filename'];
           $header_extension = $path['extension'];
           $header_filename_ext = '';
-
+          
           if ($header_filename && $header_extension) {
             $header_filename_ext = $header_filename . '.' . $header_extension;
           }
-
-          if ($header_filename_ext) {
-            header('Content-Disposition: inline; filename="' . $header_filename_ext . '"');
-          }
           
-          header('Cache-Control: no-cache, must-revalidate');
-          header('X-Accel-Buffering: no');
+          if (isset($_GET['download'])) {
 
-          header('Content-Length: ' . filesize($filename));
+            header('Pragma: public');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate, post-check=0, pre-check=0'); 
+            header('Content-Type: application/force-download');
+            header('Content-Type: application/octet-stream');
+            header('Content-Type: application/download');
+          
+            if ($header_filename_ext) {
+              header('Content-Disposition: attachment;filename=' . $header_filename_ext);
+            }
+            
+            header('Content-Transfer-Encoding: binary');
+
+          } else {
+
+            // Set headers
+            header('Content-Type: ' . $file_mime);
+            
+            if ($header_filename_ext) {
+              header('Content-Disposition: inline; filename="' . $header_filename_ext . '"');
+            }
+            
+            header('Cache-Control: no-cache, must-revalidate');
+            header('X-Accel-Buffering: no');
+  
+            header('Content-Length: ' . filesize($filename));
+
+          }
 
           if (function_exists('ob_clean')) {
             ob_clean();

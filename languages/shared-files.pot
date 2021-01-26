@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.28\n"
+"Project-Id-Version: Shared Files 1.6.29\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-01-20T20:08:57+02:00\n"
+"POT-Creation-Date: 2021-01-21T12:12:46+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: shared-files\n"
@@ -326,7 +326,7 @@ msgid "How to increase the maximum file size"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:94
-#: admin/class-sf-admin-settings.php:1021
+#: admin/class-sf-admin-settings.php:1022
 msgid "File date"
 msgstr ""
 
@@ -380,7 +380,7 @@ msgid "This email address is used for notifications regarding this file. If this
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:116
-#: admin/class-sf-admin-settings.php:1040
+#: admin/class-sf-admin-settings.php:1041
 #: public/class-sf-public-file-upload.php:103
 msgid "Description"
 msgstr ""
@@ -407,6 +407,11 @@ msgstr ""
 
 #: admin/class-sf-admin-multiple-files-upload.php:151
 msgid "File(s) successfully added."
+msgstr ""
+
+#: admin/class-sf-admin-query.php:84
+#: public/class-shortcode-shared_files.php:131
+msgid "File not found"
 msgstr ""
 
 #: admin/class-sf-admin-settings.php:23
@@ -775,7 +780,7 @@ msgid "4 columns"
 msgstr ""
 
 #: admin/class-sf-admin-settings.php:974
-#: admin/class-sf-admin-settings.php:1099
+#: admin/class-sf-admin-settings.php:1100
 msgid "Default"
 msgstr ""
 
@@ -791,63 +796,67 @@ msgstr ""
 msgid "Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1001
-msgid "Google"
+#: admin/class-sf-admin-settings.php:983
+msgid "Please note: if the Redirect method is chosen, then the Download buttons (if active) will also redirect the user to the file url rather than forcing to download the file."
 msgstr ""
 
 #: admin/class-sf-admin-settings.php:1002
+msgid "Google"
+msgstr ""
+
+#: admin/class-sf-admin-settings.php:1003
 msgid "Microsoft"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1020
+#: admin/class-sf-admin-settings.php:1021
 msgid "File publish date (post date)"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1022
+#: admin/class-sf-admin-settings.php:1023
 msgid "File title"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1041
+#: admin/class-sf-admin-settings.php:1042
 msgid "Category name"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1059
+#: admin/class-sf-admin-settings.php:1060
 msgid "Descending"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1060
+#: admin/class-sf-admin-settings.php:1061
 msgid "Ascending"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1078
+#: admin/class-sf-admin-settings.php:1079
 msgid "Transparent"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1079
+#: admin/class-sf-admin-settings.php:1080
 msgid "White"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1080
+#: admin/class-sf-admin-settings.php:1081
 msgid "Light gray"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1081
+#: admin/class-sf-admin-settings.php:1082
 msgid "Custom color"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1100
+#: admin/class-sf-admin-settings.php:1101
 msgid "Roboto"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1101
+#: admin/class-sf-admin-settings.php:1102
 msgid "Ubuntu"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1119
+#: admin/class-sf-admin-settings.php:1120
 msgid "Right"
 msgstr ""
 
-#: admin/class-sf-admin-settings.php:1120
+#: admin/class-sf-admin-settings.php:1121
 msgid "Left"
 msgstr ""
 
@@ -1180,56 +1189,53 @@ msgstr ""
 msgid "More info on shortcodes at"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:183
-#: public/class-sf-public-helpers.php:415
-msgid "Download"
-msgstr ""
-
-#: public/class-sf-public-helpers.php:193
-#: public/class-sf-public-helpers.php:425
-msgid "Are you sure?"
-msgstr ""
-
-#: public/class-sf-public-helpers.php:193
-#: public/class-sf-public-helpers.php:425
-msgid "Delete"
-msgstr ""
-
-#: public/class-sf-public-helpers.php:411
+#: public/class-sf-public-helpers.php:185
+#: public/class-sf-public-helpers.php:427
 msgid "Download original"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:452
+#: public/class-sf-public-helpers.php:189
+#: public/class-sf-public-helpers.php:431
+msgid "Download"
+msgstr ""
+
+#: public/class-sf-public-helpers.php:201
+#: public/class-sf-public-helpers.php:443
+msgid "Are you sure?"
+msgstr ""
+
+#: public/class-sf-public-helpers.php:201
+#: public/class-sf-public-helpers.php:443
+msgid "Delete"
+msgstr ""
+
+#: public/class-sf-public-helpers.php:470
 msgid "Password protected file"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:570
+#: public/class-sf-public-helpers.php:588
 msgid "Please enter password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:575
+#: public/class-sf-public-helpers.php:593
 msgid "Password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:580
+#: public/class-sf-public-helpers.php:598
 msgid "Invalid password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:583
+#: public/class-sf-public-helpers.php:601
 msgid "Submit"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:602
-#: public/class-sf-public-helpers.php:724
+#: public/class-sf-public-helpers.php:620
+#: public/class-sf-public-helpers.php:742
 msgid "Download limit reached"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:736
+#: public/class-sf-public-helpers.php:754
 msgid "This file is no longer available for download."
-msgstr ""
-
-#: public/class-shortcode-shared_files.php:131
-msgid "File not found"
 msgstr ""
 
 #: public/class-shortcode-shared_files.php:177

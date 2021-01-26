@@ -127,8 +127,14 @@ class SharedFilesPublicHelpers
             }
         
         }
-        if ( isset( $s['show_download_button'] ) ) {
-            $html .= '<hr class="clear" /><a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+        if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            
+            if ( self::getFileType( $file_id ) == 'image' ) {
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image">' . __( 'Download original', 'shared-files' ) . '</a>';
+            } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+            }
+        
         }
         
         if ( is_user_logged_in() ) {
@@ -148,13 +154,22 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
-    public static function getFileURL( $file_id = 0 )
+    public static function getFileURL( $file_id = 0, $download = 0 )
     {
         $c = get_post_custom( $file_id );
         $file_url = '';
+        
         if ( isset( $c['_sf_filename'] ) ) {
             $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0];
+            
+            if ( $download && SharedFilesHelpers::wp_engine() ) {
+                $file_url .= '&download=1';
+            } elseif ( $download ) {
+                $file_url .= '?download=1';
+            }
+        
         }
+        
         return $file_url;
     }
     
@@ -301,13 +316,15 @@ class SharedFilesPublicHelpers
             }
         
         }
+        if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            
+            if ( self::getFileType( $file_id ) == 'image' ) {
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image">' . __( 'Download original', 'shared-files' ) . '</a>';
+            } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+            }
         
-        if ( self::getFileType( $file_id ) == 'image' && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
-            $html .= '<a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image">' . __( 'Download original', 'shared-files' ) . '</a>';
-        } elseif ( isset( $s['show_download_button'] ) ) {
-            $html .= '<a href="' . $file_url . '" target="_blank" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
         }
-        
         
         if ( is_user_logged_in() ) {
             $user = wp_get_current_user();

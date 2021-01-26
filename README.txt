@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.28
+Stable tag: 1.6.29
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -131,6 +131,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.29 - 2021-01-21 =
+* (Free and Pro) Fix to the download button: now the file is always downloaded rather than opened in the browser (unless "Redirect" is chosen for file opening method)
 
 = 1.6.28 - 2021-01-20 =
 * (Free and Pro) Affiliation program introduced. Also a new setting (Pro): "Hide affiliation link"

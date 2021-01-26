@@ -1346,6 +1346,9 @@ class Shared_Files_Settings
             echo  __( 'Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files' ) ;
             ?><br />
         <strong>/wp-content/uploads/shared-files/this-is-a-file.pdf</strong>
+        <div style="margin-top: 10px;"><?php 
+            echo  __( 'Please note: if the Redirect method is chosen, then the Download buttons (if active) will also redirect the user to the file url rather than forcing to download the file.', 'shared-files' ) ;
+            ?></div>
       </div>
 
       <?php 
