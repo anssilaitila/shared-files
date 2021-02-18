@@ -2,6 +2,21 @@
 
 class SharedFilesHelpers
 {
+    public static function getFilenameWithPathV2( $filename_with_path = '' )
+    {
+        $wp_upload_dir = wp_upload_dir();
+        $filename_parts = parse_url( $filename_with_path );
+        if ( isset( $filename_parts['path'] ) ) {
+            $filename_path_parts = explode( '/', $filename_parts['path'] );
+        }
+        $filename_path_parts_sliced = array_slice( $filename_path_parts, -3, 3 );
+        if ( is_array( $filename_path_parts_sliced ) && $filename_path_parts_sliced[0] == 'uploads' ) {
+            \array_splice( $filename_path_parts_sliced, 0, 1 );
+        }
+        $filename_with_path_v2 = $wp_upload_dir['basedir'] . '/' . implode( '/', $filename_path_parts_sliced );
+        return $filename_with_path_v2;
+    }
+    
     public static function maxUploadSize()
     {
         $max_upload_size = wp_max_upload_size();
@@ -238,6 +253,11 @@ class SharedFilesHelpers
     {
         $s = get_option( 'shared_files_settings' );
         $file = get_post_meta( $file_id, '_sf_file', true );
+        $media_library_post_id = get_post_meta( $file_id, '_sf_media_library_post_id', true );
+        $media_library_post_mime_type = '';
+        if ( $media_library_post_id ) {
+            $media_library_post_mime_type = get_post_mime_type( $media_library_post_id );
+        }
         $filetypes = SharedFilesHelpers::getFiletypes();
         $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
         $filetypes_ext = SharedFilesHelpers::filetypesExt();
@@ -307,8 +327,19 @@ class SharedFilesHelpers
             
             if ( isset( $file_ext ) && $file_ext == 'psd' ) {
                 $file_type_icon_url = $s['icon_for_psd'];
-            } elseif ( isset( $file['type'] ) ) {
-                $filetype = $file['type'];
+            } elseif ( isset( $file['type'] ) || $media_library_post_mime_type ) {
+                $filetype = ( $media_library_post_mime_type ? $media_library_post_mime_type : $file['type'] );
+                if ( !$filetype && isset( $file['file'] ) && file_exists( $file['file'] ) ) {
+                    
+                    if ( function_exists( 'mime_content_type' ) ) {
+                        $filetype = mime_content_type( $file['file'] );
+                    } elseif ( function_exists( 'finfo_open' ) && function_exists( 'finfo_file' ) ) {
+                        $finfo = finfo_open( FILEINFO_MIME_TYPE );
+                        $filetype = finfo_file( $finfo, $file['file'] );
+                        finfo_close( $finfo );
+                    }
+                
+                }
                 
                 if ( isset( $custom_icons[$filetype] ) && $custom_icons[$filetype] ) {
                     $file_type_icon_url = $custom_icons[$filetype];

@@ -13,6 +13,10 @@ class ShortcodeSharedFiles
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $tag_slug = '';
+        if ( isset( $_GET['sf_tag'] ) && $_GET['sf_tag'] != '0' ) {
+            $tag_slug = $_GET['sf_tag'];
+        }
         $limit_posts = 0;
         $meta_query_hide_not_public = array(
             'relation' => 'OR',
@@ -77,10 +81,6 @@ class ShortcodeSharedFiles
             return $html;
         } else {
             $layout = SharedFilesHelpers::getLayout( $s, $atts );
-            $tag_slug = '';
-            if ( isset( $_GET['sf_tag'] ) ) {
-                $tag_slug = $_GET['sf_tag'];
-            }
             $html .= SharedFilesHelpers::initLayout( $s );
             $type = 'basic';
             if ( isset( $atts['category'] ) ) {
@@ -172,15 +172,18 @@ class ShortcodeSharedFiles
                         if ( $limit_posts ) {
                             $posts_per_page = $limit_posts;
                         }
+                        $tax_query = [];
                         $wpb_all_query = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
+                            'paged'          => $paged,
                             'posts_per_page' => $posts_per_page,
                             'tag'            => $tag_slug,
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                             'meta_query'     => $meta_query_hide_not_public,
+                            'tax_query'      => $tax_query,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
                             'post_type'      => 'shared_file',
@@ -190,6 +193,7 @@ class ShortcodeSharedFiles
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                             'meta_query'     => $meta_query_hide_not_public,
+                            'tax_query'      => $tax_query,
                         ) );
                     }
                 

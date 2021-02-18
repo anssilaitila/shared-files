@@ -8,6 +8,11 @@ class SharedFilesPublicAjax {
 
     $tag_slug = '';
     $term_slug = '';
+    $atts = [];
+    
+    if (isset($_POST['atts'])) {
+      $atts = json_decode( str_replace("\\", "", $_POST['atts']), true );
+    };
 
     if (isset($_POST['sf_tag']) && $_POST['sf_tag']) {
       $tag_slug = sanitize_title($_POST['sf_tag']);
@@ -29,13 +34,15 @@ class SharedFilesPublicAjax {
 			'key'		  => '_sf_not_public',
 			'compare'	=> 'NOT EXISTS',
 		);
-
+    
     if ($term_slug) {
 
       $wp_query = new WP_Query(array(
         'post_type' => 'shared_file',
         'post_status' => 'publish',
         'posts_per_page' => -1,
+        'tag' => $tag_slug,
+
         'tax_query' => array(
           array (
             'taxonomy' => 'shared-file-category',
@@ -44,6 +51,11 @@ class SharedFilesPublicAjax {
             'include_children' => true
           )
         ),
+
+        'orderby' => SharedFilesHelpers::getOrderBy($atts),
+        'order' => SharedFilesHelpers::getOrder($atts),
+        'meta_key' => SharedFilesHelpers::getMetaKey($atts),
+
         'meta_query' => $meta_query_hide_not_public,
       ));
 
@@ -54,6 +66,11 @@ class SharedFilesPublicAjax {
         'post_status' => 'publish',
         'posts_per_page' => -1,
         'tag' => $tag_slug,
+
+        'orderby' => SharedFilesHelpers::getOrderBy($atts),
+        'order' => SharedFilesHelpers::getOrder($atts),
+        'meta_key' => SharedFilesHelpers::getMetaKey($atts),
+
         'meta_query' => $meta_query_hide_not_public,
       ));
 

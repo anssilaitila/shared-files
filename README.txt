@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.29
+Stable tag: 1.6.31
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 = Key Features in Shared Files Pro: =
 * Upload files using FTP and activate them for the plugin with a single click
 * FTP file upload allows you to upload any number of files easily
+* Activate files from Media Library
 * Front-end file upload with support for categories and tags, logged-in users can also delete their uploaded files
 * Multiple different shortcodes/views for various use cases
 * Collect also YouTube video URLs using the front end file uploader
@@ -131,6 +132,20 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.31 - 2021-02-10 =
+* (Free and Pro) Fixed some issues regarding opening files
+* (Pro) New setting: Define folder for new files (see settings, first tab)
+
+= 1.6.30 - 2021-01-31 =
+* (Free and Pro) Fix: pagination now works normally
+* (Free and Pro) Pagination added to Simple List
+* (Free and Pro) Download button now works also when file opening method is "Redirect"
+* (Pro) New parameter for shortcode [shared_files], exclude categories (by slug): [shared_files exclude_cat="category-1,category-2"]
+* (Pro) New general setting: Show tag dropdown
+* (Pro) New shortcode parameter to show the tag dropdown: [shared_files show_tag_dropdown=1]
+* (Pro) New feature: Sync files from the media library (see the new page under Sync files in the WP admin area)
+* Bug fixes
 
 = 1.6.29 - 2021-01-21 =
 * (Free and Pro) Fix to the download button: now the file is always downloaded rather than opened in the browser (unless "Redirect" is chosen for file opening method)

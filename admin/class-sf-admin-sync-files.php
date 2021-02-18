@@ -115,59 +115,25 @@ class SharedFilesAdminSyncFiles {
 
         $item = SharedFilesFileHandling::getBaseDir() . $file;
         
-        if ($file == 'index.php' || is_dir($item)) {
+        if ($file == 'index.php') {
           continue;
+        } elseif (is_dir($item)) {
+
+          $files_in_subdir = array_diff(scandir($item), array('.', '..'));
+
+          foreach ($files_in_subdir as $file_in_subdir) {
+            $sub_item = $item . '/' . $file_in_subdir;
+            $html = $this::getFileRow($file_in_subdir, $sub_item);
+            echo $html;
+          }
+
+        } else {
+
+          $html = $this::getFileRow($file, $item);
+          echo $html;
+
         }
-
-        echo '<tr>';
-        echo '<td>' . $file . '</td>';
-        echo '<td>' . SharedFilesFileHandling::human_filesize(filesize($item)) . '</td>';
-        echo '<td>' . date ("Y-m-d", filemtime($item)) . '</td>';
-        echo '<td>';
-
-        $meta_query = array('relation' => 'AND');
-    
-        $meta_query[] = array(
-    			'key'		  => '_sf_filename',
-    			'compare'	=> '=',
-    			'value'   => $file
-    		);
-
-        $wp_query = new WP_Query(array(
-          'post_type' => 'shared_file',
-          'post_status' => 'publish',
-          'posts_per_page' => 1,
-          'meta_query' => $meta_query,
-        ));
-
-        if ($wp_query->have_posts()):
-          while ($wp_query->have_posts()): $wp_query->the_post();
-    
-            $id = get_the_id();
-            $c = get_post_custom($id);
-            echo '<span class="shared-files-active">' . __('Active', 'shared-files') . '</span>';
-    
-          endwhile;
-          
-          wp_reset_postdata();
-          
-        else:
-          echo '<span class="shared-files-inactive">' . __('Inactive', 'shared-files') . '</span><br />';
-        ?>
-
-          <form method="post">
-            <?php wp_nonce_field('sf-sync-files', 'sf-sync-files-nonce'); ?>
-            <input type="hidden" name="shared-files-op" value="sync-files" />
-            <input type="hidden" name="add_file" value="<?= sanitize_file_name($file) ?>" />
-            <input type="hidden" name="shared-file-category" class="shared-files-single-file-category" value="" />
-            <input type="submit" class="shared-files-activate <?= (SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '') ?>" value="<?= __('Activate', 'shared-files') ?>" />
-          </form>
-
-        <?php
-        endif;
-
-        echo '</td>';
-        echo '</tr>';
+        
       }
 
       echo '</table>';
@@ -176,6 +142,73 @@ class SharedFilesAdminSyncFiles {
 
     </div>
     <?php
+  }
+  
+  private static function getFileRow($file, $item) {
+
+    $html = '';
+
+    $item_array = explode('/', $item);
+    $item_array_sliced = array_slice($item_array, -2, 2);
+    $subdir = '';
+    
+    if (is_array($item_array_sliced) && $item_array_sliced[0] == 'shared-files') {
+      \array_splice($item_array_sliced, 0, 1);
+    } elseif (is_array($item_array_sliced)) {
+      $subdir = $item_array_sliced[0];
+    }
+
+    $html .= '<tr>';
+    $html .= '<td>' . implode('/', $item_array_sliced) . '</td>';
+    $html .= '<td>' . SharedFilesFileHandling::human_filesize(filesize($item)) . '</td>';
+    $html .= '<td>' . date ("Y-m-d", filemtime($item)) . '</td>';
+    $html .= '<td>';
+    
+    $meta_query = array('relation' => 'AND');
+    
+    $meta_query[] = array(
+      'key'		  => '_sf_filename',
+      'compare'	=> '=',
+      'value'   => $file
+    );
+    
+    $wp_query = new WP_Query(array(
+      'post_type' => 'shared_file',
+      'post_status' => 'publish',
+      'posts_per_page' => 1,
+      'meta_query' => $meta_query,
+    ));
+    
+    if ($wp_query->have_posts()):
+      while ($wp_query->have_posts()): $wp_query->the_post();
+    
+        $id = get_the_id();
+        $c = get_post_custom($id);
+        $html .= '<span class="shared-files-active">' . __('Active', 'shared-files') . '</span>';
+    
+      endwhile;
+      
+      wp_reset_postdata();
+      
+    else:
+      $html .= '<span class="shared-files-inactive">' . __('Inactive', 'shared-files') . '</span><br />';
+    
+      $html .= '<form method="post">';
+      $html .= wp_nonce_field('sf-sync-files', 'sf-sync-files-nonce', true, false);
+      $html .= '<input type="hidden" name="shared-files-op" value="sync-files" />';
+      $html .= '<input type="hidden" name="add_file" value="' . sanitize_file_name($file) . '" />';
+      $html .= '<input type="hidden" name="shared-file-category" class="shared-files-single-file-category" value="" />';
+      $html .= '<input type="hidden" name="_SF_SUBDIR" value="' . $subdir . '" />';
+      $html .= '<input type="submit" class="shared-files-activate ' . (SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '') . '" value="' . __('Activate', 'shared-files') . '" />';
+      $html .= '</form>';
+    
+    endif;
+    
+    $html .= '</td>';
+    $html .= '</tr>';
+    
+    return $html;
+
   }
 
 }

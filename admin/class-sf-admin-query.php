@@ -80,11 +80,26 @@ class SharedFilesAdminQuery {
 
         } elseif ($file = get_post_meta($file_id, '_sf_file', true)) {
 
-          if (!isset($file['file']) || !file_exists($file['file'])) {
-            wp_die(__('File not found', 'shared-files'));
+          $redirect = 0;
+          
+          if (isset($s['file_open_method']) && $s['file_open_method'] == 'redirect') {
+            $redirect = 1;
           }
 
           $filename = $file['file'];
+          $wp_upload_dir = wp_upload_dir();
+
+          $path = pathinfo($filename);
+
+          if (!isset($filename) || !file_exists($filename)) {
+
+            $filename_with_path_v2 = SharedFilesHelpers::getFilenameWithPathV2($filename);
+          
+            if (!$redirect && (!isset($filename_with_path_v2) || !file_exists($filename_with_path_v2))) {
+              wp_die(__('File not found', 'shared-files'));
+            }
+          }
+
           $file_mime = '';
 
           if (function_exists('mime_content_type')) {

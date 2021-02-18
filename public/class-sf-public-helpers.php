@@ -79,7 +79,7 @@ class SharedFilesPublicHelpers
         }
         
         $html .= '<div class="shared-files-main-elements-bottom">';
-        $html .= '<a class="shared-files-file-title"' . $data_file_type . $data_image_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_image_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
@@ -130,9 +130,9 @@ class SharedFilesPublicHelpers
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             
             if ( self::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image">' . __( 'Download original', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download original', 'shared-files' ) . '</a>';
             } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
-                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
             }
         
         }
@@ -268,7 +268,7 @@ class SharedFilesPublicHelpers
             $data_image_url = ' data-image-url="' . get_the_post_thumbnail_url( $file_id, 'large' ) . '" ';
         }
         
-        $html .= '<a class="shared-files-file-title"' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }
@@ -319,9 +319,9 @@ class SharedFilesPublicHelpers
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             
             if ( self::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image">' . __( 'Download original', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download', 'shared-files' ) . '</a>';
             } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
-                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button">' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
             }
         
         }
@@ -662,7 +662,7 @@ class SharedFilesPublicHelpers
             $data_image_url = ' data-image-url="' . get_the_post_thumbnail_url( $file_id, 'large' ) . '" ';
         }
         
-        $html .= '<a class="shared-files-file-title"' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
         }

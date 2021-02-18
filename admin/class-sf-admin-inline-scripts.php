@@ -8,6 +8,10 @@ class SharedFilesAdminInlineScripts {
 
       <?php $current_screen = get_current_screen(); ?>
 
+      <?php if (!isset($current_screen->id) || (isset($current_screen->id) && $current_screen->id !== 'shared_file_page_shared-files-sync-files' && $current_screen->id !== 'shared_file_page_shared-files-sync-media-library')): ?>
+        <style>#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-sync-media-library"] { display: none; visibility: hidden; }</style>
+      <?php endif; ?>
+
       <?php if (isset($current_screen->id) && ($current_screen->id === 'edit-shared_file' || $current_screen->id === 'edit-shared-file-category')): ?>
   
         <link rel="stylesheet" href="<?= SHARED_FILES_URI ?>dist/tipso.min.css">

@@ -35,6 +35,17 @@ class Shared_Files_Settings
             'shared-files'
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'show_tag_dropdown',
+            __( 'Show tag dropdown', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown',
+            'field_name' => $only_pro . 'show_tag_dropdown',
+        )
+        );
+        add_settings_field(
             'shared-files-hide_date_from_card',
             __( 'Hide file date / publish date from card', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -199,6 +210,18 @@ class Shared_Files_Settings
             'label_for'   => 'shared-files-wp_location',
             'field_name'  => 'wp_location',
             'placeholder' => '/some-dir/',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'folder_for_new_files',
+            __( 'Folder for new files', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'folder_for_new_files',
+            'field_name'  => $only_pro . 'folder_for_new_files',
+            'placeholder' => 'folder-name',
         )
         );
         add_settings_field(
@@ -1093,6 +1116,23 @@ class Shared_Files_Settings
                 ?>
         </div>
       <?php 
+            } elseif ( $field_name == 'folder_for_new_files' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'Normally the files are saved under wp-content/uploads/shared-files/.', 'shared-files' ) ;
+                ?><br /><br />
+          <?php 
+                echo  __( 'If you wish the new files to be saved to a subfolder under wp-content/uploads/shared-files/, define the folder name here.', 'shared-files' ) ;
+                ?><br /><br />
+          <?php 
+                echo  __( 'When this folder name is defined, new files will be saved under this path:', 'shared-files' ) ;
+                ?><br/>
+          <?php 
+                echo  __( 'wp-content/uploads/shared-files/folder-name/', 'shared-files' ) ;
+                ?>
+        </div>
+      <?php 
             } elseif ( $field_name == 'icon_for_image' || $field_name == 'custom_1_icon' ) {
                 ?>
         <p><?php 
@@ -1346,9 +1386,6 @@ class Shared_Files_Settings
             echo  __( 'Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files' ) ;
             ?><br />
         <strong>/wp-content/uploads/shared-files/this-is-a-file.pdf</strong>
-        <div style="margin-top: 10px;"><?php 
-            echo  __( 'Please note: if the Redirect method is chosen, then the Download buttons (if active) will also redirect the user to the file url rather than forcing to download the file.', 'shared-files' ) ;
-            ?></div>
       </div>
 
       <?php 

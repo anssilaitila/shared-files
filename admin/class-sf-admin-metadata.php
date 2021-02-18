@@ -38,6 +38,7 @@ class SharedFilesAdminMetadata
         $embed_post_id = get_post_meta( $post_id, '_sf_embed_post_id', true );
         $embed_post_title = get_post_meta( $post_id, '_sf_embed_post_title', true );
         $not_public = get_post_meta( $post_id, '_sf_not_public', true );
+        $media_library_post_id = get_post_meta( $post_id, '_sf_media_library_post_id', true );
         if ( $expiration_date instanceof DateTime ) {
             $expiration_date_formatted = $expiration_date->format( 'Y-m-d' );
         }
@@ -47,7 +48,18 @@ class SharedFilesAdminMetadata
         $password = get_post_meta( get_the_ID(), '_sf_password', true );
         $html = '';
         
-        if ( $embed_post_id ) {
+        if ( $media_library_post_id ) {
+            $permalink = get_permalink( $media_library_post_id );
+            $html .= '<div style="padding: 18px; margin: 10px 0 10px 0; background: rgb(252, 252, 252); border: 1px solid rgb(240, 240, 240);">';
+            $html .= '<span style="font-size: 14px;">';
+            $media_library_href = admin_url() . 'upload.php?item=' . $media_library_post_id;
+            $file_with_url = wp_get_attachment_url( $media_library_post_id );
+            $url_local = explode( site_url(), $file_with_url )[1];
+            //output local path
+            $html .= __( 'This file is activated from the media library', 'shared-files' ) . ':<br /><a href="' . $media_library_href . '" style="font-weight: bold; color: #333; text-decoration: none;" target="_blank">' . $url_local . '</a>';
+            $html .= '</span>';
+            $html .= '</div>';
+        } elseif ( $embed_post_id ) {
             $permalink = get_permalink( $embed_post_id );
             $html .= '<div style="padding: 18px; margin: 10px 0; background: rgb(252, 252, 252); border: 1px solid rgb(240, 240, 240);">';
             $html .= '<span style="font-size: 14px;">';
@@ -259,10 +271,21 @@ class SharedFilesAdminMetadata
      */
     public function set_upload_dir( $dir )
     {
+        $s = get_option( 'shared_files_settings' );
+        $folder_for_new_files = '';
+        
+        if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
+            $folder_for_new_files = '/' . sanitize_file_name( $s['folder_for_new_files'] );
+            $full_path_new = $dir['basedir'] . '/shared-files' . $folder_for_new_files;
+            if ( !file_exists( $full_path_new ) ) {
+                mkdir( $full_path_new );
+            }
+        }
+        
         return array(
-            'path'   => $dir['basedir'] . '/shared-files',
-            'url'    => $dir['baseurl'] . '/shared-files',
-            'subdir' => '/shared-files',
+            'path'   => $dir['basedir'] . '/shared-files' . $folder_for_new_files,
+            'url'    => $dir['baseurl'] . '/shared-files' . $folder_for_new_files,
+            'subdir' => '/shared-files' . $folder_for_new_files,
         ) + $dir;
     }
 

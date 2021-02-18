@@ -61,15 +61,21 @@ class Shared_Files_Admin {
   }
 
   /**
-   * Set the file itself when permanentyly deleting post.
+   * Delete the file itself when permanently deleting post.
    *
    * @since    1.0.0
    */
   function delete_shared_file($post_id) {
     $file = get_post_meta($post_id, '_sf_file', true);
+
     if (isset($file['file']) && file_exists($file['file'])) {
-      unlink($file['file']);
+      
+      if (strpos($file['file'], '/wp-content/uploads/shared-files/') !== false) {
+        unlink($file['file']);
+      }
+      
     }
+
   }
 
   public function add_affiliation_link() {

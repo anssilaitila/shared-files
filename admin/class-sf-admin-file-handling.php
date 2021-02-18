@@ -2,7 +2,12 @@
 
 class SharedFilesFileHandling
 {
-    public function add_file( $file, $cat_slug )
+    public static function add_file(
+        $file,
+        $cat_slug,
+        $media_library_post_id = 0,
+        $subdir = ''
+    )
     {
         return 1;
     }
@@ -62,13 +67,30 @@ class SharedFilesFileHandling
                 exit;
             } else {
                 $filename = sanitize_file_name( $_POST['add_file'] );
+                $page = 'shared-files-sync-files';
+                $media_library_post_id = 0;
+                $subdir = '';
                 
-                if ( SharedFilesFileHandling::add_file( $filename, $cat_slug ) ) {
-                    wp_redirect( admin_url( 'edit.php?post_type=shared_file&page=shared-files-sync-files&files=1' ) );
+                if ( isset( $_POST['_sf_media_library_post_id'] ) ) {
+                    $page = 'shared-files-sync-media-library';
+                    $media_library_post_id = $_POST['_sf_media_library_post_id'];
+                }
+                
+                if ( isset( $_POST['_SF_SUBDIR'] ) ) {
+                    $subdir = sanitize_file_name( $_POST['_SF_SUBDIR'] );
+                }
+                
+                if ( SharedFilesFileHandling::add_file(
+                    $filename,
+                    $cat_slug,
+                    $media_library_post_id,
+                    $subdir
+                ) ) {
+                    wp_redirect( admin_url( 'edit.php?post_type=shared_file&page=' . $page . '&files=1' ) );
                     exit;
                 } else {
                     echo  '<p>' . __( 'Error processing file(s).', 'shared-files' ) . '</p>' ;
-                    wp_redirect( admin_url( 'edit.php?post_type=shared_file&page=shared-files-sync-files&files=error' ) );
+                    wp_redirect( admin_url( 'edit.php?post_type=shared_file&page=' . $page . '&files=error' ) );
                     exit;
                 }
             
@@ -90,10 +112,10 @@ class SharedFilesFileHandling
         return $file_dir;
     }
     
-    public static function getFileUrlByName( $filename )
+    public static function getFileUrlByName( $filename, $subdir = '' )
     {
         $wp_upload_dir = parse_url( wp_upload_dir()['baseurl'] );
-        $file_url = $wp_upload_dir['path'] . '/shared-files/' . $filename;
+        $file_url = $wp_upload_dir['path'] . '/shared-files/' . $subdir . $filename;
         return $file_url;
     }
     
