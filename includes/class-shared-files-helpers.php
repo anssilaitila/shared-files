@@ -19,11 +19,16 @@ class SharedFilesHelpers
     
     public static function maxUploadSize()
     {
-        $max_upload_size = wp_max_upload_size();
-        if ( !$max_upload_size ) {
+        $s = get_option( 'shared_files_settings' );
+        $max_upload_size = size_format( wp_max_upload_size() );
+        
+        if ( isset( $s['maximum_size_text'] ) && $s['maximum_size_text'] ) {
+            $max_upload_size = $s['maximum_size_text'];
+        } elseif ( !$max_upload_size ) {
             $max_upload_size = 0;
         }
-        return size_format( $max_upload_size );
+        
+        return $max_upload_size;
     }
     
     public static function getFiletypes()

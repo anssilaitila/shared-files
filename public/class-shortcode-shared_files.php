@@ -13,6 +13,11 @@ class ShortcodeSharedFiles
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
+        $pagination_active = 0;
+        if ( isset( $_GET['_paged'] ) && $_GET['_paged'] == $embed_id ) {
+            $pagination_active = 1;
+        }
         $tag_slug = '';
         if ( isset( $_GET['sf_tag'] ) && $_GET['sf_tag'] != '0' ) {
             $tag_slug = $_GET['sf_tag'];
@@ -167,7 +172,10 @@ class ShortcodeSharedFiles
                             'meta_query'     => $meta_query_hide_not_public,
                         ) );
                     } else {
-                        $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
+                        $paged = 1;
+                        if ( $pagination_active ) {
+                            $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
+                        }
                         $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 20 );
                         if ( $limit_posts ) {
                             $posts_per_page = $limit_posts;
@@ -249,16 +257,20 @@ class ShortcodeSharedFiles
                 $html .= '<div class="shared-files-files-not-found">' . __( 'No published files found. You should add files first from WP admin: Shared Files / File Management.', 'shared-files' ) . '</div>';
             }
             
+            $paged_current = ( $pagination_active ? get_query_var( 'paged' ) : 1 );
             $pagination_args = array(
                 'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
                 'total'        => $wpb_all_query->max_num_pages,
-                'current'      => max( 1, get_query_var( 'paged' ) ),
-                'format'       => '?paged=%#%',
+                'current'      => max( 1, $paged_current ),
+                'format'       => '?paged_' . $embed_id . '=%#%',
                 'show_all'     => true,
                 'type'         => 'plain',
                 'prev_next'    => false,
                 'add_args'     => false,
                 'add_fragment' => '',
+                'add_args'     => array(
+                '_paged' => $embed_id,
+            ),
             );
             
             if ( !$limit_posts ) {

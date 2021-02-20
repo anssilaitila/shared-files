@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.31
+Stable tag: 1.6.32
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 8. Edit a single file
 
 == Changelog ==
+
+= 1.6.32 - 2021-02-20 =
+* Pagination now works normally when there are multiple instances of [shared_files] on the same page. You should give a unique embed id for each one: [shared_files embed_id="my-files"]
+* Fix regarding the "WordPress location" setting: it's now possible that the location url has more than 1 part i.e. /clients/company/ or /clients/a/abc-company/
+* New setting: "Maximum size of uploaded file" (you can change the default text for maximum file size using this, not the actual file size)
+* Freemius SDK updated to 2.4.2
 
 = 1.6.31 - 2021-02-10 =
 * (Free and Pro) Fixed some issues regarding opening files

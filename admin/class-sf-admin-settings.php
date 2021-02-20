@@ -179,6 +179,18 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-maximum_size_text',
+            __( 'Maximum size of uploaded file', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-maximum_size_text',
+            'field_name'  => 'maximum_size_text',
+            'placeholder' => SharedFilesHelpers::maxUploadSize(),
+        )
+        );
+        add_settings_field(
             'shared-files-file_open_method',
             __( 'File opening method', 'shared-files' ),
             array( $this, 'file_open_method_render' ),
@@ -213,14 +225,14 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'folder_for_new_files',
+            'shared-files-folder_for_new_files',
             __( 'Folder for new files', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
             'shared-files_section_general',
             array(
-            'label_for'   => 'shared-files-' . $only_pro . 'folder_for_new_files',
-            'field_name'  => $only_pro . 'folder_for_new_files',
+            'label_for'   => 'shared-files-folder_for_new_files',
+            'field_name'  => 'folder_for_new_files',
             'placeholder' => 'folder-name',
         )
         );
@@ -234,28 +246,6 @@ class Shared_Files_Settings
             'label_for'   => 'shared-files-' . $only_pro . 'download_limit_msg',
             'field_name'  => $only_pro . 'download_limit_msg',
             'placeholder' => 'This file is no longer available for download.',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'hide_affiliation_link',
-            __( 'Hide affiliation link', 'shared-files' ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'hide_affiliation_link',
-            'field_name' => $only_pro . 'hide_affiliation_link',
-        )
-        );
-        add_settings_field(
-            'shared-files-hide_review_box',
-            __( 'Hide review box', 'shared-files' ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-            'label_for'  => 'shared-files-hide_review_box',
-            'field_name' => 'hide_review_box',
         )
         );
         $tab = 2;
@@ -1059,7 +1049,7 @@ class Shared_Files_Settings
                     ?>]" value="<?php 
                     echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
                     ?>" placeholder="<?php 
-                    echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                    echo  ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) ;
                     ?>">
             <?php 
                 } elseif ( isset( $args['ext'] ) ) {
@@ -1073,7 +1063,7 @@ class Shared_Files_Settings
                     ?>]" value="<?php 
                     echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
                     ?>" placeholder="<?php 
-                    echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                    echo  ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) ;
                     ?>" style="width: 80px;">
             <?php 
                 } else {
@@ -1087,7 +1077,7 @@ class Shared_Files_Settings
                     ?>]" value="<?php 
                     echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
                     ?>" placeholder="<?php 
-                    echo  ( $args['placeholder'] ? $args['placeholder'] : '' ) ;
+                    echo  ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) ;
                     ?>">
             <?php 
                 }
@@ -1130,6 +1120,17 @@ class Shared_Files_Settings
                 ?><br/>
           <?php 
                 echo  __( 'wp-content/uploads/shared-files/folder-name/', 'shared-files' ) ;
+                ?>
+        </div>
+      <?php 
+            } elseif ( $field_name == 'maximum_size_text' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'This is for informational purposes only.' ) ;
+                ?><br />
+          <?php 
+                echo  __( 'The text defined here replaces the default automatically detected maximum file size.', 'shared-files' ) ;
                 ?>
         </div>
       <?php 

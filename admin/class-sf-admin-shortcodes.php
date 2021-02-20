@@ -30,33 +30,6 @@ class SharedFilesAdminShortcodes {
 
       <div class="shared-files-examples">
         <p><?= __('If you have an idea for a new shortcode or parameter, you may contact the author at', 'shared-files') . ' <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a> ' . __('or by email:', 'shared-files') ?> <a href="javascript:location='mailto:\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d';void 0"><script type="text/javascript">document.write('\u0063\u006f\u006e\u0074\u0061\u0063\u0074\u0040\u0074\u0061\u006d\u006d\u0065\u0072\u0073\u006f\u0066\u0074\u002e\u0063\u006f\u006d')</script></a></p>
-
-        <?php if (!isset($s['hide_review_box'])): ?>
-          <div class="shared-files-review-box">
-            <strong><?= __('I hope you\'re happy with the plugin!', 'shared-files') ?></strong> <?= __('If so, would you consider leaving a positive review? It really helps to support the plugin development and helps others to discover it too!', 'shared-files') ?>
-            <span>
-          
-              <?= __('Thank you for considering.', 'shared-files') ?>
-          
-              <?php
-              $url = get_admin_url() . 'options-general.php?page=shared-files';
-              $text = sprintf(
-                wp_kses(
-                  /* translators: %s: link to plugin settings */
-                  __('You can hide this notification from the <a href="%s" target="_blank">plugin settings</a> (last item).', 'shared-files'),
-                  array('a' => array('href' => array()))
-                ),
-                esc_url($url) 
-              );
-              echo $text;
-              ?>
-          
-            </span>
-            &mdash; Anssi Laitila, Tammersoft<br />
-            <a href="https://wordpress.org/support/plugin/shared-files/reviews/?rate=5#new-post" class="shared-files-review-button" target="_blank"><?= __('Leave a review', 'shared-files') ?></a>
-          </div>
-        <?php endif; ?>
-
       </div>
   
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">
@@ -91,6 +64,7 @@ class SharedFilesAdminShortcodes {
                   <li><?= __('Layout as "4 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=4-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
                   <li><?= __('Show tag dropdown:', 'shared-files') ?> <span class="sf-new-feature-inline"><?= __('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files show_tag_dropdown=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
                   <li><?= __('Exclude categories (by slug):', 'shared-files') ?> <span class="sf-new-feature-inline"><?= __('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
+                  <li><?= __('Define an embed id (required, if there are multiple instances of [shared_files] on the same page):', 'shared-files') ?> <span class="sf-new-feature-inline"><?= __('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files embed_id="my-files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
                   <li><?= __('You can also use multiple parameters:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=2-cards-on-the-same-row hide_description=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
                 </ul>
               </li>

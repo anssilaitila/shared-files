@@ -14,32 +14,76 @@ class SharedFilesAdminQuery {
     $s = get_option('shared_files_settings');
 
     $url = home_url($wp->request);
+    $url_parts = parse_url($url);
 
     $sf_query = 0;
-    $sf_sub = 0;
-
-    $url_parts = parse_url($url);
 
     if (isset($url_parts['path'])) {
       $path_parts = explode('/', $url_parts['path']);
     }
 
-    if (isset($path_parts[2]) && $path_parts[2] == 'shared-files') {
-      $sf_query = 1;
-      $sf_sub = 1;
-    } else if (isset($path_parts[1]) && $path_parts[1] == 'shared-files') {
-      $sf_query = 1;
+    if (is_super_admin() && isset($_GET['DEBUG_URL_PARTS'])) {
+      echo '<pre>1</pre>';
+      echo '<pre>' . var_dump($url_parts) . '</pre>';
+      echo '<pre>2</pre>';
+      echo '<pre>' . var_dump($path_parts) . '</pre>';
+      if (sizeof($path_parts) > 1) {
+        echo '<pre>3</pre>';
+        echo '<pre>' . var_dump($path_parts[count($path_parts)-2]) . '</pre>';
+      }
+      echo '<pre>4</pre>';
+      echo '<pre>' . var_dump(end($path_parts)) . '</pre>';
+    }
+
+    $sf_base = '';
+    $sf_base_alt = '';
+    $sf_file_id = 0;
+    $sf_query_filename = '';
+    
+    if (isset($path_parts) && is_array($path_parts) && isset($path_parts[count($path_parts)-3])) {
+
+      $sf_base = $path_parts[count($path_parts)-3];
+      $sf_base_alt = $path_parts[count($path_parts)-2];
+
+      if ($sf_base == 'shared-files') {
+
+        $file_id = (int) $path_parts[count($path_parts)-2];
+
+        if ($file_id > 0) {
+          $sf_query = 1;
+          $sf_query_filename = end($path_parts);
+        }
+
+      } elseif ($sf_base_alt == 'shared-files') {
+
+        $file_id = (int) end($path_parts);
+        
+        if ($file_id > 0) {
+          $sf_query = 1;
+          $sf_query_filename = '';
+        }
+
+      }
+
+    }
+
+    if (is_super_admin() && isset($_GET['DEBUG_URL_PARTS'])) {
+      echo '<pre>sf_base</pre>';
+      echo '<pre>' . var_dump($path_parts[count($path_parts)-3]) . '</pre>';
+      echo '<pre>sf_base</pre>';
+      echo '<pre>' . var_dump($sf_base) . '</pre>';
+      echo '<pre>sf_base_alt</pre>';
+      echo '<pre>' . var_dump($sf_base_alt) . '</pre>';
+      echo '<pre>sf_query</pre>';
+      echo '<pre>' . var_dump($sf_query) . '</pre>';
+      echo '<pre>file_id</pre>';
+      echo '<pre>' . var_dump($file_id) . '</pre>';
+      echo '<pre>sf_query_filename</pre>';
+      echo '<pre>' . var_dump($sf_query_filename) . '</pre>';
+      wp_die();
     }
 
     if ($sf_query) {
-
-      $file_id = 0;
-      
-      if ($sf_sub) {
-        $file_id = isset($path_parts[3]) ? (int) $path_parts[3] : 0;
-      } else {
-        $file_id = isset($path_parts[2]) ? (int) $path_parts[2] : 0;
-      }
 
       if ($file_id) {
 
@@ -90,6 +134,12 @@ class SharedFilesAdminQuery {
           $wp_upload_dir = wp_upload_dir();
 
           $path = pathinfo($filename);
+
+          if (is_super_admin() && isset($_GET['DEBUG_FILE'])) {
+            echo '<pre>' . var_dump($file) . '</pre>';
+            echo '<pre>' . var_dump(SharedFilesHelpers::getFilenameWithPathV2($filename)) . '</pre>';
+            wp_die();
+          }
 
           if (!isset($filename) || !file_exists($filename)) {
 

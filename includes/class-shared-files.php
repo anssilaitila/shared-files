@@ -197,10 +197,6 @@ class Shared_Files {
 
     $this->loader->add_action('admin_menu', $plugin_admin, 'add_settings_link');
 
-    if (!isset($s['hide_affiliation_link'])) {
-      $this->loader->add_action('admin_menu', $plugin_admin, 'add_affiliation_link');
-    }
-
     // Maintenance
     $this->loader->add_action('plugins_loaded', $plugin_admin_maintenance, 'update_db_check');
 
