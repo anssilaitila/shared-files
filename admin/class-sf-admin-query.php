@@ -82,6 +82,7 @@ class SharedFilesAdminQuery
         if ( $sf_query ) {
             
             if ( $file_id ) {
+                $filesize = get_post_meta( $file_id, '_sf_filesize', true ) || 0;
                 $external_url = esc_url_raw( get_post_meta( $file_id, '_sf_external_url', true ) );
                 
                 if ( $external_url ) {
@@ -125,7 +126,6 @@ class SharedFilesAdminQuery
                     if ( !$file_mime ) {
                         $file_mime = SharedFilesAdminHelpers::get_mime_type( $filename );
                     }
-                    $filesize = get_post_meta( $file_id, '_sf_filesize', true ) || 0;
                     
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );

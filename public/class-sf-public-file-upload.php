@@ -12,7 +12,7 @@ class SharedFilesFileUpload
         $post_id = get_the_id();
         $post_title = get_the_title();
         
-        if ( isset( $_POST ) && isset( $_POST['shared-files-upload'] ) ) {
+        if ( isset( $_GET ) && isset( $_GET['shared-files-upload'] ) ) {
             $html .= '<div class="shared-files-upload-complete">' . __( 'File successfully uploaded.', 'shared-files' ) . '</div>';
         } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_file'] ) && isset( $_GET['sc'] ) ) {
             $html .= '<div class="shared-files-file-deleted">' . __( 'File successfully deleted.', 'shared-files' ) . '</div>';
@@ -27,10 +27,10 @@ class SharedFilesFileUpload
             false
         );
         $html .= '<input name="shared-files-upload" value="1" type="hidden" />';
-        $html .= '<input name="_sf_embed_post_id" value="' . $post_id . '" type="hidden" />';
-        $html .= '<input name="_sf_embed_post_title" value="' . $post_title . '" type="hidden" />';
+        $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
+        $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
         $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><hr class="clear" />';
-        $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . __( 'Maximum file size:', 'shared-files' ) . ' <strong>' . SharedFilesHelpers::maxUploadSize() . '</strong></p>';
+        $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . __( 'Maximum file size:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         
         if ( isset( $s['file_upload_show_external_url'] ) ) {
             $html .= '<div class="shared-files-file-upload-youtube-container">';
@@ -38,7 +38,7 @@ class SharedFilesFileUpload
             if ( isset( $s['file_upload_external_url_title'] ) && $s['file_upload_external_url_title'] ) {
                 $external_url_title = $s['file_upload_external_url_title'];
             }
-            $html .= '<span>' . $external_url_title . '</span>';
+            $html .= '<span>' . esc_html( $external_url_title ) . '</span>';
             $html .= '<input type="text" name="_sf_external_url" class="shared-files-external-url" value="" />';
             $html .= '</div>';
         }
@@ -170,6 +170,18 @@ class SharedFilesFileUpload
                 'post_title' => sanitize_text_field( $post_title ),
             );
             wp_update_post( $my_post );
+            $goto_url = '/';
+            if ( isset( $request['pagename'] ) && $request['pagename'] ) {
+                $goto_url = '/' . $request['pagename'] . '/';
+            }
+            
+            if ( isset( $s['file_upload_send_email'] ) && is_email( $s['file_upload_send_email'] ) ) {
+                $container_url = get_site_url() . $goto_url;
+                SharedFilesAdminSendMail::file_upload_send_email( $id, get_post( $id ), $container_url );
+            }
+            
+            wp_redirect( $goto_url . '?shared-files-upload=1' );
+            exit;
         }
         
         return $request;

@@ -768,6 +768,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_new_category',
+            __( 'Allow the uploader to create a new category', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_new_category',
+            'field_name' => $only_pro . 'file_upload_new_category',
+        )
+        );
+        add_settings_field(
             'shared-files-show_tag_checkboxes_on_file_upload',
             __( 'Show tag checkboxes for front-end file uploader', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -810,6 +821,18 @@ class Shared_Files_Settings
             'label_for'   => 'shared-files-' . $only_pro . 'file_upload_external_url_title',
             'field_name'  => $only_pro . 'file_upload_external_url_title',
             'placeholder' => 'Or enter a YouTube URL:',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_send_email',
+            __( 'Send and email notify when a file is uploaded', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_send_email',
+            'field_name'  => $only_pro . 'file_upload_send_email',
+            'placeholder' => '',
         )
         );
     }
@@ -1139,6 +1162,14 @@ class Shared_Files_Settings
         <p><?php 
                 echo  __( 'e.g. /wp-content/uploads/2019/12/some-fancy-icon.png', 'shared-files' ) ;
                 ?></p>
+      <?php 
+            } elseif ( $field_name == 'file_upload_send_email' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'Enter an email address to receive the notify.', 'shared-files' ) ;
+                ?>
+        </div>
       <?php 
             }
             

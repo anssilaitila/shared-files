@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.33
+Stable tag: 1.6.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,7 +128,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 
 == Changelog ==
 
-= 1.6.33 - 2021-02-22 =
+= 1.6.34 - 2021-02-22 =
+* (Pro) New setting: "Send and email notify when a file is uploaded" (using the frontend upload)
+* (Pro) New setting: "Allow the uploader to create a new category". This allows the file uploader to create a new category and assign the file to it.
+* (Pro) New parameter for file upload shortcode (allow the uploader to create a new category): [shared_files file_upload=1 new_category=1]
+* Bug fixes
+
+= 1.6.33 - 2021-02-21 =
 * The free version has now support for front-end file uploader, can be used with the shortcode [shared_files file_upload=1]. More features coming in the next update for the Pro version of frontend upload.
 
 = 1.6.32 - 2021-02-20 =

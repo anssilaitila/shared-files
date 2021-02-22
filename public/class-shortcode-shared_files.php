@@ -253,7 +253,7 @@ class ShortcodeSharedFiles
                 
                 }
                 $html .= '</ul>';
-            } else {
+            } elseif ( !isset( $atts['file_upload'] ) ) {
                 $html .= '<div class="shared-files-files-not-found">' . __( 'No published files found. You should add files first from WP admin: Shared Files / File Management.', 'shared-files' ) . '</div>';
             }
             
