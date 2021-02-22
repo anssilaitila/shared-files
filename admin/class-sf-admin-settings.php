@@ -746,14 +746,14 @@ class Shared_Files_Settings
             'shared-files'
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
+            'shared-files-only_logged_in_users_can_add_files',
             __( 'Only logged in users can add files using the front-end file uploader', 'shared-files' ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
-            'field_name' => $only_pro . 'only_logged_in_users_can_add_files',
+            'label_for'  => 'shared-files-only_logged_in_users_can_add_files',
+            'field_name' => 'only_logged_in_users_can_add_files',
         )
         );
         add_settings_field(
@@ -768,14 +768,14 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
+            'shared-files-show_tag_checkboxes_on_file_upload',
             __( 'Show tag checkboxes for front-end file uploader', 'shared-files' ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
-            'field_name' => $only_pro . 'show_tag_checkboxes_on_file_upload',
+            'label_for'  => 'shared-files-show_tag_checkboxes_on_file_upload',
+            'field_name' => 'show_tag_checkboxes_on_file_upload',
         )
         );
         add_settings_field(
@@ -785,19 +785,19 @@ class Shared_Files_Settings
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'uncheck_hide_from_other_pages',
-            'field_name' => $only_pro . 'uncheck_hide_from_other_pages',
+            'label_for'  => 'shared-files-uncheck_hide_from_other_pages',
+            'field_name' => 'uncheck_hide_from_other_pages',
         )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'file_upload_show_external_url',
+            'shared-files-file_upload_show_external_url',
             __( 'Show External Url on file upload form', 'shared-files' ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_show_external_url',
-            'field_name' => $only_pro . 'file_upload_show_external_url',
+            'label_for'  => 'shared-files-file_upload_show_external_url',
+            'field_name' => 'file_upload_show_external_url',
         )
         );
         add_settings_field(
@@ -1151,39 +1151,33 @@ class Shared_Files_Settings
     
     public function shared_files_settings_general_section_callback()
     {
-        
-        if ( SharedFilesHelpers::isPremium() == 0 ) {
-            echo  '<p>' . __( '', 'shared-files' ) . '</p>' ;
-        } else {
-            echo  '<div class="shared-files-how-to-get-started">' ;
-            echo  '<h2>' . __( 'How to get started', 'shared-files' ) . '</h2>' ;
-            echo  '<ol>' ;
-            echo  '<li><span>' ;
-            $url = get_admin_url() . 'edit.php?post_type=shared_file';
-            $text = sprintf( wp_kses(
-                /* translators: %s: link to file management */
-                __( 'Insert files from the <a href="%s" target="_blank">file management</a>.', 'shared-files' ),
-                array(
-                    'a' => array(
-                    'href'   => array(),
-                    'target' => array(),
-                ),
-                )
-            ), esc_url( $url ) );
-            echo  $text ;
-            echo  '</span></li>' ;
-            echo  '<li><span>' ;
-            $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span> or <span class="shared-files-mini-shortcode">[shared_files_simple]</span> to the content editor of any page or post.', 'shared-files' ), array(
-                'span' => array(
-                'class' => array(),
+        echo  '<div class="shared-files-how-to-get-started">' ;
+        echo  '<h2>' . __( 'How to get started', 'shared-files' ) . '</h2>' ;
+        echo  '<ol>' ;
+        echo  '<li><span>' ;
+        $url = get_admin_url() . 'edit.php?post_type=shared_file';
+        $text = sprintf( wp_kses(
+            /* translators: %s: link to file management */
+            __( 'Insert files from the <a href="%s" target="_blank">file management</a>.', 'shared-files' ),
+            array(
+                'a' => array(
+                'href'   => array(),
+                'target' => array(),
             ),
-            ) );
-            echo  $text ;
-            echo  '</span></li>' ;
-            echo  '</ol>' ;
-            echo  '</div>' ;
-        }
-    
+            )
+        ), esc_url( $url ) );
+        echo  $text ;
+        echo  '</span></li>' ;
+        echo  '<li><span>' ;
+        $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span> or <span class="shared-files-mini-shortcode">[shared_files_simple]</span> to the content editor of any page or post.', 'shared-files' ), array(
+            'span' => array(
+            'class' => array(),
+        ),
+        ) );
+        echo  $text ;
+        echo  '</span></li>' ;
+        echo  '</ol>' ;
+        echo  '</div>' ;
     }
     
     public function shared_files_settings_tab_2_callback()

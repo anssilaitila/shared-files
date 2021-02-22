@@ -246,14 +246,14 @@ class SharedFilesPublicHelpers
         if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
             $left_style = 'width: 6px; background: none;';
         } else {
-            $left_style = 'background: url(' . $imagefile . ') right top no-repeat; background-size: 48px;';
+            $left_style = 'background: url(' . esc_attr( $imagefile ) . ') right top no-repeat; background-size: 48px;';
         }
         
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements">';
-        $html .= '<div class="shared-files-main-elements-left" style="' . $left_style . '"></div>';
+        $html .= '<div class="shared-files-main-elements-left" style="' . esc_attr( $left_style ) . '"></div>';
         if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
-            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
+            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
         $html .= '<div class="shared-files-main-elements-right">';
         $data_file_type = '';
@@ -262,15 +262,15 @@ class SharedFilesPublicHelpers
         $data_image_url = '';
         
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
-            $data_file_type = ' data-file-type="' . self::getFileType( $file_id ) . '" ';
-            $data_file_url = ' data-file-url="' . self::getFileURL( $file_id ) . '" ';
-            $data_external_url = ' data-external-url="' . $external_url . '" ';
+            $data_file_type = ' data-file-type="' . esc_attr( self::getFileType( $file_id ) ) . '" ';
+            $data_file_url = ' data-file-url="' . esc_url( self::getFileURL( $file_id ) ) . '" ';
+            $data_external_url = ' data-external-url="' . esc_url( $external_url ) . '" ';
             $data_image_url = ' data-image-url="' . get_the_post_thumbnail_url( $file_id, 'large' ) . '" ';
         }
         
-        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
+        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( get_the_title() ) . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
-            $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
+            $html .= '<span class="shared-file-size">' . esc_html( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
         }
         $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
         
@@ -280,7 +280,7 @@ class SharedFilesPublicHelpers
             
             if ( $main_date instanceof DateTime ) {
                 $main_date_formatted = $main_date->format( $date_format );
-                $html .= '<span class="shared-file-date">' . $main_date_formatted . '</span>';
+                $html .= '<span class="shared-file-date">' . esc_html( $main_date_formatted ) . '</span>';
             } else {
                 $html .= '<span class="shared-file-date">' . get_the_date() . '</span>';
             }
@@ -296,9 +296,9 @@ class SharedFilesPublicHelpers
                 foreach ( $tags as $tag ) {
                     
                     if ( $show_tags == 1 ) {
-                        $html .= '<a href="?sf_tag=' . $tag->slug . '" data-tag-slug="' . $tag->slug . '" data-hide-description="' . $hide_description . '" class="shared-files-tag-link">' . $tag->name . '</a>';
+                        $html .= '<a href="?sf_tag=' . esc_attr( $tag->slug ) . '" data-tag-slug="' . esc_attr( $tag->slug ) . '" data-hide-description="' . esc_attr( $hide_description ) . '" class="shared-files-tag-link">' . esc_html( $tag->name ) . '</a>';
                     } elseif ( $show_tags == 2 ) {
-                        $html .= '<span>' . $tag->name . '</span>';
+                        $html .= '<span>' . esc_html( $tag->name ) . '</span>';
                     }
                 
                 }
@@ -319,9 +319,9 @@ class SharedFilesPublicHelpers
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             
             if ( self::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download', 'shared-files' ) . '</a>';
             } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
-                $html .= '<a href="' . self::getFileURL( $file_id, 1 ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
             }
         
         }
@@ -336,7 +336,7 @@ class SharedFilesPublicHelpers
         
         $html .= '</div>';
         if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
-            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . $featured_img_url . '" /></div>';
+            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
         $html .= '</div>';
         $html .= '</li>';
@@ -656,23 +656,23 @@ class SharedFilesPublicHelpers
         $data_image_url = '';
         
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
-            $data_file_type = ' data-file-type="' . self::getFileType( $file_id ) . '" ';
-            $data_file_url = ' data-file-url="' . self::getFileURL( $file_id ) . '" ';
-            $data_external_url = ' data-external-url="' . $external_url . '" ';
+            $data_file_type = ' data-file-type="' . esc_attr( self::getFileType( $file_id ) ) . '" ';
+            $data_file_url = ' data-file-url="' . esc_url( self::getFileURL( $file_id ) ) . '" ';
+            $data_external_url = ' data-external-url="' . esc_url( $external_url ) . '" ';
             $data_image_url = ' data-image-url="' . get_the_post_thumbnail_url( $file_id, 'large' ) . '" ';
         }
         
         $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . get_the_title() . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
-            $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) . '</span>';
+            $html .= '<span class="shared-file-size">' . esc_html( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
         }
         $html .= SharedFilesHelpers::getPreviewButton( $id, $file_url );
         if ( isset( $c['_sf_description'] ) ) {
             
             if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] && isset( $c['_sf_description'][0] ) && $c['_sf_description'][0] ) {
-                $html .= '<p>' . nl2br( $c['_sf_description'][0] ) . '</p>';
+                $html .= '<p>' . esc_html( nl2br( $c['_sf_description'][0] ) ) . '</p>';
             } else {
-                $html .= $c['_sf_description'][0];
+                $html .= esc_html( $c['_sf_description'][0] );
             }
         
         }

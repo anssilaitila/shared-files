@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.32\n"
+"Project-Id-Version: Shared Files 1.6.33\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-02-20T19:50:04+02:00\n"
+"POT-Creation-Date: 2021-02-22T00:12:56+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: shared-files\n"
@@ -94,12 +94,7 @@ msgid "sharedfilespro.com"
 msgstr ""
 
 #: admin/class-sf-admin-help-support.php:47
-msgid "Any feedback is welcome. You may contact the author at"
-msgstr ""
-
-#: admin/class-sf-admin-help-support.php:47
-#: admin/class-sf-admin-shortcodes.php:32
-msgid "or by email:"
+msgid "Any kind of feedback is welcome. You may contact the author at"
 msgstr ""
 
 #: admin/class-sf-admin-help-support.php:52
@@ -136,20 +131,20 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:68
 #: admin/class-sf-admin-shortcodes.php:85
 #: admin/class-sf-admin-shortcodes.php:97
-#: admin/class-sf-admin-shortcodes.php:121
-#: admin/class-sf-admin-shortcodes.php:126
-#: admin/class-sf-admin-shortcodes.php:149
-#: admin/class-sf-admin-shortcodes.php:170
+#: admin/class-sf-admin-shortcodes.php:113
+#: admin/class-sf-admin-shortcodes.php:115
+#: admin/class-sf-admin-shortcodes.php:117
+#: admin/class-sf-admin-shortcodes.php:119
+#: admin/class-sf-admin-shortcodes.php:129
+#: admin/class-sf-admin-shortcodes.php:139
+#: admin/class-sf-admin-shortcodes.php:163
+#: admin/class-sf-admin-shortcodes.php:168
 #: admin/class-sf-admin-shortcodes.php:191
-#: admin/class-sf-admin-shortcodes.php:211
-#: admin/class-sf-admin-shortcodes.php:213
-#: admin/class-sf-admin-shortcodes.php:215
-#: admin/class-sf-admin-shortcodes.php:217
-#: admin/class-sf-admin-shortcodes.php:219
-#: admin/class-sf-admin-shortcodes.php:221
-#: admin/class-sf-admin-shortcodes.php:242
-#: admin/class-sf-admin-shortcodes.php:245
-#: admin/class-sf-admin-shortcodes.php:248
+#: admin/class-sf-admin-shortcodes.php:212
+#: admin/class-sf-admin-shortcodes.php:233
+#: admin/class-sf-admin-shortcodes.php:253
+#: admin/class-sf-admin-shortcodes.php:256
+#: admin/class-sf-admin-shortcodes.php:259
 #: admin/class-sf-admin-taxonomy.php:98
 msgid "Copy"
 msgstr ""
@@ -214,7 +209,7 @@ msgstr ""
 
 #: admin/class-sf-admin-help-support.php:215
 #: admin/class-sf-admin-inline-scripts.php:38
-#: admin/class-sf-admin-shortcodes.php:268
+#: admin/class-sf-admin-shortcodes.php:279
 msgid "Shortcode copied to clipboard!"
 msgstr ""
 
@@ -273,7 +268,7 @@ msgid "Expires"
 msgstr ""
 
 #: admin/class-sf-admin-list.php:146
-#: admin/class-sf-admin-shortcodes.php:201
+#: admin/class-sf-admin-shortcodes.php:108
 msgid "Front-end uploader"
 msgstr ""
 
@@ -324,7 +319,7 @@ msgid "This date is displayed in the file list instead of the publish date. If e
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:120
-#: public/class-sf-public-file-upload.php:258
+#: public/class-sf-public-file-upload.php:265
 msgid "External URL"
 msgstr ""
 
@@ -370,7 +365,7 @@ msgstr ""
 
 #: admin/class-sf-admin-metadata.php:137
 #: admin/class-sf-admin-settings.php:1061
-#: public/class-sf-public-file-upload.php:103
+#: public/class-sf-public-file-upload.php:106
 msgid "Description"
 msgstr ""
 
@@ -398,7 +393,7 @@ msgstr ""
 msgid "File(s) successfully added."
 msgstr ""
 
-#: admin/class-sf-admin-query.php:149
+#: admin/class-sf-admin-query.php:159
 #: public/class-shortcode-shared_files.php:144
 msgid "File not found"
 msgstr ""
@@ -888,10 +883,10 @@ msgstr ""
 
 #: admin/class-sf-admin-shortcodes.php:42
 #: admin/class-sf-admin-shortcodes.php:85
-#: admin/class-sf-admin-shortcodes.php:121
-#: admin/class-sf-admin-shortcodes.php:149
-#: admin/class-sf-admin-shortcodes.php:170
+#: admin/class-sf-admin-shortcodes.php:163
 #: admin/class-sf-admin-shortcodes.php:191
+#: admin/class-sf-admin-shortcodes.php:212
+#: admin/class-sf-admin-shortcodes.php:233
 msgid "Insert the shortcode"
 msgstr ""
 
@@ -940,9 +935,6 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:65
 #: admin/class-sf-admin-shortcodes.php:66
 #: admin/class-sf-admin-shortcodes.php:67
-#: admin/class-sf-admin-shortcodes.php:215
-#: admin/class-sf-admin-shortcodes.php:219
-#: admin/class-sf-admin-shortcodes.php:221
 msgid "New"
 msgstr ""
 
@@ -966,76 +958,76 @@ msgstr ""
 msgid "to the content editor of any page you wish the file list to appear."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:108
-msgid "Search form only that targets all the files, sorted by category"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:123
-msgid "Additional parameters:"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:126
-msgid "Don't sort by categories"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:136
-msgid "List only files in certain category"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:149
-#: admin/class-sf-admin-shortcodes.php:170
-msgid "You can find / define the category slug by editing the category."
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:159
-msgid "List categories / list files by category"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:170
-msgid "or"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:179
-msgid "List a single file"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:191
-msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page."
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:211
+#: admin/class-sf-admin-shortcodes.php:113
 msgid "To enable the uploader insert the shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:213
+#: admin/class-sf-admin-shortcodes.php:115
 msgid "To hide other files use parameter \"only_uploaded_files\" like so:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:215
+#: admin/class-sf-admin-shortcodes.php:117
 msgid "Hide the file list and show only the file upload form:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:217
-msgid "Pre-define the category and hide category dropdown:"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:219
-msgid "Show category checkboxes for the uploader:"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:221
+#: admin/class-sf-admin-shortcodes.php:119
 msgid "Show tag checkboxes for the uploader:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:223
+#: admin/class-sf-admin-shortcodes.php:121
+msgid "Pre-define the category and hide category dropdown:"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:131
+msgid "Show category checkboxes for the uploader:"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:141
 msgid "See live demo at"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:231
+#: admin/class-sf-admin-shortcodes.php:150
+msgid "Search form only that targets all the files, sorted by category"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:165
+msgid "Additional parameters:"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:168
+msgid "Don't sort by categories"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:178
+msgid "List only files in certain category"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:191
+#: admin/class-sf-admin-shortcodes.php:212
+msgid "You can find / define the category slug by editing the category."
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:201
+msgid "List categories / list files by category"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:212
+msgid "or"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:221
+msgid "List a single file"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:233
+msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page."
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:242
 msgid "How to define the order of the files for each shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:237
+#: admin/class-sf-admin-shortcodes.php:248
 msgid "Choose one value from the list separated by \"|\":"
 msgstr ""
 
@@ -1195,37 +1187,37 @@ msgstr ""
 msgid "Upgrade&nbsp;&nbsp;➤"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:197
+#: includes/class-shared-files-helpers.php:201
 msgid "Show all files"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:237
-#: includes/class-shared-files-helpers.php:260
-#: includes/class-shared-files-helpers.php:287
+#: includes/class-shared-files-helpers.php:241
+#: includes/class-shared-files-helpers.php:264
+#: includes/class-shared-files-helpers.php:291
 msgid "Preview"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:22
+#: public/class-sf-public-file-upload.php:19
 msgid "File successfully uploaded."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:24
+#: public/class-sf-public-file-upload.php:21
 msgid "File successfully deleted."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:38
+#: public/class-sf-public-file-upload.php:35
 msgid "Maximum file size:"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:44
+#: public/class-sf-public-file-upload.php:41
 msgid "Or enter a YouTube URL:"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:97
+#: public/class-sf-public-file-upload.php:100
 msgid "Tags"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:100
+#: public/class-sf-public-file-upload.php:103
 msgid "Title"
 msgstr ""
 

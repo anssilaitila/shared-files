@@ -199,7 +199,7 @@ class SharedFilesHelpers
             if ( !$image_url ) {
                 $image_url = $file['url'];
             }
-            $html .= '<a href="' . $image_url . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . __( 'Preview', 'shared-files' ) . '</a>';
+            $html .= '<a href="' . esc_url( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . __( 'Preview', 'shared-files' ) . '</a>';
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
             $ok = array(
                 'application/msword',
@@ -221,7 +221,7 @@ class SharedFilesHelpers
                     $file_url = get_site_url() . $file_url;
                 }
                 
-                $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
             }
         
         } else {
@@ -246,7 +246,7 @@ class SharedFilesHelpers
                     $file_url = get_site_url() . $file_url;
                 }
                 
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
             }
         
         }
@@ -258,7 +258,7 @@ class SharedFilesHelpers
     {
         $s = get_option( 'shared_files_settings' );
         $file = get_post_meta( $file_id, '_sf_file', true );
-        $media_library_post_id = get_post_meta( $file_id, '_sf_media_library_post_id', true );
+        $media_library_post_id = (int) get_post_meta( $file_id, '_sf_media_library_post_id', true );
         $media_library_post_mime_type = '';
         if ( $media_library_post_id ) {
             $media_library_post_mime_type = get_post_mime_type( $media_library_post_id );

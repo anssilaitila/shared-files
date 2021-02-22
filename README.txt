@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.6
-Stable tag: 1.6.32
+Stable tag: 1.6.33
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -19,50 +19,43 @@ Very easy to use and no complex settings to mind on, but also very scalable for 
 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
-= Some of the most used features =
-* <strong>Frontend file upload</strong>
-* <strong>Multi-file upload</strong>
-* <strong>Upload files using FTP</strong>
-* <strong>Download counter</strong>
-
 = An easy to use download manager with file upload =
 * Store files using this download manager plugin instead of media library
 * Open images and YouTube-videos in a lightbox
 * Allow users and/or visitors to upload files
 * File manager allows administrators to upload files using FTP or single/multi-file uploader
+* FTP upload and multi-file upload are features of the Pro version
 * Alternative to WP media library
 * Free version to use as a free file manager and download manager
 * More advanced file manager in the Pro version
 * Share folders and files
 
-= Some use cases for this plugin: =
-* List any number of files and keep statistics on downloads
-* Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
-* Add a single file to any article/post using a simple shortcode
-* Receive a notification when a file is downloaded
-* Sort files and documents to multiple categories
-* Use as an internet download manager, file explorer and file manager
-
 = Key Features in Shared Files Free: =
+* <strong>Front-end file upload with support for tags, logged-in users can also delete their uploaded files</strong>
+* Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Preview certain file types in the browser
 * YouTube-videos and images are opened in a lightbox
 * Open local video files using a video player in a lightbox (mp4, webm, ogg, mov)
 * Files separated from the media library
 * High quality SVG icons for 25 different file types
+* Use as an internet download manager, file explorer and file manager
 * Custom images/icons for many file types
 * A free download manager
 * Add tags to files
 
 = Key Features in Shared Files Pro: =
+* List any number of files and keep statistics on downloads
 * Upload files using FTP and activate them for the plugin with a single click
 * FTP file upload allows you to upload any number of files easily
 * Activate files from Media Library
-* Front-end file upload with support for categories and tags, logged-in users can also delete their uploaded files
+* Front-end file upload with support for categories
 * Multiple different shortcodes/views for various use cases
+* Receive a notification when a file is downloaded
 * Collect also YouTube video URLs using the front end file uploader
-* Sort files into categories
+* Sort files and documents to multiple categories
 * Fast search targeting file names and descriptions
-* File load counter
+* Add a single file to any article/post using a simple shortcode
+* Download counter
 * Bandwidth usage estimate
 * Alternatively, define an external URL for file and track those loads
 * Optionally receive an email notification when a file is downloaded
@@ -123,15 +116,20 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 == Screenshots ==
 
 1. List of files on your site
-2. Files listed in 3 columns (more layout options available)
-3. Search from all files
-4. Display only 1 specific file on page, using shortcode in post content
-5. Opening a password protected file
-6. Opening a file that's download limit has been reached
-7. File management in admin area
-8. Edit a single file
+2. Front-end file upload
+3. Files listed in 2 columns (more layout options available)
+4. File management in admin area
+5. Edit a single file
+6. Search from all files (Pro)
+7. Display only 1 specific file on page, using shortcode in post content (Pro)
+8. Opening a password protected file (Pro)
+9. Opening a file that's download limit has been reached (Pro)
+10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.33 - 2021-02-22 =
+* The free version has now support for front-end file uploader, can be used with the shortcode [shared_files file_upload=1]. More features coming in the next update for the Pro version of frontend upload.
 
 = 1.6.32 - 2021-02-20 =
 * Pagination now works normally when there are multiple instances of [shared_files] on the same page. You should give a unique embed id for each one: [shared_files embed_id="my-files"]
