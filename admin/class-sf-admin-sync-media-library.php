@@ -115,14 +115,12 @@ class SharedFilesAdminSyncMediaLibrary {
       if (isset($wp_query) && $wp_query->have_posts()) {
 
         foreach ( $wp_query->posts as $post ) {
-          
+
   //        the_attachment_link($post->ID, false);
       
-          $item = $post->guid;
-          $filename = basename($post->guid);
-          
           $file_with_url = wp_get_attachment_url($post->ID);
-          $file_with_path = wp_get_original_image_path($post->ID);
+          $file_with_path = get_attached_file($post->ID);
+          $filename = basename($file_with_path);
 
           // $item
           if (strpos($file_with_url, '/wp-content/uploads/shared-files/') !== false || !file_exists($file_with_path)) {

@@ -835,6 +835,66 @@ class Shared_Files_Settings
             'placeholder' => '',
         )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_restrict_file_types',
+            __( 'Restrict accepted file types', 'shared-files' ),
+            array( $this, 'restrict_file_types_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_restrict_file_types',
+            'field_name'  => $only_pro . 'file_upload_restrict_file_types',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_restrict_file_extensions',
+            __( 'Restrict accepted file extensions', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_restrict_file_extensions',
+            'field_name'  => $only_pro . 'file_upload_restrict_file_extensions',
+            'placeholder' => '.gif, .jpg, .png, .doc',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_custom_field_1',
+            __( 'Custom field 1', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_custom_field_1',
+            'field_name'  => $only_pro . 'file_upload_custom_field_1',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_custom_field_2',
+            __( 'Custom field 2', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_custom_field_2',
+            'field_name'  => $only_pro . 'file_upload_custom_field_2',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_custom_field_3',
+            __( 'Custom field 3', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_custom_field_3',
+            'field_name'  => $only_pro . 'file_upload_custom_field_3',
+            'placeholder' => '',
+        )
+        );
     }
     
     public function checkbox_render( $args )
@@ -930,6 +990,97 @@ class Shared_Files_Settings
             
             ?>
 
+      <?php 
+        }
+    
+    }
+    
+    public function restrict_file_types_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = $options[$args['field_name']];
+            }
+            ?>
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+      
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+      
+      <div class="shared-files-setting-container <?php 
+            echo  $free_class ;
+            ?>">
+      
+        <?php 
+            
+            if ( $free ) {
+                ?>
+        
+        <a href="<?php 
+                echo  get_admin_url() ;
+                ?>options-general.php?page=shared-files-pricing">
+          <div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>
+        </a>
+        
+        <?php 
+            } else {
+                ?>
+        
+        <div class="shared-files-setting">
+        
+          <select name="shared_files_settings[<?php 
+                echo  $args['field_name'] ;
+                ?>]">
+            <option value="" <?php 
+                echo  ( $val == '' ? 'selected' : '' ) ;
+                ?>></option>
+            <option value="any_sound_file" <?php 
+                echo  ( $val == 'any_sound_file' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  __( 'Any sound file', 'shared-files' ) ;
+                ?></option>
+            <option value="any_video_file" <?php 
+                echo  ( $val == 'any_video_file' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  __( 'Any video file', 'shared-files' ) ;
+                ?></option>
+            <option value="any_image_file" <?php 
+                echo  ( $val == 'any_image_file' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  __( 'Any image file', 'shared-files' ) ;
+                ?></option>
+          </select>
+        
+        </div>
+        
+        <?php 
+            }
+            
+            ?>
+
+      </div>
+            
       <?php 
         }
     
@@ -1169,6 +1320,31 @@ class Shared_Files_Settings
           <?php 
                 echo  __( 'Enter an email address to receive the notify.', 'shared-files' ) ;
                 ?>
+        </div>
+      <?php 
+            } elseif ( $field_name == 'file_upload_custom_field_1' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'Enter a title here and the custom field (an input field) is automatically activated for the uploader and the file edit view.', 'shared-files' ) ;
+                ?>
+        </div>
+      <?php 
+            } elseif ( $field_name == 'file_upload_restrict_file_extensions' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  __( 'A comma separated list of accepted file extensions and/or file types, for example:', 'shared-files' ) ;
+                ?>
+          <ul style="list-style: inside; padding-left: 10px; margin-bottom: 0;">
+            <li>.gif, .jpg, .png, .doc</li>
+            <li>.doc, .docx, application/msword</li>
+            <li><?php 
+                echo  __( 'More information', 'shared-files' ) ;
+                ?> <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/accept" target="_blank"><?php 
+                echo  __( 'here', 'shared-files' ) ;
+                ?></a></li>
+          </ul>
         </div>
       <?php 
             }

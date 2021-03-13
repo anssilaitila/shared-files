@@ -29,7 +29,8 @@ class SharedFilesFileUpload
         $html .= '<input name="shared-files-upload" value="1" type="hidden" />';
         $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
         $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
-        $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><hr class="clear" />';
+        $accept = '';
+        $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" /><hr class="clear" />';
         $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . __( 'Maximum file size:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         
         if ( isset( $s['file_upload_show_external_url'] ) ) {

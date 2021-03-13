@@ -130,7 +130,7 @@ class SharedFilesPublicHelpers
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             
             if ( self::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download original', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download', 'shared-files' ) . '</a>';
             } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
                 $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
             }

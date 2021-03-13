@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
-Tested up to: 5.6
-Stable tag: 1.6.34
+Tested up to: 5.7
+Stable tag: 1.6.35
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -49,6 +49,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * FTP file upload allows you to upload any number of files easily
 * Activate files from Media Library
 * Front-end file upload with support for categories
+* Custom fields for the front-end file uploader
 * Multiple different shortcodes/views for various use cases
 * Receive a notification when a file is downloaded
 * Collect also YouTube video URLs using the front end file uploader
@@ -127,6 +128,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.35 - 2021-03-13 =
+* (Pro) 3 custom fields added to the front end uploader (see settings / file upload tab)
+* (Pro) New settings for the frontend file uploader: "Restrict accepted file types" and "Restrict accepted file extensions"
+* Bug fix: files available for media library sync are no more limited to image files
+* Bug fix: redirect method now uses only the file path for opening files (no more issues if the domain or protocol is changed after adding the files)
 
 = 1.6.34 - 2021-02-22 =
 * (Pro) New setting: "Send and email notify when a file is uploaded" (using the frontend upload)

@@ -130,7 +130,9 @@ class SharedFilesAdminQuery
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );
                         $file_url = $file['url'];
-                        wp_redirect( $file_url );
+                        $redirect_url_parts = parse_url( $file_url );
+                        $file_uri = $redirect_url_parts['path'];
+                        wp_redirect( $file_uri );
                         exit;
                     }
                     

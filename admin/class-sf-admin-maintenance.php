@@ -28,10 +28,11 @@ class SharedFilesAdminMaintenance {
 //      register_setting('shared-files', 'shared_files_settings');
 
       $default_settings = [
-        'hide_bandwidth_usage' => 'on',
-        'hide_expiration_date' => 'on',
-        'card_background'      => 'light_gray',
-        'preview_service'      => 'microsoft'
+        'hide_bandwidth_usage'          => 'on',
+        'hide_expiration_date'          => 'on',
+        'card_background'               => 'light_gray',
+        'preview_service'               => 'microsoft',
+        'uncheck_hide_from_other_pages' => 'on'
       ];
 
       add_option('shared_files_settings', $default_settings);
