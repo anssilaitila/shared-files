@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.35
+Stable tag: 1.6.36
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,16 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.36 - 2021-03-14 =
+* (Free and Pro) New setting: "Always show preview button for PDF files (the preview service is Google)"
+* (Free and Pro) More debug data added to debug info section
+* (Pro) It is now possible for the uploader to select a parent category for the new category to be created
+* (Pro) New setting for the front end file uploader: "Allow the uploader to define a password for the file"
+* (Pro) New setting: "Enable the use of the preview service for password protected files"
+* (Pro) New setting: "Show featured image for password protected files"
+* (Pro) New setting: "Use a larger, non-cropped version of the featured image"
+* (Pro) New settings: "Featured image container width (px)" and "Featured image container height (px)"
 
 = 1.6.35 - 2021-03-13 =
 * (Pro) 3 custom fields added to the front end uploader (see settings / file upload tab)

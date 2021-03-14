@@ -183,7 +183,11 @@ class SharedFilesHelpers
     {
         $s = get_option( 'shared_files_settings' );
         $password = get_post_meta( $file_id, '_sf_password', true );
-        if ( isset( $s['hide_preview_button'] ) || $password || SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+        $enable_preview_with_password = 0;
+        if ( isset( $s['enable_preview_for_password_protected_files'] ) ) {
+            $enable_preview_with_password = 1;
+        }
+        if ( isset( $s['hide_preview_button'] ) || $password && $enable_preview_with_password == 0 || SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             return '';
         }
         $file = get_post_meta( $file_id, '_sf_file', true );
@@ -193,6 +197,19 @@ class SharedFilesHelpers
         }
         $html = '';
         $image_types = array( 'image/jpeg', 'image/png', 'image/gif' );
+        $pdf_types = array(
+            'application/msword',
+            'application/pdf',
+            'application/vnd.ms-excel',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/mspowerpoint',
+            'application/powerpoint',
+            'application/vnd.ms-powerpoint',
+            'application/x-mspowerpoint',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation'
+        );
+        $pdf_types = array( 'application/pdf' );
         
         if ( in_array( $filetype, $image_types ) ) {
             $image_url = get_the_post_thumbnail_url( $file_id, 'large' );
@@ -200,6 +217,15 @@ class SharedFilesHelpers
                 $image_url = $file['url'];
             }
             $html .= '<a href="' . esc_url( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . __( 'Preview', 'shared-files' ) . '</a>';
+        } elseif ( isset( $s['always_preview_pdf'] ) && !$password && in_array( $filetype, $pdf_types ) ) {
+            
+            if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
+                $file_url = $file['url'];
+            } else {
+                $file_url = get_site_url() . $file_url;
+            }
+            
+            $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
             $ok = array(
                 'application/msword',
@@ -221,7 +247,10 @@ class SharedFilesHelpers
                     $file_url = get_site_url() . $file_url;
                 }
                 
-                $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $password_protected = 0;
+                if ( !$password_protected ) {
+                    $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                }
             }
         
         } else {
@@ -246,7 +275,10 @@ class SharedFilesHelpers
                     $file_url = get_site_url() . $file_url;
                 }
                 
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $password_protected = 0;
+                if ( !$password_protected ) {
+                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                }
             }
         
         }
@@ -275,7 +307,7 @@ class SharedFilesHelpers
             $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
         }
         // Featured image override
-        if ( !isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( !isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             return $featured_img_url;
         }
         $icon_set = 2020;

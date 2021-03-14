@@ -191,7 +191,47 @@ class SharedFilesAdminHelpSupport {
       
               <?= $file ?> | <?= get_the_date() ?><br />
     
-              <?php
+            <?php
+            endwhile;
+          endif;
+          ?>
+
+          <?php
+          $wp_query = new WP_Query(array(
+            'post_type' => 'shared_file',
+            'post_status' => 'publish',
+            'posts_per_page' => 1,
+            'orderby' => 'date',
+            'order'   => 'DESC',
+            ));
+          ?>
+
+          <h3><?= __('More detailed data on one file', 'shared-files') ?></h3>
+
+          <?php
+          if ($wp_query->have_posts()):
+            while ($wp_query->have_posts()): $wp_query->the_post();
+          
+              $id = get_the_id();
+              $c = get_post_custom($id);
+              $file = (isset($c['_sf_filename']) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '');
+              ?>
+          
+              <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
+                <?= $file ?> | <?= get_the_date() ?>
+              </div>
+
+              <?php $file = get_post_meta($id, '_sf_file', true) ?>
+              
+              <?php if (isset($file['file'])): ?>
+                1: <?php echo $file['file'] ?><br />
+                2: <?php echo $file['url'] ?><br />
+                3: <?php echo $file['type'] ?><br />
+                4: <?php echo $file['error'] ?><br />
+                5: <?php echo SharedFilesHelpers::getFilenameWithPathV2($file['file']) ?>
+              <?php endif; ?>
+
+            <?php
             endwhile;
           endif;
           ?>

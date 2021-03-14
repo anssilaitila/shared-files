@@ -79,6 +79,28 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-always_preview_pdf',
+            __( 'Always show preview button for PDF files (the preview service is Google)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-always_preview_pdf',
+            'field_name' => 'always_preview_pdf',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'enable_preview_for_password_protected_files',
+            __( 'Enable the use of the preview service for password protected files', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'enable_preview_for_password_protected_files',
+            'field_name' => $only_pro . 'enable_preview_for_password_protected_files',
+        )
+        );
+        add_settings_field(
             'shared-files-hide_preview_button',
             __( 'Hide preview button', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -301,13 +323,59 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-card_featured_image_as_extra',
-            __( 'Show featured image in addition to file type icon', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'Featured image will be displayed next to file description.', 'shared-files' ) . '<br />' . __( 'Normally it is displayed instead of file type icon.' ) . '</div>',
+            __( 'Show featured image in addition to file type icon', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( 'Featured image will be displayed next to file description.', 'shared-files' ) . '<br />' . __( 'Normally it is displayed instead of file type icon.', 'shared-files' ) . '</div>',
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
             'label_for'  => 'shared-files-card_featured_image_as_extra',
             'field_name' => 'card_featured_image_as_extra',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'larger_featured_image',
+            __( 'Use a larger, non-cropped version of the featured image', 'shared-files' ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . __( '"Show featured image in addition to file type icon" must also be checked.', 'shared-files' ) . '</div>',
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'larger_featured_image',
+            'field_name' => $only_pro . 'larger_featured_image',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'featured_image_container_width',
+            __( 'Featured image container width (px)', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'featured_image_container_width',
+            'field_name'  => $only_pro . 'featured_image_container_width',
+            'placeholder' => '150',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'featured_image_container_height',
+            __( 'Featured image container height (px)', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'featured_image_container_height',
+            'field_name'  => $only_pro . 'featured_image_container_height',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_featured_image_for_password_protected_files',
+            __( 'Show featured image for password protected files', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_featured_image_for_password_protected_files',
+            'field_name' => $only_pro . 'show_featured_image_for_password_protected_files',
         )
         );
         add_settings_field(
@@ -892,6 +960,18 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-' . $only_pro . 'file_upload_custom_field_3',
             'field_name'  => $only_pro . 'file_upload_custom_field_3',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_password',
+            __( 'Allow the uploader to define a password for the file', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'password',
+            'field_name'  => $only_pro . 'file_upload_password',
             'placeholder' => '',
         )
         );

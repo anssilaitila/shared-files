@@ -62,9 +62,14 @@ class SharedFilesPublicHelpers
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements shared-files-main-elements-v2">';
         $html .= '<div class="shared-files-main-elements-top"><img src="' . esc_url( $imagefile ) . '" /></div>';
-        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
-            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
+        
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $featured_img_width_px = 150;
+            $featured_img_height_px = 0;
+            $featured_img_style = '';
+            $html .= '<div class="shared-files-main-elements-featured-image" style="' . $featured_img_style . '"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
+        
         $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
         $data_file_type = '';
         $data_file_url = '';
@@ -146,9 +151,14 @@ class SharedFilesPublicHelpers
         }
         
         $html .= '</div>';
-        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
-            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
+        
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $featured_img_width_px = 150;
+            $featured_img_height_px = 0;
+            $featured_img_style = '';
+            $html .= '<div class="shared-files-main-elements-featured-image" style="' . $featured_img_style . '"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
+        
         $html .= '</div>';
         $html .= '</li>';
         return $html;
@@ -252,9 +262,14 @@ class SharedFilesPublicHelpers
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements">';
         $html .= '<div class="shared-files-main-elements-left" style="' . esc_attr( $left_style ) . '"></div>';
-        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
-            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
+        
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $featured_img_width_px = 150;
+            $featured_img_height_px = 0;
+            $featured_img_style = 'width: ' . esc_attr( $featured_img_width_px ) . 'px; height: auto;';
+            $html .= '<div class="shared-files-main-elements-featured-image" style="' . $featured_img_style . '"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
+        
         $html .= '<div class="shared-files-main-elements-right">';
         $data_file_type = '';
         $data_file_url = '';
@@ -335,9 +350,14 @@ class SharedFilesPublicHelpers
         }
         
         $html .= '</div>';
-        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
-            $html .= '<div class="shared-files-main-elements-featured-image"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
+        
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+            $featured_img_width_px = 150;
+            $featured_img_height_px = 0;
+            $featured_img_style = 'width: ' . esc_attr( $featured_img_width_px ) . 'px; height: auto;';
+            $html .= '<div class="shared-files-main-elements-featured-image" style="' . $featured_img_style . '"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
+        
         $html .= '</div>';
         $html .= '</li>';
         return $html;
