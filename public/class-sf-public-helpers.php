@@ -126,9 +126,9 @@ class SharedFilesPublicHelpers
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
             
             if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
-                $html .= '<p class="shared-file-description">' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</p>';
+                $html .= '<div class="shared-file-description-container">' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</div>';
             } else {
-                $html .= '<p class="shared-file-description">' . wp_kses_post( $c['_sf_description'][0] ) . '</p>';
+                $html .= '<div class="shared-file-description-container">' . wp_kses_post( $c['_sf_description'][0] ) . '</div>';
             }
         
         }
@@ -325,9 +325,9 @@ class SharedFilesPublicHelpers
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
             
             if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
-                $html .= '<p class="shared-file-description">' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</p>';
+                $html .= '<div class="shared-file-description-container">' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</div>';
             } else {
-                $html .= '<p class="shared-file-description">' . wp_kses_post( $c['_sf_description'][0] ) . '</p>';
+                $html .= '<div class="shared-file-description-container">' . wp_kses_post( $c['_sf_description'][0] ) . '</div>';
             }
         
         }

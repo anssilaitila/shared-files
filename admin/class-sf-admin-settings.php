@@ -1456,7 +1456,7 @@ class Shared_Files_Settings
         echo  $text ;
         echo  '</span></li>' ;
         echo  '<li><span>' ;
-        $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span> or <span class="shared-files-mini-shortcode">[shared_files_simple]</span> to the content editor of any page or post.', 'shared-files' ), array(
+        $text = wp_kses( __( 'Insert the shortcode <span class="shared-files-mini-shortcode">[shared_files]</span>, <span class="shared-files-mini-shortcode">[shared_files_simple]</span> or <span class="shared-files-mini-shortcode">[shared_files file_upload=1]</span> to the content editor of any page or post.', 'shared-files' ), array(
             'span' => array(
             'class' => array(),
         ),

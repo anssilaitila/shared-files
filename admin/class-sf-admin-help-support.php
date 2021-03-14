@@ -73,6 +73,7 @@ class SharedFilesAdminHelpSupport {
             <ul>
               <li><?= __('The default file list:', 'shared-files') ?><br /><?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
               <li><?= __('A simpler list of files:', 'shared-files') ?><br /><?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_simple]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
+              <li><?= __('Front-end file uploader:', 'shared-files') ?><br /><?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= __('Copy', 'shared-files') ?></button></li>
             </ul>
   
             <strong>
@@ -123,9 +124,12 @@ class SharedFilesAdminHelpSupport {
           <li>
             <?= __('Check the checkbox for "WP Engine compatibility mode".', 'shared-files') ?>
           </li>
+          <li>
+            <?= __('Define the "WordPress location" if you have WP installed under a subdirectory.', 'shared-files') ?>
+          </li>
         </ul>
         
-        <p><?= __('If the issue still persists, please contact us at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>. <?= __('Thank you!', 'shared-files') ?></p>
+        <p><?= __('If the issue still persists, we are happy to help at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>. <?= __('You can just send the debug info below and we will take a look at it.', 'shared-files') ?> <?= __('Thank you!', 'shared-files') ?></p>
         
       </div>
 
