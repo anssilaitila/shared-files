@@ -138,12 +138,15 @@ class SharedFilesFileUpload
                 $filename = substr( strrchr( $upload['file'], "/" ), 1 );
                 update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
                 update_post_meta( $id, '_sf_filesize', sanitize_text_field( $_FILES['_sf_file']['size'] ) );
-                SharedFilesHelpers::addFeaturedImage(
-                    $id,
-                    $upload,
-                    $uploaded_type,
-                    $filename
-                );
+                $featured_image_already_added = 0;
+                if ( !$featured_image_already_added ) {
+                    SharedFilesHelpers::addFeaturedImage(
+                        $id,
+                        $upload,
+                        $uploaded_type,
+                        $filename
+                    );
+                }
             } elseif ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
                 $external_url = esc_url_raw( $_POST['_sf_external_url'] );
                 update_post_meta( $id, '_sf_external_url', $external_url );

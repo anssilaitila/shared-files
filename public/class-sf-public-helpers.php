@@ -123,6 +123,36 @@ class SharedFilesPublicHelpers
         
         }
         
+        
+        if ( !isset( $s['hide_file_uploader_info'] ) && is_user_logged_in() && isset( $c['_sf_frontend_uploader'][0] ) && $c['_sf_frontend_uploader'][0] ) {
+            $html .= '<div class="shared-files-file-uploaded-by">';
+            
+            if ( isset( $c['_sf_user_id'][0] ) && $c['_sf_user_id'][0] ) {
+                $user = get_user_by( 'id', intval( $c['_sf_user_id'][0] ) );
+                $user_fullname = $user->user_login;
+                
+                if ( $user->first_name && $user->last_name ) {
+                    $user_fullname = $user->first_name . ' ' . $user->last_name;
+                } elseif ( $user->last_name ) {
+                    $user_fullname = $user->last_name;
+                } elseif ( $user->first_name ) {
+                    $user_fullname = $user->first_name;
+                }
+                
+                
+                if ( is_super_admin() ) {
+                    $html .= esc_html( 'Uploaded by', 'shared-files' ) . ' <a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
+                } else {
+                    $html .= esc_html( 'Uploaded by', 'shared-files' ) . ' ' . $user_fullname;
+                }
+            
+            } else {
+                $html .= esc_html( 'Uploaded by a visitor', 'shared-files' );
+            }
+            
+            $html .= '</div>';
+        }
+        
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
             
             if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
@@ -320,6 +350,36 @@ class SharedFilesPublicHelpers
                 $html .= '</div>';
             }
         
+        }
+        
+        
+        if ( !isset( $s['hide_file_uploader_info'] ) && is_user_logged_in() && isset( $c['_sf_frontend_uploader'][0] ) && $c['_sf_frontend_uploader'][0] ) {
+            $html .= '<div class="shared-files-file-uploaded-by">';
+            
+            if ( isset( $c['_sf_user_id'][0] ) && $c['_sf_user_id'][0] ) {
+                $user = get_user_by( 'id', intval( $c['_sf_user_id'][0] ) );
+                $user_fullname = $user->user_login;
+                
+                if ( $user->first_name && $user->last_name ) {
+                    $user_fullname = $user->first_name . ' ' . $user->last_name;
+                } elseif ( $user->last_name ) {
+                    $user_fullname = $user->last_name;
+                } elseif ( $user->first_name ) {
+                    $user_fullname = $user->first_name;
+                }
+                
+                
+                if ( is_super_admin() ) {
+                    $html .= esc_html( 'Uploaded by', 'shared-files' ) . ' <a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
+                } else {
+                    $html .= esc_html( 'Uploaded by', 'shared-files' ) . ' ' . $user_fullname;
+                }
+            
+            } else {
+                $html .= esc_html( 'Uploaded by a visitor', 'shared-files' );
+            }
+            
+            $html .= '</div>';
         }
         
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {

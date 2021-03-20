@@ -108,9 +108,14 @@ class SharedFilesAdminQuery
                     
                     if ( !isset( $filename ) || !file_exists( $filename ) ) {
                         $filename_with_path_v2 = SharedFilesHelpers::getFilenameWithPathV2( $filename );
+                        
                         if ( !$redirect && (!isset( $filename_with_path_v2 ) || !file_exists( $filename_with_path_v2 )) ) {
-                            wp_die( __( 'File not found', 'shared-files' ) );
+                            $filename_with_path_v3 = SharedFilesHelpers::getFilenameWithPathV3( $filename );
+                            if ( !isset( $filename_with_path_v3 ) || !file_exists( $filename_with_path_v3 ) ) {
+                                wp_die( __( 'File not found', 'shared-files' ) );
+                            }
                         }
+                    
                     }
                     
                     $file_mime = '';

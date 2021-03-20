@@ -825,6 +825,28 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-hide_file_uploader_info',
+            __( 'Hide file uploader info', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-hide_file_uploader_info',
+            'field_name' => 'hide_file_uploader_info',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_allow_featured_image',
+            __( 'Enable featured image (a separate file can be added)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_allow_featured_image',
+            'field_name' => $only_pro . 'file_upload_allow_featured_image',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
             __( 'Show category checkboxes for front-end file uploader (instead of dropdown)', 'shared-files' ),
             array( $this, 'checkbox_render' ),
@@ -833,6 +855,17 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
             'field_name' => $only_pro . 'show_category_checkboxes_on_file_upload',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_file_upload_checkboxes_on_multiple_columns',
+            esc_html__( 'Show category and tag checkboxes on multiple columns', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_file_upload_checkboxes_on_multiple_columns',
+            'field_name' => $only_pro . 'show_file_upload_checkboxes_on_multiple_columns',
         )
         );
         add_settings_field(

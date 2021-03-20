@@ -17,6 +17,23 @@ class SharedFilesHelpers
         return $filename_with_path_v2;
     }
     
+    public static function getFilenameWithPathV3( $filename_with_path = '' )
+    {
+        $wp_theme_dir = get_template_directory();
+        $parts = explode( '/', $wp_theme_dir );
+        $parts_spliced = array_splice( $parts, -2 );
+        $filename_parts = parse_url( $filename_with_path );
+        if ( isset( $filename_parts['path'] ) ) {
+            $filename_path_parts = explode( '/', $filename_parts['path'] );
+        }
+        $filename_path_parts_sliced = array_slice( $filename_path_parts, -3, 3 );
+        if ( is_array( $filename_path_parts_sliced ) && $filename_path_parts_sliced[0] == 'uploads' ) {
+            \array_splice( $filename_path_parts_sliced, 0, 1 );
+        }
+        $final_url = implode( '/', $parts ) . '/uploads/' . implode( '/', $filename_path_parts_sliced );
+        return $final_url;
+    }
+    
     public static function maxUploadSize()
     {
         $s = get_option( 'shared_files_settings' );

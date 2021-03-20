@@ -25,6 +25,7 @@ class SharedFilesAdminMetadata
         $s = get_option( 'shared_files_settings' );
         wp_nonce_field( plugin_basename( __FILE__ ), '_sf_file_nonce' );
         $post_id = get_the_ID();
+        $c = get_post_custom( $post_id );
         $file = get_post_meta( $post_id, '_sf_file', true );
         $filename = get_post_meta( $post_id, '_sf_filename', true );
         $description = get_post_meta( $post_id, '_sf_description', true );
@@ -63,11 +64,34 @@ class SharedFilesAdminMetadata
             $permalink = get_permalink( $embed_post_id );
             $html .= '<div style="padding: 18px; margin: 10px 0; background: rgb(252, 252, 252); border: 1px solid rgb(240, 240, 240);">';
             $html .= '<span style="font-size: 14px;">';
+            $uploader_html = esc_html( 'by a visitor', 'shared-files' );
+            
+            if ( isset( $c['_sf_user_id'][0] ) && $c['_sf_user_id'][0] ) {
+                $user = get_user_by( 'id', intval( $c['_sf_user_id'][0] ) );
+                $user_fullname = $user->user_login;
+                
+                if ( $user->first_name && $user->last_name ) {
+                    $user_fullname = $user->first_name . ' ' . $user->last_name;
+                } elseif ( $user->last_name ) {
+                    $user_fullname = $user->last_name;
+                } elseif ( $user->first_name ) {
+                    $user_fullname = $user->first_name;
+                }
+                
+                
+                if ( is_super_admin() ) {
+                    $uploader_html = esc_html( 'by', 'shared-files' ) . ' ' . '<a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
+                } else {
+                    $uploader_html = esc_html( 'by', 'shared-files' ) . ' ' . $user_fullname;
+                }
+            
+            }
+            
             
             if ( $permalink ) {
-                $html .= __( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . $permalink . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a>.';
+                $html .= __( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . $permalink . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a> ' . $uploader_html . '.';
             } else {
-                $html .= __( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . $embed_post_title . ').';
+                $html .= __( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . $embed_post_title . ', ' . $uploader_html . ').';
             }
             
             $html .= '</span>';
