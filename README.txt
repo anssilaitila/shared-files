@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.38
+Stable tag: 1.6.39.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,7 +129,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 
 == Changelog ==
 
-= 1.6.38 - 2021-03-20 =
+= 1.6.39.1 - 2021-03-21 =
+* Fixed missing file error
+
+= 1.6.39 - 2021-03-21 =
+* Bug fixes
+
+= 1.6.38 - 2021-03-21 =
 * File uploader user name is now displayed on the file card when logged in (if uploaded using the front end file upload)
 * New setting for the frontend file upload: "Hide file uploader info"
 * New setting for the frontend file upload: "Show category and tag checkboxes on multiple columns"
