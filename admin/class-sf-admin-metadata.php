@@ -23,7 +23,7 @@ class SharedFilesAdminMetadata
     {
         echo  SharedFilesAdminHelpSupport::permalinks_alert() ;
         $s = get_option( 'shared_files_settings' );
-        wp_nonce_field( plugin_basename( __FILE__ ), '_sf_file_nonce' );
+        wp_nonce_field( 'shared-files-nonce-' . get_current_user_id(), '_sf_file_nonce' );
         $post_id = get_the_ID();
         $c = get_post_custom( $post_id );
         $file = get_post_meta( $post_id, '_sf_file', true );
@@ -57,14 +57,14 @@ class SharedFilesAdminMetadata
             $file_with_url = wp_get_attachment_url( $media_library_post_id );
             $url_local = explode( site_url(), $file_with_url )[1];
             //output local path
-            $html .= __( 'This file is activated from the media library', 'shared-files' ) . ':<br /><a href="' . $media_library_href . '" style="font-weight: bold; color: #333; text-decoration: none;" target="_blank">' . $url_local . '</a>';
+            $html .= esc_html__( 'This file is activated from the media library', 'shared-files' ) . ':<br /><a href="' . $media_library_href . '" style="font-weight: bold; color: #333; text-decoration: none;" target="_blank">' . $url_local . '</a>';
             $html .= '</span>';
             $html .= '</div>';
         } elseif ( $embed_post_id ) {
             $permalink = get_permalink( $embed_post_id );
             $html .= '<div style="padding: 18px; margin: 10px 0; background: rgb(252, 252, 252); border: 1px solid rgb(240, 240, 240);">';
             $html .= '<span style="font-size: 14px;">';
-            $uploader_html = esc_html( 'by a visitor', 'shared-files' );
+            $uploader_html = esc_html__( 'by a visitor', 'shared-files' );
             
             if ( isset( $c['_sf_user_id'][0] ) && $c['_sf_user_id'][0] ) {
                 $user = get_user_by( 'id', intval( $c['_sf_user_id'][0] ) );
@@ -80,42 +80,42 @@ class SharedFilesAdminMetadata
                 
                 
                 if ( is_super_admin() ) {
-                    $uploader_html = esc_html( 'by', 'shared-files' ) . ' ' . '<a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
+                    $uploader_html = esc_html__( 'by', 'shared-files' ) . ' ' . '<a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
                 } else {
-                    $uploader_html = esc_html( 'by', 'shared-files' ) . ' ' . $user_fullname;
+                    $uploader_html = esc_html__( 'by', 'shared-files' ) . ' ' . $user_fullname;
                 }
             
             }
             
             
             if ( $permalink ) {
-                $html .= __( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . $permalink . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a> ' . $uploader_html . '.';
+                $html .= esc_html__( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . $permalink . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a> ' . $uploader_html . '.';
             } else {
-                $html .= __( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . $embed_post_title . ', ' . $uploader_html . ').';
+                $html .= esc_html__( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . $embed_post_title . ', ' . $uploader_html . ').';
             }
             
             $html .= '</span>';
-            $html .= '<br /><br /><label><input type="checkbox" name="_sf_not_public"' . (( $not_public ? 'checked="checked"' : '' )) . ' /> ' . __( 'Hide from other pages', 'shared-files' ) . '</label>';
+            $html .= '<br /><br /><label><input type="checkbox" name="_sf_not_public"' . (( $not_public ? 'checked="checked"' : '' )) . ' /> ' . esc_html__( 'Hide from other pages', 'shared-files' ) . '</label>';
             $html .= '</div>';
         }
         
         
         if ( $file ) {
             $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . get_the_ID() . '/' . SharedFilesHelpers::wp_engine() . $filename;
-            $html .= __( 'Current file:', 'shared-files' ) . ' <a href="' . $file_url . '" target="_blank">' . $file_url . '</a>';
-            $html .= '<br /><br /><b>' . __( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
+            $html .= esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . $file_url . '" target="_blank">' . $file_url . '</a>';
+            $html .= '<br /><br /><b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         } else {
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         }
         
-        $html .= '<p style="margin-bottom: 3px;">' . __( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . SharedFilesHelpers::maxUploadSize() . '</strong></p>';
-        $html .= '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . __( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
-        $html .= '<div id="shared-file-main-date-title"><strong>' . __( 'File date', 'shared-files' ) . '</strong><br /><i>' . __( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '" />';
+        $html .= '<p style="margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . SharedFilesHelpers::maxUploadSize() . '</strong></p>';
+        $html .= '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . esc_html__( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
+        $html .= '<div id="shared-file-main-date-title"><strong>' . esc_html__( 'File date', 'shared-files' ) . '</strong><br /><i>' . esc_html__( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '" />';
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $html .= SharedFilesAdminHelpers::sfProMoreFeaturesMarkup();
         }
-        $html .= '<div id="shared-file-description-title">' . __( 'Description', 'shared-files' ) . '</div>';
+        $html .= '<div id="shared-file-description-title">' . esc_html__( 'Description', 'shared-files' ) . '</div>';
         echo  $html ;
         
         if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
@@ -135,7 +135,7 @@ class SharedFilesAdminMetadata
         $file_check = 0;
         if ( !$file_check ) {
             if ( !$file ) {
-                $html .= "\n        <script>\n          jQuery(document).ready(function(\$) {\n            \$('#post').submit(function() {\n              if (\$('#sf_file').prop('files').length == 0) {\n                alert('" . __( 'Please insert the file first.', 'shared-files' ) . "');\n                return false;\n              }\n            });\n          });\n        </script>\n        ";
+                $html .= "\n        <script>\n          jQuery(document).ready(function(\$) {\n            \$('#post').submit(function() {\n              if (\$('#sf_file').prop('files').length == 0) {\n                alert('" . esc_js( __( 'Please insert the file first.', 'shared-files' ) ) . "');\n                return false;\n              }\n            });\n          });\n        </script>\n        ";
             }
         }
         echo  $html ;
@@ -149,24 +149,18 @@ class SharedFilesAdminMetadata
     public function save_custom_meta_data( $id )
     {
         
-        if ( !empty($_FILES) ) {
+        if ( isset( $_FILES['_sf_file']['name'] ) ) {
             $s = get_option( 'shared_files_settings' );
             /* --- security verification --- */
-            if ( !isset( $_POST['_sf_file_nonce'] ) || !wp_verify_nonce( $_POST['_sf_file_nonce'], plugin_basename( __FILE__ ) ) ) {
-                return $id;
-            }
-            if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
-                return $id;
-            }
             
-            if ( $_POST['post_type'] == 'page' ) {
-                if ( !current_user_can( 'edit_page', $id ) ) {
-                    return $id;
-                }
-            } else {
-                if ( !current_user_can( 'edit_page', $id ) ) {
-                    return $id;
-                }
+            if ( isset( $_POST['post_type'] ) && $_POST['post_type'] != 'shared_file' ) {
+                return $id;
+            } elseif ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+                return $id;
+            } elseif ( !current_user_can( 'edit_page', $id ) ) {
+                return $id;
+            } elseif ( !isset( $_POST['_sf_file_nonce'] ) || !wp_verify_nonce( $_POST['_sf_file_nonce'], 'shared-files-nonce-' . get_current_user_id() ) ) {
+                return $id;
             }
             
             /* - end security verification - */
@@ -199,7 +193,7 @@ class SharedFilesAdminMetadata
             
             $not_public = '';
             if ( isset( $_POST['_sf_not_public'] ) ) {
-                $not_public = $_POST['_sf_not_public'];
+                $not_public = (int) $_POST['_sf_not_public'];
             }
             update_post_meta( $id, '_sf_not_public', $not_public );
             update_post_meta( $id, '_sf_limit_downloads', $limit_downloads );
@@ -231,7 +225,7 @@ class SharedFilesAdminMetadata
                 update_post_meta( $id, '_sf_load_cnt', 0 );
                 update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                 update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
-            } elseif ( !empty($_FILES['_sf_file']['name']) ) {
+            } elseif ( isset( $_FILES['_sf_file']['name'] ) && isset( $_FILES['_sf_file']['tmp_name'] ) && $_FILES['_sf_file']['tmp_name'] ) {
                 // Get the file type of the upload
                 $arr_file_type = wp_check_filetype( basename( $_FILES['_sf_file']['name'] ) );
                 $uploaded_type = $arr_file_type['type'];
@@ -250,7 +244,13 @@ class SharedFilesAdminMetadata
                     update_post_meta( $id, '_sf_file', $upload );
                     $filename = substr( strrchr( $upload['file'], "/" ), 1 );
                     update_post_meta( $id, '_sf_filename', $filename );
-                    update_post_meta( $id, '_sf_filesize', $_FILES['_sf_file']['size'] );
+                    
+                    if ( isset( $_FILES['_sf_file']['size'] ) ) {
+                        update_post_meta( $id, '_sf_filesize', $_FILES['_sf_file']['size'] );
+                    } else {
+                        update_post_meta( $id, '_sf_filesize', 0 );
+                    }
+                    
                     update_post_meta( $id, '_sf_load_cnt', 0 );
                     update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                     update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
@@ -260,7 +260,10 @@ class SharedFilesAdminMetadata
                         $uploaded_type,
                         $filename
                     );
-                    $post_title = $_POST['post_title'];
+                    $post_title = '';
+                    if ( isset( $_POST['post_title'] ) ) {
+                        $post_title = $_POST['post_title'];
+                    }
                     
                     if ( !$post_title ) {
                         $my_post = array(

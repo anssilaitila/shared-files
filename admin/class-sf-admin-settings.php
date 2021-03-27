@@ -80,13 +80,24 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-always_preview_pdf',
-            __( 'Always show preview button for PDF files (the preview service is Google)', 'shared-files' ),
+            esc_html__( 'Always show preview button for PDF files', 'shared-files' ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_section_general',
             array(
             'label_for'  => 'shared-files-always_preview_pdf',
             'field_name' => 'always_preview_pdf',
+        )
+        );
+        add_settings_field(
+            'shared-files-bypass_preview_pdf',
+            esc_html__( 'Bypass the preview service when previewing PDF files. The file is opened in the browser directly.', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-bypass_preview_pdf',
+            'field_name' => 'bypass_preview_pdf',
         )
         );
         add_settings_field(
@@ -877,6 +888,17 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-' . $only_pro . 'file_upload_new_category',
             'field_name' => $only_pro . 'file_upload_new_category',
+        )
+        );
+        add_settings_field(
+            'shared-files-show_tag_dropdown_on_file_upload',
+            __( 'Show tag dropdown for front-end file uploader', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-show_tag_dropdown_on_file_upload',
+            'field_name' => 'show_tag_dropdown_on_file_upload',
         )
         );
         add_settings_field(

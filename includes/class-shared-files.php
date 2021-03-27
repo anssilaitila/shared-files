@@ -109,6 +109,7 @@ class Shared_Files {
      */
     require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-shared-files-i18n.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-shared-files-helpers.php';
+    require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-shared-files-file-open.php';
 
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin.php';
     require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-sf-admin-cpt.php';

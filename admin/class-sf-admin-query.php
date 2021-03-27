@@ -82,7 +82,10 @@ class SharedFilesAdminQuery
         if ( $sf_query ) {
             
             if ( $file_id ) {
-                $filesize = get_post_meta( $file_id, '_sf_filesize', true ) || 0;
+                $filesize = 0;
+                if ( get_post_meta( $file_id, '_sf_filesize', true ) ) {
+                    $filesize = get_post_meta( $file_id, '_sf_filesize', true );
+                }
                 $external_url = esc_url_raw( get_post_meta( $file_id, '_sf_external_url', true ) );
                 
                 if ( $external_url ) {
@@ -95,29 +98,20 @@ class SharedFilesAdminQuery
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $redirect = 1;
                     }
-                    $filename = $file['file'];
-                    $wp_upload_dir = wp_upload_dir();
-                    $path = pathinfo( $filename );
+                    $filename = '';
+                    if ( isset( $file['file'] ) ) {
+                        $filename = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
+                    }
                     
                     if ( is_super_admin() && isset( $_GET['DEBUG_FILE'] ) ) {
-                        echo  '<pre>' . var_dump( $file ) . '</pre>' ;
-                        echo  '<pre>' . var_dump( SharedFilesHelpers::getFilenameWithPathV2( $filename ) ) . '</pre>' ;
+                        echo  '<pre>' . var_dump( $file['file'] ) . '</pre>' ;
+                        echo  '<pre>' . var_dump( $filename ) . '</pre>' ;
                         wp_die();
                     }
                     
-                    
-                    if ( !isset( $filename ) || !file_exists( $filename ) ) {
-                        $filename_with_path_v2 = SharedFilesHelpers::getFilenameWithPathV2( $filename );
-                        
-                        if ( !$redirect && (!isset( $filename_with_path_v2 ) || !file_exists( $filename_with_path_v2 )) ) {
-                            $filename_with_path_v3 = SharedFilesHelpers::getFilenameWithPathV3( $filename );
-                            if ( !isset( $filename_with_path_v3 ) || !file_exists( $filename_with_path_v3 ) ) {
-                                wp_die( __( 'File not found', 'shared-files' ) );
-                            }
-                        }
-                    
+                    if ( !$redirect && (!isset( $filename ) || !file_exists( $filename )) ) {
+                        wp_die( esc_html__( 'File not found:', 'shared-files' ) . '<br />' . $filename );
                     }
-                    
                     $file_mime = '';
                     
                     if ( function_exists( 'mime_content_type' ) ) {

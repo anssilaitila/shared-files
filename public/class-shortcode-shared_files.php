@@ -220,37 +220,39 @@ class ShortcodeSharedFiles
             
             if ( $wpb_all_query->have_posts() ) {
                 $html .= '<ul id="myList" class="shared-files-ajax-list">';
-                while ( $wpb_all_query->have_posts() ) {
-                    $wpb_all_query->the_post();
-                    $id = get_the_id();
-                    $c = get_post_custom( $id );
-                    $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
-                    $filetype = '';
-                    $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
+                if ( !isset( $atts['hide_files_first'] ) ) {
+                    while ( $wpb_all_query->have_posts() ) {
+                        $wpb_all_query->the_post();
+                        $id = get_the_id();
+                        $c = get_post_custom( $id );
+                        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
+                        $filetype = '';
+                        $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
+                        
+                        if ( isset( $atts['file_upload'] ) ) {
+                            $html .= SharedFilesPublicHelpers::fileListItem(
+                                $c,
+                                $imagefile,
+                                $hide_description,
+                                1
+                            );
+                        } elseif ( isset( $atts['category'] ) ) {
+                            $html .= SharedFilesPublicHelpers::fileListItem(
+                                $c,
+                                $imagefile,
+                                $hide_description,
+                                0
+                            );
+                        } else {
+                            $html .= SharedFilesPublicHelpers::fileListItem(
+                                $c,
+                                $imagefile,
+                                $hide_description,
+                                1
+                            );
+                        }
                     
-                    if ( isset( $atts['file_upload'] ) ) {
-                        $html .= SharedFilesPublicHelpers::fileListItem(
-                            $c,
-                            $imagefile,
-                            $hide_description,
-                            1
-                        );
-                    } elseif ( isset( $atts['category'] ) ) {
-                        $html .= SharedFilesPublicHelpers::fileListItem(
-                            $c,
-                            $imagefile,
-                            $hide_description,
-                            0
-                        );
-                    } else {
-                        $html .= SharedFilesPublicHelpers::fileListItem(
-                            $c,
-                            $imagefile,
-                            $hide_description,
-                            1
-                        );
                     }
-                
                 }
                 $html .= '</ul>';
             } elseif ( !isset( $atts['file_upload'] ) ) {

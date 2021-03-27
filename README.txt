@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.39.1
+Stable tag: 1.6.40
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,8 +129,15 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 
 == Changelog ==
 
-= 1.6.39.1 - 2021-03-21 =
-* Fixed missing file error
+= 1.6.40 - 2021-03-27 =
+* New parameter [shared_files hide_files_first=1]: Hide files first (files are shown when searched or category/tag is selected)
+* New parameter [shared_files file_upload=1 tag_dropdown=1]: Show tag dropdown for the uploader
+* New parameter [shared_files categories__and="category-1,category-2"]: Show files that belong to all of these categories
+* New setting: "Show tag dropdown for front-end file uploader"
+* New setting: "Bypass the preview service when previewing PDF files. The file is opened in the browser directly."
+* Fix: password autofill is now disabled when adding a new file
+* Fix: file urls (using the default method) now continue to work normally when the site is moved to a different location and paths are different on the server
+* Fix: front end file uploader now works correctly when the WordPress is installed in a subdirectory
 
 = 1.6.39 - 2021-03-21 =
 * Bug fixes

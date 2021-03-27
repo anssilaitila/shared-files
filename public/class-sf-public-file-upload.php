@@ -13,9 +13,9 @@ class SharedFilesFileUpload
         $post_title = get_the_title();
         
         if ( isset( $_GET ) && isset( $_GET['shared-files-upload'] ) ) {
-            $html .= '<div class="shared-files-upload-complete">' . __( 'File successfully uploaded.', 'shared-files' ) . '</div>';
+            $html .= '<div class="shared-files-upload-complete">' . esc_html__( 'File successfully uploaded.', 'shared-files' ) . '</div>';
         } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_file'] ) && isset( $_GET['sc'] ) ) {
-            $html .= '<div class="shared-files-file-deleted">' . __( 'File successfully deleted.', 'shared-files' ) . '</div>';
+            $html .= '<div class="shared-files-file-deleted">' . esc_html__( 'File successfully deleted.', 'shared-files' ) . '</div>';
         }
         
         $html .= '<div class="sf-public-file-upload-container">';
@@ -31,11 +31,11 @@ class SharedFilesFileUpload
         $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
         $accept = '';
         $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" /><hr class="clear" />';
-        $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . __( 'Maximum file size:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
+        $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . esc_html__( 'Maximum file size:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         
         if ( isset( $s['file_upload_show_external_url'] ) ) {
             $html .= '<div class="shared-files-file-upload-youtube-container">';
-            $external_url_title = __( 'Or enter a YouTube URL:', 'shared-files' );
+            $external_url_title = esc_html__( 'Or enter a YouTube URL:', 'shared-files' );
             if ( isset( $s['file_upload_external_url_title'] ) && $s['file_upload_external_url_title'] ) {
                 $external_url_title = $s['file_upload_external_url_title'];
             }
@@ -45,17 +45,38 @@ class SharedFilesFileUpload
         }
         
         
-        if ( isset( $atts['tag_checkboxes'] ) || isset( $s['show_tag_checkboxes_on_file_upload'] ) ) {
-            $taglist_args = [
-                'taxonomy' => 'post_tag',
-                'echo'     => 0,
-            ];
-            $html .= '<span class="sf-taglist-title">' . __( 'Tags', 'shared-files' ) . '</span><ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
+        if ( isset( $atts['tag_dropdown'] ) || isset( $s['show_tag_dropdown_on_file_upload'] ) ) {
+            $tag_slug_for_dropdown = 'post_tag';
+            if ( get_taxonomy( $tag_slug_for_dropdown ) ) {
+                $html .= wp_dropdown_categories( [
+                    'show_option_all' => ' ',
+                    'hide_empty'      => 0,
+                    'hierarchical'    => 0,
+                    'show_count'      => 1,
+                    'orderby'         => 'name',
+                    'name'            => $tag_slug_for_dropdown,
+                    'value_field'     => 'slug',
+                    'taxonomy'        => $tag_slug_for_dropdown,
+                    'echo'            => 0,
+                    'class'           => 'select_v2',
+                    'show_option_all' => esc_html__( 'Choose tag', 'shared-files' ),
+                ] );
+            }
+        } else {
+            
+            if ( isset( $atts['tag_checkboxes'] ) || isset( $s['show_tag_checkboxes_on_file_upload'] ) ) {
+                $taglist_args = [
+                    'taxonomy' => 'post_tag',
+                    'echo'     => 0,
+                ];
+                $html .= '<span class="sf-taglist-title">' . esc_html__( 'Tags', 'shared-files' ) . '</span><ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
+            }
+        
         }
         
-        $html .= '<span>' . __( 'Title', 'shared-files' ) . '</span>';
+        $html .= '<span>' . esc_html__( 'Title', 'shared-files' ) . '</span>';
         $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" />';
-        $html .= '<span>' . __( 'Description', 'shared-files' ) . '</span>';
+        $html .= '<span>' . esc_html__( 'Description', 'shared-files' ) . '</span>';
         $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
         $html .= '<hr class="clear" /><input type="submit" value="Submit" class="sf-public-file-upload-submit" />';
         $html .= '</form>';
@@ -99,6 +120,15 @@ class SharedFilesFileUpload
             }
             update_post_meta( $id, '_sf_embed_post_id', intval( $_POST['_sf_embed_post_id'] ) );
             update_post_meta( $id, '_sf_embed_post_title', sanitize_text_field( $_POST['_sf_embed_post_title'] ) );
+            
+            if ( isset( $_POST['post_tag'] ) ) {
+                $cat_slug = $_POST['post_tag'];
+                $cat = get_term_by( 'slug', sanitize_title( $cat_slug ), 'post_tag' );
+                if ( $cat ) {
+                    wp_set_object_terms( $id, intval( $cat->term_id ), 'post_tag' );
+                }
+            }
+            
             
             if ( isset( $_POST['tax_input']['post_tag'] ) && ($tags = $_POST['tax_input']['post_tag']) ) {
                 $tags_int = array_map( function ( $value ) {
@@ -153,7 +183,7 @@ class SharedFilesFileUpload
                 $filename = basename( $external_url );
                 update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
             } else {
-                $error_msg = __( 'File was not successfully uploaded. Please note the maximum file size.', 'shared_files' );
+                $error_msg = esc_html__( 'File was not successfully uploaded. Please note the maximum file size.', 'shared_files' );
                 wp_die( $error_msg );
             }
             
@@ -166,7 +196,7 @@ class SharedFilesFileUpload
             if ( isset( $_POST['_sf_title'] ) && $_POST['_sf_title'] ) {
                 $post_title = $_POST['_sf_title'];
             } elseif ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
-                $post_title = __( 'External URL', 'shared-files' );
+                $post_title = esc_html__( 'External URL', 'shared-files' );
             }
             
             $my_post = array(
@@ -175,8 +205,17 @@ class SharedFilesFileUpload
             );
             wp_update_post( $my_post );
             $goto_url = '/';
+            if ( isset( $s['wp_location'] ) && $s['wp_location'] ) {
+                $goto_url = $s['wp_location'];
+            }
             if ( isset( $request['pagename'] ) && $request['pagename'] ) {
-                $goto_url = '/' . $request['pagename'] . '/';
+                
+                if ( isset( $s['wp_location'] ) && $s['wp_location'] ) {
+                    $goto_url = $s['wp_location'] . $request['pagename'] . '/';
+                } else {
+                    $goto_url = '/' . $request['pagename'] . '/';
+                }
+            
             }
             
             if ( isset( $s['file_upload_send_email'] ) && is_email( $s['file_upload_send_email'] ) ) {

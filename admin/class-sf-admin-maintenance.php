@@ -32,13 +32,14 @@ class SharedFilesAdminMaintenance {
         'hide_expiration_date'          => 'on',
         'card_background'               => 'light_gray',
         'preview_service'               => 'microsoft',
-        'uncheck_hide_from_other_pages' => 'on'
+        'uncheck_hide_from_other_pages' => 'on',
+        'always_preview_pdf'            => 'on',
+        'bypass_preview_pdf'            => 'on'
       ];
 
       add_option('shared_files_settings', $default_settings);
       
     }
-
 
   }
 

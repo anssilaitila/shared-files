@@ -2,38 +2,6 @@
 
 class SharedFilesHelpers
 {
-    public static function getFilenameWithPathV2( $filename_with_path = '' )
-    {
-        $wp_upload_dir = wp_upload_dir();
-        $filename_parts = parse_url( $filename_with_path );
-        if ( isset( $filename_parts['path'] ) ) {
-            $filename_path_parts = explode( '/', $filename_parts['path'] );
-        }
-        $filename_path_parts_sliced = array_slice( $filename_path_parts, -3, 3 );
-        if ( is_array( $filename_path_parts_sliced ) && $filename_path_parts_sliced[0] == 'uploads' ) {
-            \array_splice( $filename_path_parts_sliced, 0, 1 );
-        }
-        $filename_with_path_v2 = $wp_upload_dir['basedir'] . '/' . implode( '/', $filename_path_parts_sliced );
-        return $filename_with_path_v2;
-    }
-    
-    public static function getFilenameWithPathV3( $filename_with_path = '' )
-    {
-        $wp_theme_dir = get_template_directory();
-        $parts = explode( '/', $wp_theme_dir );
-        $parts_spliced = array_splice( $parts, -2 );
-        $filename_parts = parse_url( $filename_with_path );
-        if ( isset( $filename_parts['path'] ) ) {
-            $filename_path_parts = explode( '/', $filename_parts['path'] );
-        }
-        $filename_path_parts_sliced = array_slice( $filename_path_parts, -3, 3 );
-        if ( is_array( $filename_path_parts_sliced ) && $filename_path_parts_sliced[0] == 'uploads' ) {
-            \array_splice( $filename_path_parts_sliced, 0, 1 );
-        }
-        $final_url = implode( '/', $parts ) . '/uploads/' . implode( '/', $filename_path_parts_sliced );
-        return $final_url;
-    }
-    
     public static function maxUploadSize()
     {
         $s = get_option( 'shared_files_settings' );
@@ -242,7 +210,13 @@ class SharedFilesHelpers
                 $file_url = get_site_url() . $file_url;
             }
             
-            $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+            
+            if ( isset( $s['bypass_preview_pdf'] ) ) {
+                $html .= '<a href="' . esc_url( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+            } else {
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+            }
+        
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
             $ok = array(
                 'application/msword',
