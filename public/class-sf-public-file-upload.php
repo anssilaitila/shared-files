@@ -29,6 +29,7 @@ class SharedFilesFileUpload
         $html .= '<input name="shared-files-upload" value="1" type="hidden" />';
         $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
         $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
+        $html .= '<input name="_SF_GOTO" value="' . esc_url( get_permalink() ) . '" type="hidden" />';
         $accept = '';
         $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" /><hr class="clear" />';
         $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . esc_html__( 'Maximum file size:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
@@ -204,22 +205,13 @@ class SharedFilesFileUpload
                 'post_title' => sanitize_text_field( $post_title ),
             );
             wp_update_post( $my_post );
-            $goto_url = '/';
-            if ( isset( $s['wp_location'] ) && $s['wp_location'] ) {
-                $goto_url = $s['wp_location'];
-            }
-            if ( isset( $request['pagename'] ) && $request['pagename'] ) {
-                
-                if ( isset( $s['wp_location'] ) && $s['wp_location'] ) {
-                    $goto_url = $s['wp_location'] . $request['pagename'] . '/';
-                } else {
-                    $goto_url = '/' . $request['pagename'] . '/';
-                }
-            
+            $goto_url = get_site_url();
+            if ( isset( $_POST['_SF_GOTO'] ) && $_POST['_SF_GOTO'] ) {
+                $goto_url = esc_url( $_POST['_SF_GOTO'] );
             }
             
             if ( isset( $s['file_upload_send_email'] ) && is_email( $s['file_upload_send_email'] ) ) {
-                $container_url = get_site_url() . $goto_url;
+                $container_url = $goto_url;
                 SharedFilesAdminSendMail::file_upload_send_email( $id, get_post( $id ), $container_url );
             }
             

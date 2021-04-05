@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.40\n"
+"Project-Id-Version: Shared Files 1.6.41\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-03-27T11:44:40+02:00\n"
+"POT-Creation-Date: 2021-04-05T13:52:23+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: shared-files\n"
@@ -150,7 +150,7 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:270
 #: admin/class-sf-admin-shortcodes.php:273
 #: admin/class-sf-admin-shortcodes.php:276
-#: admin/class-sf-admin-taxonomy.php:98
+#: admin/class-sf-admin-taxonomy.php:140
 msgid "Copy"
 msgstr ""
 
@@ -188,66 +188,86 @@ msgstr ""
 msgid "Define the \"WordPress location\" if you have WP installed under a subdirectory."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:132
+#: admin/class-sf-admin-help-support.php:129
+msgid "For example: if you have \"https://www.yoursite.com/example\" set for WordPress Address (URL) in the general settings of WordPress, you should set \"/example/\" for WordPress location in the plugin settings."
+msgstr ""
+
+#: admin/class-sf-admin-help-support.php:134
 msgid "If the issue still persists, we are happy to help at"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:132
+#: admin/class-sf-admin-help-support.php:134
 msgid "You can just send the debug info below and we will take a look at it."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:132
+#: admin/class-sf-admin-help-support.php:134
 msgid "Thank you!"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:141
+#: admin/class-sf-admin-help-support.php:140
+msgid "Ratings & Reviews"
+msgstr ""
+
+#: admin/class-sf-admin-help-support.php:146
+msgid "If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating."
+msgstr ""
+
+#: admin/class-sf-admin-help-support.php:155
+msgid "A huge thanks in advance!"
+msgstr ""
+
+#: admin/class-sf-admin-help-support.php:158
+msgid "Leave a rating"
+msgstr ""
+
+#: admin/class-sf-admin-help-support.php:167
 msgid "Close"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:144
-#: admin/class-sf-admin-help-support.php:152
+#: admin/class-sf-admin-help-support.php:170
+#: admin/class-sf-admin-help-support.php:178
 msgid "Open"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:152
+#: admin/class-sf-admin-help-support.php:178
 msgid "Debug Info"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:157
+#: admin/class-sf-admin-help-support.php:183
 msgid "This section contains some debug info, which may be useful when trying to solve abnormal behaviour of the plugin."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:162
+#: admin/class-sf-admin-help-support.php:188
 msgid "Variables"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:171
+#: admin/class-sf-admin-help-support.php:197
 msgid "(not set)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:187
+#: admin/class-sf-admin-help-support.php:223
 msgid "Sample file data (5 newest files)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:214
+#: admin/class-sf-admin-help-support.php:250
 msgid "More detailed data on newest file"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:236
-#: admin/class-sf-admin-help-support.php:287
+#: admin/class-sf-admin-help-support.php:272
+#: admin/class-sf-admin-help-support.php:323
 msgid "(file found)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:238
-#: admin/class-sf-admin-help-support.php:289
+#: admin/class-sf-admin-help-support.php:274
+#: admin/class-sf-admin-help-support.php:325
 msgid "(file not found)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:265
+#: admin/class-sf-admin-help-support.php:301
 msgid "Oldest file"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:323
+#: admin/class-sf-admin-help-support.php:359
 #: admin/class-sf-admin-inline-scripts.php:38
 #: admin/class-sf-admin-shortcodes.php:296
 msgid "Shortcode copied to clipboard!"
@@ -273,7 +293,7 @@ msgid "More settings available in the Pro version."
 msgstr ""
 
 #: admin/class-sf-admin-list.php:14
-#: admin/class-sf-admin-taxonomy.php:83
+#: admin/class-sf-admin-taxonomy.php:103
 msgid "Shortcode"
 msgstr ""
 
@@ -368,7 +388,7 @@ msgid "This date is displayed in the file list instead of the publish date. If e
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:145
-#: public/class-sf-public-file-upload.php:483
+#: public/class-sf-public-file-upload.php:485
 msgid "External URL"
 msgstr ""
 
@@ -396,6 +416,11 @@ msgstr ""
 msgid "Define a password here to enable password protection."
 msgstr ""
 
+#: admin/class-sf-admin-metadata.php:149
+#: admin/class-sf-admin-taxonomy.php:85
+msgid "Show"
+msgstr ""
+
 #: admin/class-sf-admin-metadata.php:176
 msgid "Expiration date"
 msgstr ""
@@ -414,7 +439,7 @@ msgstr ""
 
 #: admin/class-sf-admin-metadata.php:202
 #: admin/class-sf-admin-settings.php:1294
-#: public/class-sf-public-file-upload.php:246
+#: public/class-sf-public-file-upload.php:248
 msgid "Description"
 msgstr ""
 
@@ -426,23 +451,23 @@ msgstr ""
 msgid "Please insert the file first."
 msgstr ""
 
-#: admin/class-sf-admin-multiple-files-upload.php:108
+#: admin/class-sf-admin-multiple-files-upload.php:110
 msgid "Add multiple files"
 msgstr ""
 
-#: admin/class-sf-admin-multiple-files-upload.php:131
+#: admin/class-sf-admin-multiple-files-upload.php:133
 msgid "Maximum size of uploaded files on one submit:"
 msgstr ""
 
-#: admin/class-sf-admin-multiple-files-upload.php:132
+#: admin/class-sf-admin-multiple-files-upload.php:134
 msgid "How to increase the maximum size"
 msgstr ""
 
-#: admin/class-sf-admin-multiple-files-upload.php:151
+#: admin/class-sf-admin-multiple-files-upload.php:153
 msgid "File(s) successfully added."
 msgstr ""
 
-#: admin/class-sf-admin-query.php:184
+#: admin/class-sf-admin-query.php:194
 msgid "File not found:"
 msgstr ""
 
@@ -1244,7 +1269,7 @@ msgstr ""
 
 #: admin/class-sf-admin-sync-files.php:70
 #: admin/class-sf-admin-sync-media-library.php:71
-#: public/class-sf-public-file-upload.php:129
+#: public/class-sf-public-file-upload.php:131
 #: public/class-shortcode-shared_files.php:221
 #: public/class-shortcode-shared_files.php:241
 msgid "Choose category"
@@ -1359,7 +1384,7 @@ msgstr ""
 #: admin/class-sf-admin-taxonomy.php:42
 #: admin/class-sf-admin-taxonomy.php:43
 #: admin/class-sf-admin-taxonomy.php:55
-#: public/class-sf-public-file-upload.php:112
+#: public/class-sf-public-file-upload.php:114
 msgid "Categories"
 msgstr ""
 
@@ -1371,25 +1396,35 @@ msgstr ""
 msgid "If a value is entered, the categories are sorted by that."
 msgstr ""
 
-#: admin/class-sf-admin.php:84
+#: admin/class-sf-admin-taxonomy.php:81
+#: public/class-sf-public-file-upload.php:214
+#: public/class-sf-public-helpers.php:836
+msgid "Password"
+msgstr ""
+
+#: admin/class-sf-admin-taxonomy.php:86
+msgid "If a password is defined here, all files in this category will require a password to open."
+msgstr ""
+
+#: admin/class-sf-admin.php:101
 msgid "Settings&nbsp;&nbsp;➤"
 msgstr ""
 
-#: admin/class-sf-admin.php:90
+#: admin/class-sf-admin.php:107
 msgid "Upgrade&nbsp;&nbsp;➤"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:181
+#: includes/class-shared-files-helpers.php:204
 msgid "Show all files"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:240
-#: includes/class-shared-files-helpers.php:251
-#: includes/class-shared-files-helpers.php:253
-#: includes/class-shared-files-helpers.php:294
-#: includes/class-shared-files-helpers.php:304
-#: includes/class-shared-files-helpers.php:348
-#: includes/class-shared-files-helpers.php:358
+#: includes/class-shared-files-helpers.php:263
+#: includes/class-shared-files-helpers.php:274
+#: includes/class-shared-files-helpers.php:276
+#: includes/class-shared-files-helpers.php:317
+#: includes/class-shared-files-helpers.php:327
+#: includes/class-shared-files-helpers.php:371
+#: includes/class-shared-files-helpers.php:381
 msgid "Preview"
 msgstr ""
 
@@ -1401,46 +1436,41 @@ msgstr ""
 msgid "File successfully deleted."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:71
+#: public/class-sf-public-file-upload.php:73
 msgid "Featured image"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:78
+#: public/class-sf-public-file-upload.php:80
 msgid "Maximum file size:"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:84
+#: public/class-sf-public-file-upload.php:86
 msgid "Or enter a YouTube URL:"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:146
+#: public/class-sf-public-file-upload.php:148
 msgid "Name for a new category"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:147
+#: public/class-sf-public-file-upload.php:149
 msgid "A new category will be created and the uploaded file is assigned to it."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:164
+#: public/class-sf-public-file-upload.php:166
 msgid "Choose a parent category for the new category (optional)"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:193
+#: public/class-sf-public-file-upload.php:195
 #: public/class-shortcode-shared_files.php:265
 msgid "Choose tag"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:201
+#: public/class-sf-public-file-upload.php:203
 msgid "Tags"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:205
+#: public/class-sf-public-file-upload.php:207
 msgid "Title"
-msgstr ""
-
-#: public/class-sf-public-file-upload.php:212
-#: public/class-sf-public-helpers.php:836
-msgid "Password"
 msgstr ""
 
 #: public/class-sf-public-helpers.php:14

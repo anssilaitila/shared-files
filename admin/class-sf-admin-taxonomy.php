@@ -64,6 +64,9 @@ class SharedFilesAdminTaxonomy
         ?></div>
       </td>  
     </tr>  
+
+    <?php 
+        ?>
     
   <?php 
     }
@@ -79,6 +82,17 @@ class SharedFilesAdminTaxonomy
             'posts'       => __( 'Posts' ),
         );
         return $new_columns;
+    }
+    
+    function save_term_fields( $term_id )
+    {
+        
+        if ( isset( $_POST['_sf_cat_password'] ) && $_POST['_sf_cat_password'] ) {
+            update_term_meta( $term_id, '_sf_cat_password', sanitize_text_field( $_POST['_sf_cat_password'] ) );
+        } elseif ( isset( $_POST['_sf_cat_password'] ) && !$_POST['_sf_cat_password'] ) {
+            update_term_meta( $term_id, '_sf_cat_password', '' );
+        }
+    
     }
     
     public function add_shared_file_category_column_content( $content, $column_name, $term_id )

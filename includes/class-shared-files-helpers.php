@@ -2,6 +2,21 @@
 
 class SharedFilesHelpers
 {
+    public static function getCatPassword( $file_id )
+    {
+        $cat_password = '';
+        $terms = get_the_terms( $file_id, 'shared-file-category' );
+        if ( $terms ) {
+            foreach ( $terms as $term ) {
+                $password = get_term_meta( $term->term_id, '_sf_cat_password', true );
+                if ( $password ) {
+                    $cat_password = $password;
+                }
+            }
+        }
+        return $cat_password;
+    }
+    
     public static function maxUploadSize()
     {
         $s = get_option( 'shared_files_settings' );

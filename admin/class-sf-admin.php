@@ -66,14 +66,31 @@ class Shared_Files_Admin {
    * @since    1.0.0
    */
   function delete_shared_file($post_id) {
-    $file = get_post_meta($post_id, '_sf_file', true);
 
-    if (isset($file['file']) && file_exists($file['file'])) {
-      
-      if (strpos($file['file'], '/wp-content/uploads/shared-files/') !== false) {
-        unlink($file['file']);
+    $file = get_post_meta($post_id, '_sf_file', true);
+    
+    if (isset($file['file']) && $file['file']) {
+
+      $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilenameOnDisk($file['file']);
+    
+      if (file_exists($filename_with_path)) {
+
+        if (strpos($filename_with_path, '/wp-content/uploads/shared-files/') !== false) {
+          unlink($filename_with_path);
+        }
+
       }
+
+    }
+
+    if (has_post_thumbnail( $post_id )) {
+
+      $thumbnail_id = get_post_thumbnail_id( $post_id );
       
+      if ($thumbnail_id) {
+        // Delete all thumbnails generated for featured image
+        wp_delete_attachment($thumbnail_id, true);
+      }
     }
 
   }

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.40
+Stable tag: 1.6.41
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.41 - 2021-04-05 =
+* (Free and Pro) The frontend file uploader should now redirect to correct url after adding a file, in all cases
+* (Pro) The multi file uploader now generates the file title (post title) in a more reasonable way
+* (Pro) You can now set a password for a category. All files belonging to that category will then require a password to open.
+* Fix: all thumbnails regarding the file are now deleted when the file is permanently deleted from trash
 
 = 1.6.40 - 2021-03-27 =
 * New parameter [shared_files hide_files_first=1]: Hide files first (files are shown when searched or category/tag is selected)

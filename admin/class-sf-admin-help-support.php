@@ -125,11 +125,37 @@ class SharedFilesAdminHelpSupport {
             <?= esc_html__('Check the checkbox for "WP Engine compatibility mode".', 'shared-files') ?>
           </li>
           <li>
-            <?= esc_html__('Define the "WordPress location" if you have WP installed under a subdirectory.', 'shared-files') ?>
+            <p><?= esc_html__('Define the "WordPress location" if you have WP installed under a subdirectory.', 'shared-files') ?></p>
+            <p><?= esc_html__('For example: if you have "https://www.yoursite.com/example" set for WordPress Address (URL) in the general settings of WordPress, you should set "/example/" for WordPress location in the plugin settings.', 'shared-files') ?></p>
+
           </li>
         </ul>
         
         <p><?= esc_html__('If the issue still persists, we are happy to help at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>. <?= esc_html__('You can just send the debug info below and we will take a look at it.', 'shared-files') ?> <?= esc_html__('Thank you!', 'shared-files') ?></p>
+        
+      </div>
+
+      <div class="shared-files-admin-section">
+      
+        <h2><?= esc_html__('Ratings & Reviews', 'shared-files') ?></h2>
+
+        <p>
+          <?php
+          $text = sprintf(
+            wp_kses(
+              __('If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating.', 'shared-files'),
+              array('strong' => array())
+            )
+          );
+          echo $text;
+          ?>
+
+        </p>
+        <p>
+          <?= esc_html__('A huge thanks in advance!', 'shared-files'); ?>
+        </p>
+      
+        <a href="https://wordpress.org/support/view/plugin-reviews/shared-files?filter=5#postform" target="_blank" class="button-primary"><?= esc_html__('Leave a rating', 'shared-files'); ?></a>
         
       </div>
 
@@ -171,8 +197,18 @@ class SharedFilesAdminHelpSupport {
           sf_root: <?= SharedFilesHelpers::sf_root() ? SharedFilesHelpers::sf_root() : esc_html__('(not set)', 'shared-files') ?><br />
           get_template_directory(): <?php echo get_template_directory() ?><br />
           get_template_directory_uri(): <?= get_template_directory_uri() ?><br />
-          permalinks: <?= get_option('permalink_structure') ?>
-          <br />
+          permalinks: <?= get_option('permalink_structure') ?><br />
+          
+          <?php
+          $zlib = 0;
+          
+          if (function_exists('ini_get') && ini_get('zlib.output_compression')) {
+            $zlib = 1;
+          }
+          ?>
+          
+          zlib: <?= $zlib ?><br />
+          
     
           <?php
             $wp_query = new WP_Query(array(
