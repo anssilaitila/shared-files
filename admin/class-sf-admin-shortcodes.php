@@ -106,6 +106,31 @@ class SharedFilesAdminShortcodes {
       </div>
 
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
+                    
+        <h2>
+          <?= esc_html__('Enable front-end editor for all files') ?>
+      
+          <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+          <?php else: ?>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+          <?php endif; ?>
+      
+        </h2>
+
+        <p><?= esc_html__('Enable front-end edit using the following shortcodes (user roles must also be activated from the plugin settings):', 'shared-files') ?></p>
+      
+        <ul>  
+         <li>
+            <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></span>
+         </li>
+         <li>
+            <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
       
         <h2>
           <?= esc_html__('Front-end uploader', 'shared-files') ?>

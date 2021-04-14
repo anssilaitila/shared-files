@@ -19,6 +19,41 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
+    public static function checkCatPassword( $term_slug, $return_markup )
+    {
+        $html = '';
+        $parent_cat = get_term_by( 'slug', $term_slug, 'shared-file-category' );
+        $cat_password = SharedFilesTermMetadata::get_hierarchichal_term_metadata( $parent_cat, '_sf_cat_password' );
+        $cat_password_protection_type = SharedFilesTermMetadata::get_hierarchichal_term_metadata( $parent_cat, '_sf_cat_password_protection_type' );
+        $file_list_is_password_protected = 0;
+        if ( $cat_password_protection_type == 'cookie' ) {
+            $file_list_is_password_protected = 1;
+        }
+        $given_password = '';
+        
+        if ( isset( $_POST['_sf_cat_password'] ) && $_POST['_sf_cat_password'] ) {
+            $given_password = $_POST['_sf_cat_password'];
+        } else {
+            if ( $cat_password_protection_type == 'cookie' && isset( $_COOKIE['_sf_cat_password'] ) && $_COOKIE['_sf_cat_password'] ) {
+                $given_password = $_COOKIE['_sf_cat_password'];
+            }
+        }
+        
+        if ( $file_list_is_password_protected && (!$given_password || $given_password != $cat_password) ) {
+            
+            if ( $return_markup ) {
+                $html = SharedFilesPublicHelpers::passwordProtectedMarkupForFileList();
+            } else {
+                echo  SharedFilesPublicHelpers::passwordProtectedMarkupForFileList() ;
+                die;
+            }
+        
+        }
+        if ( $return_markup ) {
+            return $html;
+        }
+    }
+    
     public static function listCategories( $categories )
     {
         $html = '';
@@ -49,7 +84,9 @@ class SharedFilesPublicHelpers
         $s = get_option( 'shared_files_settings' );
         $file_id = get_the_id();
         $date_format = get_option( 'date_format' );
-        $password = get_post_meta( $file_id, '_sf_password', true );
+        $password = '';
+        $cat_password = '';
+        $file_password = '';
         $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
         $left_style = '';
         
@@ -180,6 +217,9 @@ class SharedFilesPublicHelpers
             }
         }
         
+        if ( is_user_logged_in() ) {
+            $html .= SharedFilesPublicHelpers::editFile( $file_id );
+        }
         $html .= '</div>';
         
         if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
@@ -267,7 +307,9 @@ class SharedFilesPublicHelpers
         $file_id = get_the_id();
         $file_url = self::getFileURL( $file_id );
         $date_format = get_option( 'date_format' );
-        $password = get_post_meta( $file_id, '_sf_password', true );
+        $password = '';
+        $cat_password = '';
+        $file_password = '';
         $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
         
         if ( isset( $s['card_align_elements_vertically'] ) ) {
@@ -409,6 +451,9 @@ class SharedFilesPublicHelpers
             }
         }
         
+        if ( is_user_logged_in() ) {
+            $html .= SharedFilesPublicHelpers::editFile( $file_id );
+        }
         $html .= '</div>';
         
         if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
@@ -420,6 +465,86 @@ class SharedFilesPublicHelpers
         
         $html .= '</div>';
         $html .= '</li>';
+        return $html;
+    }
+    
+    public static function editFile( $file_id )
+    {
+        $s = get_option( 'shared_files_settings' );
+        $can_edit_files = 0;
+        $html = '';
+        if ( !is_user_logged_in() ) {
+            return '';
+        }
+        $user = wp_get_current_user();
+        $roles = (array) $user->roles;
+        foreach ( $roles as $role ) {
+            $setting = 'can_edit_files_' . $role;
+            if ( isset( $s[$setting] ) ) {
+                $can_edit_files = 1;
+            }
+        }
+        if ( !$can_edit_files ) {
+            return '';
+        }
+        if ( !function_exists( 'wp_terms_checklist' ) ) {
+            include_once ABSPATH . 'wp-admin/includes/template.php';
+        }
+        $html .= '<hr class="clear" />';
+        $html .= '<button class="shared-files-edit-file">' . esc_html__( 'Edit', 'shared-files' ) . '</button>';
+        $html .= '<div class="shared-files-edit-single-file">';
+        $html .= '<form method="post" enctype="multipart/form-data">';
+        $html .= wp_nonce_field(
+            'sf_update_file',
+            'secret_code',
+            true,
+            false
+        );
+        $html .= '<input name="_sf_file_id" value="' . $file_id . '" type="hidden" />';
+        $html .= '<input name="shared-files-update-file" value="1" type="hidden" />';
+        $goto_url = add_query_arg( NULL, NULL );
+        $html .= '<input name="_SF_GOTO" type="hidden" style="width: 100%;" value="' . esc_url( $goto_url ) . '" />';
+        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Title', 'shared-files' ) . '</span>';
+        $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="' . esc_attr( get_the_title() ) . '" />';
+        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Categories', 'shared-files' ) . '</span>';
+        $taxonomy_slug = 'shared-file-category';
+        $term_ids = [];
+        if ( $terms = get_the_terms( $file_id, $taxonomy_slug ) ) {
+            $term_ids = wp_list_pluck( $terms, 'term_id' );
+        }
+        $termlist_args = [
+            'taxonomy'      => $taxonomy_slug,
+            'echo'          => 0,
+            'selected_cats' => $term_ids,
+        ];
+        $html .= '<ul class="sf-termlist">' . wp_terms_checklist( 0, $termlist_args ) . '</ul>';
+        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Tags', 'shared-files' ) . '</span>';
+        $tag_slug = 'post_tag';
+        $tag_ids = [];
+        if ( $terms = get_the_terms( $file_id, $tag_slug ) ) {
+            $tag_ids = wp_list_pluck( $terms, 'term_id' );
+        }
+        $taglist_args = [
+            'taxonomy'      => $tag_slug,
+            'echo'          => 0,
+            'selected_cats' => $tag_ids,
+        ];
+        $html .= '<ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
+        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Replace with a new file', 'shared-files' ) . '</span>';
+        $html .= '<input type="file" id="sf_file" name="_sf_file" size="25" /><hr class="clear" />';
+        $html .= '<hr class="clear" /><input type="submit" value="' . esc_html__( 'Submit', 'shared-files' ) . '" class="sf-public-file-update-submit" />';
+        $html .= '</form>';
+        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Delete file', 'shared-files' ) . '</span>';
+        $user = wp_get_current_user();
+        $bare_url = './?_sf_delete_editable_file=' . $file_id;
+        $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_editable_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_attr__( 'Are you sure?', 'shared-files' ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
+        $html .= '</div>';
+        return $html;
+    }
+    
+    public static function passwordProtectedMarkupForFileList()
+    {
+        $html = '';
         return $html;
     }
     

@@ -103,6 +103,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-i18n.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-file-open.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-term-metadata.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-cpt.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-taxonomy.php';
@@ -294,17 +295,20 @@ class Shared_Files
         $plugin_public_ajax = new SharedFilesPublicAjax();
         $plugin_public_file_upload = new SharedFilesFileUpload();
         $plugin_public_load = new SharedFilesPublicLoad();
-        // Enqueue CSS + JS + register shortcodes
+        // Enqueue CSS + JS + register shortcodes + set cookies
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public_load, 'public_inline_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
         $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
+        $this->loader->add_action( 'init', $plugin_public_load, 'set_cookies' );
         // Ajax
         $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_footer', $plugin_public_ajax, 'my_ajax_without_file' );
         // Front-end file upload
         $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload' );
+        // Front-end file update
+        $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_update' );
     }
     
     /**

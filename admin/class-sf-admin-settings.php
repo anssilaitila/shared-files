@@ -1030,6 +1030,31 @@ class Shared_Files_Settings
             'placeholder' => '',
         )
         );
+        $tab = 8;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        global  $wp_roles ;
+        $roles = $wp_roles->get_names();
+        foreach ( $roles as $key => $value ) {
+            if ( $key && $value ) {
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'can_edit_files_' . $key,
+                    $value,
+                    array( $this, 'checkbox_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'   => 'shared-files-' . $only_pro . 'can_edit_files_' . $key,
+                    'field_name'  => $only_pro . 'can_edit_files_' . $key,
+                    'placeholder' => '',
+                )
+                );
+            }
+        }
     }
     
     public function checkbox_render( $args )
@@ -1494,7 +1519,7 @@ class Shared_Files_Settings
     public function shared_files_settings_general_section_callback()
     {
         echo  '<div class="shared-files-how-to-get-started">' ;
-        echo  '<h2>' . __( 'How to get started', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'How to get started', 'shared-files' ) . '</h2>' ;
         echo  '<ol>' ;
         echo  '<li><span>' ;
         $url = get_admin_url() . 'edit.php?post_type=shared_file';
@@ -1526,43 +1551,52 @@ class Shared_Files_Settings
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-2">' ;
-        echo  '<h2>' . __( 'Layout settings', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Layout settings', 'shared-files' ) . '</h2>' ;
     }
     
     public function shared_files_settings_tab_3_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-3">' ;
-        echo  '<h2>' . __( 'Change default file icons', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Change default file icons', 'shared-files' ) . '</h2>' ;
     }
     
     public function shared_files_settings_tab_4_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-4">' ;
-        echo  '<h2>' . __( 'Custom file types', 'shared-files' ) . '</h2>' ;
-        echo  '<p>' . __( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
+        echo  '<h2>' . esc_html__( 'Custom file types', 'shared-files' ) . '</h2>' ;
+        echo  '<p>' . esc_html__( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
     }
     
     public function shared_files_settings_tab_5_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-5">' ;
-        echo  '<h2>' . __( 'Email settings', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Email settings', 'shared-files' ) . '</h2>' ;
     }
     
     public function shared_files_settings_admin_list_section_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-6">' ;
-        echo  '<h2>' . __( 'Admin list', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Admin list', 'shared-files' ) . '</h2>' ;
     }
     
     public function shared_files_settings_tab_7_callback()
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-7">' ;
-        echo  '<h2>' . __( 'Front-end file uploader settings', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Front-end file uploader settings', 'shared-files' ) . '</h2>' ;
+    }
+    
+    public function shared_files_settings_tab_8_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-8">' ;
+        echo  '<h2>' . esc_html__( 'File edit settings', 'shared-files' ) . '</h2>' ;
+        echo  '<p>' . esc_html__( 'These settings are valid for shortcodes [shared_files edit=1] and [shared_files_categories edit=1].', 'shared-files' ) . '</p>' ;
+        echo  '<p>' . esc_html__( 'The following user roles have the permissions to edit any file:', 'shared-files' ) . '</p>' ;
     }
     
     public function settings_page()
@@ -1576,31 +1610,34 @@ class Shared_Files_Settings
     <form action="options.php" method="post" class="shared-files-settings-form">
 
       <h1><?php 
-        echo  __( 'Shared Files Settings', 'shared-files' ) ;
+        echo  esc_html__( 'Shared Files Settings', 'shared-files' ) ;
         ?></h1>
 
       <div class="shared-files-settings-tabs-container">
         <ul class="shared-files-settings-tabs">
           <li class="shared-files-settings-tab-1-title" data-settings-container="shared-files-settings-tab-1"><span><?php 
-        echo  __( 'General settings', 'shared-files' ) ;
+        echo  esc_html__( 'General settings', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-2-title" data-settings-container="shared-files-settings-tab-2"><span><?php 
-        echo  __( 'Layout', 'shared-files' ) ;
+        echo  esc_html__( 'Layout', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-3-title" data-settings-container="shared-files-settings-tab-3"><span><?php 
-        echo  __( 'File type icons', 'shared-files' ) ;
+        echo  esc_html__( 'File type icons', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-4-title" data-settings-container="shared-files-settings-tab-4"><span><?php 
-        echo  __( 'Custom file types', 'shared-files' ) ;
+        echo  esc_html__( 'Custom file types', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-5-title" data-settings-container="shared-files-settings-tab-5"><span><?php 
-        echo  __( 'Email', 'shared-files' ) ;
+        echo  esc_html__( 'Email', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-6-title" data-settings-container="shared-files-settings-tab-6"><span><?php 
-        echo  __( 'Admin list & columns', 'shared-files' ) ;
+        echo  esc_html__( 'Admin list & columns', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-7-title" data-settings-container="shared-files-settings-tab-7"><span><?php 
-        echo  __( 'File upload', 'shared-files' ) ;
+        echo  esc_html__( 'File upload', 'shared-files' ) ;
+        ?></span></li>
+          <li class="shared-files-settings-tab-8-title" data-settings-container="shared-files-settings-tab-8"><span><?php 
+        echo  esc_html__( 'File edit', 'shared-files' ) ;
         ?></span></li>
           <hr class="clear" />
         </ul>
@@ -1641,22 +1678,22 @@ class Shared_Files_Settings
             echo  $args['field_name'] ;
             ?>]">
           <option value=""><?php 
-            echo  __( 'Default list', 'shared-files' ) ;
+            echo  esc_html__( 'Default list', 'shared-files' ) ;
             ?></option>
           <option value="2-cards-on-the-same-row" <?php 
             echo  ( $layout == '2-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
-            echo  __( '2 columns', 'shared-files' ) ;
+            echo  esc_html__( '2 columns', 'shared-files' ) ;
             ?></option>
           <option value="3-cards-on-the-same-row" <?php 
             echo  ( $layout == '3-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
-            echo  __( '3 columns', 'shared-files' ) ;
+            echo  esc_html__( '3 columns', 'shared-files' ) ;
             ?></option>
           <option value="4-cards-on-the-same-row" <?php 
             echo  ( $layout == '4-cards-on-the-same-row' ? 'selected' : '' ) ;
             ?>><?php 
-            echo  __( '4 columns', 'shared-files' ) ;
+            echo  esc_html__( '4 columns', 'shared-files' ) ;
             ?></option>
       </select>
       <?php 
@@ -1716,11 +1753,11 @@ class Shared_Files_Settings
 
       <div class="email-info">
         <?php 
-            echo  __( 'Default method means opening the files using the following url format:', 'shared-files' ) ;
+            echo  esc_html__( 'Default method means opening the files using the following url format:', 'shared-files' ) ;
             ?><br />
         <strong>/shared-files/123/this-is-a-file.pdf</strong><br /><br />
         <?php 
-            echo  __( 'Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files' ) ;
+            echo  esc_html__( 'Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files' ) ;
             ?><br />
         <strong>/wp-content/uploads/shared-files/this-is-a-file.pdf</strong>
       </div>

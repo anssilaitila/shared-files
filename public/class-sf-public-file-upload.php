@@ -222,6 +222,11 @@ class SharedFilesFileUpload
         return $request;
     }
     
+    public function file_update( $request )
+    {
+        return $request;
+    }
+    
     /**
      * Set the custom upload directory.
      *

@@ -29,5 +29,18 @@ class SharedFilesPublicLoad {
   
   }
 
+  /**
+   * Set cookies.
+   *
+   * @since    1.0.0
+   */
+  public function set_cookies() {
+
+    if (isset($_POST['_sf_cat_password']) && $_POST['_sf_cat_password'] && !is_admin()) {
+      setcookie('_sf_cat_password', $_POST['_sf_cat_password'], strtotime('+30 minutes'), '/');
+    }
+
+  }
+
 }
 

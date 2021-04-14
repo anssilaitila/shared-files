@@ -38,6 +38,13 @@ class ShortcodeSharedFiles
         //    $meta_query_hide_not_public = array();
         $html = '';
         
+        if ( isset( $_GET ) && isset( $_GET['shared-files-update'] ) ) {
+            $html .= '<div class="shared-files-upload-complete">' . esc_html__( 'File successfully updated.', 'shared-files' ) . '</div>';
+        } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_editable_file'] ) && isset( $_GET['sc'] ) ) {
+            $html .= '<div class="shared-files-file-deleted">' . esc_html__( 'File successfully deleted.', 'shared-files' ) . '</div>';
+        }
+        
+        
         if ( isset( $atts['file_upload'] ) && (is_user_logged_in() || !isset( $s['only_logged_in_users_can_add_files'] )) ) {
             
             if ( isset( $atts['only_uploaded_files'] ) ) {
@@ -91,7 +98,15 @@ class ShortcodeSharedFiles
             if ( isset( $atts['category'] ) ) {
                 $type = 'category';
             }
-            $html .= '<div class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
+            $container_embed_id = '';
+            
+            if ( $embed_id == 'default' ) {
+                $container_embed_id = 'id="' . esc_attr( 'shared-files-default' ) . '"';
+            } elseif ( $embed_id ) {
+                $container_embed_id = 'id="' . esc_attr( $embed_id ) . '"';
+            }
+            
+            $html .= '<div ' . $container_embed_id . ' class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
             $html .= '<div id="shared-files-search">';
             
             if ( isset( $atts['category'] ) ) {
@@ -212,15 +227,19 @@ class ShortcodeSharedFiles
             $filetypes = SharedFilesHelpers::getFiletypes();
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
             $html .= '<div id="shared-files-files-found"></div>';
-            $html .= '<span id="shared-files-one-file-found">' . __( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . __( 'files found.', 'shared-files' ) . '</span>';
+            $html .= '<span id="shared-files-one-file-found">' . esc_html__( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . esc_html__( 'files found.', 'shared-files' ) . '</span>';
             $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
+            /* CATEGORY PASSWORD END */
             if ( $tag_slug ) {
                 $html .= SharedFilesHelpers::tagTitleMarkup( $tag_slug, 'shared-files-non-ajax', $hide_description );
             }
             
             if ( $wpb_all_query->have_posts() ) {
                 $html .= '<ul id="myList" class="shared-files-ajax-list">';
-                if ( !isset( $atts['hide_files_first'] ) ) {
+                
+                if ( isset( $atts['hide_files_first'] ) && !isset( $_GET ) ) {
+                    // ...
+                } else {
                     while ( $wpb_all_query->have_posts() ) {
                         $wpb_all_query->the_post();
                         $id = get_the_id();
@@ -254,9 +273,12 @@ class ShortcodeSharedFiles
                     
                     }
                 }
+                
                 $html .= '</ul>';
             } elseif ( !isset( $atts['file_upload'] ) ) {
-                $html .= '<div class="shared-files-files-not-found">' . __( 'No published files found. You should add files first from WP admin: Shared Files / File Management.', 'shared-files' ) . '</div>';
+                $html .= '<ul id="myList" class="shared-files-ajax-list"><li>';
+                $html .= '<div class="shared-files-files-not-found">' . esc_html__( 'No files found.', 'shared-files' ) . '</div>';
+                $html .= '</li></ul>';
             }
             
             $paged_current = ( $pagination_active ? get_query_var( 'paged' ) : 1 );
@@ -278,13 +300,13 @@ class ShortcodeSharedFiles
             if ( !$limit_posts ) {
                 $html .= '<div id="shared-files-pagination" class="shared-files-pagination">';
                 if ( paginate_links( $pagination_args ) ) {
-                    $html .= '<span class="shared-files-more-files">' . __( 'Browse more files:', 'shared-files' ) . '</span>' . paginate_links( $pagination_args );
+                    $html .= '<span class="shared-files-more-files">' . esc_html__( 'Browse more files:', 'shared-files' ) . '</span>' . paginate_links( $pagination_args );
                 }
                 $html .= '</div>';
             }
             
             $html .= '<div id="shared-files-nothing-found">';
-            $html .= __( 'No files found.', 'shared-files' );
+            $html .= esc_html__( 'No files found.', 'shared-files' );
             $html .= '</div>';
             $html .= '</div></div><hr class="clear" />';
             wp_reset_postdata();

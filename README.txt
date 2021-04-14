@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.41
+Stable tag: 1.6.42
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -128,6 +128,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.42 - 2021-04-14 =
+* (Pro) New feature: Front-end file editor. Can be used with shortcodes [shared_files edit=1] and [shared_files_categories edit=1]. User roles must be first activated from the plugin settings (File edit tab).
+* (Pro) New options for category password protection. See full details by editing any category.
+* (Pro) New feature: email notify of the downloaded file now contains the name of the downloader (if logged in)
+* (Pro) If the embed_id parameter is defined for the shortcode [shared_files], it is now also the id of the container element for that file list
+* Bug fixes
 
 = 1.6.41 - 2021-04-05 =
 * (Free and Pro) The frontend file uploader should now redirect to correct url after adding a file, in all cases

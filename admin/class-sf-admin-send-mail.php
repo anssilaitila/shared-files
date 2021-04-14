@@ -4,25 +4,6 @@ class SharedFilesAdminSendMail
 {
     public static function file_load_send_email( $post_id, $post )
     {
-        $post_title = get_the_title( $post_id );
-        $s = get_option( 'shared_files_settings' );
-        
-        if ( isset( $s['send_email'] ) && isset( $s['recipient_email'] ) && is_email( $s['recipient_email'] ) && is_object( $post ) && $post->post_type == 'shared_file' ) {
-            $headers = [ 'Content-Type: text/html; charset=UTF-8' ];
-            $subject = 'File downloaded: ' . $post_title;
-            $body_html = '';
-            $body_html .= '<html><head><title></title></head><body>';
-            $body_html .= '<h3 style="color: #000;">File was downloaded: ' . $post_title . '</h3>';
-            $body_html .= '<p style="color: #bbb;">-- <br />This email was sent by Shared Files Pro</p>';
-            $body_html .= '</body></html>';
-            $resp = wp_mail(
-                $s['recipient_email'],
-                $subject,
-                $body_html,
-                $headers
-            );
-        }
-    
     }
     
     public static function file_upload_send_email( $post_id, $post, $container_url )
