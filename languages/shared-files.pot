@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.42\n"
+"Project-Id-Version: Shared Files 1.6.43\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-04-14T17:33:36+03:00\n"
+"POT-Creation-Date: 2021-04-14T22:58:41+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: shared-files\n"
@@ -370,7 +370,7 @@ msgid "Current file:"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:131
-#: public/class-sf-public-helpers.php:877
+#: public/class-sf-public-helpers.php:888
 msgid "Replace with a new file"
 msgstr ""
 
@@ -1431,7 +1431,7 @@ msgstr ""
 #: admin/class-sf-admin-taxonomy.php:43
 #: admin/class-sf-admin-taxonomy.php:55
 #: public/class-sf-public-file-upload.php:114
-#: public/class-sf-public-helpers.php:844
+#: public/class-sf-public-helpers.php:847
 msgid "Categories"
 msgstr ""
 
@@ -1445,8 +1445,8 @@ msgstr ""
 
 #: admin/class-sf-admin-taxonomy.php:87
 #: public/class-sf-public-file-upload.php:214
-#: public/class-sf-public-helpers.php:915
-#: public/class-sf-public-helpers.php:1071
+#: public/class-sf-public-helpers.php:929
+#: public/class-sf-public-helpers.php:1085
 msgid "Password"
 msgstr ""
 
@@ -1553,12 +1553,12 @@ msgid "Choose tag"
 msgstr ""
 
 #: public/class-sf-public-file-upload.php:203
-#: public/class-sf-public-helpers.php:861
+#: public/class-sf-public-helpers.php:868
 msgid "Tags"
 msgstr ""
 
 #: public/class-sf-public-file-upload.php:207
-#: public/class-sf-public-helpers.php:841
+#: public/class-sf-public-helpers.php:844
 msgid "Title"
 msgstr ""
 
@@ -1583,50 +1583,66 @@ msgstr ""
 
 #: public/class-sf-public-helpers.php:352
 #: public/class-sf-public-helpers.php:739
-#: public/class-sf-public-helpers.php:890
+#: public/class-sf-public-helpers.php:901
 msgid "Are you sure?"
 msgstr ""
 
 #: public/class-sf-public-helpers.php:352
 #: public/class-sf-public-helpers.php:739
-#: public/class-sf-public-helpers.php:890
+#: public/class-sf-public-helpers.php:901
 msgid "Delete"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:826
+#: public/class-sf-public-helpers.php:829
 msgid "Edit"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:880
-#: public/class-sf-public-helpers.php:925
-#: public/class-sf-public-helpers.php:1079
-msgid "Submit"
+#: public/class-sf-public-helpers.php:864
+msgid "New categories"
+msgstr ""
+
+#: public/class-sf-public-helpers.php:864
+msgid "A comma separated list of any new categories."
 msgstr ""
 
 #: public/class-sf-public-helpers.php:884
+msgid "New tags"
+msgstr ""
+
+#: public/class-sf-public-helpers.php:884
+msgid "A comma separated list of any new tags."
+msgstr ""
+
+#: public/class-sf-public-helpers.php:891
+#: public/class-sf-public-helpers.php:939
+#: public/class-sf-public-helpers.php:1093
+msgid "Submit"
+msgstr ""
+
+#: public/class-sf-public-helpers.php:895
 msgid "Delete file"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:910
-#: public/class-sf-public-helpers.php:1066
+#: public/class-sf-public-helpers.php:924
+#: public/class-sf-public-helpers.php:1080
 msgid "Please enter password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:922
-#: public/class-sf-public-helpers.php:1076
+#: public/class-sf-public-helpers.php:936
+#: public/class-sf-public-helpers.php:1090
 msgid "Invalid password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:948
+#: public/class-sf-public-helpers.php:962
 msgid "Password protected file"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:1098
-#: public/class-sf-public-helpers.php:1220
+#: public/class-sf-public-helpers.php:1112
+#: public/class-sf-public-helpers.php:1234
 msgid "Download limit reached"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:1232
+#: public/class-sf-public-helpers.php:1246
 msgid "This file is no longer available for download."
 msgstr ""
 

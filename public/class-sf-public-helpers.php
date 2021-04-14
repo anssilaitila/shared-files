@@ -77,7 +77,8 @@ class SharedFilesPublicHelpers
         $c,
         $imagefile,
         $hide_description,
-        $show_tags = 0
+        $show_tags = 0,
+        $atts = array()
     )
     {
         $html = '';
@@ -209,7 +210,7 @@ class SharedFilesPublicHelpers
         
         }
         
-        if ( is_user_logged_in() ) {
+        if ( is_user_logged_in() && !isset( $atts['edit'] ) ) {
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
@@ -217,7 +218,7 @@ class SharedFilesPublicHelpers
             }
         }
         
-        if ( is_user_logged_in() ) {
+        if ( is_user_logged_in() && isset( $atts['edit'] ) ) {
             $html .= SharedFilesPublicHelpers::editFile( $file_id );
         }
         $html .= '</div>';
@@ -300,7 +301,8 @@ class SharedFilesPublicHelpers
         $c,
         $imagefile,
         $hide_description,
-        $show_tags = 0
+        $show_tags = 0,
+        $atts = array()
     )
     {
         $s = get_option( 'shared_files_settings' );
@@ -317,7 +319,8 @@ class SharedFilesPublicHelpers
                 $c,
                 $imagefile,
                 $hide_description,
-                $show_tags
+                $show_tags,
+                $atts
             );
             return $html;
         }
@@ -443,7 +446,7 @@ class SharedFilesPublicHelpers
         
         }
         
-        if ( is_user_logged_in() ) {
+        if ( is_user_logged_in() && !isset( $atts['edit'] ) ) {
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
@@ -451,7 +454,7 @@ class SharedFilesPublicHelpers
             }
         }
         
-        if ( is_user_logged_in() ) {
+        if ( is_user_logged_in() && isset( $atts['edit'] ) ) {
             $html .= SharedFilesPublicHelpers::editFile( $file_id );
         }
         $html .= '</div>';
@@ -473,72 +476,6 @@ class SharedFilesPublicHelpers
         $s = get_option( 'shared_files_settings' );
         $can_edit_files = 0;
         $html = '';
-        if ( !is_user_logged_in() ) {
-            return '';
-        }
-        $user = wp_get_current_user();
-        $roles = (array) $user->roles;
-        foreach ( $roles as $role ) {
-            $setting = 'can_edit_files_' . $role;
-            if ( isset( $s[$setting] ) ) {
-                $can_edit_files = 1;
-            }
-        }
-        if ( !$can_edit_files ) {
-            return '';
-        }
-        if ( !function_exists( 'wp_terms_checklist' ) ) {
-            include_once ABSPATH . 'wp-admin/includes/template.php';
-        }
-        $html .= '<hr class="clear" />';
-        $html .= '<button class="shared-files-edit-file">' . esc_html__( 'Edit', 'shared-files' ) . '</button>';
-        $html .= '<div class="shared-files-edit-single-file">';
-        $html .= '<form method="post" enctype="multipart/form-data">';
-        $html .= wp_nonce_field(
-            'sf_update_file',
-            'secret_code',
-            true,
-            false
-        );
-        $html .= '<input name="_sf_file_id" value="' . $file_id . '" type="hidden" />';
-        $html .= '<input name="shared-files-update-file" value="1" type="hidden" />';
-        $goto_url = add_query_arg( NULL, NULL );
-        $html .= '<input name="_SF_GOTO" type="hidden" style="width: 100%;" value="' . esc_url( $goto_url ) . '" />';
-        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Title', 'shared-files' ) . '</span>';
-        $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="' . esc_attr( get_the_title() ) . '" />';
-        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Categories', 'shared-files' ) . '</span>';
-        $taxonomy_slug = 'shared-file-category';
-        $term_ids = [];
-        if ( $terms = get_the_terms( $file_id, $taxonomy_slug ) ) {
-            $term_ids = wp_list_pluck( $terms, 'term_id' );
-        }
-        $termlist_args = [
-            'taxonomy'      => $taxonomy_slug,
-            'echo'          => 0,
-            'selected_cats' => $term_ids,
-        ];
-        $html .= '<ul class="sf-termlist">' . wp_terms_checklist( 0, $termlist_args ) . '</ul>';
-        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Tags', 'shared-files' ) . '</span>';
-        $tag_slug = 'post_tag';
-        $tag_ids = [];
-        if ( $terms = get_the_terms( $file_id, $tag_slug ) ) {
-            $tag_ids = wp_list_pluck( $terms, 'term_id' );
-        }
-        $taglist_args = [
-            'taxonomy'      => $tag_slug,
-            'echo'          => 0,
-            'selected_cats' => $tag_ids,
-        ];
-        $html .= '<ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
-        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Replace with a new file', 'shared-files' ) . '</span>';
-        $html .= '<input type="file" id="sf_file" name="_sf_file" size="25" /><hr class="clear" />';
-        $html .= '<hr class="clear" /><input type="submit" value="' . esc_html__( 'Submit', 'shared-files' ) . '" class="sf-public-file-update-submit" />';
-        $html .= '</form>';
-        $html .= '<span class="shared-files-single-file-title">' . esc_html__( 'Delete file', 'shared-files' ) . '</span>';
-        $user = wp_get_current_user();
-        $bare_url = './?_sf_delete_editable_file=' . $file_id;
-        $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_editable_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_attr__( 'Are you sure?', 'shared-files' ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
-        $html .= '</div>';
         return $html;
     }
     

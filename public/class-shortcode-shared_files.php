@@ -253,21 +253,24 @@ class ShortcodeSharedFiles
                                 $c,
                                 $imagefile,
                                 $hide_description,
-                                1
+                                1,
+                                $atts
                             );
                         } elseif ( isset( $atts['category'] ) ) {
                             $html .= SharedFilesPublicHelpers::fileListItem(
                                 $c,
                                 $imagefile,
                                 $hide_description,
-                                0
+                                0,
+                                $atts
                             );
                         } else {
                             $html .= SharedFilesPublicHelpers::fileListItem(
                                 $c,
                                 $imagefile,
                                 $hide_description,
-                                1
+                                1,
+                                $atts
                             );
                         }
                     
