@@ -18,6 +18,7 @@ class SharedFilesFileUpload
             $html .= '<div class="shared-files-file-deleted">' . esc_html__( 'File successfully deleted.', 'shared-files' ) . '</div>';
         }
         
+        $exclude_cat = [];
         $html .= '<div class="sf-public-file-upload-container">';
         $html .= '<form method="post" enctype="multipart/form-data">';
         $html .= wp_nonce_field(

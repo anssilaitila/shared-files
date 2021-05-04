@@ -180,6 +180,18 @@ class SharedFilesAdminShortcodes {
           
           <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 category_checkboxes=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
 
+          <li><?= esc_html__('Exclude categories:', 'shared-files') ?>
+          
+          <span class="sf-new-feature-inline"><?= esc_html__('New', 'shared-files') ?></span>
+          
+          <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+          <?php else: ?>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+          <?php endif; ?>
+          
+          <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 file_upload_exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
+
           <li><?= esc_html__('See live demo at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/shared-files/file-upload-1/" style="font-weight: bold;" target="_blank">sharedfilespro.com</a></li>
   
         </ul>
@@ -249,11 +261,18 @@ class SharedFilesAdminShortcodes {
         </h2> 
   
         <ul>
-          <li>
-              
-              <?= esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button> <?= esc_html__('or', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button>. <?= esc_html__('You can find / define the category slug by editing the category.', 'shared-files'); ?>
-            </li>
-          </ul>
+          <li>              
+            <?= esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button> <?= esc_html__('or', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button>. <?= esc_html__('You can find / define the category slug by editing the category.', 'shared-files'); ?>
+
+            <h3><?= esc_html__('Additional parameters:', 'shared-files') ?></h3>
+            
+            <ul>
+              <li><?= esc_html__('Exclude categories (by slug):', 'shared-files') ?> <?php $num++ ?> <span class="sf-new-feature-inline"><?= esc_html__('New', 'shared-files') ?></span> <span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_categories exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
+            </ul>
+
+          </li>
+
+        </ul>
           
       </div>
       

@@ -130,6 +130,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_info.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode_shared_files_simple.php';
         $this->loader = new Shared_Files_Loader();
     }

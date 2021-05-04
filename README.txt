@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.43
+Stable tag: 1.6.44
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -61,6 +61,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Alternatively, define an external URL for file and track those loads
 * Optionally receive an email notification when a file is downloaded
 * Password protected files
+* Password protected categories
 * Set expiration date to a file
 * Limit number of downloads per file
 * Multi-file upload to a specific category
@@ -128,6 +129,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.44 - 2021-05-04 =
+* (Pro) Frontend file editor now opens in a modal window
+* (Pro) Description and External URL added to frontend file editor
+* (Pro) New parameter for shortcode [shared_files], exclude categories (by slug) from the file uploader: [shared_files file_upload_exclude_cat="category-1,category-2"]
+* (Pro) New parameter for shortcode [shared_files_categories], exclude categories (by slug): [shared_files_categories exclude_cat="category-1,category-2"]
+* Bug fixes
 
 = 1.6.43 - 2021-04-14 =
 * (Pro) New fields for new categories and tags for the frontend file editor

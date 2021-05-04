@@ -415,13 +415,13 @@ class SharedFilesPublicHelpers
                 
                 
                 if ( is_super_admin() ) {
-                    $html .= esc_html( 'Uploaded by', 'shared-files' ) . ' <a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
+                    $html .= esc_html__( 'Uploaded by', 'shared-files' ) . ' <a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
                 } else {
-                    $html .= esc_html( 'Uploaded by', 'shared-files' ) . ' ' . $user_fullname;
+                    $html .= esc_html__( 'Uploaded by', 'shared-files' ) . ' ' . $user_fullname;
                 }
             
             } else {
-                $html .= esc_html( 'Uploaded by a visitor', 'shared-files' );
+                $html .= esc_html__( 'Uploaded by a visitor', 'shared-files' );
             }
             
             $html .= '</div>';

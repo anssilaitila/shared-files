@@ -20,13 +20,14 @@ class SharedFilesAdminCPT {
                             'all_items'        => __('File Management', 'shared-files'),
                             'add_new'          => __('Add New', 'shared-files')
                           ],
-                          'supports'           => array('title', 'thumbnail'),
-                          'public'             => false,
-                          'show_ui'            => true,
-                          'has_archive'        => false,
-                          'publicly_queryable' => false,
-                          'menu_icon'          => 'dashicons-index-card',
-                          'taxonomies'         => array('post_tag')
+                          'supports'            => array('title', 'thumbnail'),
+                          'public'              => false,
+                          'show_ui'             => true,
+                          'has_archive'         => false,
+                          'publicly_queryable'  => false,
+                          'menu_icon'           => 'dashicons-index-card',
+                          'taxonomies'          => array('post_tag'),
+                          'exclude_from_search' => true
                        ]
     );
 
