@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Shared Files plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.44\n"
+"Project-Id-Version: Shared Files 1.6.45\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-05-04T23:00:06+03:00\n"
+"POT-Creation-Date: 2021-05-29T17:09:26+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: shared-files\n"
@@ -155,7 +155,7 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:314
 #: admin/class-sf-admin-shortcodes.php:317
 #: admin/class-sf-admin-shortcodes.php:320
-#: admin/class-sf-admin-taxonomy.php:204
+#: admin/class-sf-admin-taxonomy.php:207
 msgid "Copy"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgid "More settings available in the Pro version."
 msgstr ""
 
 #: admin/class-sf-admin-list.php:14
-#: admin/class-sf-admin-taxonomy.php:143
+#: admin/class-sf-admin-taxonomy.php:146
 msgid "Shortcode"
 msgstr ""
 
@@ -372,7 +372,7 @@ msgid "Current file:"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:131
-#: public/class-sf-public-helpers.php:847
+#: public/class-sf-public-helpers.php:846
 msgid "Replace with a new file"
 msgstr ""
 
@@ -393,70 +393,70 @@ msgstr ""
 msgid "This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:145
+#: admin/class-sf-admin-metadata.php:162
 #: public/class-sf-public-file-upload.php:516
-#: public/class-sf-public-helpers.php:852
+#: public/class-sf-public-helpers.php:851
 msgid "External URL"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:145
+#: admin/class-sf-admin-metadata.php:162
 msgid "Instead of adding a local file, you may provide an external URL to a file located elsewhere."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:145
+#: admin/class-sf-admin-metadata.php:162
 msgid "Note: if the external URL is defined, the file above will not be saved."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:147
+#: admin/class-sf-admin-metadata.php:186
 msgid "Limit downloads"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:147
+#: admin/class-sf-admin-metadata.php:186
 msgid "When this number is reached, the file can't be downloaded anymore and an email notify is sent to the administrator."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:149
-#: admin/class-sf-admin-taxonomy.php:79
-msgid "Password protection"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:149
-msgid "Define a password here to enable password protection."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:149
-#: admin/class-sf-admin-taxonomy.php:91
-msgid "Show"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:176
+#: admin/class-sf-admin-metadata.php:210
 msgid "Expiration date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:176
+#: admin/class-sf-admin-metadata.php:210
 msgid "When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:176
-msgid "Notification email"
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:176
-msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
-msgstr ""
-
-#: admin/class-sf-admin-metadata.php:202
-#: admin/class-sf-admin-settings.php:1335
-#: public/class-sf-public-file-upload.php:279
-#: public/class-sf-public-helpers.php:898
-msgid "Description"
+#: admin/class-sf-admin-metadata.php:234
+#: admin/class-sf-admin-taxonomy.php:82
+msgid "Password protection"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:234
+msgid "Define a password here to enable password protection."
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:241
+#: admin/class-sf-admin-taxonomy.php:94
+msgid "Show"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:259
+msgid "Notification email"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:259
+msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:342
+#: admin/class-sf-admin-settings.php:1335
+#: public/class-sf-public-file-upload.php:279
+#: public/class-sf-public-helpers.php:897
+msgid "Description"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:390
 msgid "Please insert the file first or define an external URL."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:256
+#: admin/class-sf-admin-metadata.php:412
 msgid "Please insert the file first."
 msgstr ""
 
@@ -476,7 +476,7 @@ msgstr ""
 msgid "File(s) successfully added."
 msgstr ""
 
-#: admin/class-sf-admin-query.php:201
+#: admin/class-sf-admin-query.php:202
 msgid "File not found:"
 msgstr ""
 
@@ -1443,62 +1443,62 @@ msgstr ""
 #: admin/class-sf-admin-taxonomy.php:43
 #: admin/class-sf-admin-taxonomy.php:55
 #: public/class-sf-public-file-upload.php:144
-#: public/class-sf-public-helpers.php:855
+#: public/class-sf-public-helpers.php:854
 msgid "Categories"
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:70
+#: admin/class-sf-admin-taxonomy.php:73
 msgid "The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:70
+#: admin/class-sf-admin-taxonomy.php:73
 msgid "If a value is entered, the categories are sorted by that."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:87
+#: admin/class-sf-admin-taxonomy.php:90
 #: public/class-sf-public-file-upload.php:245
-#: public/class-sf-public-helpers.php:946
-#: public/class-sf-public-helpers.php:1102
+#: public/class-sf-public-helpers.php:945
+#: public/class-sf-public-helpers.php:1101
 msgid "Password"
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:92
+#: admin/class-sf-admin-taxonomy.php:95
 msgid "If a password is defined here, all files in this category will require a password to open."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:101
+#: admin/class-sf-admin-taxonomy.php:104
 msgid "Type of password protection (only active when the password is set above)"
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:106
+#: admin/class-sf-admin-taxonomy.php:109
 msgid "The files in this category can be listed by anyone."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:106
+#: admin/class-sf-admin-taxonomy.php:109
 msgid "The password is required only when opening a file from this category."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:108
+#: admin/class-sf-admin-taxonomy.php:111
 msgid "The password is required also for browsing the file list, meaning that the password is asked when this category is selected."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:110
+#: admin/class-sf-admin-taxonomy.php:113
 msgid "When the correct password is given, the user can open any file in this category and the password is not asked again in 30 minutes."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:116
+#: admin/class-sf-admin-taxonomy.php:119
 msgid "The password protection is always recursive, meaning that any subcategories will also be password protected."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:118
+#: admin/class-sf-admin-taxonomy.php:121
 msgid "When the password protection for browsing the file list is enabled, the following should be noted:"
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:121
+#: admin/class-sf-admin-taxonomy.php:124
 msgid "Use the shortcode [shared_files_categories] or [shared_files hide_files_first=1 hide_search_for_all_files=1]. This way the user will be always forced to choose a category."
 msgstr ""
 
-#: admin/class-sf-admin-taxonomy.php:122
+#: admin/class-sf-admin-taxonomy.php:125
 msgid "Listing files by a tag is not password protected (you may want to disable the tag dropdown and not use tags at all)."
 msgstr ""
 
@@ -1514,14 +1514,14 @@ msgstr ""
 msgid "Show all files"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:307
-#: includes/class-shared-files-helpers.php:309
-#: includes/class-shared-files-helpers.php:321
-#: includes/class-shared-files-helpers.php:323
-#: includes/class-shared-files-helpers.php:364
-#: includes/class-shared-files-helpers.php:374
-#: includes/class-shared-files-helpers.php:418
-#: includes/class-shared-files-helpers.php:428
+#: includes/class-shared-files-helpers.php:318
+#: includes/class-shared-files-helpers.php:320
+#: includes/class-shared-files-helpers.php:332
+#: includes/class-shared-files-helpers.php:334
+#: includes/class-shared-files-helpers.php:375
+#: includes/class-shared-files-helpers.php:385
+#: includes/class-shared-files-helpers.php:429
+#: includes/class-shared-files-helpers.php:439
 msgid "Preview"
 msgstr ""
 
@@ -1566,12 +1566,12 @@ msgid "Choose tag"
 msgstr ""
 
 #: public/class-sf-public-file-upload.php:234
-#: public/class-sf-public-helpers.php:876
+#: public/class-sf-public-helpers.php:875
 msgid "Tags"
 msgstr ""
 
 #: public/class-sf-public-file-upload.php:238
-#: public/class-sf-public-helpers.php:844
+#: public/class-sf-public-helpers.php:843
 msgid "Title"
 msgstr ""
 
@@ -1587,84 +1587,84 @@ msgstr ""
 msgid "More info on shortcodes at"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:336
-#: public/class-sf-public-helpers.php:340
-#: public/class-sf-public-helpers.php:723
-#: public/class-sf-public-helpers.php:727
+#: public/class-sf-public-helpers.php:335
+#: public/class-sf-public-helpers.php:339
+#: public/class-sf-public-helpers.php:722
+#: public/class-sf-public-helpers.php:726
 msgid "Download"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:352
-#: public/class-sf-public-helpers.php:739
-#: public/class-sf-public-helpers.php:918
+#: public/class-sf-public-helpers.php:351
+#: public/class-sf-public-helpers.php:738
+#: public/class-sf-public-helpers.php:917
 msgid "Are you sure?"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:352
-#: public/class-sf-public-helpers.php:739
-#: public/class-sf-public-helpers.php:918
+#: public/class-sf-public-helpers.php:351
+#: public/class-sf-public-helpers.php:738
+#: public/class-sf-public-helpers.php:917
 msgid "Delete"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:666
-#: public/class-sf-public-helpers.php:668
+#: public/class-sf-public-helpers.php:665
+#: public/class-sf-public-helpers.php:667
 msgid "Uploaded by"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:672
+#: public/class-sf-public-helpers.php:671
 msgid "Uploaded by a visitor"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:829
+#: public/class-sf-public-helpers.php:828
 msgid "Edit"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:872
+#: public/class-sf-public-helpers.php:871
 msgid "New categories"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:872
+#: public/class-sf-public-helpers.php:871
 msgid "A comma separated list of any new categories."
 msgstr ""
 
-#: public/class-sf-public-helpers.php:892
+#: public/class-sf-public-helpers.php:891
 msgid "New tags"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:892
+#: public/class-sf-public-helpers.php:891
 msgid "A comma separated list of any new tags."
 msgstr ""
 
-#: public/class-sf-public-helpers.php:908
-#: public/class-sf-public-helpers.php:956
-#: public/class-sf-public-helpers.php:1110
+#: public/class-sf-public-helpers.php:907
+#: public/class-sf-public-helpers.php:955
+#: public/class-sf-public-helpers.php:1109
 msgid "Submit"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:912
+#: public/class-sf-public-helpers.php:911
 msgid "Delete file"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:941
-#: public/class-sf-public-helpers.php:1097
+#: public/class-sf-public-helpers.php:940
+#: public/class-sf-public-helpers.php:1096
 msgid "Please enter password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:953
-#: public/class-sf-public-helpers.php:1107
+#: public/class-sf-public-helpers.php:952
+#: public/class-sf-public-helpers.php:1106
 msgid "Invalid password"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:979
+#: public/class-sf-public-helpers.php:978
 msgid "Password protected file"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:1129
-#: public/class-sf-public-helpers.php:1251
+#: public/class-sf-public-helpers.php:1128
+#: public/class-sf-public-helpers.php:1250
 msgid "Download limit reached"
 msgstr ""
 
-#: public/class-sf-public-helpers.php:1263
+#: public/class-sf-public-helpers.php:1262
 msgid "This file is no longer available for download."
 msgstr ""
 

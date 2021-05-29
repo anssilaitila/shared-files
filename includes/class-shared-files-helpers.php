@@ -209,10 +209,14 @@ class SharedFilesHelpers
             return '';
         }
         $file = get_post_meta( $file_id, '_sf_file', true );
+        $media_library_post_id = get_post_meta( $file_id, '_sf_media_library_post_id', true );
         $filetype = '';
-        if ( isset( $file['type'] ) ) {
+        
+        if ( isset( $file['type'] ) && $file['type'] ) {
             $filetype = $file['type'];
+        } elseif ( $media_library_post_id ) {
         }
+        
         $html = '';
         $image_types = array( 'image/jpeg', 'image/png', 'image/gif' );
         $pdf_types = array(

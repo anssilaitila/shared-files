@@ -45,6 +45,11 @@ class SharedFilesAdminTaxonomy
         echo  SharedFilesAdminHelpers::sfProFeatureMarkup() ;
         ?>
 
+      <h2 style="margin-top: 24px;"><?php 
+        echo  esc_html__( 'Category password protection in Pro:' ) ;
+        ?></h2>
+      <img src="/wp-content/plugins/shared-files/img/category-password-protection.png" style="max-width: 770px; height: auto; border: 1px solid #bbb;" />
+
     </div>
     <?php 
     }
