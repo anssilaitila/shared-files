@@ -16,6 +16,7 @@ class Shared_Files_Settings
     public function shared_files_settings_init()
     {
         $only_pro = '_FREE_';
+
         register_setting( 'shared-files', 'shared_files_settings' );
         add_settings_field(
             'shared-files-icon_set',
@@ -744,6 +745,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'send_email_on_file_activation',
+            __( 'Send an email notify when a file is automatically activated for a category', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'send_email_on_file_activation',
+            'field_name' => $only_pro . 'send_email_on_file_activation',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'recipient_email',
             __( 'Notification recipient email', 'shared-files' ),
             array( $this, 'input_render' ),
@@ -947,18 +959,6 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'file_upload_send_email',
-            __( 'Send and email notify when a file is uploaded', 'shared-files' ),
-            array( $this, 'input_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_send_email',
-            'field_name'  => $only_pro . 'file_upload_send_email',
-            'placeholder' => '',
-        )
-        );
-        add_settings_field(
             'shared-files-' . $only_pro . 'file_upload_restrict_file_types',
             __( 'Restrict accepted file types', 'shared-files' ),
             array( $this, 'restrict_file_types_render' ),
@@ -1030,6 +1030,36 @@ class Shared_Files_Settings
             'placeholder' => '',
         )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_send_email',
+            __( 'Send and email notify when a file is uploaded and / or send an email to all users having one of the roles below:', 'shared-files' ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_send_email',
+            'field_name'  => $only_pro . 'file_upload_send_email',
+            'placeholder' => '',
+        )
+        );
+        global  $wp_roles ;
+        $roles = $wp_roles->get_names();
+        foreach ( $roles as $key => $value ) {
+            if ( $key && $value ) {
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'notify_on_file_upload_' . $key,
+                    $value,
+                    array( $this, 'checkbox_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'   => 'shared-files-' . $only_pro . 'notify_on_file_upload_' . $key,
+                    'field_name'  => $only_pro . 'notify_on_file_upload_' . $key,
+                    'placeholder' => '',
+                )
+                );
+            }
+        }
         $tab = 8;
         add_settings_section(
             'shared-files_tab_' . $tab,

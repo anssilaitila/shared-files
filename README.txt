@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.45
+Stable tag: 1.6.46
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.46 - 2021-06-11 =
+* (Pro) New feature: Sync categories and files. You can now define a folder name for any category, and files added to that folder (i.e. using FTP) are automatically activated for the plugin.
+* (Pro) New setting: Send an email notify when a file is automatically activated for a category (Settings / Email tab)
+* (Pro) New setting: Send an email notify to users having a specific role, when a file is uploaded (Settings / File upload tab)
+* (Free and Pro) Minor tweaks and fixes
 
 = 1.6.45 - 2021-05-29 =
 * (Pro) Preview button activated for media library files

@@ -210,12 +210,8 @@ class SharedFilesFileUpload
             if ( isset( $_POST['_SF_GOTO'] ) && $_POST['_SF_GOTO'] ) {
                 $goto_url = esc_url( $_POST['_SF_GOTO'] );
             }
-            
-            if ( isset( $s['file_upload_send_email'] ) && is_email( $s['file_upload_send_email'] ) ) {
-                $container_url = $goto_url;
-                SharedFilesAdminSendMail::file_upload_send_email( $id, get_post( $id ), $container_url );
-            }
-            
+            $container_url = $goto_url;
+            SharedFilesAdminSendMail::file_upload_send_email( $id, get_post( $id ), $container_url );
             wp_redirect( $goto_url . '?shared-files-upload=1' );
             exit;
         }

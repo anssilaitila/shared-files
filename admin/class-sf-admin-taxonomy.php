@@ -38,7 +38,7 @@ class SharedFilesAdminTaxonomy
 
     <div class="wrap">
       <h1><?php 
-        echo  __( 'Categories', 'shared-files' ) ;
+        echo  esc_html__( 'Categories', 'shared-files' ) ;
         ?></h1>
 
       <?php 
@@ -46,7 +46,7 @@ class SharedFilesAdminTaxonomy
         ?>
 
       <h2 style="margin-top: 24px;"><?php 
-        echo  esc_html__( 'Category password protection in Pro:' ) ;
+        echo  esc_html__( 'Category password protection and file sync in Pro:' ) ;
         ?></h2>
       <img src="/wp-content/plugins/shared-files/img/category-password-protection.png" style="max-width: 770px; height: auto; border: 1px solid #bbb;" />
 
@@ -63,9 +63,9 @@ class SharedFilesAdminTaxonomy
       </th>  
       <td>  
         <div class="shared-files-category-description-info"><b><?php 
-        echo  __( 'The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode.', 'shared-files' ) ;
+        echo  esc_html__( 'The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode.', 'shared-files' ) ;
         ?></b><br /><br /><?php 
-        echo  __( 'If a value is entered, the categories are sorted by that.', 'shared-files' ) ;
+        echo  esc_html__( 'If a value is entered, the categories are sorted by that.', 'shared-files' ) ;
         ?></div>
       </td>  
     </tr>  

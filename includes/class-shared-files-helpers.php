@@ -340,8 +340,9 @@ class SharedFilesHelpers
         if ( isset( $file['file'] ) ) {
             $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
         }
+        $featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' );
         // Featured image override
-        if ( !isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
+        if ( !isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && $featured_img_url ) {
             return $featured_img_url;
         }
         $icon_set = 2020;

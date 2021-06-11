@@ -6,7 +6,8 @@ class SharedFilesFileHandling
         $file,
         $cat_slug,
         $media_library_post_id = 0,
-        $subdir = ''
+        $subdir = '',
+        $add_featured_image = 0
     )
     {
         return 1;
