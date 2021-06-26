@@ -2,6 +2,15 @@
 
 class SharedFilesHelpers
 {
+    public static function writeLog( $title = '', $message = '' )
+    {
+        global  $wpdb ;
+        $wpdb->insert( $wpdb->prefix . 'shared_files_log', array(
+            'title'   => $title,
+            'message' => $message,
+        ) );
+    }
+    
     public static function getCatPassword( $file_id )
     {
         $cat_password = '';
@@ -188,7 +197,7 @@ class SharedFilesHelpers
             $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
             $html .= '<div class="' . $type . '">';
             $html .= '<span class="shared-files-tag-title">' . $current_tag->name . '</span>';
-            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . $hide_description . '" href="./?sf_tag=">' . __( 'Show all files', 'shared-files' ) . '</a>';
+            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . $hide_description . '" href="./?sf_tag=0">' . __( 'Show all files', 'shared-files' ) . '</a>';
             $html .= '</div>';
         }
         
@@ -337,8 +346,9 @@ class SharedFilesHelpers
         $imagefile = 'generic.png';
         $file_type_icon_url = '';
         $file_ext = '';
-        if ( isset( $file['file'] ) ) {
-            $file_ext = pathinfo( $file['file'], PATHINFO_EXTENSION );
+        $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
+        if ( $file_realpath ) {
+            $file_ext = pathinfo( $file_realpath, PATHINFO_EXTENSION );
         }
         $featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' );
         // Featured image override
@@ -401,13 +411,13 @@ class SharedFilesHelpers
                 $file_type_icon_url = $s['icon_for_psd'];
             } elseif ( isset( $file['type'] ) || $media_library_post_mime_type ) {
                 $filetype = ( $media_library_post_mime_type ? $media_library_post_mime_type : $file['type'] );
-                if ( !$filetype && isset( $file['file'] ) && file_exists( $file['file'] ) ) {
+                if ( !$filetype && isset( $file_realpath ) && file_exists( $file_realpath ) && is_readable( $file_realpath ) ) {
                     
                     if ( function_exists( 'mime_content_type' ) ) {
-                        $filetype = mime_content_type( $file['file'] );
+                        $filetype = mime_content_type( $file_realpath );
                     } elseif ( function_exists( 'finfo_open' ) && function_exists( 'finfo_file' ) ) {
                         $finfo = finfo_open( FILEINFO_MIME_TYPE );
-                        $filetype = finfo_file( $finfo, $file['file'] );
+                        $filetype = finfo_file( $finfo, $file_realpath );
                         finfo_close( $finfo );
                     }
                 

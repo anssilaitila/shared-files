@@ -16,7 +16,6 @@ class Shared_Files_Settings
     public function shared_files_settings_init()
     {
         $only_pro = '_FREE_';
-
         register_setting( 'shared-files', 'shared_files_settings' );
         add_settings_field(
             'shared-files-icon_set',
@@ -66,6 +65,17 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-hide_file_size_from_card',
             'field_name' => 'hide_file_size_from_card',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'delete_expired_files',
+            __( 'Delete expired files (files will be moved to trash when the expiration date is reached)', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'delete_expired_files',
+            'field_name' => $only_pro . 'delete_expired_files',
         )
         );
         add_settings_field(
@@ -742,6 +752,17 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-' . $only_pro . 'send_email',
             'field_name' => $only_pro . 'send_email',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'add_ip_to_file_downloaded_email',
+            __( "Add the downloader's IP address to the email", 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'add_ip_to_file_downloaded_email',
+            'field_name' => $only_pro . 'add_ip_to_file_downloaded_email',
         )
         );
         add_settings_field(

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.7
-Stable tag: 1.6.46
+Stable tag: 1.6.47
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,14 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.47 - 2021-06-26 =
+* (Pro) New feature / setting: Delete expired files (files will be moved to trash when the expiration date is reached)
+* (Pro) New feature / setting: Add the downloader's IP address to the email
+* (Pro) New feature / shortcode: Show files that belong to all of these tags (can also be used with only one tag): [shared_files tags__and="tag-1,tag-2"] (you can also use both categories__and + tags__and for the same shortcode)
+* (Pro) New feature / shortcode: Allow the uploader to create new tags: [shared_files file_upload=1 new_tags=1]
+* (Free and Pro) Missing translatable texts added
+* (Free and Pro) Minor tweaks and fixes
 
 = 1.6.46 - 2021-06-11 =
 * (Pro) New feature: Sync categories and files. You can now define a folder name for any category, and files added to that folder (i.e. using FTP) are automatically activated for the plugin.

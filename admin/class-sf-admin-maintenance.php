@@ -36,6 +36,22 @@ class SharedFilesAdminMaintenance
     
     }
     
+    public function update_db_check_v2()
+    {
+        $installed_version = get_site_option( 'shared_files_version' );
+        
+        if ( $installed_version != SHARED_FILES_VERSION ) {
+            global  $wpdb ;
+            $charset_collate = $wpdb->get_charset_collate();
+            // Table for debug data and general log
+            $table_name_log = $wpdb->prefix . 'shared_files_log';
+            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        title           VARCHAR(255) NOT NULL,\n        message         TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
+            update_option( 'shared_files_version', SHARED_FILES_VERSION );
+            SharedFilesHelpers::writeLog( 'Plugin updated to version ' . SHARED_FILES_VERSION, '' );
+        }
+    
+    }
+    
     public function add_cron_interval( $schedules )
     {
         $schedules['every_min'] = array(

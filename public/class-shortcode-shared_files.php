@@ -195,7 +195,9 @@ class ShortcodeSharedFiles
                         if ( $limit_posts ) {
                             $posts_per_page = $limit_posts;
                         }
-                        $tax_query = [];
+                        $tax_query = [
+                            'relation' => 'AND',
+                        ];
                         $wpb_all_query = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',

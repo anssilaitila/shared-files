@@ -184,6 +184,7 @@ class Shared_Files
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         // Maintenance
         $this->loader->add_action( 'plugins_loaded', $plugin_admin_maintenance, 'update_db_check' );
+        $this->loader->add_action( 'plugins_loaded', $plugin_admin_maintenance, 'update_db_check_v2' );
         $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );
         // Send mail
         $this->loader->add_action( 'check_expired_files', $plugin_admin_send_mail, 'file_expired_send_email' );

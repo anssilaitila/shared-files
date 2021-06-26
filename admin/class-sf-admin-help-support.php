@@ -339,6 +339,53 @@ class SharedFilesAdminHelpSupport {
           endif;
           ?>
 
+          <h3><?php echo esc_html__('Debug log', 'shared-files') ?></h3>
+          
+          <?php
+          global $wpdb;
+          $table_name = $wpdb->prefix . 'shared_files_log';
+          $msg = $wpdb->get_results("SELECT * FROM $table_name ORDER BY created_at DESC LIMIT 200");
+          ?>
+          
+          <table class="shared-files-debug-log" style="min-width: 400px;">
+          
+          <tr>
+            <th><?= esc_html__('Date', 'shared-files') ?></th>
+            <th><?= esc_html__('Title', 'shared-files') ?></th>
+            <th><?= esc_html__('Message', 'shared-files') ?></th>
+          </tr>
+          
+          <?php if (sizeof($msg) > 0): ?>
+          
+            <?php foreach ($msg as $row): ?>
+              <tr>
+          
+                <td style="white-space: nowrap;">
+                  <?= $row->created_at ?>
+                </td>
+          
+                <td>
+                  <?= $row->title ?><br />
+                </td>
+          
+                <td>
+                  <?php if (isset($row->message)): ?>
+                    <?= nl2br( $row->message ) ?>
+                  <?php endif; ?>
+                </td>
+          
+              </tr>
+            <?php endforeach; ?>
+          
+          <?php else: ?>
+          
+            <tr>
+              <td colspan="3">
+                <?= esc_html__('No data logged yet.', 'shared-files') ?>
+              </td>
+            </tr>
+          
+          <?php endif; ?>
 
         </div>
         
