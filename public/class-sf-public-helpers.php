@@ -310,9 +310,12 @@ class SharedFilesPublicHelpers
         $file_url = self::getFileURL( $file_id );
         $date_format = get_option( 'date_format' );
         $file_metadata = get_post_meta( $file_id, '_sf_file', true );
-        $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( $file_metadata['file'] );
+        $file_realpath = '';
+        if ( isset( $file_metadata['file'] ) && $file_metadata['file'] ) {
+            $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( $file_metadata['file'] );
+        }
         
-        if ( !is_readable( $file_realpath ) ) {
+        if ( $file_realpath && !is_readable( $file_realpath ) ) {
             $html = '<div class="shared-files-permission-denied-for"><b>' . esc_html__( "Can't read file (permission denied):", 'shared-files' ) . '</b><br />' . $file_realpath . '</div>';
             return $html;
         }

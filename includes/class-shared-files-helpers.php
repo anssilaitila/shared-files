@@ -346,7 +346,10 @@ class SharedFilesHelpers
         $imagefile = 'generic.png';
         $file_type_icon_url = '';
         $file_ext = '';
-        $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
+        $file_realpath = '';
+        if ( isset( $file['file'] ) && $file['file'] ) {
+            $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
+        }
         if ( $file_realpath ) {
             $file_ext = pathinfo( $file_realpath, PATHINFO_EXTENSION );
         }
