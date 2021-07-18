@@ -98,13 +98,13 @@ class Shared_Files_Admin {
   public function add_settings_link() {
     global $submenu;
     $permalink = './options-general.php?page=shared-files';
-    $submenu['edit.php?post_type=shared_file'][] = array(__('Settings&nbsp;&nbsp;➤', 'shared-files'), 'manage_options', $permalink);
+    $submenu['edit.php?post_type=shared_file'][] = array(esc_html__('Settings' . '&nbsp;&nbsp;➤', 'shared-files'), 'manage_options', $permalink);
   }
 
   public function add_upgrade_link() {
     global $submenu;
     $permalink = './options-general.php?page=shared-files-pricing';
-    $submenu['edit.php?post_type=shared_file'][] = array(__('Upgrade&nbsp;&nbsp;➤', 'shared-files'), 'manage_options', $permalink, '', 'shared-files-upgrade');
+    $submenu['edit.php?post_type=shared_file'][] = array(esc_html__('Upgrade' . '&nbsp;&nbsp;➤', 'shared-files'), 'manage_options', $permalink, '', 'shared-files-upgrade');
   }
 
 }

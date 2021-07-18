@@ -31,41 +31,114 @@ class SharedFilesFileHandling
                 $count = 0;
                 foreach ( $files as $file ) {
                     $item = self::getBaseDir() . $file;
-                    if ( $file == 'index.php' || is_dir( $item ) ) {
+                    
+                    if ( $file == 'index.php' ) {
                         continue;
-                    }
-                    $meta_query = array(
-                        'relation' => 'AND',
-                    );
-                    $meta_query[] = array(
-                        'key'     => '_sf_filename',
-                        'compare' => '=',
-                        'value'   => $file,
-                    );
-                    $wp_query = new WP_Query( array(
-                        'post_type'      => 'shared_file',
-                        'post_status'    => 'publish',
-                        'posts_per_page' => 1,
-                        'meta_query'     => $meta_query,
-                    ) );
-                    $file_active = 0;
-                    
-                    if ( $wp_query->have_posts() ) {
-                        while ( $wp_query->have_posts() ) {
-                            $wp_query->the_post();
-                            $file_active = 1;
+                        // Item a directory under wp-content/uploads/shared-files/
+                    } elseif ( is_dir( $item ) ) {
+                        $files_in_subdir = array_diff( scandir( $item ), array( '.', '..' ) );
+                        // All files under wp-content/uploads/shared-files/SUBDIR/
+                        foreach ( $files_in_subdir as $file_in_subdir ) {
+                            $sub_item = $item . '/' . $file_in_subdir;
+                            $item_array = explode( '/', $sub_item );
+                            $item_array_sliced = array_slice( $item_array, -2, 2 );
+                            $subdir = '';
+                            
+                            if ( is_array( $item_array_sliced ) && $item_array_sliced[0] == 'shared-files' ) {
+                                \array_splice( $item_array_sliced, 0, 1 );
+                            } elseif ( is_array( $item_array_sliced ) ) {
+                                $subdir = $item_array_sliced[0];
+                            }
+                            
+                            
+                            if ( $subdir ) {
+                                $meta_query = array(
+                                    'relation' => 'AND',
+                                );
+                                $meta_query[] = array(
+                                    'key'     => '_sf_filename',
+                                    'compare' => '=',
+                                    'value'   => $file_in_subdir,
+                                );
+                                $meta_query[] = array(
+                                    'key'     => '_sf_subdir',
+                                    'compare' => '=',
+                                    'value'   => $subdir,
+                                );
+                                $wp_query = new WP_Query( array(
+                                    'post_type'      => 'shared_file',
+                                    'post_status'    => 'publish',
+                                    'posts_per_page' => 1,
+                                    'meta_query'     => $meta_query,
+                                ) );
+                                $file_active = 0;
+                                
+                                if ( $wp_query->have_posts() ) {
+                                    while ( $wp_query->have_posts() ) {
+                                        $wp_query->the_post();
+                                        $file_active = 1;
+                                    }
+                                    wp_reset_postdata();
+                                }
+                                
+                                if ( !$file_active ) {
+                                    if ( SharedFilesFileHandling::add_file(
+                                        $file_in_subdir,
+                                        $cat_slug,
+                                        0,
+                                        $subdir,
+                                        0
+                                    ) ) {
+                                        $count++;
+                                    }
+                                }
+                            }
+                        
                         }
-                        wp_reset_postdata();
-                    }
-                    
-                    if ( !$file_active ) {
-                        if ( SharedFilesFileHandling::add_file( $file, $cat_slug ) ) {
-                            $count++;
+                        // Item is a file directly under wp-content/uploads/shared-files/
+                    } else {
+                        $subdir = '';
+                        $meta_query = array(
+                            'relation' => 'AND',
+                        );
+                        $meta_query[] = array(
+                            'key'     => '_sf_filename',
+                            'compare' => '=',
+                            'value'   => $file,
+                        );
+                        $meta_query[] = array(
+                            'key'     => '_sf_subdir',
+                            'compare' => 'NOT EXISTS',
+                            'value'   => '',
+                        );
+                        $wp_query = new WP_Query( array(
+                            'post_type'      => 'shared_file',
+                            'post_status'    => 'publish',
+                            'posts_per_page' => 1,
+                            'meta_query'     => $meta_query,
+                        ) );
+                        $file_active = 0;
+                        
+                        if ( $wp_query->have_posts() ) {
+                            while ( $wp_query->have_posts() ) {
+                                $wp_query->the_post();
+                                $file_active = 1;
+                            }
+                            wp_reset_postdata();
+                        }
+                        
+                        if ( !$file_active ) {
+                            if ( SharedFilesFileHandling::add_file( $file, $cat_slug ) ) {
+                                $count++;
+                            }
                         }
                     }
+                
                 }
+                SharedFilesHelpers::writeLog( 'Activated all inactive files: ' . $count . ' files', '' );
                 wp_redirect( admin_url( 'edit.php?post_type=shared_file&page=shared-files-sync-files&files=' . $count ) );
                 exit;
+                // Activate a single file, "Activate" button on file row @ Sync files & Media Library page
             } else {
                 $filename = sanitize_file_name( $_POST['add_file'] );
                 $page = 'shared-files-sync-files';

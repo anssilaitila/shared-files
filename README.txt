@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
-Tested up to: 5.7
-Stable tag: 1.6.48
+Tested up to: 5.8
+Stable tag: 1.6.49
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -15,7 +15,7 @@ This <strong>download manager</strong> allows you to list and manage downloadabl
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a substitute to media library to manage files and share files for visitors.
 
-**7-day free trial available for Pro version, no credit card required.**
+**7-day free trial available for the Pro version**
 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
@@ -129,6 +129,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.49 - 2021-07-18 =
+* (All plans) Update: [shared_files_categories category="category_slug"] now lists also the files directly under "category_slug" in addition to the subcategory links
+* (All plans) Fix: [shared_files_categories category="category_slug"] now asks the password immediately, not after selecting a subcategory
+* (All plans) Fix: Sync files / "Activate all inactive files" now activates also files under subdirectories
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.6.48 - 2021-07-03 =
 * (Free and Pro) Bug fixes

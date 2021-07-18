@@ -185,6 +185,21 @@ class SharedFilesAdminSyncFiles
             'compare' => '=',
             'value'   => $file,
         );
+        
+        if ( $subdir ) {
+            $meta_query[] = array(
+                'key'     => '_sf_subdir',
+                'compare' => '=',
+                'value'   => $subdir,
+            );
+        } else {
+            $meta_query[] = array(
+                'key'     => '_sf_subdir',
+                'compare' => 'NOT EXISTS',
+                'value'   => '',
+            );
+        }
+        
         $wp_query = new WP_Query( array(
             'post_type'      => 'shared_file',
             'post_status'    => 'publish',

@@ -36,6 +36,7 @@ class SharedFilesAdminMetadata
         $main_date = get_post_meta( $post_id, '_sf_main_date', true );
         $main_date_formatted = '';
         $notify_email = get_post_meta( $post_id, '_sf_notify_email', true );
+        $subdir = get_post_meta( $post_id, '_sf_subdir', true );
         $embed_post_id = get_post_meta( $post_id, '_sf_embed_post_id', true );
         $embed_post_title = get_post_meta( $post_id, '_sf_embed_post_title', true );
         $not_public = get_post_meta( $post_id, '_sf_not_public', true );
@@ -103,7 +104,14 @@ class SharedFilesAdminMetadata
         if ( $file ) {
             $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . get_the_ID() . '/' . SharedFilesHelpers::wp_engine() . $filename;
             $html .= esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . $file_url . '" target="_blank">' . $file_url . '</a>';
-            $html .= '<br /><br /><b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
+            
+            if ( $subdir ) {
+                $html .= '<div class="shared-files-admin-folder-name-container">' . esc_html__( 'Server folder:', 'shared-files' ) . ' <div class="shared-files-admin-folder-name">shared-files/' . $subdir . '/</div></div>';
+            } else {
+                $html .= '<br /><br />';
+            }
+            
+            $html .= '<b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         } else {
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
