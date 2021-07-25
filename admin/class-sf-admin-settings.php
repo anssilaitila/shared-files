@@ -212,7 +212,7 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-' . $only_pro . 'pagination',
-            __( 'Pagination', 'shared-files' ),
+            __( 'Pagination (number of files on one page)', 'shared-files' ),
             array( $this, 'input_render' ),
             'shared-files',
             'shared-files_section_general',
@@ -220,6 +220,17 @@ class Shared_Files_Settings
             'label_for'   => 'shared-files-' . $only_pro . 'pagination',
             'field_name'  => $only_pro . 'pagination',
             'placeholder' => '20',
+        )
+        );
+        add_settings_field(
+            'shared-files-pagination_type',
+            __( 'Pagination type', 'shared-files' ),
+            array( $this, 'pagination_type_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-pagination_type',
+            'field_name' => 'pagination_type',
         )
         );
         add_settings_field(
@@ -341,6 +352,17 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-card_small_font_size',
             'field_name' => 'card_small_font_size',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'hide_tags',
+            __( 'Hide tags', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'hide_tags',
+            'field_name' => $only_pro . 'hide_tags',
         )
         );
         add_settings_field(
@@ -1813,6 +1835,50 @@ class Shared_Files_Settings
         <strong>/wp-content/uploads/shared-files/this-is-a-file.pdf</strong>
       </div>
 
+      <?php 
+        }
+    
+    }
+    
+    public function pagination_type_render( $args )
+    {
+        
+        if ( $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = $options[$args['field_name']];
+            }
+            ?>    
+      <select name="shared_files_settings[<?php 
+            echo  $args['field_name'] ;
+            ?>]">
+          <option value="" <?php 
+            echo  ( $val == '' ? 'original' : '' ) ;
+            ?>><?php 
+            echo  esc_html__( 'Original', 'shared-files' ) ;
+            ?></option>
+          <option value="improved" <?php 
+            echo  ( $val == 'improved' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  esc_html__( 'Improved', 'shared-files' ) ;
+            ?></option>
+      </select>
+  
+      <div class="email-info">
+        <?php 
+            echo  esc_html__( 'Original type means that the page links are in the following url format:', 'shared-files' ) ;
+            ?><br />
+        <strong>sample-page-name/page/1/, sample-page-name/page/2/, ...</strong><br /><br />
+        <?php 
+            echo  esc_html__( 'Improved type works via GET parameters:', 'shared-files' ) ;
+            ?><br />
+        <strong>sample-page-name/?_page=1, sample-page-name/?_page=2, ...</strong><br /><br />
+        <?php 
+            echo  esc_html__( 'Improved type must be used, if the shortcode is on the front page or various other types of pages of the site. If you are getting 404 from the page links, use the Improved type.', 'shared-files' ) ;
+            ?><br />
+      </div>
+  
       <?php 
         }
     

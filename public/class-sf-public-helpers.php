@@ -141,8 +141,9 @@ class SharedFilesPublicHelpers
         
         }
         
+        $hide_tags = 0;
         
-        if ( $show_tags ) {
+        if ( $show_tags && !$hide_tags ) {
             $tags = get_the_tags();
             
             if ( $tags ) {
@@ -388,8 +389,9 @@ class SharedFilesPublicHelpers
         
         }
         
+        $hide_tags = 0;
         
-        if ( $show_tags ) {
+        if ( $show_tags && !$hide_tags ) {
             $tags = get_the_tags();
             
             if ( $tags ) {

@@ -30,6 +30,7 @@ class SharedFilesAdminMaintenance
                 'uncheck_hide_from_other_pages' => 'on',
                 'always_preview_pdf'            => 'on',
                 'bypass_preview_pdf'            => 'on',
+                'pagination_type'               => 'improved',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }

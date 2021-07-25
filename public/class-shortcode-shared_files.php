@@ -189,7 +189,13 @@ class ShortcodeSharedFiles
                     } else {
                         $paged = 1;
                         if ( $pagination_active ) {
-                            $paged = ( get_query_var( 'paged' ) ? absint( get_query_var( 'paged' ) ) : 1 );
+                            
+                            if ( isset( $_GET['_page'] ) && $_GET['_page'] ) {
+                                $paged = (int) $_GET['_page'];
+                            } elseif ( get_query_var( 'paged' ) ) {
+                                $paged = absint( get_query_var( 'paged' ) );
+                            }
+                        
                         }
                         $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 20 );
                         if ( $limit_posts ) {
@@ -286,30 +292,9 @@ class ShortcodeSharedFiles
                 $html .= '</li></ul>';
             }
             
-            $paged_current = ( $pagination_active ? get_query_var( 'paged' ) : 1 );
-            $pagination_args = array(
-                'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
-                'total'        => $wpb_all_query->max_num_pages,
-                'current'      => max( 1, $paged_current ),
-                'format'       => '?paged_' . $embed_id . '=%#%',
-                'show_all'     => true,
-                'type'         => 'plain',
-                'prev_next'    => false,
-                'add_args'     => false,
-                'add_fragment' => '',
-                'add_args'     => array(
-                '_paged' => $embed_id,
-            ),
-            );
-            
             if ( !$limit_posts ) {
-                $html .= '<div id="shared-files-pagination" class="shared-files-pagination">';
-                if ( paginate_links( $pagination_args ) ) {
-                    $html .= '<span class="shared-files-more-files">' . esc_html__( 'Browse more files:', 'shared-files' ) . '</span>' . paginate_links( $pagination_args );
-                }
-                $html .= '</div>';
+                $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wpb_all_query, $embed_id );
             }
-            
             $html .= '<div id="shared-files-nothing-found">';
             $html .= esc_html__( 'No files found.', 'shared-files' );
             $html .= '</div>';

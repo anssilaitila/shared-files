@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.49
+Stable tag: 1.6.50
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.50 - 2021-07-25 =
+* (All plans) New setting: Hide tags (Layout tab)
+* (All plans) New parameter for all shortcodes: hide_tags=1 (hides the tags from the file card)
+* (All plans) Update / new parameter: [shared_files_categories category=”category_slug” show_files_always=1] now lists also the files directly under “category_slug” in addition to the subcategory links (those files are no longer listed by default)
+* (Free + All plans) Improved version of the pagination. The pagination now works with shortcodes on the front page, single post, archive pages etc. (can be activated from the settings, first tab)
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.6.49 - 2021-07-18 =
 * (All plans) Update: [shared_files_categories category="category_slug"] now lists also the files directly under "category_slug" in addition to the subcategory links

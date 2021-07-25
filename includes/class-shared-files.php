@@ -127,6 +127,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-upload.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-load.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-pagination.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
@@ -298,6 +299,7 @@ class Shared_Files
         $plugin_public_ajax = new SharedFilesPublicAjax();
         $plugin_public_file_upload = new SharedFilesFileUpload();
         $plugin_public_load = new SharedFilesPublicLoad();
+        //    $plugin_public_pagination = new SharedFilesPublicPagination();
         // Enqueue CSS + JS + register shortcodes + set cookies
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public_load, 'public_inline_styles' );
