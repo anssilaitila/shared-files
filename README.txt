@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.50
+Stable tag: 1.6.51
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -129,6 +129,10 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.51 - 2021-07-30 =
+* (All plans) Download buttons are now shown also on password protected files (if enabled from the settings)
+* (Free + All plans) The redundant "Browse files:" title removed if there are no pagination links
 
 = 1.6.50 - 2021-07-25 =
 * (All plans) New setting: Hide tags (Layout tab)

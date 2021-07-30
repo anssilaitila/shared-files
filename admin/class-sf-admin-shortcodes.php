@@ -29,7 +29,7 @@ class SharedFilesAdminShortcodes {
       <h1><?= esc_html__('Available shortcodes for Shared Files', 'shared-files'); ?></h1>
 
       <div class="shared-files-examples">
-        <p><?= esc_html__('If you have an idea for a new shortcode or parameter, you may contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>.</p>
+        <p><?= esc_html__('If you have any questions regarding the shortcodes, you may contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>.</p>
       </div>
   
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">
