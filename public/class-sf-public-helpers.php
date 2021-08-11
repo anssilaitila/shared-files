@@ -221,7 +221,7 @@ class SharedFilesPublicHelpers
         }
         
         if ( is_user_logged_in() && isset( $atts['edit'] ) ) {
-            $html .= SharedFilesPublicHelpers::editFile( $file_id );
+            $html .= SharedFilesPublicHelpers::editFileButton( $file_id );
         }
         $html .= '</div>';
         
@@ -470,7 +470,7 @@ class SharedFilesPublicHelpers
         }
         
         if ( is_user_logged_in() && isset( $atts['edit'] ) ) {
-            $html .= SharedFilesPublicHelpers::editFile( $file_id );
+            $html .= SharedFilesPublicHelpers::editFileButton( $file_id );
         }
         $html .= '</div>';
         
@@ -486,7 +486,15 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
-    public static function editFile( $file_id )
+    public static function editFileButton( $file_id )
+    {
+        $s = get_option( 'shared_files_settings' );
+        $can_edit_files = 0;
+        $html = '';
+        return $html;
+    }
+    
+    public static function editFileModal( $file_id )
     {
         $s = get_option( 'shared_files_settings' );
         $can_edit_files = 0;

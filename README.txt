@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.51
+Stable tag: 1.6.52
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -32,6 +32,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 
 = Key Features in Shared Files Free: =
 * <strong>Front-end file upload with support for tags, logged-in users can also delete their uploaded files</strong>
+* Fast search targeting file names and descriptions
 * Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Preview certain file types in the browser
 * YouTube-videos and images are opened in a lightbox
@@ -44,6 +45,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Add tags to files
 
 = Key Features in Shared Files Pro: =
+* Front-end file editor: allow any user roles to edit files from the front-end
 * List any number of files and keep statistics on downloads
 * Upload files using FTP and activate them for the plugin with a single click
 * FTP file upload allows you to upload any number of files easily
@@ -54,7 +56,6 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Receive a notification when a file is downloaded
 * Collect also YouTube video URLs using the front end file uploader
 * Sort files and documents to multiple categories
-* Fast search targeting file names and descriptions
 * Add a single file to any article/post using a simple shortcode
 * Download counter
 * Bandwidth usage estimate
@@ -129,6 +130,11 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.52 - 2021-08-11 =
+* (Professional + Business) New shortcode: [shared_files_accordion]. See the Shortcodes page at WP admin / Shared Files and demo at https://www.sharedfilespro.com/shared-files/accordion/
+* (All plans) New setting: Show tags on search results cards (Layout tab)
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.6.51 - 2021-07-30 =
 * (All plans) Download buttons are now shown also on password protected files (if enabled from the settings)

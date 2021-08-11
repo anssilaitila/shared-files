@@ -108,6 +108,7 @@ class Shared_Files_Public
         add_shortcode( 'shared_files_categories', array( 'ShortcodeSharedFilesCategories', 'shared_files_categories' ) );
         add_shortcode( 'shared_files_simple', array( 'Shared_Files_Public', 'shared_files_simple' ) );
         add_shortcode( 'shared_files_info', array( 'ShortcodeSharedFilesInfo', 'shared_files_info' ) );
+        add_shortcode( 'shared_files_accordion', array( 'ShortcodeSharedFilesAccordion', 'shared_files_accordion' ) );
     }
     
     public static function shared_files_simple( $atts = array(), $content = null, $tag = '' )

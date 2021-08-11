@@ -49,12 +49,16 @@ class SharedFilesAdminShortcodes {
 
               <li><?= esc_html__('Hide files first (files are shown when searched or category/tag is selected):', 'shared-files') ?> <?php $num++ ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files hide_files_first=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
 
+              <li><?= esc_html__('Hide search form:', 'shared-files') ?> <?php $num++ ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files hide_search_form=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?= esc_html__('Show tag dropdown:', 'shared-files') ?> <?php $num++ ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files show_tag_dropdown=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
+
               <li style="margin-top: 8px;"><b><?= esc_html__('More parameters:', 'shared-files') ?></b>
   
                 <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                  <span class="shared-files-pro-only-inline-inactive">Pro</span>
+                  <span class="shared-files-pro-only-inline-inactive">All Plans</span>
                 <?php else: ?>
-                  <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+                  <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
                 <?php endif; ?>
   
                 <ul>
@@ -64,8 +68,6 @@ class SharedFilesAdminShortcodes {
                   <li><?= esc_html__('Layout as "2 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=2-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
                   <li><?= esc_html__('Layout as "3 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=3-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
                   <li><?= esc_html__('Layout as "4 columns":', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files layout=4-columns]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
-
-                  <li><?= esc_html__('Show tag dropdown:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files show_tag_dropdown=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
 
                   <li><?= esc_html__('Hide tags:', 'shared-files') ?> <span class="sf-new-feature-inline"><?= esc_html__('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files hide_tags=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
                   
@@ -106,9 +108,9 @@ class SharedFilesAdminShortcodes {
           <li style="margin-top: 8px;"><b><?= esc_html__('More parameters:', 'shared-files') ?></b>
             
             <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <span class="shared-files-pro-only-inline-inactive">All Plans</span>
             <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
             <?php endif; ?>
             
             <ul>
@@ -126,9 +128,9 @@ class SharedFilesAdminShortcodes {
           <?= esc_html__('Enable front-end editor for all files') ?>
       
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
       
         </h2>
@@ -166,9 +168,9 @@ class SharedFilesAdminShortcodes {
           <li><?= esc_html__('Allow the uploader to create a new category:', 'shared-files') ?>
 
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
           
           <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 new_category=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
@@ -178,9 +180,9 @@ class SharedFilesAdminShortcodes {
           <span class="sf-new-feature-inline"><?= esc_html__('New', 'shared-files') ?></span>
           
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
           
           <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 new_tags=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
@@ -188,9 +190,9 @@ class SharedFilesAdminShortcodes {
           <li><?= esc_html__('Pre-define the category and hide category dropdown:', 'shared-files') ?>
           
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
           
           <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 category=CATEGORY_SLUG]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
@@ -198,9 +200,9 @@ class SharedFilesAdminShortcodes {
           <li><?= esc_html__('Show category checkboxes for the uploader:', 'shared-files') ?>
           
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
           
           <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 category_checkboxes=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
@@ -208,9 +210,9 @@ class SharedFilesAdminShortcodes {
           <li><?= esc_html__('Exclude categories:', 'shared-files') ?>
          
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
           
           <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files file_upload=1 file_upload_exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
@@ -220,6 +222,39 @@ class SharedFilesAdminShortcodes {
         </ul>
       
       </div>
+
+      <?php if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial('pro') || sf_fs()->is_plan_or_trial('business') ): ?>
+
+        <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
+                      
+          <h2>
+            <?= esc_html__('Accordion', 'shared-files') ?>
+        
+            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+              <span class="shared-files-pro-only-inline-inactive">Professional</span>
+            <?php else: ?>
+              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Professional</a>
+            <?php endif; ?>
+        
+          </h2>
+        
+          <ul>  
+           <li>
+           
+              <?= esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_accordion]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></span>
+        
+              <h3><?= esc_html__('Additional parameters:', 'shared-files') ?></h3>
+        
+              <ul>
+                <li><?= esc_html__('Only the following categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_accordion categories="sample-category-1,sample-category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
+                <li><?= esc_html__('Exclude categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?= $num ?>" data-tooltip-class="shared-files-shortcode-<?= $num ?>">[shared_files_accordion exclude_cat="sample-category-1,sample-category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?= $num ?>"><?= esc_html__('Copy', 'shared-files') ?></button></li>
+              </ul>
+            
+            </li>
+          </ul>
+        </div>
+        
+      <?php endif; ?>
       
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
                     
@@ -227,9 +262,9 @@ class SharedFilesAdminShortcodes {
           <?= esc_html__('Search form only that targets all the files, sorted by category', 'shared-files') ?>
 
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-          <span class="shared-files-pro-only-inline-inactive">Pro</span>
+          <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-          <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+          <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
       
         </h2>
@@ -255,9 +290,9 @@ class SharedFilesAdminShortcodes {
             <?= esc_html__('List only files in certain category', 'shared-files') ?>
   
             <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Pro</span>
+              <span class="shared-files-pro-only-inline-inactive">All Plans</span>
             <?php else: ?>
-              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+              <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
             <?php endif; ?>
   
         </h2> 
@@ -277,9 +312,9 @@ class SharedFilesAdminShortcodes {
         <h2>
           <?= esc_html__('List categories / list files by category', 'shared-files') ?>    
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
         </h2> 
   
@@ -308,9 +343,9 @@ class SharedFilesAdminShortcodes {
           <?= esc_html__('List a single file', 'shared-files') ?>
   
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Pro</span>
+            <span class="shared-files-pro-only-inline-inactive">All Plans</span>
           <?php else: ?>
-            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Pro</a>
+            <a href="<?= get_admin_url() ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">All Plans</a>
           <?php endif; ?>
         </h2>
   

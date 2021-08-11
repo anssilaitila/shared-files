@@ -35,14 +35,25 @@ class Shared_Files_Settings
             'shared-files'
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'show_tag_dropdown',
+            'shared-files-hide_search_form',
+            __( 'Hide search form', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-hide_search_form',
+            'field_name' => 'hide_search_form',
+        )
+        );
+        add_settings_field(
+            'shared-files-show_tag_dropdown',
             __( 'Show tag dropdown', 'shared-files' ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_section_general',
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown',
-            'field_name' => $only_pro . 'show_tag_dropdown',
+            'label_for'  => 'shared-files-show_tag_dropdown',
+            'field_name' => 'show_tag_dropdown',
         )
         );
         add_settings_field(
@@ -356,13 +367,24 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-' . $only_pro . 'hide_tags',
-            __( 'Hide tags', 'shared-files' ),
+            __( 'Hide tags from the file card', 'shared-files' ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
             'label_for'  => 'shared-files-' . $only_pro . 'hide_tags',
             'field_name' => $only_pro . 'hide_tags',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'show_tags_on_search_results',
+            __( 'Show tags on search results cards', 'shared-files' ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_tags_on_search_results',
+            'field_name' => $only_pro . 'show_tags_on_search_results',
         )
         );
         add_settings_field(

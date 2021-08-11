@@ -108,6 +108,38 @@ class ShortcodeSharedFiles
             
             $html .= '<div ' . $container_embed_id . ' class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
             $html .= '<div id="shared-files-search">';
+            $is_premium = 0;
+            if ( !$is_premium ) {
+                
+                if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
+                    $html .= '<div class="shared-files-search-form-container"><form class="shared-files-ajax-form">';
+                    if ( !isset( $atts['hide_search_for_all_files'] ) ) {
+                        $html .= '<div class="shared-files-search-input-container"><input type="text" id="search-files" class="shared-files-search-files" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" /></div>';
+                    }
+                    $html .= '<input type="hidden" name="atts" value=\'' . json_encode( $atts ) . '\' />';
+                    
+                    if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
+                        $tag_selected = ( isset( $_GET['sf_tag'] ) ? $_GET['sf_tag'] : '' );
+                        $tag_args = array(
+                            'taxonomy'          => 'post_tag',
+                            'name'              => 'sf_tag',
+                            'show_option_all'   => __( 'Choose tag', 'shared-files' ),
+                            'hierarchical'      => true,
+                            'class'             => 'shared-files-tag-select select_v2',
+                            'echo'              => false,
+                            'value_field'       => 'slug',
+                            'selected'          => $tag_selected,
+                            'option_none_value' => '',
+                        );
+                        $html .= '<div class="shared-files-tag-select-container">';
+                        $html .= wp_dropdown_categories( $tag_args );
+                        $html .= '</div>';
+                    }
+                    
+                    $html .= '<hr class="clear" /></form></div>';
+                }
+            
+            }
             
             if ( isset( $atts['category'] ) ) {
                 
@@ -290,6 +322,34 @@ class ShortcodeSharedFiles
                 $html .= '<ul id="myList" class="shared-files-ajax-list"><li>';
                 $html .= '<div class="shared-files-files-not-found">' . esc_html__( 'No files found.', 'shared-files' ) . '</div>';
                 $html .= '</li></ul>';
+            }
+            
+            
+            if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search_for_all_files'] ) ) {
+                $show_tags = 0;
+                if ( isset( $s['show_tags_on_search_results'] ) ) {
+                    $show_tags = 1;
+                }
+                $html .= '<ul id="shared-files-all-files">';
+                if ( isset( $wpb_all_query_all_files ) && $wpb_all_query_all_files->have_posts() ) {
+                    while ( $wpb_all_query_all_files->have_posts() ) {
+                        $wpb_all_query_all_files->the_post();
+                        $id = get_the_id();
+                        $c = get_post_custom( $id );
+                        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
+                        $filetype = '';
+                        $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
+                        $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
+                        $html .= SharedFilesPublicHelpers::fileListItem(
+                            $c,
+                            $imagefile,
+                            $hide_description,
+                            $show_tags,
+                            $atts
+                        );
+                    }
+                }
+                $html .= '</ul>';
             }
             
             if ( !$limit_posts ) {
