@@ -23,14 +23,16 @@ class SharedFilesAdminMaintenance
         if ( $s === false ) {
             //      register_setting('shared-files', 'shared_files_settings');
             $default_settings = [
-                'hide_bandwidth_usage'          => 'on',
-                'hide_expiration_date'          => 'on',
-                'card_background'               => 'light_gray',
-                'preview_service'               => 'microsoft',
-                'uncheck_hide_from_other_pages' => 'on',
-                'always_preview_pdf'            => 'on',
-                'bypass_preview_pdf'            => 'on',
-                'pagination_type'               => 'improved',
+                'hide_bandwidth_usage'                            => 'on',
+                'hide_expiration_date'                            => 'on',
+                'card_background'                                 => 'light_gray',
+                'preview_service'                                 => 'microsoft',
+                'uncheck_hide_from_other_pages'                   => 'on',
+                'always_preview_pdf'                              => 'on',
+                'bypass_preview_pdf'                              => 'on',
+                'pagination_type'                                 => 'improved',
+                'wp_engine_compatibility_mode'                    => 'on',
+                'show_file_upload_checkboxes_on_multiple_columns' => 'on',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }

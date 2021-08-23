@@ -11,7 +11,7 @@ class SharedFilesAdminMetadata
     {
         add_meta_box(
             'my-meta-box',
-            __( 'File info' ),
+            esc_html__( 'File info' ),
             array( $this, 'custom_metadata' ),
             'shared_file',
             'normal',
@@ -137,7 +137,7 @@ class SharedFilesAdminMetadata
         /* External URL END */
         $html .= '<div class="shared-files-admin-small-fields">';
         /* Limit downloads START */
-        $html .= '<div class="small-field-container"><div id="shared-file-limit-downloads-title" class="' . $field_in_pro_class . '"><span>' . __( 'Limit downloads', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'When this number is reached, the file can\'t be downloaded anymore and an email notify is sent to the administrator.', 'shared-files' ) . '</i></div>';
+        $html .= '<div class="small-field-container"><div id="shared-file-limit-downloads-title" class="' . $field_in_pro_class . '"><span>' . esc_html__( 'Limit downloads', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'When this number is reached, the file can\'t be downloaded anymore and an email notify is sent to the administrator.', 'shared-files' ) . '</i></div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
             $html .= $field_in_pro_markup;

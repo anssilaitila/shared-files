@@ -123,7 +123,7 @@ class ShortcodeSharedFiles
                         $tag_args = array(
                             'taxonomy'          => 'post_tag',
                             'name'              => 'sf_tag',
-                            'show_option_all'   => __( 'Choose tag', 'shared-files' ),
+                            'show_option_all'   => esc_attr__( 'Choose tag', 'shared-files' ),
                             'hierarchical'      => true,
                             'class'             => 'shared-files-tag-select select_v2',
                             'echo'              => false,

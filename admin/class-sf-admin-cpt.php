@@ -13,12 +13,12 @@ class SharedFilesAdminCPT {
                        [
                           'labels'      => [
                             'name'             => 'Shared Files',
-                            'singular_name'    => __('File', 'shared-files'),
-                            'add_new_item'     => __('Add New File', 'shared-files'),
-                            'edit_item'        => __('Edit File', 'shared-files'),
-                            'not_found'        => __('No files found.', 'shared-files'),
-                            'all_items'        => __('File Management', 'shared-files'),
-                            'add_new'          => __('Add New', 'shared-files')
+                            'singular_name'    => esc_html__('File', 'shared-files'),
+                            'add_new_item'     => esc_html__('Add New File', 'shared-files'),
+                            'edit_item'        => esc_html__('Edit File', 'shared-files'),
+                            'not_found'        => esc_html__('No files found.', 'shared-files'),
+                            'all_items'        => esc_html__('File Management', 'shared-files'),
+                            'add_new'          => esc_html__('Add New', 'shared-files')
                           ],
                           'supports'            => array('title', 'thumbnail'),
                           'public'              => false,

@@ -1,17 +1,17 @@
-=== WordPress Download Manager and File Sharing Plugin with frontend file upload – a better Media Library — Shared Files ===
+=== Easy Download Manager and File Sharing Plugin with frontend file upload – a better Media Library — Shared Files ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.52
+Stable tag: 1.6.53
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring frontend file upload, FTP upload, download counter, better media library, file explorer and more...
+List and share any downloadable files on your WordPress site. Preview and search files, frontend upload, FTP upload, download manager, counter & more.
 
 == Description ==
-= The best WordPress file sharing plugin on the market =
-This <strong>download manager</strong> allows you to list and manage downloadable files on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
+= The best file sharing plugin for WordPress =
+This download manager allows you to list and manage downloadable files on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a substitute to media library to manage files and share files for visitors.
 
@@ -21,6 +21,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 
 = An easy to use download manager with file upload =
 * Store files using this download manager plugin instead of media library
+* Preview files in browser
 * Open images and YouTube-videos in a lightbox
 * Allow users and/or visitors to upload files
 * File manager allows administrators to upload files using FTP or single/multi-file uploader
@@ -31,7 +32,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Share folders and files
 
 = Key Features in Shared Files Free: =
-* <strong>Front-end file upload with support for tags, logged-in users can also delete their uploaded files</strong>
+* Front-end file upload with support for tags, logged-in users can also delete their uploaded files
 * Fast search targeting file names and descriptions
 * Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Preview certain file types in the browser
@@ -39,9 +40,8 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Open local video files using a video player in a lightbox (mp4, webm, ogg, mov)
 * Files separated from the media library
 * High quality SVG icons for 25 different file types
-* Use as an internet download manager, file explorer and file manager
+* Use as a download manager, file explorer and file manager
 * Custom images/icons for many file types
-* A free download manager
 * Add tags to files
 
 = Key Features in Shared Files Pro: =
@@ -52,6 +52,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Activate files from Media Library
 * Front-end file upload with support for categories
 * Custom fields for the front-end file uploader
+* Accordion view for files in specific categories
 * Multiple different shortcodes/views for various use cases
 * Receive a notification when a file is downloaded
 * Collect also YouTube video URLs using the front end file uploader
@@ -60,7 +61,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Download counter
 * Bandwidth usage estimate
 * Alternatively, define an external URL for file and track those loads
-* Optionally receive an email notification when a file is downloaded
+* Receive an email notification when a file is downloaded
 * Password protected files
 * Password protected categories
 * Set expiration date to a file
@@ -70,8 +71,6 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * More features on the way based on user feedback
 
 Contact the author [here](https://www.sharedfilespro.com/support/).
-
-Thanks to Luciano Del Fico for translating the Italian version.
 
 == Installation ==
 
@@ -130,6 +129,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.53 - 2021-08-22 =
+* (Professional + Business) Accordion: Categories are now listed in the same order they are defined in the shortcode
+* (Professional + Business) Accordion: Group and order files by month with shortcode [shared_files_accordion group_files_by_month=1] / [shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"]
+* (Professional + Business) Accordion: Layout updated
+* (Free + All plans) Compatibility added for Infinite Uploads (https://wordpress.org/plugins/infinite-uploads/, https://infiniteuploads.com/)
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.6.52 - 2021-08-11 =
 * (Professional + Business) New shortcode: [shared_files_accordion]. See the Shortcodes page at WP admin / Shared Files and demo at https://www.sharedfilespro.com/shared-files/accordion/

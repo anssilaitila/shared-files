@@ -10,23 +10,23 @@ class SharedFilesAdminList
     public function shared_file_custom_columns( $defaults )
     {
         $s = get_option( 'shared_files_settings' );
-        $defaults['file_url'] = __( 'Shortcode', 'shared-files' );
-        $defaults['filesize'] = __( 'File size', 'shared-files' );
-        $defaults['load_cnt'] = __( 'File loads', 'shared-files' );
+        $defaults['file_url'] = esc_html__( 'Shortcode', 'shared-files' );
+        $defaults['filesize'] = esc_html__( 'File size', 'shared-files' );
+        $defaults['load_cnt'] = esc_html__( 'File loads', 'shared-files' );
         if ( !isset( $s['hide_limit_downloads'] ) ) {
-            $defaults['limit_downloads'] = __( 'Limit', 'shared-files' );
+            $defaults['limit_downloads'] = esc_html__( 'Limit', 'shared-files' );
         }
         if ( !isset( $s['hide_file_added'] ) ) {
-            $defaults['file_added'] = __( 'File added', 'shared-files' );
+            $defaults['file_added'] = esc_html__( 'File added', 'shared-files' );
         }
         if ( !isset( $s['hide_last_access'] ) ) {
-            $defaults['last_access'] = __( 'Last access', 'shared-files' );
+            $defaults['last_access'] = esc_html__( 'Last access', 'shared-files' );
         }
         if ( !isset( $s['hide_bandwidth_usage'] ) ) {
-            $defaults['bandwidth_usage'] = __( 'Bandwidth usage (estimate)', 'shared-files' );
+            $defaults['bandwidth_usage'] = esc_html__( 'Bandwidth usage (estimate)', 'shared-files' );
         }
         if ( !isset( $s['hide_expiration_date'] ) ) {
-            $defaults['expiration_date'] = __( 'Expires', 'shared-files' );
+            $defaults['expiration_date'] = esc_html__( 'Expires', 'shared-files' );
         }
         return $defaults;
     }
@@ -89,7 +89,7 @@ class SharedFilesAdminList
         switch ( $column_name ) {
             case 'file_url':
                 echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . $post_ID . '" title="[shared_files file_id=' . $post_ID . ']">[shared_files file_id=' . $post_ID . ']</span>' ;
-                echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $post_ID . '">' . __( 'Copy', 'shared-files' ) . '</button>' ;
+                echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $post_ID . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
                 $folder_name = get_post_meta( get_the_ID(), '_sf_subdir', true );
                 if ( $folder_name ) {
                     echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . $folder_name . '/</div>' ;
@@ -109,12 +109,12 @@ class SharedFilesAdminList
                 break;
             case 'load_cnt':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                    echo  '<div class="shared-files-pro-only">' . esc_html__( 'Pro' ) . '</div>' ;
                 }
                 break;
             case 'limit_downloads':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                    echo  '<div class="shared-files-pro-only">' . esc_html__( 'Pro' ) . '</div>' ;
                 }
                 break;
             case 'file_added':
@@ -122,17 +122,17 @@ class SharedFilesAdminList
                 break;
             case 'last_access':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                    echo  '<div class="shared-files-pro-only">' . esc_html__( 'Pro' ) . '</div>' ;
                 }
                 break;
             case 'bandwidth_usage':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                    echo  '<div class="shared-files-pro-only">' . esc_html__( 'Pro' ) . '</div>' ;
                 }
                 break;
             case 'expiration_date':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo  '<div class="shared-files-pro-only">' . __( 'Pro' ) . '</div>' ;
+                    echo  '<div class="shared-files-pro-only">' . esc_html__( 'Pro' ) . '</div>' ;
                 }
                 break;
         }

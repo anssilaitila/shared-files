@@ -7,13 +7,13 @@ class SharedFilesPublicHelpers
         $html = '';
         $html .= '<div class="shared-files-public-pro-feature">';
         $html .= '<span class="shared-files-public-pro-feature-title">';
-        $html .= __( 'This feature is available in the Pro version.', 'shared-files' );
+        $html .= esc_html__( 'This feature is available in the Pro version.', 'shared-files' );
         $html .= '</span>';
         $html .= '<span>';
-        $html .= __( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . __( 'and', 'shared-files' ) . ' [shared_files_simple].';
+        $html .= esc_html__( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . esc_html__( 'and', 'shared-files' ) . ' [shared_files_simple].';
         $html .= '</span>';
         $html .= '<span>';
-        $html .= __( 'More info on shortcodes at', 'shared-files' ) . ' <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">sharedfilespro.com</a>.';
+        $html .= esc_html__( 'More info on shortcodes at', 'shared-files' ) . ' <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">sharedfilespro.com</a>.';
         $html .= '</span>';
         $html .= '</div>';
         return $html;
@@ -205,9 +205,9 @@ class SharedFilesPublicHelpers
             
             if ( isset( $s['show_download_button'] ) && $password ) {
             } elseif ( self::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . esc_html__( 'Download', 'shared-files' ) . '</a>';
             } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
-                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . esc_html__( 'Download', 'shared-files' ) . '</a>';
             }
         
         }
@@ -216,7 +216,7 @@ class SharedFilesPublicHelpers
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
-                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
             }
         }
         
@@ -454,9 +454,9 @@ class SharedFilesPublicHelpers
             
             if ( isset( $s['show_download_button'] ) && $password ) {
             } elseif ( self::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . esc_html__( 'Download', 'shared-files' ) . '</a>';
             } elseif ( isset( $s['show_download_button'] ) && self::getFileType( $file_id ) != 'youtube' ) {
-                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . __( 'Download', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( self::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . esc_html__( 'Download', 'shared-files' ) . '</a>';
             }
         
         }
@@ -465,7 +465,7 @@ class SharedFilesPublicHelpers
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
-                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . __( 'Are you sure?', 'shared-files' ) . '\')">' . __( 'Delete', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
             }
         }
         
@@ -516,7 +516,7 @@ class SharedFilesPublicHelpers
         $html .= '<meta charset="UTF-8">';
         $html .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
         $html .= '<link rel="profile" href="https://gmpg.org/xfn/11">';
-        $html .= '<title>' . __( 'Password protected file', 'shared-files' ) . '</title>';
+        $html .= '<title>' . esc_html__( 'Password protected file', 'shared-files' ) . '</title>';
         //	$html .= '<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>';
         $html .= '</head>';
         $html .= '<body>';
@@ -629,16 +629,16 @@ class SharedFilesPublicHelpers
         $html .= '<form method="POST" action="">';
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
-        $html .= '<h1>' . __( 'Please enter password', 'shared-files' ) . '</h1>';
+        $html .= '<h1>' . esc_html__( 'Please enter password', 'shared-files' ) . '</h1>';
         //    $html .= wp_nonce_field('_CL_UPDATE', '_wpnonce', true, false);
         $html .= '<div class="form-field">';
-        $html .= '<div class="form-field-left"><label for="password">' . __( 'Password', 'shared-files' ) . '</label></div>';
+        $html .= '<div class="form-field-left"><label for="password">' . esc_html__( 'Password', 'shared-files' ) . '</label></div>';
         $html .= '<div class="form-field-right"><input type="password" name="password" id="password" value="" /></div>';
         $html .= '</div>';
         if ( $_POST ) {
-            $html .= '<div class="shared-files-invalid-password">' . __( 'Invalid password', 'shared-files' ) . '</div>';
+            $html .= '<div class="shared-files-invalid-password">' . esc_html__( 'Invalid password', 'shared-files' ) . '</div>';
         }
-        $html .= '<input type="submit" class="shared-files-form-submit" value="' . __( 'Submit', 'shared-files' ) . '" />';
+        $html .= '<input type="submit" class="shared-files-form-submit" value="' . esc_attr__( 'Submit', 'shared-files' ) . '" />';
         $html .= '</form>';
         $html .= '</body>';
         $html .= '</html>';
@@ -653,7 +653,7 @@ class SharedFilesPublicHelpers
         $html .= '<meta charset="UTF-8">';
         $html .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
         $html .= '<link rel="profile" href="https://gmpg.org/xfn/11">';
-        $html .= '<title>' . __( 'Download limit reached', 'shared-files' ) . '</title>';
+        $html .= '<title>' . esc_html__( 'Download limit reached', 'shared-files' ) . '</title>';
         //	$html .= '<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>';
         $html .= '<link href="https://fonts.googleapis.com/css?family=Oswald|Quattrocento" rel="stylesheet">';
         $html .= '</head>';
@@ -771,14 +771,14 @@ class SharedFilesPublicHelpers
         $s = get_option( 'shared_files_settings' );
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
-        $html .= '<h1>' . __( 'Download limit reached', 'shared-files' ) . '</h1>';
+        $html .= '<h1>' . esc_html__( 'Download limit reached', 'shared-files' ) . '</h1>';
         
         if ( isset( $s['download_limit_msg'] ) && $s['download_limit_msg'] ) {
             $str = $s['download_limit_msg'];
             $str = preg_replace( '@(https?://([-\\w\\.]+[-\\w])+(:\\d+)?(/([\\w/_\\.#-~]*(\\?\\S+)?)?)?)@', '<a href="$1">$1</a>', $str );
             $html .= '<p>' . nl2br( $str ) . '</p>';
         } else {
-            $html .= '<p>' . __( 'This file is no longer available for download.', 'shared-files' ) . '</p>';
+            $html .= '<p>' . esc_html__( 'This file is no longer available for download.', 'shared-files' ) . '</p>';
         }
         
         $html .= '</body>';

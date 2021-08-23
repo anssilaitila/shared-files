@@ -197,7 +197,7 @@ class SharedFilesHelpers
             $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
             $html .= '<div class="' . $type . '">';
             $html .= '<span class="shared-files-tag-title">' . $current_tag->name . '</span>';
-            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . $hide_description . '" href="./?sf_tag=0">' . __( 'Show all files', 'shared-files' ) . '</a>';
+            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . $hide_description . '" href="./?sf_tag=0">' . esc_html__( 'Show all files', 'shared-files' ) . '</a>';
             $html .= '</div>';
         }
         
@@ -249,9 +249,9 @@ class SharedFilesHelpers
             }
             
             if ( $password && $enable_preview_with_password ) {
-                $html .= '<a href="' . SharedFilesPublicHelpers::getFileURL( $file_id ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . SharedFilesPublicHelpers::getFileURL( $file_id ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
             } else {
-                $html .= '<a href="' . esc_url( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . __( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
             }
         
         } elseif ( isset( $s['always_preview_pdf'] ) && !$password && in_array( $filetype, $pdf_types ) ) {
@@ -292,7 +292,7 @@ class SharedFilesHelpers
                 
                 $password_protected = 0;
                 if ( !$password_protected ) {
-                    $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                    $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
                 }
             }
         
@@ -320,7 +320,7 @@ class SharedFilesHelpers
                 
                 $password_protected = 0;
                 if ( !$password_protected ) {
-                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . __( 'Preview', 'shared-files' ) . '</a>';
+                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
                 }
             }
         

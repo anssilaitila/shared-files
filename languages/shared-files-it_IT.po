@@ -298,11 +298,11 @@ msgstr "Scegli categoria"
 
 #: public/class-shared-files-public.php:387
 msgid "file found."
-msgstr "nessun file trovato."
+msgstr "file trovato."
 
 #: public/class-shared-files-public.php:387
 msgid "files found."
-msgstr "nessun file trovato."
+msgstr "file trovato."
 
 #: public/class-shared-files-public.php:535
 msgid "Browse more files:"

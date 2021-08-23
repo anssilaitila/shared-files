@@ -6,8 +6,8 @@ class SharedFilesAdminHelpSupport
     {
         add_submenu_page(
             'edit.php?post_type=shared_file',
-            __( 'How to use Shared Files', 'shared-files' ),
-            __( 'Help / Support', 'shared-files' ),
+            esc_html__( 'How to use Shared Files', 'shared-files' ),
+            esc_html__( 'Help / Support', 'shared-files' ),
             'manage_options',
             'shared-files-support',
             [ $this, 'register_support_page_callback' ],
@@ -55,7 +55,7 @@ class SharedFilesAdminHelpSupport
         <p><?php 
         echo  esc_html__( 'Some examples on how you can use different views available at', 'shared-files' ) ;
         ?> <a href="https://www.sharedfilespro.com/shared-files/" target="_blank"><?php 
-        echo  __( 'sharedfilespro.com', 'shared-files' ) ;
+        echo  esc_html__( 'sharedfilespro.com', 'shared-files' ) ;
         ?></a>.</p>
         <p><?php 
         echo  esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' ) ;
@@ -188,7 +188,7 @@ class SharedFilesAdminHelpSupport
           </li>
           <li>
             <?php 
-        echo  esc_html__( 'Check the checkbox for "WP Engine compatibility mode".', 'shared-files' ) ;
+        echo  esc_html__( 'Check the checkbox for "Compatibility mode".', 'shared-files' ) ;
         ?>
           </li>
           <li>

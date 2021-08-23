@@ -10,8 +10,8 @@ class SharedFilesAdminSyncFiles
         }
         add_submenu_page(
             'edit.php?post_type=shared_file',
-            __( 'Sync Files', 'shared-files' ),
-            __( 'Sync Files', 'shared-files' ),
+            esc_html__( 'Sync Files', 'shared-files' ),
+            esc_html__( 'Sync Files', 'shared-files' ),
             'manage_options',
             'shared-files-sync-files',
             [ $this, 'register_page_callback' ],
@@ -82,7 +82,7 @@ class SharedFilesAdminSyncFiles
                 'taxonomy'        => $taxonomy_slug,
                 'echo'            => 0,
                 'class'           => 'select_v2',
-                'show_option_all' => __( 'Choose category', 'shared-files' ),
+                'show_option_all' => esc_attr__( 'Choose category', 'shared-files' ),
             ] ) ;
             ?><br />
             
