@@ -2,12 +2,18 @@
 
 class SharedFilesHelpers
 {
+    public static function createElemClass()
+    {
+        $elem_class = 'shared-files-embed-' . uniqid();
+        return $elem_class;
+    }
+    
     public static function writeLog( $title = '', $message = '' )
     {
         global  $wpdb ;
         $wpdb->insert( $wpdb->prefix . 'shared_files_log', array(
-            'title'   => $title,
-            'message' => $message,
+            'title'   => sanitize_text_field( $title ),
+            'message' => sanitize_textarea_field( $message ),
         ) );
     }
     
@@ -195,9 +201,9 @@ class SharedFilesHelpers
         
         if ( $tag_slug ) {
             $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
-            $html .= '<div class="' . $type . '">';
-            $html .= '<span class="shared-files-tag-title">' . $current_tag->name . '</span>';
-            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . $hide_description . '" href="./?sf_tag=0">' . esc_html__( 'Show all files', 'shared-files' ) . '</a>';
+            $html .= '<div class="' . esc_attr( $type ) . '">';
+            $html .= '<span class="shared-files-tag-title">' . esc_html( $current_tag->name ) . '</span>';
+            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . esc_attr( $hide_description ) . '" href="./?sf_tag=0">' . esc_html__( 'Show all files', 'shared-files' ) . '</a>';
             $html .= '</div>';
         }
         
@@ -249,7 +255,7 @@ class SharedFilesHelpers
             }
             
             if ( $password && $enable_preview_with_password ) {
-                $html .= '<a href="' . SharedFilesPublicHelpers::getFileURL( $file_id ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
             } else {
                 $html .= '<a href="' . esc_url( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
             }
@@ -544,10 +550,10 @@ class SharedFilesHelpers
             $html .= '<style>.shared-files-container #myList li { margin-bottom: 5px; } </style>';
             
             if ( $s['card_background'] == 'custom_color' && isset( $s['card_background_custom_color'] ) && $s['card_background_custom_color'] ) {
-                $custom_color = '#' . $s['card_background_custom_color'];
+                $custom_color = '#' . esc_attr( $s['card_background_custom_color'] );
                 
                 if ( $custom_color && preg_match( '/^#([0-9A-F]{3}){1,2}$/i', $custom_color ) ) {
-                    $html .= '<style>.shared-files-main-elements { background: ' . $custom_color . '; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
+                    $html .= '<style>.shared-files-main-elements { background: ' . esc_attr( $custom_color ) . '; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
                 } else {
                     $html .= '<style>.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
                 }
@@ -562,9 +568,9 @@ class SharedFilesHelpers
         
         
         if ( isset( $s['card_height'] ) && $s['card_height'] ) {
-            $html .= '<style>.shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . $s['card_height'] . 'px; } </style>';
-            $html .= '<style>.shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . $s['card_height'] . 'px; } </style>';
-            $html .= '<style>.shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . $s['card_height'] . 'px; } </style>';
+            $html .= '<style>.shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . esc_attr( $s['card_height'] ) . 'px; } </style>';
+            $html .= '<style>.shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . esc_attr( $s['card_height'] ) . 'px; } </style>';
+            $html .= '<style>.shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . esc_attr( $s['card_height'] ) . 'px; } </style>';
             $html .= '<style> @media (max-width: 500px) { .shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
             $html .= '<style> @media (max-width: 500px) { .shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
             $html .= '<style> @media (max-width: 500px) { .shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';

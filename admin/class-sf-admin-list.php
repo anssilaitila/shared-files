@@ -53,26 +53,26 @@ class SharedFilesAdminList
             
             if ( $_GET['orderby'] == '_sf_expiration_date' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = $_GET['orderby'];
+                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
             } elseif ( $_GET['orderby'] == '_sf_file_added' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = $_GET['orderby'];
+                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
                 $query->query_vars['meta_type'] = 'DATETIME';
             } elseif ( $_GET['orderby'] == '_sf_last_access' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = $_GET['orderby'];
+                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
                 $query->query_vars['meta_type'] = 'DATETIME';
             } elseif ( $_GET['orderby'] == '_sf_load_cnt' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = $_GET['orderby'];
+                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
                 $query->query_vars['meta_type'] = 'numeric';
             } elseif ( $_GET['orderby'] == '_sf_limit_downloads' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = $_GET['orderby'];
+                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
                 $query->query_vars['meta_type'] = 'numeric';
             } elseif ( $_GET['orderby'] == '_sf_filesize' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = $_GET['orderby'];
+                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
                 $query->query_vars['meta_type'] = 'numeric';
             }
         
@@ -86,24 +86,25 @@ class SharedFilesAdminList
      */
     public function shared_file_custom_columns_content( $column_name, $post_ID )
     {
+        $post_ID = intval( $post_ID );
         switch ( $column_name ) {
             case 'file_url':
                 echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . $post_ID . '" title="[shared_files file_id=' . $post_ID . ']">[shared_files file_id=' . $post_ID . ']</span>' ;
                 echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $post_ID . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
                 $folder_name = get_post_meta( get_the_ID(), '_sf_subdir', true );
                 if ( $folder_name ) {
-                    echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . $folder_name . '/</div>' ;
+                    echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . esc_html( $folder_name ) . '/</div>' ;
                 }
                 $file = get_post_meta( get_the_ID(), '_sf_file', true );
                 $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . SharedFilesHelpers::wp_engine() . get_post_meta( $post_ID, '_sf_filename', true );
-                echo  '<hr class="clear" /><a href="' . $file_url . '" class="shared-files-admin-file-url" target="_blank">' . $file_url . '</a>' ;
+                echo  '<hr class="clear" /><a href="' . esc_url( $file_url ) . '" class="shared-files-admin-file-url" target="_blank">' . esc_url( $file_url ) . '</a>' ;
                 break;
             case 'filesize':
                 
                 if ( get_post_meta( $post_ID, '_sf_external_url', true ) ) {
                     echo  'n/a' ;
                 } else {
-                    echo  SharedFilesAdminHelpers::human_filesize( get_post_meta( $post_ID, '_sf_filesize', true ) ) ;
+                    echo  esc_html( SharedFilesAdminHelpers::human_filesize( get_post_meta( $post_ID, '_sf_filesize', true ) ) ) ;
                 }
                 
                 break;
@@ -145,7 +146,7 @@ class SharedFilesAdminList
             return;
         }
         $taxonomy_slug = 'shared-file-category';
-        $current_category_slug = ( isset( $_GET['shared-file-category'] ) ? $_GET['shared-file-category'] : '' );
+        $current_category_slug = ( isset( $_GET['shared-file-category'] ) ? sanitize_title( $_GET['shared-file-category'] ) : '' );
         if ( get_taxonomy( $taxonomy_slug ) ) {
             wp_dropdown_categories( [
                 'show_option_all' => get_taxonomy( $taxonomy_slug )->labels->all_items,

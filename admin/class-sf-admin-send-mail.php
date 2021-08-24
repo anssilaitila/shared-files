@@ -17,7 +17,7 @@ class SharedFilesAdminSendMail
         
         if ( isset( $s['recipient_email'] ) && is_email( $s['recipient_email'] ) && $post->post_type == 'shared_file' ) {
             $headers = [ 'Content-Type: text/html; charset=UTF-8' ];
-            $subject = esc_html__( 'Download limit reached for', 'shared-files' ) . ' ' . $post_title;
+            $subject = esc_html__( 'Download limit reached for', 'shared-files' ) . ' ' . esc_html( $post_title );
             $body_html = '';
             $body_html .= '<html><head><title></title></head><body>';
             $body_html .= '<h3 style="color: #000;">' . esc_html__( 'Download limit reached for', 'shared-files' ) . ' ' . $post_title . '</h3>';
@@ -68,12 +68,12 @@ class SharedFilesAdminSendMail
                         
                         if ( $expiration_date <= $dt_now ) {
                             $headers = [ 'Content-Type: text/html; charset=UTF-8' ];
-                            $subject = esc_html__( 'File expired:', 'shared-files' ) . ' ' . $post_title;
+                            $subject = esc_html__( 'File expired:', 'shared-files' ) . ' ' . esc_html( $post_title );
                             $body_html = '';
                             $body_html .= '<html><head><title></title></head><body>';
-                            $body_html .= '<h3 style="color: #000;">' . esc_html__( 'File expired:', 'shared-files' ) . ' ' . $post_title . '</h3>';
+                            $body_html .= '<h3 style="color: #000;">' . esc_html__( 'File expired:', 'shared-files' ) . ' ' . esc_html( $post_title ) . '</h3>';
                             $body_url = admin_url( 'edit.php?post_type=shared_file' );
-                            $body_html .= '<p><a href="' . $body_url . '" target="_blank">' . esc_html__( 'File management &raquo;', 'shared-files' ) . '</a></p>';
+                            $body_html .= '<p><a href="' . esc_url( $body_url ) . '" target="_blank">' . esc_html__( 'File management &raquo;', 'shared-files' ) . '</a></p>';
                             $body_html .= '<p style="color: #bbb;">-- <br />Sent by Shared Files Pro</p>';
                             $body_html .= '</body></html>';
                             $resp = wp_mail(

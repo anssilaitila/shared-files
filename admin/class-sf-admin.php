@@ -85,7 +85,7 @@ class Shared_Files_Admin {
 
     if (has_post_thumbnail( $post_id )) {
 
-      $thumbnail_id = get_post_thumbnail_id( $post_id );
+      $thumbnail_id = intval( get_post_thumbnail_id( $post_id ) );
       
       if ($thumbnail_id) {
         // Delete all thumbnails generated for featured image

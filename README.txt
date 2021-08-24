@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.53
+Stable tag: 1.6.55
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,6 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 
 = Key Features in Shared Files Free: =
 * Front-end file upload with support for tags, logged-in users can also delete their uploaded files
-* Fast search targeting file names and descriptions
 * Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Preview certain file types in the browser
 * YouTube-videos and images are opened in a lightbox
@@ -45,6 +44,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Add tags to files
 
 = Key Features in Shared Files Pro: =
+* Fast search targeting file names and descriptions
 * Front-end file editor: allow any user roles to edit files from the front-end
 * List any number of files and keep statistics on downloads
 * Upload files using FTP and activate them for the plugin with a single click
@@ -129,6 +129,15 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.55 - 2021-08-24 =
+* (All plans) Simple list parameters updated, the following parameters are currently available (more information on Shortcodes page): [shared_files_simple hide_search=1 limit=5 category="sample-category-1"]
+* Settings reorganized
+* Missing translatable texts added
+
+= 1.6.54 - 2021-08-24 =
+* (Professional + Business) Multiple accordions can now be placed on one page
+* Fix: The "search files" input no longer submits the form / reloads the page if enter is pressed (the search results are already there)
 
 = 1.6.53 - 2021-08-22 =
 * (Professional + Business) Accordion: Categories are now listed in the same order they are defined in the shortcode

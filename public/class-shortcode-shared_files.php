@@ -9,7 +9,7 @@ class ShortcodeSharedFiles
      */
     public static function shared_files( $atts = array(), $content = null, $tag = '' )
     {
-        $post_id = get_the_id();
+        $post_id = intval( get_the_id() );
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
@@ -20,7 +20,7 @@ class ShortcodeSharedFiles
         }
         $tag_slug = '';
         if ( isset( $_GET['sf_tag'] ) && $_GET['sf_tag'] != '0' ) {
-            $tag_slug = $_GET['sf_tag'];
+            $tag_slug = sanitize_title( $_GET['sf_tag'] );
         }
         $limit_posts = 0;
         $meta_query_hide_not_public = array(
@@ -106,40 +106,9 @@ class ShortcodeSharedFiles
                 $container_embed_id = 'id="' . esc_attr( $embed_id ) . '"';
             }
             
-            $html .= '<div ' . $container_embed_id . ' class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . $layout : '' )) . '">';
+            $html .= '<div ' . $container_embed_id . ' class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . esc_attr( $layout ) : '' )) . '">';
             $html .= '<div id="shared-files-search">';
             $is_premium = 0;
-            if ( !$is_premium ) {
-                
-                if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
-                    $html .= '<div class="shared-files-search-form-container"><form class="shared-files-ajax-form">';
-                    if ( !isset( $atts['hide_search_for_all_files'] ) ) {
-                        $html .= '<div class="shared-files-search-input-container"><input type="text" id="search-files" class="shared-files-search-files" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" /></div>';
-                    }
-                    $html .= '<input type="hidden" name="atts" value=\'' . json_encode( $atts ) . '\' />';
-                    
-                    if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
-                        $tag_selected = ( isset( $_GET['sf_tag'] ) ? $_GET['sf_tag'] : '' );
-                        $tag_args = array(
-                            'taxonomy'          => 'post_tag',
-                            'name'              => 'sf_tag',
-                            'show_option_all'   => esc_attr__( 'Choose tag', 'shared-files' ),
-                            'hierarchical'      => true,
-                            'class'             => 'shared-files-tag-select select_v2',
-                            'echo'              => false,
-                            'value_field'       => 'slug',
-                            'selected'          => $tag_selected,
-                            'option_none_value' => '',
-                        );
-                        $html .= '<div class="shared-files-tag-select-container">';
-                        $html .= wp_dropdown_categories( $tag_args );
-                        $html .= '</div>';
-                    }
-                    
-                    $html .= '<hr class="clear" /></form></div>';
-                }
-            
-            }
             
             if ( isset( $atts['category'] ) ) {
                 
@@ -229,7 +198,7 @@ class ShortcodeSharedFiles
                             }
                         
                         }
-                        $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 20 );
+                        $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 40 );
                         if ( $limit_posts ) {
                             $posts_per_page = $limit_posts;
                         }

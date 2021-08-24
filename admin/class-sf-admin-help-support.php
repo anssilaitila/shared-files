@@ -41,10 +41,10 @@ class SharedFilesAdminHelpSupport
         ?>
 
     <link rel="stylesheet" href="<?php 
-        echo  SHARED_FILES_URI ;
+        echo  esc_url( SHARED_FILES_URI ) ;
         ?>dist/tipso.min.css">
     <script src="<?php 
-        echo  SHARED_FILES_URI ;
+        echo  esc_url( SHARED_FILES_URI ) ;
         ?>dist/tipso.min.js"></script>
 
     <div class="shared-files-help-support wrap">
@@ -233,7 +233,7 @@ class SharedFilesAdminHelpSupport
         ?>
         </p>
       
-        <a href="https://wordpress.org/support/view/plugin-reviews/shared-files?filter=5#postform" target="_blank" class="button-primary"><?php 
+        <a href="https://wordpress.org/support/view/plugin-reviews/shared-files/reviews/#new-post" target="_blank" class="button-primary"><?php 
         echo  esc_html__( 'Leave a rating', 'shared-files' ) ;
         ?></a>
         
@@ -286,40 +286,40 @@ class SharedFilesAdminHelpSupport
         echo  esc_html__( 'Variables', 'shared-files' ) ;
         ?></h3>
           site_url(): <?php 
-        echo  site_url() ;
+        echo  esc_html( site_url() ) ;
         ?><br />
           home_url(): <?php 
-        echo  home_url() ;
+        echo  esc_html( home_url() ) ;
         ?><br />
           wp_upload_dir()['path']: <?php 
-        echo  wp_upload_dir()['path'] ;
+        echo  esc_html( wp_upload_dir()['path'] ) ;
         ?><br />
           wp_upload_dir()['url']: <?php 
-        echo  wp_upload_dir()['url'] ;
+        echo  esc_html( wp_upload_dir()['url'] ) ;
         ?><br />
           wp_upload_dir()['subdir']: <?php 
-        echo  wp_upload_dir()['subdir'] ;
+        echo  esc_html( wp_upload_dir()['subdir'] ) ;
         ?><br />
           wp_upload_dir()['basedir']: <?php 
-        echo  wp_upload_dir()['basedir'] ;
+        echo  esc_html( wp_upload_dir()['basedir'] ) ;
         ?><br />
           wp_upload_dir()['baseurl']: <?php 
-        echo  wp_upload_dir()['baseurl'] ;
+        echo  esc_html( wp_upload_dir()['baseurl'] ) ;
         ?><br />
           wp_upload_dir()['error']: <?php 
-        echo  wp_upload_dir()['error'] ;
+        echo  esc_html( wp_upload_dir()['error'] ) ;
         ?><br />
           sf_root: <?php 
-        echo  ( SharedFilesHelpers::sf_root() ? SharedFilesHelpers::sf_root() : esc_html__( '(not set)', 'shared-files' ) ) ;
+        echo  ( SharedFilesHelpers::sf_root() ? esc_html( SharedFilesHelpers::sf_root() ) : esc_html__( '(not set)', 'shared-files' ) ) ;
         ?><br />
           get_template_directory(): <?php 
-        echo  get_template_directory() ;
+        echo  esc_html( get_template_directory() ) ;
         ?><br />
           get_template_directory_uri(): <?php 
-        echo  get_template_directory_uri() ;
+        echo  esc_html( get_template_directory_uri() ) ;
         ?><br />
           permalinks: <?php 
-        echo  get_option( 'permalink_structure' ) ;
+        echo  esc_html( get_option( 'permalink_structure' ) ) ;
         ?><br />
           
           <?php 
@@ -357,9 +357,9 @@ class SharedFilesAdminHelpSupport
                 ?>
       
               <?php 
-                echo  $file ;
+                echo  esc_html( $file ) ;
                 ?> | <?php 
-                echo  get_the_date() ;
+                echo  esc_html( get_the_date() ) ;
                 ?><br />
     
             <?php 
@@ -385,16 +385,16 @@ class SharedFilesAdminHelpSupport
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
-                $id = get_the_id();
+                $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
                 $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
                 ?>
           
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
                 <?php 
-                echo  $file ;
+                echo  esc_html( $file ) ;
                 ?> | <?php 
-                echo  get_the_date() ;
+                echo  esc_html( get_the_date() ) ;
                 ?>
               </div>
 
@@ -410,7 +410,7 @@ class SharedFilesAdminHelpSupport
                     $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
                     ?>
                 1: <?php 
-                    echo  $filename_with_path ;
+                    echo  esc_html( $filename_with_path ) ;
                     ?><br />
                 
                 <?php 
@@ -432,10 +432,10 @@ class SharedFilesAdminHelpSupport
                     ?>
                 
                 3: <?php 
-                    echo  $file['url'] ;
+                    echo  esc_html( $file['url'] ) ;
                     ?><br />
                 4: <?php 
-                    echo  $file['type'] ;
+                    echo  esc_html( $file['type'] ) ;
                     ?><br />
                 
                 <?php 
@@ -443,7 +443,7 @@ class SharedFilesAdminHelpSupport
                     if ( isset( $file['error'] ) && $file['error'] ) {
                         ?>
                   5: <?php 
-                        echo  $file['error'] ;
+                        echo  esc_html( $file['error'] ) ;
                         ?><br />
                 <?php 
                     }
@@ -478,16 +478,16 @@ class SharedFilesAdminHelpSupport
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
-                $id = get_the_id();
+                $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
                 $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
                 ?>
           
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
                 <?php 
-                echo  $file ;
+                echo  esc_html( $file ) ;
                 ?> | <?php 
-                echo  get_the_date() ;
+                echo  esc_html( get_the_date() ) ;
                 ?>
               </div>
           
@@ -503,7 +503,7 @@ class SharedFilesAdminHelpSupport
                     $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
                     ?>
                 1: <?php 
-                    echo  $filename_with_path ;
+                    echo  esc_html( $filename_with_path ) ;
                     ?><br />
                 
                 <?php 
@@ -525,10 +525,10 @@ class SharedFilesAdminHelpSupport
                     ?>
 
                 3: <?php 
-                    echo  $file['url'] ;
+                    echo  esc_html( $file['url'] ) ;
                     ?><br />
                 4: <?php 
-                    echo  $file['type'] ;
+                    echo  esc_html( $file['type'] ) ;
                     ?><br />
                 
                 <?php 
@@ -536,7 +536,7 @@ class SharedFilesAdminHelpSupport
                     if ( isset( $file['error'] ) && $file['error'] ) {
                         ?>
                   5: <?php 
-                        echo  $file['error'] ;
+                        echo  esc_html( $file['error'] ) ;
                         ?><br />
                 <?php 
                     }
@@ -589,13 +589,13 @@ class SharedFilesAdminHelpSupport
           
                 <td style="white-space: nowrap;">
                   <?php 
-                echo  $row->created_at ;
+                echo  esc_html( $row->created_at ) ;
                 ?>
                 </td>
           
                 <td>
                   <?php 
-                echo  $row->title ;
+                echo  esc_html( $row->title ) ;
                 ?><br />
                 </td>
           
@@ -605,7 +605,7 @@ class SharedFilesAdminHelpSupport
                 if ( isset( $row->message ) ) {
                     ?>
                     <?php 
-                    echo  nl2br( $row->message ) ;
+                    echo  wp_kses_post( nl2br( $row->message ) ) ;
                     ?>
                   <?php 
                 }
@@ -640,7 +640,7 @@ class SharedFilesAdminHelpSupport
       </div>
 
       <script src="<?php 
-        echo  SHARED_FILES_URI ;
+        echo  esc_url( SHARED_FILES_URI ) ;
         ?>dist/clipboard.min.js"></script>
   
       <script>

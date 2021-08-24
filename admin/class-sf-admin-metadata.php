@@ -58,7 +58,7 @@ class SharedFilesAdminMetadata
             $file_with_url = wp_get_attachment_url( $media_library_post_id );
             $url_local = explode( site_url(), $file_with_url )[1];
             //output local path
-            $html .= esc_html__( 'This file is activated from the media library', 'shared-files' ) . ':<br /><a href="' . $media_library_href . '" style="font-weight: bold; color: #333; text-decoration: none;" target="_blank">' . $url_local . '</a>';
+            $html .= esc_html__( 'This file is activated from the media library', 'shared-files' ) . ':<br /><a href="' . esc_url( $media_library_href ) . '" style="font-weight: bold; color: #333; text-decoration: none;" target="_blank">' . esc_html( $url_local ) . '</a>';
             $html .= '</span>';
             $html .= '</div>';
         } elseif ( $embed_post_id ) {
@@ -81,18 +81,18 @@ class SharedFilesAdminMetadata
                 
                 
                 if ( is_super_admin() ) {
-                    $uploader_html = esc_html__( 'by', 'shared-files' ) . ' ' . '<a href="' . get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) . '" target="_blank">' . $user_fullname . '</a>';
+                    $uploader_html = esc_html__( 'by', 'shared-files' ) . ' ' . '<a href="' . esc_url( get_admin_url( null, 'user-edit.php?user_id=' . $c['_sf_user_id'][0] ) ) . '" target="_blank">' . $user_fullname . '</a>';
                 } else {
-                    $uploader_html = esc_html__( 'by', 'shared-files' ) . ' ' . $user_fullname;
+                    $uploader_html = esc_html__( 'by', 'shared-files' ) . ' ' . esc_html( $user_fullname );
                 }
             
             }
             
             
             if ( $permalink ) {
-                $html .= esc_html__( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . $permalink . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a> ' . $uploader_html . '.';
+                $html .= esc_html__( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . esc_url( $permalink ) . '" style="font-weight: bold;" target="_blank">' . get_the_title( $embed_post_id ) . '</a> ' . esc_html( $uploader_html ) . '.';
             } else {
-                $html .= esc_html__( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . $embed_post_title . ', ' . $uploader_html . ').';
+                $html .= esc_html__( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . esc_html( $embed_post_title ) . ', ' . esc_html( $uploader_html ) . ').';
             }
             
             $html .= '</span>';
@@ -103,10 +103,10 @@ class SharedFilesAdminMetadata
         
         if ( $file ) {
             $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . get_the_ID() . '/' . SharedFilesHelpers::wp_engine() . $filename;
-            $html .= esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . $file_url . '" target="_blank">' . $file_url . '</a>';
+            $html .= esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( $file_url ) . '</a>';
             
             if ( $subdir ) {
-                $html .= '<div class="shared-files-admin-folder-name-container">' . esc_html__( 'Server folder:', 'shared-files' ) . ' <div class="shared-files-admin-folder-name">shared-files/' . $subdir . '/</div></div>';
+                $html .= '<div class="shared-files-admin-folder-name-container">' . esc_html__( 'Server folder:', 'shared-files' ) . ' <div class="shared-files-admin-folder-name">shared-files/' . esc_attr( $subdir ) . '/</div></div>';
             } else {
                 $html .= '<br /><br />';
             }
@@ -117,18 +117,18 @@ class SharedFilesAdminMetadata
             $html .= '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
         }
         
-        $html .= '<p style="margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . SharedFilesHelpers::maxUploadSize() . '</strong></p>';
+        $html .= '<p style="margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         $html .= '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . esc_html__( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
-        $html .= '<div id="shared-file-main-date-title"><strong>' . esc_html__( 'File date', 'shared-files' ) . '</strong><br /><i>' . esc_html__( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . $main_date_formatted . '" />';
+        $html .= '<div id="shared-file-main-date-title"><strong>' . esc_html__( 'File date', 'shared-files' ) . '</strong><br /><i>' . esc_html__( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . esc_attr( $main_date_formatted ) . '" />';
         $pro_field_active = 0;
         $field_in_pro_class = 'shared-files-field-in-pro-greyed-out';
         $field_in_pro_markup = '<div class="shared-files-field-in-pro-container">';
-        $field_in_pro_markup .= '<a href="' . get_admin_url() . 'options-general.php?page=shared-files-pricing">';
+        $field_in_pro_markup .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
         $field_in_pro_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>';
         $field_in_pro_markup .= '</a>';
         $field_in_pro_markup .= '</div>';
         /* External URL START */
-        $html .= '<div id="shared-file-external-url-title" class="' . $field_in_pro_class . '">';
+        $html .= '<div id="shared-file-external-url-title" class="' . esc_attr( $field_in_pro_class ) . '">';
         $html .= '<span>' . esc_html__( 'External URL', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Instead of adding a local file, you may provide an external URL to a file located elsewhere.', 'shared-files' ) . '<br />' . esc_html__( 'Note: if the external URL is defined, the file above will not be saved.', 'shared-files' ) . '</i></div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
@@ -137,7 +137,7 @@ class SharedFilesAdminMetadata
         /* External URL END */
         $html .= '<div class="shared-files-admin-small-fields">';
         /* Limit downloads START */
-        $html .= '<div class="small-field-container"><div id="shared-file-limit-downloads-title" class="' . $field_in_pro_class . '"><span>' . esc_html__( 'Limit downloads', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'When this number is reached, the file can\'t be downloaded anymore and an email notify is sent to the administrator.', 'shared-files' ) . '</i></div>';
+        $html .= '<div class="small-field-container"><div id="shared-file-limit-downloads-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Limit downloads', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'When this number is reached, the file can\'t be downloaded anymore and an email notify is sent to the administrator.', 'shared-files' ) . '</i></div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
             $html .= $field_in_pro_markup;
@@ -145,7 +145,7 @@ class SharedFilesAdminMetadata
         $html .= '</div>';
         /* Limit downloads END */
         /* Expiration date START */
-        $html .= '<div class="small-field-container"><div id="shared-file-expiration-date-title" class="' . $field_in_pro_class . '"><span>' . esc_html__( 'Expiration date', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list.', 'shared-files' ) . '</i></div>';
+        $html .= '<div class="small-field-container"><div id="shared-file-expiration-date-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Expiration date', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list.', 'shared-files' ) . '</i></div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
             $html .= $field_in_pro_markup;
@@ -153,7 +153,7 @@ class SharedFilesAdminMetadata
         $html .= '</div>';
         /* Expiration date END */
         /* Password protection START */
-        $html .= '<div class="small-field-container"><div id="shared-file-password-title" class="' . $field_in_pro_class . '"><span>' . esc_html__( 'Password protection', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Define a password here to enable password protection.', 'shared-files' ) . '</i></div>';
+        $html .= '<div class="small-field-container"><div id="shared-file-password-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Password protection', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Define a password here to enable password protection.', 'shared-files' ) . '</i></div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
             $html .= $field_in_pro_markup;
@@ -161,7 +161,7 @@ class SharedFilesAdminMetadata
         $html .= '</div>';
         /* Password protection END */
         /* Notification email START */
-        $html .= '<div class="small-field-container"><div id="shared-file-notify-email-title" class="' . $field_in_pro_class . '"><span>' . esc_html__( 'Notification email', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used.', 'shared-files' ) . '</i></div>';
+        $html .= '<div class="small-field-container"><div id="shared-file-notify-email-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Notification email', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used.', 'shared-files' ) . '</i></div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
             $html .= $field_in_pro_markup;
@@ -172,13 +172,13 @@ class SharedFilesAdminMetadata
         $pro_field_active = 0;
         
         if ( !$pro_field_active ) {
-            $html .= '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . $field_in_pro_class . '"><span>' . esc_html__( 'Custom field 1' ) . '</span></div>';
+            $html .= '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 1' ) . '</span></div>';
             $html .= $field_in_pro_markup;
             $html .= '</div>';
-            $html .= '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . $field_in_pro_class . '"><span>' . esc_html__( 'Custom field 2' ) . '</span></div>';
+            $html .= '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 2' ) . '</span></div>';
             $html .= $field_in_pro_markup;
             $html .= '</div>';
-            $html .= '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . $field_in_pro_class . '"><span>' . esc_html__( 'Custom field 3' ) . '</span></div>';
+            $html .= '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 3' ) . '</span></div>';
             $html .= $field_in_pro_markup;
             $html .= '</div>';
         }
@@ -186,7 +186,7 @@ class SharedFilesAdminMetadata
         /* Custom fields END */
         $html .= '<hr class="clear" /></div>';
         /* Description START */
-        $html .= '<div id="shared-file-description-title" class="' . $field_in_pro_class . '">' . esc_html__( 'Description', 'shared-files' ) . '</div>';
+        $html .= '<div id="shared-file-description-title" class="' . esc_attr( $field_in_pro_class ) . '">' . esc_html__( 'Description', 'shared-files' ) . '</div>';
         echo  $html ;
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
@@ -239,7 +239,7 @@ class SharedFilesAdminMetadata
             $expiration_date = '';
             
             if ( isset( $_POST['_sf_expiration_date'] ) ) {
-                $dt = DateTime::createFromFormat( "Y-m-d", $_POST['_sf_expiration_date'] );
+                $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_expiration_date'] ) );
                 if ( $dt !== false && !array_sum( $dt::getLastErrors() ) ) {
                     $expiration_date = $dt;
                 }
@@ -248,7 +248,7 @@ class SharedFilesAdminMetadata
             $main_date = '';
             
             if ( isset( $_POST['_sf_main_date'] ) ) {
-                $dt = DateTime::createFromFormat( "Y-m-d", $_POST['_sf_main_date'] );
+                $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_main_date'] ) );
                 if ( $dt !== false && !array_sum( $dt::getLastErrors() ) ) {
                     $main_date = $dt;
                 }
@@ -263,7 +263,7 @@ class SharedFilesAdminMetadata
             update_post_meta( $id, '_sf_expiration_date', $expiration_date );
             update_post_meta( $id, '_sf_main_date', $main_date );
             //      update_post_meta($id, '_sf_expiration_date', isset($_POST['_sf_expiration_date']) ? (int) $_POST['_sf_expiration_date'] : '');
-            update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? $_POST['_sf_password'] : '' ) );
+            update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? sanitize_text_field( $_POST['_sf_password'] ) : '' ) );
             
             if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
                 
@@ -306,10 +306,10 @@ class SharedFilesAdminMetadata
                     add_post_meta( $id, '_sf_file', $upload );
                     update_post_meta( $id, '_sf_file', $upload );
                     $filename = substr( strrchr( $upload['file'], "/" ), 1 );
-                    update_post_meta( $id, '_sf_filename', $filename );
+                    update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
                     
                     if ( isset( $_FILES['_sf_file']['size'] ) ) {
-                        update_post_meta( $id, '_sf_filesize', $_FILES['_sf_file']['size'] );
+                        update_post_meta( $id, '_sf_filesize', sanitize_text_field( $_FILES['_sf_file']['size'] ) );
                     } else {
                         update_post_meta( $id, '_sf_filesize', 0 );
                     }
@@ -317,6 +317,14 @@ class SharedFilesAdminMetadata
                     update_post_meta( $id, '_sf_load_cnt', 0 );
                     update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                     update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
+                    
+                    if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
+                        $folder_for_new_files = sanitize_file_name( $s['folder_for_new_files'] );
+                        if ( $folder_for_new_files ) {
+                            update_post_meta( $id, '_sf_subdir', rtrim( $folder_for_new_files, '/' ) );
+                        }
+                    }
+                    
                     SharedFilesHelpers::addFeaturedImage(
                         $id,
                         $upload,
@@ -330,16 +338,16 @@ class SharedFilesAdminMetadata
                     
                     if ( !$post_title ) {
                         $my_post = array(
-                            'ID'         => $id,
-                            'post_title' => $filename,
+                            'ID'         => intval( $id ),
+                            'post_title' => sanitize_text_field( $filename ),
                         );
                         remove_action( 'save_post', [ $this, 'save_custom_meta_data' ] );
                         wp_update_post( $my_post );
                         add_action( 'save_post', [ $this, 'save_custom_meta_data' ] );
                     } else {
                         $my_post = array(
-                            'ID'        => $id,
-                            'post_name' => $id,
+                            'ID'        => intval( $id ),
+                            'post_name' => intval( $id ),
                         );
                         remove_action( 'save_post', [ $this, 'save_custom_meta_data' ] );
                         wp_update_post( $my_post );
@@ -366,14 +374,14 @@ class SharedFilesAdminMetadata
         
         if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
             $folder_for_new_files = '/' . sanitize_file_name( $s['folder_for_new_files'] );
-            $full_path_new = $dir['basedir'] . '/shared-files' . $folder_for_new_files;
+            $full_path_new = realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files;
             if ( !file_exists( $full_path_new ) ) {
                 mkdir( $full_path_new );
             }
         }
         
         return array(
-            'path'   => $dir['basedir'] . '/shared-files' . $folder_for_new_files,
+            'path'   => realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files,
             'url'    => $dir['baseurl'] . '/shared-files' . $folder_for_new_files,
             'subdir' => '/shared-files' . $folder_for_new_files,
         ) + $dir;

@@ -128,14 +128,14 @@ class SharedFilesAdminSyncMediaLibrary {
           }
           
           echo '<tr>';
-          echo '<td><a href="' . $file_with_url . '" target="_blank">' . $filename . '</a>';
+          echo '<td><a href="' . esc_url( $file_with_url ) . '" target="_blank">' . esc_html( $filename ) . '</a>';
 //          echo $post->post_title;
 //          echo $file_with_path;
           echo '</td>';
           
-          echo '<td>' . SharedFilesFileHandling::human_filesize(filesize($file_with_path)) . '</td>';
+          echo '<td>' . esc_html( SharedFilesFileHandling::human_filesize(filesize($file_with_path)) ) . '</td>';
 
-          echo '<td>' . $post->post_modified . '</td>';
+          echo '<td>' . esc_html( $post->post_modified ) . '</td>';
           echo '<td>';
   
           $meta_query = array('relation' => 'AND');
@@ -171,7 +171,7 @@ class SharedFilesAdminSyncMediaLibrary {
             <form method="post">
               <?php wp_nonce_field('sf-sync-files', 'sf-sync-files-nonce'); ?>
               <input type="hidden" name="shared-files-op" value="sync-files" />
-              <input type="hidden" name="_sf_media_library_post_id" value="<?= $post->ID ?>" />
+              <input type="hidden" name="_sf_media_library_post_id" value="<?= intval( $post->ID ) ?>" />
               <input type="hidden" name="add_file" value="<?= sanitize_file_name($filename) ?>" />
               <input type="hidden" name="shared-file-category" class="shared-files-single-file-category" value="" />
               <input type="submit" class="shared-files-activate <?= (SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '') ?>" value="<?= esc_attr__('Activate', 'shared-files') ?>" />

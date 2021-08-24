@@ -112,7 +112,7 @@ class SharedFilesAdminSyncFiles
         echo  esc_html__( 'Files found on the server at', 'shared-files' ) ;
         ?>
         <span class="shared-files-path"><?php 
-        echo  $path ;
+        echo  esc_html( $path ) ;
         ?></span>:
       </p>
 
@@ -173,9 +173,9 @@ class SharedFilesAdminSyncFiles
         }
         
         $html .= '<tr>';
-        $html .= '<td>' . implode( '/', $item_array_sliced ) . '</td>';
-        $html .= '<td>' . SharedFilesFileHandling::human_filesize( filesize( $item ) ) . '</td>';
-        $html .= '<td>' . date( "Y-m-d", filemtime( $item ) ) . '</td>';
+        $html .= '<td>' . esc_html( implode( '/', $item_array_sliced ) ) . '</td>';
+        $html .= '<td>' . esc_html( SharedFilesFileHandling::human_filesize( filesize( $item ) ) ) . '</td>';
+        $html .= '<td>' . esc_html( date( "Y-m-d", filemtime( $item ) ) ) . '</td>';
         $html .= '<td>';
         $meta_query = array(
             'relation' => 'AND',
@@ -227,8 +227,8 @@ class SharedFilesAdminSyncFiles
             $html .= '<input type="hidden" name="shared-files-op" value="sync-files" />';
             $html .= '<input type="hidden" name="add_file" value="' . sanitize_file_name( $file ) . '" />';
             $html .= '<input type="hidden" name="shared-file-category" class="shared-files-single-file-category" value="" />';
-            $html .= '<input type="hidden" name="_SF_SUBDIR" value="' . $subdir . '" />';
-            $html .= '<input type="submit" class="shared-files-activate ' . (( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' )) . '" value="' . esc_html__( 'Activate', 'shared-files' ) . '" />';
+            $html .= '<input type="hidden" name="_SF_SUBDIR" value="' . esc_attr( $subdir ) . '" />';
+            $html .= '<input type="submit" class="shared-files-activate ' . (( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' )) . '" value="' . esc_attr__( 'Activate', 'shared-files' ) . '" />';
             $html .= '</form>';
         }
         

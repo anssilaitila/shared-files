@@ -14,9 +14,9 @@ class SharedFilesAdminInlineScripts {
 
       <?php if (isset($current_screen->id) && ($current_screen->id === 'edit-shared_file' || $current_screen->id === 'edit-shared-file-category')): ?>
   
-        <link rel="stylesheet" href="<?= SHARED_FILES_URI ?>dist/tipso.min.css">
-        <script src="<?= SHARED_FILES_URI ?>dist/tipso.min.js"></script>
-        <script src="<?= SHARED_FILES_URI ?>dist/clipboard.min.js"></script>
+        <link rel="stylesheet" href="<?= esc_url( SHARED_FILES_URI ) ?>dist/tipso.min.css">
+        <script src="<?= esc_url( SHARED_FILES_URI ) ?>dist/tipso.min.js"></script>
+        <script src="<?= esc_url( SHARED_FILES_URI ) ?>dist/clipboard.min.js"></script>
     
         <script>
           
@@ -35,7 +35,7 @@ class SharedFilesAdminInlineScripts {
               let clipboardtarget = jQuery(e.trigger).data('clipboard-target');
       
               jQuery(clipboardtarget).tipso({
-                content: "<?= __('Shortcode copied to clipboard!', 'shared-files') ?>",
+                content: "<?= esc_js( __('Shortcode copied to clipboard!', 'shared-files') ) ?>",
                 width: 240
               });
       

@@ -47,7 +47,7 @@ class SharedFilesAdminNotifications {
             <div class='shared-files-notice-text'>
                 <p><b style='font-weight: 700;'>Exclusive offer!</b> For a limited time we're offering <b style='font-weight: 700;'>10% off</b> our PRO version to all users of our free <b style='font-weight: 700;'>Shared Files</b> plugin. Use the promotional code <b style='font-weight: 700;'>SALENOW10</b> to redeem this offer.</p>
                 <p class='sf-links'>
-                    <a class='sf_notice_dismiss sf_offer_btn' href='" . sf_fs()->get_upgrade_url() . "' target='_blank'><b>" . esc_html__('Upgrade now!') . "</b></a>
+                    <a class='sf_notice_dismiss sf_offer_btn' href='" . esc_url( sf_fs()->get_upgrade_url() ) . "' target='_blank'><b>" . esc_html__('Upgrade now!') . "</b></a>
                     <a class='sf_notice_dismiss' style='margin-left: 5px;' href='" . esc_url( add_query_arg( 'sf_ignore_offer_notice', 'always' ) ) . "'>" . __( 'I\'m not interested') . "</a>
 
                 </p>

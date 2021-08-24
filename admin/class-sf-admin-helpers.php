@@ -8,7 +8,7 @@ class SharedFilesAdminHelpers {
     
       $html .= '<div class="sf-admin-pro-feature">';
       $html .= '<span>' . esc_html__('This feature is available in the Pro version.', 'shared-files') . '</span>';
-      $html .= '<a href="' . get_admin_url() . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
+      $html .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
       $html .= '</div>';
       
       return $html;
@@ -21,7 +21,7 @@ class SharedFilesAdminHelpers {
     
       $html .= '<div class="sf-admin-pro-feature">';
       $html .= '<span>' . esc_html__('More features available in the Pro version.', 'shared-files') . '</span>';
-      $html .= '<a href="' . get_admin_url() . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
+      $html .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
       $html .= '</div>';
       
       return $html;
@@ -34,7 +34,7 @@ class SharedFilesAdminHelpers {
     
       $html .= '<div class="sf-admin-pro-feature">';
       $html .= '<span>' . esc_html__('More settings available in the Pro version.', 'shared-files') . '</span>';
-      $html .= '<a href="' . get_admin_url() . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
+      $html .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
       $html .= '</div>';
       
       return $html;

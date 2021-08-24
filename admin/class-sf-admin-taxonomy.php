@@ -98,7 +98,7 @@ class SharedFilesAdminTaxonomy
         $term = get_term( $term_id, 'shared-file-category' );
         switch ( $column_name ) {
             case 'shortcode':
-                $content = '<span class="shared-files-shortcode-admin-list shared-files-shortcode-' . $term->slug . '" title="[shared_files category=' . $term->slug . ']">[shared_files category=' . $term->slug . ']</span>' . '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $term->slug . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>';
+                $content = '<span class="shared-files-shortcode-admin-list shared-files-shortcode-' . esc_attr( $term->slug ) . '" title="[shared_files category=' . esc_attr( $term->slug ) . ']">[shared_files category=' . $term->slug . ']</span>' . '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . esc_attr( $term->slug ) . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>';
                 break;
             default:
                 break;

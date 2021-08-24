@@ -6,7 +6,7 @@ class ShortcodeSharedFilesAccordion
     {
         
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            $html = SharedFilesAdminHelpers::sfProFeatureMarkup();
+            $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
             return $html;
         }
     
