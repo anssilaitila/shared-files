@@ -2,6 +2,16 @@
 
 class SharedFilesHelpers
 {
+    public static function getText( $text_id, $default_text )
+    {
+        $s = get_option( 'shared_files_settings' );
+        $text = sanitize_text_field( $default_text );
+        if ( isset( $s[$text_id] ) && $s[$text_id] ) {
+            $text = sanitize_text_field( $s[$text_id] );
+        }
+        return $text;
+    }
+    
     public static function createElemClass()
     {
         $elem_class = 'shared-files-embed-' . uniqid();
@@ -24,7 +34,7 @@ class SharedFilesHelpers
         if ( $terms ) {
             foreach ( $terms as $term ) {
                 //        $password = get_term_meta($term->term_id, '_sf_cat_password', true);
-                $password = SharedFilesTermMetadata::get_hierarchichal_term_metadata( $term, '_sf_cat_password' );
+                $password = sanitize_text_field( SharedFilesTermMetadata::get_hierarchichal_term_metadata( $term, '_sf_cat_password' ) );
                 if ( $password ) {
                     $cat_password = $password;
                 }
@@ -39,7 +49,7 @@ class SharedFilesHelpers
         $terms = get_the_terms( $file_id, 'shared-file-category' );
         if ( $terms ) {
             foreach ( $terms as $term ) {
-                $password_protection_type = SharedFilesTermMetadata::get_hierarchichal_term_metadata( $term, '_sf_cat_password_protection_type' );
+                $password_protection_type = sanitize_text_field( SharedFilesTermMetadata::get_hierarchichal_term_metadata( $term, '_sf_cat_password_protection_type' ) );
                 if ( $password_protection_type ) {
                     $cat_password_protection_type = $password_protection_type;
                 }
@@ -117,42 +127,42 @@ class SharedFilesHelpers
     {
         $s = get_option( 'shared_files_settings' );
         $filetypes = array(
-            'image/png'                                                                 => ( isset( $s['icon_for_image'] ) ? $s['icon_for_image'] : '' ),
-            'image/jpg'                                                                 => ( isset( $s['icon_for_image'] ) ? $s['icon_for_image'] : '' ),
-            'image/jpeg'                                                                => ( isset( $s['icon_for_image'] ) ? $s['icon_for_image'] : '' ),
-            'application/pdf'                                                           => ( isset( $s['icon_for_pdf'] ) ? $s['icon_for_pdf'] : '' ),
-            'application/postscript'                                                    => ( isset( $s['icon_for_ai'] ) ? $s['icon_for_ai'] : '' ),
-            'application/msword'                                                        => ( isset( $s['icon_for_doc'] ) ? $s['icon_for_doc'] : '' ),
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'   => ( isset( $s['icon_for_doc'] ) ? $s['icon_for_doc'] : '' ),
-            'application/vnd.ms-fontobject'                                             => ( isset( $s['icon_for_font'] ) ? $s['icon_for_font'] : '' ),
-            'font/otf'                                                                  => ( isset( $s['icon_for_font'] ) ? $s['icon_for_font'] : '' ),
-            'font/ttf'                                                                  => ( isset( $s['icon_for_font'] ) ? $s['icon_for_font'] : '' ),
-            'font/woff'                                                                 => ( isset( $s['icon_for_font'] ) ? $s['icon_for_font'] : '' ),
-            'font/woff2'                                                                => ( isset( $s['icon_for_font'] ) ? $s['icon_for_font'] : '' ),
-            'text/html'                                                                 => ( isset( $s['icon_for_html'] ) ? $s['icon_for_html'] : '' ),
-            'audio/mpeg3'                                                               => ( isset( $s['icon_for_mp3'] ) ? $s['icon_for_mp3'] : '' ),
-            'audio/x-mpeg-3'                                                            => ( isset( $s['icon_for_mp3'] ) ? $s['icon_for_mp3'] : '' ),
-            'audio/mpeg'                                                                => ( isset( $s['icon_for_mp3'] ) ? $s['icon_for_mp3'] : '' ),
-            'video/x-msvideo'                                                           => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'video/mpeg'                                                                => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'video/x-mpeg'                                                              => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'video/ogg'                                                                 => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'video/webm'                                                                => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'video/3gpp'                                                                => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'video/3gpp2'                                                               => ( isset( $s['icon_for_video'] ) ? $s['icon_for_video'] : '' ),
-            'application/vnd.ms-excel'                                                  => ( isset( $s['icon_for_xlsx'] ) ? $s['icon_for_xlsx'] : '' ),
-            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'         => ( isset( $s['icon_for_xlsx'] ) ? $s['icon_for_xlsx'] : '' ),
-            'application/zip'                                                           => ( isset( $s['icon_for_zip'] ) ? $s['icon_for_zip'] : '' ),
-            'application/x-7z-compressed'                                               => ( isset( $s['icon_for_zip'] ) ? $s['icon_for_zip'] : '' ),
-            'application/mspowerpoint'                                                  => ( isset( $s['icon_for_pptx'] ) ? $s['icon_for_pptx'] : '' ),
-            'application/powerpoint'                                                    => ( isset( $s['icon_for_pptx'] ) ? $s['icon_for_pptx'] : '' ),
-            'application/vnd.ms-powerpoint'                                             => ( isset( $s['icon_for_pptx'] ) ? $s['icon_for_pptx'] : '' ),
-            'application/x-mspowerpoint'                                                => ( isset( $s['icon_for_pptx'] ) ? $s['icon_for_pptx'] : '' ),
-            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => ( isset( $s['icon_for_pptx'] ) ? $s['icon_for_pptx'] : '' ),
-            'application/x-indesign'                                                    => ( isset( $s['icon_for_indd'] ) ? $s['icon_for_indd'] : '' ),
-            'image/vnd.adobe.photoshop'                                                 => ( isset( $s['icon_for_psd'] ) ? $s['icon_for_psd'] : '' ),
-            'application/photoshop'                                                     => ( isset( $s['icon_for_psd'] ) ? $s['icon_for_psd'] : '' ),
-            'image/svg+xml'                                                             => ( isset( $s['icon_for_svg'] ) ? $s['icon_for_svg'] : '' ),
+            'image/png'                                                                 => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
+            'image/jpg'                                                                 => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
+            'image/jpeg'                                                                => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
+            'application/pdf'                                                           => ( isset( $s['icon_for_pdf'] ) ? sanitize_text_field( $s['icon_for_pdf'] ) : '' ),
+            'application/postscript'                                                    => ( isset( $s['icon_for_ai'] ) ? sanitize_text_field( $s['icon_for_ai'] ) : '' ),
+            'application/msword'                                                        => ( isset( $s['icon_for_doc'] ) ? sanitize_text_field( $s['icon_for_doc'] ) : '' ),
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'   => ( isset( $s['icon_for_doc'] ) ? sanitize_text_field( $s['icon_for_doc'] ) : '' ),
+            'application/vnd.ms-fontobject'                                             => ( isset( $s['icon_for_font'] ) ? sanitize_text_field( $s['icon_for_font'] ) : '' ),
+            'font/otf'                                                                  => ( isset( $s['icon_for_font'] ) ? sanitize_text_field( $s['icon_for_font'] ) : '' ),
+            'font/ttf'                                                                  => ( isset( $s['icon_for_font'] ) ? sanitize_text_field( $s['icon_for_font'] ) : '' ),
+            'font/woff'                                                                 => ( isset( $s['icon_for_font'] ) ? sanitize_text_field( $s['icon_for_font'] ) : '' ),
+            'font/woff2'                                                                => ( isset( $s['icon_for_font'] ) ? sanitize_text_field( $s['icon_for_font'] ) : '' ),
+            'text/html'                                                                 => ( isset( $s['icon_for_html'] ) ? sanitize_text_field( $s['icon_for_html'] ) : '' ),
+            'audio/mpeg3'                                                               => ( isset( $s['icon_for_mp3'] ) ? sanitize_text_field( $s['icon_for_mp3'] ) : '' ),
+            'audio/x-mpeg-3'                                                            => ( isset( $s['icon_for_mp3'] ) ? sanitize_text_field( $s['icon_for_mp3'] ) : '' ),
+            'audio/mpeg'                                                                => ( isset( $s['icon_for_mp3'] ) ? sanitize_text_field( $s['icon_for_mp3'] ) : '' ),
+            'video/x-msvideo'                                                           => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'video/mpeg'                                                                => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'video/x-mpeg'                                                              => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'video/ogg'                                                                 => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'video/webm'                                                                => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'video/3gpp'                                                                => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'video/3gpp2'                                                               => ( isset( $s['icon_for_video'] ) ? sanitize_text_field( $s['icon_for_video'] ) : '' ),
+            'application/vnd.ms-excel'                                                  => ( isset( $s['icon_for_xlsx'] ) ? sanitize_text_field( $s['icon_for_xlsx'] ) : '' ),
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'         => ( isset( $s['icon_for_xlsx'] ) ? sanitize_text_field( $s['icon_for_xlsx'] ) : '' ),
+            'application/zip'                                                           => ( isset( $s['icon_for_zip'] ) ? sanitize_text_field( $s['icon_for_zip'] ) : '' ),
+            'application/x-7z-compressed'                                               => ( isset( $s['icon_for_zip'] ) ? sanitize_text_field( $s['icon_for_zip'] ) : '' ),
+            'application/mspowerpoint'                                                  => ( isset( $s['icon_for_pptx'] ) ? sanitize_text_field( $s['icon_for_pptx'] ) : '' ),
+            'application/powerpoint'                                                    => ( isset( $s['icon_for_pptx'] ) ? sanitize_text_field( $s['icon_for_pptx'] ) : '' ),
+            'application/vnd.ms-powerpoint'                                             => ( isset( $s['icon_for_pptx'] ) ? sanitize_text_field( $s['icon_for_pptx'] ) : '' ),
+            'application/x-mspowerpoint'                                                => ( isset( $s['icon_for_pptx'] ) ? sanitize_text_field( $s['icon_for_pptx'] ) : '' ),
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation' => ( isset( $s['icon_for_pptx'] ) ? sanitize_text_field( $s['icon_for_pptx'] ) : '' ),
+            'application/x-indesign'                                                    => ( isset( $s['icon_for_indd'] ) ? sanitize_text_field( $s['icon_for_indd'] ) : '' ),
+            'image/vnd.adobe.photoshop'                                                 => ( isset( $s['icon_for_psd'] ) ? sanitize_text_field( $s['icon_for_psd'] ) : '' ),
+            'application/photoshop'                                                     => ( isset( $s['icon_for_psd'] ) ? sanitize_text_field( $s['icon_for_psd'] ) : '' ),
+            'image/svg+xml'                                                             => ( isset( $s['icon_for_svg'] ) ? sanitize_text_field( $s['icon_for_svg'] ) : '' ),
         );
         return $filetypes;
     }
@@ -202,7 +212,7 @@ class SharedFilesHelpers
         if ( $tag_slug ) {
             $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
             $html .= '<div class="' . esc_attr( $type ) . '">';
-            $html .= '<span class="shared-files-tag-title">' . esc_html( $current_tag->name ) . '</span>';
+            $html .= '<span class="shared-files-tag-title">' . sanitize_text_field( $current_tag->name ) . '</span>';
             $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . esc_attr( $hide_description ) . '" href="./?sf_tag=0">' . esc_html__( 'Show all files', 'shared-files' ) . '</a>';
             $html .= '</div>';
         }
@@ -224,11 +234,11 @@ class SharedFilesHelpers
             return '';
         }
         $file = get_post_meta( $file_id, '_sf_file', true );
-        $media_library_post_id = get_post_meta( $file_id, '_sf_media_library_post_id', true );
+        $media_library_post_id = intval( get_post_meta( $file_id, '_sf_media_library_post_id', true ) );
         $filetype = '';
         
         if ( isset( $file['type'] ) && $file['type'] ) {
-            $filetype = $file['type'];
+            $filetype = sanitize_text_field( $file['type'] );
         } elseif ( $media_library_post_id ) {
         }
         
@@ -249,30 +259,30 @@ class SharedFilesHelpers
         $pdf_types = array( 'application/pdf' );
         
         if ( in_array( $filetype, $image_types ) ) {
-            $image_url = get_the_post_thumbnail_url( $file_id, 'large' );
+            $image_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'large' ) );
             if ( !$image_url ) {
-                $image_url = $file['url'];
+                $image_url = esc_url_raw( $file['url'] );
             }
             
             if ( $password && $enable_preview_with_password ) {
-                $html .= '<a href="' . esc_url( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             } else {
-                $html .= '<a href="' . esc_url( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url_raw( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             }
         
         } elseif ( isset( $s['always_preview_pdf'] ) && !$password && in_array( $filetype, $pdf_types ) ) {
             
             if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
-                $file_url = $file['url'];
+                $file_url = esc_url_raw( $file['url'] );
             } else {
-                $file_url = get_site_url() . $file_url;
+                $file_url = esc_url_raw( get_site_url() . $file_url );
             }
             
             
             if ( isset( $s['bypass_preview_pdf'] ) ) {
-                $html .= '<a href="' . esc_url( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . esc_url( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             } else {
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             }
         
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
@@ -291,9 +301,9 @@ class SharedFilesHelpers
             if ( in_array( $filetype, $ok ) ) {
                 
                 if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
-                    $file_url = $file['url'];
+                    $file_url = esc_url_raw( $file['url'] );
                 } else {
-                    $file_url = get_site_url() . $file_url;
+                    $file_url = esc_url_raw( get_site_url() . $file_url );
                 }
                 
                 $password_protected = 0;
@@ -319,14 +329,14 @@ class SharedFilesHelpers
             if ( in_array( $filetype, $ok ) ) {
                 
                 if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
-                    $file_url = $file['url'];
+                    $file_url = esc_url_raw( $file['url'] );
                 } else {
-                    $file_url = get_site_url() . $file_url;
+                    $file_url = esc_url_raw( get_site_url() . $file_url );
                 }
                 
                 $password_protected = 0;
                 if ( !$password_protected ) {
-                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
                 }
             }
         
@@ -348,7 +358,7 @@ class SharedFilesHelpers
         $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
         $filetypes_ext = SharedFilesHelpers::filetypesExt();
         $custom_icons = SharedFilesHelpers::getCustomIcons();
-        $password = get_post_meta( $file_id, '_sf_password', true );
+        $password = sanitize_text_field( get_post_meta( $file_id, '_sf_password', true ) );
         $imagefile = 'generic.png';
         $file_type_icon_url = '';
         $file_ext = '';
@@ -383,7 +393,7 @@ class SharedFilesHelpers
                 $custom_ext = 'custom_' . $n . '_ext';
                 $custom_icon_url = 'custom_' . $n . '_icon';
                 if ( isset( $s[$custom_ext] ) && $file_ext == $s[$custom_ext] && isset( $s[$custom_icon_url] ) && $s[$custom_icon_url] ) {
-                    return $s[$custom_icon_url];
+                    return esc_url_raw( $s[$custom_icon_url] );
                 }
             }
         }
@@ -457,7 +467,7 @@ class SharedFilesHelpers
                     }
                 
                 } elseif ( isset( $s['icon_for_other'] ) ) {
-                    $file_type_icon_url = $s['icon_for_other'];
+                    $file_type_icon_url = sanitize_text_field( $s['icon_for_other'] );
                 }
             
             }
@@ -467,7 +477,7 @@ class SharedFilesHelpers
         if ( !$file_type_icon_url ) {
             
             if ( isset( $s['icon_for_other'] ) && strlen( $s['icon_for_other'] ) > 0 ) {
-                $file_type_icon_url = $s['icon_for_other'];
+                $file_type_icon_url = esc_url_raw( $s['icon_for_other'] );
             } elseif ( $icon_set == 2020 ) {
                 $file_type_icon_url = SHARED_FILES_URI . 'img/2020/generic.svg';
             } else {
@@ -503,6 +513,14 @@ class SharedFilesHelpers
             }
         }
         
+        
+        if ( is_multisite() ) {
+            $multisite_path_part = str_replace( '/', '', get_blog_details()->path );
+            if ( $multisite_path_part ) {
+                $sf_root = '/' . $multisite_path_part . $sf_root;
+            }
+        }
+        
         return $sf_root;
     }
     
@@ -511,7 +529,7 @@ class SharedFilesHelpers
         $layout = '';
         
         if ( isset( $atts['layout'] ) ) {
-            $layout = $atts['layout'];
+            $layout = sanitize_text_field( $atts['layout'] );
             
             if ( $layout == '2-columns' ) {
                 $layout = '2-cards-on-the-same-row';
@@ -522,7 +540,7 @@ class SharedFilesHelpers
             }
         
         } elseif ( isset( $s['layout'] ) && $s['layout'] ) {
-            $layout = $s['layout'];
+            $layout = sanitize_text_field( $s['layout'] );
         }
         
         return $layout;
@@ -591,9 +609,9 @@ class SharedFilesHelpers
         $s = get_option( 'shared_files_settings' );
         
         if ( isset( $atts['order'] ) && $atts['order'] ) {
-            $order = $atts['order'];
+            $order = sanitize_text_field( $atts['order'] );
         } elseif ( isset( $s['order'] ) && $s['order'] ) {
-            $order = $s['order'];
+            $order = sanitize_text_field( $s['order'] );
         }
         
         return $order;
@@ -607,11 +625,11 @@ class SharedFilesHelpers
         if ( isset( $atts['order_by'] ) && $atts['order_by'] == '_sf_main_date' ) {
             $order_by = 'meta_value';
         } elseif ( isset( $atts['order_by'] ) && $atts['order_by'] ) {
-            $order_by = $atts['order_by'];
+            $order_by = sanitize_text_field( $atts['order_by'] );
         } elseif ( isset( $s['order_by'] ) && $s['order_by'] == '_sf_main_date' ) {
             $order_by = 'meta_value';
         } elseif ( isset( $s['order_by'] ) && $s['order_by'] ) {
-            $order_by = $s['order_by'];
+            $order_by = sanitize_text_field( $s['order_by'] );
         }
         
         return $order_by;
@@ -623,9 +641,9 @@ class SharedFilesHelpers
         $s = get_option( 'shared_files_settings' );
         
         if ( isset( $atts['order_by'] ) && $atts['order_by'] == '_sf_main_date' ) {
-            $meta_key = $atts['order_by'];
+            $meta_key = sanitize_text_field( $atts['order_by'] );
         } elseif ( isset( $s['order_by'] ) && $s['order_by'] == '_sf_main_date' ) {
-            $meta_key = $s['order_by'];
+            $meta_key = sanitize_text_field( $s['order_by'] );
         }
         
         return $meta_key;
@@ -638,6 +656,7 @@ class SharedFilesHelpers
         $filename
     )
     {
+        $file_id = intval( $file_id );
         if ( !function_exists( 'wp_crop_image' ) ) {
             include ABSPATH . 'wp-admin/includes/image.php';
         }

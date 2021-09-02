@@ -10,23 +10,23 @@ class SharedFilesAdminList
     public function shared_file_custom_columns( $defaults )
     {
         $s = get_option( 'shared_files_settings' );
-        $defaults['file_url'] = esc_html__( 'Shortcode', 'shared-files' );
-        $defaults['filesize'] = esc_html__( 'File size', 'shared-files' );
-        $defaults['load_cnt'] = esc_html__( 'File loads', 'shared-files' );
+        $defaults['file_url'] = sanitize_text_field( __( 'Shortcode', 'shared-files' ) );
+        $defaults['filesize'] = sanitize_text_field( __( 'File size', 'shared-files' ) );
+        $defaults['load_cnt'] = sanitize_text_field( __( 'File loads', 'shared-files' ) );
         if ( !isset( $s['hide_limit_downloads'] ) ) {
-            $defaults['limit_downloads'] = esc_html__( 'Limit', 'shared-files' );
+            $defaults['limit_downloads'] = sanitize_text_field( __( 'Limit', 'shared-files' ) );
         }
         if ( !isset( $s['hide_file_added'] ) ) {
-            $defaults['file_added'] = esc_html__( 'File added', 'shared-files' );
+            $defaults['file_added'] = sanitize_text_field( __( 'File added', 'shared-files' ) );
         }
         if ( !isset( $s['hide_last_access'] ) ) {
-            $defaults['last_access'] = esc_html__( 'Last access', 'shared-files' );
+            $defaults['last_access'] = sanitize_text_field( __( 'Last access', 'shared-files' ) );
         }
         if ( !isset( $s['hide_bandwidth_usage'] ) ) {
-            $defaults['bandwidth_usage'] = esc_html__( 'Bandwidth usage (estimate)', 'shared-files' );
+            $defaults['bandwidth_usage'] = sanitize_text_field( __( 'Bandwidth usage (estimate)', 'shared-files' ) );
         }
         if ( !isset( $s['hide_expiration_date'] ) ) {
-            $defaults['expiration_date'] = esc_html__( 'Expires', 'shared-files' );
+            $defaults['expiration_date'] = sanitize_text_field( __( 'Expires', 'shared-files' ) );
         }
         return $defaults;
     }
@@ -87,11 +87,12 @@ class SharedFilesAdminList
     public function shared_file_custom_columns_content( $column_name, $post_ID )
     {
         $post_ID = intval( $post_ID );
+        $file_id = intval( get_the_ID() );
         switch ( $column_name ) {
             case 'file_url':
                 echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . $post_ID . '" title="[shared_files file_id=' . $post_ID . ']">[shared_files file_id=' . $post_ID . ']</span>' ;
                 echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $post_ID . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
-                $folder_name = get_post_meta( get_the_ID(), '_sf_subdir', true );
+                $folder_name = get_post_meta( $file_id, '_sf_subdir', true );
                 if ( $folder_name ) {
                     echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . esc_html( $folder_name ) . '/</div>' ;
                 }
@@ -119,7 +120,7 @@ class SharedFilesAdminList
                 }
                 break;
             case 'file_added':
-                echo  get_post_meta( $post_ID, '_sf_file_added', true ) ;
+                echo  esc_html( get_post_meta( $post_ID, '_sf_file_added', true ) ) ;
                 break;
             case 'last_access':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {

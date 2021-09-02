@@ -18,44 +18,28 @@ class SharedFilesAdminNotifications {
 
   		echo "
         <div class='sf_notice sf_review_notice'>
-            <img src='". SHARED_FILES_URI . 'img/sf-sunrise.jpg' ."' alt='" . esc_attr__('Shared Files', 'shared-files') . "'>
-            <div class='shared-files-notice-text'>
-                <p style='padding-top: 4px;'>" . sprintf( __( "It's great to see that you've been using the %sShared Files%s plugin for a while now. Hopefully you're happy with it!&nbsp; If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!" ), '<strong style=\'font-weight: 700;\'>', '</strong>' ) . "</p>
-                <p class='links'>
-                    <a class='sf_notice_dismiss' href='https://wordpress.org/support/plugin/shared-files/reviews/#new-post' target='_blank'>" . esc_html__('Sure, I\'d love to!') . "</a>
-                    &middot;
-                    <a class='sf_notice_dismiss' href='" . esc_url($dismiss_url) . "'>" . esc_html__('No thanks') . "</a>
-                    &middot;
-                    <a class='sf_notice_dismiss' href='" . esc_url($dismiss_url) . "'>" . esc_html__('I\'ve already given a review') . "</a>
-                    &middot;
-                    <a class='sf_notice_dismiss' href='" . esc_url($later_url) . "'>" . esc_html__('Ask Me Later') . "</a>
-                </p>
-            </div>
-            <a class='sf_notice_close' href='" . esc_url($dismiss_url) . "'>x</a>
+
+          <img src='". SHARED_FILES_URI . 'img/sf-sunrise.jpg' ."' alt='" . esc_attr__('Shared Files', 'shared-files') . "'>
+          <div class='shared-files-notice-text'>
+
+            <p style='padding-top: 4px;'>" . sprintf( __( "It's great to see that you've been using the %sShared Files%s plugin for a while now. Hopefully you're happy with it!&nbsp; If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!" ), '<strong style=\'font-weight: 700;\'>', '</strong>' ) . "</p>
+
+            <p class='links'>
+                <a class='sf_notice_dismiss' href='https://wordpress.org/support/plugin/shared-files/reviews/#new-post' target='_blank'>" . esc_html__('Sure, I\'d love to!', 'shared-files') . "</a>
+                &middot;
+                <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url ) . "'>" . esc_html__('No thanks', 'shared-files') . "</a>
+                &middot;
+                <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url ) . "'>" . esc_html__('I\'ve already given a review', 'shared-files') . "</a>
+                &middot;
+                <a class='sf_notice_dismiss' href='" . esc_url( $later_url ) . "'>" . esc_html__('Ask Me Later', 'shared-files') . "</a>
+            </p>
+
+          </div>
+
+          <a class='sf_notice_close' href='" . esc_url($dismiss_url) . "'>x</a>
+
         </div>";
   
-    }
-
-    $sf_offer_show_notice = get_option('shared_files_offer_show_notice');
-    $should_show_offer_notice = $sf_offer_show_notice;
-
-    if ($should_show_offer_notice && sf_fs()->is_not_paying() && current_user_can('administrator')) {
-      
-			echo "
-        <div class='sf_notice sf_review_notice sf_new_user_sale_notice'>
-            <img src='". SHARED_FILES_URI . 'img/sale.jpg' ."' alt='" . esc_attr__('Shared Files', 'shared-files') . "'>
-            <div class='shared-files-notice-text'>
-                <p><b style='font-weight: 700;'>Exclusive offer!</b> For a limited time we're offering <b style='font-weight: 700;'>10% off</b> our PRO version to all users of our free <b style='font-weight: 700;'>Shared Files</b> plugin. Use the promotional code <b style='font-weight: 700;'>SALENOW10</b> to redeem this offer.</p>
-                <p class='sf-links'>
-                    <a class='sf_notice_dismiss sf_offer_btn' href='" . esc_url( sf_fs()->get_upgrade_url() ) . "' target='_blank'><b>" . esc_html__('Upgrade now!') . "</b></a>
-                    <a class='sf_notice_dismiss' style='margin-left: 5px;' href='" . esc_url( add_query_arg( 'sf_ignore_offer_notice', 'always' ) ) . "'>" . __( 'I\'m not interested') . "</a>
-
-                </p>
-            </div>
-            <a class='sf_notice_close' href='" . esc_url( add_query_arg( 'sf_ignore_offer_notice', 'always' ) ) . "'>x</a>
-        </div>
-        ";
-        
     }
 
   }
@@ -116,56 +100,17 @@ class SharedFilesAdminNotifications {
 
   		}
   	}
-
-    // Offer notice
-
-    if (!get_option('shared_files_offer_notice_date')) {
-
-      $dt = new DateTime('+4 weeks');
-
-      if ($dt !== false && !array_sum($dt::getLastErrors())) {
-        $notify_date = $dt;
-        update_option('shared_files_offer_notice_date', $notify_date, false);
-      }
-
-    } else {
-
-      $notify_date = get_option('shared_files_offer_notice_date');
-
-      if ($notify_date instanceof DateTime) {
-        $dt_now = new DateTime('now');
-        
-        if ($notify_date <= $dt_now) {
-          update_option('shared_files_offer_show_notice', 1, false);
-        }
-
-      }
-      
-    }
-
-  	if (isset($_GET['sf_ignore_offer_notice'])) {
-			update_option('shared_files_offer_notice', 'dismissed', false);
-			update_option('shared_files_offer_show_notice', 0, false);
-			$sf_statuses_option['offer_notice_dismissed'] = $this->sf_get_current_time();
-			update_option('sf_statuses', $sf_statuses_option, false);
-
-      $dt = new DateTime('+26 weeks');
-
-      if ($dt !== false && !array_sum($dt::getLastErrors())) {
-        $notify_date = $dt;
-        update_option('shared_files_offer_notice_date', $notify_date, false);
-      }
-
-    }
     
   }
 
   public function sf_get_current_time() {
+
   	$current_time = time();
   
   	// $current_time = strtotime( 'November 25, 2022' ) + 1;
   
   	return $current_time;
+
   }
 
 }

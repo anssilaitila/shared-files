@@ -90,7 +90,7 @@ class SharedFilesAdminQuery
                 
                 if ( $external_url ) {
                     if ( !isset( $_POST['youtube'] ) && !isset( $_POST['only_meta'] ) ) {
-                        header( 'Location: ' . $external_url );
+                        header( 'Location: ' . esc_url_raw( $external_url ) );
                     }
                     die;
                 } elseif ( $file = get_post_meta( $file_id, '_sf_file', true ) ) {
@@ -128,7 +128,7 @@ class SharedFilesAdminQuery
                     
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );
-                        $file_url = $file['url'];
+                        $file_url = esc_url_raw( $file['url'] );
                         $redirect_url_parts = parse_url( $file_url );
                         $file_uri = $redirect_url_parts['path'];
                         wp_redirect( $file_uri );

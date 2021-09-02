@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.55
+Stable tag: 1.6.56
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -41,11 +41,13 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * High quality SVG icons for 25 different file types
 * Use as a download manager, file explorer and file manager
 * Custom images/icons for many file types
+* WordPress Multisite compatible
 * Add tags to files
 
 = Key Features in Shared Files Pro: =
 * Fast search targeting file names and descriptions
 * Front-end file editor: allow any user roles to edit files from the front-end
+* Automatically generated filters based on custom field values
 * List any number of files and keep statistics on downloads
 * Upload files using FTP and activate them for the plugin with a single click
 * FTP file upload allows you to upload any number of files easily
@@ -129,6 +131,17 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.56 - 2021-09-02 =
+* (Business) New feature: Activate any number of custom fields (see Settings / Custom fields tab)
+* (Professional) Max. number of custom fields increased to 5
+* (Professional + Business) All custom fields can now be used as search filters (dropdown contents are automatically generated from file data), see plugin settings / Custom fields tab
+* (All plans) Custom field settings are now on a separate tab (Settings / Custom fields)
+* (All plans) More settings for custom fields
+* (All plans) New parameter for the frontend uploader: hide_category_dropdown=1
+* (All plans) Fix: Logged in user may now delete their own uploaded files properly
+* (Free + All plans) Multisite support added. The files now open normally on multisite subsites.
+* (Free + All plans) Fix: It is no longer possible to submit the frontend file upload form without adding the file
 
 = 1.6.55 - 2021-08-24 =
 * (All plans) Simple list parameters updated, the following parameters are currently available (more information on Shortcodes page): [shared_files_simple hide_search=1 limit=5 category="sample-category-1"]

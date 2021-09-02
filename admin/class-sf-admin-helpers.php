@@ -4,40 +4,40 @@ class SharedFilesAdminHelpers {
 
   public static function sfProFeatureMarkup() {
   
-      $html = '';
+    $html = '';
+  
+    $html .= '<div class="sf-admin-pro-feature">';
+    $html .= '<span>' . sanitize_text_field( __('This feature is available in the Pro version.', 'shared-files') ) . '</span>';
+    $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
+    $html .= '</div>';
     
-      $html .= '<div class="sf-admin-pro-feature">';
-      $html .= '<span>' . esc_html__('This feature is available in the Pro version.', 'shared-files') . '</span>';
-      $html .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
-      $html .= '</div>';
-      
-      return $html;
+    return $html;
     
   }
   
   public static function sfProMoreFeaturesMarkup() {
   
-      $html = '';
+    $html = '';
+  
+    $html .= '<div class="sf-admin-pro-feature">';
+    $html .= '<span>' . sanitize_text_field( __('More features available in the Pro version.', 'shared-files') ) . '</span>';
+    $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
+    $html .= '</div>';
     
-      $html .= '<div class="sf-admin-pro-feature">';
-      $html .= '<span>' . esc_html__('More features available in the Pro version.', 'shared-files') . '</span>';
-      $html .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
-      $html .= '</div>';
-      
-      return $html;
+    return $html;
     
   }
   
   public static function sfProFeatureSettingsMarkup() {
   
-      $html = '';
+    $html = '';
+  
+    $html .= '<div class="sf-admin-pro-feature">';
+    $html .= '<span>' . sanitize_text_field( __('More settings available in the Pro version.', 'shared-files') ) . '</span>';
+    $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
+    $html .= '</div>';
     
-      $html .= '<div class="sf-admin-pro-feature">';
-      $html .= '<span>' . esc_html__('More settings available in the Pro version.', 'shared-files') . '</span>';
-      $html .= '<a href="' . esc_url( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
-      $html .= '</div>';
-      
-      return $html;
+    return $html;
     
   }
 
@@ -106,16 +106,25 @@ class SharedFilesAdminHelpers {
     );
 
     if (isset($mimet[$idx])) {
-     return $mimet[$idx];
+
+      return $mimet[$idx];
+
     } else {
-     return 'application/octet-stream';
+
+      return 'application/octet-stream';
+
     }
+
   }
 
   public static function human_filesize($bytes, $decimals = 2) {
+
     $size = array('bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+
     $factor = floor((strlen($bytes) - 1) / 3);
+
     return $bytes ? sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . ' ' . @$size[$factor] : 0;
+
   }
 
   public static function sf_root() {
@@ -135,6 +144,16 @@ class SharedFilesAdminHelpers {
       
       if (isset($path_parts[2]) && $path_parts[2] == 'wp-admin') {
         $sf_root = '/' . $path_parts[1];
+      }
+      
+    }
+    
+    if ( is_multisite() ) {
+
+      $multisite_path_part = str_replace( '/', '', get_blog_details()->path );
+      
+      if ($multisite_path_part) {
+        $sf_root = '/' . $multisite_path_part . $sf_root;
       }
       
     }

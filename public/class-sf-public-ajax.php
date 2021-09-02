@@ -17,7 +17,9 @@ class SharedFilesPublicAjax
         if ( isset( $_POST['sf_category'] ) && $_POST['sf_category'] ) {
             $term_slug = sanitize_title( $_POST['sf_category'] );
         }
-        if ( isset( $atts['hide_files_first'] ) && !$term_slug && !$tag_slug ) {
+        $cf_active = 0;
+        $meta_query = [];
+        if ( isset( $atts['hide_files_first'] ) && !$term_slug && !$tag_slug && !$cf_active ) {
             die;
         }
         /* CATEGORY PASSWORD END */
@@ -33,6 +35,11 @@ class SharedFilesPublicAjax
             'key'     => '_sf_not_public',
             'compare' => 'NOT EXISTS',
         );
+        $meta_query_full = array(
+            'relation' => 'AND',
+        );
+        $meta_query_full[] = $meta_query_hide_not_public;
+        $meta_query_full[] = $meta_query;
         
         if ( $term_slug ) {
             $wp_query = new WP_Query( array(
@@ -49,7 +56,7 @@ class SharedFilesPublicAjax
                 'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                 'order'          => SharedFilesHelpers::getOrder( $atts ),
                 'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
-                'meta_query'     => $meta_query_hide_not_public,
+                'meta_query'     => $meta_query_full,
             ) );
         } else {
             $wp_query = new WP_Query( array(
@@ -60,7 +67,7 @@ class SharedFilesPublicAjax
                 'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                 'order'          => SharedFilesHelpers::getOrder( $atts ),
                 'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
-                'meta_query'     => $meta_query_hide_not_public,
+                'meta_query'     => $meta_query_full,
             ) );
         }
         
@@ -71,7 +78,7 @@ class SharedFilesPublicAjax
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
-                $id = get_the_id();
+                $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
                 $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
                 $filetype = '';
@@ -85,7 +92,7 @@ class SharedFilesPublicAjax
             }
         }
         if ( $wp_query->found_posts == 0 ) {
-            $html .= '<p>' . __( 'No files found.', 'shared-files' ) . '</p>';
+            $html .= '<p>' . sanitize_text_field( __( 'No files found.', 'shared-files' ) ) . '</p>';
         }
         echo  $html ;
     }

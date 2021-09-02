@@ -25,6 +25,7 @@ class SharedFilesFileHandling
     
     public static function getFileUrl( $file_id )
     {
+        $file_id = intval( $file_id );
         $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0];
         return $file_dir;
     }

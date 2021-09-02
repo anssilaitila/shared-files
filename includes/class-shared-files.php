@@ -118,7 +118,6 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-settings.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-notifications.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-multiple-files-upload.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-media-library.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-file-handling.php';
@@ -174,7 +173,6 @@ class Shared_Files
         $plugin_admin_list = new SharedFilesAdminList();
         $plugin_admin_metadata = new SharedFilesAdminMetadata();
         $plugin_admin_notifications = new SharedFilesAdminNotifications();
-        $plugin_admin_multiple_files_upload = new SharedFilesAdminMultipleFilesUpload();
         $plugin_admin_sync_files = new SharedFilesAdminSyncFiles();
         $plugin_admin_sync_media_library = new SharedFilesAdminSyncMediaLibrary();
         $plugin_admin_file_handling = new SharedFilesFileHandling();
@@ -264,9 +262,6 @@ class Shared_Files
             8
         );
         $this->loader->add_action( 'admin_init', $plugin_admin_notifications, 'process_notifications' );
-        // Multiple files upload
-        $this->loader->add_filter( 'admin_init', $plugin_admin_multiple_files_upload, 'file_upload' );
-        $this->loader->add_action( 'admin_print_footer_scripts', $plugin_admin_multiple_files_upload, 'add_multiple_files_view' );
         // Sync files
         $this->loader->add_action( 'admin_menu', $plugin_admin_sync_files, 'register_page' );
         $this->loader->add_action( 'admin_menu', $plugin_admin_sync_media_library, 'register_page' );

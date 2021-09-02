@@ -6,8 +6,8 @@ class SharedFilesAdminHelpSupport
     {
         add_submenu_page(
             'edit.php?post_type=shared_file',
-            esc_html__( 'How to use Shared Files', 'shared-files' ),
-            esc_html__( 'Help / Support', 'shared-files' ),
+            sanitize_text_field( __( 'How to use Shared Files', 'shared-files' ) ),
+            sanitize_text_field( __( 'Help / Support', 'shared-files' ) ),
             'manage_options',
             'shared-files-support',
             [ $this, 'register_support_page_callback' ],
@@ -19,7 +19,7 @@ class SharedFilesAdminHelpSupport
     {
         $html = '';
         if ( !get_option( 'permalink_structure' ) ) {
-            $html = '<div class="shared-files-permalinks-alert"><strong>' . esc_html__( 'Please note', 'shared-files' ) . '</strong>: ' . esc_html__( 'you have currently "Plain" selected in the permalink settings. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!', 'shared-files' ) . '</div>';
+            $html = '<div class="shared-files-permalinks-alert"><strong>' . sanitize_text_field( __( 'Please note', 'shared-files' ) ) . '</strong>: ' . sanitize_text_field( __( 'you have currently "Plain" selected in the permalink settings. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!', 'shared-files' ) ) . '</div>';
         }
         return $html;
     }
@@ -48,18 +48,23 @@ class SharedFilesAdminHelpSupport
         ?>dist/tipso.min.js"></script>
 
     <div class="shared-files-help-support wrap">
+
       <h1><?php 
         echo  esc_html__( 'How to use Shared Files', 'shared-files' ) ;
         ?></h1>
+
       <div class="shared-files-examples">
+
         <p><?php 
         echo  esc_html__( 'Some examples on how you can use different views available at', 'shared-files' ) ;
         ?> <a href="https://www.sharedfilespro.com/shared-files/" target="_blank"><?php 
         echo  esc_html__( 'sharedfilespro.com', 'shared-files' ) ;
         ?></a>.</p>
+
         <p><?php 
         echo  esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' ) ;
         ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>.</p>
+
       </div>
 
       <div class="shared-files-admin-section">
@@ -67,12 +72,13 @@ class SharedFilesAdminHelpSupport
         <h2><?php 
         echo  esc_html__( 'Instructions for basic usage', 'shared-files' ) ;
         ?></h2>
+
         <ol>
           <li>
   
             <?php 
-        $url = get_admin_url() . 'edit.php?post_type=shared_file';
-        $text = sprintf( wp_kses(
+        $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file' );
+        echo  sprintf( wp_kses(
             /* translators: %s: link to file management */
             __( 'Add the files from the <a href="%s" target="_blank">file management</a> page.', 'shared-files' ),
             array(
@@ -81,17 +87,18 @@ class SharedFilesAdminHelpSupport
                 'target' => array(),
             ),
             )
-        ), esc_url( $url ) );
-        echo  $text ;
+        ), esc_url( $url ) ) ;
         ?>
           
           </li>
           <li>
+
             <?php 
         echo  esc_html__( 'Insert either one of these shortcodes to any page or post:', 'shared-files' ) ;
         ?><br />
   
             <ul>
+
               <li><?php 
         echo  esc_html__( 'The default file list:', 'shared-files' ) ;
         ?><br /><?php 
@@ -105,6 +112,7 @@ class SharedFilesAdminHelpSupport
         ?>"><?php 
         echo  esc_html__( 'Copy', 'shared-files' ) ;
         ?></button></li>
+
               <li><?php 
         echo  esc_html__( 'A simpler list of files:', 'shared-files' ) ;
         ?><br /><?php 
@@ -118,6 +126,7 @@ class SharedFilesAdminHelpSupport
         ?>"><?php 
         echo  esc_html__( 'Copy', 'shared-files' ) ;
         ?></button></li>
+
               <li><?php 
         echo  esc_html__( 'Front-end file uploader:', 'shared-files' ) ;
         ?><br /><?php 
@@ -131,12 +140,13 @@ class SharedFilesAdminHelpSupport
         ?>"><?php 
         echo  esc_html__( 'Copy', 'shared-files' ) ;
         ?></button></li>
+
             </ul>
   
             <strong>
             <?php 
-        $url = get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-shortcodes';
-        $text = sprintf( wp_kses(
+        $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-shortcodes' );
+        echo  sprintf( wp_kses(
             /* translators: %s: link to the list of available shortcodes */
             __( 'A complete list of available shortcodes can be found <a href="%s">here</a>.', 'shared-files' ),
             array(
@@ -145,8 +155,7 @@ class SharedFilesAdminHelpSupport
                 'target' => array(),
             ),
             )
-        ), esc_url( $url ) );
-        echo  $text ;
+        ), esc_url( $url ) ) ;
         ?>
             </strong>
             
@@ -164,33 +173,35 @@ class SharedFilesAdminHelpSupport
         <p>
           
           <?php 
-        $url = get_admin_url() . 'options-general.php?page=shared-files';
-        $text = sprintf( wp_kses(
+        $url = esc_url_raw( get_admin_url() . 'options-general.php?page=shared-files' );
+        echo  sprintf( wp_kses(
             /* translators: %s: link to plugin settings */
-            __( 'In case you are getting 404-errors from file URLs, you should change the following <a href="%s" target="_blank">settings</a> (either one or both)', 'shared-files' ),
+            __( 'In case you are getting 404-errors from file URLs, you should change the following <a href="%s" target="_blank">settings</a> (either one or both):', 'shared-files' ),
             array(
                 'a' => array(
                 'href'   => array(),
                 'target' => array(),
             ),
             )
-        ), esc_url( $url ) );
-        echo  $text . ':' ;
+        ), esc_url( $url ) ) ;
         ?>
         
         </p>
   
         <ul>
+
           <li>
             <?php 
         echo  esc_html__( 'Set the file opening method to "Redirect".', 'shared-files' ) ;
         ?>
           </li>
+
           <li>
             <?php 
         echo  esc_html__( 'Check the checkbox for "Compatibility mode".', 'shared-files' ) ;
         ?>
           </li>
+
           <li>
             <p><?php 
         echo  esc_html__( 'Define the "WordPress location" if you have WP installed under a subdirectory.', 'shared-files' ) ;
@@ -200,6 +211,7 @@ class SharedFilesAdminHelpSupport
         ?></p>
 
           </li>
+
         </ul>
         
         <p><?php 
@@ -220,13 +232,12 @@ class SharedFilesAdminHelpSupport
 
         <p>
           <?php 
-        $text = sprintf( wp_kses( __( 'If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating.', 'shared-files' ), array(
+        echo  sprintf( wp_kses( __( 'If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating.', 'shared-files' ), array(
             'strong' => array(),
-        ) ) );
-        echo  $text ;
+        ) ) ) ;
         ?>
-
         </p>
+
         <p>
           <?php 
         echo  esc_html__( 'A huge thanks in advance!', 'shared-files' ) ;
@@ -347,13 +358,14 @@ class SharedFilesAdminHelpSupport
           <h3><?php 
         echo  esc_html__( 'Sample file data (5 newest files)', 'shared-files' ) ;
         ?></h3>
+
           <?php 
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
-                $id = get_the_id();
+                $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
                 ?>
       
               <?php 
@@ -387,7 +399,7 @@ class SharedFilesAdminHelpSupport
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
                 ?>
           
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
@@ -406,6 +418,7 @@ class SharedFilesAdminHelpSupport
                 
                 if ( isset( $file['file'] ) ) {
                     ?>
+
                 <?php 
                     $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
                     ?>
@@ -480,7 +493,7 @@ class SharedFilesAdminHelpSupport
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . get_the_id() . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
                 ?>
           
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
@@ -639,9 +652,7 @@ class SharedFilesAdminHelpSupport
         
       </div>
 
-      <script src="<?php 
-        echo  esc_url( SHARED_FILES_URI ) ;
-        ?>dist/clipboard.min.js"></script>
+      <script src="/wp-includes/js/clipboard.min.js"></script>
   
       <script>
       var clipboard = new ClipboardJS('.shared-files-copy');
@@ -673,7 +684,6 @@ class SharedFilesAdminHelpSupport
       });
   
       clipboard.on('error', function(e) {
-//        console.log(e);
       });
       </script>
 

@@ -13,6 +13,9 @@ class ShortcodeSharedFiles
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $meta_query = [];
+        $meta_query_full = [];
+        $custom_fields_active = 0;
         $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
         $pagination_active = 0;
         if ( isset( $_GET['_paged'] ) && $_GET['_paged'] == $embed_id ) {
@@ -110,6 +113,17 @@ class ShortcodeSharedFiles
             $html .= '<div id="shared-files-search">';
             $is_premium = 0;
             
+            if ( $custom_fields_active ) {
+                $meta_query_full = array(
+                    'relation' => 'AND',
+                );
+                $meta_query_full[] = $meta_query_hide_not_public;
+                $meta_query_full[] = $meta_query;
+            } else {
+                $meta_query_full = $meta_query_hide_not_public;
+            }
+            
+            
             if ( isset( $atts['category'] ) ) {
                 
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
@@ -135,7 +149,7 @@ class ShortcodeSharedFiles
                         'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                         'order'          => SharedFilesHelpers::getOrder( $atts ),
                         'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
-                        'meta_query'     => $meta_query_hide_not_public,
+                        'meta_query'     => $meta_query_full,
                     ) );
                     $wpb_all_query_all_files = new WP_Query( array(
                         'post_type'      => 'shared_file',
@@ -170,7 +184,7 @@ class ShortcodeSharedFiles
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
-                            'meta_query'     => $meta_query_hide_not_public,
+                            'meta_query'     => $meta_query_full,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
                             'post_type'      => 'shared_file',
@@ -214,7 +228,7 @@ class ShortcodeSharedFiles
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
-                            'meta_query'     => $meta_query_hide_not_public,
+                            'meta_query'     => $meta_query_full,
                             'tax_query'      => $tax_query,
                         ) );
                         $wpb_all_query_all_files = new WP_Query( array(
@@ -237,7 +251,7 @@ class ShortcodeSharedFiles
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
             $html .= '<div id="shared-files-files-found"></div>';
             $html .= '<span id="shared-files-one-file-found">' . esc_html__( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . esc_html__( 'files found.', 'shared-files' ) . '</span>';
-            $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
+            $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
             /* CATEGORY PASSWORD END */
             if ( $tag_slug ) {
                 $html .= SharedFilesHelpers::tagTitleMarkup( $tag_slug, 'shared-files-non-ajax', $hide_description );
@@ -251,9 +265,9 @@ class ShortcodeSharedFiles
                 } else {
                     while ( $wpb_all_query->have_posts() ) {
                         $wpb_all_query->the_post();
-                        $id = get_the_id();
+                        $id = intval( get_the_id() );
                         $c = get_post_custom( $id );
-                        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
+                        $external_url = ( isset( $c['_sf_external_url'] ) ? esc_url_raw( $c['_sf_external_url'][0] ) : '' );
                         $filetype = '';
                         $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
                         
@@ -303,11 +317,11 @@ class ShortcodeSharedFiles
                 if ( isset( $wpb_all_query_all_files ) && $wpb_all_query_all_files->have_posts() ) {
                     while ( $wpb_all_query_all_files->have_posts() ) {
                         $wpb_all_query_all_files->the_post();
-                        $id = get_the_id();
+                        $id = intval( get_the_id() );
                         $c = get_post_custom( $id );
-                        $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
+                        $external_url = ( isset( $c['_sf_external_url'] ) ? esc_url_raw( $c['_sf_external_url'][0] ) : '' );
                         $filetype = '';
-                        $hide_description = ( isset( $atts['hide_description'] ) ? $atts['hide_description'] : '' );
+                        $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
                         $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
                         $html .= SharedFilesPublicHelpers::fileListItem(
                             $c,

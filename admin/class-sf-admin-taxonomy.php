@@ -5,17 +5,17 @@ class SharedFilesAdminTaxonomy
     public function create_shared_files_custom_taxonomy()
     {
         $labels = array(
-            'name'              => esc_html__( 'Category', 'shared-files' ),
-            'singular_name'     => esc_html__( 'Category', 'shared-files' ),
-            'search_items'      => esc_html__( 'Search Categories', 'shared-files' ),
-            'all_items'         => esc_html__( 'All Categories', 'shared-files' ),
-            'parent_item'       => esc_html__( 'Parent Category', 'shared-files' ),
-            'parent_item_colon' => esc_html__( 'Parent Category:', 'shared-files' ),
-            'edit_item'         => esc_html__( 'Edit Category', 'shared-files' ),
-            'update_item'       => esc_html__( 'Update Category', 'shared-files' ),
-            'add_new_item'      => esc_html__( 'Add New Category', 'shared-files' ),
-            'new_item_name'     => esc_html__( 'New Type Name', 'shared-files' ),
-            'menu_name'         => esc_html__( 'Categories', 'shared-files' ),
+            'name'              => sanitize_text_field( __( 'Category', 'shared-files' ) ),
+            'singular_name'     => sanitize_text_field( __( 'Category', 'shared-files' ) ),
+            'search_items'      => sanitize_text_field( __( 'Search Categories', 'shared-files' ) ),
+            'all_items'         => sanitize_text_field( __( 'All Categories', 'shared-files' ) ),
+            'parent_item'       => sanitize_text_field( __( 'Parent Category', 'shared-files' ) ),
+            'parent_item_colon' => sanitize_text_field( __( 'Parent Category:', 'shared-files' ) ),
+            'edit_item'         => sanitize_text_field( __( 'Edit Category', 'shared-files' ) ),
+            'update_item'       => sanitize_text_field( __( 'Update Category', 'shared-files' ) ),
+            'add_new_item'      => sanitize_text_field( __( 'Add New Category', 'shared-files' ) ),
+            'new_item_name'     => sanitize_text_field( __( 'New Type Name', 'shared-files' ) ),
+            'menu_name'         => sanitize_text_field( __( 'Categories', 'shared-files' ) ),
         );
     }
     
@@ -23,8 +23,8 @@ class SharedFilesAdminTaxonomy
     {
         add_submenu_page(
             'edit.php?post_type=shared_file',
-            esc_html__( 'Categories', 'shared-files' ),
-            esc_html__( 'Categories', 'shared-files' ),
+            sanitize_text_field( __( 'Categories', 'shared-files' ) ),
+            sanitize_text_field( __( 'Categories', 'shared-files' ) ),
             'manage_options',
             'shared-files-categories-info',
             [ $this, 'register_categories_info_page_callback' ],
@@ -80,11 +80,11 @@ class SharedFilesAdminTaxonomy
     {
         $new_columns = array(
             'cb'          => '<input type="checkbox" />',
-            'name'        => esc_html__( 'Name' ),
-            'description' => esc_html__( 'Description' ),
-            'shortcode'   => esc_html__( 'Shortcode', 'shared-files' ),
-            'slug'        => esc_html__( 'Slug' ),
-            'posts'       => esc_html__( 'Posts' ),
+            'name'        => sanitize_text_field( __( 'Name' ) ),
+            'description' => sanitize_text_field( __( 'Description' ) ),
+            'shortcode'   => sanitize_text_field( __( 'Shortcode', 'shared-files' ) ),
+            'slug'        => sanitize_text_field( __( 'Slug' ) ),
+            'posts'       => sanitize_text_field( __( 'Posts' ) ),
         );
         return $new_columns;
     }
@@ -98,7 +98,7 @@ class SharedFilesAdminTaxonomy
         $term = get_term( $term_id, 'shared-file-category' );
         switch ( $column_name ) {
             case 'shortcode':
-                $content = '<span class="shared-files-shortcode-admin-list shared-files-shortcode-' . esc_attr( $term->slug ) . '" title="[shared_files category=' . esc_attr( $term->slug ) . ']">[shared_files category=' . $term->slug . ']</span>' . '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . esc_attr( $term->slug ) . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>';
+                $content = '<span class="shared-files-shortcode-admin-list shared-files-shortcode-' . esc_attr( $term->slug ) . '" title="[shared_files category=' . esc_attr( $term->slug ) . ']">[shared_files category=' . sanitize_title( $term->slug ) . ']</span>' . '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . esc_attr( $term->slug ) . '">' . sanitize_text_field( __( 'Copy', 'shared-files' ) ) . '</button>';
                 break;
             default:
                 break;

@@ -12,8 +12,8 @@ class SharedFilesAdminSyncMediaLibrary {
     
     add_submenu_page(
       'edit.php?post_type=shared_file',
-      esc_html__('Sync Media Library', 'shared-files'),
-      '<span style="font-size: 15px; margin: 0 2px 0 5px;">&#8627;</span> ' . esc_html__('Media Library', 'shared-files'),
+      sanitize_text_field( __('Sync Media Library', 'shared-files') ),
+      '<span style="font-size: 15px; margin: 0 2px 0 5px;">&#8627;</span> ' . sanitize_text_field( __('Media Library', 'shared-files') ),
       'manage_options',
       'shared-files-sync-media-library',
       [$this, 'register_page_callback'],
@@ -29,7 +29,7 @@ class SharedFilesAdminSyncMediaLibrary {
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <div class="shared-files-sync-files">
-      <h1><?= esc_html__('Sync Media Library Files', 'shared-files'); ?></h1>
+      <h1><?php echo esc_html__('Sync Media Library Files', 'shared-files'); ?></h1>
 
       <?php
       if (SharedFilesHelpers::isPremium() == 0) {  
@@ -40,11 +40,11 @@ class SharedFilesAdminSyncMediaLibrary {
       <?php $path = SharedFilesFileHandling::getBaseDir(); ?>
 
       <p>
-        <?= esc_html__('You may activate files found in the media library to be used by the plugin, without having to add the files again.', 'shared-files') ?>
+        <?php echo esc_html__('You may activate files found in the media library to be used by the plugin, without having to add the files again.', 'shared-files') ?>
       </p>
 
       <p>
-        <?= esc_html__('If a file is inactive, it means that it exists in the media library, but has not yet been activated for the plugin.', 'shared-files') ?>
+        <?php echo esc_html__('If a file is inactive, it means that it exists in the media library, but has not yet been activated for the plugin.', 'shared-files') ?>
       </p>
 
       <p>
@@ -55,20 +55,20 @@ class SharedFilesAdminSyncMediaLibrary {
         
           <?php if (get_taxonomy($taxonomy_slug)): ?>
   
-            <span class="shared-files-category-for-new-files"><?= esc_html__('Category for new files:', 'shared-files') ?></span>
+            <span class="shared-files-category-for-new-files"><?php echo esc_html__('Category for new files:', 'shared-files') ?></span>
   
-            <?= wp_dropdown_categories([
+            <?php echo wp_dropdown_categories([
               'show_option_all' => ' ',
-              'hide_empty' => 0,
-              'hierarchical' => 1,
-              'show_count' => 1,
-              'orderby' => 'name',
-              'name' => $taxonomy_slug,
-              'value_field' => 'slug',
-              'taxonomy' => $taxonomy_slug,
-              'echo' => 0,
-              'class' => 'select_v2',
-              'show_option_all' => esc_attr__('Choose category', 'shared-files')
+              'hide_empty'      => 0,
+              'hierarchical'    => 1,
+              'show_count'      => 1,
+              'orderby'         => 'name',
+              'name'            => $taxonomy_slug,
+              'value_field'     => 'slug',
+              'taxonomy'        => $taxonomy_slug,
+              'echo'            => 0,
+              'class'           => 'select_v2',
+              'show_option_all' => sanitize_text_field( __('Choose category', 'shared-files') )
             ]) ?><br />
             
           <?php endif; ?>
@@ -79,7 +79,7 @@ class SharedFilesAdminSyncMediaLibrary {
       </p>
 
       <p>
-        <?= esc_html__('Files found in the media library', 'shared-files') ?>:
+        <?php echo esc_html__('Files found in the media library', 'shared-files') ?>:
       </p>
 
       <?php
@@ -156,7 +156,7 @@ class SharedFilesAdminSyncMediaLibrary {
           if ($wp_query->have_posts()):
             while ($wp_query->have_posts()): $wp_query->the_post();
       
-              $id = get_the_id();
+              $id = intval( get_the_id() );
               $c = get_post_custom($id);
               echo '<span class="shared-files-active">' . esc_html__('Active', 'shared-files') . '</span>';
       
@@ -171,10 +171,10 @@ class SharedFilesAdminSyncMediaLibrary {
             <form method="post">
               <?php wp_nonce_field('sf-sync-files', 'sf-sync-files-nonce'); ?>
               <input type="hidden" name="shared-files-op" value="sync-files" />
-              <input type="hidden" name="_sf_media_library_post_id" value="<?= intval( $post->ID ) ?>" />
-              <input type="hidden" name="add_file" value="<?= sanitize_file_name($filename) ?>" />
+              <input type="hidden" name="_sf_media_library_post_id" value="<?php echo intval( $post->ID ) ?>" />
+              <input type="hidden" name="add_file" value="<?php echo sanitize_file_name($filename) ?>" />
               <input type="hidden" name="shared-file-category" class="shared-files-single-file-category" value="" />
-              <input type="submit" class="shared-files-activate <?= (SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '') ?>" value="<?= esc_attr__('Activate', 'shared-files') ?>" />
+              <input type="submit" class="shared-files-activate <?php echo (SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '') ?>" value="<?php echo esc_attr__('Activate', 'shared-files') ?>" />
             </form>
   
           <?php

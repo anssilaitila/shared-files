@@ -7,13 +7,13 @@ class SharedFilesPublicHelpers
         $html = '';
         $html .= '<div class="shared-files-public-pro-feature">';
         $html .= '<span class="shared-files-public-pro-feature-title">';
-        $html .= esc_html__( 'This feature is available in the Pro version.', 'shared-files' );
+        $html .= sanitize_text_field( __( 'This feature is available in the Pro version.', 'shared-files' ) );
         $html .= '</span>';
         $html .= '<span>';
-        $html .= esc_html__( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . esc_html__( 'and', 'shared-files' ) . ' [shared_files_simple].';
+        $html .= sanitize_text_field( __( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . __( 'and', 'shared-files' ) . ' [shared_files_simple].' );
         $html .= '</span>';
         $html .= '<span>';
-        $html .= esc_html__( 'More info on shortcodes at', 'shared-files' ) . ' <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">sharedfilespro.com</a>.';
+        $html .= sanitize_text_field( __( 'More info on shortcodes at', 'shared-files' ) . ' <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">sharedfilespro.com</a>.' );
         $html .= '</span>';
         $html .= '</div>';
         return $html;
@@ -32,10 +32,10 @@ class SharedFilesPublicHelpers
         $given_password = '';
         
         if ( isset( $_POST['_sf_cat_password'] ) && $_POST['_sf_cat_password'] ) {
-            $given_password = $_POST['_sf_cat_password'];
+            $given_password = sanitize_text_field( $_POST['_sf_cat_password'] );
         } else {
             if ( $cat_password_protection_type == 'cookie' && isset( $_COOKIE['_sf_cat_password'] ) && $_COOKIE['_sf_cat_password'] ) {
-                $given_password = $_COOKIE['_sf_cat_password'];
+                $given_password = sanitize_text_field( $_COOKIE['_sf_cat_password'] );
             }
         }
         
@@ -63,7 +63,7 @@ class SharedFilesPublicHelpers
         foreach ( $categories as $cat ) {
             $html .= '<li>';
             $html .= '<div>';
-            $html .= '<a href="?cat=' . esc_attr( $cat->slug ) . '">' . esc_html( $cat->name ) . '</a>';
+            $html .= '<a href="?cat=' . esc_attr( $cat->slug ) . '">' . sanitize_text_field( $cat->name ) . '</a>';
             $html .= '</div>';
             $html .= '</li>';
         }
@@ -108,7 +108,7 @@ class SharedFilesPublicHelpers
             $html .= '<div class="shared-files-main-elements-featured-image" style="' . esc_attr( $featured_img_style ) . '"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
         }
         
-        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
         $data_file_type = '';
         $data_file_url = '';
         $data_external_url = '';
@@ -122,9 +122,9 @@ class SharedFilesPublicHelpers
         }
         
         $html .= '<div class="shared-files-main-elements-bottom">';
-        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_image_url . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( get_the_title() ) . '</a>';
+        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_image_url . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
-            $html .= '<span class="shared-file-size">' . esc_html( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
+            $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
         }
         $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
         
@@ -216,7 +216,7 @@ class SharedFilesPublicHelpers
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
-                $html .= '<a href="' . esc_url( wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
             }
         }
         
@@ -244,7 +244,7 @@ class SharedFilesPublicHelpers
         $file_url = '';
         
         if ( isset( $c['_sf_filename'] ) ) {
-            $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0];
+            $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] );
             
             if ( $download && SharedFilesHelpers::wp_engine() ) {
                 $file_url .= '&download=1';
@@ -468,7 +468,7 @@ class SharedFilesPublicHelpers
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
-                $html .= '<a href="' . esc_url( wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . $user->ID, 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
             }
         }
         
@@ -522,7 +522,6 @@ class SharedFilesPublicHelpers
         $html .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
         $html .= '<link rel="profile" href="https://gmpg.org/xfn/11">';
         $html .= '<title>' . esc_html__( 'Password protected file', 'shared-files' ) . '</title>';
-        //	$html .= '<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>';
         $html .= '</head>';
         $html .= '<body>';
         $html .= '
@@ -635,7 +634,6 @@ class SharedFilesPublicHelpers
         $html .= '<div class="shared-files-password-protected-container">';
         $html .= '<div class="shared-files-password-protected">';
         $html .= '<h1>' . esc_html__( 'Please enter password', 'shared-files' ) . '</h1>';
-        //    $html .= wp_nonce_field('_CL_UPDATE', '_wpnonce', true, false);
         $html .= '<div class="form-field">';
         $html .= '<div class="form-field-left"><label for="password">' . esc_html__( 'Password', 'shared-files' ) . '</label></div>';
         $html .= '<div class="form-field-right"><input type="password" name="password" id="password" value="" /></div>';
@@ -659,7 +657,6 @@ class SharedFilesPublicHelpers
         $html .= '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
         $html .= '<link rel="profile" href="https://gmpg.org/xfn/11">';
         $html .= '<title>' . esc_html__( 'Download limit reached', 'shared-files' ) . '</title>';
-        //	$html .= '<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>';
         $html .= '<link href="https://fonts.googleapis.com/css?family=Oswald|Quattrocento" rel="stylesheet">';
         $html .= '</head>';
         $html .= '<body>';
@@ -819,7 +816,7 @@ class SharedFilesPublicHelpers
         $html = '';
         $html .= '<div class="shared-files-simple-list-row">';
         $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name"><span>';
-        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
         $data_file_type = '';
         $data_file_url = '';
         $data_external_url = '';

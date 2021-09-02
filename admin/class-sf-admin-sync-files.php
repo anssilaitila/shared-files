@@ -10,8 +10,8 @@ class SharedFilesAdminSyncFiles
         }
         add_submenu_page(
             'edit.php?post_type=shared_file',
-            esc_html__( 'Sync Files', 'shared-files' ),
-            esc_html__( 'Sync Files', 'shared-files' ),
+            sanitize_text_field( __( 'Sync Files', 'shared-files' ) ),
+            sanitize_text_field( __( 'Sync Files', 'shared-files' ) ),
             'manage_options',
             'shared-files-sync-files',
             [ $this, 'register_page_callback' ],
@@ -173,9 +173,9 @@ class SharedFilesAdminSyncFiles
         }
         
         $html .= '<tr>';
-        $html .= '<td>' . esc_html( implode( '/', $item_array_sliced ) ) . '</td>';
-        $html .= '<td>' . esc_html( SharedFilesFileHandling::human_filesize( filesize( $item ) ) ) . '</td>';
-        $html .= '<td>' . esc_html( date( "Y-m-d", filemtime( $item ) ) ) . '</td>';
+        $html .= '<td>' . sanitize_text_field( implode( '/', $item_array_sliced ) ) . '</td>';
+        $html .= '<td>' . sanitize_text_field( SharedFilesFileHandling::human_filesize( filesize( $item ) ) ) . '</td>';
+        $html .= '<td>' . sanitize_text_field( date( "Y-m-d", filemtime( $item ) ) ) . '</td>';
         $html .= '<td>';
         $meta_query = array(
             'relation' => 'AND',
@@ -212,11 +212,11 @@ class SharedFilesAdminSyncFiles
                 $wp_query->the_post();
                 $id = get_the_id();
                 $c = get_post_custom( $id );
-                $html .= '<span class="shared-files-active">' . esc_html__( 'Active', 'shared-files' ) . '</span>';
+                $html .= '<span class="shared-files-active">' . sanitize_text_field( __( 'Active', 'shared-files' ) ) . '</span>';
             }
             wp_reset_postdata();
         } else {
-            $html .= '<span class="shared-files-inactive">' . esc_html__( 'Inactive', 'shared-files' ) . '</span><br />';
+            $html .= '<span class="shared-files-inactive">' . sanitize_text_field( __( 'Inactive', 'shared-files' ) ) . '</span><br />';
             $html .= '<form method="post">';
             $html .= wp_nonce_field(
                 'sf-sync-files',
