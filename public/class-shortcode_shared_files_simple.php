@@ -10,9 +10,9 @@ class ShortcodeSharedFilesSimple
         $limit_posts = 0;
         $html = '';
         $html .= '<div class="shared-files-simple-container" />';
-        $html .= '<div class="shared-files-simple-text-contact" style="display: none;">' . esc_html__( 'contact', 'shared-files' ) . '</div>';
-        $html .= '<div class="shared-files-simple-text-contacts" style="display: none;">' . esc_html__( 'contacts', 'shared-files' ) . '</div>';
-        $html .= '<div class="shared-files-simple-text-found" style="display: none;">' . esc_html__( 'found', 'shared-files' ) . '</div>';
+        $html .= '<div class="shared-files-simple-text-contact" style="display: none;">' . sanitize_text_field( __( 'contact', 'shared-files' ) ) . '</div>';
+        $html .= '<div class="shared-files-simple-text-contacts" style="display: none;">' . sanitize_text_field( __( 'contacts', 'shared-files' ) ) . '</div>';
+        $html .= '<div class="shared-files-simple-text-found" style="display: none;">' . sanitize_text_field( __( 'found', 'shared-files' ) ) . '</div>';
         $limit_posts = 0;
         $tax_query = [];
         $meta_query_hide_not_public = array(
@@ -27,7 +27,7 @@ class ShortcodeSharedFilesSimple
             'key'     => '_sf_not_public',
             'compare' => 'NOT EXISTS',
         );
-        $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 40 );
+        $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 20 );
         $pagination_active = 1;
         $paged = 1;
         if ( $pagination_active ) {
@@ -57,9 +57,9 @@ class ShortcodeSharedFilesSimple
             $html .= '<input type="text" class="shared-files-simple-search" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '">';
         }
         $html .= '<div id="shared-files-files-found"></div>';
-        $html .= '<span id="shared-files-one-file-found">' . esc_html__( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . esc_html__( 'files found.', 'shared-files' ) . '</span>';
+        $html .= '<span id="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span id="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
         $html .= '<div class="shared-files-simple-nothing-found">';
-        $html .= esc_html__( 'No files found.', 'shared-files' );
+        $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );
         $html .= '</div>';
         
         if ( $wp_query->have_posts() ) {
@@ -72,7 +72,7 @@ class ShortcodeSharedFilesSimple
             $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wp_query, 'default' );
         }
         if ( $wp_query->found_posts == 0 ) {
-            $html .= '<p>' . esc_html__( 'No files found.', 'shared-files' ) . '</p>';
+            $html .= '<p>' . sanitize_text_field( __( 'No files found.', 'shared-files' ) ) . '</p>';
         }
         $html .= '</div>';
         wp_reset_postdata();

@@ -18,6 +18,29 @@ class Shared_Files_Settings
         $only_pro = '_FREE_';
         $s = get_option( 'shared_files_settings' );
         register_setting( 'shared-files', 'shared_files_settings' );
+        add_settings_field(
+            'shared-files-show_download_counter',
+            sanitize_text_field( __( 'Show download counter', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-show_download_counter',
+            'field_name' => 'show_download_counter',
+        )
+        );
+        add_settings_field(
+            'shared-files-download_counter_text',
+            sanitize_text_field( __( 'Download counter text', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-download_counter_text',
+            'field_name'  => 'download_counter_text',
+            'placeholder' => sanitize_text_field( __( 'Downloads:', 'shared-files' ) ),
+        )
+        );
         
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             add_settings_field(
@@ -63,7 +86,7 @@ class Shared_Files_Settings
                 array(
                 'label_for'   => 'shared-files-' . $only_pro . 'hide_search_form',
                 'field_name'  => $only_pro . 'hide_search_form',
-                'placeholder' => esc_attr__( 'The search form is automatically visible unless hidden by this setting or by a shortcode parameter.', 'shared-files' ),
+                'placeholder' => sanitize_text_field( __( 'The search form is automatically visible unless hidden by this setting or by a shortcode parameter.', 'shared-files' ) ),
             )
             );
             add_settings_field(
@@ -239,7 +262,7 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-maximum_size_text',
             'field_name'  => 'maximum_size_text',
-            'placeholder' => esc_attr( SharedFilesHelpers::maxUploadSize() ),
+            'placeholder' => sanitize_text_field( SharedFilesHelpers::maxUploadSize() ),
         )
         );
         add_settings_field(
@@ -251,7 +274,7 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-' . $only_pro . 'download_limit_msg',
             'field_name'  => $only_pro . 'download_limit_msg',
-            'placeholder' => esc_attr__( 'This file is no longer available for download.', 'shared-files' ),
+            'placeholder' => sanitize_text_field( __( 'This file is no longer available for download.', 'shared-files' ) ),
         )
         );
         $tab = 2;
@@ -602,28 +625,32 @@ class Shared_Files_Settings
                 'field_name' => $only_pro . 'cf_' . $n . '_hide_from_admin_edit',
             )
             );
-            add_settings_field(
-                'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                'field_name' => $only_pro . 'cf_' . $n . '_use_as_search_filter',
-            )
-            );
-            add_settings_field(
-                'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
-                sanitize_text_field( __( 'Search filter title', 'shared-files' ) ),
-                array( $this, 'input_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
-                'field_name' => $only_pro . 'cf_' . $n . '_select_title',
-            )
-            );
+            
+            if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                    sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
+                    array( $this, 'checkbox_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                    'field_name' => $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                )
+                );
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
+                    sanitize_text_field( __( 'Search filter title', 'shared-files' ) ),
+                    array( $this, 'input_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
+                    'field_name' => $only_pro . 'cf_' . $n . '_select_title',
+                )
+                );
+            }
+        
         }
         if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
@@ -703,7 +730,7 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-' . $only_pro . 'file_upload_new_category',
-            sanitize_text_field( __( 'Allow the uploader to create a new category', 'shared-files' ) ),
+            sanitize_text_field( __( 'Allow the uploader to create a single new category', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
@@ -712,15 +739,41 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'file_upload_new_category',
         )
         );
+        
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
+                sanitize_text_field( __( 'Allow the uploader to create multiple new categories', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
+                'field_name' => $only_pro . 'file_upload_multiple_new_categories',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
+                sanitize_text_field( __( 'Allow the uploader to create multiple new tags', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
+                'field_name' => $only_pro . 'file_upload_multiple_new_tags',
+            )
+            );
+        }
+        
         add_settings_field(
-            'shared-files-show_tag_dropdown_on_file_upload',
+            'shared-files-' . $only_pro . 'show_tag_dropdown_on_file_upload',
             sanitize_text_field( __( 'Show tag dropdown for front-end file uploader', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-show_tag_dropdown_on_file_upload',
-            'field_name' => 'show_tag_dropdown_on_file_upload',
+            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown_on_file_upload',
+            'field_name' => $only_pro . 'show_tag_dropdown_on_file_upload',
         )
         );
         add_settings_field(
@@ -765,7 +818,7 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-' . $only_pro . 'file_upload_external_url_title',
             'field_name'  => $only_pro . 'file_upload_external_url_title',
-            'placeholder' => esc_attr__( 'Or enter a YouTube URL:', 'shared-files' ),
+            'placeholder' => sanitize_text_field( __( 'Or enter a YouTube URL:', 'shared-files' ) ),
         )
         );
         add_settings_field(
@@ -1263,6 +1316,82 @@ class Shared_Files_Settings
                 );
             }
         }
+        
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_section(
+                'shared-files_tab_10_2',
+                '',
+                array( $this, 'shared_files_settings_tab_10_2_callback' ),
+                'shared-files'
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_external_url',
+                sanitize_text_field( __( 'Hide external URL', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_external_url',
+                'field_name' => $only_pro . 'file_edit_hide_external_url',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_category_checkboxes',
+                sanitize_text_field( __( 'Hide category checkboxes', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_category_checkboxes',
+                'field_name' => $only_pro . 'file_edit_hide_category_checkboxes',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_new_categories',
+                sanitize_text_field( __( 'Hide new category input', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_new_categories',
+                'field_name' => $only_pro . 'file_edit_hide_new_categories',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_tag_checkboxes',
+                sanitize_text_field( __( 'Hide tag checkboxes', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_tag_checkboxes',
+                'field_name' => $only_pro . 'file_edit_hide_tag_checkboxes',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_new_tags',
+                sanitize_text_field( __( 'Hide new tag input', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_new_tags',
+                'field_name' => $only_pro . 'file_edit_hide_new_tags',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_description',
+                sanitize_text_field( __( 'Hide description', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_description',
+                'field_name' => $only_pro . 'file_edit_hide_description',
+            )
+            );
+        }
+    
     }
     
     public function checkbox_render( $args )
@@ -1292,7 +1421,7 @@ class Shared_Files_Settings
         <?php 
                 $free_class = 'shared-files-setting-container-free';
                 ?>
-        
+
         <?php 
                 
                 if ( strpos( $field_name, '_use_as_search_filter' ) !== false ) {
@@ -1300,6 +1429,56 @@ class Shared_Files_Settings
           <?php 
                     $plan_required = 'Professional';
                     ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_upload_multiple_new_categories' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_upload_multiple_new_tags' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_external_url' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_category_checkboxes' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_new_categories' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_tag_checkboxes' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_new_tags' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_description' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+
         <?php 
                 }
                 
@@ -1311,7 +1490,7 @@ class Shared_Files_Settings
             ?>
 
       <div class="shared-files-setting-container <?php 
-            echo  $free_class ;
+            echo  esc_attr( $free_class ) ;
             ?>">
 
         <?php 
@@ -1396,7 +1575,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>
 
@@ -1423,7 +1602,7 @@ class Shared_Files_Settings
             ?>
       
       <div class="shared-files-setting-container <?php 
-            echo  $free_class ;
+            echo  esc_attr( $free_class ) ;
             ?>">
       
         <?php 
@@ -1432,7 +1611,7 @@ class Shared_Files_Settings
                 ?>
         
         <a href="<?php 
-                echo  get_admin_url() ;
+                echo  esc_url( get_admin_url() ) ;
                 ?>options-general.php?page=shared-files-pricing">
           <div class="shared-files-settings-pro-feature-overlay"><div><?php 
                 echo  esc_html__( 'All Plans', 'shared-files' ) ;
@@ -1446,7 +1625,7 @@ class Shared_Files_Settings
         <div class="shared-files-setting">
         
           <select name="shared_files_settings[<?php 
-                echo  $args['field_name'] ;
+                echo  esc_attr( $args['field_name'] ) ;
                 ?>]">
             <option value="" <?php 
                 echo  ( $val == '' ? 'selected' : '' ) ;
@@ -1489,7 +1668,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>
   
@@ -1519,7 +1698,7 @@ class Shared_Files_Settings
             ?>
       
       <div class="shared-files-setting-container <?php 
-            echo  $free_class ;
+            echo  esc_attr( $free_class ) ;
             ?>">
       
         <?php 
@@ -1659,7 +1838,7 @@ class Shared_Files_Settings
             ?>
 
       <div class="shared-files-setting-container <?php 
-            echo  $free_class ;
+            echo  esc_attr( $free_class ) ;
             ?>">
 
         <?php 
@@ -1668,7 +1847,7 @@ class Shared_Files_Settings
                 ?>
  
           <a href="<?php 
-                echo  get_admin_url() ;
+                echo  esc_url( get_admin_url() ) ;
                 ?>options-general.php?page=shared-files-pricing">
             <div class="shared-files-settings-pro-feature-overlay"><div><?php 
                 echo  esc_html__( 'All Plans', 'shared-files' ) ;
@@ -1681,6 +1860,10 @@ class Shared_Files_Settings
   
           <div class="shared-files-setting">
 
+              <?php 
+                $val = sanitize_textarea_field( $options[$field_name] );
+                ?>
+
               <textarea class="textarea-field" id="shared-files-<?php 
                 echo  esc_attr( $field_name ) ;
                 ?>" name="shared_files_settings[<?php 
@@ -1688,7 +1871,7 @@ class Shared_Files_Settings
                 ?>]" placeholder="<?php 
                 echo  ( $args['placeholder'] ? esc_attr( $args['placeholder'] ) : '' ) ;
                 ?>"><?php 
-                echo  ( isset( $options[$field_name] ) ? esc_html( $options[$field_name] ) : '' ) ;
+                echo  ( isset( $val ) ? esc_html( $val ) : '' ) ;
                 ?></textarea>
 
           </div>
@@ -1751,7 +1934,7 @@ class Shared_Files_Settings
             ?>
 
       <div class="shared-files-setting-container <?php 
-            echo  $free_class ;
+            echo  esc_attr( $free_class ) ;
             ?>">
 
         <?php 
@@ -1774,19 +1957,35 @@ class Shared_Files_Settings
           <div class="shared-files-setting">
 
             <?php 
+                $val = '';
+                ?>
+            
+            <?php 
+                
+                if ( isset( $options[$field_name] ) ) {
+                    ?>
+              <?php 
+                    $val = sanitize_text_field( $options[$field_name] );
+                    ?>
+            <?php 
+                }
+                
+                ?>
+
+            <?php 
                 
                 if ( $field_name == 'card_background_custom_color' ) {
                     ?>
               # <input type="text" style="width: 100px;" class="input-field <?php 
                     echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
                     ?>" id="shared-files-<?php 
-                    echo  $field_name ;
+                    echo  esc_attr( $field_name ) ;
                     ?>" name="shared_files_settings[<?php 
-                    echo  $field_name ;
+                    echo  esc_attr( $field_name ) ;
                     ?>]" value="<?php 
-                    echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                    echo  ( isset( $val ) ? esc_attr( $val ) : '' ) ;
                     ?>" placeholder="<?php 
-                    echo  ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) ;
+                    echo  ( isset( $args['placeholder'] ) ? esc_attr( $args['placeholder'] ) : '' ) ;
                     ?>">
             <?php 
                 } elseif ( isset( $args['ext'] ) ) {
@@ -1794,13 +1993,13 @@ class Shared_Files_Settings
               filename.<input type="text" class="input-field <?php 
                     echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
                     ?>" id="shared-files-<?php 
-                    echo  $field_name ;
+                    echo  esc_attr( $field_name ) ;
                     ?>" name="shared_files_settings[<?php 
-                    echo  $field_name ;
+                    echo  esc_attr( $field_name ) ;
                     ?>]" value="<?php 
-                    echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                    echo  ( isset( $val ) ? esc_attr( $val ) : '' ) ;
                     ?>" placeholder="<?php 
-                    echo  ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) ;
+                    echo  ( isset( $args['placeholder'] ) ? esc_attr( $args['placeholder'] ) : '' ) ;
                     ?>" style="width: 80px;">
             <?php 
                 } else {
@@ -1808,13 +2007,13 @@ class Shared_Files_Settings
               <input type="text" class="input-field <?php 
                     echo  ( isset( $args['wide'] ) ? 'input-field-wide' : '' ) ;
                     ?>" id="shared-files-<?php 
-                    echo  $field_name ;
+                    echo  esc_attr( $field_name ) ;
                     ?>" name="shared_files_settings[<?php 
-                    echo  $field_name ;
+                    echo  esc_attr( $field_name ) ;
                     ?>]" value="<?php 
-                    echo  ( isset( $options[$field_name] ) ? $options[$field_name] : '' ) ;
+                    echo  ( isset( $val ) ? esc_attr( $val ) : '' ) ;
                     ?>" placeholder="<?php 
-                    echo  ( isset( $args['placeholder'] ) ? $args['placeholder'] : '' ) ;
+                    echo  ( isset( $args['placeholder'] ) ? esc_attr( $args['placeholder'] ) : '' ) ;
                     ?>">
             <?php 
                 }
@@ -2015,6 +2214,11 @@ class Shared_Files_Settings
         echo  '<p>' . esc_html__( 'The following user roles have the permissions to edit any file:', 'shared-files' ) . '</p>' ;
     }
     
+    public function shared_files_settings_tab_10_2_callback()
+    {
+        echo  '<p>' . esc_html__( 'More settings for file edit view:', 'shared-files' ) . '</p>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -2093,11 +2297,11 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $layout = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $layout = $options[$args['field_name']];
+                $layout = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
-            echo  $args['field_name'] ;
+            echo  esc_attr( $args['field_name'] ) ;
             ?>]">
           <option value=""><?php 
             echo  esc_html__( 'Default list', 'shared-files' ) ;
@@ -2130,11 +2334,11 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
-            echo  $args['field_name'] ;
+            echo  esc_attr( $args['field_name'] ) ;
             ?>]">
           <option value="2020" <?php 
             echo  ( $val == '2020' || $val == '' ? 'selected' : '' ) ;
@@ -2155,7 +2359,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2196,7 +2400,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2240,7 +2444,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2269,7 +2473,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $order_by = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $order_by = $options[$args['field_name']];
+                $order_by = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2303,7 +2507,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $order_by = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $order_by = $options[$args['field_name']];
+                $order_by = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2330,7 +2534,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $order = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $order = $options[$args['field_name']];
+                $order = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>
       <select name="shared_files_settings[<?php 
@@ -2359,7 +2563,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $card_background = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $card_background = $options[$args['field_name']];
+                $card_background = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2396,7 +2600,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $card_font = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $card_font = $options[$args['field_name']];
+                $card_font = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 
@@ -2428,7 +2632,7 @@ class Shared_Files_Settings
             $options = get_option( 'shared_files_settings' );
             $val = '';
             if ( isset( $options[$args['field_name']] ) ) {
-                $val = $options[$args['field_name']];
+                $val = sanitize_text_field( $options[$args['field_name']] );
             }
             ?>    
       <select name="shared_files_settings[<?php 

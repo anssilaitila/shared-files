@@ -42,9 +42,9 @@ class ShortcodeSharedFiles
         $html = '';
         
         if ( isset( $_GET ) && isset( $_GET['shared-files-update'] ) ) {
-            $html .= '<div class="shared-files-upload-complete">' . esc_html__( 'File successfully updated.', 'shared-files' ) . '</div>';
+            $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __( 'File successfully updated.', 'shared-files' ) ) . '</div>';
         } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_editable_file'] ) && isset( $_GET['sc'] ) ) {
-            $html .= '<div class="shared-files-file-deleted">' . esc_html__( 'File successfully deleted.', 'shared-files' ) . '</div>';
+            $html .= '<div class="shared-files-file-deleted">' . sanitize_text_field( __( 'File successfully deleted.', 'shared-files' ) ) . '</div>';
         }
         
         
@@ -96,7 +96,6 @@ class ShortcodeSharedFiles
             return $html;
         } else {
             $layout = SharedFilesHelpers::getLayout( $s, $atts );
-            $html .= SharedFilesHelpers::initLayout( $s );
             $type = 'basic';
             if ( isset( $atts['category'] ) ) {
                 $type = 'category';
@@ -212,7 +211,7 @@ class ShortcodeSharedFiles
                             }
                         
                         }
-                        $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 40 );
+                        $posts_per_page = ( isset( $s['pagination'] ) && $s['pagination'] ? (int) $s['pagination'] : 20 );
                         if ( $limit_posts ) {
                             $posts_per_page = $limit_posts;
                         }
@@ -250,7 +249,7 @@ class ShortcodeSharedFiles
             $filetypes = SharedFilesHelpers::getFiletypes();
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
             $html .= '<div id="shared-files-files-found"></div>';
-            $html .= '<span id="shared-files-one-file-found">' . esc_html__( 'file found.', 'shared-files' ) . '</span><span id="shared-files-more-than-one-file-found">' . esc_html__( 'files found.', 'shared-files' ) . '</span>';
+            $html .= '<span id="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span id="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
             $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
             /* CATEGORY PASSWORD END */
             if ( $tag_slug ) {
@@ -272,7 +271,7 @@ class ShortcodeSharedFiles
                         $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
                         
                         if ( isset( $atts['file_upload'] ) ) {
-                            $html .= SharedFilesPublicHelpers::fileListItem(
+                            $html .= SharedFilesPublicFileCardDefault::fileListItem(
                                 $c,
                                 $imagefile,
                                 $hide_description,
@@ -280,7 +279,7 @@ class ShortcodeSharedFiles
                                 $atts
                             );
                         } elseif ( isset( $atts['category'] ) ) {
-                            $html .= SharedFilesPublicHelpers::fileListItem(
+                            $html .= SharedFilesPublicFileCardDefault::fileListItem(
                                 $c,
                                 $imagefile,
                                 $hide_description,
@@ -288,7 +287,7 @@ class ShortcodeSharedFiles
                                 $atts
                             );
                         } else {
-                            $html .= SharedFilesPublicHelpers::fileListItem(
+                            $html .= SharedFilesPublicFileCardDefault::fileListItem(
                                 $c,
                                 $imagefile,
                                 $hide_description,
@@ -303,7 +302,7 @@ class ShortcodeSharedFiles
                 $html .= '</ul>';
             } elseif ( !isset( $atts['file_upload'] ) ) {
                 $html .= '<ul id="myList" class="shared-files-ajax-list"><li>';
-                $html .= '<div class="shared-files-files-not-found">' . esc_html__( 'No files found.', 'shared-files' ) . '</div>';
+                $html .= '<div class="shared-files-files-not-found">' . sanitize_text_field( __( 'No files found.', 'shared-files' ) ) . '</div>';
                 $html .= '</li></ul>';
             }
             
@@ -323,7 +322,7 @@ class ShortcodeSharedFiles
                         $filetype = '';
                         $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
                         $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                        $html .= SharedFilesPublicHelpers::fileListItem(
+                        $html .= SharedFilesPublicFileCardDefault::fileListItem(
                             $c,
                             $imagefile,
                             $hide_description,
@@ -339,7 +338,7 @@ class ShortcodeSharedFiles
                 $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wpb_all_query, $embed_id );
             }
             $html .= '<div id="shared-files-nothing-found">';
-            $html .= esc_html__( 'No files found.', 'shared-files' );
+            $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );
             $html .= '</div>';
             $html .= '</div></div><hr class="clear" />';
             wp_reset_postdata();

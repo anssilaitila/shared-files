@@ -23,9 +23,6 @@ class SharedFilesAdminSyncFiles
     {
         ?>
     
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-
     <div class="shared-files-sync-files">
       <h1><?php 
         echo  esc_html__( 'Sync Files', 'shared-files' ) ;
@@ -82,7 +79,7 @@ class SharedFilesAdminSyncFiles
                 'taxonomy'        => $taxonomy_slug,
                 'echo'            => 0,
                 'class'           => 'select_v2',
-                'show_option_all' => esc_attr__( 'Choose category', 'shared-files' ),
+                'show_option_all' => sanitize_text_field( __( 'Choose category', 'shared-files' ) ),
             ] ) ;
             ?><br />
             
@@ -124,9 +121,9 @@ class SharedFilesAdminSyncFiles
             $num = (int) $_GET['files'];
             
             if ( $num == 1 ) {
-                echo  '<p class="shared-files-files-activated">' . $num . ' ' . esc_html__( 'file activated.', 'shared-files' ) . '</p>' ;
+                echo  '<p class="shared-files-files-activated">' . esc_attr( $num ) . ' ' . esc_html__( 'file activated.', 'shared-files' ) . '</p>' ;
             } else {
-                echo  '<p class="shared-files-files-activated">' . $num . ' ' . esc_html__( 'files activated.', 'shared-files' ) . '</p>' ;
+                echo  '<p class="shared-files-files-activated">' . esc_attr( $num ) . ' ' . esc_html__( 'files activated.', 'shared-files' ) . '</p>' ;
             }
         
         }
@@ -143,12 +140,10 @@ class SharedFilesAdminSyncFiles
                 $files_in_subdir = array_diff( scandir( $item ), array( '.', '..' ) );
                 foreach ( $files_in_subdir as $file_in_subdir ) {
                     $sub_item = $item . '/' . $file_in_subdir;
-                    $html = $this::getFileRow( $file_in_subdir, $sub_item );
-                    echo  $html ;
+                    $this::getFileRow( $file_in_subdir, $sub_item );
                 }
             } else {
-                $html = $this::getFileRow( $file, $item );
-                echo  $html ;
+                $this::getFileRow( $file, $item );
             }
         
         }
@@ -161,7 +156,6 @@ class SharedFilesAdminSyncFiles
     
     private static function getFileRow( $file, $item )
     {
-        $html = '';
         $item_array = explode( '/', $item );
         $item_array_sliced = array_slice( $item_array, -2, 2 );
         $subdir = '';
@@ -172,11 +166,11 @@ class SharedFilesAdminSyncFiles
             $subdir = $item_array_sliced[0];
         }
         
-        $html .= '<tr>';
-        $html .= '<td>' . sanitize_text_field( implode( '/', $item_array_sliced ) ) . '</td>';
-        $html .= '<td>' . sanitize_text_field( SharedFilesFileHandling::human_filesize( filesize( $item ) ) ) . '</td>';
-        $html .= '<td>' . sanitize_text_field( date( "Y-m-d", filemtime( $item ) ) ) . '</td>';
-        $html .= '<td>';
+        echo  '<tr>' ;
+        echo  '<td>' . esc_html( implode( '/', $item_array_sliced ) ) . '</td>' ;
+        echo  '<td>' . esc_html( SharedFilesFileHandling::human_filesize( filesize( $item ) ) ) . '</td>' ;
+        echo  '<td>' . esc_html( date( "Y-m-d", filemtime( $item ) ) ) . '</td>' ;
+        echo  '<td>' ;
         $meta_query = array(
             'relation' => 'AND',
         );
@@ -210,35 +204,25 @@ class SharedFilesAdminSyncFiles
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
-                $id = get_the_id();
+                $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $html .= '<span class="shared-files-active">' . sanitize_text_field( __( 'Active', 'shared-files' ) ) . '</span>';
+                echo  '<span class="shared-files-active">' . esc_html__( 'Active', 'shared-files' ) . '</span>' ;
             }
             wp_reset_postdata();
         } else {
-            $html .= '<span class="shared-files-inactive">' . sanitize_text_field( __( 'Inactive', 'shared-files' ) ) . '</span><br />';
-            $html .= '<form method="post">';
-            $html .= wp_nonce_field(
-                'sf-sync-files',
-                'sf-sync-files-nonce',
-                true,
-                false
-            );
-            $html .= '<input type="hidden" name="shared-files-op" value="sync-files" />';
-            $html .= '<input type="hidden" name="add_file" value="' . sanitize_file_name( $file ) . '" />';
-            $html .= '<input type="hidden" name="shared-file-category" class="shared-files-single-file-category" value="" />';
-            $html .= '<input type="hidden" name="_SF_SUBDIR" value="' . esc_attr( $subdir ) . '" />';
-            $html .= '<input type="submit" class="shared-files-activate ' . (( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' )) . '" value="' . esc_attr__( 'Activate', 'shared-files' ) . '" />';
-            $html .= '</form>';
+            echo  '<span class="shared-files-inactive">' . esc_html__( 'Inactive', 'shared-files' ) . '</span><br />' ;
+            $is_premium = 0;
+            
+            if ( !$is_premium ) {
+                echo  '<form method="post">' ;
+                echo  '<input type="submit" class="shared-files-activate ' . (( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' )) . '" value="' . esc_attr__( 'Activate', 'shared-files' ) . '" />' ;
+                echo  '</form>' ;
+            }
+        
         }
         
-        $html .= '</td>';
-        $html .= '</tr>';
-        return $html;
-    }
-    
-    public function sync_folders_and_files()
-    {
+        echo  '</td>' ;
+        echo  '</tr>' ;
     }
 
 }

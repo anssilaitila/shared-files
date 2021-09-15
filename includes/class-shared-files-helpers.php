@@ -27,44 +27,13 @@ class SharedFilesHelpers
         ) );
     }
     
-    public static function getCatPassword( $file_id )
-    {
-        $cat_password = '';
-        $terms = get_the_terms( $file_id, 'shared-file-category' );
-        if ( $terms ) {
-            foreach ( $terms as $term ) {
-                //        $password = get_term_meta($term->term_id, '_sf_cat_password', true);
-                $password = sanitize_text_field( SharedFilesTermMetadata::get_hierarchichal_term_metadata( $term, '_sf_cat_password' ) );
-                if ( $password ) {
-                    $cat_password = $password;
-                }
-            }
-        }
-        return $cat_password;
-    }
-    
-    public static function getCatPasswordProtectionType( $file_id )
-    {
-        $cat_password_protection_type = '';
-        $terms = get_the_terms( $file_id, 'shared-file-category' );
-        if ( $terms ) {
-            foreach ( $terms as $term ) {
-                $password_protection_type = sanitize_text_field( SharedFilesTermMetadata::get_hierarchichal_term_metadata( $term, '_sf_cat_password_protection_type' ) );
-                if ( $password_protection_type ) {
-                    $cat_password_protection_type = $password_protection_type;
-                }
-            }
-        }
-        return $cat_password_protection_type;
-    }
-    
     public static function maxUploadSize()
     {
         $s = get_option( 'shared_files_settings' );
         $max_upload_size = size_format( wp_max_upload_size() );
         
         if ( isset( $s['maximum_size_text'] ) && $s['maximum_size_text'] ) {
-            $max_upload_size = $s['maximum_size_text'];
+            $max_upload_size = sanitize_text_field( $s['maximum_size_text'] );
         } elseif ( !$max_upload_size ) {
             $max_upload_size = 0;
         }
@@ -280,9 +249,9 @@ class SharedFilesHelpers
             
             
             if ( isset( $s['bypass_preview_pdf'] ) ) {
-                $html .= '<a href="' . esc_url( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+                $html .= '<a href="' . esc_url_raw( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             } else {
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             }
         
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
@@ -308,7 +277,7 @@ class SharedFilesHelpers
                 
                 $password_protected = 0;
                 if ( !$password_protected ) {
-                    $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . esc_html__( 'Preview', 'shared-files' ) . '</a>';
+                    $html .= '<a href="https://view.officeapps.live.com/op/view.aspx?src=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
                 }
             }
         
@@ -336,7 +305,7 @@ class SharedFilesHelpers
                 
                 $password_protected = 0;
                 if ( !$password_protected ) {
-                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
                 }
             }
         
@@ -345,9 +314,23 @@ class SharedFilesHelpers
         return $html;
     }
     
+    public static function getDownloadCounter( $file_id )
+    {
+        $file_id = intval( $file_id );
+        $s = get_option( 'shared_files_settings' );
+        $download_counter = intval( get_post_meta( $file_id, '_sf_load_cnt', true ) );
+        $text = 'Downloads:';
+        if ( isset( $s['download_counter_text'] ) && $s['download_counter_text'] ) {
+            $text = $s['download_counter_text'];
+        }
+        $html = '<div class="shared-files-download-counter"><span>' . $text . ' ' . $download_counter . '</span></div>';
+        return $html;
+    }
+    
     public static function getImageFile( $file_id, $external_url )
     {
         $s = get_option( 'shared_files_settings' );
+        $file_id = intval( $file_id );
         $file = get_post_meta( $file_id, '_sf_file', true );
         $media_library_post_id = (int) get_post_meta( $file_id, '_sf_media_library_post_id', true );
         $media_library_post_mime_type = '';
@@ -364,12 +347,12 @@ class SharedFilesHelpers
         $file_ext = '';
         $file_realpath = '';
         if ( isset( $file['file'] ) && $file['file'] ) {
-            $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
+            $file_realpath = SharedFilesFileOpen::getUpdatedPathAndFilename( sanitize_text_field( $file['file'] ) );
         }
         if ( $file_realpath ) {
             $file_ext = pathinfo( $file_realpath, PATHINFO_EXTENSION );
         }
-        $featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' );
+        $featured_img_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'thumbnail' ) );
         // Featured image override
         if ( !isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && $featured_img_url ) {
             return $featured_img_url;
@@ -404,7 +387,7 @@ class SharedFilesHelpers
             if ( (substr( $external_url, 0, strlen( 'https://www.youtube.com' ) ) === 'https://www.youtube.com' || substr( $external_url, 0, strlen( 'https://youtu.be' ) ) === 'https://youtu.be') && isset( $s['icon_for_youtube'] ) ) {
                 
                 if ( isset( $s['icon_for_youtube'] ) && $s['icon_for_youtube'] ) {
-                    $file_type_icon_url = $s['icon_for_youtube'];
+                    $file_type_icon_url = esc_url_raw( $s['icon_for_youtube'] );
                 } else {
                     $file_type_icon_url = SHARED_FILES_URI . 'img/2020/video.svg';
                     if ( $icon_set == 2019 ) {
@@ -427,9 +410,9 @@ class SharedFilesHelpers
         } else {
             
             if ( isset( $file_ext ) && $file_ext == 'psd' ) {
-                $file_type_icon_url = $s['icon_for_psd'];
+                $file_type_icon_url = esc_url_raw( $s['icon_for_psd'] );
             } elseif ( isset( $file['type'] ) || $media_library_post_mime_type ) {
-                $filetype = ( $media_library_post_mime_type ? $media_library_post_mime_type : $file['type'] );
+                $filetype = ( $media_library_post_mime_type ? $media_library_post_mime_type : sanitize_text_field( $file['type'] ) );
                 if ( !$filetype && isset( $file_realpath ) && file_exists( $file_realpath ) && is_readable( $file_realpath ) ) {
                     
                     if ( function_exists( 'mime_content_type' ) ) {
@@ -443,7 +426,7 @@ class SharedFilesHelpers
                 }
                 
                 if ( isset( $custom_icons[$filetype] ) && $custom_icons[$filetype] ) {
-                    $file_type_icon_url = $custom_icons[$filetype];
+                    $file_type_icon_url = esc_url_raw( $custom_icons[$filetype] );
                 } elseif ( array_key_exists( $filetype, $filetypes ) && isset( $filetypes[$filetype] ) ) {
                     $imagefile = $filetypes[$filetype] . '.svg';
                     $file_type_icon_url = SHARED_FILES_URI . 'img/2020/' . $imagefile;
@@ -504,9 +487,9 @@ class SharedFilesHelpers
         $sf_root = '';
         
         if ( isset( $s['wp_location'] ) && isset( $s['wp_location'] ) ) {
-            $sf_root = rtrim( $s['wp_location'], '/' );
+            $sf_root = rtrim( sanitize_text_field( $s['wp_location'] ), '/' );
         } else {
-            $url_parts = parse_url( get_admin_url() );
+            $url_parts = parse_url( esc_url_raw( get_admin_url() ) );
             $path_parts = explode( '/', $url_parts['path'] );
             if ( isset( $path_parts[2] ) && $path_parts[2] == 'wp-admin' ) {
                 $sf_root = '/' . $path_parts[1];
@@ -544,57 +527,6 @@ class SharedFilesHelpers
         }
         
         return $layout;
-    }
-    
-    public static function initLayout( $s )
-    {
-        $html = '';
-        if ( isset( $s['card_small_font_size'] ) && $s['card_small_font_size'] ) {
-            $html .= '<style>.shared-files-main-elements p { font-size: 15px; }</style>';
-        }
-        if ( isset( $s['card_font'] ) && $s['card_font'] ) {
-            
-            if ( $s['card_font'] == 'roboto' ) {
-                $html .= '<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">';
-                $html .= '<style>.shared-files-main-elements * { font-family: "Roboto", sans-serif; }</style>';
-            } elseif ( $s['card_font'] == 'ubuntu' ) {
-                $html .= '<link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">';
-                $html .= '<style>.shared-files-main-elements * { font-family: "Ubuntu", sans-serif; }</style>';
-            }
-        
-        }
-        
-        if ( isset( $s['card_background'] ) && $s['card_background'] ) {
-            $html .= '<style>.shared-files-container #myList li { margin-bottom: 5px; } </style>';
-            
-            if ( $s['card_background'] == 'custom_color' && isset( $s['card_background_custom_color'] ) && $s['card_background_custom_color'] ) {
-                $custom_color = '#' . esc_attr( $s['card_background_custom_color'] );
-                
-                if ( $custom_color && preg_match( '/^#([0-9A-F]{3}){1,2}$/i', $custom_color ) ) {
-                    $html .= '<style>.shared-files-main-elements { background: ' . esc_attr( $custom_color ) . '; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
-                } else {
-                    $html .= '<style>.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
-                }
-            
-            } elseif ( $s['card_background'] == 'white' ) {
-                $html .= '<style>.shared-files-main-elements { background: #fff; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
-            } elseif ( $s['card_background'] == 'light_gray' ) {
-                $html .= '<style>.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } </style>';
-            }
-        
-        }
-        
-        
-        if ( isset( $s['card_height'] ) && $s['card_height'] ) {
-            $html .= '<style>.shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . esc_attr( $s['card_height'] ) . 'px; } </style>';
-            $html .= '<style>.shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . esc_attr( $s['card_height'] ) . 'px; } </style>';
-            $html .= '<style>.shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . esc_attr( $s['card_height'] ) . 'px; } </style>';
-            $html .= '<style> @media (max-width: 500px) { .shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
-            $html .= '<style> @media (max-width: 500px) { .shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
-            $html .= '<style> @media (max-width: 500px) { .shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } </style>';
-        }
-        
-        return $html;
     }
     
     public static function isPremium()
@@ -666,7 +598,7 @@ class SharedFilesHelpers
                 case 'image/jpeg':
                 case 'image/png':
                 case 'image/gif':
-                    $image_url = $upload['file'];
+                    $image_url = esc_url_raw( $upload['file'] );
                     // Prepare an array of post data for the attachment.
                     $attachment = array(
                         'guid'           => $image_url,

@@ -33,6 +33,7 @@ class SharedFilesAdminMaintenance
                 'wp_engine_compatibility_mode'                    => 'on',
                 'show_file_upload_checkboxes_on_multiple_columns' => 'on',
                 'show_download_button'                            => 'on',
+                'show_download_counter'                           => 'on',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }

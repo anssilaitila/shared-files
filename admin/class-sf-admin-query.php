@@ -11,7 +11,7 @@ class SharedFilesAdminQuery
     {
         global  $wp ;
         $s = get_option( 'shared_files_settings' );
-        $url = home_url( $wp->request );
+        $url = esc_url_raw( home_url( $wp->request ) );
         $url_parts = parse_url( $url );
         $sf_query = 0;
         if ( isset( $url_parts['path'] ) ) {
@@ -20,17 +20,17 @@ class SharedFilesAdminQuery
         
         if ( is_super_admin() && isset( $_GET['DEBUG_URL_PARTS'] ) ) {
             echo  '<pre>1</pre>' ;
-            echo  '<pre>' . var_dump( $url_parts ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $url_parts ) ) . '</pre>' ;
             echo  '<pre>2</pre>' ;
-            echo  '<pre>' . var_dump( $path_parts ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $path_parts ) ) . '</pre>' ;
             
             if ( sizeof( $path_parts ) > 1 ) {
                 echo  '<pre>3</pre>' ;
-                echo  '<pre>' . var_dump( $path_parts[count( $path_parts ) - 2] ) . '</pre>' ;
+                echo  '<pre>' . var_dump( esc_html( $path_parts[count( $path_parts ) - 2] ) ) . '</pre>' ;
             }
             
             echo  '<pre>4</pre>' ;
-            echo  '<pre>' . var_dump( end( $path_parts ) ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( end( $path_parts ) ) ) . '</pre>' ;
         }
         
         $sf_base = '';
@@ -65,17 +65,17 @@ class SharedFilesAdminQuery
         
         if ( is_super_admin() && isset( $_GET['DEBUG_URL_PARTS'] ) ) {
             echo  '<pre>sf_base</pre>' ;
-            echo  '<pre>' . var_dump( $path_parts[count( $path_parts ) - 3] ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $path_parts[count( $path_parts ) - 3] ) ) . '</pre>' ;
             echo  '<pre>sf_base</pre>' ;
-            echo  '<pre>' . var_dump( $sf_base ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $sf_base ) ) . '</pre>' ;
             echo  '<pre>sf_base_alt</pre>' ;
-            echo  '<pre>' . var_dump( $sf_base_alt ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $sf_base_alt ) ) . '</pre>' ;
             echo  '<pre>sf_query</pre>' ;
-            echo  '<pre>' . var_dump( $sf_query ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $sf_query ) ) . '</pre>' ;
             echo  '<pre>file_id</pre>' ;
-            echo  '<pre>' . var_dump( $file_id ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $file_id ) ) . '</pre>' ;
             echo  '<pre>sf_query_filename</pre>' ;
-            echo  '<pre>' . var_dump( $sf_query_filename ) . '</pre>' ;
+            echo  '<pre>' . var_dump( esc_html( $sf_query_filename ) ) . '</pre>' ;
             wp_die();
         }
         
@@ -84,7 +84,7 @@ class SharedFilesAdminQuery
             if ( $file_id ) {
                 $filesize = 0;
                 if ( get_post_meta( $file_id, '_sf_filesize', true ) ) {
-                    $filesize = get_post_meta( $file_id, '_sf_filesize', true );
+                    $filesize = intval( get_post_meta( $file_id, '_sf_filesize', true ) );
                 }
                 $external_url = esc_url_raw( get_post_meta( $file_id, '_sf_external_url', true ) );
                 
@@ -100,12 +100,12 @@ class SharedFilesAdminQuery
                     }
                     $filename = '';
                     if ( isset( $file['file'] ) ) {
-                        $filename = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
+                        $filename = SharedFilesFileOpen::getUpdatedPathAndFilename( sanitize_text_field( $file['file'] ) );
                     }
                     
                     if ( is_super_admin() && isset( $_GET['DEBUG_FILE'] ) ) {
-                        echo  '<pre>' . var_dump( $file['file'] ) . '</pre>' ;
-                        echo  '<pre>' . var_dump( $filename ) . '</pre>' ;
+                        echo  '<pre>' . var_dump( esc_html( $file['file'] ) ) . '</pre>' ;
+                        echo  '<pre>' . var_dump( esc_html( $filename ) ) . '</pre>' ;
                         wp_die();
                     }
                     
@@ -125,13 +125,17 @@ class SharedFilesAdminQuery
                     if ( !$file_mime ) {
                         $file_mime = SharedFilesAdminHelpers::get_mime_type( $filename );
                     }
+                    // Update load counter (1/2)
+                    $load_cnt = (int) get_post_meta( $file_id, '_sf_load_cnt', true );
+                    // Update load counter (2/2)
+                    update_post_meta( $file_id, '_sf_load_cnt', intval( $load_cnt ) + 1 );
                     
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );
                         $file_url = esc_url_raw( $file['url'] );
                         $redirect_url_parts = parse_url( $file_url );
                         $file_uri = $redirect_url_parts['path'];
-                        wp_redirect( $file_uri );
+                        wp_redirect( esc_url_raw( $file_uri ) );
                         exit;
                     }
                     

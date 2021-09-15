@@ -1,70 +1,37 @@
 <?php
 
-class SharedFilesAdminInlineScripts {
-
-  public function inline_scripts() {
-
-      ?>
-
-      <?php $current_screen = get_current_screen(); ?>
-
-      <?php if (!isset($current_screen->id) || (isset($current_screen->id) && $current_screen->id !== 'shared_file_page_shared-files-sync-files' && $current_screen->id !== 'shared_file_page_shared-files-sync-media-library')): ?>
-
-        <style>#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-sync-media-library"] { display: none; visibility: hidden; }</style>
-
-      <?php endif; ?>
-
-      <?php if (isset($current_screen->id) && ($current_screen->id === 'edit-shared_file' || $current_screen->id === 'edit-shared-file-category' || $current_screen->id === 'shared_file_page_shared-files-shortcodes')): ?>
-  
-        <link rel="stylesheet" href="<?= esc_url( SHARED_FILES_URI ) ?>dist/tipso.min.css">
-        <script src="<?= esc_url( SHARED_FILES_URI ) ?>dist/tipso.min.js"></script>
-        <script src="/wp-includes/js/clipboard.min.js"></script>
-    
-        <script>
-          
-          jQuery(function ($) {
-
-            $(document).on('click', '.shared-files-copy', function (e) {
-              e.preventDefault();
-            });
-              
-            var clipboard = new ClipboardJS('.shared-files-copy');
+class SharedFilesAdminInlineScripts
+{
+    public static function inline_scripts()
+    {
+        $current_screen = get_current_screen();
+        $current_screen_id = '';
+        if ( isset( $current_screen->id ) ) {
+            $current_screen_id = $current_screen->id;
+        }
+        $js = '';
         
-            clipboard.on('success', function(e) {
-
-              e.clearSelection();
-      
-              let clipboardtarget = jQuery(e.trigger).data('clipboard-target');
-      
-              jQuery(clipboardtarget).tipso({
-                content: "<?= esc_js( __('Shortcode copied to clipboard!', 'shared-files') ) ?>",
-                width: 240
-              });
-      
-              jQuery(clipboardtarget).tipso('show');
-              
-              setTimeout(function () {
-                showpanel(clipboardtarget);
-              }, 2000);
-              
-              function showpanel(clipboardtarget) {
-                jQuery(clipboardtarget).tipso('hide');
-                jQuery(clipboardtarget).tipso('destroy');
-              }
-              
-            });
+        if ( $current_screen_id === 'shared_file' ) {
+            $post_id = intval( get_the_ID() );
+            $file = get_post_meta( $post_id, '_sf_file', true );
+            $js .= "jQuery( document ).ready( function(\$) {";
+            $is_premium = 0;
+            if ( !$is_premium ) {
+                if ( !$file ) {
+                    $js .= "\n            \$('#post').submit(function() {\n              if (\$('#sf_file').prop('files').length == 0) {\n                alert('" . esc_js( __( 'Please insert the file first.', 'shared-files' ) ) . "');\n                return false;\n              }\n            });\n          ";
+                }
+            }
+            $js .= "});";
+        } elseif ( $current_screen_id === 'edit-shared_file' || $current_screen_id === 'edit-shared-file-category' || $current_screen_id === 'shared_file_page_shared-files-shortcodes' || $current_screen_id === 'shared_file_page_shared-files-support' ) {
+            $js .= "jQuery( document ).ready( function(\$) {";
+            if ( $current_screen_id === 'shared_file_page_shared-files-support' ) {
+                $js .= "\n          \$('.shared-files-toggle-debug-info').on('click', function() {\n            if (\$('.shared-files-debug-info-container').is(':hidden')) {\n              \$('.shared-files-debug-info-container').show();\n              \$(this).text('" . esc_js( __( 'Close', 'shared-files' ) ) . "');\n            } else {\n              \$('.shared-files-debug-info-container').hide();\n              \$(this).text('" . esc_js( __( 'Open', 'shared-files' ) ) . "');\n            }\n          });\n        ";
+            }
+            $js .= "\n        \$(document).on('click', '.shared-files-copy', function (e) {\n          e.preventDefault();\n        });\n          \n        var clipboard = new ClipboardJS('.shared-files-copy');\n        \n        clipboard.on('success', function(e) {\n        \n          e.clearSelection();\n        \n          let clipboardtarget = jQuery(e.trigger).data('clipboard-target');\n        \n          jQuery(clipboardtarget).tipso({\n            content: '" . esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) . "',\n            width: 240\n          });\n        \n          jQuery(clipboardtarget).tipso('show');\n          \n          setTimeout(function () {\n            showpanel(clipboardtarget);\n          }, 2000);\n          \n          function showpanel(clipboardtarget) {\n            jQuery(clipboardtarget).tipso('hide');\n            jQuery(clipboardtarget).tipso('destroy');\n          }\n          \n        });\n        \n        clipboard.on('error', function(e) {\n        });\n      \n      ";
+            $js .= "});";
+        }
         
-            clipboard.on('error', function(e) {
-            });
-      
-          });
-  
-        </script>
-      
-      <?php endif; ?>
-      
-      <?php
-
-  }
+        return $js;
+    }
 
 }

@@ -12,7 +12,7 @@ class SharedFilesAdminList
         $s = get_option( 'shared_files_settings' );
         $defaults['file_url'] = sanitize_text_field( __( 'Shortcode', 'shared-files' ) );
         $defaults['filesize'] = sanitize_text_field( __( 'File size', 'shared-files' ) );
-        $defaults['load_cnt'] = sanitize_text_field( __( 'File loads', 'shared-files' ) );
+        $defaults['load_cnt'] = sanitize_text_field( __( 'Downloads', 'shared-files' ) );
         if ( !isset( $s['hide_limit_downloads'] ) ) {
             $defaults['limit_downloads'] = sanitize_text_field( __( 'Limit', 'shared-files' ) );
         }
@@ -90,14 +90,14 @@ class SharedFilesAdminList
         $file_id = intval( get_the_ID() );
         switch ( $column_name ) {
             case 'file_url':
-                echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . $post_ID . '" title="[shared_files file_id=' . $post_ID . ']">[shared_files file_id=' . $post_ID . ']</span>' ;
-                echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . $post_ID . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
+                echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . esc_attr( $post_ID ) . '" title="[shared_files file_id=' . esc_attr( $post_ID ) . ']">[shared_files file_id=' . esc_attr( $post_ID ) . ']</span>' ;
+                echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . esc_attr( $post_ID ) . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
                 $folder_name = get_post_meta( $file_id, '_sf_subdir', true );
                 if ( $folder_name ) {
                     echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . esc_html( $folder_name ) . '/</div>' ;
                 }
-                $file = get_post_meta( get_the_ID(), '_sf_file', true );
-                $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . SharedFilesHelpers::wp_engine() . get_post_meta( $post_ID, '_sf_filename', true );
+                //        $file = get_post_meta(get_the_ID(), '_sf_file', true);
+                $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( get_post_meta( $post_ID, '_sf_filename', true ) );
                 echo  '<hr class="clear" /><a href="' . esc_url( $file_url ) . '" class="shared-files-admin-file-url" target="_blank">' . esc_url( $file_url ) . '</a>' ;
                 break;
             case 'filesize':
@@ -105,14 +105,12 @@ class SharedFilesAdminList
                 if ( get_post_meta( $post_ID, '_sf_external_url', true ) ) {
                     echo  'n/a' ;
                 } else {
-                    echo  esc_html( SharedFilesAdminHelpers::human_filesize( get_post_meta( $post_ID, '_sf_filesize', true ) ) ) ;
+                    echo  esc_html( SharedFilesAdminHelpers::human_filesize( sanitize_text_field( get_post_meta( $post_ID, '_sf_filesize', true ) ) ) ) ;
                 }
                 
                 break;
             case 'load_cnt':
-                if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo  '<div class="shared-files-pro-only">' . esc_html__( 'Pro' ) . '</div>' ;
-                }
+                echo  esc_html( get_post_meta( $post_ID, '_sf_load_cnt', true ) ) ;
                 break;
             case 'limit_downloads':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {

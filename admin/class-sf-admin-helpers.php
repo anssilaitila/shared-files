@@ -135,11 +135,11 @@ class SharedFilesAdminHelpers {
   
     if (isset($s['wp_location']) && isset($s['wp_location'])) {
   
-      $sf_root = rtrim($s['wp_location'], '/');
+      $sf_root = rtrim( sanitize_text_field( $s['wp_location'] ), '/');
   
     } else {
   
-      $url_parts = parse_url(get_admin_url());
+      $url_parts = parse_url( esc_url_raw( get_admin_url() ) );
       $path_parts = explode('/', $url_parts['path']);
       
       if (isset($path_parts[2]) && $path_parts[2] == 'wp-admin') {

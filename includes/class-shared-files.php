@@ -108,6 +108,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-cpt.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-taxonomy.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-maintenance.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-inline-styles.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-inline-scripts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-send-mail.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-query.php';
@@ -127,6 +128,8 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-upload.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-load.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-pagination.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-default.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-vertical.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
@@ -165,6 +168,7 @@ class Shared_Files
         $plugin_admin_cpt = new SharedFilesAdminCPT();
         $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
         $plugin_admin_maintenance = new SharedFilesAdminMaintenance();
+        $plugin_admin_inline_styles = new SharedFilesAdminInlineStyles();
         $plugin_admin_inline_scripts = new SharedFilesAdminInlineScripts();
         $plugin_admin_shortcodes = new SharedFilesAdminShortcodes();
         $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
@@ -186,8 +190,6 @@ class Shared_Files
         $this->loader->add_action( 'plugins_loaded', $plugin_admin_maintenance, 'update_db_check' );
         $this->loader->add_action( 'init', $plugin_admin_maintenance, 'update_db_check_v2' );
         $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );
-        // Send mail
-        $this->loader->add_action( 'check_expired_files', $plugin_admin_send_mail, 'file_expired_send_email' );
         // CPT
         $this->loader->add_action( 'init', $plugin_admin_cpt, 'create_custom_post_type' );
         // Custom metadata for a file
@@ -218,12 +220,7 @@ class Shared_Files
         // Query
         $this->loader->add_filter( 'request', $plugin_admin_query, 'alter_the_query' );
         // Inline
-        $this->loader->add_action(
-            'admin_head',
-            $plugin_admin_inline_scripts,
-            'inline_scripts',
-            100
-        );
+        //    $this->loader->add_action('admin_head', $plugin_admin_inline_scripts, 'inline_scripts', 100);
         // Admin list
         $this->loader->add_action(
             'manage_shared_file_posts_custom_column',
@@ -265,8 +262,6 @@ class Shared_Files
         // Sync files
         $this->loader->add_action( 'admin_menu', $plugin_admin_sync_files, 'register_page' );
         $this->loader->add_action( 'admin_menu', $plugin_admin_sync_media_library, 'register_page' );
-        // File handling
-        $this->loader->add_filter( 'admin_init', $plugin_admin_file_handling, 'activate_file' );
         // Settings
         $this->loader->add_action( 'admin_menu', $plugin_settings, 'shared_files_add_admin_menu' );
         $this->loader->add_action( 'admin_init', $plugin_settings, 'shared_files_settings_init' );
@@ -305,11 +300,8 @@ class Shared_Files
         // Ajax
         $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
-        $this->loader->add_action( 'wp_footer', $plugin_public_ajax, 'my_ajax_without_file' );
         // Front-end file upload
         $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload' );
-        // Front-end file update
-        $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_update' );
     }
     
     /**

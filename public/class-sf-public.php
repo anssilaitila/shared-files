@@ -55,8 +55,9 @@ class Shared_Files_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_styles()
+    public function enqueue_styles( $hook )
     {
+        $s = get_option( 'shared_files_settings' );
         wp_enqueue_style(
             $this->plugin_name,
             SHARED_FILES_URI . 'dist/css/p.css',
@@ -71,6 +72,15 @@ class Shared_Files_Public
             $this->version,
             'all'
         );
+        if ( isset( $s['card_font'] ) && $s['card_font'] ) {
+            
+            if ( $s['card_font'] == 'roboto' ) {
+                wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto&display=swap', false );
+            } elseif ( $s['card_font'] == 'ubuntu' ) {
+                wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap', false );
+            }
+        
+        }
     }
     
     /**
@@ -78,7 +88,7 @@ class Shared_Files_Public
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts()
+    public function enqueue_scripts( $hook )
     {
         wp_enqueue_script(
             $this->plugin_name,
@@ -94,6 +104,15 @@ class Shared_Files_Public
             $this->version,
             false
         );
+        $inline_js = $this->get_inline_scripts();
+        wp_add_inline_script( $this->plugin_name, $inline_js );
+    }
+    
+    public function get_inline_scripts()
+    {
+        $js = '';
+        $js .= "jQuery(document).ready(function(\$) {\n  \n      if (typeof ajaxurl === 'undefined') {\n        ajaxurl = '" . esc_url_raw( admin_url( 'admin-ajax.php' ) ) . "'; // get ajaxurl\n      }\n  \n    });";
+        return $js;
     }
     
     /**

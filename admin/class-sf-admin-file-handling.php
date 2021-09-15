@@ -2,21 +2,6 @@
 
 class SharedFilesFileHandling
 {
-    public static function add_file(
-        $file,
-        $cat_slug,
-        $media_library_post_id = 0,
-        $subdir = '',
-        $add_featured_image = 0
-    )
-    {
-        return 1;
-    }
-    
-    public static function activate_file()
-    {
-    }
-    
     public static function getBaseDir()
     {
         $base_dir = wp_get_upload_dir()['basedir'] . '/shared-files/';
@@ -26,7 +11,7 @@ class SharedFilesFileHandling
     public static function getFileUrl( $file_id )
     {
         $file_id = intval( $file_id );
-        $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0];
+        $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] );
         return $file_dir;
     }
     

@@ -8,9 +8,6 @@ class SharedFilesPublicAjax
         $tag_slug = '';
         $term_slug = '';
         $atts = [];
-        if ( isset( $_POST['atts'] ) ) {
-            $atts = json_decode( str_replace( "\\", "", $_POST['atts'] ), true );
-        }
         if ( isset( $_POST['sf_tag'] ) && $_POST['sf_tag'] ) {
             $tag_slug = sanitize_title( $_POST['sf_tag'] );
         }
@@ -80,10 +77,10 @@ class SharedFilesPublicAjax
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $external_url = ( isset( $c['_sf_external_url'] ) ? $c['_sf_external_url'][0] : '' );
+                $external_url = ( isset( $c['_sf_external_url'] ) ? esc_url_raw( $c['_sf_external_url'][0] ) : '' );
                 $filetype = '';
                 $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
-                $html .= SharedFilesPublicHelpers::fileListItem(
+                $html .= SharedFilesPublicFileCardDefault::fileListItem(
                     $c,
                     $imagefile,
                     $hide_description,
@@ -94,21 +91,34 @@ class SharedFilesPublicAjax
         if ( $wp_query->found_posts == 0 ) {
             $html .= '<p>' . sanitize_text_field( __( 'No files found.', 'shared-files' ) ) . '</p>';
         }
-        echo  $html ;
-    }
-    
-    public function my_ajax_without_file()
-    {
-        ?>
-  
-      <script type="text/javascript" >
-      jQuery(document).ready(function($) {
-        ajaxurl = "<?php 
-        echo  admin_url( 'admin-ajax.php' ) ;
-        ?>"; // get ajaxurl
-      });
-      </script> 
-      <?php 
+        $html_allowed_tags = [
+            'li'   => [],
+            'div'  => [
+            'class' => [],
+            'style' => [],
+        ],
+            'a'    => [
+            'href'              => [],
+            'target'            => [],
+            'data-file-url'     => [],
+            'data-external-url' => [],
+            'data-image-url'    => [],
+            'data-file-type'    => [],
+            'class'             => [],
+            'id'                => [],
+            'download'          => [],
+            'onclick'           => [],
+        ],
+            'span' => [
+            'class' => [],
+        ],
+            'img'  => [
+            'src' => [],
+        ],
+            'b'    => [],
+            'p'    => [],
+        ];
+        echo  wp_kses( $html, $html_allowed_tags ) ;
     }
 
 }

@@ -33,19 +33,12 @@ class SharedFilesAdminHelpSupport
         ?>
     
     <?php 
-        echo  $this::permalinks_alert() ;
+        echo  SharedFilesAdminHelpSupport::permalinks_alert() ;
         ?>
     
     <?php 
         $num = 0;
         ?>
-
-    <link rel="stylesheet" href="<?php 
-        echo  esc_url( SHARED_FILES_URI ) ;
-        ?>dist/tipso.min.css">
-    <script src="<?php 
-        echo  esc_url( SHARED_FILES_URI ) ;
-        ?>dist/tipso.min.js"></script>
 
     <div class="shared-files-help-support wrap">
 
@@ -104,11 +97,11 @@ class SharedFilesAdminHelpSupport
         ?><br /><?php 
         $num++;
         ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>" data-tooltip-class="shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>">[shared_files]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>"><?php 
         echo  esc_html__( 'Copy', 'shared-files' ) ;
         ?></button></li>
@@ -118,11 +111,11 @@ class SharedFilesAdminHelpSupport
         ?><br /><?php 
         $num++;
         ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>" data-tooltip-class="shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>">[shared_files_simple]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>"><?php 
         echo  esc_html__( 'Copy', 'shared-files' ) ;
         ?></button></li>
@@ -132,11 +125,11 @@ class SharedFilesAdminHelpSupport
         ?><br /><?php 
         $num++;
         ?><span class="shared-files-shortcode shared-files-shortcode-only shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>" data-tooltip-class="shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>">[shared_files file_upload=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php 
-        echo  $num ;
+        echo  esc_attr( $num ) ;
         ?>"><?php 
         echo  esc_html__( 'Copy', 'shared-files' ) ;
         ?></button></li>
@@ -250,24 +243,6 @@ class SharedFilesAdminHelpSupport
         
       </div>
 
-      <script>
-        jQuery(function ($) {
-          $('.shared-files-toggle-debug-info').on('click', function() {
-            if ($('.shared-files-debug-info-container').is(':hidden')) {
-              $('.shared-files-debug-info-container').show();
-              $(this).text("<?php 
-        echo  esc_js( __( 'Close', 'shared-files' ) ) ;
-        ?>");
-            } else {
-              $('.shared-files-debug-info-container').hide();
-              $(this).text("<?php 
-        echo  esc_js( __( 'Open', 'shared-files' ) ) ;
-        ?>");
-            }
-          });
-        });
-      </script>
-
       <div class="shared-files-admin-section">
 
         <h2><?php 
@@ -341,7 +316,7 @@ class SharedFilesAdminHelpSupport
         ?>
           
           zlib: <?php 
-        echo  $zlib ;
+        echo  esc_attr( $zlib ) ;
         ?><br />
           
     
@@ -365,7 +340,7 @@ class SharedFilesAdminHelpSupport
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
                 ?>
       
               <?php 
@@ -399,7 +374,7 @@ class SharedFilesAdminHelpSupport
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
                 ?>
           
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
@@ -493,7 +468,7 @@ class SharedFilesAdminHelpSupport
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
                 $c = get_post_custom( $id );
-                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . $c['_sf_filename'][0] : '' );
+                $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
                 ?>
           
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">

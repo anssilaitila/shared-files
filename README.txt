@@ -1,13 +1,13 @@
-=== Easy Download Manager and File Sharing Plugin with frontend file upload – a better Media Library — Shared Files ===
+=== Shared Files – Easy Download Manager and File Sharing Plugin with Frontend File Upload ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.56
+Stable tag: 1.6.58
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-List and share any downloadable files on your WordPress site. Preview and search files, frontend upload, FTP upload, download manager, counter & more.
+A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring frontend file upload, FTP upload, download counter, better media library, file explorer and more...
 
 == Description ==
 = The best file sharing plugin for WordPress =
@@ -42,6 +42,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Use as a download manager, file explorer and file manager
 * Custom images/icons for many file types
 * WordPress Multisite compatible
+* Infinite Uploads compatible
 * Add tags to files
 
 = Key Features in Shared Files Pro: =
@@ -131,6 +132,19 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.58 - 2021-09-15 =
+* (Professional + Business) New setting: Allow the uploader to create multiple new categories
+* (Professional + Business) New setting: Allow the uploader to create multiple new tags
+* (Professional + Business) New settings to hide sections from the frontend file editor (Settings / File edit)
+* (All plans) Frontend file edit modal replaced with a custom one (for better compatibility with themes and other plugins)
+* (All plans) Next sync timestamp added to category edit page
+* (All plans) Fix: file type is now properly saved when syncing files from folder (preview buttons are shown correctly)
+* (All plans) New shortcode parameter: Show files that belong to any these tags: [shared_files tags__or="tag-1,tag-2,tag-3"]
+* (Free + All plans) New setting: Show download counter on the frontend
+
+= 1.6.57 - 2021-09-13 =
+* Bug fixes
 
 = 1.6.56 - 2021-09-02 =
 * (Business) New feature: Activate any number of custom fields (see Settings / Custom fields tab)

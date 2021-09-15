@@ -32,7 +32,7 @@ class SharedFilesPublicPagination {
 
         $html .= '<hr class="clear" /><div class="shared-files-pagination-improved">';
   
-        $html .= '<div class="shared-files-pagination-improved-more-files">' . esc_html__('Browse files:', 'shared-files') . '</div>';
+        $html .= '<div class="shared-files-pagination-improved-more-files">' . sanitize_text_field( __('Browse files:', 'shared-files') ) . '</div>';
         
         $html .= paginate_links($pagination_args);
   
@@ -61,7 +61,7 @@ class SharedFilesPublicPagination {
       $html .= '<hr class="clear" /><div id="shared-files-pagination" class="shared-files-pagination">';
     
       if (paginate_links($pagination_args)) {
-        $html .= '<span class="shared-files-more-files">' . esc_html__('Browse more files:', 'shared-files') . '</span>' .
+        $html .= '<span class="shared-files-more-files">' . sanitize_text_field( __('Browse more files:', 'shared-files') ) . '</span>' .
         paginate_links($pagination_args);
       }
     

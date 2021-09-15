@@ -24,6 +24,49 @@ class SharedFilesPublicLoad {
         }';
       
     }
+
+    if (isset($s['card_small_font_size']) && $s['card_small_font_size']) {
+      $out .= '.shared-files-main-elements p { font-size: 15px; }';
+    }
+    
+    if (isset($s['card_font']) && $s['card_font']) {
+    
+      if ($s['card_font'] == 'roboto') {
+        $out .= '.shared-files-main-elements * { font-family: "Roboto", sans-serif; }';
+      } elseif ($s['card_font'] == 'ubuntu') {
+        $out .= '.shared-files-main-elements * { font-family: "Ubuntu", sans-serif; }';
+      }
+    
+    }
+    
+    if (isset($s['card_background']) && $s['card_background']) {
+    
+      $out .= '.shared-files-container #myList li { margin-bottom: 5px; } ';
+    
+      if ($s['card_background'] == 'custom_color' && isset($s['card_background_custom_color']) && $s['card_background_custom_color']) {
+        $custom_color = '#' . esc_attr( $s['card_background_custom_color'] );
+        
+        if ($custom_color && preg_match('/^#([0-9A-F]{3}){1,2}$/i', $custom_color)) {
+          $out .= '.shared-files-main-elements { background: ' . esc_attr( $custom_color ) . '; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } ';
+        } else {
+          $out .= '.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } ';
+        }
+    
+      } elseif ($s['card_background'] == 'white') {
+        $out .= '.shared-files-main-elements { background: #fff; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } ';
+      } elseif ($s['card_background'] == 'light_gray') {
+        $out .= '.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } ';
+      }
+    }
+    
+    if (isset($s['card_height']) && $s['card_height']) {
+        $out .= '.shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . intval( $s['card_height'] ) . 'px; } ';  
+        $out .= '.shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . intval( $s['card_height'] ) . 'px; } ';  
+        $out .= '.shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: ' . intval( $s['card_height'] ) . 'px; } ';  
+        $out .= ' @media (max-width: 500px) { .shared-files-2-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } ';  
+        $out .= ' @media (max-width: 500px) { .shared-files-3-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } ';  
+        $out .= ' @media (max-width: 500px) { .shared-files-4-cards-on-the-same-row #myList li .shared-files-main-elements { height: auto; } } ';  
+    }
   
     return $out;
   

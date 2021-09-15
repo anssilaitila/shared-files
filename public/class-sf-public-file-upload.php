@@ -61,7 +61,7 @@ class SharedFilesFileUpload
                     'taxonomy'        => $tag_slug_for_dropdown,
                     'echo'            => 0,
                     'class'           => 'select_v2',
-                    'show_option_all' => esc_html__( 'Choose tag', 'shared-files' ),
+                    'show_option_all' => sanitize_text_field( __( 'Choose tag', 'shared-files' ) ),
                 ] );
             }
         } else {
@@ -169,7 +169,7 @@ class SharedFilesFileUpload
                 // Use the WordPress API to upload the file
                 $upload = wp_upload_bits( $_FILES['_sf_file']['name'], null, file_get_contents( $_FILES['_sf_file']['tmp_name'] ) );
                 if ( isset( $upload['error'] ) && $upload['error'] ) {
-                    wp_die( 'There was an error uploading your file. The error is: ' . $upload['error'] );
+                    wp_die( 'There was an error uploading your file. The error is: ' . esc_html( $upload['error'] ) );
                 }
                 remove_filter( 'upload_dir', [ $this, 'set_upload_dir' ] );
                 add_post_meta( $id, '_sf_file', $upload );
@@ -213,20 +213,15 @@ class SharedFilesFileUpload
                 'post_title' => sanitize_text_field( $post_title ),
             );
             wp_update_post( $my_post );
-            $goto_url = get_site_url();
+            $goto_url = esc_url_raw( get_site_url() );
             if ( isset( $_POST['_SF_GOTO'] ) && $_POST['_SF_GOTO'] ) {
-                $goto_url = esc_url( $_POST['_SF_GOTO'] );
+                $goto_url = esc_url_raw( $_POST['_SF_GOTO'] );
             }
             $container_url = $goto_url;
             wp_redirect( $goto_url . '?shared-files-upload=1' );
             exit;
         }
         
-        return $request;
-    }
-    
-    public function file_update( $request )
-    {
         return $request;
     }
     

@@ -36,7 +36,7 @@ class SharedFilesAdminNotifications {
 
           </div>
 
-          <a class='sf_notice_close' href='" . esc_url($dismiss_url) . "'>x</a>
+          <a class='sf_notice_close' href='" . esc_url( $dismiss_url ) . "'>x</a>
 
         </div>";
   
