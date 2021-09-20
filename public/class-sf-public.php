@@ -110,8 +110,14 @@ class Shared_Files_Public
     
     public function get_inline_scripts()
     {
+        $s = get_option( 'shared_files_settings' );
         $js = '';
-        $js .= "jQuery(document).ready(function(\$) {\n  \n      if (typeof ajaxurl === 'undefined') {\n        ajaxurl = '" . esc_url_raw( admin_url( 'admin-ajax.php' ) ) . "'; // get ajaxurl\n      }\n  \n    });";
+        $js .= "jQuery(document).ready(function(\$) {";
+        $js .= "\n      if (typeof ajaxurl === 'undefined') {\n        ajaxurl = '" . esc_url_raw( admin_url( 'admin-ajax.php' ) ) . "'; // get ajaxurl\n      }\n      ";
+        if ( !isset( $s['file_upload_file_not_required'] ) ) {
+            $js .= "\n        \$('.shared-files-frontend-file-upload').submit(function (e) {\n        \n          let elem_class = \$(this).closest('.shared-files-main-container').data('elem-class');\n          \n          if (\$('.' + elem_class + ' #sf_file').prop('files').length == 0) {\n            alert('Please choose the file first.');\n            return false;\n          }\n        \n        });\n        ";
+        }
+        $js .= "});";
         return $js;
     }
     
@@ -128,6 +134,7 @@ class Shared_Files_Public
         add_shortcode( 'shared_files_simple', array( 'Shared_Files_Public', 'shared_files_simple' ) );
         add_shortcode( 'shared_files_info', array( 'ShortcodeSharedFilesInfo', 'shared_files_info' ) );
         add_shortcode( 'shared_files_accordion', array( 'ShortcodeSharedFilesAccordion', 'shared_files_accordion' ) );
+        add_shortcode( 'shared_files_favorites', array( 'ShortcodeSharedFilesFavorites', 'shared_files_favorites' ) );
     }
     
     public static function shared_files_simple( $atts = array(), $content = null, $tag = '' )

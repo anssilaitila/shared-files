@@ -9,6 +9,7 @@ class SharedFilesFileUpload
         if ( !function_exists( 'wp_terms_checklist' ) ) {
             include ABSPATH . 'wp-admin/includes/template.php';
         }
+        $upload_id = '';
         $post_id = intval( get_the_id() );
         $post_title = sanitize_text_field( get_the_title() );
         
@@ -30,6 +31,7 @@ class SharedFilesFileUpload
         $html .= '<input name="shared-files-upload" value="1" type="hidden" />';
         $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
         $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
+        $html .= '<input name="_sf_upload_id" value="' . esc_attr( $upload_id ) . '" type="hidden" />';
         $html .= '<input name="_SF_GOTO" value="' . esc_url_raw( get_permalink() ) . '" type="hidden" />';
         $accept = '';
         $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" /><hr class="clear" />';
@@ -121,11 +123,16 @@ class SharedFilesFileUpload
             );
             $id = wp_insert_post( $new_post );
             update_post_meta( $id, '_sf_frontend_uploader', 1 );
-            if ( !isset( $s['uncheck_hide_from_other_pages'] ) ) {
-                update_post_meta( $id, '_sf_not_public', 1 );
-            }
             update_post_meta( $id, '_sf_embed_post_id', intval( $_POST['_sf_embed_post_id'] ) );
             update_post_meta( $id, '_sf_embed_post_title', sanitize_text_field( $_POST['_sf_embed_post_title'] ) );
+            
+            if ( isset( $_POST['_sf_upload_id'] ) && $_POST['_sf_upload_id'] ) {
+                update_post_meta( $id, '_sf_upload_id', sanitize_text_field( $_POST['_sf_upload_id'] ) );
+                update_post_meta( $id, '_sf_not_public', 1 );
+            } elseif ( !isset( $s['uncheck_hide_from_other_pages'] ) ) {
+                update_post_meta( $id, '_sf_not_public', 1 );
+            }
+            
             
             if ( isset( $_POST['post_tag'] ) ) {
                 $cat_slug = sanitize_title( $_POST['post_tag'] );
@@ -191,7 +198,7 @@ class SharedFilesFileUpload
                 update_post_meta( $id, '_sf_external_url', $external_url );
                 $filename = basename( $external_url );
                 update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
-            } else {
+            } elseif ( !isset( $s['file_upload_file_not_required'] ) ) {
                 $error_msg = sanitize_text_field( __( 'File was not successfully uploaded. Please note the maximum file size.', 'shared_files' ) );
                 wp_die( $error_msg );
             }

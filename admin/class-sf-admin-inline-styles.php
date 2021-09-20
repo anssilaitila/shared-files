@@ -20,7 +20,11 @@ class SharedFilesAdminInlineStyles {
       $css .= '#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-sync-media-library"] { display: none; visibility: hidden; }';
       
     }
-    
+
+    if (SharedFilesHelpers::isPremium() == 0) {
+      $css .= '.wp-list-table tr[data-slug="shared-files"] .upgrade a { color: #3db634; }';
+    }
+
     return $css;
     
   }

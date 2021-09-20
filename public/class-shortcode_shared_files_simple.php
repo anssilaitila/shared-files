@@ -7,9 +7,10 @@ class ShortcodeSharedFilesSimple
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $elem_class = SharedFilesHelpers::createElemClass();
         $limit_posts = 0;
         $html = '';
-        $html .= '<div class="shared-files-simple-container" />';
+        $html .= '<div class="' . $elem_class . ' shared-files-simple-container" />';
         $html .= '<div class="shared-files-simple-text-contact" style="display: none;">' . sanitize_text_field( __( 'contact', 'shared-files' ) ) . '</div>';
         $html .= '<div class="shared-files-simple-text-contacts" style="display: none;">' . sanitize_text_field( __( 'contacts', 'shared-files' ) ) . '</div>';
         $html .= '<div class="shared-files-simple-text-found" style="display: none;">' . sanitize_text_field( __( 'found', 'shared-files' ) ) . '</div>';
@@ -54,7 +55,7 @@ class ShortcodeSharedFilesSimple
             'tax_query'      => $tax_query,
         ) );
         if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
-            $html .= '<input type="text" class="shared-files-simple-search" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '">';
+            $html .= '<input type="text" class="shared-files-simple-search" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '" data-elem-class="' . $elem_class . '">';
         }
         $html .= '<div id="shared-files-files-found"></div>';
         $html .= '<span id="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span id="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';

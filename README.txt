@@ -3,11 +3,11 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.58
+Stable tag: 1.6.59
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring frontend file upload, FTP upload, download counter, better media library, file explorer and more...
+List and share any downloadable files on your WordPress site. Preview and search files, frontend upload, FTP upload, download manager, counter & more.
 
 == Description ==
 = The best file sharing plugin for WordPress =
@@ -33,6 +33,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 
 = Key Features in Shared Files Free: =
 * Front-end file upload with support for tags, logged-in users can also delete their uploaded files
+* Download counter
 * Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Preview certain file types in the browser
 * YouTube-videos and images are opened in a lightbox
@@ -61,7 +62,6 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Collect also YouTube video URLs using the front end file uploader
 * Sort files and documents to multiple categories
 * Add a single file to any article/post using a simple shortcode
-* Download counter
 * Bandwidth usage estimate
 * Alternatively, define an external URL for file and track those loads
 * Receive an email notification when a file is downloaded
@@ -132,6 +132,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.59 - 2021-09-20 =
+* (Business) New feature: Favorites. The shortcode [shared_files_favorites] displays user's favorite files. Files can be marked as favorites by first enabling the feature from the plugin settings: "Activate favorite files". After that the file card has a new button: "Add to favorites" (all shortcodes).
+* (All plans) Define an ID for the files and display only these uploaded files, having the same ID: [shared_files file_upload=1 upload_id="name-for-id"]
+* (All plans) New setting for front end file uploader: "Show Expiration date"
+* (All plans) New setting for front end file uploader: "Make the file field optional"
+* (Free + All plans) Fix: There can now be any number of different shortcodes ([shared_files], [shared_files_simple] and [shared_files_search]) on the same page, and the search & filtering works properly on each one
 
 = 1.6.58 - 2021-09-15 =
 * (Professional + Business) New setting: Allow the uploader to create multiple new categories

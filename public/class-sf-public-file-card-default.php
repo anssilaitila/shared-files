@@ -7,7 +7,8 @@ class SharedFilesPublicFileCardDefault
         $imagefile,
         $hide_description,
         $show_tags = 0,
-        $atts = array()
+        $atts = array(),
+        $favorites = 0
     )
     {
         $s = get_option( 'shared_files_settings' );
@@ -36,7 +37,8 @@ class SharedFilesPublicFileCardDefault
                 $imagefile,
                 $hide_description,
                 $show_tags,
-                $atts
+                $atts,
+                $favorites
             );
             return $html;
         }
@@ -166,8 +168,9 @@ class SharedFilesPublicFileCardDefault
             }
         
         }
+        $html .= '<div class="shared-files-edit-actions">';
         
-        if ( is_user_logged_in() && !isset( $atts['edit'] ) ) {
+        if ( is_user_logged_in() && !isset( $atts['edit'] ) && !$favorites ) {
             $user = wp_get_current_user();
             $bare_url = './?_sf_delete_file=' . $file_id;
             if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] == $user->ID ) {
@@ -175,6 +178,7 @@ class SharedFilesPublicFileCardDefault
             }
         }
         
+        $html .= '</div>';
         $html .= '</div>';
         
         if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {

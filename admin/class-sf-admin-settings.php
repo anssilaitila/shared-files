@@ -810,6 +810,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-file_upload_show_expiration_date',
+            sanitize_text_field( __( 'Show Expiration date', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-file_upload_show_expiration_date',
+            'field_name' => 'file_upload_show_expiration_date',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'file_upload_external_url_title',
             sanitize_text_field( __( 'Text for External URL', 'shared-files' ) ),
             array( $this, 'input_render' ),
@@ -852,8 +863,20 @@ class Shared_Files_Settings
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'   => 'shared-files-' . $only_pro . 'password',
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_password',
             'field_name'  => $only_pro . 'file_upload_password',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_file_not_required',
+            sanitize_text_field( __( 'Make the file field optional', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_upload_file_not_required',
+            'field_name'  => $only_pro . 'file_upload_file_not_required',
             'placeholder' => '',
         )
         );
@@ -1391,6 +1414,110 @@ class Shared_Files_Settings
             )
             );
         }
+        
+        
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            $tab = 11;
+            add_settings_section(
+                'shared-files_tab_' . $tab,
+                '',
+                array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+                'shared-files'
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'activate_favorite_files_for_logged_in',
+                sanitize_text_field( __( 'Activate favorite files for logged in users', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'activate_favorite_files_for_logged_in',
+                'field_name' => $only_pro . 'activate_favorite_files_for_logged_in',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'activate_favorite_files_for_non_logged_in',
+                sanitize_text_field( __( 'Activate for non-logged in users', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'activate_favorite_files_for_non_logged_in',
+                'field_name' => $only_pro . 'activate_favorite_files_for_non_logged_in',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'favorite_files_text_add_to_favorites',
+                sanitize_text_field( __( 'Text for "Add to favorites"', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'favorite_files_text_add_to_favorites',
+                'field_name'  => $only_pro . 'favorite_files_text_add_to_favorites',
+                'placeholder' => sanitize_text_field( __( 'Add to favorites', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'favorite_files_text_favorited',
+                sanitize_text_field( __( 'Text for "Favorited"', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'favorite_files_text_favorited',
+                'field_name'  => $only_pro . 'favorite_files_text_favorited',
+                'placeholder' => sanitize_text_field( __( 'Favorited', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'favorite_files_text_delete_from_favorites',
+                sanitize_text_field( __( 'Text for "Remove from favorites"', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'favorite_files_text_delete_from_favorites',
+                'field_name'  => $only_pro . 'favorite_files_text_delete_from_favorites',
+                'placeholder' => sanitize_text_field( __( 'Remove from favorites', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'favorite_files_text_deleted',
+                sanitize_text_field( __( 'Text for "Removed"', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'favorite_files_text_deleted',
+                'field_name'  => $only_pro . 'favorite_files_text_deleted',
+                'placeholder' => sanitize_text_field( __( 'Removed', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'show_title_above_favorite_files',
+                sanitize_text_field( __( 'Show title in shortcode [shared_files_favorites]', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'show_title_above_favorite_files',
+                'field_name' => $only_pro . 'show_title_above_favorite_files',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'favorite_files_title_text',
+                sanitize_text_field( __( 'Title text', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'favorite_files_title_text',
+                'field_name'  => $only_pro . 'favorite_files_title_text',
+                'placeholder' => 'Favorite files',
+            )
+            );
+        }
     
     }
     
@@ -1477,6 +1604,25 @@ class Shared_Files_Settings
                     ?>
           <?php 
                     $plan_required = 'Professional';
+                    ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'activate_favorite_files' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'activate_favorite_files_non_logged_in' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'show_title_above_favorite_files' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
                     ?>
 
         <?php 
@@ -1923,6 +2069,38 @@ class Shared_Files_Settings
           <?php 
                     $plan_required = 'Professional';
                     ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'favorite_files_text_add_to_favorites' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'favorite_files_text_favorited' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'favorite_files_title_text' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'favorite_files_text_delete_from_favorites' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'favorite_files_text_deleted' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+
         <?php 
                 }
                 
@@ -2219,6 +2397,13 @@ class Shared_Files_Settings
         echo  '<p>' . esc_html__( 'More settings for file edit view:', 'shared-files' ) . '</p>' ;
     }
     
+    public function shared_files_settings_tab_11_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-11">' ;
+        echo  '<h2>' . esc_html__( 'Favorites', 'shared-files' ) . '</h2>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -2265,6 +2450,19 @@ class Shared_Files_Settings
           <li class="shared-files-settings-tab-10-title" data-settings-container="shared-files-settings-tab-10"><span><?php 
         echo  esc_html__( 'File edit', 'shared-files' ) ;
         ?></span></li>
+          
+          <?php 
+        
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            ?>
+            <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11"><span><?php 
+            echo  esc_html__( 'Favorites', 'shared-files' ) ;
+            ?></span></li>
+          <?php 
+        }
+        
+        ?>
+          
           <hr class="clear" />
         </ul>
       </div>

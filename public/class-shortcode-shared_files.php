@@ -13,6 +13,7 @@ class ShortcodeSharedFiles
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $elem_class = SharedFilesHelpers::createElemClass();
         $meta_query = [];
         $meta_query_full = [];
         $custom_fields_active = 0;
@@ -40,6 +41,7 @@ class ShortcodeSharedFiles
         );
         //    $meta_query_hide_not_public = array();
         $html = '';
+        $html .= '<div class="' . $elem_class . ' shared-files-main-container" data-elem-class="' . $elem_class . '">';
         
         if ( isset( $_GET ) && isset( $_GET['shared-files-update'] ) ) {
             $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __( 'File successfully updated.', 'shared-files' ) ) . '</div>';
@@ -218,6 +220,27 @@ class ShortcodeSharedFiles
                         $tax_query = [
                             'relation' => 'AND',
                         ];
+                        
+                        if ( isset( $atts['upload_id'] ) ) {
+                            $upload_id = sanitize_text_field( $atts['upload_id'] );
+                            $meta_query_full = array(
+                                'relation' => 'AND',
+                            );
+                            $meta_query_full[] = array(
+                                'key'     => '_sf_upload_id',
+                                'compare' => '=',
+                                'value'   => $upload_id,
+                            );
+                            $meta_query_hide_not_public = array(
+                                'relation' => 'AND',
+                            );
+                            $meta_query_hide_not_public[] = array(
+                                'key'     => '_sf_upload_id',
+                                'compare' => '=',
+                                'value'   => $upload_id,
+                            );
+                        }
+                        
                         $wpb_all_query = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
@@ -256,7 +279,7 @@ class ShortcodeSharedFiles
                 $html .= SharedFilesHelpers::tagTitleMarkup( $tag_slug, 'shared-files-non-ajax', $hide_description );
             }
             
-            if ( $wpb_all_query->have_posts() ) {
+            if ( $wpb_all_query_all_files->have_posts() ) {
                 $html .= '<ul id="myList" class="shared-files-ajax-list">';
                 
                 if ( isset( $atts['hide_files_first'] ) && !isset( $_GET ) ) {
@@ -340,7 +363,8 @@ class ShortcodeSharedFiles
             $html .= '<div id="shared-files-nothing-found">';
             $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );
             $html .= '</div>';
-            $html .= '</div></div><hr class="clear" />';
+            $html .= '</div></div>';
+            $html .= '</div><hr class="clear" />';
             wp_reset_postdata();
             return $html;
         }

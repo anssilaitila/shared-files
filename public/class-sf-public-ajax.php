@@ -84,7 +84,8 @@ class SharedFilesPublicAjax
                     $c,
                     $imagefile,
                     $hide_description,
-                    1
+                    1,
+                    $atts
                 );
             }
         }
@@ -98,16 +99,19 @@ class SharedFilesPublicAjax
             'style' => [],
         ],
             'a'    => [
-            'href'              => [],
-            'target'            => [],
-            'data-file-url'     => [],
-            'data-external-url' => [],
-            'data-image-url'    => [],
-            'data-file-type'    => [],
-            'class'             => [],
-            'id'                => [],
-            'download'          => [],
-            'onclick'           => [],
+            'href'                  => [],
+            'target'                => [],
+            'data-file-url'         => [],
+            'data-external-url'     => [],
+            'data-image-url'        => [],
+            'data-file-type'        => [],
+            'data-tag-slug'         => [],
+            'data-hide-description' => [],
+            'data-file-id'          => [],
+            'class'                 => [],
+            'id'                    => [],
+            'download'              => [],
+            'onclick'               => [],
         ],
             'span' => [
             'class' => [],

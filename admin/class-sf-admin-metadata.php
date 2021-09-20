@@ -40,6 +40,7 @@ class SharedFilesAdminMetadata
         $embed_post_id = intval( get_post_meta( $post_id, '_sf_embed_post_id', true ) );
         $embed_post_title = sanitize_text_field( get_post_meta( $post_id, '_sf_embed_post_title', true ) );
         $not_public = sanitize_text_field( get_post_meta( $post_id, '_sf_not_public', true ) );
+        $upload_id = sanitize_text_field( get_post_meta( $post_id, '_sf_upload_id', true ) );
         $media_library_post_id = intval( get_post_meta( $post_id, '_sf_media_library_post_id', true ) );
         if ( $expiration_date instanceof DateTime ) {
             $expiration_date_formatted = $expiration_date->format( 'Y-m-d' );
@@ -118,6 +119,9 @@ class SharedFilesAdminMetadata
         
         echo  '<p style="margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>' ;
         echo  '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . esc_html__( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>' ;
+        if ( $upload_id ) {
+            echo  '<div class="shared-files-admin-upload-id-container">' . esc_html__( 'Upload ID:', 'shared-files' ) . ' <div class="shared-files-admin-upload-id">' . esc_html( $upload_id ) . '</div></div>' ;
+        }
         echo  '<div id="shared-file-main-date-title"><strong>' . esc_html__( 'File date', 'shared-files' ) . '</strong><br /><i>' . esc_html__( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . esc_attr( $main_date_formatted ) . '" />' ;
         $pro_field_active = 0;
         $field_in_pro_class = 'shared-files-field-in-pro-greyed-out';
