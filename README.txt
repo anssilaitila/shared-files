@@ -3,15 +3,15 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.59
+Stable tag: 1.6.60
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-List and share any downloadable files on your WordPress site. Preview and search files, frontend upload, FTP upload, download manager, counter & more.
+Download manager for easy file sharing. List and share files featuring preview & search, frontend upload, FTP sync, download counter & more.
 
 == Description ==
 = The best file sharing plugin for WordPress =
-This download manager allows you to list and manage downloadable files on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
+This download manager allows you to list and manage file downloads on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a substitute to media library to manage files and share files for visitors.
 
@@ -49,6 +49,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 = Key Features in Shared Files Pro: =
 * Fast search targeting file names and descriptions
 * Front-end file editor: allow any user roles to edit files from the front-end
+* Favorite files for logged in and/or non-logged in users
 * Automatically generated filters based on custom field values
 * List any number of files and keep statistics on downloads
 * Upload files using FTP and activate them for the plugin with a single click
@@ -132,6 +133,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.60 - 2021-10-11 =
+* Minor bug fixes
 
 = 1.6.59 - 2021-09-20 =
 * (Business) New feature: Favorites. The shortcode [shared_files_favorites] displays user's favorite files. Files can be marked as favorites by first enabling the feature from the plugin settings: "Activate favorite files". After that the file card has a new button: "Add to favorites" (all shortcodes).

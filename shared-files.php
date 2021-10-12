@@ -15,9 +15,9 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.6.59
- * Author:            Tammersoft
- * Author URI:        https://www.tammersoft.com
+ * Version:           1.6.60
+ * Author:            Shared Files PRO
+ * Author URI:        https://www.sharedfilespro.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       shared-files
@@ -118,7 +118,7 @@ if ( function_exists( 'sf_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.6.59' );
+    define( 'SHARED_FILES_VERSION', '1.6.60' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**
