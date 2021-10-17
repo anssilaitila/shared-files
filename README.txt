@@ -3,14 +3,14 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.60
+Stable tag: 1.6.62
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Download manager for easy file sharing. List and share files featuring preview & search, frontend upload, FTP sync, download counter & more.
+A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring frontend file upload, FTP upload, download counter, better media library, file explorer and more...
 
 == Description ==
-= The best file sharing plugin for WordPress =
+= The best file sharing plugin on the market =
 This download manager allows you to list and manage file downloads on your site easily. Just add the files using the file manager in the admin area and insert the shortcode to the page you wish to list the files. Front-end file upload allows users and visitor to upload their own files.
 
 Very easy to use and no complex settings to mind on, but also very scalable for a large group of files. Many options for different layouts. Can be used as a substitute to media library to manage files and share files for visitors.
@@ -133,6 +133,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.62 - 2021-10-17 =
+* (All plans) New parameter for shortcode [shared_files], exclude tags (by slug) from the file uploader: [shared_files file_upload_exclude_tag="tag-1,tag-2"]
+* (Free + All plans) html markup fixes
+
+= 1.6.61 - 2021-10-13 =
+* More bug fixes
 
 = 1.6.60 - 2021-10-11 =
 * Minor bug fixes

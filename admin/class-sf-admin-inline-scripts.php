@@ -15,6 +15,7 @@ class SharedFilesAdminInlineScripts
             $post_id = intval( get_the_ID() );
             $file = get_post_meta( $post_id, '_sf_file', true );
             $js .= "jQuery( document ).ready( function(\$) {";
+            $js .= "\n        \$('form#post').attr('enctype', 'multipart/form-data');\n      ";
             $is_premium = 0;
             if ( !$is_premium ) {
                 if ( !$file ) {

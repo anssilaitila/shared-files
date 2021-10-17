@@ -627,41 +627,6 @@ class SharedFilesAdminHelpSupport
         
       </div>
 
-      <script src="/wp-includes/js/clipboard.min.js"></script>
-  
-      <script>
-      var clipboard = new ClipboardJS('.shared-files-copy');
-  
-      clipboard.on('success', function(e) {
-
-        e.clearSelection();
-
-        let clipboardtarget = jQuery(e.trigger).data('clipboard-target');
-
-        jQuery(clipboardtarget).tipso({
-          content: "<?php 
-        echo  esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) ;
-        ?>",
-          width: 240
-        });
-
-        jQuery(clipboardtarget).tipso('show');
-        
-        setTimeout(function () {
-          showpanel(clipboardtarget);
-        }, 2000);
-        
-        function showpanel(clipboardtarget) {
-          jQuery(clipboardtarget).tipso('hide');
-          jQuery(clipboardtarget).tipso('destroy');
-        }
-        
-      });
-  
-      clipboard.on('error', function(e) {
-      });
-      </script>
-
     </div>
     <?php 
     }

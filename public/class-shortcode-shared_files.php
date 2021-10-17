@@ -95,6 +95,8 @@ class ShortcodeSharedFiles
             }
             return $html;
         } elseif ( isset( $atts['hide_file_list'] ) ) {
+            // .shared-files-main-container
+            $html .= '</div>';
             return $html;
         } else {
             $layout = SharedFilesHelpers::getLayout( $s, $atts );
@@ -363,8 +365,13 @@ class ShortcodeSharedFiles
             $html .= '<div id="shared-files-nothing-found">';
             $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );
             $html .= '</div>';
-            $html .= '</div></div>';
-            $html .= '</div><hr class="clear" />';
+            // #shared-files-search
+            $html .= '</div>';
+            // .shared-files-container
+            $html .= '</div>';
+            // .shared-files-main-container
+            $html .= '</div>';
+            $html .= '<hr class="clear" />';
             wp_reset_postdata();
             return $html;
         }

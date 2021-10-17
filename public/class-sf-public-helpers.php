@@ -92,7 +92,7 @@ class SharedFilesPublicHelpers
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
-                $id = get_the_id();
+                $id = intval( get_the_id() );
                 $html .= SharedFilesPublicHelpers::singleFileSimpleMarkup( $id );
             }
         }
@@ -104,6 +104,7 @@ class SharedFilesPublicHelpers
     
     public static function singleFileSimpleMarkup( $id, $showGroups = 0 )
     {
+        $id = intval( $id );
         $s = get_option( 'shared_files_settings' );
         $c = get_post_custom( $id );
         $file_id = intval( get_the_id() );

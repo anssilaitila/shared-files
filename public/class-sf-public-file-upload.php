@@ -20,6 +20,7 @@ class SharedFilesFileUpload
         }
         
         $exclude_cat = [];
+        $exclude_tag = [];
         $html .= '<div class="sf-public-file-upload-container">';
         $html .= '<form method="post" enctype="multipart/form-data" class="shared-files-frontend-file-upload">';
         $html .= wp_nonce_field(
@@ -64,6 +65,7 @@ class SharedFilesFileUpload
                     'echo'            => 0,
                     'class'           => 'select_v2',
                     'show_option_all' => sanitize_text_field( __( 'Choose tag', 'shared-files' ) ),
+                    'exclude'         => $exclude_tag,
                 ] );
             }
         } else {
@@ -84,6 +86,7 @@ class SharedFilesFileUpload
         $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
         $html .= '<hr class="clear" /><input type="submit" value="Submit" class="sf-public-file-upload-submit" />';
         $html .= '</form>';
+        // .sf-public-file-upload-container
         $html .= '</div>';
         return $html;
     }

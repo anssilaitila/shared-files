@@ -55,7 +55,7 @@ class SharedFilesAdminMetadata
             echo  '<div style="padding: 18px; margin: 10px 0 10px 0; background: rgb(252, 252, 252); border: 1px solid rgb(240, 240, 240);">' ;
             echo  '<span style="font-size: 14px;">' ;
             $media_library_href = esc_url_raw( admin_url() . 'upload.php?item=' . $media_library_post_id );
-            $file_with_url = wp_get_attachment_url( $media_library_post_id );
+            $file_with_url = esc_url_raw( wp_get_attachment_url( $media_library_post_id ) );
             $url_local = explode( site_url(), $file_with_url )[1];
             //output local path
             echo  esc_html__( 'This file is activated from the media library', 'shared-files' ) . ':<br /><a href="' . esc_url( $media_library_href ) . '" style="font-weight: bold; color: #333; text-decoration: none;" target="_blank">' . esc_html( $url_local ) . '</a>' ;
@@ -88,11 +88,17 @@ class SharedFilesAdminMetadata
             
             }
             
+            $html_allowed_tags = [
+                'a' => [
+                'href'   => [],
+                'target' => [],
+            ],
+            ];
             
             if ( $permalink ) {
-                echo  esc_html__( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . esc_url( $permalink ) . '" style="font-weight: bold;" target="_blank">' . esc_html( get_the_title( $embed_post_id ) ) . '</a> ' . $uploader_html . '.' ;
+                echo  esc_html__( 'This file was uploaded on page', 'shared-files' ) . ' <a href="' . esc_url( $permalink ) . '" style="font-weight: bold;" target="_blank">' . esc_html( get_the_title( $embed_post_id ) ) . '</a> ' . wp_kses( $uploader_html, $html_allowed_tags ) . '.' ;
             } else {
-                echo  esc_html__( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . esc_html( $embed_post_title ) . ', ' . $uploader_html . ').' ;
+                echo  esc_html__( 'This file was uploaded on a page that has been deleted since', 'shared-files' ) . ' (' . esc_html( $embed_post_title ) . ', ' . wp_kses( $uploader_html, $html_allowed_tags ) . ').' ;
             }
             
             echo  '</span>' ;
@@ -205,56 +211,6 @@ class SharedFilesAdminMetadata
             echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
         }
         /* Description END */
-        echo  "\n    <script>\n      jQuery(document).ready(function(\$) {\n        \$('form#post').attr('enctype', 'multipart/form-data');\n      });\n    </script>\n    " ;
-        /*
-            $file_check = 0;
-        
-            if (sf_fs()->is__premium_only()) {  
-              if (sf_fs()->can_use_premium_code()) {
-        
-                if (!$file) {
-        
-                  echo "
-                  <script>
-                    jQuery(document).ready(function($) {
-                      $('#post').submit(function() {
-                        if ($('#shared-file-external-url').val().length == 0 && $('#sf_file').prop('files').length == 0) {
-                          alert('" . esc_js( __('Please insert the file first or define an external URL.', 'shared-files') ) . "');
-                          return false;
-                        }
-                      });
-                    });
-                  </script>
-                  ";
-        
-                }
-                
-                $file_check = 1;
-                
-              }
-            }
-            
-            if (!$file_check) {
-        
-              if (!$file) {
-        
-                echo "
-                <script>
-                  jQuery(document).ready(function($) {
-                    $('#post').submit(function() {
-                      if ($('#sf_file').prop('files').length == 0) {
-                        alert('" . esc_js( __('Please insert the file first.', 'shared-files') ) . "');
-                        return false;
-                      }
-                    });
-                  });
-                </script>
-                ";
-        
-              }
-              
-            }
-        */
     }
     
     /**

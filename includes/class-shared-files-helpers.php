@@ -182,7 +182,7 @@ class SharedFilesHelpers
             $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
             $html .= '<div class="' . esc_attr( $type ) . '">';
             $html .= '<span class="shared-files-tag-title">' . sanitize_text_field( $current_tag->name ) . '</span>';
-            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . esc_attr( $hide_description ) . '" href="./?sf_tag=0">' . esc_html__( 'Show all files', 'shared-files' ) . '</a>';
+            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . esc_attr( $hide_description ) . '" href="./?sf_tag=0">' . sanitize_text_field( __( 'Show all files', 'shared-files' ) ) . '</a>';
             $html .= '</div>';
         }
         
@@ -321,7 +321,7 @@ class SharedFilesHelpers
         $download_counter = intval( get_post_meta( $file_id, '_sf_load_cnt', true ) );
         $text = 'Downloads:';
         if ( isset( $s['download_counter_text'] ) && $s['download_counter_text'] ) {
-            $text = $s['download_counter_text'];
+            $text = sanitize_text_field( $s['download_counter_text'] );
         }
         $html = '<div class="shared-files-download-counter"><span>' . $text . ' ' . $download_counter . '</span></div>';
         return $html;

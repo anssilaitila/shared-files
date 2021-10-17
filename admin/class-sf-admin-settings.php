@@ -579,17 +579,6 @@ class Shared_Files_Settings
             'shared-files'
         );
         $custom_fields_cnt = 3 + 1;
-        
-        if ( sf_fs()->is_plan_or_trial( 'business' ) ) {
-            if ( isset( $s['custom_fields_cnt'] ) ) {
-                $custom_fields_cnt = intval( $s['custom_fields_cnt'] ) + 1;
-            }
-        } elseif ( sf_fs()->is_plan_or_trial( 'pro' ) ) {
-            $custom_fields_cnt = 5 + 1;
-        } elseif ( sf_fs()->is_plan_or_trial( 'personal' ) ) {
-            $custom_fields_cnt = 3 + 1;
-        }
-        
         for ( $n = 1 ;  $n < $custom_fields_cnt ;  $n++ ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'file_upload_custom_field_' . $n,
