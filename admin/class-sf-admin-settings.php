@@ -66,6 +66,17 @@ class Shared_Files_Settings
             )
             );
             add_settings_field(
+                'shared-files-' . $only_pro . 'sort_tags_by',
+                sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
+                array( $this, 'sort_tags_by_render' ),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'sort_tags_by',
+                'field_name' => $only_pro . 'sort_tags_by',
+            )
+            );
+            add_settings_field(
                 'shared-files-' . $only_pro . 'show_category_dropdown',
                 sanitize_text_field( __( 'Show category filter', 'shared-files' ) ),
                 array( $this, 'checkbox_render' ),
@@ -74,6 +85,17 @@ class Shared_Files_Settings
                 array(
                 'label_for'  => 'shared-files-' . $only_pro . 'show_category_dropdown',
                 'field_name' => $only_pro . 'show_category_dropdown',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'sort_categories_by',
+                sanitize_text_field( __( 'Sort categories by', 'shared-files' ) ),
+                array( $this, 'sort_categories_by_render' ),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'sort_categories_by',
+                'field_name' => $only_pro . 'sort_categories_by',
             )
             );
         } else {
@@ -101,6 +123,17 @@ class Shared_Files_Settings
             )
             );
             add_settings_field(
+                'shared-files-' . $only_pro . 'sort_tags_by',
+                sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
+                array( $this, 'sort_tags_by_render' ),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'sort_tags_by',
+                'field_name' => $only_pro . 'sort_tags_by',
+            )
+            );
+            add_settings_field(
                 'shared-files-' . $only_pro . 'hide_category_dropdown',
                 sanitize_text_field( __( 'Hide category filter', 'shared-files' ) ),
                 array( $this, 'checkbox_render' ),
@@ -109,6 +142,17 @@ class Shared_Files_Settings
                 array(
                 'label_for'  => 'shared-files-' . $only_pro . 'hide_category_dropdown',
                 'field_name' => $only_pro . 'hide_category_dropdown',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'sort_categories_by',
+                sanitize_text_field( __( 'Sort categories by', 'shared-files' ) ),
+                array( $this, 'sort_categories_by_render' ),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'sort_categories_by',
+                'field_name' => $only_pro . 'sort_categories_by',
             )
             );
         }
@@ -2534,6 +2578,178 @@ class Shared_Files_Settings
             echo  ( $val == '2019' ? 'selected' : '' ) ;
             ?>>2019</option>
       </select>
+      <?php 
+        }
+    
+    }
+    
+    public function sort_tags_by_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = sanitize_text_field( $options[$args['field_name']] );
+            }
+            ?>    
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+      <?php 
+            $plan_required = 'All Plans';
+            ?>
+      
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+
+      <div class="shared-files-setting-container <?php 
+            echo  esc_attr( $free_class ) ;
+            ?>">
+      
+        <?php 
+            
+            if ( $free ) {
+                ?>
+        
+          <a href="<?php 
+                echo  esc_url( get_admin_url() ) ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php 
+                echo  esc_html( $plan_required ) ;
+                ?></div></div>
+          </a>
+        
+        <?php 
+            } else {
+                ?>
+        
+          <div class="shared-files-setting">
+      
+            <select name="shared_files_settings[<?php 
+                echo  esc_attr( $args['field_name'] ) ;
+                ?>]">
+                <option value="" <?php 
+                echo  ( $val == '' ? 'selected' : '' ) ;
+                ?>>ID</option>
+                <option value="name" <?php 
+                echo  ( $val == 'name' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( 'Name', 'shared-files' ) ;
+                ?></option>
+            </select>
+            
+          </div>
+          
+        <?php 
+            }
+            
+            ?>
+        
+      </div>
+      
+      <?php 
+        }
+    
+    }
+    
+    public function sort_categories_by_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = sanitize_text_field( $options[$args['field_name']] );
+            }
+            ?>    
+      
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+      <?php 
+            $plan_required = 'All Plans';
+            ?>
+      
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+      
+      <div class="shared-files-setting-container <?php 
+            echo  esc_attr( $free_class ) ;
+            ?>">
+      
+        <?php 
+            
+            if ( $free ) {
+                ?>
+        
+          <a href="<?php 
+                echo  esc_url( get_admin_url() ) ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php 
+                echo  esc_html( $plan_required ) ;
+                ?></div></div>
+          </a>
+        
+        <?php 
+            } else {
+                ?>
+        
+          <div class="shared-files-setting">
+      
+            <select name="shared_files_settings[<?php 
+                echo  esc_attr( $args['field_name'] ) ;
+                ?>]">
+                <option value="" <?php 
+                echo  ( $val == '' ? 'selected' : '' ) ;
+                ?>>ID</option>
+                <option value="name" <?php 
+                echo  ( $val == 'name' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( 'Name', 'shared-files' ) ;
+                ?></option>
+            </select>
+            
+          </div>
+            
+        <?php 
+            }
+            
+            ?>
+        
+      </div>
+
       <?php 
         }
     

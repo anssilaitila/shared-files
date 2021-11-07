@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.62
+Stable tag: 1.6.63
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,6 +133,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.63 - 2021-11-07 =
+* (Professional + Business) Accordion: The grouping by month and using the "file date" as date now works normally (the shortcode [shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"])
+* (All plans) New setting: Sort tags by (for search filter)
+* (All plans) New setting: Sort categories by (for search filter)
+* (All plans) New minimal layout for listing a single file: [shared_files file_id=12345 layout="minimal"]
 
 = 1.6.62 - 2021-10-17 =
 * (All plans) New parameter for shortcode [shared_files], exclude tags (by slug) from the file uploader: [shared_files file_upload_exclude_tag="tag-1,tag-2"]
