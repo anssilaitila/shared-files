@@ -1,0 +1,135 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        wp-versions: [ 5.8 ]
+        php-versions: [ 7.4 ]
+    
+    name: WP ${{ matrix.wp-versions }} on PHP ${{ matrix.php-versions }}
+
+    env:
+      php-ini-values: post_max_size=256M
+      DB_DATABASE: wordpress_test
+      DB_USER: root
+      DB_PASSWORD: 'root'
+      DB_HOST: localhost
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+
+#      - name: Shutdown Ubuntu MySQL (SUDO)
+#        run: sudo service mysql stop # Shutdown the Default MySQL, "sudo" is necessary, please not remove it
+
+      - run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE wordpress_test;' -uroot -proot
+          mysql -e 'SHOW DATABASES;' -uroot -proot
+
+      - name: Verify mysql version
+        run: |
+          mysqld --version
+          mysql -V
+          mysqladmin -V
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install WP tests
+        run: |
+          bash bin/install-wp-tests.sh wordpress_test root 'root' localhost 5.8
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          tools: pecl, phpunit
+          php-version: ${{ matrix.php-versions }}
+          ini-values: ${{ env.php-ini-values }}
+        env:
+          update: true
+
+      - name: Get Composer cache directory
+        working-directory: ${{ env.wp-bp-directory }}
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      
+      - name: Cache Composer dependencies
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        working-directory: ${{ env.wp-bp-directory }}
+        run: composer install -q --prefer-dist --no-progress --ansi --no-interaction --no-suggest
+
+#      - name: Install NodeJS
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: 12.16.0
+
+#      - name: Cache NodeJS modules
+#        uses: actions/cache@v2
+#        env:
+#          cache-name: cache-node-modules
+#        with:
+#          path: ~/.npm
+#          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+#          restore-keys: |
+#            ${{ runner.os }}-npm-
+
+#      - name: Install Node dependencies
+#        working-directory: ${{ env.wp-bp-directory }}
+#        run: npm ci
+      
+      - name: Install phpunit 5.x on PHP 5.6
+        if: ${{ matrix.php-versions == '5.6' }}
+        run: |
+          composer global require --dev phpunit/phpunit ^5 -q --prefer-dist --no-progress --ansi --no-interaction --no-suggest
+          phpunit --version
+
+      - name: Install phpunit 6.x on PHP 7.3
+        if: ${{ matrix.php-versions == '7.3' }}
+        run: |
+          composer global require --dev phpunit/phpunit ^6 -q --prefer-dist --no-progress --ansi --no-interaction --no-suggest
+          phpunit --version
+
+      - name: Install phpunit 6.x on PHP 7.4
+        if: ${{ matrix.php-versions == '7.4' }}
+        run: |
+          composer global require --dev phpunit/phpunit ^6 -q --prefer-dist --no-progress --ansi --no-interaction --no-suggest
+          phpunit --version
+
+      - name: Install phpunit 7.x on PHP 8.0
+        if: ${{ matrix.php-versions == '8.0' }}
+        run: |
+          composer global require --dev phpunit/phpunit ^7 -q --prefer-dist --no-progress --ansi --no-interaction --no-suggest
+          phpunit --version
+
+      - name: Install PHPUnit Polyfills
+        run: |
+          composer global require --dev yoast/phpunit-polyfills
+
+      - name: Run phpunit tests
+        working-directory: ${{ env.wp-bp-directory }}
+        run: phpunit
