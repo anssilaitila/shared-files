@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.63
+Stable tag: 1.6.64
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,6 +133,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.64 - 2021-12-11 =
+* (Professional + Business) New setting: Remove link from file title (Layout tab)
+* (Professional + Business) New setting: Trigger file downloaded email on (values: "File title link, preview and download buttons" and "Download button only") (Email tab)
+* (All plans) New setting: Show message for download limit reached on file card (General settings tab)
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.6.63 - 2021-11-07 =
 * (Professional + Business) Accordion: The grouping by month and using the "file date" as date now works normally (the shortcode [shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"])

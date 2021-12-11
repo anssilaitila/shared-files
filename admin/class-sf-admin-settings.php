@@ -310,6 +310,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'show_limit_message_on_file_card',
+            sanitize_text_field( __( 'Show message for download limit reached on file card', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'show_limit_message_on_file_card',
+            'field_name' => $only_pro . 'show_limit_message_on_file_card',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'download_limit_msg',
             sanitize_text_field( __( 'Message for download limit reached', 'shared-files' ) ),
             array( $this, 'textarea_render' ),
@@ -402,6 +413,19 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'card_align_elements_vertically',
         )
         );
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'remove_link_from_file_title',
+                sanitize_text_field( __( 'Remove link from file title', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'remove_link_from_file_title',
+                'field_name' => $only_pro . 'remove_link_from_file_title',
+            )
+            );
+        }
         add_settings_field(
             'shared-files-show_download_button',
             sanitize_text_field( __( 'Show download button', 'shared-files' ) ),
@@ -1251,6 +1275,19 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'send_email',
         )
         );
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'trigger_download_email',
+                sanitize_text_field( __( 'Trigger file downloaded email on', 'shared-files' ) ),
+                array( $this, 'trigger_download_email_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'trigger_download_email',
+                'field_name' => $only_pro . 'trigger_download_email',
+            )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'add_ip_to_file_downloaded_email',
             sanitize_text_field( __( "Add the downloader's IP address to the email", 'shared-files' ) ),
@@ -1634,6 +1671,12 @@ class Shared_Files_Settings
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'file_edit_hide_description' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'remove_link_from_file_title' ) !== false ) {
                     ?>
           <?php 
                     $plan_required = 'Professional';
@@ -2571,12 +2614,16 @@ class Shared_Files_Settings
       <select name="shared_files_settings[<?php 
             echo  esc_attr( $args['field_name'] ) ;
             ?>]">
-          <option value="2020" <?php 
+        <option value="2020" <?php 
             echo  ( $val == '2020' || $val == '' ? 'selected' : '' ) ;
-            ?>>2020</option>
-          <option value="2019" <?php 
+            ?>><?php 
+            echo  esc_html__( 'Improved (SVG)', 'shared-files' ) ;
+            ?></option>
+        <option value="2019" <?php 
             echo  ( $val == '2019' ? 'selected' : '' ) ;
-            ?>>2019</option>
+            ?>><?php 
+            echo  esc_html__( 'First set', 'shared-files' ) ;
+            ?></option>
       </select>
       <?php 
         }
@@ -2652,6 +2699,94 @@ class Shared_Files_Settings
                 echo  ( $val == 'name' ? 'selected' : '' ) ;
                 ?>><?php 
                 echo  esc_html__( 'Name', 'shared-files' ) ;
+                ?></option>
+            </select>
+            
+          </div>
+          
+        <?php 
+            }
+            
+            ?>
+        
+      </div>
+      
+      <?php 
+        }
+    
+    }
+    
+    public function trigger_download_email_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = sanitize_text_field( $options[$args['field_name']] );
+            }
+            ?>    
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+      <?php 
+            $plan_required = 'Professional';
+            ?>
+      
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+
+      <div class="shared-files-setting-container <?php 
+            echo  esc_attr( $free_class ) ;
+            ?>">
+      
+        <?php 
+            
+            if ( $free ) {
+                ?>
+        
+          <a href="<?php 
+                echo  esc_url( get_admin_url() ) ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php 
+                echo  esc_html( $plan_required ) ;
+                ?></div></div>
+          </a>
+        
+        <?php 
+            } else {
+                ?>
+        
+          <div class="shared-files-setting">
+      
+            <select name="shared_files_settings[<?php 
+                echo  esc_attr( $args['field_name'] ) ;
+                ?>]">
+                <option value="" <?php 
+                echo  ( $val == '' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( 'File title link, preview and download buttons', 'shared-files' ) ;
+                ?></option>
+                <option value="download_button_only" <?php 
+                echo  ( $val == 'download_button_only' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( 'Download button only', 'shared-files' ) ;
                 ?></option>
             </select>
             

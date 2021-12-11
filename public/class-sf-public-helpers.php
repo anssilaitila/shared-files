@@ -22,6 +22,7 @@ class SharedFilesPublicHelpers
     public static function getFileURL( $file_id = 0, $download = 0 )
     {
         $file_id = intval( $file_id );
+        $s = get_option( 'shared_files_settings' );
         $c = get_post_custom( $file_id );
         $file_url = '';
         

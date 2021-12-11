@@ -76,11 +76,16 @@ class SharedFilesPublicFileCardDefault
             $data_image_url = ' data-image-url="' . esc_url_raw( get_the_post_thumbnail_url( $file_id, 'large' ) ) . '" ';
         }
         
-        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
-        if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
-            $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
+        $show_file_link = 1;
+        
+        if ( $show_file_link ) {
+            $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
+            if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
+                $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
+            }
+            $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
         }
-        $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
+        
         
         if ( !isset( $s['hide_date_from_card'] ) ) {
             $main_date = get_post_meta( $file_id, '_sf_main_date', true );

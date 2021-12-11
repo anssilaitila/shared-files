@@ -232,11 +232,13 @@ class SharedFilesHelpers
             if ( !$image_url ) {
                 $image_url = esc_url_raw( $file['url'] );
             }
+            $data_file_url = SharedFilesPublicHelpers::getFileURL( $file_id );
+            $data_file_url_attr = ' data-file-url="' . esc_url_raw( $data_file_url ) . '" ';
             
             if ( $password && $enable_preview_with_password ) {
                 $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             } else {
-                $html .= '<a href="' . esc_url_raw( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+                $html .= '<a href="' . esc_url_raw( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image" ' . $data_file_url_attr . '>' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             }
         
         } elseif ( isset( $s['always_preview_pdf'] ) && !$password && in_array( $filetype, $pdf_types ) ) {
