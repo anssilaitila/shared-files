@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.64
+Stable tag: 1.6.65
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,13 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Free version to use as a free file manager and download manager
 * More advanced file manager in the Pro version
 * Share folders and files
+
+= New Features in Shared Files Pro: =
+* Use the shortcode [shared_files_restricted] to list personal files for the logged in user
+* The logged in user can also upload files, and only site administrator and the user will see the files
+* The logged in user sees only the files that he/she has uploaded and optionally such files that the site administrator has added for them
+* Restrict access to files for specific users and roles
+* Use those features to enable file hosting for clients
 
 = Key Features in Shared Files Free: =
 * Front-end file upload with support for tags, logged-in users can also delete their uploaded files
@@ -133,6 +140,11 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.65 - 2022-01-02 =
+* (Professional + Business) New feature: Restrict file opening permissions to a specific user or roles (see the new fields by editing any file)
+* (Professional + Business) New shortcode: [shared_files_restricted] (list only such files that are readable by the logged in user)
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.6.64 - 2021-12-11 =
 * (Professional + Business) New setting: Remove link from file title (Layout tab)

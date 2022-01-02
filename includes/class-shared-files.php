@@ -122,6 +122,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-media-library.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-file-handling.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-restrict-access.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-ajax.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-helpers.php';
@@ -137,6 +138,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode_shared_files_simple.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_accordion.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_favorites.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_restricted.php';
         $this->loader = new Shared_Files_Loader();
     }
     
@@ -181,6 +183,7 @@ class Shared_Files
         $plugin_admin_sync_files = new SharedFilesAdminSyncFiles();
         $plugin_admin_sync_media_library = new SharedFilesAdminSyncMediaLibrary();
         $plugin_admin_file_handling = new SharedFilesFileHandling();
+        $plugin_admin_restrict_access = new SharedFilesAdminRestrictAccess();
         $plugin_settings = new Shared_Files_Settings();
         // Enqueue CSS + JS (+ other)
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -270,6 +273,8 @@ class Shared_Files
         $this->loader->add_action( 'admin_menu', $plugin_admin_shortcodes, 'register_shortcodes_page' );
         // Help & support
         $this->loader->add_action( 'admin_menu', $plugin_admin_help_support, 'register_support_page' );
+        // Restrict access info page
+        $this->loader->add_action( 'admin_menu', $plugin_admin_restrict_access, 'register_page' );
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $this->loader->add_action( 'admin_menu', $plugin_admin_taxonomy, 'register_categories_info_page' );
         }

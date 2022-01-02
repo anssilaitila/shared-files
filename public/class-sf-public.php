@@ -135,6 +135,7 @@ class Shared_Files_Public
         add_shortcode( 'shared_files_info', array( 'ShortcodeSharedFilesInfo', 'shared_files_info' ) );
         add_shortcode( 'shared_files_accordion', array( 'ShortcodeSharedFilesAccordion', 'shared_files_accordion' ) );
         add_shortcode( 'shared_files_favorites', array( 'ShortcodeSharedFilesFavorites', 'shared_files_favorites' ) );
+        add_shortcode( 'shared_files_restricted', array( 'ShortcodeSharedFilesRestricted', 'shared_files_restricted' ) );
     }
     
     public static function shared_files_simple( $atts = array(), $content = null, $tag = '' )

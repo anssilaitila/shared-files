@@ -49,6 +49,7 @@ class SharedFilesAdminMetadata
             $main_date_formatted = $main_date->format( 'Y-m-d' );
         }
         $password = sanitize_text_field( get_post_meta( $post_id, '_sf_password', true ) );
+        $permission_user_id = intval( get_post_meta( $post_id, '_sf_permission_user_id', true ) );
         
         if ( $media_library_post_id ) {
             $permalink = esc_url_raw( get_permalink( $media_library_post_id ) );
@@ -171,6 +172,18 @@ class SharedFilesAdminMetadata
         }
         echo  '</div>' ;
         /* Expiration date END */
+        /* User START */
+        
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for user', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only this user will see the file listed on shortcode [shared_files_restricted].', 'shared-files' ) . '</i></div>' ;
+            $pro_field_active = 0;
+            if ( !$pro_field_active ) {
+                echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
+            }
+            echo  '</div>' ;
+        }
+        
+        /* User END */
         /* Password protection START */
         echo  '<div class="small-field-container"><div id="shared-file-password-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Password protection', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Define a password here to enable password protection.', 'shared-files' ) . '</i></div>' ;
         $pro_field_active = 0;
@@ -179,6 +192,18 @@ class SharedFilesAdminMetadata
         }
         echo  '</div>' ;
         /* Password protection END */
+        /* Role START */
+        
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only the users having these roles will see the file listed on shortcode [shared_files_restricted].', 'shared-files' ) . '</i></div>' ;
+            $pro_field_active = 0;
+            if ( !$pro_field_active ) {
+                echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
+            }
+            echo  '</div>' ;
+        }
+        
+        /* Role END */
         /* Notification email START */
         echo  '<div class="small-field-container"><div id="shared-file-notify-email-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Notification email', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used.', 'shared-files' ) . '</i></div>' ;
         $pro_field_active = 0;
@@ -268,15 +293,13 @@ class SharedFilesAdminMetadata
             }
             
             $not_public = '';
-            if ( isset( $_POST['_sf_not_public'] ) ) {
-                $not_public = (int) $_POST['_sf_not_public'];
+            if ( isset( $_POST['_sf_not_public'] ) && $_POST['_sf_not_public'] ) {
+                $not_public = 1;
             }
             update_post_meta( $id, '_sf_not_public', $not_public );
             update_post_meta( $id, '_sf_limit_downloads', $limit_downloads );
             update_post_meta( $id, '_sf_expiration_date', $expiration_date );
             update_post_meta( $id, '_sf_main_date', $main_date );
-            //      update_post_meta($id, '_sf_expiration_date', isset($_POST['_sf_expiration_date']) ? (int) $_POST['_sf_expiration_date'] : '');
-            update_post_meta( $id, '_sf_password', ( isset( $_POST['_sf_password'] ) ? sanitize_text_field( $_POST['_sf_password'] ) : '' ) );
             
             if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
                 

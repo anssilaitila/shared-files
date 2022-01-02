@@ -2,7 +2,7 @@
 
 class SharedFilesFileUpload
 {
-    public static function fileUploadMarkup( $atts )
+    public static function fileUploadMarkup( $atts, $restrict_access = 0 )
     {
         $html = '';
         $s = get_option( 'shared_files_settings' );
@@ -33,6 +33,9 @@ class SharedFilesFileUpload
         $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
         $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
         $html .= '<input name="_sf_upload_id" value="' . esc_attr( $upload_id ) . '" type="hidden" />';
+        if ( $restrict_access ) {
+            $html .= '<input name="_sf_restrict_access" value="1" type="hidden" />';
+        }
         $html .= '<input name="_SF_GOTO" value="' . esc_url_raw( get_permalink() ) . '" type="hidden" />';
         $accept = '';
         $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" /><hr class="clear" />';
@@ -157,6 +160,9 @@ class SharedFilesFileUpload
             if ( is_user_logged_in() ) {
                 $user = wp_get_current_user();
                 update_post_meta( $id, '_sf_user_id', intval( $user->ID ) );
+                if ( isset( $_POST['_sf_restrict_access'] ) && $_POST['_sf_restrict_access'] ) {
+                    update_post_meta( $id, '_sf_permission_user_id', intval( $user->ID ) );
+                }
             }
             
             

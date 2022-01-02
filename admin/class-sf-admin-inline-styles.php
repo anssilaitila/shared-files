@@ -19,8 +19,14 @@ class SharedFilesAdminInlineStyles {
     
       $css .= '#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-sync-media-library"] { display: none; visibility: hidden; }';
       
+    } 
+    
+    if ($current_screen_id !== 'shared_file_page_shared-files-support' && $current_screen_id !== 'shared_file_page_shared-files-restrict-access') {
+    
+      $css .= '#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-restrict-access"] { display: none; visibility: hidden; }';
+      
     }
-
+    
     if (SharedFilesHelpers::isPremium() == 0) {
       $css .= '.wp-list-table tr[data-slug="shared-files"] .upgrade a { color: #3db634; }';
     }
