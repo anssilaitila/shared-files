@@ -19,7 +19,12 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
-    public static function getFileURL( $file_id = 0, $download = 0 )
+    public static function getFileURL(
+        $file_id = 0,
+        $download = 0,
+        $is_wait_page = 0,
+        $atts = array()
+    )
     {
         $file_id = intval( $file_id );
         $s = get_option( 'shared_files_settings' );

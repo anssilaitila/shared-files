@@ -175,7 +175,7 @@ class SharedFilesAdminMetadata
         /* User START */
         
         if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
-            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for user', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only this user will see the file listed on shortcode [shared_files_restricted].', 'shared-files' ) . '</i></div>' ;
+            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for user', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only this user will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i></div>' ;
             $pro_field_active = 0;
             if ( !$pro_field_active ) {
                 echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
@@ -195,7 +195,7 @@ class SharedFilesAdminMetadata
         /* Role START */
         
         if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
-            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only the users having these roles will see the file listed on shortcode [shared_files_restricted].', 'shared-files' ) . '</i></div>' ;
+            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i></div>' ;
             $pro_field_active = 0;
             if ( !$pro_field_active ) {
                 echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;

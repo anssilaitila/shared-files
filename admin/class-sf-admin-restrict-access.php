@@ -35,38 +35,38 @@ class SharedFilesAdminRestrictAccess {
       <?php endif; ?>
 
       <div style="background: #fff; display: inline-block; padding: 1rem; font-size: 15px;">
-        The following information should be noted <b>when using the password protection or restricting the access to files for specific users and roles</b>.
+        <?php echo esc_html__('The following information should be noted <b>when using the password protection or restricting the access to files for specific users and roles</b>.', 'shared-files') ?>
       </div>
       
       <hr class="clear" />
 
-      <p>The setting "File opening method" defines the way the file urls work (plugin settings, Technical tab).</p>
+      <p><?php echo esc_html__('The setting "File opening method" defines the way the file urls work (plugin settings, Technical tab).', 'shared-files') ?></p>
       
-      <h3>File opening method: Default</h3>
+      <h3><?php echo esc_html__('File opening method: Default', 'shared-files') ?></h3>
       
-      <p>Default method means opening the files using the following url format:</p>
+      <p><?php echo esc_html__('Default method means opening the files using the following url format:', 'shared-files') ?></p>
       
       <div style="background: #fff; display: inline-block; padding: 3px 8px;">
-        /shared-files/123/this-is-a-file.pdf
+        <?php echo esc_html__('/shared-files/123/this-is-a-file.pdf', 'shared-files') ?>
       </div>
 
-      <p>When the file is opened, the user will see that same url on the browser. The plugin will locate the actual file on the server, check for password protection and access restrictions and serve it to the user.</p>
+      <p><?php echo esc_html__('When the file is opened, the user will see that same url on the browser. The plugin will locate the actual file on the server, check for password protection and access restrictions and serve it to the user.', 'shared-files') ?></p>
       
-      <h3>File opening method: Redirect</h3>
+      <h3><?php echo esc_html__('File opening method: Redirect', 'shared-files') ?></h3>
       
-      <p>Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:</p>
+      <p><?php echo esc_html__('Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files') ?></p>
       
       <div style="background: #fff; display: inline-block; padding: 3px 8px;">
-        /wp-content/uploads/shared-files/this-is-a-file.pdf
+        <?php echo esc_html__('/wp-content/uploads/shared-files/this-is-a-file.pdf', 'shared-files') ?>
       </div>
       
-      <h3>How to prevent direct access to files on the server</h3>
+      <h3><?php echo esc_html__('How to prevent direct access to files on the server', 'shared-files') ?></h3>
       
-      <p>When using either one of the file opening methods and regardless of passwords or other restrictions, the direct access to file urls like /wp-content/uploads/shared-files/this-is-a-file.pdf remains.</p>
+      <p><?php echo esc_html__('When using either one of the file opening methods and regardless of passwords or other restrictions, the direct access to file urls like /wp-content/uploads/shared-files/this-is-a-file.pdf remains.', 'shared-files') ?></p>
       
-      <p style="font-weight: 700;">If you wish to prevent anyone from opening the files using the direct urls like /wp-content/uploads/shared-files/this-is-a-file.pdf, you should make the necessary restrictions to the web server configuration (Nginx, Apache, etc.) and use the default file opening method (file urls formatted like /shared-files/123/this-is-a-file.pdf).</p>
+      <p style="font-weight: 700;"><?php echo esc_html__('If you wish to prevent anyone from opening the files using the direct urls like /wp-content/uploads/shared-files/this-is-a-file.pdf, you should make the necessary restrictions to the web server configuration (Nginx, Apache, etc.) and use the default file opening method (file urls formatted like /shared-files/123/this-is-a-file.pdf).', 'shared-files') ?></p>
       
-      <p>If you don't make such adjustments, the plugin will work normally, but it should be noted that the files would be accessible using the direct urls like /wp-content/uploads/shared-files/this-is-a-file.pdf.</p>
+      <p><?php echo esc_html__("If you don't make such adjustments, the plugin will work normally, but it should be noted that the files would be accessible using the direct urls like /wp-content/uploads/shared-files/this-is-a-file.pdf.", "shared-files") ?></p>
 
     </div>
     <?php

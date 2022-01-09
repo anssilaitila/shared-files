@@ -163,16 +163,21 @@ class SharedFilesPublicFileCardDefault
             }
         
         }
-        if ( !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
-            
-            if ( isset( $s['show_download_button'] ) && $password ) {
-            } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
-                $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
-            } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
-                $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
-            }
         
+        if ( !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            $wait_page_active = 0;
+            if ( !$wait_page_active ) {
+                
+                if ( isset( $s['show_download_button'] ) && $password ) {
+                } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
+                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
+                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                }
+            
+            }
         }
+        
         $html .= '<div class="shared-files-edit-actions">';
         
         if ( is_user_logged_in() && !isset( $atts['edit'] ) && !$favorites ) {

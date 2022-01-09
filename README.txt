@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.65
+Stable tag: 1.6.66
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * The logged in user sees only the files that he/she has uploaded and optionally such files that the site administrator has added for them
 * Restrict access to files for specific users and roles
 * Use those features to enable file hosting for clients
+* Wait countdown page for all downloads: all download links can be redirected to one universal download page, including a countdown timer, other content and automatic file download
 
 = Key Features in Shared Files Free: =
 * Front-end file upload with support for tags, logged-in users can also delete their uploaded files
@@ -57,6 +58,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Fast search targeting file names and descriptions
 * Front-end file editor: allow any user roles to edit files from the front-end
 * Favorite files for logged in and/or non-logged in users
+* Wait countdown page for all downloads
 * Automatically generated filters based on custom field values
 * List any number of files and keep statistics on downloads
 * Upload files using FTP and activate them for the plugin with a single click
@@ -140,6 +142,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.66 - 2022-01-09 =
+* (Business) New feature: Wait countdown page for downloads. You can now define a page in the settings which all download links will be redirected to. There is a certain waiting time and counter in seconds and after that the download will normally occur. There are settings regarding this feature at the plugin settings, Wait page -tab.
+* (Business) New shortcode parameter for activating the wait countdown page for a specific file list: [shared_files use_wait_page=1]
+* (Professional + Business) Added support for files with restricted permissions to the shortcode [shared_files_accordion]. Can be activated like so: [shared_files_accordion restricted=1]
+* (Free + All plans) Some missing translatable texts added to the .pot file
 
 = 1.6.65 - 2022-01-02 =
 * (Professional + Business) New feature: Restrict file opening permissions to a specific user or roles (see the new fields by editing any file)

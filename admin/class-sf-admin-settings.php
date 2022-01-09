@@ -1587,6 +1587,94 @@ class Shared_Files_Settings
                 'placeholder' => 'Favorite files',
             )
             );
+            $tab = 12;
+            add_settings_section(
+                'shared-files_tab_' . $tab,
+                '',
+                array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+                'shared-files'
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'activate_wait_page',
+                sanitize_text_field( __( 'Activate wait countdown page for all download links', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'activate_wait_page',
+                'field_name' => $only_pro . 'activate_wait_page',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'wait_page',
+                sanitize_text_field( __( 'Wait countdown page', 'shared-files' ) ),
+                array( $this, 'wait_page_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'wait_page',
+                'field_name' => $only_pro . 'wait_page',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'wait_page_text_before_seconds',
+                sanitize_text_field( __( 'Text before seconds', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'wait_page_text_before_seconds',
+                'field_name'  => $only_pro . 'wait_page_text_before_seconds',
+                'placeholder' => sanitize_text_field( __( 'Your download will start automatically in', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'wait_page_countdown_seconds',
+                sanitize_text_field( __( 'Countdown length in seconds', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'wait_page_countdown_seconds',
+                'field_name'  => $only_pro . 'wait_page_countdown_seconds',
+                'placeholder' => 5,
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'wait_page_text_after_seconds',
+                sanitize_text_field( __( 'Text after seconds', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'wait_page_text_after_seconds',
+                'field_name'  => $only_pro . 'wait_page_text_after_seconds',
+                'placeholder' => sanitize_text_field( __( 'seconds...', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'wait_page_download_button_text',
+                sanitize_text_field( __( 'Download button text', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'wait_page_download_button_text',
+                'field_name'  => $only_pro . 'wait_page_download_button_text',
+                'placeholder' => sanitize_text_field( __( 'Download', 'shared-files' ) ),
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'wait_page_hide_download_button',
+                sanitize_text_field( __( 'Hide download button', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'wait_page_hide_download_button',
+                'field_name' => $only_pro . 'wait_page_hide_download_button',
+            )
+            );
         }
     
     }
@@ -1696,6 +1784,19 @@ class Shared_Files_Settings
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'show_title_above_favorite_files' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'activate_wait_page' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'wait_page_hide_download_button' ) !== false ) {
                     ?>
           <?php 
                     $plan_required = 'Business';
@@ -1832,44 +1933,44 @@ class Shared_Files_Settings
             if ( $free ) {
                 ?>
         
-        <a href="<?php 
+          <a href="<?php 
                 echo  esc_url( get_admin_url() ) ;
                 ?>options-general.php?page=shared-files-pricing">
-          <div class="shared-files-settings-pro-feature-overlay"><div><?php 
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php 
                 echo  esc_html__( 'All Plans', 'shared-files' ) ;
                 ?></div></div>
-        </a>
+          </a>
         
         <?php 
             } else {
                 ?>
         
-        <div class="shared-files-setting">
-        
-          <select name="shared_files_settings[<?php 
+          <div class="shared-files-setting">
+          
+            <select name="shared_files_settings[<?php 
                 echo  esc_attr( $args['field_name'] ) ;
                 ?>]">
-            <option value="" <?php 
+              <option value="" <?php 
                 echo  ( $val == '' ? 'selected' : '' ) ;
                 ?>></option>
-            <option value="any_sound_file" <?php 
+              <option value="any_sound_file" <?php 
                 echo  ( $val == 'any_sound_file' ? 'selected' : '' ) ;
                 ?>><?php 
                 echo  esc_html__( 'Any sound file', 'shared-files' ) ;
                 ?></option>
-            <option value="any_video_file" <?php 
+              <option value="any_video_file" <?php 
                 echo  ( $val == 'any_video_file' ? 'selected' : '' ) ;
                 ?>><?php 
                 echo  esc_html__( 'Any video file', 'shared-files' ) ;
                 ?></option>
-            <option value="any_image_file" <?php 
+              <option value="any_image_file" <?php 
                 echo  ( $val == 'any_image_file' ? 'selected' : '' ) ;
                 ?>><?php 
                 echo  esc_html__( 'Any image file', 'shared-files' ) ;
                 ?></option>
-          </select>
-        
-        </div>
+            </select>
+          
+          </div>
         
         <?php 
             }
@@ -2178,6 +2279,31 @@ class Shared_Files_Settings
                     ?>
 
         <?php 
+                } elseif ( strpos( $field_name, 'wait_page_text_before_seconds' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'wait_page_countdown_seconds' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'wait_page_text_after_seconds' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'wait_page_download_button_text' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+
+        <?php 
                 }
                 
                 ?>
@@ -2480,6 +2606,13 @@ class Shared_Files_Settings
         echo  '<h2>' . esc_html__( 'Favorites', 'shared-files' ) . '</h2>' ;
     }
     
+    public function shared_files_settings_tab_12_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-12">' ;
+        echo  '<h2>' . esc_html__( 'Wait countdown page', 'shared-files' ) . '</h2>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -2521,7 +2654,7 @@ class Shared_Files_Settings
         echo  esc_html__( 'Email', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-9-title" data-settings-container="shared-files-settings-tab-9"><span><?php 
-        echo  esc_html__( 'Admin list & columns', 'shared-files' ) ;
+        echo  esc_html__( 'Admin list', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-10-title" data-settings-container="shared-files-settings-tab-10"><span><?php 
         echo  esc_html__( 'File edit', 'shared-files' ) ;
@@ -2533,6 +2666,9 @@ class Shared_Files_Settings
             ?>
             <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11"><span><?php 
             echo  esc_html__( 'Favorites', 'shared-files' ) ;
+            ?></span></li>
+            <li class="shared-files-settings-tab-12-title" data-settings-container="shared-files-settings-tab-12"><span><?php 
+            echo  esc_html__( 'Wait countdown page', 'shared-files' ) ;
             ?></span></li>
           <?php 
         }
@@ -2596,6 +2732,94 @@ class Shared_Files_Settings
             echo  esc_html__( '4 columns', 'shared-files' ) ;
             ?></option>
       </select>
+      <?php 
+        }
+    
+    }
+    
+    public function wait_page_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$field_name] ) ) {
+                $val = sanitize_text_field( $options[$field_name] );
+            }
+            ?>
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+      
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+
+      <div class="shared-files-setting-container <?php 
+            echo  esc_attr( $free_class ) ;
+            ?>">
+
+        <?php 
+            
+            if ( $free ) {
+                ?>
+        
+          <a href="<?php 
+                echo  esc_url( get_admin_url() ) ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php 
+                echo  esc_html__( 'Business', 'shared-files' ) ;
+                ?></div></div>
+          </a>
+        
+        <?php 
+            } else {
+                ?>
+        
+          <div class="shared-files-setting">
+          
+            <?php 
+                $pages_args = [
+                    'name'             => "shared_files_settings[" . esc_attr( $args['field_name'] ) . "]",
+                    'selected'         => $val,
+                    'show_option_none' => ' ',
+                ];
+                ?>    
+            
+            <?php 
+                wp_dropdown_pages( $pages_args );
+                ?>
+            
+            <div class="email-info">
+              <?php 
+                echo  esc_html__( "The countdown timer is displayed on the page selected above. It is hooked to the theme's function the_content(), and displayed just before the actual content.", "shared-files" ) ;
+                ?>
+            </div>
+          
+          </div>
+        
+        <?php 
+            }
+            
+            ?>
+
+      </div>
+
       <?php 
         }
     
