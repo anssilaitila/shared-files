@@ -39,6 +39,7 @@ class SharedFilesPublicFileCardVertical
         }
         
         $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
+        $file_url_for_preview = SharedFilesPublicHelpers::getFileURL( $file_id, 0, 1 );
         $data_file_type = '';
         $data_file_url = '';
         $data_external_url = '';
@@ -59,7 +60,7 @@ class SharedFilesPublicFileCardVertical
             if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
                 $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
             }
-            $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
+            $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url_for_preview, $atts );
         }
         
         

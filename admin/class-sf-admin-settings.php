@@ -753,6 +753,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-file_upload_hide_description',
+            sanitize_text_field( __( 'Hide description field', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-file_upload_hide_description',
+            'field_name' => 'file_upload_hide_description',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'file_upload_allow_featured_image',
             sanitize_text_field( __( 'Enable featured image (a separate file can be added)', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),

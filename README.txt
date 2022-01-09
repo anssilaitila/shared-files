@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.8
-Stable tag: 1.6.66
+Stable tag: 1.6.67
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,11 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.67 - 2022-01-09 =
+* (Business) Fixed preview feature when using the wait page
+* (Professional + Business) User dropdown ordered (file edit view)
+* (Free + All plans) New setting: Hide description field (plugin settings, File upload tab)
 
 = 1.6.66 - 2022-01-09 =
 * (Business) New feature: Wait countdown page for downloads. You can now define a page in the settings which all download links will be redirected to. There is a certain waiting time and counter in seconds and after that the download will normally occur. There are settings regarding this feature at the plugin settings, Wait page -tab.

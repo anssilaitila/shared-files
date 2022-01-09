@@ -14,6 +14,7 @@ class SharedFilesPublicFileCardDefault
         $s = get_option( 'shared_files_settings' );
         $file_id = intval( get_the_id() );
         $file_url = SharedFilesPublicHelpers::getFileURL( $file_id );
+        $file_url_for_preview = SharedFilesPublicHelpers::getFileURL( $file_id, 0, 1 );
         $date_format = get_option( 'date_format' );
         $file_metadata = get_post_meta( $file_id, '_sf_file', true );
         $file_realpath = '';
@@ -83,7 +84,7 @@ class SharedFilesPublicFileCardDefault
             if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
                 $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
             }
-            $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url );
+            $html .= SharedFilesHelpers::getPreviewButton( $file_id, $file_url_for_preview, $atts );
         }
         
         

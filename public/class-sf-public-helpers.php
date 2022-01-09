@@ -22,7 +22,7 @@ class SharedFilesPublicHelpers
     public static function getFileURL(
         $file_id = 0,
         $download = 0,
-        $is_wait_page = 0,
+        $force_direct_url = 0,
         $atts = array()
     )
     {

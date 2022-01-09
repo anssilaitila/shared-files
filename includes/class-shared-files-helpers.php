@@ -189,8 +189,14 @@ class SharedFilesHelpers
         return $html;
     }
     
-    public static function getPreviewButton( $file_id, $file_url )
+    public static function getPreviewButton( $file_id, $file_url, $atts = array() )
     {
+        
+        if ( isset( $atts['hide_preview'] ) ) {
+            $html = '';
+            return $html;
+        }
+        
         $s = get_option( 'shared_files_settings' );
         $password = '';
         $cat_password = '';

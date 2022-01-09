@@ -85,8 +85,12 @@ class SharedFilesFileUpload
         
         $html .= '<span>' . sanitize_text_field( __( 'Title', 'shared-files' ) ) . '</span>';
         $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" />';
-        $html .= '<span>' . sanitize_text_field( __( 'Description', 'shared-files' ) ) . '</span>';
-        $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
+        
+        if ( !isset( $s['file_upload_hide_description'] ) ) {
+            $html .= '<span>' . sanitize_text_field( __( 'Description', 'shared-files' ) ) . '</span>';
+            $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
+        }
+        
         $html .= '<hr class="clear" /><input type="submit" value="Submit" class="sf-public-file-upload-submit" />';
         $html .= '</form>';
         // .sf-public-file-upload-container
