@@ -50,13 +50,13 @@ class SharedFilesAdminHelpSupport
 
         <p><?php 
         echo  esc_html__( 'Some examples on how you can use different views available at', 'shared-files' ) ;
-        ?> <a href="https://www.sharedfilespro.com/shared-files/" target="_blank"><?php 
+        ?> <a href="https://www.sharedfilespro.com/shared-files/?utm_source=plugin-examples" target="_blank"><?php 
         echo  esc_html__( 'sharedfilespro.com', 'shared-files' ) ;
         ?></a>.</p>
 
         <p><?php 
         echo  esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' ) ;
-        ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>.</p>
+        ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-feedback" target="_blank">sharedfilespro.com/support/</a>.</p>
 
       </div>
 

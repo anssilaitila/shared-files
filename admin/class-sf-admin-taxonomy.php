@@ -72,7 +72,7 @@ class SharedFilesAdminTaxonomy
 
     <?php 
         ?>
-    
+
   <?php 
     }
     

@@ -65,7 +65,7 @@ class ShortcodeSharedFilesSimple
         
         if ( $wp_query->have_posts() ) {
             $html .= '<div class="shared-files-simple-ajax-results">';
-            $html .= SharedFilesPublicHelpers::SharedFilesSimpleMarkup( $wp_query );
+            $html .= SharedFilesPublicHelpers::SharedFilesSimpleMarkup( $wp_query, 0, $atts );
             $html .= '</div>';
         }
         

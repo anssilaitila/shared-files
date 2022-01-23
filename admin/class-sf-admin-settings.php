@@ -361,6 +361,19 @@ class Shared_Files_Settings
             'field_name' => 'wp_engine_compatibility_mode',
         )
         );
+        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_sync_interval',
+                sanitize_text_field( __( 'File & category sync interval', 'shared-files' ) ),
+                array( $this, 'file_sync_interval_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_sync_interval',
+                'field_name' => $only_pro . 'file_sync_interval',
+            )
+            );
+        }
         add_settings_field(
             'shared-files-wp_location',
             sanitize_text_field( __( 'WordPress location', 'shared-files' ) ),
@@ -2934,6 +2947,99 @@ class Shared_Files_Settings
                 echo  ( $val == 'name' ? 'selected' : '' ) ;
                 ?>><?php 
                 echo  esc_html__( 'Name', 'shared-files' ) ;
+                ?></option>
+            </select>
+            
+          </div>
+          
+        <?php 
+            }
+            
+            ?>
+        
+      </div>
+      
+      <?php 
+        }
+    
+    }
+    
+    public function file_sync_interval_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = sanitize_text_field( $options[$args['field_name']] );
+            }
+            ?>    
+
+      <?php 
+            $free = 0;
+            ?>
+      <?php 
+            $free_class = '';
+            ?>
+      <?php 
+            $plan_required = 'Professional';
+            ?>
+      
+      <?php 
+            
+            if ( substr( $field_name, 0, strlen( '_FREE_' ) ) === '_FREE_' ) {
+                ?>
+        <?php 
+                $free = 1;
+                ?>
+        <?php 
+                $free_class = 'shared-files-setting-container-free';
+                ?>
+      <?php 
+            }
+            
+            ?>
+
+      <div class="shared-files-setting-container <?php 
+            echo  esc_attr( $free_class ) ;
+            ?>">
+      
+        <?php 
+            
+            if ( $free ) {
+                ?>
+        
+          <a href="<?php 
+                echo  esc_url( get_admin_url() ) ;
+                ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php 
+                echo  esc_html( $plan_required ) ;
+                ?></div></div>
+          </a>
+        
+        <?php 
+            } else {
+                ?>
+        
+          <div class="shared-files-setting">
+      
+            <select name="shared_files_settings[<?php 
+                echo  esc_attr( $args['field_name'] ) ;
+                ?>]">
+              <option value="every_15_min" <?php 
+                echo  ( $val == 'every_15_min' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( '15 minutes', 'shared-files' ) ;
+                ?></option>
+              <option value="shared_files_every_5_min" <?php 
+                echo  ( $val == 'shared_files_every_5_min' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( '5 minutes', 'shared-files' ) ;
+                ?></option>
+              <option value="every_min" <?php 
+                echo  ( $val == 'every_min' ? 'selected' : '' ) ;
+                ?>><?php 
+                echo  esc_html__( '1 minute', 'shared-files' ) ;
                 ?></option>
             </select>
             

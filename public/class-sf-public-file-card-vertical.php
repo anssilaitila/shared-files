@@ -29,7 +29,9 @@ class SharedFilesPublicFileCardVertical
         
         $html .= '<li>';
         $html .= '<div class="shared-files-main-elements shared-files-main-elements-v2">';
-        $html .= '<div class="shared-files-main-elements-top"><img src="' . esc_url_raw( $imagefile ) . '" /></div>';
+        if ( !isset( $s['hide_file_type_icon_from_card'] ) ) {
+            $html .= '<div class="shared-files-main-elements-top"><img src="' . esc_url_raw( $imagefile ) . '" /></div>';
+        }
         
         if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = get_the_post_thumbnail_url( $file_id, 'thumbnail' )) ) {
             $featured_img_width_px = 150;

@@ -2,7 +2,7 @@
 
 class SharedFilesFileOpen {
 
-  public static function getUpdatedPathAndFilename($filename_with_path = '') {
+  public static function getUpdatedPathAndFilename($filename_with_path = '', $file_id = 0) {
 
     if (substr( $filename_with_path, 0, 5 ) === 'iu://') {
 
@@ -26,7 +26,7 @@ class SharedFilesFileOpen {
       }
 
       $final_path_and_filename = $wp_upload_dir['basedir'] . '/' . implode('/', $filename_path_parts_sliced);
-      
+
     } else {
 
       $wp_theme_dir = get_template_directory();
@@ -100,6 +100,8 @@ class SharedFilesFileOpen {
     
     if (isset($filename_parts['path'])) {
       $filename_path_parts = explode('/', $filename_parts['path']);
+    } else {
+      return '';
     }
     
     $uploads_pos = array_search('uploads', $filename_path_parts);

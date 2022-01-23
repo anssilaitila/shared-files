@@ -91,7 +91,7 @@ class SharedFilesFileUpload
             $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
         }
         
-        $html .= '<hr class="clear" /><input type="submit" value="Submit" class="sf-public-file-upload-submit" />';
+        $html .= '<hr class="clear" /><input type="submit" value="' . esc_attr__( 'Submit', 'shared-files' ) . '" class="sf-public-file-upload-submit" />';
         $html .= '</form>';
         // .sf-public-file-upload-container
         $html .= '</div>';

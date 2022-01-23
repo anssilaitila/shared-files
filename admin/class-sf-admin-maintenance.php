@@ -66,6 +66,10 @@ class SharedFilesAdminMaintenance
             'interval' => 900,
             'display'  => 'Every 15 minutes',
         );
+        $schedules['shared_files_every_5_min'] = array(
+            'interval' => 300,
+            'display'  => 'Every 5 minutes',
+        );
         return $schedules;
     }
 

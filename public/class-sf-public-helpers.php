@@ -90,7 +90,7 @@ class SharedFilesPublicHelpers
         return $limit_active;
     }
     
-    public static function sharedFilesSimpleMarkup( $wp_query, $include_children = 0 )
+    public static function sharedFilesSimpleMarkup( $wp_query, $include_children = 0, $atts = array() )
     {
         $html = '';
         $html .= '<div class="shared-files-search">';
@@ -99,7 +99,7 @@ class SharedFilesPublicHelpers
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
                 $id = intval( get_the_id() );
-                $html .= SharedFilesPublicHelpers::singleFileSimpleMarkup( $id );
+                $html .= SharedFilesPublicHelpers::singleFileSimpleMarkup( $id, 0, $atts );
             }
         }
         $html .= '</div><hr class="clear" />';
@@ -108,7 +108,7 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
-    public static function singleFileSimpleMarkup( $id, $showGroups = 0 )
+    public static function singleFileSimpleMarkup( $id, $showGroups = 0, $atts = array() )
     {
         $id = intval( $id );
         $s = get_option( 'shared_files_settings' );

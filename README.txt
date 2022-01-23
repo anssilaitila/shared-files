@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
-Tested up to: 5.8
-Stable tag: 1.6.67
+Tested up to: 5.9
+Stable tag: 1.6.68
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,14 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.68 - 2022-01-23 =
+* (Professional + Business) Front-end file editor option added to accordion: [shared_files_accordion edit=1]
+* (Professional + Business) New parameter [shared_files_restricted hide_file_list=1]
+* (Professional + Business) New setting to change the file sync interval to 5 or 1 minute(s) (Technical tab)
+* (All plans) Front-end file editor option added to simple list: [shared_files_simple edit=1]
+* (All plans) Fix: The setting "Hide file type icon from card" now works correctly when the setting "Align elements vertically and centered (inside file card)" is also checked
+* (Free + All plans) "Submit" is now translatable in the file uploader
 
 = 1.6.67 - 2022-01-09 =
 * (Business) Fixed preview feature when using the wait page

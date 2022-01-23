@@ -139,7 +139,7 @@ class Shared_Files_Admin
                     unlink( $filename_with_path );
                 }
             } else {
-                wp_die( sanitize_text_field( __( 'File not found:', 'shared-files' ) ) . '<br />' . $filename_with_path );
+                //        wp_die( sanitize_text_field( __('File not found:', 'shared-files') ) . '<br />' . $filename_with_path );
             }
         
         }
