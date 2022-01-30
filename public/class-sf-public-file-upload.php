@@ -14,7 +14,10 @@ class SharedFilesFileUpload
         $post_title = sanitize_text_field( get_the_title() );
         
         if ( isset( $_GET ) && isset( $_GET['shared-files-upload'] ) ) {
-            $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __( 'File successfully uploaded.', 'shared-files' ) ) . '</div>';
+            $multiple_files_upload_active = 0;
+            if ( !$multiple_files_upload_active ) {
+                $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __( 'File successfully uploaded.', 'shared-files' ) ) . '</div>';
+            }
         } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_file'] ) && isset( $_GET['sc'] ) ) {
             $html .= '<div class="shared-files-file-deleted">' . sanitize_text_field( __( 'File successfully deleted.', 'shared-files' ) ) . '</div>';
         }
@@ -38,7 +41,14 @@ class SharedFilesFileUpload
         }
         $html .= '<input name="_SF_GOTO" value="' . esc_url_raw( get_permalink() ) . '" type="hidden" />';
         $accept = '';
-        $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" /><hr class="clear" />';
+        $multiple_files_upload_active = 0;
+        $file_required = 'required';
+        if ( isset( $s['file_upload_file_not_required'] ) ) {
+            $file_required = '';
+        }
+        if ( !$multiple_files_upload_active ) {
+            $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" ' . $file_required . ' /><hr class="clear" />';
+        }
         $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . sanitize_text_field( __( 'Maximum file size:', 'shared-files' ) ) . ' <strong>' . sanitize_text_field( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         
         if ( isset( $s['file_upload_show_external_url'] ) ) {
@@ -98,7 +108,7 @@ class SharedFilesFileUpload
         return $html;
     }
     
-    public function file_upload( $request )
+    public function file_upload_single_free( $request )
     {
         $s = get_option( 'shared_files_settings' );
         

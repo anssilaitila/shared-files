@@ -383,7 +383,7 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-wp_location',
             'field_name'  => 'wp_location',
-            'placeholder' => '/some-dir/',
+            'placeholder' => '/some-folder/',
         )
         );
         add_settings_field(
@@ -2439,10 +2439,13 @@ class Shared_Files_Settings
                 ?>
         <div class="email-info">
           <?php 
-                echo  esc_html__( 'If you\'re getting 404 from file URLs, it may be necessary to set this to the same directory that your WordPress is installed to. If this is set, the file URLs are formatted like so:<br /><b>/some-dir/shared-files/123/this-is-a-file.pdf</b>', 'shared-files' ) ;
+                echo  esc_html__( 'If you\'re getting 404 from file URLs, it may be necessary to set this to the same folder that your WordPress is installed to. If this is set, the file URLs are formatted like so:', 'shared-files' ) ;
+                ?><br /><b>/some-folder/shared-files/123/this-is-a-file.pdf</b><br /><br />
+          <?php 
+                echo  esc_html__( 'You should usually set this to be the first part of the url, like /some-folder/. This setting may be necessary, if you have installed WordPress in a subdirectory.', 'shared-files' ) ;
                 ?><br /><br />
           <?php 
-                echo  esc_html__( 'You should only set this to be the first part of the url, like /some-dir/. This setting may be necessary, if you have installed WordPress in a subdirectory.', 'shared-files' ) ;
+                echo  esc_html__( 'In some cases there is two extra parts before the /wp-content/... part starts, you should set this to whatever is before /wp-content/ in other url\'s used by your theme.', 'shared-files' ) ;
                 ?>
         </div>
       <?php 

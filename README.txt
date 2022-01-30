@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.9
-Stable tag: 1.6.68
+Stable tag: 1.6.69
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,10 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.69 - 2022-01-30 =
+* (All plans) It is now possible to upload multiple files at once using the front end uploader
+* (Free + All plans) Translatable texts updated
 
 = 1.6.68 - 2022-01-23 =
 * (Professional + Business) Front-end file editor option added to accordion: [shared_files_accordion edit=1]
