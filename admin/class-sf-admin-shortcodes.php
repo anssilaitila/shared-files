@@ -290,13 +290,15 @@ class SharedFilesAdminShortcodes {
               <p><?php echo esc_html__('A file is listed for the logged in user, if any of the following matches:', 'shared-files') ?></p>
 
               <ul>
-                <li><?php echo esc_html__('The file was originally uploaded by the logged in user.', 'shared-files') ?></li>
-                <li><?php echo esc_html__('The user was specifically given permissions to read the file (by editing the file)', 'shared-files') ?>.</li>
+                <li><?php echo esc_html__('The user was specifically given permissions to read the file (by editing the file).', 'shared-files') ?><br />
+                <?php echo esc_html__('When a user uploads a file, that user is automatically given permissions to read that file.', 'shared-files') ?></li>
+                <li><?php echo esc_html__('The logged in user belongs to a role that has permissions to read the file.', 'shared-files') ?></li>
               </ul>
 
               <p><?php echo esc_html__('The following should also be noted:', 'shared-files') ?></p>
 
               <ul>
+                <li><?php echo esc_html__('A user having the administrator role can open any file.', 'shared-files') ?></li>
                 <li><?php echo esc_html__('A caching plugin should not be used for logged in users, to prevent the file list storing in the cache.', 'shared-files') ?></li>
                 <li><?php echo esc_html__('It is advisable to block direct access to file urls like /wp-content/uploads/shared-files/* on the server level (Apache, Nginx, etc.)', 'shared-files') ?> – <a href="<?php echo esc_url( get_admin_url(null, 'edit.php?post_type=shared_file&page=shared-files-restrict-access' ) ) ?>"><?php echo esc_html__('More information &raquo;', 'shared-files') ?></a></li>
 
