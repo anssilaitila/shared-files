@@ -54,9 +54,40 @@ class SharedFilesAdminHelpSupport
         echo  esc_html__( 'sharedfilespro.com', 'shared-files' ) ;
         ?></a>.</p>
 
-        <p><?php 
-        echo  esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' ) ;
-        ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-feedback" target="_blank">sharedfilespro.com/support/</a>.</p>
+
+        <?php 
+        
+        if ( sf_fs()->can_use_premium_code() ) {
+            ?>
+
+          <p><?php 
+            echo  esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' ) ;
+            ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-feedback" target="_blank">sharedfilespro.com/support/</a>.</p>
+          
+        <?php 
+        } else {
+            ?>
+
+          <p>
+          <?php 
+            $url = 'https://wordpress.org/support/plugin/shared-files/';
+            echo  sprintf( wp_kses(
+                /* translators: %s: link to the support forum */
+                __( 'Any kind of feedback is welcome. You may contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files' ),
+                array(
+                    'a' => array(
+                    'href'   => array(),
+                    'target' => array(),
+                ),
+                )
+            ), esc_url( $url ) ) ;
+            ?>
+          </p>
+                
+        <?php 
+        }
+        
+        ?>
 
       </div>
 

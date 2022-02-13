@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.6.70
+ * Version:           1.6.71
  * Author:            Tammersoft
  * Author URI:        https://www.tammersoft.com
  * License:           GPL-2.0+
@@ -42,6 +42,8 @@ if ( function_exists( 'sf_fs' ) ) {
             if ( !isset( $sf_fs ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/freemius/start.php';
+                $settings_contact = false;
+                $settings_support = true;
                 $sf_fs = fs_dynamic_init( array(
                     'id'             => '5144',
                     'slug'           => 'shared-files',
@@ -58,7 +60,8 @@ if ( function_exists( 'sf_fs' ) ) {
                 ),
                     'menu'           => array(
                     'slug'    => 'shared-files',
-                    'support' => false,
+                    'contact' => $settings_contact,
+                    'support' => $settings_support,
                     'parent'  => array(
                     'slug' => 'options-general.php',
                 ),
@@ -88,6 +91,24 @@ if ( function_exists( 'sf_fs' ) ) {
         6
     );
     sf_fs()->add_filter( 'show_deactivation_feedback_form', '__return_false' );
+    function freemius_custom_is_submenu_visible( $is_visible, $menu_id )
+    {
+        
+        if ( $menu_id == 'contact' ) {
+            return sf_fs()->can_use_premium_code();
+        } elseif ( $menu_id == 'support' ) {
+            return !sf_fs()->can_use_premium_code();
+        }
+        
+        return $is_visible;
+    }
+    
+    sf_fs()->add_filter(
+        'is_submenu_visible',
+        'freemius_custom_is_submenu_visible',
+        10,
+        2
+    );
     function sf_fs_custom_connect_message_on_update(
         $message,
         $user_first_name,
@@ -118,7 +139,7 @@ if ( function_exists( 'sf_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.6.70' );
+    define( 'SHARED_FILES_VERSION', '1.6.71' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**

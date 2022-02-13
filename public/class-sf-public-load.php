@@ -78,6 +78,19 @@ class SharedFilesPublicLoad {
    * @since    1.0.0
    */
   public function set_cookies() {
+    
+    if ( isset($_GET['SF_DEBUG_311']) ) {
+      var_dump( intval( get_current_user_id() ) );
+      print('<br /><br />');
+      $current_user_x = wp_get_current_user();
+      var_dump($current_user_x);
+      print('<br /><br />');
+      var_dump($current_user_x->ID);
+      print('<br /><br />');
+      global $current_user;
+      var_dump( $current_user );
+      wp_die();
+    }
 
     if (isset($_POST['_sf_cat_password']) && $_POST['_sf_cat_password'] && !is_admin()) {
       setcookie('_sf_cat_password', sanitize_text_field( $_POST['_sf_cat_password'] ), strtotime('+30 minutes'), '/');

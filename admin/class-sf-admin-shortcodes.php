@@ -26,7 +26,29 @@ class SharedFilesAdminShortcodes {
       <h1><?php echo esc_html__('Available shortcodes for Shared Files', 'shared-files'); ?></h1>
 
       <div class="shared-files-examples">
-        <p><?php echo esc_html__('If you have any questions regarding the shortcodes, you may contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
+
+        <?php if (sf_fs()->can_use_premium_code()): ?>
+
+          <p><?php echo esc_html__('If you have any questions regarding the shortcodes, you may contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
+          
+        <?php else: ?>
+
+          <p>
+          <?php
+          $url = 'https://wordpress.org/support/plugin/shared-files/';
+          echo sprintf(
+            wp_kses(
+              /* translators: %s: link to the support forum */
+              __('If you have any questions regarding the shortcodes, you may contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files'),
+              array('a' => array('href' => array(), 'target' => array()))
+            ),
+            esc_url($url) 
+          );
+          ?>
+          </p>
+        
+        <?php endif; ?>
+
       </div>
   
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">
