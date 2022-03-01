@@ -27,7 +27,7 @@ class SharedFilesAdminShortcodes {
 
       <div class="shared-files-examples">
 
-        <?php if (sf_fs()->can_use_premium_code()): ?>
+        <?php if (shared_files_fs()->can_use_premium_code()): ?>
 
           <p><?php echo esc_html__('If you have any questions regarding the shortcodes, you may contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
           
@@ -72,7 +72,7 @@ class SharedFilesAdminShortcodes {
 
               <li><?php echo esc_html__('Show tag dropdown:', 'shared-files') ?> <?php $num++ ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files show_tag_dropdown=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
-              <?php if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial('business') ): ?>
+              <?php if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial('business') ): ?>
 
                 <li><?php echo esc_html__('Use wait countdown page:', 'shared-files') ?>
   
@@ -285,7 +285,7 @@ class SharedFilesAdminShortcodes {
       
       </div>
 
-      <?php if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial('pro') || sf_fs()->is_plan_or_trial('business') ): ?>
+      <?php if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial('pro') || shared_files_fs()->is_plan_or_trial('business') ): ?>
 
         <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
                       
@@ -393,7 +393,7 @@ class SharedFilesAdminShortcodes {
         
       <?php endif; ?>
 
-      <?php if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial('business') ): ?>
+      <?php if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial('business') ): ?>
       
         <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
                       

@@ -27,7 +27,7 @@ class Shared_Files_Deactivator {
    */
   public static function deactivate() {
 
-    sf_fs()->add_action('after_uninstall', 'sf_fs_uninstall_cleanup');
+    shared_files_fs()->add_action('after_uninstall', 'shared_files_fs_uninstall_cleanup');
 
   }
 

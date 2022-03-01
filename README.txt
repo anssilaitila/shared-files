@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.9
-Stable tag: 1.6.71
+Stable tag: 1.6.72
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,10 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.72 - 2022-03-01 =
+* (Free + All plans) Fixed an issue where file size was occasionally set to 0 after upload
+* (Free + All plans) Various tweaks and fixes
 
 = 1.6.71 - 2022-02-13 =
 * (All plans) Edit file -link added to the file upload notification email

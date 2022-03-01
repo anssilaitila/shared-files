@@ -57,7 +57,7 @@ class SharedFilesAdminHelpSupport
 
         <?php 
         
-        if ( sf_fs()->can_use_premium_code() ) {
+        if ( shared_files_fs()->can_use_premium_code() ) {
             ?>
 
           <p><?php 

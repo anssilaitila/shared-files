@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.6.71
+ * Version:           1.6.72
  * Author:            Tammersoft
  * Author URI:        https://www.tammersoft.com
  * License:           GPL-2.0+
@@ -28,23 +28,23 @@ if ( !defined( 'WPINC' ) ) {
     die;
 }
 
-if ( function_exists( 'sf_fs' ) ) {
-    sf_fs()->set_basename( false, __FILE__ );
+if ( function_exists( 'shared_files_fs' ) ) {
+    shared_files_fs()->set_basename( false, __FILE__ );
 } else {
     
-    if ( !function_exists( 'sf_fs' ) ) {
+    if ( !function_exists( 'shared_files_fs' ) ) {
         // Create a helper function for easy SDK access.
-        function sf_fs()
+        function shared_files_fs()
         {
-            global  $sf_fs ;
+            global  $shared_files_fs ;
             $s = get_option( 'shared_files_settings' );
             
-            if ( !isset( $sf_fs ) ) {
+            if ( !isset( $shared_files_fs ) ) {
                 // Include Freemius SDK.
                 require_once dirname( __FILE__ ) . '/freemius/start.php';
                 $settings_contact = false;
                 $settings_support = true;
-                $sf_fs = fs_dynamic_init( array(
+                $shared_files_fs = fs_dynamic_init( array(
                     'id'             => '5144',
                     'slug'           => 'shared-files',
                     'premium_slug'   => 'shared-files-pro',
@@ -70,46 +70,46 @@ if ( function_exists( 'sf_fs' ) ) {
                 ) );
             }
             
-            return $sf_fs;
+            return $shared_files_fs;
         }
         
         // Init Freemius.
-        sf_fs();
+        shared_files_fs();
         // Signal that SDK was initiated.
-        do_action( 'sf_fs_loaded' );
+        do_action( 'shared_files_fs_loaded' );
     }
     
-    function sf_fs_custom_connect_message( $message, $user_first_name )
+    function shared_files_fs_custom_connect_message( $message, $user_first_name )
     {
         return sprintf( __( 'Hey %1$s' ) . ',<br>' . __( 'never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.' ), $user_first_name );
     }
     
-    sf_fs()->add_filter(
+    shared_files_fs()->add_filter(
         'connect_message',
-        'sf_fs_custom_connect_message',
+        'shared_files_fs_custom_connect_message',
         10,
         6
     );
-    sf_fs()->add_filter( 'show_deactivation_feedback_form', '__return_false' );
+    shared_files_fs()->add_filter( 'show_deactivation_feedback_form', '__return_false' );
     function freemius_custom_is_submenu_visible( $is_visible, $menu_id )
     {
         
         if ( $menu_id == 'contact' ) {
-            return sf_fs()->can_use_premium_code();
+            return shared_files_fs()->can_use_premium_code();
         } elseif ( $menu_id == 'support' ) {
-            return !sf_fs()->can_use_premium_code();
+            return !shared_files_fs()->can_use_premium_code();
         }
         
         return $is_visible;
     }
     
-    sf_fs()->add_filter(
+    shared_files_fs()->add_filter(
         'is_submenu_visible',
         'freemius_custom_is_submenu_visible',
         10,
         2
     );
-    function sf_fs_custom_connect_message_on_update(
+    function shared_files_fs_custom_connect_message_on_update(
         $message,
         $user_first_name,
         $plugin_title,
@@ -128,9 +128,9 @@ if ( function_exists( 'sf_fs' ) ) {
         );
     }
     
-    sf_fs()->add_filter(
+    shared_files_fs()->add_filter(
         'connect_message_on_update',
-        'sf_fs_custom_connect_message_on_update',
+        'shared_files_fs_custom_connect_message_on_update',
         10,
         6
     );
@@ -139,7 +139,7 @@ if ( function_exists( 'sf_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.6.71' );
+    define( 'SHARED_FILES_VERSION', '1.6.72' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**

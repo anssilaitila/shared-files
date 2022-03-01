@@ -361,7 +361,7 @@ class Shared_Files_Settings
             'field_name' => 'wp_engine_compatibility_mode',
         )
         );
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'file_sync_interval',
                 sanitize_text_field( __( 'File & category sync interval', 'shared-files' ) ),
@@ -426,7 +426,7 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'card_align_elements_vertically',
         )
         );
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'remove_link_from_file_title',
                 sanitize_text_field( __( 'Remove link from file title', 'shared-files' ) ),
@@ -696,7 +696,7 @@ class Shared_Files_Settings
             )
             );
             
-            if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+            if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
                 add_settings_field(
                     'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
                     sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
@@ -722,7 +722,7 @@ class Shared_Files_Settings
             }
         
         }
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'custom_fields_cnt',
                 sanitize_text_field( __( 'Number of custom fields', 'shared-files' ) ),
@@ -821,7 +821,7 @@ class Shared_Files_Settings
         )
         );
         
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
                 sanitize_text_field( __( 'Allow the uploader to create multiple new categories', 'shared-files' ) ),
@@ -1299,7 +1299,7 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'send_email',
         )
         );
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'trigger_download_email',
                 sanitize_text_field( __( 'Trigger file downloaded email on', 'shared-files' ) ),
@@ -1434,7 +1434,7 @@ class Shared_Files_Settings
             }
         }
         
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'pro' ) || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_section(
                 'shared-files_tab_10_2',
                 '',
@@ -1510,7 +1510,7 @@ class Shared_Files_Settings
         }
         
         
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             $tab = 11;
             add_settings_section(
                 'shared-files_tab_' . $tab,
@@ -2689,7 +2689,7 @@ class Shared_Files_Settings
           
           <?php 
         
-        if ( sf_fs()->is_free_plan() || sf_fs()->is_plan_or_trial( 'business' ) ) {
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             ?>
             <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11"><span><?php 
             echo  esc_html__( 'Favorites', 'shared-files' ) ;

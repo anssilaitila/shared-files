@@ -206,7 +206,7 @@ class SharedFilesFileUpload
                 update_post_meta( $id, '_sf_file', $upload );
                 $filename = substr( strrchr( $upload['file'], "/" ), 1 );
                 update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
-                update_post_meta( $id, '_sf_filesize', sanitize_text_field( $_FILES['_sf_file']['size'] ) );
+                SharedFilesFileUpdate::uFilesize( $id, $_FILES['_sf_file']['size'], $upload['file'] );
                 $featured_image_already_added = 0;
                 if ( !$featured_image_already_added ) {
                     SharedFilesHelpers::addFeaturedImage(
