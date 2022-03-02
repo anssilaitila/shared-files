@@ -87,25 +87,38 @@ class SharedFilesAdminQuery
                     $filesize = intval( get_post_meta( $file_id, '_sf_filesize', true ) );
                 }
                 $external_url = esc_url_raw( get_post_meta( $file_id, '_sf_external_url', true ) );
+                $file = get_post_meta( $file_id, '_sf_file', true );
+                $filename_fallback = get_post_meta( $file_id, '_sf_filename', true );
                 
                 if ( $external_url ) {
                     if ( !isset( $_POST['youtube'] ) && !isset( $_POST['only_meta'] ) ) {
                         header( 'Location: ' . esc_url_raw( $external_url ) );
                     }
                     die;
-                } elseif ( $file = get_post_meta( $file_id, '_sf_file', true ) ) {
+                } elseif ( $file || $filename_fallback ) {
                     $redirect = 0;
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $redirect = 1;
                     }
                     $filename = '';
+                    
                     if ( isset( $file['file'] ) ) {
                         $filename = SharedFilesFileOpen::getUpdatedPathAndFilename( sanitize_text_field( $file['file'] ) );
+                    } elseif ( $filename_fallback ) {
+                        // metadata not found (field _sf_file)
+                        $filename_with_path_fallback = 'shared-files/';
+                        if ( $subdir_fallback = get_post_meta( $file_id, '_sf_subdir', true ) ) {
+                            $filename_with_path_fallback .= $subdir_fallback . '/';
+                        }
+                        $filename_with_path_fallback .= $filename_fallback;
+                        $filename = SharedFilesFileOpen::getUpdatedPathAndFilename( sanitize_text_field( $filename_with_path_fallback ) );
                     }
+                    
                     
                     if ( is_super_admin() && isset( $_GET['DEBUG_FILE'] ) ) {
                         echo  '<pre>' . var_dump( esc_html( $file['file'] ) ) . '</pre>' ;
                         echo  '<pre>' . var_dump( esc_html( $filename ) ) . '</pre>' ;
+                        echo  '<pre>' . var_dump( esc_html( $filename_fallback ) ) . '</pre>' ;
                         wp_die();
                     }
                     

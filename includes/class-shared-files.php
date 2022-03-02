@@ -140,6 +140,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_accordion.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_favorites.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_restricted.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_exact_search.php';
         $this->loader = new Shared_Files_Loader();
     }
     

@@ -386,6 +386,33 @@ class Shared_Files_Settings
             'placeholder' => '/some-folder/',
         )
         );
+        
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_min_chars',
+                sanitize_text_field( __( 'Min. characters for search in [shared_files_exact_search]', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'exact_search_min_chars',
+                'field_name'  => $only_pro . 'exact_search_min_chars',
+                'placeholder' => 3,
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_whole_words_only',
+                sanitize_text_field( __( 'Search whole words only in [shared_files_exact_search] (default targets also partial text)', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'exact_search_whole_words_only',
+                'field_name' => $only_pro . 'exact_search_whole_words_only',
+            )
+            );
+        }
+        
         add_settings_field(
             'shared-files-pagination_type',
             sanitize_text_field( __( 'Pagination type', 'shared-files' ) ),
@@ -1793,6 +1820,12 @@ class Shared_Files_Settings
           <?php 
                     $plan_required = 'Professional';
                     ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'exact_search_whole_words_only' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
 
         <?php 
                 } elseif ( strpos( $field_name, 'activate_favorite_files' ) !== false ) {
@@ -2266,6 +2299,12 @@ class Shared_Files_Settings
         <?php 
                 
                 if ( strpos( $field_name, 'cf_' ) !== false && strpos( $field_name, '_select_title' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'exact_search_min_chars' ) !== false ) {
                     ?>
           <?php 
                     $plan_required = 'Professional';

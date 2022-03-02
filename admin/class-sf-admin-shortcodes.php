@@ -163,6 +163,34 @@ class SharedFilesAdminShortcodes {
       </div>
 
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
+  
+        <h2>
+          <?php echo esc_html__('Exact search from all files', 'shared-files'); ?>
+
+          <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+            <span class="shared-files-pro-only-inline-inactive">Professional</span>
+          <?php else: ?>
+            <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Professional</a>
+          <?php endif; ?>
+        
+        </h2>
+  
+        <ul>
+  
+          <li>
+            <?php echo esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_exact_search]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button> <?php echo esc_html__('to the content editor of any page you wish the file list to appear.', 'shared-files'); ?>
+          </li>
+          <li>
+            <?php echo esc_html__('This search targets all files (their titles) and shows the files after enter is pressed.', 'shared-files') ?>
+          </li>
+          <li>
+            <?php echo esc_html__('Minimum number of characters required for the search to function is defined in the plugin settings (default is 3).', 'shared-files') ?>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
                     
         <h2>
           <?php echo esc_html__('Enable front-end editor for all files') ?>

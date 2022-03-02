@@ -206,7 +206,15 @@ class SharedFilesFileUpload
                 update_post_meta( $id, '_sf_file', $upload );
                 $filename = substr( strrchr( $upload['file'], "/" ), 1 );
                 update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
-                SharedFilesFileUpdate::uFilesize( $id, $_FILES['_sf_file']['size'], $upload['file'] );
+                $sf_file_size = 0;
+                $upload_file = '';
+                if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
+                    $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
+                }
+                if ( isset( $upload['file'] ) && $upload['file'] ) {
+                    $upload_file = sanitize_text_field( $upload['file'] );
+                }
+                SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
                 $featured_image_already_added = 0;
                 if ( !$featured_image_already_added ) {
                     SharedFilesHelpers::addFeaturedImage(

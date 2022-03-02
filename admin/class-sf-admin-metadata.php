@@ -120,6 +120,18 @@ class SharedFilesAdminMetadata
             
             echo  '<b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />' ;
             echo  '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />' ;
+        } elseif ( $filename_fallback = get_post_meta( $post_id, '_sf_filename', true ) ) {
+            $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . intval( get_the_ID() ) . '/' . SharedFilesHelpers::wp_engine() . $filename_fallback;
+            echo  esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( $file_url ) . '</a>' ;
+            
+            if ( $subdir ) {
+                echo  '<div class="shared-files-admin-folder-name-container">' . esc_html__( 'Server folder:', 'shared-files' ) . ' <div class="shared-files-admin-folder-name">shared-files/' . esc_attr( $subdir ) . '/</div></div>' ;
+            } else {
+                echo  '<br /><br />' ;
+            }
+            
+            echo  '<b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />' ;
+            echo  '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />' ;
         } else {
             echo  '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />' ;
         }
@@ -348,7 +360,15 @@ class SharedFilesAdminMetadata
                     update_post_meta( $id, '_sf_file', $upload );
                     $filename = substr( strrchr( $upload['file'], "/" ), 1 );
                     update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
-                    SharedFilesFileUpdate::uFilesize( $id, $_FILES['_sf_file']['size'], $upload['file'] );
+                    $sf_file_size = 0;
+                    $upload_file = '';
+                    if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
+                        $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
+                    }
+                    if ( isset( $upload['file'] ) && $upload['file'] ) {
+                        $upload_file = sanitize_text_field( $upload['file'] );
+                    }
+                    SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
                     update_post_meta( $id, '_sf_load_cnt', 0 );
                     update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                     update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
