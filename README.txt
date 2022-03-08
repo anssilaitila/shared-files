@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.9
-Stable tag: 1.6.73
+Stable tag: 1.6.74
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.74 - 2022-03-08 =
+* (Free + All plans) PHP error fix (happened during plugin activation if the plugin Contact List is also installed)
 
 = 1.6.73 - 2022-03-02 =
 * (Free + All plans) Improved compatibility with site migration tools
