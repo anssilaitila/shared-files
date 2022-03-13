@@ -771,6 +771,17 @@ class Shared_Files_Settings
             'shared-files'
         );
         add_settings_field(
+            'shared-files-file_upload_disable_progress_bar',
+            sanitize_text_field( __( 'Disable progress bar / ajax upload', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-file_upload_disable_progress_bar',
+            'field_name' => 'file_upload_disable_progress_bar',
+        )
+        );
+        add_settings_field(
             'shared-files-only_logged_in_users_can_add_files',
             sanitize_text_field( __( 'Only logged in users can add files using the front-end file uploader', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),

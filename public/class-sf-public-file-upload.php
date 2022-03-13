@@ -24,8 +24,12 @@ class SharedFilesFileUpload
         
         $exclude_cat = [];
         $exclude_tag = [];
+        $ajax_class = '';
+        if ( !isset( $s['file_upload_disable_progress_bar'] ) ) {
+            $ajax_class = ' shared-files-frontend-file-upload-ajax-active';
+        }
         $html .= '<div class="sf-public-file-upload-container">';
-        $html .= '<form method="post" enctype="multipart/form-data" class="shared-files-frontend-file-upload">';
+        $html .= '<form method="post" enctype="multipart/form-data" class="shared-files-frontend-file-upload' . $ajax_class . '">';
         $html .= wp_nonce_field(
             'sf_insert_file',
             'secret_code',
@@ -49,7 +53,7 @@ class SharedFilesFileUpload
         if ( !$multiple_files_upload_active ) {
             $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" ' . $file_required . ' /><hr class="clear" />';
         }
-        $html .= '<p style="margin-top: 5px; margin-bottom: 8px;">' . sanitize_text_field( __( 'Maximum file size:', 'shared-files' ) ) . ' <strong>' . sanitize_text_field( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
+        $html .= '<p style="margin-top: 10px; margin-bottom: 8px;">' . sanitize_text_field( __( 'Maximum file size:', 'shared-files' ) ) . ' <strong>' . sanitize_text_field( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         
         if ( isset( $s['file_upload_show_external_url'] ) ) {
             $html .= '<div class="shared-files-file-upload-youtube-container">';
@@ -101,6 +105,9 @@ class SharedFilesFileUpload
             $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
         }
         
+        if ( !isset( $s['file_upload_disable_progress_bar'] ) ) {
+            $html .= SharedFilesHelpers::ajaxUploadMarkup();
+        }
         $html .= '<hr class="clear" /><input type="submit" value="' . esc_attr__( 'Submit', 'shared-files' ) . '" class="sf-public-file-upload-submit" />';
         $html .= '</form>';
         // .sf-public-file-upload-container

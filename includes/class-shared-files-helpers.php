@@ -2,6 +2,23 @@
 
 class SharedFilesHelpers
 {
+    public static function ajaxUploadMarkup()
+    {
+        $html = '';
+        $html .= '<div class="shared-files-ajax-upload-container">';
+        $html .= '<div class="shared-files-ajax-upload-phase-1">' . esc_html__( 'Please wait, uploading file(s)...', 'shared-files' ) . '</div>';
+        $html .= '<div class="shared-files-ajax-upload-progress-bar-container"><div class="shared-files-progress-bar">&nbsp;</div></div>';
+        $html .= '<div class="shared-files-ajax-upload-phase-2">' . esc_html__( 'Processing file(s)...', 'shared-files' ) . ' <img src="' . SHARED_FILES_URI . 'img/loading.gif" width="15" height="15" /></div>';
+        $html .= '<div class="shared-files-ajax-upload-phase-3">';
+        $html .= '<span class="shared-files-ajax-upload-complete">&raquo; ' . esc_html__( 'Upload complete!', 'shared-files' ) . '</span>';
+        if ( !isset( $atts['hide_file_list'] ) ) {
+            $html .= '<a class="shared-files-reload-page-button" href="" onclick="window.location.href=window.location.href; return false;">' . esc_html__( 'Reload page', 'shared-files' ) . '</a>';
+        }
+        $html .= '</div>';
+        $html .= '</div>';
+        return $html;
+    }
+    
     public static function getText( $text_id, $default_text )
     {
         $s = get_option( 'shared_files_settings' );
