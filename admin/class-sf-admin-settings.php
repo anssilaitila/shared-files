@@ -2537,7 +2537,7 @@ class Shared_Files_Settings
                 ?>
         <div class="email-info">
           <?php 
-                echo  esc_html__( 'Enter an email address to receive the notify.', 'shared-files' ) ;
+                echo  esc_html__( 'Enter an email address to receive the notify, or multiple email addresses separated by a comma.', 'shared-files' ) ;
                 ?>
         </div>
       <?php 

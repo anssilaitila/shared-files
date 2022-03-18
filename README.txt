@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 5.9
-Stable tag: 1.6.75
+Stable tag: 1.6.77
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -142,6 +142,12 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.77 - 2022-03-18 =
+* (All plans) You can now add multiple email addresses to receive the file upload notification
+
+= 1.6.76 - 2022-03-15 =
+* (Free + All plans) Fix: The video player now opens the video file directly from the redirected url when using the File opening method as Redirect (defined at the plugin settings, Technical tab)
 
 = 1.6.75 - 2022-03-12 =
 * (Free + All plans) New feature: File upload progress bar added to front end file upload

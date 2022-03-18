@@ -122,17 +122,27 @@ class SharedFilesPublicHelpers
         $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
         $data_file_type = '';
         $data_file_url = '';
+        $data_video_url_redir = '';
         $data_external_url = '';
         $data_image_url = '';
         
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            $this_file_type = SharedFilesPublicHelpers::getFileType( $file_id );
             $data_file_type = ' data-file-type="' . esc_attr( self::getFileType( $file_id ) ) . '" ';
             $data_file_url = ' data-file-url="' . esc_url_raw( self::getFileURL( $file_id ) ) . '" ';
             $data_external_url = ' data-external-url="' . esc_url_raw( $external_url ) . '" ';
             $data_image_url = ' data-image-url="' . esc_url_raw( get_the_post_thumbnail_url( $file_id, 'large' ) ) . '" ';
+            if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
+                
+                if ( substr( $this_file_type, 0, strlen( 'video' ) ) === 'video' ) {
+                    $file_uri = SharedFilesFileOpen::getRedirectTarget( $file_id );
+                    $data_video_url_redir = ' data-video-url-redir="' . esc_url_raw( $file_uri ) . '" ';
+                }
+            
+            }
         }
         
-        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
+        $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_video_url_redir . $data_external_url . $data_image_url . 'href="' . $file_url . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
         if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( sanitize_text_field( $c['_sf_filesize'][0] ) ) . '</span>';
         }

@@ -46,8 +46,33 @@ class SharedFilesAdminShortcodes {
           );
           ?>
           </p>
-        
+                
         <?php endif; ?>
+
+        <div class="shared-files-all-paid-plans">
+
+          <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+
+            <span class="shared-files-pro-only-inline-inactive" style="margin-left: 0; margin-right: 1px;">All Plans</span>
+
+            <?php echo esc_html__('means that the shortcode / parameter exists in all of the paid plans.', 'shared-files') ?>
+
+          <?php else: ?>
+
+            <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline" style="margin-left: 0; margin-right: 1px;">All Plans</a>
+
+            <?php
+            echo wp_kses(
+                /* translators: %s: link to the support forum */
+                __('means that the shortcode / parameter exists in all of the <strong>paid</strong> plans.', 'shared-files'),
+                array('strong' => array())
+              );
+            ?>
+
+          <?php endif; ?>
+
+
+        </div>
 
       </div>
   

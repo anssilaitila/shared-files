@@ -23,7 +23,7 @@ class SharedFilesPublicFileCardDefault
         }
         
         if ( $file_realpath && !is_readable( $file_realpath ) ) {
-            $html = '<div class="shared-files-permission-denied-for"><b>' . sanitize_text_field( __( "Can't read file (permission denied):", 'shared-files' ) ) . '</b><br />' . sanitize_text_field( $file_realpath ) . '</div>';
+            $html = '<li><div class="shared-files-permission-denied-for"><b>' . sanitize_text_field( __( "Can't read file (permission denied):", 'shared-files' ) ) . '</b><br />' . sanitize_text_field( $file_realpath ) . '</div></li>';
             return $html;
         }
         
@@ -67,20 +67,30 @@ class SharedFilesPublicFileCardDefault
         $html .= '<div class="shared-files-main-elements-right">';
         $data_file_type = '';
         $data_file_url = '';
+        $data_video_url_redir = '';
         $data_external_url = '';
         $data_image_url = '';
         
         if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+            $this_file_type = SharedFilesPublicHelpers::getFileType( $file_id );
             $data_file_type = ' data-file-type="' . esc_attr( SharedFilesPublicHelpers::getFileType( $file_id ) ) . '" ';
             $data_file_url = ' data-file-url="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" ';
             $data_external_url = ' data-external-url="' . esc_url_raw( $external_url ) . '" ';
             $data_image_url = ' data-image-url="' . esc_url_raw( get_the_post_thumbnail_url( $file_id, 'large' ) ) . '" ';
+            if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
+                
+                if ( substr( $this_file_type, 0, strlen( 'video' ) ) === 'video' ) {
+                    $file_uri = SharedFilesFileOpen::getRedirectTarget( $file_id );
+                    $data_video_url_redir = ' data-video-url-redir="' . esc_url_raw( $file_uri ) . '" ';
+                }
+            
+            }
         }
         
         $show_file_link = 1;
         
         if ( $show_file_link ) {
-            $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
+            $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_video_url_redir . $data_external_url . $data_image_url . 'href="' . esc_url( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
             if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
                 $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
             }
@@ -171,9 +181,9 @@ class SharedFilesPublicFileCardDefault
                 
                 if ( isset( $s['show_download_button'] ) && $password ) {
                 } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
-                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button shared-files-download-button-image" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
                 } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
-                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" id="shared-files-download-button" class="shared-files-download-button" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
                 }
             
             }
@@ -196,7 +206,7 @@ class SharedFilesPublicFileCardDefault
             $featured_img_width_px = 150;
             $featured_img_height_px = 0;
             $featured_img_style = 'width: ' . esc_attr( $featured_img_width_px ) . 'px; height: auto;';
-            $html .= '<div class="shared-files-main-elements-featured-image" style="' . $featured_img_style . '"><img src="' . esc_url( $featured_img_url ) . '" /></div>';
+            $html .= '<div class="shared-files-main-elements-featured-image" style="' . $featured_img_style . '"><img src="' . esc_url( $featured_img_url ) . '" alt="" /></div>';
         }
         
         $html .= '</div>';

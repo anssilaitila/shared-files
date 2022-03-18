@@ -113,7 +113,7 @@ class ShortcodeSharedFiles
             }
             
             $html .= '<div ' . $container_embed_id . ' class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . esc_attr( $layout ) : '' )) . '">';
-            $html .= '<div id="shared-files-search">';
+            $html .= '<div class="shared-files-search">';
             $is_premium = 0;
             
             if ( $custom_fields_active ) {
@@ -273,8 +273,8 @@ class ShortcodeSharedFiles
             
             $filetypes = SharedFilesHelpers::getFiletypes();
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
-            $html .= '<div id="shared-files-files-found"></div>';
-            $html .= '<span id="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span id="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
+            $html .= '<div class="shared-files-files-found"></div>';
+            $html .= '<span class="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span class="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
             $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
             /* CATEGORY PASSWORD END */
             if ( $tag_slug ) {
@@ -282,7 +282,7 @@ class ShortcodeSharedFiles
             }
             
             if ( $wpb_all_query_all_files->have_posts() ) {
-                $html .= '<ul id="myList" class="shared-files-ajax-list">';
+                $html .= '<ul class="shared-files-main-file-list shared-files-ajax-list">';
                 
                 if ( isset( $atts['hide_files_first'] ) && !isset( $_GET ) ) {
                     // ...
@@ -326,7 +326,7 @@ class ShortcodeSharedFiles
                 
                 $html .= '</ul>';
             } elseif ( !isset( $atts['file_upload'] ) ) {
-                $html .= '<ul id="myList" class="shared-files-ajax-list"><li>';
+                $html .= '<ul class="shared-files-main-file-list shared-files-ajax-list"><li>';
                 $html .= '<div class="shared-files-files-not-found">' . sanitize_text_field( __( 'No files found.', 'shared-files' ) ) . '</div>';
                 $html .= '</li></ul>';
             }
@@ -337,7 +337,7 @@ class ShortcodeSharedFiles
                 if ( isset( $s['show_tags_on_search_results'] ) ) {
                     $show_tags = 1;
                 }
-                $html .= '<ul id="shared-files-all-files">';
+                $html .= '<ul class="shared-files-all-files">';
                 if ( isset( $wpb_all_query_all_files ) && $wpb_all_query_all_files->have_posts() ) {
                     while ( $wpb_all_query_all_files->have_posts() ) {
                         $wpb_all_query_all_files->the_post();
@@ -362,10 +362,10 @@ class ShortcodeSharedFiles
             if ( !$limit_posts ) {
                 $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wpb_all_query, $embed_id );
             }
-            $html .= '<div id="shared-files-nothing-found">';
+            $html .= '<div class="shared-files-nothing-found">';
             $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );
             $html .= '</div>';
-            // #shared-files-search
+            // .shared-files-search
             $html .= '</div>';
             // .shared-files-container
             $html .= '</div>';

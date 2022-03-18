@@ -51,7 +51,7 @@ class SharedFilesFileUpload
             $file_required = '';
         }
         if ( !$multiple_files_upload_active ) {
-            $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" value="" size="25" ' . $file_required . ' /><hr class="clear" />';
+            $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" size="25" ' . $file_required . ' /><hr class="clear" />';
         }
         $html .= '<p style="margin-top: 10px; margin-bottom: 8px;">' . sanitize_text_field( __( 'Maximum file size:', 'shared-files' ) ) . ' <strong>' . sanitize_text_field( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         

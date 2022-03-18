@@ -2,6 +2,18 @@
 
 class SharedFilesFileOpen {
 
+  public static function getRedirectTarget( $file_id = 0 ) {
+
+    $file = get_post_meta( $file_id, '_sf_file', true );
+    $file_url = esc_url_raw( $file['url'] );
+    
+    $redirect_url_parts = parse_url($file_url);
+    $file_uri = $redirect_url_parts['path'];
+  
+    return $file_uri;
+    
+  }
+
   public static function getUpdatedPathAndFilename($filename_with_path = '', $file_id = 0) {
 
     if (substr( $filename_with_path, 0, 5 ) === 'iu://') {

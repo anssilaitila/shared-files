@@ -57,8 +57,8 @@ class ShortcodeSharedFilesSimple
         if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
             $html .= '<input type="text" class="shared-files-simple-search" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '" data-elem-class="' . $elem_class . '">';
         }
-        $html .= '<div id="shared-files-files-found"></div>';
-        $html .= '<span id="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span id="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
+        $html .= '<div class="shared-files-files-found"></div>';
+        $html .= '<span class="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span class="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
         $html .= '<div class="shared-files-simple-nothing-found">';
         $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );
         $html .= '</div>';

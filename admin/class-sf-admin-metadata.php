@@ -146,7 +146,7 @@ class SharedFilesAdminMetadata
         $field_in_pro_class = 'shared-files-field-in-pro-greyed-out';
         $field_in_all_plans_markup = '<div class="shared-files-field-in-pro-container">';
         $field_in_all_plans_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
-        $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>All plans</span></div>';
+        $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>All Plans</span></div>';
         $field_in_all_plans_markup .= '</a>';
         $field_in_all_plans_markup .= '</div>';
         $field_in_pro_markup = '<div class="shared-files-field-in-pro-container">';
@@ -154,6 +154,11 @@ class SharedFilesAdminMetadata
         $field_in_pro_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Professional</span></div>';
         $field_in_pro_markup .= '</a>';
         $field_in_pro_markup .= '</div>';
+        $field_in_business_markup = '<div class="shared-files-field-in-pro-container">';
+        $field_in_business_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
+        $field_in_business_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Business</span></div>';
+        $field_in_business_markup .= '</a>';
+        $field_in_business_markup .= '</div>';
         $field_in_pro_markup_allowed_tags = [
             'div'  => [
             'class' => [],
@@ -241,6 +246,15 @@ class SharedFilesAdminMetadata
             echo  '</div>' ;
             echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 3' ) . '</span></div>' ;
             echo  wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags ) ;
+            echo  '</div>' ;
+            echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 4' ) . '</span></div>' ;
+            echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
+            echo  '</div>' ;
+            echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 5' ) . '</span></div>' ;
+            echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
+            echo  '</div>' ;
+            echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Unlimited custom fields' ) . '</span></div>' ;
+            echo  wp_kses( $field_in_business_markup, $field_in_pro_markup_allowed_tags ) ;
             echo  '</div>' ;
         }
         

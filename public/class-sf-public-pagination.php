@@ -58,7 +58,7 @@ class SharedFilesPublicPagination {
         );
     
     
-      $html .= '<hr class="clear" /><div id="shared-files-pagination" class="shared-files-pagination">';
+      $html .= '<hr class="clear" /><div class="shared-files-pagination">';
     
       if (paginate_links($pagination_args)) {
         $html .= '<span class="shared-files-more-files">' . sanitize_text_field( __('Browse more files:', 'shared-files') ) . '</span>' .
