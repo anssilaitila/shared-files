@@ -1037,6 +1037,17 @@ class Shared_Files_Settings
             'shared-files'
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'folder_icon_uri',
+            sanitize_text_field( __( 'Folder icon', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'folder_icon_uri',
+            'field_name' => $only_pro . 'folder_icon_uri',
+        )
+        );
+        add_settings_field(
             'shared-files-icon_image',
             sanitize_text_field( __( 'File type: Image', 'shared-files' ) ),
             array( $this, 'input_render' ),
@@ -2527,10 +2538,10 @@ class Shared_Files_Settings
                 ?>
         </div>
       <?php 
-            } elseif ( $field_name == 'icon_for_image' || $field_name == 'custom_1_icon' ) {
+            } elseif ( $field_name == 'icon_for_image' || $field_name == 'custom_1_icon' || $field_name == 'folder_icon_uri' ) {
                 ?>
         <p><?php 
-                echo  esc_html__( 'e.g. /wp-content/uploads/2019/12/some-fancy-icon.png', 'shared-files' ) ;
+                echo  esc_html__( 'e.g. /wp-content/uploads/2022/01/custom-icon.png', 'shared-files' ) ;
                 ?></p>
       <?php 
             } elseif ( $field_name == 'file_upload_send_email' ) {
@@ -2637,7 +2648,7 @@ class Shared_Files_Settings
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-6">' ;
-        echo  '<h2>' . esc_html__( 'Change default file icons', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Change default icons', 'shared-files' ) . '</h2>' ;
     }
     
     public function shared_files_settings_tab_7_callback()
@@ -2722,7 +2733,7 @@ class Shared_Files_Settings
         echo  esc_html__( 'File upload', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-6-title" data-settings-container="shared-files-settings-tab-6"><span><?php 
-        echo  esc_html__( 'File type icons', 'shared-files' ) ;
+        echo  esc_html__( 'Icons', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-7-title" data-settings-container="shared-files-settings-tab-7"><span><?php 
         echo  esc_html__( 'Custom file types', 'shared-files' ) ;

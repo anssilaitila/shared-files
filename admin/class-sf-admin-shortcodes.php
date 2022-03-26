@@ -71,7 +71,6 @@ class SharedFilesAdminShortcodes {
 
           <?php endif; ?>
 
-
         </div>
 
       </div>
