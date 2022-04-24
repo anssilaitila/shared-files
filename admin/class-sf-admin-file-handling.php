@@ -8,13 +8,6 @@ class SharedFilesFileHandling
         return $base_dir;
     }
     
-    public static function getFileUrl( $file_id )
-    {
-        $file_id = intval( $file_id );
-        $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] );
-        return $file_dir;
-    }
-    
     public static function getFileUrlByName( $filename, $subdir = '' )
     {
         $wp_upload_dir = parse_url( wp_upload_dir()['baseurl'] );

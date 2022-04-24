@@ -37,25 +37,58 @@ class SharedFilesAdminQuery
         $sf_base_alt = '';
         $sf_file_id = 0;
         $sf_query_filename = '';
+        $file_id = 0;
+        $sc_part = '';
+        $sf_sc = '';
         
         if ( isset( $path_parts ) && is_array( $path_parts ) && isset( $path_parts[count( $path_parts ) - 3] ) ) {
             $sf_base = $path_parts[count( $path_parts ) - 3];
             $sf_base_alt = $path_parts[count( $path_parts ) - 2];
             
             if ( $sf_base == 'shared-files' ) {
-                $file_id = (int) $path_parts[count( $path_parts ) - 2];
                 
-                if ( $file_id > 0 ) {
-                    $sf_query = 1;
-                    $sf_query_filename = end( $path_parts );
+                if ( isset( $s['obfuscate_file_urls'] ) ) {
+                    $sc_part = sanitize_text_field( $path_parts[count( $path_parts ) - 2] );
+                    $sc_parts = explode( '-', $sc_part );
+                    
+                    if ( isset( $sc_parts[0] ) && $sc_parts[0] && isset( $sc_parts[1] ) && $sc_parts[1] ) {
+                        $file_id = $sc_parts[0];
+                        $sf_sc = $sc_parts[1];
+                        $sf_query = 1;
+                        $sf_query_filename = end( $path_parts );
+                    }
+                
+                } else {
+                    $file_id = (int) $path_parts[count( $path_parts ) - 2];
+                    
+                    if ( $file_id > 0 ) {
+                        $sf_query = 1;
+                        $sf_query_filename = end( $path_parts );
+                    }
+                
                 }
             
             } elseif ( $sf_base_alt == 'shared-files' ) {
-                $file_id = (int) end( $path_parts );
                 
-                if ( $file_id > 0 ) {
-                    $sf_query = 1;
-                    $sf_query_filename = '';
+                if ( isset( $s['obfuscate_file_urls'] ) ) {
+                    $sc_part = sanitize_text_field( end( $path_parts ) );
+                    $sc_parts = explode( '-', $sc_part );
+                    
+                    if ( isset( $sc_parts[0] ) && $sc_parts[0] && isset( $sc_parts[1] ) && $sc_parts[1] ) {
+                        $file_id = $sc_parts[0];
+                        $sf_sc = $sc_parts[1];
+                        $sf_query = 1;
+                        $sf_query_filename = end( $path_parts );
+                    }
+                
+                } else {
+                    $file_id = (int) end( $path_parts );
+                    
+                    if ( $file_id > 0 ) {
+                        $sf_query = 1;
+                        $sf_query_filename = '';
+                    }
+                
                 }
             
             }

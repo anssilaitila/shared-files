@@ -109,7 +109,7 @@ class SharedFilesAdminMetadata
         
         
         if ( $file ) {
-            $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . intval( get_the_ID() ) . '/' . SharedFilesHelpers::wp_engine() . $filename;
+            $file_url = SharedFilesPublicHelpers::getFileURL( intval( get_the_ID() ) );
             echo  esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( $file_url ) . '</a>' ;
             
             if ( $subdir ) {
@@ -121,7 +121,8 @@ class SharedFilesAdminMetadata
             echo  '<b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />' ;
             echo  '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />' ;
         } elseif ( $filename_fallback = get_post_meta( $post_id, '_sf_filename', true ) ) {
-            $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . intval( get_the_ID() ) . '/' . SharedFilesHelpers::wp_engine() . $filename_fallback;
+            //      $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . intval( get_the_ID() ) . '/' . SharedFilesHelpers::wp_engine() . $filename_fallback;
+            $file_url = SharedFilesPublicHelpers::getFileURL( intval( get_the_ID() ) );
             echo  esc_html__( 'Current file:', 'shared-files' ) . ' <a href="' . esc_url( $file_url ) . '" target="_blank">' . esc_html( $file_url ) . '</a>' ;
             
             if ( $subdir ) {

@@ -4,11 +4,25 @@ class SharedFilesAdminMaintenance
 {
     public function update_db_check()
     {
+        $s = get_option( 'shared_files_settings' );
+        
+        if ( !get_option( 'shared-files-sc' ) ) {
+            $rand_code = sanitize_text_field( md5( uniqid( rand(), true ) ) );
+            add_option(
+                'shared-files-sc',
+                $rand_code,
+                '',
+                'yes'
+            );
+        }
+        
         //    wp_clear_scheduled_hook('check_expired_files');
         //    wp_clear_scheduled_hook('cron_sync_folders_and_files');
+        //    wp_clear_scheduled_hook('cron_remove_obsolete_file_metadata_automatically');
         if ( !wp_next_scheduled( 'check_expired_files' ) ) {
             wp_schedule_event( time(), 'daily', 'check_expired_files' );
         }
+        //    wp_die(wp_next_scheduled('cron_remove_obsolete_file_metadata_automatically'));
         $sf_dir = wp_get_upload_dir()['basedir'] . '/shared-files/';
         $sf_file = $sf_dir . 'index.php';
         
@@ -18,7 +32,6 @@ class SharedFilesAdminMaintenance
         }
         
         //    delete_option('shared_files_settings');
-        $s = get_option( 'shared_files_settings' );
         
         if ( $s === false ) {
             //      register_setting('shared-files', 'shared_files_settings');

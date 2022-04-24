@@ -96,7 +96,8 @@ class SharedFilesAdminList
                 if ( $folder_name ) {
                     echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . esc_html( $folder_name ) . '/</div>' ;
                 }
-                $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( get_post_meta( $post_ID, '_sf_filename', true ) );
+                //        $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . $post_ID . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( get_post_meta($post_ID, '_sf_filename', true) );
+                $file_url = SharedFilesPublicHelpers::getFileURL( $file_id );
                 echo  '<hr class="clear" /><a href="' . esc_url( $file_url ) . '" class="shared-files-admin-file-url" target="_blank">' . esc_url( $file_url ) . '</a>' ;
                 break;
             case 'filesize':

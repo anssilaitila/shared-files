@@ -32,7 +32,10 @@ class SharedFilesPublicHelpers
         $file_url = '';
         
         if ( isset( $c['_sf_filename'] ) ) {
-            $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] );
+            $obfuscated = 0;
+            if ( !$obfuscated ) {
+                $file_url = SharedFilesHelpers::sf_root() . '/shared-files/' . $file_id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] );
+            }
             
             if ( $download && SharedFilesHelpers::wp_engine() ) {
                 $file_url .= '&download=1';

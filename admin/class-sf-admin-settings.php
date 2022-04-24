@@ -361,6 +361,19 @@ class Shared_Files_Settings
             'field_name' => 'wp_engine_compatibility_mode',
         )
         );
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'obfuscate_file_urls',
+                sanitize_text_field( __( 'Obfuscate file urls', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'obfuscate_file_urls',
+                'field_name' => $only_pro . 'obfuscate_file_urls',
+            )
+            );
+        }
         if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'file_sync_interval',
@@ -374,6 +387,17 @@ class Shared_Files_Settings
             )
             );
         }
+        add_settings_field(
+            'shared-files-' . $only_pro . 'remove_obsolete_file_metadata_automatically',
+            sanitize_text_field( __( 'Remove obsolete file metadata automatically', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'remove_obsolete_file_metadata_automatically',
+            'field_name' => $only_pro . 'remove_obsolete_file_metadata_automatically',
+        )
+        );
         add_settings_field(
             'shared-files-wp_location',
             sanitize_text_field( __( 'WordPress location', 'shared-files' ) ),
@@ -1768,6 +1792,10 @@ class Shared_Files_Settings
       <?php 
             $plan_required = 'All Plans';
             ?>
+
+      <?php 
+            $show_info = 0;
+            ?>
     
       <?php 
             
@@ -1848,6 +1876,12 @@ class Shared_Files_Settings
           <?php 
                     $plan_required = 'Professional';
                     ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'remove_obsolete_file_metadata_automatically' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
 
         <?php 
                 } elseif ( strpos( $field_name, 'activate_favorite_files' ) !== false ) {
@@ -1879,6 +1913,15 @@ class Shared_Files_Settings
                     ?>
           <?php 
                     $plan_required = 'Business';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'obfuscate_file_urls' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
+                    ?>
+          <?php 
+                    $show_info = 1;
                     ?>
 
         <?php 
@@ -1951,6 +1994,29 @@ class Shared_Files_Settings
           <?php 
                 echo  esc_html__( 'If checked, all uploaded files will be instantly listed on other shortcodes/pages also.', 'shared-files' ) ;
                 ?><br />
+        </div>
+      <?php 
+            } elseif ( $args['field_name'] == 'obfuscate_file_urls' || $show_info ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  esc_html__( 'Generate long random urls for files, like so:', 'shared-files' ) ;
+                ?><br />
+          <strong>/shared-files/5348-9f13c19ce03475aa0565010094d83678/this-is-a-file.pdf</strong><br /><br />
+          <?php 
+                echo  esc_html__( "Files can't be opened without knowing the exact long part before the filename.", 'shared-files' ) ;
+                ?><br />
+        </div>
+      <?php 
+            } elseif ( $args['field_name'] == 'remove_obsolete_file_metadata_automatically' ) {
+                ?>
+        <div class="email-info">
+          <?php 
+                echo  esc_html__( "If a file isn't readable or doesn't exist at all (you may have manually deleted the file from the server), you may want to delete the file metadata automatically, so there won't be an error message in the frontend file list.", 'shared-files' ) ;
+                ?><br /><br />
+          <?php 
+                echo  esc_html__( "If this setting is checked, the related file metadata is automatically moved to trash.", 'shared-files' ) ;
+                ?>
         </div>
       <?php 
             } elseif ( isset( $args['placeholder'] ) && $args['placeholder'] ) {

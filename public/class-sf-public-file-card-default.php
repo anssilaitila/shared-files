@@ -23,7 +23,7 @@ class SharedFilesPublicFileCardDefault
         }
         
         if ( $file_realpath && !is_readable( $file_realpath ) ) {
-            $html = '<li><div class="shared-files-permission-denied-for"><b>' . sanitize_text_field( __( "Can't read file (permission denied):", 'shared-files' ) ) . '</b><br />' . sanitize_text_field( $file_realpath ) . '</div></li>';
+            $html = '<li><div class="shared-files-permission-denied-for"><b>' . sanitize_text_field( __( "Can't read file (permission denied or file not found):", 'shared-files' ) ) . '</b><br />' . sanitize_text_field( $file_realpath ) . '</div></li>';
             return $html;
         }
         
