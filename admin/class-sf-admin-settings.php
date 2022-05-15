@@ -1773,7 +1773,116 @@ class Shared_Files_Settings
             )
             );
         }
-    
+        
+        $tab = 13;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        add_settings_field(
+            'shared-files-simple_list_show_titles_for_columns',
+            sanitize_text_field( __( 'Show titles for columns', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-simple_list_show_titles_for_columns',
+            'field_name' => 'simple_list_show_titles_for_columns',
+        )
+        );
+        add_settings_field(
+            'shared-files-simple_list_hide_file_description',
+            sanitize_text_field( __( 'Hide file description', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-simple_list_hide_file_description',
+            'field_name' => 'simple_list_hide_file_description',
+        )
+        );
+        add_settings_field(
+            'shared-files-simple_list_title_file',
+            sanitize_text_field( __( 'Title for file column', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-simple_list_title_file',
+            'field_name' => 'simple_list_title_file',
+        )
+        );
+        $custom_fields_cnt = 3 + 1;
+        for ( $n = 1 ;  $n < $custom_fields_cnt ;  $n++ ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'simple_list_show_custom_field_' . $n,
+                sanitize_text_field( __( 'Show custom field', 'shared-files' ) . ' ' . $n ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'simple_list_show_custom_field_' . $n,
+                'field_name' => $only_pro . 'simple_list_show_custom_field_' . $n,
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'simple_list_title_custom_field_' . $n,
+                sanitize_text_field( __( 'Title for custom field', 'shared-files' ) . ' ' . $n ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'simple_list_title_custom_field_' . $n,
+                'field_name' => $only_pro . 'simple_list_title_custom_field_' . $n,
+            )
+            );
+        }
+        add_settings_field(
+            'shared-files-' . $only_pro . 'simple_list_show_category',
+            sanitize_text_field( __( 'Show category', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'simple_list_show_category',
+            'field_name' => $only_pro . 'simple_list_show_category',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'simple_list_title_category',
+            sanitize_text_field( __( 'Title for category column', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'simple_list_title_category',
+            'field_name' => $only_pro . 'simple_list_title_category',
+        )
+        );
+        add_settings_field(
+            'shared-files-simple_list_show_tag',
+            sanitize_text_field( __( 'Show tag', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-simple_list_show_tag',
+            'field_name' => 'simple_list_show_tag',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'simple_list_title_tag',
+            sanitize_text_field( __( 'Title for tag column', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'simple_list_title_tag',
+            'field_name' => $only_pro . 'simple_list_title_tag',
+        )
+        );
     }
     
     public function checkbox_render( $args )
@@ -2767,6 +2876,13 @@ class Shared_Files_Settings
         echo  '<h2>' . esc_html__( 'Wait countdown page', 'shared-files' ) . '</h2>' ;
     }
     
+    public function shared_files_settings_tab_13_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-13">' ;
+        echo  '<h2>' . esc_html__( 'Simple list', 'shared-files' ) . '</h2>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -2812,6 +2928,10 @@ class Shared_Files_Settings
         ?></span></li>
           <li class="shared-files-settings-tab-10-title" data-settings-container="shared-files-settings-tab-10"><span><?php 
         echo  esc_html__( 'File edit', 'shared-files' ) ;
+        ?></span></li>
+
+          <li class="shared-files-settings-tab-13-title" data-settings-container="shared-files-settings-tab-13"><span><?php 
+        echo  esc_html__( 'Simple list', 'shared-files' ) ;
         ?></span></li>
           
           <?php 

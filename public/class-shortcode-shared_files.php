@@ -284,7 +284,7 @@ class ShortcodeSharedFiles
             if ( $wpb_all_query_all_files->have_posts() ) {
                 $html .= '<ul class="shared-files-main-file-list shared-files-ajax-list">';
                 
-                if ( isset( $atts['hide_files_first'] ) && !isset( $_GET ) ) {
+                if ( isset( $atts['hide_files_first'] ) ) {
                     // ...
                 } else {
                     while ( $wpb_all_query->have_posts() ) {
@@ -359,8 +359,10 @@ class ShortcodeSharedFiles
                 $html .= '</ul>';
             }
             
-            if ( !$limit_posts ) {
-                $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wpb_all_query, $embed_id );
+            if ( !isset( $atts['hide_files_first'] ) ) {
+                if ( !$limit_posts ) {
+                    $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wpb_all_query, $embed_id );
+                }
             }
             $html .= '<div class="shared-files-nothing-found">';
             $html .= sanitize_text_field( __( 'No files found.', 'shared-files' ) );

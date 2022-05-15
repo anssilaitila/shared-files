@@ -95,9 +95,13 @@ class SharedFilesPublicHelpers
     
     public static function sharedFilesSimpleMarkup( $wp_query, $include_children = 0, $atts = array() )
     {
+        $s = get_option( 'shared_files_settings' );
         $html = '';
         $html .= '<div class="shared-files-search">';
         $html .= '<div class="shared-files-simple-list">';
+        if ( isset( $s['simple_list_show_titles_for_columns'] ) ) {
+            $html .= SharedFilesPublicHelpers::singleFileSimpleTitlesMarkup( $atts );
+        }
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
@@ -108,6 +112,23 @@ class SharedFilesPublicHelpers
         $html .= '</div><hr class="clear" />';
         $html .= '</div>';
         wp_reset_postdata();
+        return $html;
+    }
+    
+    public static function singleFileSimpleTitlesMarkup( $atts = array() )
+    {
+        $s = get_option( 'shared_files_settings' );
+        $html = '';
+        $html .= '<div class="shared-files-simple-list-row">';
+        $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name shared-files-simple-list-col-title"><span>' . SharedFilesHelpers::getText( 'simple_list_title_file', __( 'File', 'shared-files' ) ) . '</span></div>';
+        
+        if ( isset( $s['simple_list_show_tag'] ) ) {
+            $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-title"><span>';
+            $html .= SharedFilesHelpers::getText( 'simple_list_title_tag', __( 'Tag', 'shared-files' ) );
+            $html .= '</span></div>';
+        }
+        
+        $html .= '</div>';
         return $html;
     }
     
@@ -122,7 +143,8 @@ class SharedFilesPublicHelpers
         $html = '';
         $html .= '<div class="shared-files-simple-list-row">';
         $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name"><span>';
-        $file_url = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
+        //    $file_url = (isset($c['_sf_filename']) ? SharedFilesHelpers::sf_root() . '/shared-files/' . intval( get_the_id() ) . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '');
+        $file_url = SharedFilesPublicHelpers::getFileURL( $file_id );
         $data_file_type = '';
         $data_file_url = '';
         $data_video_url_redir = '';
@@ -150,16 +172,39 @@ class SharedFilesPublicHelpers
             $html .= '<span class="shared-file-size">' . SharedFilesAdminHelpers::human_filesize( sanitize_text_field( $c['_sf_filesize'][0] ) ) . '</span>';
         }
         $html .= SharedFilesHelpers::getPreviewButton( $id, $file_url );
-        if ( isset( $c['_sf_description'] ) ) {
+        if ( !isset( $s['simple_list_hide_file_description'] ) ) {
+            if ( isset( $c['_sf_description'] ) ) {
+                
+                if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] && isset( $c['_sf_description'][0] ) && $c['_sf_description'][0] ) {
+                    $html .= '<p>' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</p>';
+                } else {
+                    $html .= wp_kses_post( $c['_sf_description'][0] );
+                }
             
-            if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] && isset( $c['_sf_description'][0] ) && $c['_sf_description'][0] ) {
-                $html .= '<p>' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</p>';
-            } else {
-                $html .= wp_kses_post( $c['_sf_description'][0] );
             }
-        
         }
         $html .= '</span></div>';
+        
+        if ( isset( $s['simple_list_show_tag'] ) ) {
+            $html .= '<div class="shared-files-simple-list-col"><span>';
+            $terms = get_the_terms( $id, 'post_tag' );
+            
+            if ( $terms ) {
+                $html .= '<div class="shared-files-simple-tags">';
+                foreach ( $terms as $term ) {
+                    $t_id = intval( $term->term_id );
+                    $custom_fields = get_option( "taxonomy_term_{$t_id}" );
+                    if ( !isset( $custom_fields['hide_group'] ) ) {
+                        $html .= '<span>' . sanitize_text_field( $term->name ) . '</span>';
+                    }
+                }
+                $html .= '</div>';
+            }
+            
+            $html .= '</span></div>';
+        }
+        
+        // row END
         $html .= '</div>';
         return $html;
     }

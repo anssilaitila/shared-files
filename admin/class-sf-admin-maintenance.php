@@ -47,6 +47,8 @@ class SharedFilesAdminMaintenance
                 'show_file_upload_checkboxes_on_multiple_columns' => 'on',
                 'show_download_button'                            => 'on',
                 'show_download_counter'                           => 'on',
+                'simple_list_show_titles_for_columns'             => 'on',
+                'simple_list_title_tag'                           => 'on',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }

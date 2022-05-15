@@ -54,6 +54,16 @@ class ShortcodeSharedFilesSimple
             'meta_query'     => $meta_query_hide_not_public,
             'tax_query'      => $tax_query,
         ) );
+        $wp_query_all_files = new WP_Query( array(
+            'post_type'      => 'shared_file',
+            'post_status'    => 'publish',
+            'posts_per_page' => -1,
+            'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
+            'order'          => SharedFilesHelpers::getOrder( $atts ),
+            'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
+            'meta_query'     => $meta_query_hide_not_public,
+            'tax_query'      => $tax_query,
+        ) );
         if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
             $html .= '<input type="text" class="shared-files-simple-search" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '" data-elem-class="' . $elem_class . '">';
         }
@@ -69,6 +79,15 @@ class ShortcodeSharedFilesSimple
             $html .= '</div>';
         }
         
+        if ( $wp_query_all_files->have_posts() ) {
+            
+            if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
+                $html .= '<div class="shared-files-simple-search-all-files">';
+                $html .= SharedFilesPublicHelpers::SharedFilesSimpleMarkup( $wp_query_all_files, 0, $atts );
+                $html .= '</div>';
+            }
+        
+        }
         if ( !$limit_posts ) {
             $html .= SharedFilesPublicPagination::getPagination( $pagination_active, $wp_query, 'default' );
         }

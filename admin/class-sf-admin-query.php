@@ -112,7 +112,8 @@ class SharedFilesAdminQuery
             wp_die();
         }
         
-        if ( $sf_query ) {
+        $file_id = intval( $file_id );
+        if ( $sf_query && $file_id ) {
             
             if ( $file_id ) {
                 $filesize = 0;
