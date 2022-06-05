@@ -20,9 +20,9 @@ class SharedFilesAdminQuery
         
         if ( is_super_admin() && isset( $_GET['DEBUG_URL_PARTS'] ) ) {
             echo  '<pre>1</pre>' ;
-            echo  '<pre>' . var_dump( esc_html( $url_parts ) ) . '</pre>' ;
+            echo  '<pre>' . esc_html( var_dump( $url_parts ) ) . '</pre>' ;
             echo  '<pre>2</pre>' ;
-            echo  '<pre>' . var_dump( esc_html( $path_parts ) ) . '</pre>' ;
+            echo  '<pre>' . esc_html( var_dump( $path_parts ) ) . '</pre>' ;
             
             if ( sizeof( $path_parts ) > 1 ) {
                 echo  '<pre>3</pre>' ;

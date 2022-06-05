@@ -399,6 +399,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'prevent_search_engines_from_indexing_file_urls',
+            sanitize_text_field( __( 'Prevent search engines from indexing file urls', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'prevent_search_engines_from_indexing_file_urls',
+            'field_name' => $only_pro . 'prevent_search_engines_from_indexing_file_urls',
+        )
+        );
+        add_settings_field(
             'shared-files-wp_location',
             sanitize_text_field( __( 'WordPress location', 'shared-files' ) ),
             array( $this, 'input_render' ),
@@ -2438,7 +2449,19 @@ class Shared_Files_Settings
           <div class="shared-files-setting">
 
               <?php 
-                $val = sanitize_textarea_field( $options[$field_name] );
+                $val = '';
+                ?>
+
+              <?php 
+                
+                if ( isset( $options[$field_name] ) && $options[$field_name] ) {
+                    ?>
+                <?php 
+                    $val = sanitize_textarea_field( $options[$field_name] );
+                    ?>
+              <?php 
+                }
+                
                 ?>
 
               <textarea class="textarea-field" id="shared-files-<?php 
