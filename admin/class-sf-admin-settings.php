@@ -399,6 +399,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-bypass_file_exists_check',
+            sanitize_text_field( __( 'Bypass the file exists check on frontend file list', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-bypass_file_exists_check',
+            'field_name' => 'bypass_file_exists_check',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'prevent_search_engines_from_indexing_file_urls',
             sanitize_text_field( __( 'Prevent search engines from indexing file urls', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),

@@ -49,7 +49,6 @@ class SharedFilesAdminMetadata
             $main_date_formatted = $main_date->format( 'Y-m-d' );
         }
         $password = sanitize_text_field( get_post_meta( $post_id, '_sf_password', true ) );
-        $permission_user_id = intval( get_post_meta( $post_id, '_sf_permission_user_id', true ) );
         
         if ( $media_library_post_id ) {
             $permalink = esc_url_raw( get_permalink( $media_library_post_id ) );
@@ -198,7 +197,7 @@ class SharedFilesAdminMetadata
         /* User START */
         
         if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for user', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only this user will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i></div>' ;
+            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i></div>' ;
             $pro_field_active = 0;
             if ( !$pro_field_active ) {
                 echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
