@@ -37,6 +37,9 @@ class SharedFilesAdminMetadata
         $main_date_formatted = '';
         $notify_email = sanitize_email( get_post_meta( $post_id, '_sf_notify_email', true ) );
         $subdir = sanitize_file_name( get_post_meta( $post_id, '_sf_subdir', true ) );
+        if ( $subdir == '/' ) {
+            $subdir = '';
+        }
         $embed_post_id = intval( get_post_meta( $post_id, '_sf_embed_post_id', true ) );
         $embed_post_title = sanitize_text_field( get_post_meta( $post_id, '_sf_embed_post_title', true ) );
         $not_public = sanitize_text_field( get_post_meta( $post_id, '_sf_not_public', true ) );
