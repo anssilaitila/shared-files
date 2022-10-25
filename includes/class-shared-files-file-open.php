@@ -16,7 +16,25 @@ class SharedFilesFileOpen {
 
   public static function getUpdatedPathAndFilename($filename_with_path = '', $file_id = 0) {
 
-    if (substr( $filename_with_path, 0, 5 ) === 'iu://') {
+    $final_path_and_filename = '';
+
+    if (substr( $filename_with_path, 1, 1 ) === ':') {
+      
+      $wp_upload_dir = wp_upload_dir();
+      $filename_parts = parse_url($filename_with_path);
+      
+      if (isset($filename_parts['path'])) {
+        $filename_path_parts = explode('/', $filename_parts['path']);
+        $removed = array_shift( $filename_path_parts );
+      }
+      
+      if (is_array($filename_path_parts) && $filename_path_parts[0] != 'shared-files') {
+        \array_splice($filename_path_parts, 0, 1);
+      }
+      
+      $final_path_and_filename = $wp_upload_dir['basedir'] . '/' . implode('/', $filename_path_parts);
+
+    } elseif (substr( $filename_with_path, 0, 5 ) === 'iu://') {
 
       $wp_upload_dir = wp_upload_dir();
       $filename_parts = parse_url($filename_with_path);
