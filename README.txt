@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.87
+Stable tag: 1.6.88
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,7 +81,6 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Limit number of downloads per file
 * Multi-file upload to a specific category
 * A full-featured download manager plugin
-* More features on the way based on user feedback
 
 Contact the author [here](https://www.sharedfilespro.com/support/).
 
@@ -142,6 +141,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.88 - 2022-11-15 =
+* Freemius WordPress SDK update (2.5.2)
 
 = 1.6.87 - 2022-11-06 =
 * WordPress 6.1 compatibility update
