@@ -57,7 +57,7 @@ class SharedFilesAdminMaintenance
     
     public function update_db_check_v2()
     {
-        $installed_version = get_site_option( 'shared_files_version' );
+        $installed_version = get_option( 'shared_files_version' );
         
         if ( $installed_version != SHARED_FILES_VERSION ) {
             global  $wpdb ;

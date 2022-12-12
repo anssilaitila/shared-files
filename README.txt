@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.88
+Stable tag: 1.6.90
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -141,6 +141,15 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.90 - 2022-12-12 =
+* (Free + All plans) Issue with the debug log filling on multisite installations fixed
+
+= 1.6.89 - 2022-12-11 =
+* (Professional + Business) New parameter for shortcode [shared_files_restricted], show files from specific category: [shared_files_restricted category=category-name]
+* (Professional + Business) New parameter, exclude categories (by slug): [shared_files_restricted exclude_cat="category-1,category-2"]
+* (All plans) Fix: the file field "Notification email" is now saved properly
+* (Free + All plans) Tweaks and fixes
 
 = 1.6.88 - 2022-11-15 =
 * Freemius WordPress SDK update (2.5.2)

@@ -394,6 +394,10 @@ class SharedFilesAdminShortcodes {
 
                 <li><?php echo esc_html__('Enable the front-end editor', 'shared-files') ?>: <span class="sf-new-feature-inline" style="color: #3c434a;"><?php echo esc_html__('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
+                <li><?php echo esc_html__('Show files from a specific category', 'shared-files') ?>: <span class="sf-new-feature-inline" style="color: #3c434a;"><?php echo esc_html__('New', 'shared-files') ?></span> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button>. <?php echo esc_html__('You can find / define the category slug by editing the category.', 'shared-files'); ?></li>
+
+                <li><?php echo esc_html__('Exclude categories (by slug):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
               </ul>
             
             </li>

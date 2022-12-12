@@ -7,5 +7,10 @@
     "wp-phpunit/wp-phpunit": "^5.0",
     "automattic/vipwpcs": "^1.0",
     "wp-coding-standards/wpcs": "^1.0"
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }

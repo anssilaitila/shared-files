@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.6.88\n"
+"Project-Id-Version: Shared Files 1.6.90\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-15T15:17:06+02:00\n"
+"POT-Creation-Date: 2022-12-12T16:31:00+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: shared-files\n"
@@ -162,26 +162,28 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:391
 #: admin/class-sf-admin-shortcodes.php:393
 #: admin/class-sf-admin-shortcodes.php:395
-#: admin/class-sf-admin-shortcodes.php:424
-#: admin/class-sf-admin-shortcodes.php:430
-#: admin/class-sf-admin-shortcodes.php:432
+#: admin/class-sf-admin-shortcodes.php:397
+#: admin/class-sf-admin-shortcodes.php:399
+#: admin/class-sf-admin-shortcodes.php:428
 #: admin/class-sf-admin-shortcodes.php:434
 #: admin/class-sf-admin-shortcodes.php:436
 #: admin/class-sf-admin-shortcodes.php:438
 #: admin/class-sf-admin-shortcodes.php:440
-#: admin/class-sf-admin-shortcodes.php:468
-#: admin/class-sf-admin-shortcodes.php:492
-#: admin/class-sf-admin-shortcodes.php:497
-#: admin/class-sf-admin-shortcodes.php:520
-#: admin/class-sf-admin-shortcodes.php:540
-#: admin/class-sf-admin-shortcodes.php:545
-#: admin/class-sf-admin-shortcodes.php:546
-#: admin/class-sf-admin-shortcodes.php:547
-#: admin/class-sf-admin-shortcodes.php:571
-#: admin/class-sf-admin-shortcodes.php:576
-#: admin/class-sf-admin-shortcodes.php:598
-#: admin/class-sf-admin-shortcodes.php:601
-#: admin/class-sf-admin-shortcodes.php:604
+#: admin/class-sf-admin-shortcodes.php:442
+#: admin/class-sf-admin-shortcodes.php:444
+#: admin/class-sf-admin-shortcodes.php:472
+#: admin/class-sf-admin-shortcodes.php:496
+#: admin/class-sf-admin-shortcodes.php:501
+#: admin/class-sf-admin-shortcodes.php:524
+#: admin/class-sf-admin-shortcodes.php:544
+#: admin/class-sf-admin-shortcodes.php:549
+#: admin/class-sf-admin-shortcodes.php:550
+#: admin/class-sf-admin-shortcodes.php:551
+#: admin/class-sf-admin-shortcodes.php:575
+#: admin/class-sf-admin-shortcodes.php:580
+#: admin/class-sf-admin-shortcodes.php:602
+#: admin/class-sf-admin-shortcodes.php:605
+#: admin/class-sf-admin-shortcodes.php:608
 #: admin/class-sf-admin-taxonomy.php:101
 msgid "Copy"
 msgstr ""
@@ -1648,12 +1650,12 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:168
 #: admin/class-sf-admin-shortcodes.php:207
 #: admin/class-sf-admin-shortcodes.php:362
-#: admin/class-sf-admin-shortcodes.php:424
-#: admin/class-sf-admin-shortcodes.php:468
-#: admin/class-sf-admin-shortcodes.php:492
-#: admin/class-sf-admin-shortcodes.php:520
-#: admin/class-sf-admin-shortcodes.php:540
-#: admin/class-sf-admin-shortcodes.php:571
+#: admin/class-sf-admin-shortcodes.php:428
+#: admin/class-sf-admin-shortcodes.php:472
+#: admin/class-sf-admin-shortcodes.php:496
+#: admin/class-sf-admin-shortcodes.php:524
+#: admin/class-sf-admin-shortcodes.php:544
+#: admin/class-sf-admin-shortcodes.php:575
 msgid "Insert the shortcode"
 msgstr ""
 
@@ -1686,10 +1688,11 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:349
 #: admin/class-sf-admin-shortcodes.php:393
 #: admin/class-sf-admin-shortcodes.php:395
-#: admin/class-sf-admin-shortcodes.php:410
-#: admin/class-sf-admin-shortcodes.php:438
-#: admin/class-sf-admin-shortcodes.php:440
-#: admin/class-sf-admin-shortcodes.php:547
+#: admin/class-sf-admin-shortcodes.php:397
+#: admin/class-sf-admin-shortcodes.php:414
+#: admin/class-sf-admin-shortcodes.php:442
+#: admin/class-sf-admin-shortcodes.php:444
+#: admin/class-sf-admin-shortcodes.php:551
 msgid "New"
 msgstr ""
 
@@ -1729,7 +1732,8 @@ msgid "Hide tags:"
 msgstr ""
 
 #: admin/class-sf-admin-shortcodes.php:133
-#: admin/class-sf-admin-shortcodes.php:545
+#: admin/class-sf-admin-shortcodes.php:399
+#: admin/class-sf-admin-shortcodes.php:549
 msgid "Exclude categories (by slug):"
 msgstr ""
 
@@ -1899,9 +1903,9 @@ msgid "If you have any questions regarding the items above, you can always conta
 msgstr ""
 
 #: admin/class-sf-admin-shortcodes.php:387
-#: admin/class-sf-admin-shortcodes.php:426
-#: admin/class-sf-admin-shortcodes.php:494
-#: admin/class-sf-admin-shortcodes.php:542
+#: admin/class-sf-admin-shortcodes.php:430
+#: admin/class-sf-admin-shortcodes.php:498
+#: admin/class-sf-admin-shortcodes.php:546
 msgid "Additional parameters:"
 msgstr ""
 
@@ -1917,85 +1921,90 @@ msgstr ""
 msgid "Enable the front-end editor"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:407
-msgid "Accordion"
+#: admin/class-sf-admin-shortcodes.php:397
+msgid "Show files from a specific category"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:430
-msgid "Group and order files by month"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:432
-msgid "Group files by month and use the \"file date\" as date (default is file publish date)"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:434
-msgid "Only the following categories"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:436
-msgid "Exclude categories"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:438
-#: admin/class-sf-admin-shortcodes.php:547
-msgid "Restrict file list by permissions"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:440
-msgid "Enable the front-end file editor"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:455
-msgid "Favorite files"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:479
-msgid "Search form only that targets all the files, sorted by category"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:497
-msgid "Don't sort by categories"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:507
-msgid "List only files in certain category"
-msgstr ""
-
-#: admin/class-sf-admin-shortcodes.php:520
-#: admin/class-sf-admin-shortcodes.php:540
+#: admin/class-sf-admin-shortcodes.php:397
+#: admin/class-sf-admin-shortcodes.php:524
+#: admin/class-sf-admin-shortcodes.php:544
 msgid "You can find / define the category slug by editing the category."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:530
+#: admin/class-sf-admin-shortcodes.php:411
+msgid "Accordion"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:434
+msgid "Group and order files by month"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:436
+msgid "Group files by month and use the \"file date\" as date (default is file publish date)"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:438
+msgid "Only the following categories"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:440
+msgid "Exclude categories"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:442
+#: admin/class-sf-admin-shortcodes.php:551
+msgid "Restrict file list by permissions"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:444
+msgid "Enable the front-end file editor"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:459
+msgid "Favorite files"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:483
+msgid "Search form only that targets all the files, sorted by category"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:501
+msgid "Don't sort by categories"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:511
+msgid "List only files in certain category"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:534
 msgid "List categories / list files by category"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:540
+#: admin/class-sf-admin-shortcodes.php:544
 msgid "or"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:546
+#: admin/class-sf-admin-shortcodes.php:550
 msgid "Show files under current category, even if there are subcategories present:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:559
+#: admin/class-sf-admin-shortcodes.php:563
 msgid "List a single file"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:576
+#: admin/class-sf-admin-shortcodes.php:580
 msgid "Minimal layout:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:578
+#: admin/class-sf-admin-shortcodes.php:582
 msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:587
+#: admin/class-sf-admin-shortcodes.php:591
 msgid "How to define the order of the files for each shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:593
+#: admin/class-sf-admin-shortcodes.php:597
 msgid "Choose one value from the list separated by \"|\":"
 msgstr ""
 
