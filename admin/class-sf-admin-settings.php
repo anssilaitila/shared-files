@@ -332,6 +332,17 @@ class Shared_Files_Settings
             'placeholder' => sanitize_text_field( __( 'This file is no longer available for download.', 'shared-files' ) ),
         )
         );
+        add_settings_field(
+            'shared-files-disable_download_log',
+            sanitize_text_field( __( 'Disable download log', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-disable_download_log',
+            'field_name' => 'disable_download_log',
+        )
+        );
         $tab = 2;
         add_settings_section(
             'shared-files_tab_' . $tab,
@@ -1905,6 +1916,50 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'simple_list_title_tag',
         )
         );
+        $tab = 14;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'enable_single_contact_page',
+                sanitize_text_field( __( 'Enable single file page', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'enable_single_file_page',
+                'field_name' => $only_pro . 'enable_single_file_page',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'show_files_in_site_search_results',
+                sanitize_text_field( __( 'Show files in site search results', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'show_files_in_site_search_results',
+                'field_name' => $only_pro . 'show_files_in_site_search_results',
+            )
+            );
+            add_settings_field(
+                'shared-files-tag_slug',
+                sanitize_text_field( __( 'Tag taxonomy', 'shared-files' ) ),
+                array( $this, 'tag_slug_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-tag_slug',
+                'field_name' => 'tag_slug',
+            )
+            );
+        }
+    
     }
     
     public function checkbox_render( $args )
@@ -2009,6 +2064,18 @@ class Shared_Files_Settings
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'remove_obsolete_file_metadata_automatically' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( $field_name == '_FREE_enable_single_file_page' ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( $field_name == '_FREE_show_files_in_site_search_results' ) {
                     ?>
           <?php 
                     $plan_required = 'Professional';
@@ -2157,6 +2224,33 @@ class Shared_Files_Settings
                 echo  esc_html( $args['placeholder'] ) ;
                 ?><br />
         </div>
+
+      <?php 
+            } elseif ( $field_name == 'enable_single_file_page' || $field_name == '_FREE_enable_single_file_page' ) {
+                ?>
+            
+        <div class="general-info">
+          <?php 
+                echo  esc_html__( "Each file will have their own page under slug 'shared_file', and as content the regular file card, url being like so:", 'shared-files' ) ;
+                ?>
+          /shared_file/sample-file/<br /><br />
+    
+          <?php 
+                echo  esc_html__( "It's also possible to customize the template by having the file single-shared_file.php in your theme.", 'shared-files' ) ;
+                ?>
+    
+        </div>
+        
+      <?php 
+            } elseif ( $field_name == 'show_files_in_site_search_results' || $field_name == '_FREE_show_files_in_site_search_results' ) {
+                ?>
+          
+          <div class="general-info">
+            <?php 
+                echo  esc_html__( "Show the files in the site search results. Proper function requires also the single file pages enabled.", 'shared-files' ) ;
+                ?>
+          </div>
+
       <?php 
             }
             
@@ -2917,6 +3011,13 @@ class Shared_Files_Settings
         echo  '<h2>' . esc_html__( 'Simple list', 'shared-files' ) . '</h2>' ;
     }
     
+    public function shared_files_settings_tab_14_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-14">' ;
+        echo  '<h2>' . esc_html__( 'Custom post type', 'shared-files' ) . '</h2>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -2982,6 +3083,10 @@ class Shared_Files_Settings
         }
         
         ?>
+
+          <li class="shared-files-settings-tab-14-title" data-settings-container="shared-files-settings-tab-14"><span><?php 
+        echo  esc_html__( 'Custom post type', 'shared-files' ) ;
+        ?></span></li>
           
           <hr class="clear" />
         </ul>
@@ -3333,6 +3438,45 @@ class Shared_Files_Settings
             }
             
             ?>
+        
+      </div>
+      
+      <?php 
+        }
+    
+    }
+    
+    public function tag_slug_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = sanitize_text_field( $options[$args['field_name']] );
+            }
+            ?>    
+  
+      <div class="shared-files-setting-container">
+      
+        <div class="shared-files-setting">
+    
+          <select name="shared_files_settings[<?php 
+            echo  esc_attr( $args['field_name'] ) ;
+            ?>]">
+            <option value="post_tag" <?php 
+            echo  ( $val == 'post_tag' || $val == '' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  esc_html__( 'Same as posts have', 'shared-files' ) ;
+            ?></option>
+            <option value="shared-file-tag" <?php 
+            echo  ( $val == 'shared-file-tag' ? 'selected' : '' ) ;
+            ?>><?php 
+            echo  esc_html__( 'Custom taxonomy', 'shared-files' ) ;
+            ?></option>
+          </select>
+          
+        </div>
         
       </div>
       

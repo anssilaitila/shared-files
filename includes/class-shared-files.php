@@ -109,6 +109,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-cpt.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-taxonomy.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-maintenance.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-operations.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-inline-styles.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-inline-scripts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-send-mail.php';
@@ -116,6 +117,8 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-list.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-metadata.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-shortcodes.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-download-log.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-statistics.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-help-support.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-settings.php';
@@ -173,9 +176,12 @@ class Shared_Files
         $plugin_admin_cpt = new SharedFilesAdminCPT();
         $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
         $plugin_admin_maintenance = new SharedFilesAdminMaintenance();
+        $plugin_admin_operations = new SharedFilesAdminOperations();
         $plugin_admin_inline_styles = new SharedFilesAdminInlineStyles();
         $plugin_admin_inline_scripts = new SharedFilesAdminInlineScripts();
         $plugin_admin_shortcodes = new SharedFilesAdminShortcodes();
+        $plugin_admin_download_log = new SharedFilesAdminDownloadLog();
+        $plugin_admin_statistics = new SharedFilesAdminStatistics();
         $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
         $plugin_admin_query = new SharedFilesAdminQuery();
         $plugin_admin_send_mail = new SharedFilesAdminSendMail();
@@ -196,6 +202,8 @@ class Shared_Files
         $this->loader->add_action( 'plugins_loaded', $plugin_admin_maintenance, 'update_db_check' );
         $this->loader->add_action( 'init', $plugin_admin_maintenance, 'update_db_check_v2' );
         $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );
+        // Admin operations
+        $this->loader->add_filter( 'admin_init', $plugin_admin_operations, 'operations' );
         // CPT
         $this->loader->add_action( 'init', $plugin_admin_cpt, 'create_custom_post_type' );
         // Custom metadata for a file
@@ -271,6 +279,12 @@ class Shared_Files
         // Settings
         $this->loader->add_action( 'admin_menu', $plugin_settings, 'shared_files_add_admin_menu' );
         $this->loader->add_action( 'admin_init', $plugin_settings, 'shared_files_settings_init' );
+        // Download log
+        if ( !isset( $s['disable_download_log'] ) ) {
+            $this->loader->add_action( 'admin_menu', $plugin_admin_download_log, 'register_download_log_page' );
+        }
+        // Statistics
+        $this->loader->add_action( 'admin_menu', $plugin_admin_statistics, 'register_statistics_page' );
         // Shortcodes
         $this->loader->add_action( 'admin_menu', $plugin_admin_shortcodes, 'register_shortcodes_page' );
         // Help & support

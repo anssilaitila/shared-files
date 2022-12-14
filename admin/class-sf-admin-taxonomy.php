@@ -4,7 +4,35 @@ class SharedFilesAdminTaxonomy
 {
     public function create_shared_files_custom_taxonomy()
     {
-        $labels = array(
+        
+        if ( SHARED_FILES_TAG_SLUG != 'post_tag' ) {
+            $labels_tag = array(
+                'name'              => sanitize_text_field( __( 'Tag', 'shared-files' ) ),
+                'singular_name'     => sanitize_text_field( __( 'Tag', 'shared-files' ) ),
+                'search_items'      => sanitize_text_field( __( 'Search Tags', 'shared-files' ) ),
+                'all_items'         => sanitize_text_field( __( 'All Tags', 'shared-files' ) ),
+                'parent_item'       => sanitize_text_field( __( 'Parent Tag', 'shared-files' ) ),
+                'parent_item_colon' => sanitize_text_field( __( 'Parent Tag:', 'shared-files' ) ),
+                'edit_item'         => sanitize_text_field( __( 'Edit Tag', 'shared-files' ) ),
+                'update_item'       => sanitize_text_field( __( 'Update Tag', 'shared-files' ) ),
+                'add_new_item'      => sanitize_text_field( __( 'Add New Tag', 'shared-files' ) ),
+                'new_item_name'     => sanitize_text_field( __( 'New Type Name', 'shared-files' ) ),
+                'menu_name'         => sanitize_text_field( __( 'Tags', 'shared-files' ) ),
+            );
+            register_taxonomy( SHARED_FILES_TAG_SLUG, array( 'shared_file' ), array(
+                'hierarchical'       => false,
+                'labels'             => $labels_tag,
+                'show_ui'            => true,
+                'show_admin_column'  => true,
+                'query_var'          => true,
+                'rewrite'            => array(
+                'slug' => 'tag',
+            ),
+                'publicly_queryable' => false,
+            ) );
+        }
+        
+        $labels_category = array(
             'name'              => sanitize_text_field( __( 'Category', 'shared-files' ) ),
             'singular_name'     => sanitize_text_field( __( 'Category', 'shared-files' ) ),
             'search_items'      => sanitize_text_field( __( 'Search Categories', 'shared-files' ) ),

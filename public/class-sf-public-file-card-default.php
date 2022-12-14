@@ -117,7 +117,7 @@ class SharedFilesPublicFileCardDefault
         $hide_tags = 0;
         
         if ( $show_tags && !$hide_tags ) {
-            $tags = get_the_tags();
+            $tags = get_the_terms( $file_id, SHARED_FILES_TAG_SLUG );
             
             if ( $tags ) {
                 $html .= '<div class="shared-files-tags-container">';

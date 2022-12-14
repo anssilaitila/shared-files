@@ -187,7 +187,7 @@ class SharedFilesPublicHelpers
         
         if ( isset( $s['simple_list_show_tag'] ) ) {
             $html .= '<div class="shared-files-simple-list-col"><span>';
-            $terms = get_the_terms( $id, 'post_tag' );
+            $terms = get_the_terms( $id, SHARED_FILES_TAG_SLUG );
             
             if ( $terms ) {
                 $html .= '<div class="shared-files-simple-tags">';

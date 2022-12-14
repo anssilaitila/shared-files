@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.90
+Stable tag: 1.6.92
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,8 +30,12 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Free version to use as a free file manager and download manager
 * More advanced file manager in the Pro version
 * Share folders and files
+* Statistics of file downloads
+* Download log of all file downloads
 
 = New Features in Shared Files Pro: =
+* Separate pages for single files, e.g. /shared_file/sample-file/
+* Show files in site search results
 * Use the shortcode [shared_files_restricted] to list personal files for the logged in user
 * The logged in user can also upload files, and only site administrator and the user will see the files
 * The logged in user sees only the files that he/she has uploaded and optionally such files that the site administrator has added for them
@@ -141,6 +145,17 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.92 - 2022-12-14 =
+* Bug fixes
+
+= 1.6.91 - 2022-12-14 =
+* New tab in settings: Custom post type
+* (Professional + Business) Separate pages for single files, e.g. /shared_file/sample-file/ (see settings, Custom post type tab)
+* (Professional + Business) Show files in site search results (also in settings, Custom post type tab)
+* (Free + All plans) You can now activate custom tag taxonomy for files instead of the default post tags (settings, Custom post type tab)
+* (Free + All plans) New section at WP admin / Shared Files / Statistics. Top 20 most downloaded files for now, more coming later (you may request some specific statistics at the support forum for free version, for paid version at https://www.sharedfilespro.com/support/).
+* (Free + All plans) New feature: download log. All downloads are now logged, see WP admin / Shared Files / Download log. Download log can be disabled at plugin settings, first tab.
 
 = 1.6.90 - 2022-12-12 =
 * (Free + All plans) Issue with the debug log filling on multisite installations fixed

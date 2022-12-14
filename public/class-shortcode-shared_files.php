@@ -126,6 +126,16 @@ class ShortcodeSharedFiles
                 $meta_query_full = $meta_query_hide_not_public;
             }
             
+            $taxonomy_query = [
+                'relation' => 'AND',
+            ];
+            if ( $tag_slug ) {
+                $taxonomy_query[] = array(
+                    'taxonomy' => SHARED_FILES_TAG_SLUG,
+                    'field'    => 'slug',
+                    'terms'    => $tag_slug,
+                );
+            }
             
             if ( isset( $atts['category'] ) ) {
                 
@@ -138,17 +148,19 @@ class ShortcodeSharedFiles
                 
                 if ( isset( $_GET['sf_category'] ) && $_GET['sf_category'] != '0' ) {
                     $term_slug = sanitize_title( $_GET['sf_category'] );
+                    if ( $term_slug ) {
+                        $taxonomy_query[] = array(
+                            'taxonomy'         => 'shared-file-category',
+                            'field'            => 'slug',
+                            'terms'            => $term_slug,
+                            'include_children' => true,
+                        );
+                    }
                     $wpb_all_query = new WP_Query( array(
                         'post_type'      => 'shared_file',
                         'post_status'    => 'publish',
                         'posts_per_page' => -1,
-                        'tag'            => $tag_slug,
-                        'tax_query'      => array( array(
-                        'taxonomy'         => 'shared-file-category',
-                        'field'            => 'slug',
-                        'terms'            => $term_slug,
-                        'include_children' => true,
-                    ) ),
+                        'tax_query'      => $taxonomy_query,
                         'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                         'order'          => SharedFilesHelpers::getOrder( $atts ),
                         'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
@@ -173,17 +185,19 @@ class ShortcodeSharedFiles
                     
                     if ( isset( $_GET['c'] ) && $_GET['c'] != 'all_files' ) {
                         $term_slug = sanitize_title( $_GET['c'] );
+                        if ( $term_slug ) {
+                            $taxonomy_query[] = array(
+                                'taxonomy'         => 'shared-file-category',
+                                'field'            => 'slug',
+                                'terms'            => $term_slug,
+                                'include_children' => true,
+                            );
+                        }
                         $wpb_all_query = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
                             'posts_per_page' => -1,
-                            'tag'            => $tag_slug,
-                            'tax_query'      => array( array(
-                            'taxonomy'         => 'shared-file-category',
-                            'field'            => 'slug',
-                            'terms'            => $term_slug,
-                            'include_children' => true,
-                        ) ),
+                            'tax_query'      => $taxonomy_query,
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
@@ -243,12 +257,18 @@ class ShortcodeSharedFiles
                             );
                         }
                         
+                        if ( $tag_slug ) {
+                            $tax_query[] = array(
+                                'taxonomy' => SHARED_FILES_TAG_SLUG,
+                                'field'    => 'slug',
+                                'terms'    => $tag_slug,
+                            );
+                        }
                         $wpb_all_query = new WP_Query( array(
                             'post_type'      => 'shared_file',
                             'post_status'    => 'publish',
                             'paged'          => $paged,
                             'posts_per_page' => $posts_per_page,
-                            'tag'            => $tag_slug,
                             'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                             'order'          => SharedFilesHelpers::getOrder( $atts ),
                             'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),

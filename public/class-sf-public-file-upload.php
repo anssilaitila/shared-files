@@ -68,7 +68,7 @@ class SharedFilesFileUpload
         
         
         if ( isset( $atts['tag_dropdown'] ) || isset( $s['show_tag_dropdown_on_file_upload'] ) ) {
-            $tag_slug_for_dropdown = 'post_tag';
+            $tag_slug_for_dropdown = SHARED_FILES_TAG_SLUG;
             if ( get_taxonomy( $tag_slug_for_dropdown ) ) {
                 $html .= wp_dropdown_categories( [
                     'show_option_all' => ' ',
@@ -89,7 +89,7 @@ class SharedFilesFileUpload
             
             if ( isset( $atts['tag_checkboxes'] ) || isset( $s['show_tag_checkboxes_on_file_upload'] ) ) {
                 $taglist_args = [
-                    'taxonomy' => 'post_tag',
+                    'taxonomy' => SHARED_FILES_TAG_SLUG,
                     'echo'     => 0,
                 ];
                 $html .= '<span class="sf-taglist-title">' . sanitize_text_field( __( 'Tags', 'shared-files' ) ) . '</span><ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
@@ -161,20 +161,20 @@ class SharedFilesFileUpload
             }
             
             
-            if ( isset( $_POST['post_tag'] ) ) {
-                $cat_slug = sanitize_title( $_POST['post_tag'] );
-                $cat = get_term_by( 'slug', sanitize_title( $cat_slug ), 'post_tag' );
+            if ( isset( $_POST[SHARED_FILES_TAG_SLUG] ) ) {
+                $cat_slug = sanitize_title( $_POST[SHARED_FILES_TAG_SLUG] );
+                $cat = get_term_by( 'slug', sanitize_title( $cat_slug ), SHARED_FILES_TAG_SLUG );
                 if ( $cat ) {
-                    wp_set_object_terms( $id, intval( $cat->term_id ), 'post_tag' );
+                    wp_set_object_terms( $id, intval( $cat->term_id ), SHARED_FILES_TAG_SLUG );
                 }
             }
             
             
-            if ( isset( $_POST['tax_input']['post_tag'] ) && ($tags = $_POST['tax_input']['post_tag']) ) {
+            if ( isset( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) && ($tags = $_POST['tax_input'][SHARED_FILES_TAG_SLUG]) ) {
                 $tags_int = array_map( function ( $value ) {
                     return (int) $value;
                 }, $tags );
-                wp_set_post_terms( $id, $tags_int, 'post_tag' );
+                wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
             }
             
             

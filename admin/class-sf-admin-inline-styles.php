@@ -15,13 +15,21 @@ class SharedFilesAdminInlineStyles {
     
     $css = '';
 
+    $css .= '#menu-posts-shared_file > ul > li:nth-of-type(7) {';
+    $css .= 'border-bottom: 1px solid rgb(110, 110, 110);';      
+    $css .= '}';
+
+    $css .= '#menu-posts-shared_file > ul > li:nth-of-type(8) {';
+    $css .= 'border-bottom: 1px solid rgb(110, 110, 110);';      
+    $css .= '}';
+
     if ($current_screen_id !== 'shared_file_page_shared-files-sync-files' && $current_screen_id !== 'shared_file_page_shared-files-sync-media-library') {
     
       $css .= '#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-sync-media-library"] { display: none; visibility: hidden; }';
       
     } 
     
-    if ($current_screen_id !== 'shared_file_page_shared-files-support' && $current_screen_id !== 'shared_file_page_shared-files-restrict-access') {
+    if ($current_screen_id !== 'shared_file_page_shared-files-shortcodes' && $current_screen_id !== 'shared_file_page_shared-files-restrict-access') {
     
       $css .= '#adminmenu a[href="edit.php?post_type=shared_file&page=shared-files-restrict-access"] { display: none; visibility: hidden; }';
       

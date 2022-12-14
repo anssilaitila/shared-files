@@ -37,19 +37,29 @@ class SharedFilesPublicAjax
         );
         $meta_query_full[] = $meta_query_hide_not_public;
         $meta_query_full[] = $meta_query;
+        $tax_query = [
+            'relation' => 'AND',
+        ];
+        if ( $tag_slug ) {
+            $tax_query[] = array(
+                'taxonomy' => SHARED_FILES_TAG_SLUG,
+                'field'    => 'slug',
+                'terms'    => $tag_slug,
+            );
+        }
         
         if ( $term_slug ) {
-            $wp_query = new WP_Query( array(
-                'post_type'      => 'shared_file',
-                'post_status'    => 'publish',
-                'posts_per_page' => -1,
-                'tag'            => $tag_slug,
-                'tax_query'      => array( array(
+            $tax_query[] = array(
                 'taxonomy'         => 'shared-file-category',
                 'field'            => 'slug',
                 'terms'            => $term_slug,
                 'include_children' => true,
-            ) ),
+            );
+            $wp_query = new WP_Query( array(
+                'post_type'      => 'shared_file',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'tax_query'      => $tax_query,
                 'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                 'order'          => SharedFilesHelpers::getOrder( $atts ),
                 'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
@@ -60,7 +70,7 @@ class SharedFilesPublicAjax
                 'post_type'      => 'shared_file',
                 'post_status'    => 'publish',
                 'posts_per_page' => -1,
-                'tag'            => $tag_slug,
+                'tax_query'      => $tax_query,
                 'orderby'        => SharedFilesHelpers::getOrderBy( $atts ),
                 'order'          => SharedFilesHelpers::getOrder( $atts ),
                 'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),

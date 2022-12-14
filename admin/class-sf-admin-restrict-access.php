@@ -4,10 +4,10 @@ class SharedFilesAdminRestrictAccess {
 
   public function register_page() {
 
-    $menu_pos = 8;
+    $menu_pos = 9;
 
     if (SharedFilesHelpers::isPremium() == 1) {
-      $menu_pos = 9;
+      $menu_pos = 10;
     }
     
     add_submenu_page(
@@ -28,14 +28,8 @@ class SharedFilesAdminRestrictAccess {
     <div class="shared-files-sync-files">
       <h1><?php echo esc_html__('Restrict access to files on server level', 'shared-files'); ?></h1>
 
-      <?php if (0): ?>
-        <p>
-          <?php echo esc_html__('The following information should be noted when using the password protection or restricting the access to files for specific users and roles.', 'shared-files') ?>
-        </p>
-      <?php endif; ?>
-
       <div style="background: #fff; display: inline-block; padding: 1rem; font-size: 15px;">
-        <?php echo esc_html__('The following information should be noted <b>when using the password protection or restricting the access to files for specific users and roles</b>.', 'shared-files') ?>
+        <?php echo esc_html__('The following information should be noted when using the password protection or restricting the access to files for specific users and roles.', 'shared-files') ?>
       </div>
       
       <hr class="clear" />

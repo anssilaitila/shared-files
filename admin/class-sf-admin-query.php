@@ -177,6 +177,21 @@ class SharedFilesAdminQuery
                     // Update load counter (2/2)
                     update_post_meta( $file_id, '_sf_load_cnt', intval( $load_cnt ) + 1 );
                     
+                    if ( !isset( $s['disable_download_log'] ) ) {
+                        global  $wpdb ;
+                        $report = '';
+                        $wpdb->insert( $wpdb->prefix . 'shared_files_download_log', array(
+                            'file_id'      => intval( $file_id ),
+                            'file_title'   => sanitize_text_field( get_the_title( $file_id ) ),
+                            'file_name'    => sanitize_text_field( $filename ),
+                            'file_size'    => sanitize_text_field( $filesize ),
+                            'ip'           => '',
+                            'download_cnt' => intval( $load_cnt ) + 1,
+                            'report'       => $report,
+                        ) );
+                    }
+                    
+                    
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );
                         $file_url = esc_url_raw( $file['url'] );

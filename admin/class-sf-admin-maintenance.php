@@ -49,6 +49,7 @@ class SharedFilesAdminMaintenance
                 'show_download_counter'                           => 'on',
                 'simple_list_show_titles_for_columns'             => 'on',
                 'simple_list_title_tag'                           => 'on',
+                'shared-file-tag'                                 => 'shared-file-tag',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }
@@ -65,6 +66,9 @@ class SharedFilesAdminMaintenance
             // Table for debug data and general log
             $table_name_log = $wpdb->prefix . 'shared_files_log';
             $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        title           VARCHAR(255) NOT NULL,\n        message         TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
+            // Table for file download log
+            $table_name_download_log = $wpdb->prefix . 'shared_files_download_log';
+            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_download_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        file_id         VARCHAR(255) NOT NULL,\n        file_title      VARCHAR(255) NOT NULL,\n        file_name       VARCHAR(255) NOT NULL,\n        file_size       VARCHAR(255) NOT NULL,\n        ip              VARCHAR(255) NOT NULL,\n        download_cnt    MEDIUMINT NOT NULL,\n        report          TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
             update_option( 'shared_files_version', SHARED_FILES_VERSION );
             SharedFilesHelpers::writeLog( 'Plugin updated to version ' . SHARED_FILES_VERSION, '' );
         }

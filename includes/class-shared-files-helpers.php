@@ -196,7 +196,7 @@ class SharedFilesHelpers
         $html = '';
         
         if ( $tag_slug ) {
-            $current_tag = get_term_by( 'slug', $tag_slug, 'post_tag' );
+            $current_tag = get_term_by( 'slug', $tag_slug, SHARED_FILES_TAG_SLUG );
             $html .= '<div class="' . esc_attr( $type ) . '">';
             $html .= '<span class="shared-files-tag-title">' . sanitize_text_field( $current_tag->name ) . '</span>';
             $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . esc_attr( $hide_description ) . '" href="./?sf_tag=0">' . sanitize_text_field( __( 'Show all files', 'shared-files' ) ) . '</a>';
