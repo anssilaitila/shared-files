@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.6.92
+ * Version:           1.6.93
  * Author:            Shared Files PRO
  * Author URI:        https://www.sharedfilespro.com
  * License:           GPL-2.0+
@@ -140,12 +140,18 @@ if ( function_exists( 'shared_files_fs' ) ) {
         10,
         6
     );
+    function shared_files_fs_custom_icon()
+    {
+        return dirname( __FILE__ ) . '/img/plugin-icon/icon.svg';
+    }
+    
+    shared_files_fs()->add_filter( 'plugin_icon', 'shared_files_fs_custom_icon' );
     /**
      * Currently plugin version.
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.6.92' );
+    define( 'SHARED_FILES_VERSION', '1.6.93' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**

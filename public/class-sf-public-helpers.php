@@ -7,7 +7,7 @@ class SharedFilesPublicHelpers
         $html = '';
         $html .= '<div class="shared-files-public-pro-feature">';
         $html .= '<span class="shared-files-public-pro-feature-title">';
-        $html .= sanitize_text_field( __( 'This feature is available in the Pro version.', 'shared-files' ) );
+        $html .= sanitize_text_field( __( 'This feature is available in the paid plans.', 'shared-files' ) );
         $html .= '</span>';
         $html .= '<span>';
         $html .= sanitize_text_field( __( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . __( 'and', 'shared-files' ) . ' [shared_files_simple].' );

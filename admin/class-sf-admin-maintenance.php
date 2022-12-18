@@ -49,7 +49,7 @@ class SharedFilesAdminMaintenance
                 'show_download_counter'                           => 'on',
                 'simple_list_show_titles_for_columns'             => 'on',
                 'simple_list_title_tag'                           => 'on',
-                'shared-file-tag'                                 => 'shared-file-tag',
+                'tag_slug'                                        => 'shared-file-tag',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }

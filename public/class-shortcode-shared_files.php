@@ -114,7 +114,19 @@ class ShortcodeSharedFiles
             
             $html .= '<div ' . $container_embed_id . ' class="shared-files-container shared-files-type-' . $type . ' ' . (( $layout ? 'shared-files-' . esc_attr( $layout ) : '' )) . '">';
             $html .= '<div class="shared-files-search">';
-            $is_premium = 0;
+            
+            if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
+                $html .= '<div class="shared-files-search-form-container"><form class="shared-files-ajax-form" onsubmit="return false;" data-elem-class="' . $elem_class . '">';
+                if ( !isset( $atts['hide_search_for_all_files'] ) ) {
+                    $html .= '<div class="shared-files-search-input-container"><input type="text"  class="shared-files-search-files-input shared-files-search-files" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" data-elem-class="' . $elem_class . '" /></div>';
+                }
+                $is_premium = 0;
+                // .shared-files-search-form-container
+                $html .= '</form>';
+                // .shared-files-ajax-form
+                $html .= '</div>';
+            }
+            
             
             if ( $custom_fields_active ) {
                 $meta_query_full = array(

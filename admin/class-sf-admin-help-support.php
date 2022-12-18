@@ -118,7 +118,7 @@ class SharedFilesAdminHelpSupport
           <li>
 
             <?php 
-        echo  esc_html__( 'Insert either one of these shortcodes to any page or post:', 'shared-files' ) ;
+        echo  esc_html__( 'Insert one of these shortcodes to any page or post:', 'shared-files' ) ;
         ?><br />
   
             <ul>

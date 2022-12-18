@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.92
+Stable tag: 1.6.93
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,6 +20,8 @@ Very easy to use and no complex settings to mind on, but also very scalable for 
 See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-files/).
 
 = An easy to use download manager with file upload =
+* Fast search targeting file names and descriptions
+* Add tags to files, either using same tags as posts or using a custom taxonomy
 * Store files using this download manager plugin instead of media library
 * Preview files in browser
 * Open images and YouTube-videos in a lightbox
@@ -44,6 +46,8 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Wait countdown page for all downloads: all download links can be redirected to one universal download page, including a countdown timer, other content and automatic file download
 
 = Key Features in Shared Files Free: =
+* Search from all files
+* Classify files using tags
 * Front-end file upload with support for tags, logged-in users can also delete their uploaded files
 * Download counter
 * Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
@@ -56,10 +60,8 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Custom images/icons for many file types
 * WordPress Multisite compatible
 * Infinite Uploads compatible
-* Add tags to files
 
 = Key Features in Shared Files Pro: =
-* Fast search targeting file names and descriptions
 * Front-end file editor: allow any user roles to edit files from the front-end
 * Favorite files for logged in and/or non-logged in users
 * Wait countdown page for all downloads
@@ -145,6 +147,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.93 - 2022-12-18 =
+* Various tweaks and fixes
 
 = 1.6.92 - 2022-12-14 =
 * Bug fixes

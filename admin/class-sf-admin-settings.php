@@ -41,19 +41,20 @@ class Shared_Files_Settings
             'placeholder' => sanitize_text_field( __( 'Downloads:', 'shared-files' ) ),
         )
         );
+        add_settings_field(
+            'shared-files-hide_search_form',
+            sanitize_text_field( __( 'Hide search form', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'   => 'shared-files-hide_search_form',
+            'field_name'  => 'hide_search_form',
+            'placeholder' => sanitize_text_field( __( 'The search form is automatically visible unless hidden by this setting or by a shortcode parameter.', 'shared-files' ) ),
+        )
+        );
         
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'show_search_form',
-                sanitize_text_field( __( 'Show search form', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_section_general',
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'show_search_form',
-                'field_name' => $only_pro . 'show_search_form',
-            )
-            );
             add_settings_field(
                 'shared-files-' . $only_pro . 'show_tag_dropdown',
                 sanitize_text_field( __( 'Show tag filter', 'shared-files' ) ),
@@ -99,18 +100,6 @@ class Shared_Files_Settings
             )
             );
         } else {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'hide_search_form',
-                sanitize_text_field( __( 'Hide search form', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_section_general',
-                array(
-                'label_for'   => 'shared-files-' . $only_pro . 'hide_search_form',
-                'field_name'  => $only_pro . 'hide_search_form',
-                'placeholder' => sanitize_text_field( __( 'The search form is automatically visible unless hidden by this setting or by a shortcode parameter.', 'shared-files' ) ),
-            )
-            );
             add_settings_field(
                 'shared-files-' . $only_pro . 'show_tag_dropdown',
                 sanitize_text_field( __( 'Show tag filter', 'shared-files' ) ),

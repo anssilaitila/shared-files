@@ -147,6 +147,7 @@ class SharedFilesAdminMetadata
         echo  '<div id="shared-file-main-date-title"><strong>' . esc_html__( 'File date', 'shared-files' ) . '</strong><br /><i>' . esc_html__( 'This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings.', 'shared-files' ) . '</i></div><input id="shared-file-main-date" name="_sf_main_date" type="date" value="' . esc_attr( $main_date_formatted ) . '" />' ;
         $pro_field_active = 0;
         $field_in_pro_class = 'shared-files-field-in-pro-greyed-out';
+        $field_in_pro_more_features_class = 'shared-files-admin-free-more-features';
         $field_in_all_plans_markup = '<div class="shared-files-field-in-pro-container">';
         $field_in_all_plans_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
         $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>All Plans</span></div>';
@@ -172,6 +173,9 @@ class SharedFilesAdminMetadata
         ],
             'span' => [],
         ];
+        /* Paid plans START */
+        echo  '<div class="shared-files-admin-more-features-button-container ' . esc_attr( $field_in_pro_more_features_class ) . '""><button class="shared-files-admin-button">' . esc_html__( 'More features', 'shared-files' ) . '</button></div>' ;
+        echo  '<div class="shared-files-admin-more-features-container ' . esc_attr( $field_in_pro_more_features_class ) . '">' ;
         /* External URL START */
         echo  '<div id="shared-file-external-url-title" class="' . esc_attr( $field_in_pro_class ) . '">' ;
         echo  '<span>' . esc_html__( 'External URL', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Instead of adding a local file, you may provide an external URL to a file located elsewhere.', 'shared-files' ) . '<br />' . esc_html__( 'Note: if the external URL is defined, the file above will not be saved.', 'shared-files' ) . '</i></div>' ;
@@ -263,12 +267,23 @@ class SharedFilesAdminMetadata
         
         /* Custom fields END */
         echo  '<hr class="clear" /></div>' ;
+        echo  '</div>' ;
+        /* Paid plans END */
         /* Description START */
-        echo  '<div id="shared-file-description-title" class="' . esc_attr( $field_in_pro_class ) . '">' . esc_html__( 'Description', 'shared-files' ) . '</div>' ;
-        $pro_field_active = 0;
-        if ( !$pro_field_active ) {
-            echo  wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags ) ;
+        echo  '<div id="shared-file-description-title">' . esc_html__( 'Description', 'shared-files' ) . '</div>' ;
+        
+        if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+            echo  '<textarea name="_sf_description" class="shared-files-admin-field-file-description">' . esc_html( $description ) . '</textarea>' ;
+        } else {
+            $settings = array(
+                'media_buttons' => false,
+                'teeny'         => true,
+                'wpautop'       => false,
+                'textarea_rows' => 16,
+            );
+            wp_editor( $description, '_sf_description', $settings );
         }
+        
         /* Description END */
     }
     

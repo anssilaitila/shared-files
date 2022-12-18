@@ -55,7 +55,7 @@ class SharedFilesAdminDownloadLog {
    
         global $wpdb;
 
-        $items_per_page = 100;
+        $items_per_page = 200;
         $page = isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1;
         $offset = ( $page * $items_per_page ) - $items_per_page;
         
