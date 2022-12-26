@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.93
+Stable tag: 1.6.94
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,7 @@ See live demos at [sharedfilespro.com](https://www.sharedfilespro.com/shared-fil
 * Classify files using tags
 * Front-end file upload with support for tags, logged-in users can also delete their uploaded files
 * Download counter
+* Allow any file type to be uploaded
 * Share a folder of downloadable files like using Dropbox, Google Drive or OneDrive
 * Preview certain file types in the browser
 * YouTube-videos and images are opened in a lightbox
@@ -147,6 +148,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.94 - 2022-12-26 =
+* (Free + All plans) New feature / settings: allow more file types. WordPress allows specific file types by default, but you can now allow additional file types from the plugin settings, Allow more file types tab.
 
 = 1.6.93 - 2022-12-18 =
 * Various tweaks and fixes

@@ -127,6 +127,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-media-library.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-file-handling.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-restrict-access.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-allow-more-file-types.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-ajax.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-helpers.php';
@@ -192,6 +193,7 @@ class Shared_Files
         $plugin_admin_sync_media_library = new SharedFilesAdminSyncMediaLibrary();
         $plugin_admin_file_handling = new SharedFilesFileHandling();
         $plugin_admin_restrict_access = new SharedFilesAdminRestrictAccess();
+        $plugin_admin_allow_more_file_types = new SharedFilesAdminAllowMoreFileTypes();
         $plugin_settings = new Shared_Files_Settings();
         // Enqueue CSS + JS (+ other)
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -297,6 +299,8 @@ class Shared_Files
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_upgrade_link' );
         }
+        // Allow more file types
+        $this->loader->add_filter( 'upload_mimes', $plugin_admin_allow_more_file_types, 'add_file_types' );
     }
     
     /**

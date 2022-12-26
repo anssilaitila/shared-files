@@ -1075,6 +1075,88 @@ class Shared_Files_Settings
                 );
             }
         }
+        $tab = 51;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        $file_exts = [
+            'webp',
+            'avif',
+            'svg',
+            'json',
+            'csv',
+            'ttf',
+            'woff',
+            'woff2'
+        ];
+        foreach ( $file_exts as $ext ) {
+            add_settings_field(
+                'shared-files-allow_file_type_' . $ext,
+                '.' . $ext,
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-allow_file_type_' . $ext,
+                'field_name' => 'allow_file_type_' . $ext,
+            )
+            );
+        }
+        $custom_file_types_cnt = 2;
+        if ( isset( $s['custom_file_types_cnt'] ) ) {
+            $custom_file_types_cnt = intval( $s['custom_file_types_cnt'] ) + 1;
+        }
+        for ( $n = 1 ;  $n < $custom_file_types_cnt ;  $n++ ) {
+            add_settings_field(
+                'shared-files-cft_' . $n . '_active',
+                sanitize_text_field( __( 'Custom file type', 'shared-files' ) . ' ' . $n . ' ' . __( 'active', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-cft_' . $n . '_active',
+                'field_name' => 'cft_' . $n . '_active',
+            )
+            );
+            add_settings_field(
+                'shared-files-cft_' . $n . '_extension',
+                sanitize_text_field( __( 'File extension', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-cft_' . $n . '_extension',
+                'field_name'  => 'cft_' . $n . '_extension',
+                'placeholder' => '.ext',
+            )
+            );
+            add_settings_field(
+                'shared-files-cft_' . $n . '_mime_type',
+                sanitize_text_field( __( 'Mime type', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-cft_' . $n . '_mime_type',
+                'field_name' => 'cft_' . $n . '_mime_type',
+            )
+            );
+        }
+        add_settings_field(
+            'shared-files-custom_file_types_cnt',
+            sanitize_text_field( __( 'Number of custom file types', 'shared-files' ) ),
+            array( $this, 'custom_file_types_cnt_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-custom_file_types_cnt',
+            'field_name'  => 'custom_file_types_cnt',
+            'placeholder' => '',
+        )
+        );
         $tab = 6;
         add_settings_section(
             'shared-files_tab_' . $tab,
@@ -2490,6 +2572,104 @@ class Shared_Files_Settings
     
     }
     
+    public function custom_file_types_cnt_render( $args )
+    {
+        
+        if ( $field_name = $args['field_name'] ) {
+            $options = get_option( 'shared_files_settings' );
+            $val = '';
+            if ( isset( $options[$args['field_name']] ) ) {
+                $val = sanitize_text_field( $options[$args['field_name']] );
+            }
+            ?>
+        
+      <div class="shared-files-setting-container">
+              
+        <div class="shared-files-setting">
+        
+          <select name="shared_files_settings[<?php 
+            echo  esc_attr( $args['field_name'] ) ;
+            ?>]">
+            <option value="" <?php 
+            echo  ( $val == '' ? 'selected' : '' ) ;
+            ?>></option>
+            <option value="1" <?php 
+            echo  ( $val == '1' ? 'selected' : '' ) ;
+            ?>>1</option>
+            <option value="2" <?php 
+            echo  ( $val == '2' ? 'selected' : '' ) ;
+            ?>>2</option>
+            <option value="3" <?php 
+            echo  ( $val == '3' ? 'selected' : '' ) ;
+            ?>>3</option>
+            <option value="4" <?php 
+            echo  ( $val == '4' ? 'selected' : '' ) ;
+            ?>>4</option>
+            <option value="5" <?php 
+            echo  ( $val == '5' ? 'selected' : '' ) ;
+            ?>>5</option>
+            <option value="6" <?php 
+            echo  ( $val == '6' ? 'selected' : '' ) ;
+            ?>>6</option>
+            <option value="7" <?php 
+            echo  ( $val == '7' ? 'selected' : '' ) ;
+            ?>>7</option>
+            <option value="8" <?php 
+            echo  ( $val == '8' ? 'selected' : '' ) ;
+            ?>>8</option>
+            <option value="9" <?php 
+            echo  ( $val == '9' ? 'selected' : '' ) ;
+            ?>>9</option>
+            <option value="10" <?php 
+            echo  ( $val == '10' ? 'selected' : '' ) ;
+            ?>>10</option>
+            <option value="11" <?php 
+            echo  ( $val == '11' ? 'selected' : '' ) ;
+            ?>>11</option>
+            <option value="12" <?php 
+            echo  ( $val == '12' ? 'selected' : '' ) ;
+            ?>>12</option>
+            <option value="13" <?php 
+            echo  ( $val == '13' ? 'selected' : '' ) ;
+            ?>>13</option>
+            <option value="14" <?php 
+            echo  ( $val == '14' ? 'selected' : '' ) ;
+            ?>>14</option>
+            <option value="15" <?php 
+            echo  ( $val == '15' ? 'selected' : '' ) ;
+            ?>>15</option>
+            <option value="16" <?php 
+            echo  ( $val == '16' ? 'selected' : '' ) ;
+            ?>>16</option>
+            <option value="17" <?php 
+            echo  ( $val == '17' ? 'selected' : '' ) ;
+            ?>>17</option>
+            <option value="18" <?php 
+            echo  ( $val == '18' ? 'selected' : '' ) ;
+            ?>>18</option>
+            <option value="19" <?php 
+            echo  ( $val == '19' ? 'selected' : '' ) ;
+            ?>>19</option>
+            <option value="20" <?php 
+            echo  ( $val == '20' ? 'selected' : '' ) ;
+            ?>>20</option>
+          </select>
+
+          <div class="email-info">
+            <?php 
+            echo  esc_html__( 'Choose a value and save the settings, and the new fields will be usable.', 'shared-files' ) ;
+            ?>
+          </div>
+        
+        </div>
+  
+      </div>
+            
+      <?php 
+        }
+    
+    }
+    
     public function textarea_render( $args )
     {
         
@@ -2936,6 +3116,25 @@ class Shared_Files_Settings
         echo  '<h2>' . esc_html__( 'Front-end file uploader settings', 'shared-files' ) . '</h2>' ;
     }
     
+    public function shared_files_settings_tab_51_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-51">' ;
+        echo  '<h2>' . esc_html__( 'Allow more file types', 'shared-files' ) . '</h2>' ;
+        echo  '<p>' . esc_html__( 'WordPress allows certain file types by default and you can allow more file types here.', 'shared-files' ) . '</p>' ;
+        $url = 'https://codex.wordpress.org/Uploading_Files';
+        echo  sprintf( wp_kses(
+            /* translators: %s: link to codex.wordpress.org/Uploading_Files */
+            __( 'A complete list of the file types allowed by default can be found here <a href="%s" target="_blank">here</a>.', 'shared-files' ),
+            array(
+                'a' => array(
+                'href'   => array(),
+                'target' => array(),
+            ),
+            )
+        ), esc_url( $url ) ) ;
+    }
+    
     public function shared_files_settings_tab_6_callback()
     {
         echo  '</div>' ;
@@ -2947,7 +3146,7 @@ class Shared_Files_Settings
     {
         echo  '</div>' ;
         echo  '<div class="shared-files-settings-tab-7">' ;
-        echo  '<h2>' . esc_html__( 'Custom file types', 'shared-files' ) . '</h2>' ;
+        echo  '<h2>' . esc_html__( 'Custom icons', 'shared-files' ) . '</h2>' ;
         echo  '<p>' . esc_html__( 'Define extensions and icons for custom file types here. You may add the files to the media library and then copy the URL to the appropriate field below.', 'shared-files' ) . '</p>' ;
     }
     
@@ -3038,11 +3237,16 @@ class Shared_Files_Settings
           <li class="shared-files-settings-tab-5-title" data-settings-container="shared-files-settings-tab-5"><span><?php 
         echo  esc_html__( 'File upload', 'shared-files' ) ;
         ?></span></li>
+
+          <li class="shared-files-settings-tab-51-title" data-settings-container="shared-files-settings-tab-51"><span><?php 
+        echo  esc_html__( 'Allow more file types', 'shared-files' ) ;
+        ?></span></li>
+
           <li class="shared-files-settings-tab-6-title" data-settings-container="shared-files-settings-tab-6"><span><?php 
         echo  esc_html__( 'Icons', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-7-title" data-settings-container="shared-files-settings-tab-7"><span><?php 
-        echo  esc_html__( 'Custom file types', 'shared-files' ) ;
+        echo  esc_html__( 'Custom icons', 'shared-files' ) ;
         ?></span></li>
           <li class="shared-files-settings-tab-8-title" data-settings-container="shared-files-settings-tab-8"><span><?php 
         echo  esc_html__( 'Email', 'shared-files' ) ;

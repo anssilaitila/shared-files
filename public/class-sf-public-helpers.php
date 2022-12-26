@@ -13,7 +13,7 @@ class SharedFilesPublicHelpers
         $html .= sanitize_text_field( __( 'You can use the shortcodes', 'shared-files' ) . ' [shared_files] ' . __( 'and', 'shared-files' ) . ' [shared_files_simple].' );
         $html .= '</span>';
         $html .= '<span>';
-        $html .= sanitize_text_field( __( 'More info on shortcodes at', 'shared-files' ) . ' <a href="https://www.sharedfilespro.com/support/shortcodes/" target="_blank">sharedfilespro.com</a>.' );
+        $html .= sanitize_text_field( __( 'More info on shortcodes', 'shared-files' ) . ' <a href="' . esc_url( get_admin_url( null, 'edit.php?post_type=shared_file&page=shared-files-shortcodes' ) ) . '" target="_blank">here</a>.' );
         $html .= '</span>';
         $html .= '</div>';
         return $html;
