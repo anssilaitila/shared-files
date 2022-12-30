@@ -111,9 +111,11 @@ class SharedFilesPublicFileCardDefault
         
         }
         
+        $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_after_date' );
         if ( isset( $s['show_download_counter'] ) && $s['show_download_counter'] ) {
             $html .= SharedFilesHelpers::getDownloadCounter( $file_id );
         }
+        $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_after_download_counter' );
         $hide_tags = 0;
         
         if ( $show_tags && !$hide_tags ) {
@@ -165,6 +167,7 @@ class SharedFilesPublicFileCardDefault
             $html .= '</div>';
         }
         
+        $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_before_description' );
         if ( isset( $c['_sf_description'] ) && !$hide_description ) {
             
             if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
@@ -174,6 +177,7 @@ class SharedFilesPublicFileCardDefault
             }
         
         }
+        $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_after_description' );
         
         if ( !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             $wait_page_active = 0;

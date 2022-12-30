@@ -1,9 +1,9 @@
 === Shared Files – Easy Download Manager and File Sharing Plugin with Frontend File Upload ===
 Contributors: anssilaitila, freemius
-Tags: download manager, file sharing, file upload, download monitor, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
+Tags: download manager, file sharing, file upload, file manager, download counter, document management, download monitor, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.94
+Stable tag: 1.6.95
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,9 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.95 - 2022-12-30 =
+* (Free + All plans) Some PHP actions added to enable better customization of the plugin. For more information see https://www.sharedfilespro.com/docs/php-actions/.
 
 = 1.6.94 - 2022-12-26 =
 * (Free + All plans) New feature / settings: allow more file types. WordPress allows specific file types by default, but you can now allow additional file types from the plugin settings, Allow more file types tab.

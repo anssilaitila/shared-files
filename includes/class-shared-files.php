@@ -136,6 +136,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-pagination.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-default.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-vertical.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-hooks.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
