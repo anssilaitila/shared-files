@@ -109,6 +109,8 @@ class SharedFilesAdminList
                 }
                 
                 break;
+            case 'restriction':
+                break;
             case 'load_cnt':
                 echo  esc_html( get_post_meta( $post_ID, '_sf_load_cnt', true ) ) ;
                 break;

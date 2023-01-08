@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, file manager, download counter, document management, download monitor, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.1
-Stable tag: 1.6.95
+Stable tag: 1.6.96
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -148,6 +148,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.6.96 - 2022-01-08 =
+* (Business) Wait Countdown Page: Fixed an issue when which prevented the file from starting to download
+* (Professional + Business) New column "Restriction" added to file and category management that contains information of set permissions
+* (Professional + Business) Accordion: Subcategories are now shown under the main category instead of the same level. It is also possible to hide the subcategories and their files: [shared_files_accordion hide_subcategories=1]
+* (Free + All plans) New settings for download log: Log downloader user data, Log downloader IP, Log downloader user agent and Log referer url
+* (Free + All plans) New action: shared_files_frontend_file_uploaded (fires when a file has been uploaded using the front end uploader), more information at https://www.sharedfilespro.com/docs/php-actions/
 
 = 1.6.95 - 2022-12-30 =
 * (Free + All plans) Some PHP actions added to enable better customization of the plugin. For more information see https://www.sharedfilespro.com/docs/php-actions/.

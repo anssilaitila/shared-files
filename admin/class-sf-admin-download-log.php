@@ -74,6 +74,25 @@ class SharedFilesAdminDownloadLog {
           <th><?php echo esc_html__('File', 'shared-files') ?></th>
           <th><?php echo esc_html__('File size', 'shared-files') ?></th>
           <th><?php echo esc_html__('Download count', 'shared-files') ?></th>
+
+          <?php if ( isset( $s['log_enable_user_data'] ) ): ?>
+            <th><?php echo esc_html__('User ID', 'shared-files') ?></th>
+            <th><?php echo esc_html__('Name', 'shared-files') ?></th>
+          <?php endif; ?>
+          
+          <?php if ( isset( $s['log_enable_ip'] ) ): ?>
+            <th><?php echo esc_html__('IP address', 'shared-files') ?></th>
+          <?php endif; ?>
+          
+          
+          <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
+            <th><?php echo esc_html__('User agent', 'shared-files') ?></th>
+          <?php endif; ?>
+          
+          <?php if ( isset( $s['log_enable_referer_url'] ) ): ?>
+            <th><?php echo esc_html__('Referer URL', 'shared-files') ?></th>
+          <?php endif; ?>
+
         </tr>
         
         <?php if (sizeof($results) > 0): ?>
@@ -99,6 +118,59 @@ class SharedFilesAdminDownloadLog {
                   <?php echo esc_html( $row->download_cnt ) ?>
                 <?php endif; ?>
               </td>
+
+              <?php if ( isset( $s['log_enable_user_data'] ) ): ?>
+
+                <td>
+                  <?php if (isset($row->user_id)): ?>
+                    <?php echo esc_html( $row->user_id ) ?>
+                  <?php endif; ?>
+                </td>
+
+                <td>
+                  <?php if (isset($row->user_login)): ?>
+                    <?php echo esc_html( $row->user_login ) ?><br />
+                  <?php endif; ?>
+
+                  <?php if (isset($row->user_name)): ?>
+                    <?php echo esc_html( $row->user_name ) ?>
+                  <?php endif; ?>
+                </td>
+
+              <?php endif; ?>
+              
+              
+              <?php if ( isset( $s['log_enable_ip'] ) ): ?>
+
+                <td>
+                  <?php if (isset($row->ip)): ?>
+                    <?php echo esc_html( $row->ip ) ?>
+                  <?php endif; ?>
+                </td>
+
+              <?php endif; ?>
+              
+              
+              <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
+
+                <td>
+                  <?php if (isset($row->user_agent)): ?>
+                    <?php echo esc_html( $row->user_agent ) ?>
+                  <?php endif; ?>
+                </td>
+
+              <?php endif; ?>
+              
+              <?php if ( isset( $s['log_enable_referer_url'] ) ): ?>
+
+                <td>
+                  <?php if (isset($row->referer_url)): ?>
+                    <?php echo esc_html( $row->referer_url ) ?>
+                  <?php endif; ?>
+                </td>
+
+              <?php endif; ?>
+
             </tr>
         
           <?php endforeach; ?>

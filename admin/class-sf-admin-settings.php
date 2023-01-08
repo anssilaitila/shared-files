@@ -53,6 +53,50 @@ class Shared_Files_Settings
             'placeholder' => sanitize_text_field( __( 'The search form is automatically visible unless hidden by this setting or by a shortcode parameter.', 'shared-files' ) ),
         )
         );
+        add_settings_field(
+            'shared-files-log_enable_user_data',
+            sanitize_text_field( __( 'Log downloader user data', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-log_enable_user_data',
+            'field_name' => 'log_enable_user_data',
+        )
+        );
+        add_settings_field(
+            'shared-files-log_enable_ip',
+            sanitize_text_field( __( 'Log downloader IP', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-log_enable_ip',
+            'field_name' => 'log_enable_ip',
+        )
+        );
+        add_settings_field(
+            'shared-files-log_enable_user_agent',
+            sanitize_text_field( __( 'Log downloader user agent', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-log_enable_user_agent',
+            'field_name' => 'log_enable_user_agent',
+        )
+        );
+        add_settings_field(
+            'shared-files-log_enable_referer_url',
+            sanitize_text_field( __( 'Log referer url', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-log_enable_referer_url',
+            'field_name' => 'log_enable_referer_url',
+        )
+        );
         
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             add_settings_field(

@@ -109,14 +109,18 @@ class SharedFilesAdminTaxonomy
     
     public function theme_columns( $theme_columns )
     {
-        $new_columns = array(
-            'cb'          => '<input type="checkbox" />',
-            'name'        => sanitize_text_field( __( 'Name' ) ),
-            'description' => sanitize_text_field( __( 'Description' ) ),
-            'shortcode'   => sanitize_text_field( __( 'Shortcode', 'shared-files' ) ),
-            'slug'        => sanitize_text_field( __( 'Slug' ) ),
-            'posts'       => sanitize_text_field( __( 'Posts' ) ),
-        );
+        $new_columns = [];
+        $columns_set = 0;
+        if ( !$columns_set ) {
+            $new_columns = array(
+                'cb'          => '<input type="checkbox" />',
+                'name'        => sanitize_text_field( __( 'Name' ) ),
+                'description' => sanitize_text_field( __( 'Description' ) ),
+                'shortcode'   => sanitize_text_field( __( 'Shortcode', 'shared-files' ) ),
+                'slug'        => sanitize_text_field( __( 'Slug' ) ),
+                'posts'       => sanitize_text_field( __( 'Posts' ) ),
+            );
+        }
         return $new_columns;
     }
     
@@ -128,6 +132,8 @@ class SharedFilesAdminTaxonomy
     {
         $term = get_term( $term_id, 'shared-file-category' );
         switch ( $column_name ) {
+            case 'restriction':
+                break;
             case 'shortcode':
                 $content = '<span class="shared-files-shortcode-admin-list shared-files-shortcode-' . sanitize_title( $term->slug ) . '" title="[shared_files category=' . sanitize_title( $term->slug ) . ']">[shared_files category=' . sanitize_title( $term->slug ) . ']</span>' . '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . sanitize_title( $term->slug ) . '">' . sanitize_text_field( __( 'Copy', 'shared-files' ) ) . '</button>';
                 break;

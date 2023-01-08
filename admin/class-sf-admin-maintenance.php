@@ -50,6 +50,10 @@ class SharedFilesAdminMaintenance
                 'simple_list_show_titles_for_columns'             => 'on',
                 'simple_list_title_tag'                           => 'on',
                 'tag_slug'                                        => 'shared-file-tag',
+                'log_enable_user_data'                            => 'on',
+                'log_enable_ip'                                   => 'on',
+                'log_enable_user_agent'                           => 'on',
+                'log_enable_referer_url'                          => 'on',
             ];
             add_option( 'shared_files_settings', $default_settings );
         }
@@ -69,6 +73,10 @@ class SharedFilesAdminMaintenance
             // Table for file download log
             $table_name_download_log = $wpdb->prefix . 'shared_files_download_log';
             $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_download_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        file_id         VARCHAR(255) NOT NULL,\n        file_title      VARCHAR(255) NOT NULL,\n        file_name       VARCHAR(255) NOT NULL,\n        file_size       VARCHAR(255) NOT NULL,\n        ip              VARCHAR(255) NOT NULL,\n        download_cnt    MEDIUMINT NOT NULL,\n        report          TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
+            $column_exists = $wpdb->get_results( "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" . $table_name_download_log . "' AND column_name = 'user_id'" );
+            if ( !$column_exists ) {
+                $wpdb->query( "ALTER TABLE {$table_name_download_log} " . "ADD user_id      BIGINT(20) NOT NULL, " . "ADD user_login   VARCHAR(255) NOT NULL, " . "ADD user_name    VARCHAR(255) NOT NULL, " . "ADD user_country VARCHAR(255) NOT NULL, " . "ADD user_agent   TEXT NOT NULL, " . "ADD referer_url  TEXT NOT NULL " );
+            }
             update_option( 'shared_files_version', SHARED_FILES_VERSION );
             SharedFilesHelpers::writeLog( 'Plugin updated to version ' . SHARED_FILES_VERSION, '' );
         }

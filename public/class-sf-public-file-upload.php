@@ -258,6 +258,7 @@ class SharedFilesFileUpload
                 'post_title' => sanitize_text_field( $post_title ),
             );
             wp_update_post( $my_post );
+            do_action( 'shared_files_frontend_file_uploaded', $id );
             $goto_url = esc_url_raw( get_site_url() );
             if ( isset( $_POST['_SF_GOTO'] ) && $_POST['_SF_GOTO'] ) {
                 $goto_url = esc_url_raw( $_POST['_SF_GOTO'] );

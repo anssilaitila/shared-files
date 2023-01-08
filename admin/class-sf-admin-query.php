@@ -180,14 +180,67 @@ class SharedFilesAdminQuery
                     if ( !isset( $s['disable_download_log'] ) ) {
                         global  $wpdb ;
                         $report = '';
+                        $ip_address = '';
+                        if ( isset( $s['log_enable_ip'] ) ) {
+                            $ip_address = sanitize_text_field( SharedFilesHelpers::getIPAddress() );
+                        }
+                        $user_agent = '';
+                        if ( isset( $s['log_enable_user_agent'] ) ) {
+                            if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
+                                $user_agent = sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] );
+                            }
+                        }
+                        $referer_url = '';
+                        if ( isset( $s['log_enable_referer_url'] ) ) {
+                            if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
+                                $referer_url = sanitize_text_field( $_SERVER['HTTP_REFERER'] );
+                            }
+                        }
+                        $user_id = 0;
+                        $user_login = '';
+                        $user_name = '';
+                        $user_country = '';
+                        
+                        if ( isset( $s['log_enable_user_data'] ) ) {
+                            $user_id = intval( get_current_user_id() );
+                            
+                            if ( $user_id ) {
+                                $user = wp_get_current_user();
+                                
+                                if ( $user ) {
+                                    $user_fullname = '';
+                                    
+                                    if ( $user->first_name && $user->last_name ) {
+                                        $user_fullname = $user->first_name . ' ' . $user->last_name;
+                                    } elseif ( $user->last_name ) {
+                                        $user_fullname = $user->last_name;
+                                    } elseif ( $user->first_name ) {
+                                        $user_fullname = $user->first_name;
+                                    }
+                                    
+                                    $user_login = sanitize_text_field( $user->user_login );
+                                    $user_name = sanitize_text_field( $user_fullname );
+                                    $user_country = '';
+                                }
+                            
+                            }
+                        
+                        }
+                        
                         $wpdb->insert( $wpdb->prefix . 'shared_files_download_log', array(
                             'file_id'      => intval( $file_id ),
                             'file_title'   => sanitize_text_field( get_the_title( $file_id ) ),
                             'file_name'    => sanitize_text_field( $filename ),
                             'file_size'    => sanitize_text_field( $filesize ),
-                            'ip'           => '',
+                            'ip'           => $ip_address,
                             'download_cnt' => intval( $load_cnt ) + 1,
                             'report'       => $report,
+                            'user_id'      => $user_id,
+                            'user_login'   => $user_login,
+                            'user_name'    => $user_name,
+                            'user_country' => $user_country,
+                            'user_agent'   => $user_agent,
+                            'referer_url'  => $referer_url,
                         ) );
                     }
                     
