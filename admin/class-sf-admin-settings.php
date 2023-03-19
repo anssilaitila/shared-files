@@ -454,8 +454,19 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-prevent_search_engines_from_indexing_uploaded_file_urls',
+            sanitize_text_field( __( 'Prevent search engines from indexing files uploaded using front end uploader', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-prevent_search_engines_from_indexing_uploaded_file_urls',
+            'field_name' => 'prevent_search_engines_from_indexing_uploaded_file_urls',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'prevent_search_engines_from_indexing_file_urls',
-            sanitize_text_field( __( 'Prevent search engines from indexing file urls', 'shared-files' ) ),
+            sanitize_text_field( __( 'Prevent search engines from indexing all file urls', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
@@ -3930,6 +3941,24 @@ class Shared_Files_Settings
             echo  esc_html__( 'Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:', 'shared-files' ) ;
             ?><br />
         <strong>/wp-content/uploads/shared-files/this-is-a-file.pdf</strong>
+        <br /><br />
+
+        <strong>
+        <?php 
+            $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-restrict-access' );
+            echo  sprintf( wp_kses(
+                /* translators: %s: link to the information page about access restriction */
+                __( '<a href="%s">Important information regarding file permissions &raquo;</a>', 'shared-files' ),
+                array(
+                    'a' => array(
+                    'href'   => array(),
+                    'target' => array(),
+                ),
+                )
+            ), esc_url( $url ) ) ;
+            ?>
+        </strong>
+
       </div>
 
       <?php 

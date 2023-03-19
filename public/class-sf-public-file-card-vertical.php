@@ -66,9 +66,13 @@ class SharedFilesPublicFileCardVertical
         
         $html .= '<div class="shared-files-main-elements-bottom">';
         $show_file_link = 1;
+        $nofollow = '';
+        if ( isset( $c['_sf_frontend_uploader'] ) && (isset( $s['prevent_search_engines_from_indexing_uploaded_file_urls'] ) || isset( $s['prevent_search_engines_from_indexing_file_urls'] )) ) {
+            $nofollow = 'rel="ugc nofollow" ';
+        }
         
         if ( $show_file_link ) {
-            $html .= '<a class="shared-files-file-title" ' . $data_file_type . $data_file_url . $data_video_url_redir . $data_external_url . $data_image_url . 'href="' . esc_url_raw( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
+            $html .= '<a class="shared-files-file-title" ' . $nofollow . $data_file_type . $data_file_url . $data_video_url_redir . $data_external_url . $data_image_url . 'href="' . esc_url_raw( $file_url ) . '" target="_blank">' . sanitize_text_field( get_the_title() ) . '</a>';
             if ( isset( $c['_sf_filesize'] ) && !isset( $s['hide_file_size_from_card'] ) ) {
                 $html .= '<span class="shared-file-size">' . sanitize_text_field( SharedFilesAdminHelpers::human_filesize( $c['_sf_filesize'][0] ) ) . '</span>';
             }
@@ -163,9 +167,9 @@ class SharedFilesPublicFileCardVertical
                 
                 if ( isset( $s['show_download_button'] ) && $password ) {
                 } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
-                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
                 } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
-                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
                 }
             
             }

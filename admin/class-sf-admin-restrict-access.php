@@ -25,7 +25,7 @@ class SharedFilesAdminRestrictAccess {
   public function register_page_callback() {
     ?>
     
-    <div class="shared-files-sync-files">
+    <div class="shared-files-sync-files shared-files-admin-page-restrict-access">
       <h1><?php echo esc_html__('Restrict access to files on server level', 'shared-files'); ?></h1>
 
       <div style="background: #fff; display: inline-block; padding: 1rem; font-size: 15px;">
@@ -56,7 +56,7 @@ class SharedFilesAdminRestrictAccess {
       
       <h3><?php echo esc_html__('How to prevent direct access to files on the server', 'shared-files') ?></h3>
       
-      <p><?php echo esc_html__('When using either one of the file opening methods and regardless of passwords or other restrictions, the direct access to file urls like /wp-content/uploads/shared-files/this-is-a-file.pdf remains.', 'shared-files') ?></p>
+      <p><?php echo esc_html__('When using either one of the file opening methods and regardless of passwords or other restrictions, the direct access to file urls like /wp-content/uploads/shared-files/this-is-a-file.pdf remains to anyone, including non-logged in users.', 'shared-files') ?></p>
       
       <p style="font-weight: 700;"><?php echo esc_html__('If you wish to prevent anyone from opening the files using the direct urls like /wp-content/uploads/shared-files/this-is-a-file.pdf, you should make the necessary restrictions to the web server configuration (Nginx, Apache, etc.) and use the default file opening method (file urls formatted like /shared-files/123/this-is-a-file.pdf).', 'shared-files') ?></p>
       

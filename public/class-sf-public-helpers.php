@@ -98,7 +98,7 @@ class SharedFilesPublicHelpers
         $s = get_option( 'shared_files_settings' );
         $html = '';
         $html .= '<div class="shared-files-search">';
-        $html .= '<div class="shared-files-simple-list">';
+        $html .= '<div class="shared-files-simple-list shared-files-ajax-list">';
         if ( isset( $s['simple_list_show_titles_for_columns'] ) ) {
             $html .= SharedFilesPublicHelpers::singleFileSimpleTitlesMarkup( $atts );
         }

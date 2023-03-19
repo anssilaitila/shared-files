@@ -219,6 +219,21 @@ class SharedFilesAdminMetadata
         if ( !$pro_field_active ) {
             echo  wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags ) ;
         }
+        
+        if ( $pro_field_active ) {
+            $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-restrict-access' );
+            echo  '<div style="margin-top: 12px;">' . sprintf( wp_kses(
+                /* translators: %s: link to the information page about access restriction */
+                __( '<a href="%s">Important information regarding file permissions &raquo;</a>', 'shared-files' ),
+                array(
+                    'a' => array(
+                    'href'   => array(),
+                    'target' => array(),
+                ),
+                )
+            ), esc_url( $url ) ) . '</div>' ;
+        }
+        
         echo  '</div>' ;
         /* Password protection END */
         /* Role START */

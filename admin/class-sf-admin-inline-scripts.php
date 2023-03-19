@@ -33,7 +33,7 @@ class SharedFilesAdminInlineScripts
             }
             $js .= "\n        \$(document).on('click', '.shared-files-copy', function (e) {\n          e.preventDefault();\n        });\n      ";
             if ( !$is_premium ) {
-                $js .= "\n          \$('.shared-files-copy').tipso({\n            content: '" . esc_js( __( 'This feature is available in the paid plans.', 'shared-files' ) ) . "',\n            width: 280,\n            background: '#2271b1',\n          });\n        ";
+                $js .= "\n          \$('.shared-files-copy:not(.shared-files-copy-for-all)').tipso({\n            content: '" . esc_js( __( 'This feature is available in the paid plans.', 'shared-files' ) ) . "',\n            width: 280,\n            background: '#2271b1',\n          });\n        ";
             }
             $js .= "\n        var clipboard = new ClipboardJS('.shared-files-copy');\n        \n        clipboard.on('success', function(e) {\n        \n          e.clearSelection();\n        \n          let clipboardtarget = jQuery(e.trigger).data('clipboard-target');\n        \n          jQuery(clipboardtarget).tipso({\n            content: '" . esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) . "',\n            width: 240\n          });\n        \n          jQuery(clipboardtarget).tipso('show');\n          \n          setTimeout(function () {\n            showpanel(clipboardtarget);\n          }, 2000);\n          \n          function showpanel(clipboardtarget) {\n            jQuery(clipboardtarget).tipso('hide');\n            jQuery(clipboardtarget).tipso('destroy');\n          }\n          \n        });\n        \n        clipboard.on('error', function(e) {\n        });\n      \n      ";
             $js .= "});";
