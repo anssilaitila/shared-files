@@ -160,6 +160,8 @@ class SharedFilesAdminNotifications {
 
     // Rating notice
 
+    /*
+    
     if (!get_option('shared_files_rating_notice_date')) {
 
       $dt = new DateTime('+8 weeks');
@@ -183,6 +185,8 @@ class SharedFilesAdminNotifications {
       }
       
     }
+    
+    */
   
   	if (isset($_GET['sf_ignore_rating_notice_notify'])) {
     	

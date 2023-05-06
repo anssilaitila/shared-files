@@ -927,6 +927,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_category_required',
+            sanitize_text_field( __( 'Make category selection required', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_category_required',
+            'field_name' => $only_pro . 'file_upload_category_required',
+        )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'show_category_checkboxes_on_file_upload',
             sanitize_text_field( __( 'Show category checkboxes for front-end file uploader (instead of dropdown)', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
