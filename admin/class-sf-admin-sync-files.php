@@ -128,26 +128,37 @@ class SharedFilesAdminSyncFiles
         
         }
         
-        echo  '<table>' ;
-        echo  '<tr><th>' . esc_html__( 'Filename', 'shared-files' ) . '</th><th>' . esc_html__( 'File size', 'shared-files' ) . '</th><th>' . esc_html__( 'Last modified', 'shared-files' ) . '</th><th>' . esc_html__( 'Status', 'shared-files' ) . '</th></tr>' ;
-        $files = array_diff( scandir( $path ), array( '.', '..' ) );
-        foreach ( $files as $file ) {
-            $item = SharedFilesFileHandling::getBaseDir() . $file;
+        
+        if ( file_exists( $path ) ) {
+            $path_contents = scandir( $path );
             
-            if ( $file == 'index.php' ) {
-                continue;
-            } elseif ( is_dir( $item ) ) {
-                $files_in_subdir = array_diff( scandir( $item ), array( '.', '..' ) );
-                foreach ( $files_in_subdir as $file_in_subdir ) {
-                    $sub_item = $item . '/' . $file_in_subdir;
-                    $this::getFileRow( $file_in_subdir, $sub_item );
+            if ( is_array( $path_contents ) ) {
+                echo  '<table>' ;
+                echo  '<tr><th>' . esc_html__( 'Filename', 'shared-files' ) . '</th><th>' . esc_html__( 'File size', 'shared-files' ) . '</th><th>' . esc_html__( 'Last modified', 'shared-files' ) . '</th><th>' . esc_html__( 'Status', 'shared-files' ) . '</th></tr>' ;
+                $files = array_diff( $path_contents, array( '.', '..' ) );
+                foreach ( $files as $file ) {
+                    $item = SharedFilesFileHandling::getBaseDir() . $file;
+                    
+                    if ( $file == 'index.php' ) {
+                        continue;
+                    } elseif ( is_dir( $item ) ) {
+                        $files_in_subdir = array_diff( scandir( $item ), array( '.', '..' ) );
+                        if ( is_array( $files_in_subdir ) ) {
+                            foreach ( $files_in_subdir as $file_in_subdir ) {
+                                $sub_item = $item . '/' . $file_in_subdir;
+                                $this::getFileRow( $file_in_subdir, $sub_item );
+                            }
+                        }
+                    } else {
+                        $this::getFileRow( $file, $item );
+                    }
+                
                 }
-            } else {
-                $this::getFileRow( $file, $item );
+                echo  '</table>' ;
             }
         
         }
-        echo  '</table>' ;
+        
         ?>
 
     </div>
