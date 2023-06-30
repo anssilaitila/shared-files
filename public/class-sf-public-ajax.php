@@ -11,9 +11,13 @@ class SharedFilesPublicAjax
         if ( isset( $_POST['sf_tag'] ) && $_POST['sf_tag'] ) {
             $tag_slug = sanitize_title( $_POST['sf_tag'] );
         }
+        
         if ( isset( $_POST['sf_category'] ) && $_POST['sf_category'] ) {
             $term_slug = sanitize_title( $_POST['sf_category'] );
+        } elseif ( isset( $atts['category'] ) && $atts['category'] ) {
+            $term_slug = sanitize_title( $atts['category'] );
         }
+        
         $cf_active = 0;
         $meta_query = [];
         if ( isset( $atts['hide_files_first'] ) && !$term_slug && !$tag_slug && !$cf_active ) {
