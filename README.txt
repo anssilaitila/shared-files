@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, file manager, download counter, document management, download monitor, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
 Tested up to: 6.2
-Stable tag: 1.7.00
+Stable tag: 1.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -257,22 +257,30 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 
 == Changelog ==
 
-= 1.7.00 - 2022-06-30 =
+= 1.7.1 - 2023-07-05 =
+* (All plans) New parameters to be used with the shortcode [shared_files_simple] (see WP admin / Shared Files / Shortcodes):
+    * Exclude categories (by slug)
+    * Show files that belong to all of these categories (you can also hide the search form using the parameter hide_search=1)
+    * Show files that belong to all of these tags (can also be used with only one tag)
+    * Show files that belong to any of these categories
+    * Show files that belong to any of these tags
+
+= 1.7.0 - 2023-06-30 =
 * (Free + All plans) Various tweaks & fixes
 
-= 1.6.99 - 2022-06-10 =
+= 1.6.99 - 2023-06-10 =
 * (Free + All plans) Bug fixes
 
-= 1.6.98 - 2022-05-06 =
+= 1.6.98 - 2023-05-06 =
 * (All plans) New setting for file upload: make category selection required (see plugin settings / File upload tab)
 * (Free + All plans) Bug fixes
 
-= 1.6.97 - 2022-03-19 =
+= 1.6.97 - 2023-03-19 =
 * (Professional + Business) Fix: if a logged in user has more than 1 role, additional roles are now also counted in permisson restricted file lists
 * (All plans) New parameter to exclude files uploaded by front end uploader: [shared_files_categories exclude_files_uploaded_by_front_end_uploader=1]
 * (Free + All plans) New setting: Prevent search engines from indexing files uploaded using front end uploader
 
-= 1.6.96 - 2022-01-08 =
+= 1.6.96 - 2023-01-08 =
 * (Business) Wait Countdown Page: Fixed an issue which prevented the file from starting to download
 * (Professional + Business) New column "Restriction" added to file and category management that contains information of set permissions
 * (Professional + Business) Accordion: Subcategories are now shown under the main category instead of the same level. It is also possible to hide the subcategories and their files: [shared_files_accordion hide_subcategories=1]

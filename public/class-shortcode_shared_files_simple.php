@@ -15,7 +15,9 @@ class ShortcodeSharedFilesSimple
         $html .= '<div class="shared-files-simple-text-contacts" style="display: none;">' . sanitize_text_field( __( 'contacts', 'shared-files' ) ) . '</div>';
         $html .= '<div class="shared-files-simple-text-found" style="display: none;">' . sanitize_text_field( __( 'found', 'shared-files' ) ) . '</div>';
         $limit_posts = 0;
-        $tax_query = [];
+        $tax_query = [
+            'relation' => 'AND',
+        ];
         $meta_query_hide_not_public = array(
             'relation' => 'OR',
         );

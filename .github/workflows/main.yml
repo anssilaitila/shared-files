@@ -128,7 +128,7 @@ jobs:
 
       - name: Install PHPUnit Polyfills
         run: |
-          composer global require --dev yoast/phpunit-polyfills
+          composer global require --dev yoast/phpunit-polyfills:1.0.5
 
       - name: Run phpunit tests
         working-directory: ${{ env.wp-bp-directory }}
