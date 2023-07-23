@@ -97,9 +97,9 @@ class SharedFilesAdminShortcodes {
                 <li><?php echo esc_html__('Use wait countdown page:', 'shared-files') ?>
           
                 <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-                  <span class="shared-files-pro-only-inline-inactive">Business</span>
+                  <span class="shared-files-pro-only-inline-inactive">Max</span>
                 <?php else: ?>
-                  <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Business</a>
+                  <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Max</a>
                 <?php endif; ?>
                 
                 <?php $num++ ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files use_wait_page=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
@@ -214,9 +214,9 @@ class SharedFilesAdminShortcodes {
           <?php echo esc_html__('Exact search from all files', 'shared-files'); ?>
 
           <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-            <span class="shared-files-pro-only-inline-inactive">Professional</span>
+            <span class="shared-files-pro-only-inline-inactive"><?php echo esc_html__('Paid plans', 'shared-files'); ?></span>
           <?php else: ?>
-            <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Professional</a>
+            <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline"><?php echo esc_html__('Paid plans', 'shared-files'); ?></a>
           <?php endif; ?>
         
         </h2>
@@ -365,114 +365,110 @@ class SharedFilesAdminShortcodes {
       
       </div>
 
-      <?php if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial('pro') || shared_files_fs()->is_plan_or_trial('business') ): ?>
-
-        <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
-                      
-          <h2>
-            <?php echo esc_html__('File list restricted by permissions', 'shared-files') ?>
+      <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
                     
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Professional</span>
-            <?php else: ?>
-              <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Professional</a>
-            <?php endif; ?>
-        
-          </h2>
+        <h2>
+          <?php echo esc_html__('File list restricted by permissions', 'shared-files') ?>
+                  
+          <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+            <span class="shared-files-pro-only-inline-inactive"><?php echo esc_html__('Paid plans', 'shared-files'); ?></span>
+          <?php else: ?>
+            <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline"><?php echo esc_html__('Paid plans', 'shared-files'); ?></a>
+          <?php endif; ?>
+      
+        </h2>
 
-          <ul>  
-           <li>
-           
-              <?php echo esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></span>
-              
-              <p><?php echo esc_html__('This shortcode will list only such files that are readable by the logged in user.', 'shared-files') ?></p>
-
-              <p><?php echo esc_html__('A file is listed for the logged in user, if any of the following matches:', 'shared-files') ?></p>
-
-              <ul>
-                <li><?php echo esc_html__('The user was specifically given permissions to read the file (by editing the file).', 'shared-files') ?><br />
-                <?php echo esc_html__('When a user uploads a file, that user is automatically given permissions to read that file.', 'shared-files') ?></li>
-                <li><?php echo esc_html__('The logged in user belongs to a role that has permissions to read the file.', 'shared-files') ?></li>
-              </ul>
-
-              <p><?php echo esc_html__('The following should also be noted:', 'shared-files') ?></p>
-
-              <ul>
-                <li><?php echo esc_html__('A user having the administrator role can open any file.', 'shared-files') ?></li>
-                <li><?php echo esc_html__('A caching plugin should not be used for logged in users, to prevent the file list storing in the cache.', 'shared-files') ?></li>
-                <li><?php echo esc_html__('It is advisable to block direct access to file urls like /wp-content/uploads/shared-files/* on the server level (Apache, Nginx, etc.)', 'shared-files') ?> – <a href="<?php echo esc_url( get_admin_url(null, 'edit.php?post_type=shared_file&page=shared-files-restrict-access' ) ) ?>"><?php echo esc_html__('More information &raquo;', 'shared-files') ?></a></li>
-
-                <?php if (0): ?>
-                  <li><?php echo esc_html__('If you have any questions regarding the items above, you can always contact us at https://www.sharedfilespro.com/support/ and we\'ll help.', 'shared-files') ?></li>
-                <?php endif; ?>
-
-                </ul>
-        
-              <h3><?php echo esc_html__('Additional parameters:', 'shared-files') ?></h3>
-        
-              <ul>
-
-                <li><?php echo esc_html__('Show the file uploader', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted file_upload=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Show only the file uploader, hide file list', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted file_upload=1 hide_file_list=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Enable the front-end editor', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Show files from a specific category', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button>. <?php echo esc_html__('You can find / define the category slug by editing the category.', 'shared-files'); ?></li>
-
-                <li><?php echo esc_html__('Exclude categories (by slug):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-              </ul>
+        <ul>  
+         <li>
+         
+            <?php echo esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></span>
             
-            </li>
-          </ul>
+            <p><?php echo esc_html__('This shortcode will list only such files that are readable by the logged in user.', 'shared-files') ?></p>
 
-        </div>
+            <p><?php echo esc_html__('A file is listed for the logged in user, if any of the following matches:', 'shared-files') ?></p>
 
-        <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
-                      
-          <h2>
-            <?php echo esc_html__('Accordion', 'shared-files') ?>
-        
-            <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Professional</span>
-            <?php else: ?>
-              <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Professional</a>
-            <?php endif; ?>
-        
-          </h2>
-        
-          <ul>  
-           <li>
-           
-              <?php echo esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></span>
-        
-              <h3><?php echo esc_html__('Additional parameters:', 'shared-files') ?></h3>
-        
-              <ul>
+            <ul>
+              <li><?php echo esc_html__('The user was specifically given permissions to read the file (by editing the file).', 'shared-files') ?><br />
+              <?php echo esc_html__('When a user uploads a file, that user is automatically given permissions to read that file.', 'shared-files') ?></li>
+              <li><?php echo esc_html__('The logged in user belongs to a role that has permissions to read the file.', 'shared-files') ?></li>
+            </ul>
 
-                <li><?php echo esc_html__('Group and order files by month', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion group_files_by_month=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+            <p><?php echo esc_html__('The following should also be noted:', 'shared-files') ?></p>
 
-                <li><?php echo esc_html__('Group files by month and use the "file date" as date (default is file publish date)', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+            <ul>
+              <li><?php echo esc_html__('A user having the administrator role can open any file.', 'shared-files') ?></li>
+              <li><?php echo esc_html__('A caching plugin should not be used for logged in users, to prevent the file list storing in the cache.', 'shared-files') ?></li>
+              <li><?php echo esc_html__('It is advisable to block direct access to file urls like /wp-content/uploads/shared-files/* on the server level (Apache, Nginx, etc.)', 'shared-files') ?> – <a href="<?php echo esc_url( get_admin_url(null, 'edit.php?post_type=shared_file&page=shared-files-restrict-access' ) ) ?>"><?php echo esc_html__('More information &raquo;', 'shared-files') ?></a></li>
 
-                <li><?php echo esc_html__('Only the following categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion categories="sample-category-1,sample-category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Exclude categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion exclude_cat="sample-category-1,sample-category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Hide subcategories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion hide_subcategories=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Restrict file list by permissions', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion restricted=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
-
-                <li><?php echo esc_html__('Enable the front-end file editor', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+              <?php if (0): ?>
+                <li><?php echo esc_html__('If you have any questions regarding the items above, you can always contact us at https://www.sharedfilespro.com/support/ and we\'ll help.', 'shared-files') ?></li>
+              <?php endif; ?>
 
               </ul>
-            
-            </li>
-          </ul>
-        </div>
-        
-      <?php endif; ?>
+      
+            <h3><?php echo esc_html__('Additional parameters:', 'shared-files') ?></h3>
+      
+            <ul>
 
+              <li><?php echo esc_html__('Show the file uploader', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted file_upload=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Show only the file uploader, hide file list', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted file_upload=1 hide_file_list=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Enable the front-end editor', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Show files from a specific category', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted category="category_slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button>. <?php echo esc_html__('You can find / define the category slug by editing the category.', 'shared-files'); ?></li>
+
+              <li><?php echo esc_html__('Exclude categories (by slug):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_restricted exclude_cat="category-1,category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+            </ul>
+          
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
+                    
+        <h2>
+          <?php echo esc_html__('Accordion', 'shared-files') ?>
+      
+          <?php if (SharedFilesHelpers::isPremium() == 1): ?>
+            <span class="shared-files-pro-only-inline-inactive"><?php echo esc_html__('Paid plans', 'shared-files'); ?></span>
+          <?php else: ?>
+            <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline"><?php echo esc_html__('Paid plans', 'shared-files'); ?></a>
+          <?php endif; ?>
+      
+        </h2>
+      
+        <ul>  
+         <li>
+         
+            <?php echo esc_html__('Insert the shortcode', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></span>
+      
+            <h3><?php echo esc_html__('Additional parameters:', 'shared-files') ?></h3>
+      
+            <ul>
+
+              <li><?php echo esc_html__('Group and order files by month', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion group_files_by_month=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Group files by month and use the "file date" as date (default is file publish date)', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Only the following categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion categories="sample-category-1,sample-category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Exclude categories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion exclude_cat="sample-category-1,sample-category-2"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Hide subcategories', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion hide_subcategories=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Restrict file list by permissions', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion restricted=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+              <li><?php echo esc_html__('Enable the front-end file editor', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion edit=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+
+            </ul>
+          
+          </li>
+        </ul>
+      </div>
+        
       <?php if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial('business') ): ?>
       
         <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
@@ -481,9 +477,9 @@ class SharedFilesAdminShortcodes {
             <?php echo esc_html__('Favorite files', 'shared-files') ?>
             
             <?php if (SharedFilesHelpers::isPremium() == 1): ?>
-              <span class="shared-files-pro-only-inline-inactive">Business</span>
+              <span class="shared-files-pro-only-inline-inactive">Max</span>
             <?php else: ?>
-              <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Business</a>
+              <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing" class="shared-files-pro-only-inline">Max</a>
             <?php endif; ?>
         
           </h2>

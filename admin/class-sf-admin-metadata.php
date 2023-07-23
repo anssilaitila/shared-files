@@ -153,14 +153,9 @@ class SharedFilesAdminMetadata
         $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>All Plans</span></div>';
         $field_in_all_plans_markup .= '</a>';
         $field_in_all_plans_markup .= '</div>';
-        $field_in_pro_markup = '<div class="shared-files-field-in-pro-container">';
-        $field_in_pro_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
-        $field_in_pro_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Professional</span></div>';
-        $field_in_pro_markup .= '</a>';
-        $field_in_pro_markup .= '</div>';
         $field_in_business_markup = '<div class="shared-files-field-in-pro-container">';
         $field_in_business_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
-        $field_in_business_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Business</span></div>';
+        $field_in_business_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Max</span></div>';
         $field_in_business_markup .= '</a>';
         $field_in_business_markup .= '</div>';
         $field_in_pro_markup_allowed_tags = [
@@ -202,16 +197,12 @@ class SharedFilesAdminMetadata
         echo  '</div>' ;
         /* Expiration date END */
         /* User START */
-        
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i></div>' ;
-            $pro_field_active = 0;
-            if ( !$pro_field_active ) {
-                echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
-            }
-            echo  '</div>' ;
+        echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i></div>' ;
+        $pro_field_active = 0;
+        if ( !$pro_field_active ) {
+            echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
         }
-        
+        echo  '</div>' ;
         /* User END */
         /* Password protection START */
         echo  '<div class="small-field-container"><div id="shared-file-password-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Password protection', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Define a password here to enable password protection.', 'shared-files' ) . '</i></div>' ;
@@ -237,16 +228,12 @@ class SharedFilesAdminMetadata
         echo  '</div>' ;
         /* Password protection END */
         /* Role START */
-        
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i></div>' ;
-            $pro_field_active = 0;
-            if ( !$pro_field_active ) {
-                echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
-            }
-            echo  '</div>' ;
+        echo  '<div class="small-field-container"><div id="shared-file-user-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i></div>' ;
+        $pro_field_active = 0;
+        if ( !$pro_field_active ) {
+            echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
         }
-        
+        echo  '</div>' ;
         /* Role END */
         /* Notification email START */
         echo  '<div class="small-field-container"><div id="shared-file-notify-email-title" class="' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Notification email', 'shared-files' ) . '</span><br /><i>' . esc_html__( 'This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used.', 'shared-files' ) . '</i></div>' ;
@@ -270,10 +257,10 @@ class SharedFilesAdminMetadata
             echo  wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags ) ;
             echo  '</div>' ;
             echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 4' ) . '</span></div>' ;
-            echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
+            echo  wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags ) ;
             echo  '</div>' ;
             echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Custom field 5' ) . '</span></div>' ;
-            echo  wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags ) ;
+            echo  wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags ) ;
             echo  '</div>' ;
             echo  '<div class="small-field-container"><div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '"><span>' . esc_html__( 'Unlimited custom fields' ) . '</span></div>' ;
             echo  wp_kses( $field_in_business_markup, $field_in_pro_markup_allowed_tags ) ;
