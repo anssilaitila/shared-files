@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, file manager, download counter, document management, download monitor, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 4.0.0
-Tested up to: 6.2
-Stable tag: 1.7.2
+Tested up to: 6.3
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -257,8 +257,11 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 
 == Changelog ==
 
+= 1.7.3 - 2023-07-25 =
+* Compatibility for WP 6.3
+
 = 1.7.2 - 2023-07-21 =
-* (Free + All plans) Minor tweaks and fixes
+* (Free + All plans) Minor tweaks & fixes
 
 = 1.7.1 - 2023-07-05 =
 * (All plans) New parameters to be used with the shortcode [shared_files_simple] (see WP admin / Shared Files / Shortcodes):

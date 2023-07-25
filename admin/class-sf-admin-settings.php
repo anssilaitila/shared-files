@@ -418,17 +418,19 @@ class Shared_Files_Settings
             )
             );
         }
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_sync_interval',
-            sanitize_text_field( __( 'File & category sync interval', 'shared-files' ) ),
-            array( $this, 'file_sync_interval_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_sync_interval',
-            'field_name' => $only_pro . 'file_sync_interval',
-        )
-        );
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_sync_interval',
+                sanitize_text_field( __( 'File & category sync interval', 'shared-files' ) ),
+                array( $this, 'file_sync_interval_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_sync_interval',
+                'field_name' => $only_pro . 'file_sync_interval',
+            )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'remove_obsolete_file_metadata_automatically',
             sanitize_text_field( __( 'Remove obsolete file metadata automatically', 'shared-files' ) ),
@@ -485,29 +487,33 @@ class Shared_Files_Settings
             'placeholder' => '/some-folder/',
         )
         );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'exact_search_min_chars',
-            sanitize_text_field( __( 'Min. characters for search in [shared_files_exact_search]', 'shared-files' ) ),
-            array( $this, 'input_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'   => 'shared-files-' . $only_pro . 'exact_search_min_chars',
-            'field_name'  => $only_pro . 'exact_search_min_chars',
-            'placeholder' => 3,
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'exact_search_whole_words_only',
-            sanitize_text_field( __( 'Search whole words only in [shared_files_exact_search] (default targets also partial text)', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'exact_search_whole_words_only',
-            'field_name' => $only_pro . 'exact_search_whole_words_only',
-        )
-        );
+        
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_min_chars',
+                sanitize_text_field( __( 'Min. characters for search in [shared_files_exact_search]', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'exact_search_min_chars',
+                'field_name'  => $only_pro . 'exact_search_min_chars',
+                'placeholder' => 3,
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_whole_words_only',
+                sanitize_text_field( __( 'Search whole words only in [shared_files_exact_search] (default targets also partial text)', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'exact_search_whole_words_only',
+                'field_name' => $only_pro . 'exact_search_whole_words_only',
+            )
+            );
+        }
+        
         add_settings_field(
             'shared-files-pagination_type',
             sanitize_text_field( __( 'Pagination type', 'shared-files' ) ),
@@ -548,17 +554,19 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'card_align_elements_vertically',
         )
         );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'remove_link_from_file_title',
-            sanitize_text_field( __( 'Remove link from file title', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'remove_link_from_file_title',
-            'field_name' => $only_pro . 'remove_link_from_file_title',
-        )
-        );
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'remove_link_from_file_title',
+                sanitize_text_field( __( 'Remove link from file title', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'remove_link_from_file_title',
+                'field_name' => $only_pro . 'remove_link_from_file_title',
+            )
+            );
+        }
         add_settings_field(
             'shared-files-show_download_button',
             sanitize_text_field( __( 'Show download button', 'shared-files' ) ),
@@ -815,28 +823,32 @@ class Shared_Files_Settings
                 'field_name' => $only_pro . 'cf_' . $n . '_hide_from_admin_edit',
             )
             );
-            add_settings_field(
-                'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                'field_name' => $only_pro . 'cf_' . $n . '_use_as_search_filter',
-            )
-            );
-            add_settings_field(
-                'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
-                sanitize_text_field( __( 'Search filter title', 'shared-files' ) ),
-                array( $this, 'input_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
-                'field_name' => $only_pro . 'cf_' . $n . '_select_title',
-            )
-            );
+            
+            if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                    sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
+                    array( $this, 'checkbox_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                    'field_name' => $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                )
+                );
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
+                    sanitize_text_field( __( 'Search filter title', 'shared-files' ) ),
+                    array( $this, 'input_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
+                    'field_name' => $only_pro . 'cf_' . $n . '_select_title',
+                )
+                );
+            }
+        
         }
         if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             add_settings_field(
@@ -958,28 +970,32 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'file_upload_new_category',
         )
         );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
-            sanitize_text_field( __( 'Allow the uploader to create multiple new categories', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
-            'field_name' => $only_pro . 'file_upload_multiple_new_categories',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
-            sanitize_text_field( __( 'Allow the uploader to create multiple new tags', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
-            'field_name' => $only_pro . 'file_upload_multiple_new_tags',
-        )
-        );
+        
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
+                sanitize_text_field( __( 'Allow the uploader to create multiple new categories', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
+                'field_name' => $only_pro . 'file_upload_multiple_new_categories',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
+                sanitize_text_field( __( 'Allow the uploader to create multiple new tags', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
+                'field_name' => $only_pro . 'file_upload_multiple_new_tags',
+            )
+            );
+        }
+        
         add_settings_field(
             'shared-files-' . $only_pro . 'show_tag_dropdown_on_file_upload',
             sanitize_text_field( __( 'Show tag dropdown for front-end file uploader', 'shared-files' ) ),
@@ -1526,17 +1542,19 @@ class Shared_Files_Settings
             'field_name' => $only_pro . 'send_email',
         )
         );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'trigger_download_email',
-            sanitize_text_field( __( 'Trigger file downloaded email on', 'shared-files' ) ),
-            array( $this, 'trigger_download_email_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'trigger_download_email',
-            'field_name' => $only_pro . 'trigger_download_email',
-        )
-        );
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'trigger_download_email',
+                sanitize_text_field( __( 'Trigger file downloaded email on', 'shared-files' ) ),
+                array( $this, 'trigger_download_email_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'trigger_download_email',
+                'field_name' => $only_pro . 'trigger_download_email',
+            )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'add_ip_to_file_downloaded_email',
             sanitize_text_field( __( "Add the downloader's IP address to the email", 'shared-files' ) ),
@@ -1658,78 +1676,82 @@ class Shared_Files_Settings
                 );
             }
         }
-        add_settings_section(
-            'shared-files_tab_10_2',
-            '',
-            array( $this, 'shared_files_settings_tab_10_2_callback' ),
-            'shared-files'
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_edit_hide_external_url',
-            sanitize_text_field( __( 'Hide external URL', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_10_2',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_external_url',
-            'field_name' => $only_pro . 'file_edit_hide_external_url',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_edit_hide_category_checkboxes',
-            sanitize_text_field( __( 'Hide category checkboxes', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_10_2',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_category_checkboxes',
-            'field_name' => $only_pro . 'file_edit_hide_category_checkboxes',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_edit_hide_new_categories',
-            sanitize_text_field( __( 'Hide new category input', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_10_2',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_new_categories',
-            'field_name' => $only_pro . 'file_edit_hide_new_categories',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_edit_hide_tag_checkboxes',
-            sanitize_text_field( __( 'Hide tag checkboxes', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_10_2',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_tag_checkboxes',
-            'field_name' => $only_pro . 'file_edit_hide_tag_checkboxes',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_edit_hide_new_tags',
-            sanitize_text_field( __( 'Hide new tag input', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_10_2',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_new_tags',
-            'field_name' => $only_pro . 'file_edit_hide_new_tags',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'file_edit_hide_description',
-            sanitize_text_field( __( 'Hide description', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_10_2',
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_description',
-            'field_name' => $only_pro . 'file_edit_hide_description',
-        )
-        );
+        
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_section(
+                'shared-files_tab_10_2',
+                '',
+                array( $this, 'shared_files_settings_tab_10_2_callback' ),
+                'shared-files'
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_external_url',
+                sanitize_text_field( __( 'Hide external URL', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_external_url',
+                'field_name' => $only_pro . 'file_edit_hide_external_url',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_category_checkboxes',
+                sanitize_text_field( __( 'Hide category checkboxes', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_category_checkboxes',
+                'field_name' => $only_pro . 'file_edit_hide_category_checkboxes',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_new_categories',
+                sanitize_text_field( __( 'Hide new category input', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_new_categories',
+                'field_name' => $only_pro . 'file_edit_hide_new_categories',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_tag_checkboxes',
+                sanitize_text_field( __( 'Hide tag checkboxes', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_tag_checkboxes',
+                'field_name' => $only_pro . 'file_edit_hide_tag_checkboxes',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_new_tags',
+                sanitize_text_field( __( 'Hide new tag input', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_new_tags',
+                'field_name' => $only_pro . 'file_edit_hide_new_tags',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'file_edit_hide_description',
+                sanitize_text_field( __( 'Hide description', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_10_2',
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_edit_hide_description',
+                'field_name' => $only_pro . 'file_edit_hide_description',
+            )
+            );
+        }
+        
         
         if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
             $tab = 11;
@@ -2038,39 +2060,43 @@ class Shared_Files_Settings
             array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
         );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'enable_single_contact_page',
-            sanitize_text_field( __( 'Enable single file page', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'enable_single_file_page',
-            'field_name' => $only_pro . 'enable_single_file_page',
-        )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'show_files_in_site_search_results',
-            sanitize_text_field( __( 'Show files in site search results', 'shared-files' ) ),
-            array( $this, 'checkbox_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-' . $only_pro . 'show_files_in_site_search_results',
-            'field_name' => $only_pro . 'show_files_in_site_search_results',
-        )
-        );
-        add_settings_field(
-            'shared-files-tag_slug',
-            sanitize_text_field( __( 'Tag taxonomy', 'shared-files' ) ),
-            array( $this, 'tag_slug_render' ),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-            'label_for'  => 'shared-files-tag_slug',
-            'field_name' => 'tag_slug',
-        )
-        );
+        
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'enable_single_contact_page',
+                sanitize_text_field( __( 'Enable single file page', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'enable_single_file_page',
+                'field_name' => $only_pro . 'enable_single_file_page',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'show_files_in_site_search_results',
+                sanitize_text_field( __( 'Show files in site search results', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'show_files_in_site_search_results',
+                'field_name' => $only_pro . 'show_files_in_site_search_results',
+            )
+            );
+            add_settings_field(
+                'shared-files-tag_slug',
+                sanitize_text_field( __( 'Tag taxonomy', 'shared-files' ) ),
+                array( $this, 'tag_slug_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-tag_slug',
+                'field_name' => 'tag_slug',
+            )
+            );
+        }
+    
     }
     
     public function checkbox_render( $args )
@@ -2107,41 +2133,127 @@ class Shared_Files_Settings
 
         <?php 
                 
-                if ( strpos( $field_name, 'activate_favorite_files' ) !== false ) {
+                if ( strpos( $field_name, '_use_as_search_filter' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_upload_multiple_new_categories' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_upload_multiple_new_tags' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_external_url' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_category_checkboxes' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_new_categories' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_tag_checkboxes' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_new_tags' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'file_edit_hide_description' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'remove_link_from_file_title' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'exact_search_whole_words_only' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'remove_obsolete_file_metadata_automatically' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( $field_name == '_FREE_enable_single_file_page' ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( $field_name == '_FREE_show_files_in_site_search_results' ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'activate_favorite_files' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'activate_favorite_files_non_logged_in' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'show_title_above_favorite_files' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
 
         <?php 
                 } elseif ( strpos( $field_name, 'activate_wait_page' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'wait_page_hide_download_button' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'obfuscate_file_urls' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
           <?php 
                     $show_info = 1;
@@ -2397,7 +2509,7 @@ class Shared_Files_Settings
             $free_class = '';
             ?>
       <?php 
-            $plan_required = 'Max';
+            $plan_required = 'Business';
             ?>
       
       <?php 
@@ -2746,59 +2858,72 @@ class Shared_Files_Settings
 
         <?php 
                 
-                if ( strpos( $field_name, 'favorite_files_text_add_to_favorites' ) !== false ) {
+                if ( strpos( $field_name, 'cf_' ) !== false && strpos( $field_name, '_select_title' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'exact_search_min_chars' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+
+        <?php 
+                } elseif ( strpos( $field_name, 'favorite_files_text_add_to_favorites' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'favorite_files_text_favorited' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'favorite_files_title_text' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'favorite_files_text_delete_from_favorites' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'favorite_files_text_deleted' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
 
         <?php 
                 } elseif ( strpos( $field_name, 'wait_page_text_before_seconds' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'wait_page_countdown_seconds' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'wait_page_text_after_seconds' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
         <?php 
                 } elseif ( strpos( $field_name, 'wait_page_download_button_text' ) !== false ) {
                     ?>
           <?php 
-                    $plan_required = 'Max';
+                    $plan_required = 'Business';
                     ?>
 
         <?php 
@@ -3330,7 +3455,7 @@ class Shared_Files_Settings
                 echo  esc_url( get_admin_url() ) ;
                 ?>options-general.php?page=shared-files-pricing">
             <div class="shared-files-settings-pro-feature-overlay"><div><?php 
-                echo  esc_html__( 'Max', 'shared-files' ) ;
+                echo  esc_html__( 'Business', 'shared-files' ) ;
                 ?></div></div>
           </a>
         
@@ -3505,7 +3630,7 @@ class Shared_Files_Settings
             $free_class = '';
             ?>
       <?php 
-            $plan_required = 'All Plans';
+            $plan_required = 'Professional';
             ?>
       
       <?php 
@@ -3637,7 +3762,7 @@ class Shared_Files_Settings
             $free_class = '';
             ?>
       <?php 
-            $plan_required = 'All Plans';
+            $plan_required = 'Professional';
             ?>
       
       <?php 
