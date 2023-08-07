@@ -90,9 +90,56 @@ class ShortcodeSharedFiles
         
         
         if ( isset( $atts['file_id'] ) ) {
-            if ( SharedFilesHelpers::isPremium() == 0 ) {
-                $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
+            $file_id = (int) $atts['file_id'];
+            $wpb_all_query = new WP_Query( array(
+                'post_type'      => 'shared_file',
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'p'              => $file_id,
+            ) );
+            $filetypes = SharedFilesHelpers::getFiletypes();
+            $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
+            $html .= '<div class="shared-files-search">';
+            $html .= '<ul class="shared-files-main-file-list">';
+            
+            if ( $wpb_all_query->have_posts() ) {
+                while ( $wpb_all_query->have_posts() ) {
+                    $wpb_all_query->the_post();
+                    $id = get_the_id();
+                    $c = get_post_custom( $id );
+                    $external_url = ( isset( $c['_sf_external_url'] ) ? esc_url_raw( $c['_sf_external_url'][0] ) : '' );
+                    $filetype = '';
+                    $imagefile = SharedFilesHelpers::getImageFile( $id, $external_url );
+                    $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
+                    
+                    if ( isset( $atts['layout'] ) && $atts['layout'] == 'minimal' ) {
+                        $html .= SharedFilesPublicFileCardMinimal::fileListItem(
+                            $c,
+                            $imagefile,
+                            $hide_description,
+                            2,
+                            $atts
+                        );
+                    } else {
+                        $html .= SharedFilesPublicFileCardDefault::fileListItem(
+                            $c,
+                            $imagefile,
+                            $hide_description,
+                            2,
+                            $atts
+                        );
+                    }
+                
+                }
+                wp_reset_postdata();
+            } else {
+                $html .= '<div class="sf_error">' . esc_html__( 'File not found', 'shared-files' ) . '</div>';
             }
+            
+            $html .= '</ul>';
+            $html .= '</div>';
+            // .shared-files-main-container
+            $html .= '</div>';
             return $html;
         } elseif ( isset( $atts['hide_file_list'] ) ) {
             // .shared-files-main-container
@@ -121,6 +168,32 @@ class ShortcodeSharedFiles
                     $html .= '<div class="shared-files-search-input-container"><input type="text"  class="shared-files-search-files-input shared-files-search-files" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" data-elem-class="' . $elem_class . '" /></div>';
                 }
                 $is_premium = 0;
+                
+                if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
+                    $tag_selected = ( isset( $_GET['sf_tag'] ) ? sanitize_title( $_GET['sf_tag'] ) : '' );
+                    $tags_orderby = '';
+                    $tags_order = 'ASC';
+                    if ( isset( $s['sort_tags_by'] ) && $s['sort_tags_by'] ) {
+                        $tags_orderby = sanitize_title( $s['sort_tags_by'] );
+                    }
+                    $tag_args = array(
+                        'taxonomy'          => SHARED_FILES_TAG_SLUG,
+                        'name'              => 'sf_tag',
+                        'show_option_none'  => esc_attr__( 'Choose tag', 'shared-files' ),
+                        'hierarchical'      => true,
+                        'class'             => 'shared-files-tag-select select_v2',
+                        'echo'              => false,
+                        'value_field'       => 'slug',
+                        'selected'          => $tag_selected,
+                        'option_none_value' => '',
+                        'orderby'           => $tags_orderby,
+                        'order'             => $tags_order,
+                    );
+                    $html .= '<div class="shared-files-tag-select-container">';
+                    $html .= wp_dropdown_categories( $tag_args );
+                    $html .= '</div>';
+                }
+                
                 // .shared-files-search-form-container
                 $html .= '</form>';
                 // .shared-files-ajax-form

@@ -91,7 +91,7 @@ class SharedFilesAdminList
                 break;
             case 'file_url':
                 echo  '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . esc_attr( $post_ID ) . '" title="[shared_files file_id=' . esc_attr( $post_ID ) . ']">[shared_files file_id=' . esc_attr( $post_ID ) . ']</span>' ;
-                echo  '<button class="shared-files-copy shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . esc_attr( $post_ID ) . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
+                echo  '<button class="shared-files-copy shared-files-copy-single shared-files-copy-admin-list" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-' . esc_attr( $post_ID ) . '">' . esc_html__( 'Copy', 'shared-files' ) . '</button>' ;
                 $folder_name = get_post_meta( $file_id, '_sf_subdir', true );
                 if ( $folder_name ) {
                     echo  '<hr class="clear" /><div class="shared-files-admin-folder-name">' . esc_html( $folder_name ) . '/</div>' ;

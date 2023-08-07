@@ -1,9 +1,9 @@
 === Shared Files – Easy Download Manager and File Sharing Plugin with Frontend File Upload ===
 Contributors: anssilaitila, freemius
-Tags: download manager, file sharing, file upload, file manager, download counter, document management, download monitor, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
-Requires at least: 4.0.0
+Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
+Requires at least: 5.4.0
 Tested up to: 6.3
-Stable tag: 1.7.3
+Stable tag: 1.7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -257,11 +257,16 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 
 == Changelog ==
 
+= 1.7.4 - 2023-08-07 =
+- (Free + All plans) Added the CSS class shared-files-card-12345 to all file cards (the list item, "li") in all shortcodes, where 12345 is the file id
+- (Free + All plans) New setting for simple list: Show download counter
+- (Free + All plans) New setting for simple list: Title for download counter
+
 = 1.7.3 - 2023-07-25 =
 * Compatibility for WP 6.3
 
 = 1.7.2 - 2023-07-21 =
-* (Free + All plans) Minor tweaks & fixes
+* (Free + All plans) Minor tweaks and fixes
 
 = 1.7.1 - 2023-07-05 =
 * (All plans) New parameters to be used with the shortcode [shared_files_simple] (see WP admin / Shared Files / Shortcodes):

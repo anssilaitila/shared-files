@@ -4,42 +4,56 @@ class SharedFilesAdminNotifications {
 
   public function notifications_html() {
 
-  	$sf_rating_show_notice = get_option('shared_files_rating_show_notice');
-
-  	$sf_rating_notice_option = get_option('shared_files_rating_notice');
-  	$sf_rating_notice_waiting = get_transient('shared_files_rating_notice_waiting');
-
-  	$should_show_rating_notice = ($sf_rating_show_notice && $sf_rating_notice_waiting !== 'waiting' && $sf_rating_notice_option !== 'dismissed');
-
-  	if ($should_show_rating_notice && current_user_can('administrator')) {
-
-  		$dismiss_url = add_query_arg('sf_ignore_rating_notice_notify', '1');
-  		$later_url = add_query_arg('sf_ignore_rating_notice_notify', 'later');
-
-  		echo "
+    $sf_rating_show_notice_now = get_option('shared_files_rating_show_notice_now_v2');
+    $sf_rating_notice_status = get_option('shared_files_rating_notice_status_v2');
+    
+    $sf_rating_notice_later_seconds = get_transient('shared_files_rating_notice_later_seconds_v2');
+    
+    $should_show_rating_notice = 0;
+    
+    if ( $sf_rating_show_notice_now && $sf_rating_notice_status != 'dismissed' ) {
+      
+      if ( $sf_rating_notice_status != 'later' ) {
+        $should_show_rating_notice = 1;
+      } elseif ( !$sf_rating_notice_later_seconds ) {
+        $should_show_rating_notice = 1;
+      }
+      
+    } 
+    
+    if ($should_show_rating_notice && current_user_can('administrator')) {
+    
+      $dismiss_url = add_query_arg('sf_ignore_rating_notice_notify', '1');
+      $later_url = add_query_arg('sf_ignore_rating_notice_notify', 'later');
+    
+      $file_posts = wp_count_posts('shared_file');
+      $file_cnt = intval( $file_posts->publish );
+      
+      echo "
         <div class='sf_notice sf_review_notice'>
-
-          <img src='". SHARED_FILES_URI . 'img/sf-sunrise.jpg' ."' alt='" . esc_attr__('Shared Files', 'shared-files') . "'>
           <div class='shared-files-notice-text'>
-
-            <p style='padding-top: 4px;'>" . sprintf( __( "It's great to see that you've been using the %sShared Files%s plugin for a while now. Hopefully you're happy with it!&nbsp; If so, would you consider leaving a positive review? It really helps to support the plugin and helps others to discover it too!" ), '<strong style=\'font-weight: 700;\'>', '</strong>' ) . "</p>
-
+            " . 
+            
+            '<div style=\'margin-bottom: 8px;\'><p style=\'font-size: 15px;\'>' . sprintf( __( "Hey, I noticed that you have added %s%d files%s with the Shared Files plugin – that's awesome!" ), '<strong style=\'font-weight: 700;\'>', ( $file_cnt ), '</strong>' ) . '</p></div>' . 
+            
+            '<div style=\'margin-bottom: 8px;\'><p style=\'font-size: 15px;\'>' . sprintf( __( "Could you please do me a BIG favour and give it a 5-star rating on WordPress? It will help to spread the word and boost our motivation." ) ) . '</p></div>' . 
+            
+            '<p style=\'font-size: 15px;\'>– Anssi (Lead developer)</p>' .
+            
+            "
             <p class='links'>
-                <a class='sf_notice_dismiss' href='https://wordpress.org/support/plugin/shared-files/reviews/#new-post' target='_blank'>" . esc_html__('Sure, I\'d love to!', 'shared-files') . "</a>
-                &middot;
-                <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url ) . "'>" . esc_html__('No thanks', 'shared-files') . "</a>
-                &middot;
-                <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url ) . "'>" . esc_html__('I\'ve already given a review', 'shared-files') . "</a>
-                &middot;
-                <a class='sf_notice_dismiss' href='" . esc_url( $later_url ) . "'>" . esc_html__('Ask Me Later', 'shared-files') . "</a>
+              <a class='sf_notice_dismiss' style='border: 1px solid green; background: green; color: #fff; font-weight: 700; padding: 5px 10px; border-radius: 3px; text-decoration: none; margin-right: 10px;' href='https://wordpress.org/support/plugin/shared-files/reviews/#new-post' target='_blank'>" . esc_html__('Sure, I\'d love to!', 'shared-files') . "</a>
+              &middot;
+              <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url ) . "'>" . esc_html__('No thanks', 'shared-files') . "</a>
+              &middot;
+              <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url ) . "'>" . esc_html__('I\'ve already given a review', 'shared-files') . "</a>
+              &middot;
+              <a class='sf_notice_dismiss' href='" . esc_url( $later_url ) . "'>" . esc_html__('Ask Me Later', 'shared-files') . "</a>
             </p>
-
           </div>
-
           <a class='sf_notice_close' href='" . esc_url( $dismiss_url ) . "'>x</a>
-
         </div>";
-  
+    
     }
 
     $screen = get_current_screen();
@@ -147,69 +161,45 @@ class SharedFilesAdminNotifications {
 
     /*
     if (0) {
-      delete_transient('shared_files_rating_notice_waiting');
-  		delete_option('shared_files_rating_notice');
-  		delete_option('shared_files_rating_notice_date');
-  		delete_option('shared_files_rating_show_notice');
+      delete_transient('shared_files_rating_notice_later_seconds_v2');
+      delete_option('shared_files_rating_show_notice_now_v2');
+      delete_option('shared_files_rating_notice_status_v2');
     }
     */
     
   	global $current_user;
   	$user_id = $current_user->ID;
-  	$sf_statuses_option = get_option('sf_statuses', array());
 
     // Rating notice
 
-    /*
+    $file_posts = wp_count_posts('shared_file');
+    $file_cnt = intval( $file_posts->publish );
     
-    if (!get_option('shared_files_rating_notice_date')) {
-
-      $dt = new DateTime('+8 weeks');
-
-      if ($dt !== false && !array_sum($dt::getLastErrors())) {
-        $notify_date = $dt;
-        update_option('shared_files_rating_notice_date', $notify_date, false);
-      }
-
-    } else {
-
-      $notify_date = get_option('shared_files_rating_notice_date');
-
-      if ($notify_date instanceof DateTime) {
-        $dt_now = new DateTime('now');
-        
-        if ($notify_date <= $dt_now) {
-          update_option('shared_files_rating_show_notice', 1, false);
-        }
-
-      }
+    $sf_rating_current_status = get_option('shared_files_rating_notice_status_v2');
+    
+    if (isset($_GET['sf_ignore_rating_notice_notify'])) {
       
-    }
+      if ((int) $_GET['sf_ignore_rating_notice_notify'] === 1) {
+        
+        update_option('shared_files_rating_notice_status_v2', 'dismissed', false);
+        
+      } elseif ($_GET['sf_ignore_rating_notice_notify'] === 'later') {
     
-    */
-  
-  	if (isset($_GET['sf_ignore_rating_notice_notify'])) {
-    	
-  		if ((int) $_GET['sf_ignore_rating_notice_notify'] === 1) {
-    		
-  			update_option('shared_files_rating_notice', 'dismissed', false);
-  			$sf_statuses_option['rating_notice_dismissed'] = $this->sf_get_current_time();
-  			update_option('sf_statuses', $sf_statuses_option, false);
-  
-  		} elseif ($_GET['sf_ignore_rating_notice_notify'] === 'later') {
+        update_option('shared_files_rating_notice_status_v2', 'later', false);
+        set_transient('shared_files_rating_notice_later_seconds_v2', '_later', 2 * WEEK_IN_SECONDS);
+    
+      }
+    
+    } elseif (!$sf_rating_current_status && $file_cnt > 50) {
+      update_option('shared_files_rating_show_notice_now_v2', 1, false);
+    }
 
-  			set_transient('shared_files_rating_notice_waiting', 'waiting', 2 * WEEK_IN_SECONDS);
-  			update_option('shared_files_rating_notice', 'pending', false);
-
-  		}
   
-  	} elseif ( isset($_GET['shared_files_ignore_how_to_notify']) ) {
+  	if ( isset($_GET['shared_files_ignore_how_to_notify']) ) {
       
       update_option('shared_files_how_to_show_notice', 0, false);
       
     }
-    
-    
     
   }
 

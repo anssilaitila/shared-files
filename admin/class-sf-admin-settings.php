@@ -97,19 +97,19 @@ class Shared_Files_Settings
             'field_name' => 'log_enable_referer_url',
         )
         );
+        add_settings_field(
+            'shared-files-show_tag_dropdown',
+            sanitize_text_field( __( 'Show tag filter', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-show_tag_dropdown',
+            'field_name' => 'show_tag_dropdown',
+        )
+        );
         
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'show_tag_dropdown',
-                sanitize_text_field( __( 'Show tag filter', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_section_general',
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown',
-                'field_name' => $only_pro . 'show_tag_dropdown',
-            )
-            );
             add_settings_field(
                 'shared-files-' . $only_pro . 'sort_tags_by',
                 sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
@@ -144,17 +144,6 @@ class Shared_Files_Settings
             )
             );
         } else {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'show_tag_dropdown',
-                sanitize_text_field( __( 'Show tag filter', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_section_general',
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown',
-                'field_name' => $only_pro . 'show_tag_dropdown',
-            )
-            );
             add_settings_field(
                 'shared-files-' . $only_pro . 'sort_tags_by',
                 sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
@@ -997,14 +986,14 @@ class Shared_Files_Settings
         }
         
         add_settings_field(
-            'shared-files-' . $only_pro . 'show_tag_dropdown_on_file_upload',
+            'shared-files-show_tag_dropdown_on_file_upload',
             sanitize_text_field( __( 'Show tag dropdown for front-end file uploader', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown_on_file_upload',
-            'field_name' => $only_pro . 'show_tag_dropdown_on_file_upload',
+            'label_for'  => 'shared-files-show_tag_dropdown_on_file_upload',
+            'field_name' => 'show_tag_dropdown_on_file_upload',
         )
         );
         add_settings_field(
@@ -1984,6 +1973,29 @@ class Shared_Files_Settings
             'field_name' => 'simple_list_title_file',
         )
         );
+        add_settings_field(
+            'shared-files-simple_list_show_download_counter',
+            sanitize_text_field( __( 'Show download counter', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-simple_list_show_download_counter',
+            'field_name' => 'simple_list_show_download_counter',
+        )
+        );
+        add_settings_field(
+            'shared-files-simple_list_title_download_counter',
+            sanitize_text_field( __( 'Title for download counter', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-simple_list_title_download_counter',
+            'field_name'  => 'simple_list_title_download_counter',
+            'placeholder' => sanitize_text_field( __( 'Downloads', 'shared-files' ) ),
+        )
+        );
         $custom_fields_cnt = 3 + 1;
         for ( $n = 1 ;  $n < $custom_fields_cnt ;  $n++ ) {
             add_settings_field(
@@ -2043,14 +2055,15 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'simple_list_title_tag',
+            'shared-files-simple_list_title_tag',
             sanitize_text_field( __( 'Title for tag column', 'shared-files' ) ),
             array( $this, 'input_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-            'label_for'  => 'shared-files-' . $only_pro . 'simple_list_title_tag',
-            'field_name' => $only_pro . 'simple_list_title_tag',
+            'label_for'   => 'shared-files-simple_list_title_tag',
+            'field_name'  => 'simple_list_title_tag',
+            'placeholder' => sanitize_text_field( __( 'Tag', 'shared-files' ) ),
         )
         );
         $tab = 14;
@@ -2084,19 +2097,19 @@ class Shared_Files_Settings
                 'field_name' => $only_pro . 'show_files_in_site_search_results',
             )
             );
-            add_settings_field(
-                'shared-files-tag_slug',
-                sanitize_text_field( __( 'Tag taxonomy', 'shared-files' ) ),
-                array( $this, 'tag_slug_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'  => 'shared-files-tag_slug',
-                'field_name' => 'tag_slug',
-            )
-            );
         }
-    
+        
+        add_settings_field(
+            'shared-files-tag_slug',
+            sanitize_text_field( __( 'Tag taxonomy', 'shared-files' ) ),
+            array( $this, 'tag_slug_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-tag_slug',
+            'field_name' => 'tag_slug',
+        )
+        );
     }
     
     public function checkbox_render( $args )

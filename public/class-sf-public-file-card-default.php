@@ -53,7 +53,7 @@ class SharedFilesPublicFileCardDefault
             $left_style = 'background: url(' . esc_attr( $imagefile ) . ') right top no-repeat; background-size: 48px;';
         }
         
-        $html .= '<li>';
+        $html .= '<li class="shared-files-card-' . $file_id . '">';
         $html .= '<div class="shared-files-main-elements">';
         $html .= '<div class="shared-files-main-elements-left" style="' . esc_attr( $left_style ) . '"></div>';
         

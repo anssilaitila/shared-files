@@ -48,13 +48,15 @@ class SharedFilesAdminMaintenance
                 'show_download_button'                                    => 'on',
                 'show_download_counter'                                   => 'on',
                 'simple_list_show_titles_for_columns'                     => 'on',
-                'simple_list_title_tag'                                   => 'on',
+                'simple_list_show_download_counter'                       => 'on',
+                'simple_list_show_tag'                                    => 'on',
                 'tag_slug'                                                => 'shared-file-tag',
                 'log_enable_user_data'                                    => 'on',
                 'log_enable_ip'                                           => 'on',
                 'log_enable_user_agent'                                   => 'on',
                 'log_enable_referer_url'                                  => 'on',
                 'prevent_search_engines_from_indexing_uploaded_file_urls' => 'on',
+                'show_tag_dropdown_on_file_upload'                        => 'on',
             ];
             add_option( 'shared_files_settings', $default_settings );
             update_option( 'shared_files_how_to_show_notice', 1, false );

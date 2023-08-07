@@ -122,6 +122,13 @@ class SharedFilesPublicHelpers
         $html .= '<div class="shared-files-simple-list-row">';
         $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name shared-files-simple-list-col-title"><span>' . SharedFilesHelpers::getText( 'simple_list_title_file', __( 'File', 'shared-files' ) ) . '</span></div>';
         
+        if ( isset( $s['simple_list_show_download_counter'] ) ) {
+            $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-title"><span>';
+            $html .= SharedFilesHelpers::getText( 'simple_list_title_download_counter', __( 'Downloads', 'shared-files' ) );
+            $html .= '</span></div>';
+        }
+        
+        
         if ( isset( $s['simple_list_show_tag'] ) ) {
             $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-title"><span>';
             $html .= SharedFilesHelpers::getText( 'simple_list_title_tag', __( 'Tag', 'shared-files' ) );
@@ -184,6 +191,13 @@ class SharedFilesPublicHelpers
             }
         }
         $html .= '</span></div>';
+        
+        if ( isset( $s['simple_list_show_download_counter'] ) ) {
+            $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-download-counter"><span>';
+            $html .= intval( get_post_meta( $file_id, '_sf_load_cnt', true ) );
+            $html .= '</span></div>';
+        }
+        
         
         if ( isset( $s['simple_list_show_tag'] ) ) {
             $html .= '<div class="shared-files-simple-list-col"><span>';
