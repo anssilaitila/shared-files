@@ -1,4 +1,4 @@
-=== Shared Files – Easy Download Manager and File Sharing Plugin with Frontend File Upload ===
+=== Shared Files – Advanced File Sharing & Download Manager with Frontend Uploads ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 5.4.0
@@ -7,7 +7,7 @@ Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A download manager plugin to share files like on Dropbox, Google Drive or OneDrive! Featuring frontend file upload, FTP upload, download counter, better media library, file manager and more...
+Your personal WordPress-based Dropbox! Upload, manage, and share files effortlessly. Comes with a download counter, enhanced media library, and FTP uploads.
 
 == Description ==
 
@@ -45,37 +45,21 @@ These are just some of the highlights offered by the Shared Files plugin.
 
 == Getting started ==
 
-Installing and getting started with organizing your documents is super simple if you are using Shared Files plugin. Let's see how!
+Installing and getting started with organizing your files is super simple when you are using Shared Files plugin. Let's see how!
 
-There are two scenarios you may follow to get Shared Files, either free version or pro version.
-
-To install the free version of the plugin you need to follow these steps:
-
-* Go to your WordPress website from the backend
-* Click on Plugins > Add New
-* On the search line, type “Shared Files”
-* Click on Install > Activate
-
-To install the Pro version of the Shared Files plugin you should repeat the following actions:
-
-* Download the zip file of the Shared Files plugin
-* Click on the Plugins section
-* Upload the zip file
-* Type the license key and Activate
-
-Start managing your documents in a team right inside WordPress admin with 2 steps:
+Start managing your files in a team right inside WordPress admin with 2 steps:
 
 1. Add some documents/files from WP admin > Shared Files > File Management. 
 2. Insert one of these shortcodes to any page or post on your site.
-    * [shared_files]
-    * [shared_files_simple]
-    * [shared_files file_upload=1]
+    * [shared_files] (default file list)
+    * [shared_files_simple] (simple file list)
+    * [shared_files file_upload=1] (file list with front end uploader)
 
 That's it! You can start enjoying the Shared Files file managing plugin.
 
 == Shared Files plugin features ==
 
-Shared Files WordPress website file manager allows adding files through “File Management” section, doing the following actions:
+Shared Files WordPress website file manager allows adding files through File Management section, doing the following actions:
 
 * Adding file name
 * Choosing the file
@@ -96,17 +80,18 @@ Shared Files file sharing WordPress solution allows sharing numerous types of fi
 * XLS
 * Images
 * YouTube videos
+* Any file type can be activated from the plugin settings
 * File folders - this is particularly important for big teams for effective collaboration
 
 = File search =
 
 What is the purpose of a file-sharing plugin if not allowing you to easily and quickly find the exact file you're looking for. This is what Shared Files plugin offers to it's users.
 
-Powerful and fast file/document search functionality based on various defined categories, such as file name, description, and more makes it super easy for Shared Files plugin users to track and find the exact file/document they're looking for.
+Powerful and fast file search functionality based on various defined categories, such as file name, description, and more makes it super easy for Shared Files plugin users to track and find the exact file/document they're looking for.
 
 = Previewing files =
 
-This file managing plugin allows a team to upload files onto the WordPress admin, collaborate with each other, and most importantly administrator and users can preview the files on the browser before going live to ensure the accuracy of the uploaded file/document.
+This file managing plugin allows a team to upload files onto the WordPress admin, collaborate with each other, and most importantly administrator and users can preview the files on the browser before going live to ensure the accuracy of the uploaded file.
 
 = Document / file tags =
 
