@@ -31,7 +31,7 @@ class SharedFilesAdminMetadata
         $description = wp_kses_post( get_post_meta( $post_id, '_sf_description', true ) );
         $external_url = esc_url_raw( get_post_meta( $post_id, '_sf_external_url', true ) );
         $limit_downloads = intval( get_post_meta( $post_id, '_sf_limit_downloads', true ) );
-        $expiration_date = sanitize_text_field( get_post_meta( $post_id, '_sf_expiration_date', true ) );
+        $expiration_date = get_post_meta( $post_id, '_sf_expiration_date', true );
         $expiration_date_formatted = '';
         $main_date = get_post_meta( $post_id, '_sf_main_date', true );
         $main_date_formatted = '';
@@ -340,18 +340,20 @@ class SharedFilesAdminMetadata
             
             $expiration_date = '';
             
-            if ( isset( $_POST['_sf_expiration_date'] ) ) {
+            if ( isset( $_POST['_sf_expiration_date'] ) && $_POST['_sf_expiration_date'] ) {
                 $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_expiration_date'] ) );
-                if ( $dt !== false && !array_sum( $dt::getLastErrors() ) ) {
+                $errors = $dt::getLastErrors();
+                if ( $dt !== false && !array_sum( (array) $errors ) ) {
                     $expiration_date = $dt;
                 }
             }
             
             $main_date = '';
             
-            if ( isset( $_POST['_sf_main_date'] ) ) {
+            if ( isset( $_POST['_sf_main_date'] ) && $_POST['_sf_main_date'] ) {
                 $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_main_date'] ) );
-                if ( $dt !== false && !array_sum( $dt::getLastErrors() ) ) {
+                $errors = $dt::getLastErrors();
+                if ( $dt !== false && !array_sum( (array) $errors ) ) {
                     $main_date = $dt;
                 }
             }

@@ -138,7 +138,7 @@ class SharedFilesFileUpload
         }
         
         
-        if ( isset( $_POST ) && isset( $_POST['shared-files-upload'] ) && (isset( $_FILES ) && isset( $_FILES['_sf_file']['name'] ) || isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url']) ) {
+        if ( isset( $_POST ) && isset( $_POST['shared-files-upload'] ) ) {
             if ( !isset( $_POST['secret_code'] ) || !wp_verify_nonce( $_POST['secret_code'], 'sf_insert_file' ) ) {
                 wp_die( 'Error in processing form data.' );
             }

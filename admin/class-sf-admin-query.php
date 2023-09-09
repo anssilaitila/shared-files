@@ -172,6 +172,9 @@ class SharedFilesAdminQuery
                     if ( !$file_mime ) {
                         $file_mime = SharedFilesAdminHelpers::get_mime_type( $filename );
                     }
+                    if ( $file_mime == 'text/html' ) {
+                        $file_mime = 'text/plain';
+                    }
                     // Update load counter (1/2)
                     $load_cnt = (int) get_post_meta( $file_id, '_sf_load_cnt', true );
                     // Update load counter (2/2)

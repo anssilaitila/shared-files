@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 5.4.0
 Tested up to: 6.3
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -241,6 +241,10 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.6 - 2023-09-09 =
+* (Professional + Business) It is now possible to set accordion layout using a shortcode parameter: [shared_files_accordion layout=2-columns] (+ 3-columns and 4-columns)
+* (Free + All plans) Bug fixes
 
 = 1.7.5 - 2023-08-16 =
 - (Professional + Business) New feature for accordion: Show only subcategories under this category and as separate clickable elements, [shared_files_accordion base_category="category-slug"]
