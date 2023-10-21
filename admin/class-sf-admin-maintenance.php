@@ -81,6 +81,9 @@ class SharedFilesAdminMaintenance
             if ( !$column_exists ) {
                 $wpdb->query( "ALTER TABLE {$table_name_download_log} " . "ADD user_id      BIGINT(20) NOT NULL, " . "ADD user_login   VARCHAR(255) NOT NULL, " . "ADD user_name    VARCHAR(255) NOT NULL, " . "ADD user_country VARCHAR(255) NOT NULL, " . "ADD user_agent   TEXT NOT NULL, " . "ADD referer_url  TEXT NOT NULL " );
             }
+            // Table for contacts
+            $table_name_contacts = $wpdb->prefix . 'shared_files_contacts';
+            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_contacts . " (\n        id                BIGINT(20) NOT NULL auto_increment,\n        file_id           VARCHAR(255) NOT NULL,\n        file_title        VARCHAR(255) NOT NULL,\n        file_name         VARCHAR(255) NOT NULL,\n        file_size         VARCHAR(255) NOT NULL,\n        embed_id          VARCHAR(255) NOT NULL,\n        ask_for_email_id  VARCHAR(255) NOT NULL,\n        email             VARCHAR(255) NOT NULL,\n        ip                VARCHAR(255) NOT NULL,\n        user_country      VARCHAR(255) NOT NULL,\n        user_agent        TEXT NOT NULL,\n        referer_url       TEXT NOT NULL,\n        title             VARCHAR(255) NOT NULL,\n        message           TEXT NOT NULL,\n        created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
             update_option( 'shared_files_version', SHARED_FILES_VERSION );
             SharedFilesHelpers::writeLog( 'Plugin updated to version ' . SHARED_FILES_VERSION, '' );
         }

@@ -3092,7 +3092,7 @@ class Shared_Files_Settings
             } elseif ( $field_name == 'icon_for_image' || $field_name == 'custom_1_icon' || $field_name == 'folder_icon_uri' ) {
                 ?>
         <p><?php 
-                echo  esc_html__( 'e.g. /wp-content/uploads/2022/01/custom-icon.png', 'shared-files' ) ;
+                echo  esc_html__( 'e.g. /wp-content/uploads/2023/01/custom-icon.png', 'shared-files' ) ;
                 ?></p>
       <?php 
             } elseif ( $field_name == 'file_upload_send_email' ) {

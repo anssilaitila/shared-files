@@ -9,6 +9,7 @@ class ShortcodeSharedFiles
      */
     public static function shared_files( $atts = array(), $content = null, $tag = '' )
     {
+        $html = '';
         $post_id = intval( get_the_id() );
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
@@ -18,6 +19,24 @@ class ShortcodeSharedFiles
         $meta_query_full = [];
         $custom_fields_active = 0;
         $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
+        if ( isset( $atts['ask_for_email'] ) && $atts['ask_for_email'] == 1 ) {
+            
+            if ( is_super_admin() ) {
+                $html .= SharedFilesPublicContacts::askForEmailInfo();
+            } else {
+                $ask_for_email_form_field = '_sf_email_' . $embed_id;
+                
+                if ( isset( $_POST[$ask_for_email_form_field] ) && is_email( $_POST[$ask_for_email_form_field] ) ) {
+                    $email = sanitize_email( $_POST[$ask_for_email_form_field] );
+                    SharedFilesPublicContacts::saveEmail( $embed_id, $email, $atts );
+                } else {
+                    $html = SharedFilesPublicContacts::askForEmail( $embed_id, $atts );
+                    return $html;
+                }
+            
+            }
+        
+        }
         $pagination_active = 0;
         if ( isset( $_GET['_paged'] ) && $_GET['_paged'] == $embed_id ) {
             $pagination_active = 1;
@@ -40,7 +59,6 @@ class ShortcodeSharedFiles
             'compare' => 'NOT EXISTS',
         );
         //    $meta_query_hide_not_public = array();
-        $html = '';
         $html .= '<div class="' . $elem_class . ' shared-files-main-container" data-elem-class="' . $elem_class . '">';
         
         if ( isset( $_GET ) && isset( $_GET['shared-files-update'] ) ) {

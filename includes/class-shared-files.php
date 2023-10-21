@@ -119,6 +119,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-shortcodes.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-download-log.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-statistics.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-contacts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-help-support.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-settings.php';
@@ -137,6 +138,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-default.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-vertical.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-hooks.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-contacts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
@@ -184,6 +186,7 @@ class Shared_Files
         $plugin_admin_shortcodes = new SharedFilesAdminShortcodes();
         $plugin_admin_download_log = new SharedFilesAdminDownloadLog();
         $plugin_admin_statistics = new SharedFilesAdminStatistics();
+        $plugin_admin_contacts = new SharedFilesAdminContacts();
         $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
         $plugin_admin_query = new SharedFilesAdminQuery();
         $plugin_admin_send_mail = new SharedFilesAdminSendMail();
@@ -288,6 +291,8 @@ class Shared_Files
         }
         // Statistics
         $this->loader->add_action( 'admin_menu', $plugin_admin_statistics, 'register_statistics_page' );
+        // Contacts
+        $this->loader->add_action( 'admin_menu', $plugin_admin_contacts, 'register_contacts_page' );
         // Shortcodes
         $this->loader->add_action( 'admin_menu', $plugin_admin_shortcodes, 'register_shortcodes_page' );
         // Help & support

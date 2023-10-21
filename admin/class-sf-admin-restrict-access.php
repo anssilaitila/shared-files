@@ -4,10 +4,10 @@ class SharedFilesAdminRestrictAccess {
 
   public function register_page() {
 
-    $menu_pos = 9;
+    $menu_pos = 10;
 
     if (SharedFilesHelpers::isPremium() == 1) {
-      $menu_pos = 10;
+      $menu_pos = 11;
     }
     
     add_submenu_page(

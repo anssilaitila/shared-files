@@ -53,14 +53,14 @@ class SharedFilesAdminStatistics {
   
       <div class="shared-files-admin-section shared-files-admin-section-statistics">
   
-        <h2><?php echo esc_html__('Top 20 most popular files', 'shared-files') ?></h2>
+        <h2><?php echo esc_html__('Top 50 most popular files', 'shared-files') ?></h2>
 
         <?php
         $wp_query = new WP_Query(array(
           'post_type'       => 'shared_file',
           'post_status'     => 'publish',
         
-          'posts_per_page'  => 20,
+          'posts_per_page'  => 50,
         
           'orderby'         => 'meta_value_num',
           'order'           => 'DESC',

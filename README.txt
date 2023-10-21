@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 5.4.0
 Tested up to: 6.3
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,6 +29,7 @@ Shared Files provides an interface for uploading and managing a large group of d
 == Features in the FREE version of Shared Files ==
 
 * Top 20 most popular files
+* Ask for an email address before showing the file(s)
 * Download log of all file downloads
 * Download counter for all files
 * Front end search from all files
@@ -241,6 +242,10 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.7 - 2023-10-21 =
+- (Free + All plans) New feature: ask for an email address before showing the file(s) - add the parameter ask_for_email=1 to a shortcode to ask for an email address before showing the file(s) to the user, these emails can be found from WP admin / Shared Files / Contacts. See also WP admin / Shared Files / Shortcodes for details regarding the shortcodes.
+- (Free + All plans) Number of top downloads increased from 20 to 50
 
 = 1.7.6 - 2023-09-09 =
 * (Professional + Business) It is now possible to set accordion layout using a shortcode parameter: [shared_files_accordion layout=2-columns] (+ 3-columns and 4-columns)

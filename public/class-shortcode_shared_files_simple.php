@@ -4,12 +4,31 @@ class ShortcodeSharedFilesSimple
 {
     public static function view( $atts )
     {
+        $html = '';
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
         $elem_class = SharedFilesHelpers::createElemClass();
+        $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
+        if ( isset( $atts['ask_for_email'] ) && $atts['ask_for_email'] == 1 ) {
+            
+            if ( is_super_admin() ) {
+                $html .= SharedFilesPublicContacts::askForEmailInfo();
+            } else {
+                $ask_for_email_form_field = '_sf_email_' . $embed_id;
+                
+                if ( isset( $_POST[$ask_for_email_form_field] ) && is_email( $_POST[$ask_for_email_form_field] ) ) {
+                    $email = sanitize_email( $_POST[$ask_for_email_form_field] );
+                    SharedFilesPublicContacts::saveEmail( $embed_id, $email, $atts );
+                } else {
+                    $html = SharedFilesPublicContacts::askForEmail( $embed_id, $atts );
+                    return $html;
+                }
+            
+            }
+        
+        }
         $limit_posts = 0;
-        $html = '';
         $html .= '<div class="' . $elem_class . ' shared-files-simple-container" />';
         $html .= '<div class="shared-files-simple-text-contact" style="display: none;">' . sanitize_text_field( __( 'contact', 'shared-files' ) ) . '</div>';
         $html .= '<div class="shared-files-simple-text-contacts" style="display: none;">' . sanitize_text_field( __( 'contacts', 'shared-files' ) ) . '</div>';
