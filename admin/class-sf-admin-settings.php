@@ -2110,6 +2110,129 @@ class Shared_Files_Settings
             'field_name' => 'tag_slug',
         )
         );
+        $tab = 15;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        add_settings_field(
+            'shared-files-lead_form_title',
+            sanitize_text_field( __( 'Title above the form', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-lead_form_title',
+            'field_name'  => 'lead_form_title',
+            'placeholder' => sanitize_text_field( __( 'Please enter the following information to see the file(s):', 'shared-files' ) ),
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_form_description',
+            sanitize_text_field( __( 'Description after the title', 'shared-files' ) ),
+            array( $this, 'textarea_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-lead_form_description',
+            'field_name'  => 'lead_form_description',
+            'placeholder' => '',
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_show_name',
+            sanitize_text_field( __( 'Show name', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-lead_show_name',
+            'field_name' => 'lead_show_name',
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_name_title',
+            sanitize_text_field( __( 'Title for name', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-lead_name_title',
+            'field_name'  => 'lead_name_title',
+            'placeholder' => sanitize_text_field( __( 'Name', 'shared-files' ) ),
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_hide_email',
+            sanitize_text_field( __( 'Hide email', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-lead_hide_email',
+            'field_name' => 'lead_hide_email',
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_email_title',
+            sanitize_text_field( __( 'Title for email', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-lead_email_title',
+            'field_name'  => 'lead_email_title',
+            'placeholder' => sanitize_text_field( __( 'Email', 'shared-files' ) ),
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_show_phone',
+            sanitize_text_field( __( 'Show phone', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-lead_show_phone',
+            'field_name' => 'lead_show_phone',
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_phone_title',
+            sanitize_text_field( __( 'Title for phone', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-lead_phone_title',
+            'field_name'  => 'lead_phone_title',
+            'placeholder' => sanitize_text_field( __( 'Phone', 'shared-files' ) ),
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_show_description',
+            sanitize_text_field( __( 'Show description', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-lead_show_description',
+            'field_name' => 'lead_show_description',
+        )
+        );
+        add_settings_field(
+            'shared-files-lead_description_title',
+            sanitize_text_field( __( 'Title for description', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-lead_description_title',
+            'field_name'  => 'lead_description_title',
+            'placeholder' => sanitize_text_field( __( 'Description', 'shared-files' ) ),
+        )
+        );
     }
     
     public function checkbox_render( $args )
@@ -3285,6 +3408,15 @@ class Shared_Files_Settings
         echo  '<h2>' . esc_html__( 'Custom post type', 'shared-files' ) . '</h2>' ;
     }
     
+    public function shared_files_settings_tab_15_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-15">' ;
+        echo  '<h2>' . esc_html__( 'Lead generation / ask for contact info before showing the file(s)', 'shared-files' ) . '</h2>' ;
+        echo  '<p>' . esc_html__( 'These settings are valid for shortcodes with the parameter ask_for_contact_info like [shared_files ask_for_contact_info=1].', 'shared-files' ) . '</p>' ;
+        echo  '<p>' . esc_html__( 'The user is asked to fill in their contact info before showing the file list.', 'shared-files' ) . '</p>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -3358,6 +3490,10 @@ class Shared_Files_Settings
 
           <li class="shared-files-settings-tab-14-title" data-settings-container="shared-files-settings-tab-14"><span><?php 
         echo  esc_html__( 'Custom post type', 'shared-files' ) ;
+        ?></span></li>
+
+          <li class="shared-files-settings-tab-15-title" data-settings-container="shared-files-settings-tab-15"><span><?php 
+        echo  esc_html__( 'Lead generation', 'shared-files' ) ;
         ?></span></li>
           
           <hr class="clear" />

@@ -1,13 +1,13 @@
-=== Shared Files – Advanced File Sharing & Download Manager with Frontend Uploads ===
+=== Shared Files – Advanced File Sharing & Download Manager with Frontend Uploads & Lead Generation ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 5.4.0
-Tested up to: 6.3
-Stable tag: 1.7.7
+Tested up to: 6.4
+Stable tag: 1.7.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Your personal WordPress-based Dropbox! Upload, manage, and share files effortlessly. Comes with a download counter, enhanced media library, and FTP uploads.
+Your personal WordPress-based Dropbox! Upload, manage, and share files effortlessly. Comes with a download counter, enhanced media library, FTP uploads and lead management.
 
 == Description ==
 
@@ -15,7 +15,7 @@ Your personal WordPress-based Dropbox! Upload, manage, and share files effortles
 
 In search of a file and document management plugin? Don't go too far, you're in the right place!
 
-The Shared Files plugin is a file download manager that can help you easily and quickly manage and list downloaded files on your WordPress website. All you need to do is to add the files using file manager. 
+The Shared Files plugin is a file download manager that can help you easily and quickly manage and list downloaded files on your WordPress website. All you need to do is to add the files using file manager. You can also optionally collect new leads by asking for contact info before showing the files.
 
 *Get the Shared Files plugin and stay neatly organized and managed with your documents and files.*
 
@@ -28,8 +28,8 @@ Shared Files provides an interface for uploading and managing a large group of d
 
 == Features in the FREE version of Shared Files ==
 
-* Top 20 most popular files
-* Ask for an email address before showing the file(s)
+* Top 50 most popular files
+* Collect leads by asking for contact info before showing the file(s)
 * Download log of all file downloads
 * Download counter for all files
 * Front end search from all files
@@ -141,6 +141,7 @@ What is more important than having a statistics of your uploads! Shared Files pl
 * Lightbox view for images and videos (, YouTube, mp4, webm, ogg, mov)
 * Functions as a file explorer, download manager, and file manager
 * WordPress Multisite compatible
+* A lead generation tool for WordPress
 
 == Shared Files Pro offerings ==
 
@@ -242,6 +243,11 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.8 - 2023-11-02 =
+- (Free + All plans) New fields for contacts / lead generation: name, phone and description (see plugin settings, Lead generation tab)
+- (Free + All plans) CSV export for creating a csv file from all contacts / leads (WP admin / Shared Files / Leads)
+- (Free + All plans) New PHP action shared_files_add_lead, fires when a new lead / contact is added
 
 = 1.7.7 - 2023-10-21 =
 - (Free + All plans) New feature: ask for an email address before showing the file(s) - add the parameter ask_for_email=1 to a shortcode to ask for an email address before showing the file(s) to the user, these emails can be found from WP admin / Shared Files / Contacts. See also WP admin / Shared Files / Shortcodes for details regarding the shortcodes.

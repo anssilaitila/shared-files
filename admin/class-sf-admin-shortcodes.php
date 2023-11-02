@@ -94,7 +94,7 @@ class SharedFilesAdminShortcodes {
 
               <li><?php echo esc_html__('Show tag dropdown:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files show_tag_dropdown=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
-              <li><?php echo esc_html__('Ask for email first, then show files (ask_for_email_id is any text to indentify this file list):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files ask_for_email=1 ask_for_email_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+              <li><?php echo esc_html__('Ask for contact info first, then show files (file_list_id is any text to indentify this file list):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files ask_for_contact_info=1 file_list_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
               <?php if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial('business') ): ?>
 
@@ -160,6 +160,51 @@ class SharedFilesAdminShortcodes {
   
       </div>
 
+      <div class="shared-files-admin-section shared-files-admin-section-shortcodes">
+      
+        <h2><?php echo esc_html__('Lead generation', 'shared-files') ?></h2>
+      
+        <ul>
+          <li>
+      
+            <?php echo esc_html__('Ask for contact info first, then show files (file_list_id is any text to indentify this file list):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files ask_for_contact_info=1 file_list_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button>
+
+            <br /><br />
+
+            <?php
+
+            $url = esc_url_raw( get_admin_url() . 'options-general.php?page=shared-files#shared-files-settings-tab-15' );
+            echo sprintf(
+              wp_kses(
+                /* translators: %s: link to file management */
+                __('Please check the <a href="%s" target="_blank">plugin settings</a> for some options regarding the lead generation.', 'shared-files'),
+                array('a' => array('href' => array(), 'target' => array()))
+              ),
+              esc_url($url) 
+            );
+            
+            ?>
+            <br /><br />
+            <?php
+
+            $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-contacts' );
+            echo sprintf(
+              wp_kses(
+                /* translators: %s: link to file management */
+                __('The leads are saved <a href="%s" target="_blank">here</a> and can be exported to a csv file.', 'shared-files'),
+                array('a' => array('href' => array(), 'target' => array()))
+              ),
+              esc_url($url) 
+            );
+
+            ?>
+      
+          </li>
+        </ul>
+      
+      </div>
+      
+      
       <div class="shared-files-admin-section shared-files-admin-section-shortcodes">      
   
         <h2><?php echo esc_html__('Simple list', 'shared-files'); ?></h2>
@@ -172,7 +217,7 @@ class SharedFilesAdminShortcodes {
 
           <li><?php echo esc_html__('Hide the search:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_simple hide_search=1]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
-          <li><?php echo esc_html__('Ask for email first, then show files (ask_for_email_id is any text to indentify this file list):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_simple ask_for_email=1 ask_for_email_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+          <li><?php echo esc_html__('Ask for contact info first, then show files (file_list_id is any text to indentify this file list):', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_simple ask_for_contact_info=1 file_list_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
           <li style="margin-top: 8px;"><b><?php echo esc_html__('More parameters:', 'shared-files') ?></b>
             
@@ -453,7 +498,7 @@ class SharedFilesAdminShortcodes {
         
               <ul>
 
-                <li><?php echo esc_html__('Ask for email first, then show files (ask_for_email_id is any text to indentify this file list)', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion ask_for_email=1 ask_for_email_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
+                <li><?php echo esc_html__('Ask for contact info first, then show files (file_list_id is any text to indentify this file list)', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion ask_for_contact_info=1 file_list_id="My files"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 
                 <li><?php echo esc_html__('Show only subcategories under this category and as separate clickable elements', 'shared-files') ?>: <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files_accordion base_category="category-slug"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button></li>
 

@@ -10,16 +10,14 @@ class ShortcodeSharedFilesSimple
         $s = get_option( 'shared_files_settings' );
         $elem_class = SharedFilesHelpers::createElemClass();
         $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
-        if ( isset( $atts['ask_for_email'] ) && $atts['ask_for_email'] == 1 ) {
+        if ( isset( $atts['ask_for_email'] ) && $atts['ask_for_email'] == 1 || isset( $atts['ask_for_contact_info'] ) && $atts['ask_for_contact_info'] == 1 ) {
             
             if ( is_super_admin() ) {
                 $html .= SharedFilesPublicContacts::askForEmailInfo();
             } else {
-                $ask_for_email_form_field = '_sf_email_' . $embed_id;
                 
-                if ( isset( $_POST[$ask_for_email_form_field] ) && is_email( $_POST[$ask_for_email_form_field] ) ) {
-                    $email = sanitize_email( $_POST[$ask_for_email_form_field] );
-                    SharedFilesPublicContacts::saveEmail( $embed_id, $email, $atts );
+                if ( isset( $_POST['shared-files-add-contact'] ) ) {
+                    SharedFilesPublicContacts::saveEmail( $embed_id, $atts );
                 } else {
                     $html = SharedFilesPublicContacts::askForEmail( $embed_id, $atts );
                     return $html;

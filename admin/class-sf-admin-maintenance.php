@@ -57,6 +57,9 @@ class SharedFilesAdminMaintenance
                 'log_enable_referer_url'                                  => 'on',
                 'prevent_search_engines_from_indexing_uploaded_file_urls' => 'on',
                 'show_tag_dropdown_on_file_upload'                        => 'on',
+                'lead_show_name'                                          => 'on',
+                'lead_show_phone'                                         => 'on',
+                'lead_show_description'                                   => 'on',
             ];
             add_option( 'shared_files_settings', $default_settings );
             update_option( 'shared_files_how_to_show_notice', 1, false );
@@ -84,6 +87,10 @@ class SharedFilesAdminMaintenance
             // Table for contacts
             $table_name_contacts = $wpdb->prefix . 'shared_files_contacts';
             $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_contacts . " (\n        id                BIGINT(20) NOT NULL auto_increment,\n        file_id           VARCHAR(255) NOT NULL,\n        file_title        VARCHAR(255) NOT NULL,\n        file_name         VARCHAR(255) NOT NULL,\n        file_size         VARCHAR(255) NOT NULL,\n        embed_id          VARCHAR(255) NOT NULL,\n        ask_for_email_id  VARCHAR(255) NOT NULL,\n        email             VARCHAR(255) NOT NULL,\n        ip                VARCHAR(255) NOT NULL,\n        user_country      VARCHAR(255) NOT NULL,\n        user_agent        TEXT NOT NULL,\n        referer_url       TEXT NOT NULL,\n        title             VARCHAR(255) NOT NULL,\n        message           TEXT NOT NULL,\n        created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
+            $column_exists = $wpdb->get_results( "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" . $table_name_contacts . "' AND column_name = 'name'" );
+            if ( !$column_exists ) {
+                $wpdb->query( "ALTER TABLE {$table_name_contacts} " . "ADD name   VARCHAR(255) NOT NULL, " . "ADD phone  VARCHAR(255) NOT NULL, " . "ADD descr  TEXT NOT NULL " );
+            }
             update_option( 'shared_files_version', SHARED_FILES_VERSION );
             SharedFilesHelpers::writeLog( 'Plugin updated to version ' . SHARED_FILES_VERSION, '' );
         }
