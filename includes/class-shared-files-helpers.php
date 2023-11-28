@@ -33,9 +33,12 @@ class SharedFilesHelpers
         $html .= '<div class="shared-files-ajax-upload-phase-2">' . esc_html__( 'Processing file(s)...', 'shared-files' ) . ' <img src="' . SHARED_FILES_URI . 'img/loading.gif" width="15" height="15" alt="" /></div>';
         $html .= '<div class="shared-files-ajax-upload-phase-3">';
         $html .= '<span class="shared-files-ajax-upload-complete">&raquo; ' . esc_html__( 'Upload complete!', 'shared-files' ) . '</span>';
+        
         if ( !isset( $atts['hide_file_list'] ) ) {
-            $html .= '<a class="shared-files-reload-page-button" href="" onclick="window.location.href=window.location.href; return false;">' . esc_html__( 'Reload page', 'shared-files' ) . '</a>';
+            $current_url = esc_url_raw( get_permalink() );
+            $html .= '<a class="shared-files-reload-page-button" href="" onclick="window.location.href=\'' . $current_url . '\'; return false;">' . esc_html__( 'Reload page', 'shared-files' ) . '</a>';
         }
+        
         $html .= '</div>';
         $html .= '</div>';
         return $html;

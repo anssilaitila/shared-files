@@ -8,6 +8,7 @@ class ShortcodeSharedFilesSimple
         // normalize attribute keys, lowercase
         $atts = array_change_key_case( (array) $atts, CASE_LOWER );
         $s = get_option( 'shared_files_settings' );
+        $current_url = esc_url_raw( get_permalink() );
         $elem_class = SharedFilesHelpers::createElemClass();
         $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
         if ( isset( $atts['ask_for_email'] ) && $atts['ask_for_email'] == 1 || isset( $atts['ask_for_contact_info'] ) && $atts['ask_for_contact_info'] == 1 ) {

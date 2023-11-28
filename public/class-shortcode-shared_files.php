@@ -458,7 +458,7 @@ class ShortcodeSharedFiles
                 if ( isset( $s['show_tags_on_search_results'] ) ) {
                     $show_tags = 1;
                 }
-                $html .= '<ul class="shared-files-all-files">';
+                $html .= '<ul class="shared-files-all-files shared-files-main-file-list">';
                 if ( isset( $wpb_all_query_all_files ) && $wpb_all_query_all_files->have_posts() ) {
                     while ( $wpb_all_query_all_files->have_posts() ) {
                         $wpb_all_query_all_files->the_post();

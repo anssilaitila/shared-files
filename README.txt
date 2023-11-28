@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 5.4.0
 Tested up to: 6.4
-Stable tag: 1.7.8
+Stable tag: 1.7.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -243,6 +243,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.9 - 2023-11-28 =
+* (Professional + Business) Added permalink edit for single files when the setting "Enable single file page" is active
+* (Professional + Business) Added the parameter categories__or for the shortcode [shared_files_restricted]
+* (All plans) Fix: the external url is now correctly saved when using the multi file front end uploader
+* (Free + All plans) Fix: the search results are now presented in the same amount of columns as the default file list
+* (Free + All plans) Fix: when the search input value is removed, the default file list is now shown with the pagination, instead of all available files as search results
 
 = 1.7.8 - 2023-11-02 =
 - (Free + All plans) New fields for contacts / lead generation: name, phone and description (see plugin settings, Lead generation tab)

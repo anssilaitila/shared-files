@@ -257,6 +257,9 @@ class SharedFilesAdminQuery
                         exit;
                     }
                     
+                    if ( function_exists( 'ob_start' ) ) {
+                        ob_start();
+                    }
                     $path = pathinfo( $filename );
                     $header_filename = $path['filename'];
                     $header_extension = $path['extension'];
@@ -287,12 +290,6 @@ class SharedFilesAdminQuery
                         header( 'Content-Length: ' . filesize( $filename ) );
                     }
                     
-                    if ( function_exists( 'ob_clean' ) ) {
-                        ob_clean();
-                    }
-                    if ( function_exists( 'ob_end_flush' ) ) {
-                        ob_end_flush();
-                    }
                     
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'alt' ) {
                         set_time_limit( 0 );
@@ -303,6 +300,14 @@ class SharedFilesAdminQuery
                             flush();
                         }
                     } else {
+                        if ( function_exists( 'ob_get_level' ) && function_exists( 'ob_end_clean' ) ) {
+                            while ( ob_get_level() ) {
+                                ob_end_clean();
+                            }
+                        }
+                        if ( function_exists( 'flush' ) ) {
+                            flush();
+                        }
                         readfile( $filename );
                     }
                     

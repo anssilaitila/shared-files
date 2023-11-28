@@ -23,7 +23,7 @@ class SharedFilesAdminCPT
             'add_new'       => sanitize_text_field( __( 'Add New', 'shared-files' ) ),
         ],
             'supports'            => array( 'title', 'thumbnail' ),
-            'public'              => false,
+            'public'              => $publicly_queryable,
             'show_ui'             => true,
             'has_archive'         => false,
             'publicly_queryable'  => $publicly_queryable,
