@@ -83,9 +83,6 @@ class SharedFilesPublicAjax
         }
         
         $hide_description = ( isset( $_POST['hide_description'] ) && $_POST['hide_description'] ? 1 : '' );
-        if ( $tag_slug ) {
-            $html .= SharedFilesHelpers::tagTitleMarkup( $tag_slug, '', $hide_description );
-        }
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();

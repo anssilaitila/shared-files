@@ -19,6 +19,19 @@ class SharedFilesPublicHelpers
         return $html;
     }
     
+    public static function getDescription( $c, $s )
+    {
+        $html = '';
+        
+        if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
+            $html .= '<div class="shared-file-description-container">' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</div>';
+        } else {
+            $html .= '<div class="shared-file-description-container">' . wp_kses_post( $c['_sf_description'][0] ) . '</div>';
+        }
+        
+        return $html;
+    }
+    
     public static function getFileURL(
         $file_id = 0,
         $download = 0,

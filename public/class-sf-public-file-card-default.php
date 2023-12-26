@@ -128,13 +128,7 @@ class SharedFilesPublicFileCardDefault
             if ( $tags ) {
                 $html .= '<div class="shared-files-tags-container">';
                 foreach ( $tags as $tag ) {
-                    
-                    if ( $show_tags == 1 ) {
-                        $html .= '<a href="?sf_tag=' . esc_attr( $tag->slug ) . '" data-tag-slug="' . esc_attr( $tag->slug ) . '" data-hide-description="' . esc_attr( $hide_description ) . '" class="shared-files-tag-link">' . sanitize_text_field( $tag->name ) . '</a>';
-                    } elseif ( $show_tags == 2 ) {
-                        $html .= '<span>' . sanitize_text_field( $tag->name ) . '</span>';
-                    }
-                
+                    $html .= '<span>' . sanitize_text_field( $tag->name ) . '</span>';
                 }
                 $html .= '</div>';
             }
@@ -171,15 +165,21 @@ class SharedFilesPublicFileCardDefault
             $html .= '</div>';
         }
         
-        $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_before_description' );
-        if ( isset( $c['_sf_description'] ) && !$hide_description ) {
-            
-            if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
-                $html .= '<div class="shared-file-description-container">' . wp_kses_post( nl2br( $c['_sf_description'][0] ) ) . '</div>';
-            } else {
-                $html .= '<div class="shared-file-description-container">' . wp_kses_post( $c['_sf_description'][0] ) . '</div>';
-            }
+        $custom_fields_free = 1;
         
+        if ( $custom_fields_free && !isset( $atts['file_id'] ) ) {
+            $n = 1;
+            if ( isset( $s['file_upload_custom_field_' . $n] ) && ($cf_title = sanitize_text_field( $s['file_upload_custom_field_' . $n] )) ) {
+                if ( isset( $c['_sf_file_upload_cf_' . $n] ) && $c['_sf_file_upload_cf_' . $n] ) {
+                    $html .= '<div class="shared-files-custom-field"><span>' . $cf_title . '</span> ' . sanitize_text_field( $c['_sf_file_upload_cf_' . $n][0] ) . '</div>';
+                }
+            }
+        }
+        
+        $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_before_description' );
+        $description_free = 1;
+        if ( $description_free && !isset( $atts['file_id'] ) ) {
+            $html .= SharedFilesPublicHelpers::getDescription( $c, $s );
         }
         $html .= SharedFilesPublicHooks::get_action_content( 'shared_files_file_card_after_description' );
         
@@ -189,9 +189,9 @@ class SharedFilesPublicFileCardDefault
                 
                 if ( isset( $s['show_download_button'] ) && $password ) {
                 } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
-                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                    $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
                 } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
-                    $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a>';
+                    $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
                 }
             
             }

@@ -398,9 +398,6 @@ class ShortcodeSharedFiles
             $html .= '<span class="shared-files-one-file-found">' . sanitize_text_field( __( 'file found.', 'shared-files' ) ) . '</span><span class="shared-files-more-than-one-file-found">' . sanitize_text_field( __( 'files found.', 'shared-files' ) ) . '</span>';
             $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
             /* CATEGORY PASSWORD END */
-            if ( $tag_slug ) {
-                $html .= SharedFilesHelpers::tagTitleMarkup( $tag_slug, 'shared-files-non-ajax', $hide_description );
-            }
             
             if ( $wpb_all_query_all_files->have_posts() ) {
                 $html .= '<ul class="shared-files-main-file-list shared-files-ajax-list">';

@@ -736,7 +736,7 @@ class Shared_Files_Settings
         );
         add_settings_field(
             'shared-files-card_height',
-            sanitize_text_field( __( 'Card height in pixels', 'shared-files' ) ),
+            sanitize_text_field( __( 'Minimum card height in pixels', 'shared-files' ) ),
             array( $this, 'input_render' ),
             'shared-files',
             'shared-files_tab_' . $tab,
@@ -778,18 +778,35 @@ class Shared_Files_Settings
         );
         $custom_fields_cnt = 3 + 1;
         for ( $n = 1 ;  $n < $custom_fields_cnt ;  $n++ ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'file_upload_custom_field_' . $n,
-                sanitize_text_field( __( 'Custom field', 'shared-files' ) ) . ' ' . $n,
-                array( $this, 'input_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'   => 'shared-files-' . $only_pro . 'file_upload_custom_field_' . $n,
-                'field_name'  => $only_pro . 'file_upload_custom_field_' . $n,
-                'placeholder' => '',
-            )
-            );
+            
+            if ( $n == 1 ) {
+                add_settings_field(
+                    'shared-files-file_upload_custom_field_' . $n,
+                    sanitize_text_field( __( 'Custom field', 'shared-files' ) ) . ' ' . $n,
+                    array( $this, 'input_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'   => 'shared-files-file_upload_custom_field_' . $n,
+                    'field_name'  => 'file_upload_custom_field_' . $n,
+                    'placeholder' => '',
+                )
+                );
+            } else {
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'file_upload_custom_field_' . $n,
+                    sanitize_text_field( __( 'Custom field', 'shared-files' ) ) . ' ' . $n,
+                    array( $this, 'input_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'   => 'shared-files-' . $only_pro . 'file_upload_custom_field_' . $n,
+                    'field_name'  => $only_pro . 'file_upload_custom_field_' . $n,
+                    'placeholder' => '',
+                )
+                );
+            }
+            
             add_settings_field(
                 'shared-files-' . $only_pro . 'cf_' . $n . '_hide_from_frontend_uploader',
                 sanitize_text_field( __( 'Hide from front-end uploader', 'shared-files' ) ),
@@ -2233,6 +2250,40 @@ class Shared_Files_Settings
             'placeholder' => sanitize_text_field( __( 'Description', 'shared-files' ) ),
         )
         );
+        $tab = 16;
+        add_settings_section(
+            'shared-files_tab_' . $tab,
+            '',
+            array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+            'shared-files'
+        );
+        $single_file_free = 1;
+        
+        if ( $single_file_free ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'single_file_show_custom_fields',
+                sanitize_text_field( __( 'Show custom fields', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'single_file_show_custom_fields',
+                'field_name' => $only_pro . 'single_file_show_custom_fields',
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'single_file_show_description',
+                sanitize_text_field( __( 'Show description', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'single_file_show_description',
+                'field_name' => $only_pro . 'single_file_show_description',
+            )
+            );
+        }
+    
     }
     
     public function checkbox_render( $args )
@@ -3230,7 +3281,7 @@ class Shared_Files_Settings
                 ?>
         <div class="email-info">
           <?php 
-                echo  esc_html__( 'Enter a title here and the custom field (an input field) is automatically activated for the uploader and the file edit view.', 'shared-files' ) ;
+                echo  esc_html__( 'Enter a title here and the custom field (an input field) is automatically activated.', 'shared-files' ) ;
                 ?>
         </div>
       <?php 
@@ -3417,6 +3468,14 @@ class Shared_Files_Settings
         echo  '<p>' . esc_html__( 'The user is asked to fill in their contact info before showing the file list.', 'shared-files' ) . '</p>' ;
     }
     
+    public function shared_files_settings_tab_16_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-16">' ;
+        echo  '<h2>' . esc_html__( 'Single file', 'shared-files' ) . '</h2>' ;
+        echo  '<p>' . esc_html__( 'These settings are valid for shortcodes with the parameter file_id like [shared_files file_id=12345].', 'shared-files' ) . '</p>' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -3496,6 +3555,10 @@ class Shared_Files_Settings
         echo  esc_html__( 'Lead generation', 'shared-files' ) ;
         ?></span></li>
           
+          <li class="shared-files-settings-tab-16-title" data-settings-container="shared-files-settings-tab-16"><span><?php 
+        echo  esc_html__( 'Single file', 'shared-files' ) ;
+        ?></span></li>
+
           <hr class="clear" />
         </ul>
       </div>
@@ -4194,6 +4257,13 @@ class Shared_Files_Settings
             echo  esc_html__( 'Microsoft', 'shared-files' ) ;
             ?></option>
       </select>
+
+      <div class="email-info">
+        <?php 
+            echo  esc_html__( 'The preview is available for certain file types only and PDF is supported by Google only.', 'shared-files' ) ;
+            ?>
+      </div>
+
       <?php 
         }
     
