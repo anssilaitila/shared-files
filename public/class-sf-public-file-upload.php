@@ -66,37 +66,42 @@ class SharedFilesFileUpload
             $html .= '</div>';
         }
         
-        
-        if ( isset( $atts['tag_dropdown'] ) || isset( $s['show_tag_dropdown_on_file_upload'] ) ) {
-            $tag_slug_for_dropdown = SHARED_FILES_TAG_SLUG;
-            if ( get_taxonomy( $tag_slug_for_dropdown ) ) {
-                $html .= wp_dropdown_categories( [
-                    'show_option_all' => ' ',
-                    'hide_empty'      => 0,
-                    'hierarchical'    => 0,
-                    'show_count'      => 1,
-                    'orderby'         => 'name',
-                    'name'            => $tag_slug_for_dropdown,
-                    'value_field'     => 'slug',
-                    'taxonomy'        => $tag_slug_for_dropdown,
-                    'echo'            => 0,
-                    'class'           => 'select_v2',
-                    'show_option_all' => sanitize_text_field( __( 'Choose tag', 'shared-files' ) ),
-                    'exclude'         => $exclude_tag,
-                ] );
-            }
-        } else {
+        $tag_slug_for_dropdown = SHARED_FILES_TAG_SLUG;
+        $tag_count = wp_count_terms( SHARED_FILES_TAG_SLUG, array(
+            'hide_empty' => false,
+        ) );
+        if ( $tag_count ) {
             
-            if ( isset( $atts['tag_checkboxes'] ) || isset( $s['show_tag_checkboxes_on_file_upload'] ) ) {
-                $taglist_args = [
-                    'taxonomy' => SHARED_FILES_TAG_SLUG,
-                    'echo'     => 0,
-                ];
-                $html .= '<span class="sf-taglist-title">' . sanitize_text_field( __( 'Tags', 'shared-files' ) ) . '</span><ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
+            if ( isset( $atts['tag_dropdown'] ) || isset( $s['show_tag_dropdown_on_file_upload'] ) ) {
+                if ( get_taxonomy( $tag_slug_for_dropdown ) ) {
+                    $html .= wp_dropdown_categories( [
+                        'show_option_all' => ' ',
+                        'hide_empty'      => 0,
+                        'hierarchical'    => 0,
+                        'show_count'      => 0,
+                        'orderby'         => 'name',
+                        'name'            => $tag_slug_for_dropdown,
+                        'value_field'     => 'slug',
+                        'taxonomy'        => $tag_slug_for_dropdown,
+                        'echo'            => 0,
+                        'class'           => 'select_v2',
+                        'show_option_all' => sanitize_text_field( __( 'Choose tag', 'shared-files' ) ),
+                        'exclude'         => $exclude_tag,
+                    ] );
+                }
+            } else {
+                
+                if ( isset( $atts['tag_checkboxes'] ) || isset( $s['show_tag_checkboxes_on_file_upload'] ) ) {
+                    $taglist_args = [
+                        'taxonomy' => SHARED_FILES_TAG_SLUG,
+                        'echo'     => 0,
+                    ];
+                    $html .= '<span class="sf-taglist-title">' . sanitize_text_field( __( 'Tags', 'shared-files' ) ) . '</span><ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
+                }
+            
             }
         
         }
-        
         $html .= '<span>' . sanitize_text_field( __( 'Title', 'shared-files' ) ) . '</span>';
         $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" />';
         

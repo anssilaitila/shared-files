@@ -50,7 +50,7 @@ class SharedFilesPublicFileCardDefault
         if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
             $left_style = 'width: 6px; background: none;';
         } else {
-            $left_style = 'background: url(' . esc_attr( $imagefile ) . ') right top no-repeat; background-size: 48px;';
+            $left_style = 'background-image: url(' . esc_attr( $imagefile ) . ');';
         }
         
         $html .= '<li class="shared-files-card-' . $file_id . '">';

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, download counter, file manager, document management, download, downloads, monitor, frontend file upload, onedrive, google drive, media library
 Requires at least: 5.4.0
 Tested up to: 6.4
-Stable tag: 1.7.12
+Stable tag: 1.7.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -243,6 +243,13 @@ Yes, you can use it as a file manager. You don't necessarily have to add any pub
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.13 - 2024-01-14 =
+* (All plans) New feature: search filters added for simple list (can be activated from settings, Simple list tab)
+* (All plans) New setting (Layout tab): File type icon width, default file card (px)
+* (All plans) New setting (Layout tab): File type icon height, vertical view (px)
+* (All plans) New setting (first tab): Search input field targets filtered files rather than all files
+* (Free + All plans) Layout tweaks & fixes
 
 = 1.7.12 - 2023-12-26 =
 * (Free + All plans) Bug fixes + tweaks

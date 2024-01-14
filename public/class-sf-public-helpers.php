@@ -132,7 +132,7 @@ class SharedFilesPublicHelpers
     {
         $s = get_option( 'shared_files_settings' );
         $html = '';
-        $html .= '<div class="shared-files-simple-list-row">';
+        $html .= '<div class="shared-files-simple-list-row shared-files-simple-list-title-row">';
         $html .= '<div class="shared-files-simple-list-col shared-files-simple-list-col-name shared-files-simple-list-col-title"><span>' . SharedFilesHelpers::getText( 'simple_list_title_file', __( 'File', 'shared-files' ) ) . '</span></div>';
         
         if ( isset( $s['simple_list_show_download_counter'] ) ) {

@@ -24,7 +24,7 @@ class SharedFilesPublicFileCardVertical
         if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
             $left_style = 'width: 6px; background: none;';
         } else {
-            $left_style = 'background: url(' . esc_url_raw( $imagefile ) . ') right top no-repeat; background-size: 48px;';
+            $left_style = 'background: url(' . esc_url_raw( $imagefile ) . ');';
         }
         
         $html .= '<li>';

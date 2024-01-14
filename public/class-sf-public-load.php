@@ -33,7 +33,7 @@ class SharedFilesPublicLoad
         }
         
         if ( isset( $s['card_background'] ) && $s['card_background'] ) {
-            $out .= '.shared-files-container .shared-files-main-file-list li { margin-bottom: 5px; } ';
+            $out .= '.shared-files-container .shared-files-main-file-list li { margin-bottom: 16px; } ';
             
             if ( $s['card_background'] == 'custom_color' && isset( $s['card_background_custom_color'] ) && $s['card_background_custom_color'] ) {
                 $custom_color = '#' . esc_attr( $s['card_background_custom_color'] );
@@ -45,21 +45,23 @@ class SharedFilesPublicLoad
                 }
             
             } elseif ( $s['card_background'] == 'white' ) {
-                $out .= '.shared-files-main-elements { background: #fff; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } ';
+                $out .= '.shared-files-main-elements { background: #fff; padding: 20px 10px; border-radius: 10px; } ';
             } elseif ( $s['card_background'] == 'light_gray' ) {
-                $out .= '.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; margin-bottom: 20px; } ';
+                $out .= '.shared-files-main-elements { background: #f7f7f7; padding: 20px 10px; border-radius: 10px; } ';
             }
         
         }
         
         
         if ( isset( $s['card_height'] ) && $s['card_height'] ) {
-            $out .= '.shared-files-2-cards-on-the-same-row .shared-files-main-file-list li .shared-files-main-elements { height: ' . intval( $s['card_height'] ) . 'px; } ';
-            $out .= '.shared-files-3-cards-on-the-same-row .shared-files-main-file-list li .shared-files-main-elements { height: ' . intval( $s['card_height'] ) . 'px; } ';
-            $out .= '.shared-files-4-cards-on-the-same-row .shared-files-main-file-list li .shared-files-main-elements { height: ' . intval( $s['card_height'] ) . 'px; } ';
-            $out .= ' @media (max-width: 500px) { .shared-files-2-cards-on-the-same-row .shared-files-main-file-list li .shared-files-main-elements { height: auto; } } ';
-            $out .= ' @media (max-width: 500px) { .shared-files-3-cards-on-the-same-row .shared-files-main-file-list li .shared-files-main-elements { height: auto; } } ';
-            $out .= ' @media (max-width: 500px) { .shared-files-4-cards-on-the-same-row .shared-files-main-file-list li .shared-files-main-elements { height: auto; } } ';
+            $out .= '.shared-files-main-file-list li { min-height: ' . intval( $s['card_height'] ) . 'px; } ';
+            $out .= '.shared-files-2-cards-on-the-same-row .shared-files-main-file-list li { min-height: ' . intval( $s['card_height'] ) . 'px; } ';
+            $out .= '.shared-files-3-cards-on-the-same-row .shared-files-main-file-list li { min-height: ' . intval( $s['card_height'] ) . 'px; } ';
+            $out .= '.shared-files-4-cards-on-the-same-row .shared-files-main-file-list li { min-height: ' . intval( $s['card_height'] ) . 'px; } ';
+            $out .= ' @media (max-width: 500px) { .shared-files-main-file-list li { min-height: 0; } } ';
+            $out .= ' @media (max-width: 500px) { .shared-files-2-cards-on-the-same-row .shared-files-main-file-list li { min-height: 0; } } ';
+            $out .= ' @media (max-width: 500px) { .shared-files-3-cards-on-the-same-row .shared-files-main-file-list li { min-height: 0; } } ';
+            $out .= ' @media (max-width: 500px) { .shared-files-4-cards-on-the-same-row .shared-files-main-file-list li { min-height: 0; } } ';
         }
         
         return $out;

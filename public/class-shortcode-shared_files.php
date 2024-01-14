@@ -115,8 +115,12 @@ class ShortcodeSharedFiles
             ) );
             $filetypes = SharedFilesHelpers::getFiletypes();
             $external_filetypes = SharedFilesHelpers::getExternalFiletypes();
+            $extra_class = '';
+            if ( isset( $atts['layout'] ) && $atts['layout'] == 'minimal' ) {
+                $extra_class = ' shared-files-minimal';
+            }
             $html .= '<div class="shared-files-search">';
-            $html .= '<ul class="shared-files-main-file-list">';
+            $html .= '<ul class="shared-files-main-file-list' . $extra_class . '">';
             
             if ( $wpb_all_query->have_posts() ) {
                 while ( $wpb_all_query->have_posts() ) {
@@ -180,9 +184,12 @@ class ShortcodeSharedFiles
             
             if ( !isset( $s['hide_search_form'] ) && !isset( $atts['hide_search'] ) ) {
                 $html .= '<div class="shared-files-search-form-container"><form class="shared-files-ajax-form" onsubmit="return false;" data-elem-class="' . $elem_class . '">';
+                
                 if ( !isset( $atts['hide_search_for_all_files'] ) ) {
-                    $html .= '<div class="shared-files-search-input-container"><input type="text"  class="shared-files-search-files-input shared-files-search-files" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" data-elem-class="' . $elem_class . '" /></div>';
+                    $extra_class = '';
+                    $html .= '<div class="shared-files-search-input-container"><input type="text"  class="shared-files-search-files-input shared-files-search-files' . $extra_class . '" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" data-elem-class="' . $elem_class . '" /></div>';
                 }
+                
                 $is_premium = 0;
                 
                 if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
@@ -399,7 +406,7 @@ class ShortcodeSharedFiles
             $hide_description = ( isset( $atts['hide_description'] ) ? sanitize_text_field( $atts['hide_description'] ) : '' );
             /* CATEGORY PASSWORD END */
             
-            if ( $wpb_all_query_all_files->have_posts() ) {
+            if ( isset( $wpb_all_query_all_files ) && $wpb_all_query_all_files->have_posts() ) {
                 $html .= '<ul class="shared-files-main-file-list shared-files-ajax-list">';
                 
                 if ( isset( $atts['hide_files_first'] ) ) {

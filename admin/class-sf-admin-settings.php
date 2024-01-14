@@ -54,6 +54,17 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'search_input_targets_active_files',
+            sanitize_text_field( __( 'Search input field targets filtered files rather than all files', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'search_input_targets_active_files',
+            'field_name' => $only_pro . 'search_input_targets_active_files',
+        )
+        );
+        add_settings_field(
             'shared-files-log_enable_user_data',
             sanitize_text_field( __( 'Log downloader user data', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
@@ -667,6 +678,30 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'file_type_icon_width_default',
+            sanitize_text_field( __( 'File type icon width, default file card (px)', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_type_icon_width_default',
+            'field_name'  => $only_pro . 'file_type_icon_width_default',
+            'placeholder' => 48,
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_type_icon_height_vertical',
+            sanitize_text_field( __( 'File type icon height, vertical view (px)', 'shared-files' ) ),
+            array( $this, 'input_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'   => 'shared-files-' . $only_pro . 'file_type_icon_height_vertical',
+            'field_name'  => $only_pro . 'file_type_icon_height_vertical',
+            'placeholder' => 70,
+        )
+        );
+        add_settings_field(
             'shared-files-card_featured_image_as_extra',
             sanitize_text_field( __( 'Show featured image in addition to file type icon', 'shared-files' ) ) . '<div style="font-weight: 400; font-style: italic; font-size: 12px; margin-top: 3px;">' . sanitize_text_field( __( 'Featured image will be displayed next to file description.', 'shared-files' ) ) . '<br />' . sanitize_text_field( __( 'Normally it is displayed instead of file type icon.', 'shared-files' ) ) . '</div>',
             array( $this, 'checkbox_render' ),
@@ -743,7 +778,7 @@ class Shared_Files_Settings
             array(
             'label_for'   => 'shared-files-card_height',
             'field_name'  => 'card_height',
-            'placeholder' => '380',
+            'placeholder' => '280',
         )
         );
         add_settings_field(
@@ -1956,6 +1991,17 @@ class Shared_Files_Settings
             '',
             array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
             'shared-files'
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'simple_list_show_search_filters',
+            sanitize_text_field( __( 'Show search filters', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'simple_list_show_search_filters',
+            'field_name' => $only_pro . 'simple_list_show_search_filters',
+        )
         );
         add_settings_field(
             'shared-files-simple_list_show_titles_for_columns',
