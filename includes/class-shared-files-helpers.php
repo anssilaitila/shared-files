@@ -635,7 +635,8 @@ class SharedFilesHelpers
         $file_id,
         $upload,
         $uploaded_type,
-        $filename
+        $filename,
+        $copy_to_media_library = 0
     )
     {
         $file_id = intval( $file_id );
@@ -648,19 +649,27 @@ class SharedFilesHelpers
                 case 'image/jpeg':
                 case 'image/png':
                 case 'image/gif':
-                    $image_url = esc_url_raw( $upload['file'] );
-                    // Prepare an array of post data for the attachment.
-                    $attachment = array(
-                        'guid'           => $image_url,
-                        'post_mime_type' => $uploaded_type,
-                        'post_title'     => $filename,
-                        'post_content'   => '',
-                        'post_status'    => 'inherit',
-                    );
-                    $attach_id = wp_insert_attachment( $attachment, $image_url, $file_id );
-                    $attach_data = wp_generate_attachment_metadata( $attach_id, $image_url );
-                    wp_update_attachment_metadata( $attach_id, $attach_data );
-                    set_post_thumbnail( $file_id, $attach_id );
+                    $new_featured_image = $upload;
+                    if ( $copy_to_media_library ) {
+                        $new_featured_image = wp_upload_bits( $filename, null, file_get_contents( $new_featured_image['file'] ) );
+                    }
+                    
+                    if ( $new_featured_image ) {
+                        $image_url = esc_url_raw( $new_featured_image['file'] );
+                        // Prepare an array of post data for the attachment.
+                        $attachment = array(
+                            'guid'           => $image_url,
+                            'post_mime_type' => $uploaded_type,
+                            'post_title'     => $filename,
+                            'post_content'   => '',
+                            'post_status'    => 'inherit',
+                        );
+                        $attach_id = wp_insert_attachment( $attachment, $image_url, $file_id );
+                        $attach_data = wp_generate_attachment_metadata( $attach_id, $image_url );
+                        wp_update_attachment_metadata( $attach_id, $attach_data );
+                        set_post_thumbnail( $file_id, $attach_id );
+                    }
+                    
                     break;
             }
         }

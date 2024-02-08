@@ -233,7 +233,8 @@ class SharedFilesFileUpload
                         $id,
                         $upload,
                         $uploaded_type,
-                        $filename
+                        $filename,
+                        1
                     );
                 }
             } elseif ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {

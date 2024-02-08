@@ -471,7 +471,8 @@ class SharedFilesAdminMetadata
                         $id,
                         $upload,
                         $uploaded_type,
-                        $filename
+                        $filename,
+                        1
                     );
                     $post_title = '';
                     if ( isset( $_POST['post_title'] ) ) {
