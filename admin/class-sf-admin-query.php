@@ -260,13 +260,20 @@ class SharedFilesAdminQuery
                     if ( function_exists( 'ob_start' ) ) {
                         ob_start();
                     }
-                    $path = pathinfo( $filename );
-                    $header_filename = $path['filename'];
-                    $header_extension = $path['extension'];
+                    $custom_filename = sanitize_text_field( get_post_meta( $file_id, '_sf_filename', true ) );
                     $header_filename_ext = '';
-                    if ( $header_filename && $header_extension ) {
-                        $header_filename_ext = $header_filename . '.' . $header_extension;
+                    
+                    if ( $custom_filename ) {
+                        $header_filename_ext = $custom_filename;
+                    } else {
+                        $path = pathinfo( $filename );
+                        $header_filename = $path['filename'];
+                        $header_extension = $path['extension'];
+                        if ( $header_filename && $header_extension ) {
+                            $header_filename_ext = $header_filename . '.' . $header_extension;
+                        }
                     }
+                    
                     
                     if ( isset( $_GET['download'] ) ) {
                         header( 'Pragma: public' );

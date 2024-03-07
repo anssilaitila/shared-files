@@ -173,6 +173,15 @@ class SharedFilesAdminMetadata
             'span' => [],
         ];
         echo  '<div class="shared-files-admin-small-fields">' ;
+        /* Filename START */
+        echo  '<div class="small-field-container">' ;
+        echo  '<div id="shared-file-external-url-title" class="' . esc_attr( $field_in_pro_class ) . '">' ;
+        echo  '<h4>' . esc_html__( 'Filename', 'shared-files' ) . '</h4>' ;
+        echo  '<i>' . esc_html__( 'The filename in the url changes based on this value.', 'shared-files' ) . '</i>' ;
+        echo  '</div>' ;
+        echo  '<input id="shared-file-filename" name="_sf_filename" type="text" value="' . esc_attr( $filename ) . '" />' ;
+        echo  '</div>' ;
+        /* Filename END */
         /* File date START */
         echo  '<div class="small-field-container">' ;
         echo  '<div id="shared-file-main-date-title">' ;
@@ -419,6 +428,13 @@ class SharedFilesAdminMetadata
                 update_post_meta( $id, '_sf_description', '' );
             }
             
+            $custom_filename = '';
+            
+            if ( isset( $_POST['_sf_filename'] ) && $_POST['_sf_filename'] ) {
+                $custom_filename = sanitize_text_field( $_POST['_sf_filename'] );
+                update_post_meta( $id, '_sf_filename', $custom_filename );
+            }
+            
             
             if ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
                 $external_url = esc_url_raw( $_POST['_sf_external_url'] );
@@ -432,6 +448,7 @@ class SharedFilesAdminMetadata
                 // Get the file type of the upload
                 $arr_file_type = wp_check_filetype( basename( $_FILES['_sf_file']['name'] ) );
                 $uploaded_type = $arr_file_type['type'];
+                $filename_for_custom_field = basename( $_FILES['_sf_file']['name'] );
                 add_filter( 'upload_dir', [ $this, 'set_upload_dir' ] );
                 // Use the WordPress API to upload the file
                 $upload = wp_upload_bits( $_FILES['_sf_file']['name'], null, file_get_contents( $_FILES['_sf_file']['tmp_name'] ) );
@@ -445,7 +462,7 @@ class SharedFilesAdminMetadata
                 } else {
                     add_post_meta( $id, '_sf_file', $upload );
                     update_post_meta( $id, '_sf_file', $upload );
-                    $filename = substr( strrchr( $upload['file'], "/" ), 1 );
+                    $filename = $filename_for_custom_field;
                     update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
                     $sf_file_size = 0;
                     $upload_file = '';

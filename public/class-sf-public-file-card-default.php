@@ -141,14 +141,25 @@ class SharedFilesPublicFileCardDefault
             
             if ( isset( $c['_sf_user_id'][0] ) && $c['_sf_user_id'][0] ) {
                 $user = get_user_by( 'id', intval( $c['_sf_user_id'][0] ) );
-                $user_fullname = $user->user_login;
+                $user_fullname = '';
                 
-                if ( $user->first_name && $user->last_name ) {
-                    $user_fullname = $user->first_name . ' ' . $user->last_name;
-                } elseif ( $user->last_name ) {
-                    $user_fullname = $user->last_name;
-                } elseif ( $user->first_name ) {
-                    $user_fullname = $user->first_name;
+                if ( $user ) {
+                    if ( isset( $user->user_login ) ) {
+                        $user_fullname = $user->user_login;
+                    }
+                    if ( isset( $user->first_name ) || isset( $user->last_name ) ) {
+                        
+                        if ( $user->first_name && $user->last_name ) {
+                            $user_fullname = $user->first_name . ' ' . $user->last_name;
+                        } elseif ( $user->last_name ) {
+                            $user_fullname = $user->last_name;
+                        } elseif ( $user->first_name ) {
+                            $user_fullname = $user->first_name;
+                        }
+                    
+                    }
+                } else {
+                    $user_fullname = sanitize_text_field( __( '(user not found)', 'shared-files' ) );
                 }
                 
                 

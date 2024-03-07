@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.15\n"
+"Project-Id-Version: Shared Files 1.7.16\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-02-08T20:35:53+02:00\n"
+"POT-Creation-Date: 2024-02-20T23:15:58+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: shared-files\n"
@@ -62,8 +62,8 @@ msgstr ""
 
 #: admin/class-sf-admin-contacts.php:100
 #: admin/class-sf-admin-settings.php:1972
-#: public/class-sf-public-file-card-default.php:192
-#: public/class-sf-public-file-card-default.php:194
+#: public/class-sf-public-file-card-default.php:203
+#: public/class-sf-public-file-card-default.php:205
 #: public/class-sf-public-file-card-vertical.php:170
 #: public/class-sf-public-file-card-vertical.php:172
 msgid "Download"
@@ -116,7 +116,7 @@ msgid "Phone"
 msgstr ""
 
 #: admin/class-sf-admin-contacts.php:154
-#: admin/class-sf-admin-metadata.php:320
+#: admin/class-sf-admin-metadata.php:329
 #: admin/class-sf-admin-settings.php:2296
 #: admin/class-sf-admin-settings.php:4366
 #: public/class-sf-public-contacts.php:52
@@ -626,101 +626,111 @@ msgid "Upload ID:"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:179
+#: admin/class-sf-admin-sync-files.php:137
+#: admin/class-sf-admin-sync-media-library.php:120
+msgid "Filename"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:180
+msgid "The filename in the url changes based on this value."
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:188
 #: admin/class-sf-admin-settings.php:4339
 msgid "File date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:180
+#: admin/class-sf-admin-metadata.php:189
 msgid "This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:187
+#: admin/class-sf-admin-metadata.php:196
 #: public/class-sf-public-file-upload.php:259
 msgid "External URL"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:188
+#: admin/class-sf-admin-metadata.php:197
 msgid "Instead of adding a local file, you may provide an external URL to a file located elsewhere."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:188
+#: admin/class-sf-admin-metadata.php:197
 msgid "Note: if the external URL is defined, the file above will not be saved."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:197
+#: admin/class-sf-admin-metadata.php:206
 msgid "Expiration date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:197
+#: admin/class-sf-admin-metadata.php:206
 msgid "When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:197
+#: admin/class-sf-admin-metadata.php:206
 msgid "It's also possible to delete these files automatically (see plugin settings)."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:205
+#: admin/class-sf-admin-metadata.php:214
 msgid "Notification email"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:205
+#: admin/class-sf-admin-metadata.php:214
 msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:212
+#: admin/class-sf-admin-metadata.php:221
 msgid "Restrict access"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:216
+#: admin/class-sf-admin-metadata.php:225
 msgid "Restrict access for users"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:216
+#: admin/class-sf-admin-metadata.php:225
 msgid "Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1]."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:226
+#: admin/class-sf-admin-metadata.php:235
 msgid "Password protection"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:226
+#: admin/class-sf-admin-metadata.php:235
 msgid "Define a password here to enable password protection."
 msgstr ""
 
 #. translators: %s: link to the information page about access restriction
-#: admin/class-sf-admin-metadata.php:236
+#: admin/class-sf-admin-metadata.php:245
 #: admin/class-sf-admin-settings.php:4220
 msgid "<a href=\"%s\">Important information regarding file permissions &raquo;</a>"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:251
+#: admin/class-sf-admin-metadata.php:260
 msgid "Restrict access for roles"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:251
+#: admin/class-sf-admin-metadata.php:260
 msgid "Only the users having these roles will see the file listed on the restricted file lists."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:261
+#: admin/class-sf-admin-metadata.php:270
 msgid "Limit downloads"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:261
+#: admin/class-sf-admin-metadata.php:270
 msgid "When this number is reached, the file can't be downloaded anymore and an email notify is sent to the administrator."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:269
+#: admin/class-sf-admin-metadata.php:278
 #: admin/class-sf-admin-settings.php:3408
 #: admin/class-sf-admin-settings.php:3551
 msgid "Custom fields"
 msgstr ""
 
 #. translators: %s: link to file management
-#: admin/class-sf-admin-metadata.php:277
+#: admin/class-sf-admin-metadata.php:286
 msgid "<a href=\"%s\" target=\"_blank\">Settings for custom fields &raquo;</a>"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:293
+#: admin/class-sf-admin-metadata.php:302
 msgid "Custom field 1"
 msgstr ""
 
@@ -2570,11 +2580,6 @@ msgstr ""
 
 #: admin/class-sf-admin-sync-files.php:137
 #: admin/class-sf-admin-sync-media-library.php:120
-msgid "Filename"
-msgstr ""
-
-#: admin/class-sf-admin-sync-files.php:137
-#: admin/class-sf-admin-sync-media-library.php:120
 msgid "Last modified"
 msgstr ""
 
@@ -2757,24 +2762,28 @@ msgstr ""
 msgid "Can't read file (permission denied or file not found):"
 msgstr ""
 
-#: public/class-sf-public-file-card-default.php:156
-#: public/class-sf-public-file-card-default.php:158
+#: public/class-sf-public-file-card-default.php:162
+msgid "(user not found)"
+msgstr ""
+
+#: public/class-sf-public-file-card-default.php:167
+#: public/class-sf-public-file-card-default.php:169
 #: public/class-sf-public-file-card-vertical.php:134
 #: public/class-sf-public-file-card-vertical.php:136
 msgid "Uploaded by"
 msgstr ""
 
-#: public/class-sf-public-file-card-default.php:162
+#: public/class-sf-public-file-card-default.php:173
 #: public/class-sf-public-file-card-vertical.php:140
 msgid "Uploaded by a visitor"
 msgstr ""
 
-#: public/class-sf-public-file-card-default.php:206
+#: public/class-sf-public-file-card-default.php:217
 #: public/class-sf-public-file-card-vertical.php:184
 msgid "Are you sure?"
 msgstr ""
 
-#: public/class-sf-public-file-card-default.php:206
+#: public/class-sf-public-file-card-default.php:217
 #: public/class-sf-public-file-card-vertical.php:184
 msgid "Delete"
 msgstr ""
