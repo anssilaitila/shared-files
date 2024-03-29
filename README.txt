@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager
 Requires at least: 5.4.0
-Tested up to: 6.4
-Stable tag: 1.7.17
+Tested up to: 6.5
+Stable tag: 1.7.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -251,6 +251,12 @@ Yes, you can use it as a file manager like that. You don't necessarily have to a
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.18 - 2024-03-17 =
+* (Professional + Business) It is now possible to search in custom fields in shortcode [shared_files_exact_search] (see plugin settings, Exact search tab)
+* (Free + All plans) Fix: the minimum file card height now works correctly in multiple column layout and smaller card sizes
+* (Free + All plans) Fixed an issue where the file preview url would get first part of path duplicated when WP is installed in a subdirectory
+* (Free + All plans) New setting (File upload tab): Set the status of uploaded files to "Pending Review"
 
 = 1.7.17 - 2024-03-07 =
 * (Free + All plans) Bug fixes
@@ -568,7 +574,7 @@ Yes, you can use it as a file manager like that. You don't necessarily have to a
 * (Free + All plans) Minor tweaks and fixes
 
 = 1.5.0 - 2019-12-09 =
-* New licensing model 
+* New licensing model (separate free and paid version)
 
 = 1.0.0 - 2018-07-15 =
 * Initial release

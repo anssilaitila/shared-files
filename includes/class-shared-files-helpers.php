@@ -231,6 +231,21 @@ class SharedFilesHelpers
         return $html;
     }
     
+    public static function getSiteBaseURL()
+    {
+        $url = esc_url_raw( get_site_url() );
+        $url_parts = parse_url( $url );
+        $base_url = '';
+        
+        if ( isset( $url_parts['scheme'] ) && isset( $url_parts['host'] ) ) {
+            $base_url = $url_parts['scheme'] . '://' . $url_parts['host'];
+        } else {
+            $base_url = $url;
+        }
+        
+        return $base_url;
+    }
+    
     public static function getPreviewButton( $file_id, $file_url, $atts = array() )
     {
         
@@ -294,7 +309,7 @@ class SharedFilesHelpers
             if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                 $file_url = esc_url_raw( $file['url'] );
             } else {
-                $file_url = esc_url_raw( get_site_url() . $file_url );
+                $file_url = esc_url_raw( SharedFilesHelpers::getSiteBaseURL() . $file_url );
             }
             
             
@@ -322,7 +337,7 @@ class SharedFilesHelpers
                 if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                     $file_url = esc_url_raw( $file['url'] );
                 } else {
-                    $file_url = esc_url_raw( get_site_url() . $file_url );
+                    $file_url = esc_url_raw( SharedFilesHelpers::getSiteBaseURL() . $file_url );
                 }
                 
                 $password_protected = 0;
@@ -350,7 +365,7 @@ class SharedFilesHelpers
                 if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                     $file_url = esc_url_raw( $file['url'] );
                 } else {
-                    $file_url = esc_url_raw( get_site_url() . $file_url );
+                    $file_url = esc_url_raw( SharedFilesHelpers::getSiteBaseURL() . $file_url );
                 }
                 
                 $password_protected = 0;

@@ -487,33 +487,6 @@ class Shared_Files_Settings
             'placeholder' => '/some-folder/',
         )
         );
-        
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'exact_search_min_chars',
-                sanitize_text_field( __( 'Min. characters for search in [shared_files_exact_search]', 'shared-files' ) ),
-                array( $this, 'input_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'   => 'shared-files-' . $only_pro . 'exact_search_min_chars',
-                'field_name'  => $only_pro . 'exact_search_min_chars',
-                'placeholder' => 3,
-            )
-            );
-            add_settings_field(
-                'shared-files-' . $only_pro . 'exact_search_whole_words_only',
-                sanitize_text_field( __( 'Search whole words only in [shared_files_exact_search] (default targets also partial text)', 'shared-files' ) ),
-                array( $this, 'checkbox_render' ),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                'label_for'  => 'shared-files-' . $only_pro . 'exact_search_whole_words_only',
-                'field_name' => $only_pro . 'exact_search_whole_words_only',
-            )
-            );
-        }
-        
         add_settings_field(
             'shared-files-pagination_type',
             sanitize_text_field( __( 'Pagination type', 'shared-files' ) ),
@@ -932,6 +905,17 @@ class Shared_Files_Settings
             array(
             'label_for'  => 'shared-files-only_logged_in_users_can_add_files',
             'field_name' => 'only_logged_in_users_can_add_files',
+        )
+        );
+        add_settings_field(
+            'shared-files-file_upload_set_to_pending',
+            sanitize_text_field( __( 'Set the status of uploaded files to "Pending Review"', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-file_upload_set_to_pending',
+            'field_name' => 'file_upload_set_to_pending',
         )
         );
         add_settings_field(
@@ -2329,6 +2313,76 @@ class Shared_Files_Settings
             )
             );
         }
+        
+        $show_exact_search_tab = 0;
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            $show_exact_search_tab = 1;
+        }
+        
+        if ( $show_exact_search_tab ) {
+            $tab = 17;
+            add_settings_section(
+                'shared-files_tab_' . $tab,
+                '',
+                array( $this, 'shared_files_settings_tab_' . $tab . '_callback' ),
+                'shared-files'
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_min_chars',
+                sanitize_text_field( __( 'Min. characters for search', 'shared-files' ) ),
+                array( $this, 'input_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'   => 'shared-files-' . $only_pro . 'exact_search_min_chars',
+                'field_name'  => $only_pro . 'exact_search_min_chars',
+                'placeholder' => 3,
+            )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_whole_words_only',
+                sanitize_text_field( __( 'Search whole words only (default targets also partial text)', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'exact_search_whole_words_only',
+                'field_name' => $only_pro . 'exact_search_whole_words_only',
+            )
+            );
+            $tab = '17_more';
+            add_settings_section(
+                'shared-files_tab_' . $tab,
+                '',
+                array( $this, 'shared_files_settings_tab_17_more_callback' ),
+                'shared-files'
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'exact_search_more_fields',
+                sanitize_text_field( __( 'Activate search for more fields (defined below)', 'shared-files' ) ),
+                array( $this, 'checkbox_render' ),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                'label_for'  => 'shared-files-' . $only_pro . 'exact_search_more_fields',
+                'field_name' => $only_pro . 'exact_search_more_fields',
+            )
+            );
+            $custom_fields_cnt = 3 + 1;
+            for ( $n = 1 ;  $n < $custom_fields_cnt ;  $n++ ) {
+                add_settings_field(
+                    'shared-files-' . $only_pro . 'exact_search_custom_field_' . $n,
+                    sanitize_text_field( __( 'Custom field', 'shared-files' ) ) . ' ' . $n,
+                    array( $this, 'checkbox_render' ),
+                    'shared-files',
+                    'shared-files_tab_' . $tab,
+                    array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'exact_search_custom_field_' . $n,
+                    'field_name' => $only_pro . 'exact_search_custom_field_' . $n,
+                )
+                );
+            }
+        }
     
     }
     
@@ -2438,6 +2492,19 @@ class Shared_Files_Settings
           <?php 
                     $plan_required = 'Professional';
                     ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'exact_search_more_fields' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( strpos( $field_name, 'exact_search_custom_field_' ) !== false ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+
         <?php 
                 } elseif ( $field_name == '_FREE_enable_single_file_page' ) {
                     ?>
@@ -3522,6 +3589,20 @@ class Shared_Files_Settings
         echo  '<p>' . esc_html__( 'These settings are valid for shortcodes with the parameter file_id like [shared_files file_id=12345].', 'shared-files' ) . '</p>' ;
     }
     
+    public function shared_files_settings_tab_17_callback()
+    {
+        echo  '</div>' ;
+        echo  '<div class="shared-files-settings-tab-17">' ;
+        echo  '<h2>' . esc_html__( 'Exact search', 'shared-files' ) . '</h2>' ;
+        echo  '<p>' . esc_html__( 'These settings are valid for the shortcode [shared_files_exact_search].', 'shared-files' ) . '</p>' ;
+        echo  '<p>' . esc_html__( 'The exact search targets all files (only their titles by default) and shows the files after enter is pressed.', 'shared-files' ) . '</p>' ;
+    }
+    
+    public function shared_files_settings_tab_17_more_callback()
+    {
+        echo  '<hr />' ;
+    }
+    
     public function settings_page()
     {
         ?>
@@ -3604,6 +3685,25 @@ class Shared_Files_Settings
           <li class="shared-files-settings-tab-16-title" data-settings-container="shared-files-settings-tab-16"><span><?php 
         echo  esc_html__( 'Single file', 'shared-files' ) ;
         ?></span></li>
+
+          <?php 
+        $show_exact_search_tab = 0;
+        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+            $show_exact_search_tab = 1;
+        }
+        ?>
+
+          <?php 
+        
+        if ( $show_exact_search_tab ) {
+            ?>
+            <li class="shared-files-settings-tab-17-title" data-settings-container="shared-files-settings-tab-17"><span><?php 
+            echo  esc_html__( 'Exact search', 'shared-files' ) ;
+            ?></span></li>
+          <?php 
+        }
+        
+        ?>
 
           <hr class="clear" />
         </ul>

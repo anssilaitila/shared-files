@@ -147,9 +147,10 @@ class SharedFilesFileUpload
             if ( !isset( $_POST['secret_code'] ) || !wp_verify_nonce( $_POST['secret_code'], 'sf_insert_file' ) ) {
                 wp_die( 'Error in processing form data.' );
             }
+            $post_status = ( isset( $s['file_upload_set_to_pending'] ) && $s['file_upload_set_to_pending'] ? 'pending' : 'publish' );
             $new_post = array(
                 'post_type'    => 'shared_file',
-                'post_status'  => 'publish',
+                'post_status'  => $post_status,
                 'post_title'   => '',
                 'post_content' => '',
             );
