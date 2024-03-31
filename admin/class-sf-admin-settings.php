@@ -908,6 +908,28 @@ class Shared_Files_Settings
         )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_enable_restrict_access_for_users',
+            sanitize_text_field( __( 'Enable restrict access for users (logged in users only)', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_enable_restrict_access_for_users',
+            'field_name' => $only_pro . 'file_upload_enable_restrict_access_for_users',
+        )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_enable_restrict_access_for_roles',
+            sanitize_text_field( __( 'Enable restrict access for roles (logged in users only)', 'shared-files' ) ),
+            array( $this, 'checkbox_render' ),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+            'label_for'  => 'shared-files-' . $only_pro . 'file_upload_enable_restrict_access_for_roles',
+            'field_name' => $only_pro . 'file_upload_enable_restrict_access_for_roles',
+        )
+        );
+        add_settings_field(
             'shared-files-file_upload_set_to_pending',
             sanitize_text_field( __( 'Set the status of uploaded files to "Pending Review"', 'shared-files' ) ),
             array( $this, 'checkbox_render' ),
@@ -2513,6 +2535,18 @@ class Shared_Files_Settings
                     ?>
         <?php 
                 } elseif ( $field_name == '_FREE_show_files_in_site_search_results' ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( $field_name == '_FREE_file_upload_enable_restrict_access_for_users' ) {
+                    ?>
+          <?php 
+                    $plan_required = 'Professional';
+                    ?>
+        <?php 
+                } elseif ( $field_name == '_FREE_file_upload_enable_restrict_access_for_roles' ) {
                     ?>
           <?php 
                     $plan_required = 'Professional';

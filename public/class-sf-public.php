@@ -90,6 +90,7 @@ class Shared_Files_Public
      */
     public function enqueue_scripts( $hook )
     {
+        $s = get_option( 'shared_files_settings' );
         wp_enqueue_script(
             $this->plugin_name,
             SHARED_FILES_URI . 'dist/js/p.js',

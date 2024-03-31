@@ -61,7 +61,7 @@ class SharedFilesFileUpload
             if ( isset( $s['file_upload_external_url_title'] ) && $s['file_upload_external_url_title'] ) {
                 $external_url_title = sanitize_text_field( $s['file_upload_external_url_title'] );
             }
-            $html .= '<span>' . sanitize_text_field( $external_url_title ) . '</span>';
+            $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( $external_url_title ) . '</span>';
             $html .= '<input type="text" name="_sf_external_url" class="shared-files-external-url" value="" />';
             $html .= '</div>';
         }
@@ -102,11 +102,11 @@ class SharedFilesFileUpload
             }
         
         }
-        $html .= '<span>' . sanitize_text_field( __( 'Title', 'shared-files' ) ) . '</span>';
+        $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( __( 'Title', 'shared-files' ) ) . '</span>';
         $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" />';
         
         if ( !isset( $s['file_upload_hide_description'] ) ) {
-            $html .= '<span>' . sanitize_text_field( __( 'Description', 'shared-files' ) ) . '</span>';
+            $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( __( 'Description', 'shared-files' ) ) . '</span>';
             $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
         }
         
