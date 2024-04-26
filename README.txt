@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager
 Requires at least: 5.4.0
 Tested up to: 6.5
-Stable tag: 1.7.19
+Stable tag: 1.7.20
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -251,6 +251,9 @@ Yes, you can use it as a file manager like that. You don't necessarily have to a
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.20 - 2024-04-26 =
+* Bug fixes
 
 = 1.7.19 - 2024-03-31 =
 * (Professional + Business) Restrict access for users and roles added for the front end uploader (can be activated from the plugin settings, File upload tab)

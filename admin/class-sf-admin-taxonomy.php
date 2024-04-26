@@ -1,10 +1,7 @@
 <?php
 
-class SharedFilesAdminTaxonomy
-{
-    public function create_shared_files_custom_taxonomy()
-    {
-        
+class SharedFilesAdminTaxonomy {
+    public function create_shared_files_custom_taxonomy() {
         if ( SHARED_FILES_TAG_SLUG != 'post_tag' ) {
             $labels_tag = array(
                 'name'              => sanitize_text_field( __( 'Tag', 'shared-files' ) ),
@@ -19,19 +16,18 @@ class SharedFilesAdminTaxonomy
                 'new_item_name'     => sanitize_text_field( __( 'New Type Name', 'shared-files' ) ),
                 'menu_name'         => sanitize_text_field( __( 'Tags', 'shared-files' ) ),
             );
-            register_taxonomy( SHARED_FILES_TAG_SLUG, array( 'shared_file' ), array(
+            register_taxonomy( SHARED_FILES_TAG_SLUG, array('shared_file'), array(
                 'hierarchical'       => false,
                 'labels'             => $labels_tag,
                 'show_ui'            => true,
                 'show_admin_column'  => true,
                 'query_var'          => true,
                 'rewrite'            => array(
-                'slug' => 'tag',
-            ),
+                    'slug' => 'tag',
+                ),
                 'publicly_queryable' => false,
             ) );
         }
-        
         $labels_category = array(
             'name'              => sanitize_text_field( __( 'Category', 'shared-files' ) ),
             'singular_name'     => sanitize_text_field( __( 'Category', 'shared-files' ) ),
@@ -46,47 +42,44 @@ class SharedFilesAdminTaxonomy
             'menu_name'         => sanitize_text_field( __( 'Categories', 'shared-files' ) ),
         );
     }
-    
-    public function register_categories_info_page()
-    {
+
+    public function register_categories_info_page() {
         add_submenu_page(
             'edit.php?post_type=shared_file',
             sanitize_text_field( __( 'Categories', 'shared-files' ) ),
             sanitize_text_field( __( 'Categories', 'shared-files' ) ),
             'manage_options',
             'shared-files-categories-info',
-            [ $this, 'register_categories_info_page_callback' ],
+            [$this, 'register_categories_info_page_callback'],
             3
         );
     }
-    
-    public function register_categories_info_page_callback()
-    {
+
+    public function register_categories_info_page_callback() {
         ?>
 
     <div class="wrap">
       <h1><?php 
-        echo  esc_html__( 'Categories', 'shared-files' ) ;
+        echo esc_html__( 'Categories', 'shared-files' );
         ?></h1>
 
       <?php 
-        echo  SharedFilesAdminHelpers::sfProFeatureMarkup() ;
+        echo SharedFilesAdminHelpers::sfProFeatureMarkup();
         ?>
 
       <h2 style="margin-top: 24px;"><?php 
-        echo  esc_html__( 'Category password protection and file sync in Pro:' ) ;
+        echo esc_html__( 'Category password protection and file sync in Pro:' );
         ?></h2>
       
       <img src="<?php 
-        echo  SHARED_FILES_URI ;
+        echo SHARED_FILES_URI;
         ?>img/category-password-protection.png" style="max-width: 770px; height: auto; border: 1px solid #bbb;" />
 
     </div>
     <?php 
     }
-    
-    function taxonomy_custom_fields( $term )
-    {
+
+    function taxonomy_custom_fields( $term ) {
         ?>
 
     <tr class="form-field">  
@@ -94,9 +87,9 @@ class SharedFilesAdminTaxonomy
       </th>  
       <td>  
         <div class="shared-files-category-description-info"><b><?php 
-        echo  esc_html__( 'The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode.', 'shared-files' ) ;
+        echo esc_html__( 'The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode.', 'shared-files' );
         ?></b><br /><br /><?php 
-        echo  esc_html__( 'If a value is entered, the categories are sorted by that.', 'shared-files' ) ;
+        echo esc_html__( 'If a value is entered, the categories are sorted by that.', 'shared-files' );
         ?></div>
       </td>  
     </tr>  
@@ -106,9 +99,8 @@ class SharedFilesAdminTaxonomy
 
   <?php 
     }
-    
-    public function theme_columns( $theme_columns )
-    {
+
+    public function theme_columns( $theme_columns ) {
         $new_columns = [];
         $columns_set = 0;
         if ( !$columns_set ) {
@@ -123,13 +115,11 @@ class SharedFilesAdminTaxonomy
         }
         return $new_columns;
     }
-    
-    function save_term_fields( $term_id )
-    {
+
+    function save_term_fields( $term_id ) {
     }
-    
-    public function add_shared_file_category_column_content( $content, $column_name, $term_id )
-    {
+
+    public function add_shared_file_category_column_content( $content, $column_name, $term_id ) {
         $term = get_term( $term_id, 'shared-file-category' );
         switch ( $column_name ) {
             case 'restriction':

@@ -1,22 +1,18 @@
 <?php
 
-class SharedFilesFileHandling
-{
-    public static function getBaseDir()
-    {
+class SharedFilesFileHandling {
+    public static function getBaseDir() {
         $base_dir = wp_get_upload_dir()['basedir'] . '/shared-files/';
         return $base_dir;
     }
-    
-    public static function getFileUrlByName( $filename, $subdir = '' )
-    {
+
+    public static function getFileUrlByName( $filename, $subdir = '' ) {
         $wp_upload_dir = parse_url( wp_upload_dir()['baseurl'] );
         $file_url = $wp_upload_dir['path'] . '/shared-files/' . $subdir . $filename;
         return $file_url;
     }
-    
-    public static function human_filesize( $bytes, $decimals = 2 )
-    {
+
+    public static function human_filesize( $bytes, $decimals = 2 ) {
         $size = array(
             'bytes',
             'KB',

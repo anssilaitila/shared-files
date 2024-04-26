@@ -1,16 +1,13 @@
 <?php
 
-class SharedFilesAdminInlineScripts
-{
-    public static function inline_scripts()
-    {
+class SharedFilesAdminInlineScripts {
+    public static function inline_scripts() {
         $current_screen = get_current_screen();
         $current_screen_id = '';
         if ( isset( $current_screen->id ) ) {
             $current_screen_id = $current_screen->id;
         }
         $js = '';
-        
         if ( $current_screen_id == 'shared_file_page_shared-files-download-log' ) {
             $js .= "jQuery( document ).ready( function(\$) {\n        \n        \$('.shared-files-empty-download-log-form').submit(function() {\n      \n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the download log?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n      \n        });\n      \n      });";
         } elseif ( $current_screen_id == 'shared_file_page_shared-files-contacts' ) {
@@ -42,7 +39,6 @@ class SharedFilesAdminInlineScripts
             $js .= "\n        var clipboard = new ClipboardJS('.shared-files-copy');\n        \n        clipboard.on('success', function(e) {\n        \n          e.clearSelection();\n        \n          let clipboardtarget = jQuery(e.trigger).data('clipboard-target');\n        \n          jQuery(clipboardtarget).tipso({\n            content: '" . esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) . "',\n            width: 240\n          });\n        \n          jQuery(clipboardtarget).tipso('show');\n          \n          setTimeout(function () {\n            showpanel(clipboardtarget);\n          }, 2000);\n          \n          function showpanel(clipboardtarget) {\n            jQuery(clipboardtarget).tipso('hide');\n            jQuery(clipboardtarget).tipso('destroy');\n          }\n          \n        });\n        \n        clipboard.on('error', function(e) {\n        });\n      \n      ";
             $js .= "});";
         }
-        
         return $js;
     }
 

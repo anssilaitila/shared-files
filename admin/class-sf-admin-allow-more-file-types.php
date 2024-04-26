@@ -1,8 +1,10 @@
 <?php
 
+use enshrined\svgSanitize\Sanitizer;
+
 class SharedFilesAdminAllowMoreFileTypes {
 
-  public function add_file_types( $mimes ) {
+  public static function add_file_types( $mimes ) {
 
     $s = get_option('shared_files_settings');
 
@@ -57,6 +59,40 @@ class SharedFilesAdminAllowMoreFileTypes {
     }
     
     return $mimes;
+
+  }
+  
+  public static function sanitize_file( $tmp_name ) {
+
+    $file_contents = file_get_contents( $tmp_name );
+
+    $mime_type = '';
+    
+    if ( function_exists('finfo_open') && function_exists('finfo_file') ) {
+    
+      $finfo = finfo_open( FILEINFO_MIME_TYPE );
+      $mime_type = finfo_file( $finfo, $tmp_name );
+      finfo_close( $finfo );
+    
+    } elseif ( function_exists('mime_content_type') ) {
+    
+      $mime_type = mime_content_type( $tmp_name );
+      
+    }
+
+    if ( $mime_type == 'image/svg+xml' ) {
+
+      $sanitizer = new Sanitizer();
+
+      $file_contents_sanitized = $sanitizer->sanitize( $file_contents );
+      
+      return $file_contents_sanitized;
+      
+    } else {
+
+      return $file_contents;
+
+    }
 
   }
 

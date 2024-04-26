@@ -19,8 +19,7 @@
  * @subpackage Shared_Files/admin
  * @author     Anssi Laitila <anssi.laitila@gmail.com>
  */
-class Shared_Files_Admin
-{
+class Shared_Files_Admin {
     /**
      * The ID of this plugin.
      *
@@ -28,7 +27,8 @@ class Shared_Files_Admin
      * @access   private
      * @var      string    $plugin_name    The ID of this plugin.
      */
-    private  $plugin_name ;
+    private $plugin_name;
+
     /**
      * The version of this plugin.
      *
@@ -36,7 +36,8 @@ class Shared_Files_Admin
      * @access   private
      * @var      string    $version    The current version of this plugin.
      */
-    private  $version ;
+    private $version;
+
     /**
      * Initialize the class and set its properties.
      *
@@ -44,14 +45,12 @@ class Shared_Files_Admin
      * @param    string    $plugin_name       The name of this plugin.
      * @param    string    $version    The version of this plugin.
      */
-    public function __construct( $plugin_name, $version )
-    {
+    public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
-    
-    public function enqueue_styles( $hook )
-    {
+
+    public function enqueue_styles( $hook ) {
         $current_screen = get_current_screen();
         $current_screen_id = '';
         if ( isset( $current_screen->id ) ) {
@@ -66,7 +65,6 @@ class Shared_Files_Admin
             'all'
         );
         wp_add_inline_style( $this->plugin_name, $inline_css );
-        
         if ( $current_screen_id === 'edit-shared_file' || $current_screen_id === 'edit-shared-file-category' || $current_screen_id === 'shared_file_page_shared-files-shortcodes' || $current_screen_id === 'shared_file_page_shared-files-support' ) {
             wp_enqueue_style(
                 $this->plugin_name . '-tipso',
@@ -78,11 +76,9 @@ class Shared_Files_Admin
         } elseif ( $current_screen_id === 'shared_file_page_shared-files-sync-files' || $current_screen_id === 'shared_file_page_shared-files-sync-media-library' ) {
             wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap', false );
         }
-    
     }
-    
-    public function enqueue_scripts( $hook )
-    {
+
+    public function enqueue_scripts( $hook ) {
         $current_screen = get_current_screen();
         $current_screen_id = '';
         if ( isset( $current_screen->id ) ) {
@@ -93,47 +89,42 @@ class Shared_Files_Admin
             wp_enqueue_script(
                 $this->plugin_name,
                 SHARED_FILES_URI . 'dist/js/a.js',
-                array( 'jquery' ),
+                array('jquery'),
                 $this->version,
                 false
             );
         }
         $inline_js = SharedFilesAdminInlineScripts::inline_scripts();
         wp_add_inline_script( $this->plugin_name, $inline_js );
-        
         if ( $current_screen_id === 'edit-shared_file' || $current_screen_id === 'edit-shared-file-category' || $current_screen_id === 'shared_file_page_shared-files-shortcodes' || $current_screen_id === 'shared_file_page_shared-files-support' ) {
             wp_enqueue_script(
                 $this->plugin_name . '-tipso',
                 SHARED_FILES_URI . 'dist/tipso.min.js',
-                array( 'jquery' ),
+                array('jquery'),
                 $this->version,
                 true
             );
             wp_enqueue_script(
                 $this->plugin_name . '-clipboard',
                 '/wp-includes/js/clipboard.js',
-                array( 'jquery' ),
+                array('jquery'),
                 $this->version,
                 true
             );
         }
-    
     }
-    
+
     /**
      * Delete the file itself when permanently deleting post.
      *
      * @since    1.0.0
      */
-    function delete_shared_file( $post_id )
-    {
+    function delete_shared_file( $post_id ) {
         $post_id = intval( $post_id );
         $file = get_post_meta( $post_id, '_sf_file', true );
-        
         if ( isset( $file['file'] ) && $file['file'] ) {
             $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilenameOnDisk( $file['file'] );
             $filename_with_path = str_replace( '../', '', $filename_with_path );
-            
             if ( file_exists( $filename_with_path ) ) {
                 if ( strpos( $filename_with_path, '/wp-content/uploads/shared-files/' ) !== false ) {
                     unlink( $filename_with_path );
@@ -141,10 +132,7 @@ class Shared_Files_Admin
             } else {
                 //        wp_die( sanitize_text_field( __('File not found:', 'shared-files') ) . '<br />' . $filename_with_path );
             }
-        
         }
-        
-        
         if ( has_post_thumbnail( $post_id ) ) {
             $thumbnail_id = intval( get_post_thumbnail_id( $post_id ) );
             if ( $thumbnail_id ) {
@@ -152,19 +140,16 @@ class Shared_Files_Admin
                 wp_delete_attachment( $thumbnail_id, true );
             }
         }
-    
     }
-    
-    public function add_settings_link()
-    {
-        global  $submenu ;
+
+    public function add_settings_link() {
+        global $submenu;
         $permalink = './options-general.php?page=shared-files';
-        $submenu['edit.php?post_type=shared_file'][] = array( sanitize_text_field( __( 'Settings', 'shared-files' ) ) . '&nbsp;&nbsp;➤', 'manage_options', $permalink );
+        $submenu['edit.php?post_type=shared_file'][] = array(sanitize_text_field( __( 'Settings', 'shared-files' ) ) . '&nbsp;&nbsp;➤', 'manage_options', $permalink);
     }
-    
-    public function add_upgrade_link()
-    {
-        global  $submenu ;
+
+    public function add_upgrade_link() {
+        global $submenu;
         $permalink = './options-general.php?page=shared-files-pricing';
         $submenu['edit.php?post_type=shared_file'][] = array(
             sanitize_text_field( __( 'Upgrade', 'shared-files' ) ) . '&nbsp;&nbsp;➤',

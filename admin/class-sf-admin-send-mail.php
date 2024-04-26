@@ -1,5 +1,4 @@
 <?php
 
-class SharedFilesAdminSendMail
-{
+class SharedFilesAdminSendMail {
 }

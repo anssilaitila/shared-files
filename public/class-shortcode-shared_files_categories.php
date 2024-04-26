@@ -1,10 +1,7 @@
 <?php
 
-class ShortcodeSharedFilesCategories
-{
-    public static function shared_files_categories( $atts = array(), $content = null, $tag = '' )
-    {
-        
+class ShortcodeSharedFilesCategories {
+    public static function shared_files_categories( $atts = [], $content = null, $tag = '' ) {
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $html = SharedFilesAdminHelpers::sfProFeatureMarkup();
             return $html;
@@ -12,7 +9,6 @@ class ShortcodeSharedFilesCategories
             $html = '<div style="background: #fff; border: 1px solid #bbb; color: #000; padding: 10px 20px; border-radius: 5px;">' . esc_html__( 'Only logged in users can list these files.', 'shared-files' ) . '</div>';
             return $html;
         }
-    
     }
 
 }

@@ -1,9 +1,7 @@
 <?php
 
-class SharedFilesPublicAjax
-{
-    public function sf_get_files()
-    {
+class SharedFilesPublicAjax {
+    public function sf_get_files() {
         $html = '';
         $tag_slug = '';
         $term_slug = '';
@@ -11,13 +9,11 @@ class SharedFilesPublicAjax
         if ( isset( $_POST['sf_tag'] ) && $_POST['sf_tag'] ) {
             $tag_slug = sanitize_title( $_POST['sf_tag'] );
         }
-        
         if ( isset( $_POST['sf_category'] ) && $_POST['sf_category'] ) {
             $term_slug = sanitize_title( $_POST['sf_category'] );
         } elseif ( isset( $atts['category'] ) && $atts['category'] ) {
             $term_slug = sanitize_title( $atts['category'] );
         }
-        
         $cf_active = 0;
         $meta_query = [];
         if ( isset( $atts['hide_files_first'] ) && !$term_slug && !$tag_slug && !$cf_active ) {
@@ -51,7 +47,6 @@ class SharedFilesPublicAjax
                 'terms'    => $tag_slug,
             );
         }
-        
         if ( $term_slug ) {
             $tax_query[] = array(
                 'taxonomy'         => 'shared-file-category',
@@ -59,7 +54,7 @@ class SharedFilesPublicAjax
                 'terms'            => $term_slug,
                 'include_children' => true,
             );
-            $wp_query = new WP_Query( array(
+            $wp_query = new WP_Query(array(
                 'post_type'      => 'shared_file',
                 'post_status'    => 'publish',
                 'posts_per_page' => -1,
@@ -68,9 +63,9 @@ class SharedFilesPublicAjax
                 'order'          => SharedFilesHelpers::getOrder( $atts ),
                 'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                 'meta_query'     => $meta_query_full,
-            ) );
+            ));
         } else {
-            $wp_query = new WP_Query( array(
+            $wp_query = new WP_Query(array(
                 'post_type'      => 'shared_file',
                 'post_status'    => 'publish',
                 'posts_per_page' => -1,
@@ -79,9 +74,8 @@ class SharedFilesPublicAjax
                 'order'          => SharedFilesHelpers::getOrder( $atts ),
                 'meta_key'       => SharedFilesHelpers::getMetaKey( $atts ),
                 'meta_query'     => $meta_query_full,
-            ) );
+            ));
         }
-        
         $hide_description = ( isset( $_POST['hide_description'] ) && $_POST['hide_description'] ? 1 : '' );
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
@@ -106,34 +100,34 @@ class SharedFilesPublicAjax
         $html_allowed_tags = [
             'li'   => [],
             'div'  => [
-            'class' => [],
-            'style' => [],
-        ],
+                'class' => [],
+                'style' => [],
+            ],
             'a'    => [
-            'href'                  => [],
-            'target'                => [],
-            'data-file-url'         => [],
-            'data-external-url'     => [],
-            'data-image-url'        => [],
-            'data-file-type'        => [],
-            'data-tag-slug'         => [],
-            'data-hide-description' => [],
-            'data-file-id'          => [],
-            'class'                 => [],
-            'id'                    => [],
-            'download'              => [],
-            'onclick'               => [],
-        ],
+                'href'                  => [],
+                'target'                => [],
+                'data-file-url'         => [],
+                'data-external-url'     => [],
+                'data-image-url'        => [],
+                'data-file-type'        => [],
+                'data-tag-slug'         => [],
+                'data-hide-description' => [],
+                'data-file-id'          => [],
+                'class'                 => [],
+                'id'                    => [],
+                'download'              => [],
+                'onclick'               => [],
+            ],
             'span' => [
-            'class' => [],
-        ],
+                'class' => [],
+            ],
             'img'  => [
-            'src' => [],
-        ],
+                'src' => [],
+            ],
             'b'    => [],
             'p'    => [],
         ];
-        echo  wp_kses( $html, $html_allowed_tags ) ;
+        echo wp_kses( $html, $html_allowed_tags );
     }
 
 }

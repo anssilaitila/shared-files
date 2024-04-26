@@ -25,8 +25,7 @@
  * @subpackage Shared_Files/includes
  * @author     Anssi Laitila <anssi.laitila@gmail.com>
  */
-class Shared_Files
-{
+class Shared_Files {
     /**
      * The loader that's responsible for maintaining and registering all hooks that power
      * the plugin.
@@ -35,7 +34,8 @@ class Shared_Files
      * @access   protected
      * @var      Shared_Files_Loader    $loader    Maintains and registers all hooks for the plugin.
      */
-    protected  $loader ;
+    protected $loader;
+
     /**
      * The unique identifier of this plugin.
      *
@@ -43,7 +43,8 @@ class Shared_Files
      * @access   protected
      * @var      string    $plugin_name    The string used to uniquely identify this plugin.
      */
-    protected  $plugin_name ;
+    protected $plugin_name;
+
     /**
      * The current version of the plugin.
      *
@@ -51,7 +52,8 @@ class Shared_Files
      * @access   protected
      * @var      string    $version    The current version of the plugin.
      */
-    protected  $version ;
+    protected $version;
+
     /**
      * Define the core functionality of the plugin.
      *
@@ -61,8 +63,7 @@ class Shared_Files
      *
      * @since    1.0.0
      */
-    public function __construct()
-    {
+    public function __construct() {
         if ( defined( 'SHARED_FILES_VERSION' ) ) {
             $this->version = SHARED_FILES_VERSION;
         }
@@ -72,7 +73,7 @@ class Shared_Files
         $this->define_admin_hooks();
         $this->define_public_hooks();
     }
-    
+
     /**
      * Load the required dependencies for this plugin.
      *
@@ -89,8 +90,7 @@ class Shared_Files
      * @since    1.0.0
      * @access   private
      */
-    private function load_dependencies()
-    {
+    private function load_dependencies() {
         /**
          * The class responsible for orchestrating the actions and filters of the
          * core plugin.
@@ -150,7 +150,7 @@ class Shared_Files
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_exact_search.php';
         $this->loader = new Shared_Files_Loader();
     }
-    
+
     /**
      * Define the locale for this plugin for internationalization.
      *
@@ -160,12 +160,11 @@ class Shared_Files
      * @since    1.0.0
      * @access   private
      */
-    private function set_locale()
-    {
+    private function set_locale() {
         $plugin_i18n = new Shared_Files_i18n();
         $this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
     }
-    
+
     /**
      * Register all of the hooks related to the admin area functionality
      * of the plugin.
@@ -173,10 +172,9 @@ class Shared_Files
      * @since    1.0.0
      * @access   private
      */
-    private function define_admin_hooks()
-    {
+    private function define_admin_hooks() {
         $s = get_option( 'shared_files_settings' );
-        $plugin_admin = new Shared_Files_Admin( $this->get_plugin_name(), $this->get_version() );
+        $plugin_admin = new Shared_Files_Admin($this->get_plugin_name(), $this->get_version());
         $plugin_admin_cpt = new SharedFilesAdminCPT();
         $plugin_admin_taxonomy = new SharedFilesAdminTaxonomy();
         $plugin_admin_maintenance = new SharedFilesAdminMaintenance();
@@ -305,10 +303,8 @@ class Shared_Files
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_upgrade_link' );
         }
-        // Allow more file types
-        $this->loader->add_filter( 'upload_mimes', $plugin_admin_allow_more_file_types, 'add_file_types' );
     }
-    
+
     /**
      * Register all of the hooks related to the public-facing functionality
      * of the plugin.
@@ -316,9 +312,8 @@ class Shared_Files
      * @since    1.0.0
      * @access   private
      */
-    private function define_public_hooks()
-    {
-        $plugin_public = new Shared_Files_Public( $this->get_plugin_name(), $this->get_version() );
+    private function define_public_hooks() {
+        $plugin_public = new Shared_Files_Public($this->get_plugin_name(), $this->get_version());
         $plugin_public_ajax = new SharedFilesPublicAjax();
         $plugin_public_file_upload = new SharedFilesFileUpload();
         $plugin_public_load = new SharedFilesPublicLoad();
@@ -339,17 +334,16 @@ class Shared_Files
             $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload_single_free' );
         }
     }
-    
+
     /**
      * Run the loader to execute all of the hooks with WordPress.
      *
      * @since    1.0.0
      */
-    public function run()
-    {
+    public function run() {
         $this->loader->run();
     }
-    
+
     /**
      * The name of the plugin used to uniquely identify it within the context of
      * WordPress and to define internationalization functionality.
@@ -357,30 +351,27 @@ class Shared_Files
      * @since     1.0.0
      * @return    string    The name of the plugin.
      */
-    public function get_plugin_name()
-    {
+    public function get_plugin_name() {
         return $this->plugin_name;
     }
-    
+
     /**
      * The reference to the class that orchestrates the hooks with the plugin.
      *
      * @since     1.0.0
      * @return    Shared_Files_Loader    Orchestrates the hooks of the plugin.
      */
-    public function get_loader()
-    {
+    public function get_loader() {
         return $this->loader;
     }
-    
+
     /**
      * Retrieve the version number of the plugin.
      *
      * @since     1.0.0
      * @return    string    The version number of the plugin.
      */
-    public function get_version()
-    {
+    public function get_version() {
         return $this->version;
     }
 

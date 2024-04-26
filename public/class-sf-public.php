@@ -19,8 +19,7 @@
  * @subpackage Shared_Files/public
  * @author     Anssi Laitila <anssi.laitila@gmail.com>
  */
-class Shared_Files_Public
-{
+class Shared_Files_Public {
     /**
      * The ID of this plugin.
      *
@@ -28,7 +27,8 @@ class Shared_Files_Public
      * @access   private
      * @var      string    $plugin_name    The ID of this plugin.
      */
-    private  $plugin_name ;
+    private $plugin_name;
+
     /**
      * The version of this plugin.
      *
@@ -36,7 +36,8 @@ class Shared_Files_Public
      * @access   private
      * @var      string    $version    The current version of this plugin.
      */
-    private  $version ;
+    private $version;
+
     /**
      * Initialize the class and set its properties.
      *
@@ -44,19 +45,17 @@ class Shared_Files_Public
      * @param    string    $plugin_name       The name of the plugin.
      * @param    string    $version           The version of this plugin.
      */
-    public function __construct( $plugin_name, $version )
-    {
+    public function __construct( $plugin_name, $version ) {
         $this->plugin_name = $plugin_name;
         $this->version = $version;
     }
-    
+
     /**
      * Register the stylesheets for the public-facing side of the site.
      *
      * @since    1.0.0
      */
-    public function enqueue_styles( $hook )
-    {
+    public function enqueue_styles( $hook ) {
         $s = get_option( 'shared_files_settings' );
         wp_enqueue_style(
             $this->plugin_name,
@@ -73,44 +72,40 @@ class Shared_Files_Public
             'all'
         );
         if ( isset( $s['card_font'] ) && $s['card_font'] ) {
-            
             if ( $s['card_font'] == 'roboto' ) {
                 wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto&display=swap', false );
             } elseif ( $s['card_font'] == 'ubuntu' ) {
                 wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap', false );
             }
-        
         }
     }
-    
+
     /**
      * Register the JavaScript for the public-facing side of the site.
      *
      * @since    1.0.0
      */
-    public function enqueue_scripts( $hook )
-    {
+    public function enqueue_scripts( $hook ) {
         $s = get_option( 'shared_files_settings' );
         wp_enqueue_script(
             $this->plugin_name,
             SHARED_FILES_URI . 'dist/js/p.js',
-            array( 'jquery' ),
+            array('jquery'),
             $this->version,
             false
         );
         wp_enqueue_script(
             $this->plugin_name . '-basiclightbox',
             SHARED_FILES_URI . 'dist/basiclightbox/basicLightbox.min.js',
-            array( 'jquery' ),
+            array('jquery'),
             $this->version,
             false
         );
         $inline_js = $this->get_inline_scripts();
         wp_add_inline_script( $this->plugin_name, $inline_js );
     }
-    
-    public function get_inline_scripts()
-    {
+
+    public function get_inline_scripts() {
         $s = get_option( 'shared_files_settings' );
         $js = '';
         $js .= "jQuery(document).ready(function(\$) {";
@@ -121,27 +116,25 @@ class Shared_Files_Public
         $js .= "});";
         return $js;
     }
-    
+
     /**
      * Register the shortcodes.
      *
      * @since    1.0.0
      */
-    public function register_shortcodes()
-    {
-        add_shortcode( 'shared_files', array( 'ShortcodeSharedFiles', 'shared_files' ) );
-        add_shortcode( 'shared_files_search', array( 'ShortcodeSharedFilesSearch', 'shared_files_search' ) );
-        add_shortcode( 'shared_files_categories', array( 'ShortcodeSharedFilesCategories', 'shared_files_categories' ) );
-        add_shortcode( 'shared_files_simple', array( 'Shared_Files_Public', 'shared_files_simple' ) );
-        add_shortcode( 'shared_files_info', array( 'ShortcodeSharedFilesInfo', 'shared_files_info' ) );
-        add_shortcode( 'shared_files_accordion', array( 'ShortcodeSharedFilesAccordion', 'shared_files_accordion' ) );
-        add_shortcode( 'shared_files_favorites', array( 'ShortcodeSharedFilesFavorites', 'shared_files_favorites' ) );
-        add_shortcode( 'shared_files_restricted', array( 'ShortcodeSharedFilesRestricted', 'shared_files_restricted' ) );
-        add_shortcode( 'shared_files_exact_search', array( 'ShortcodeSharedFilesExactSearch', 'shared_files_exact_search' ) );
+    public function register_shortcodes() {
+        add_shortcode( 'shared_files', array('ShortcodeSharedFiles', 'shared_files') );
+        add_shortcode( 'shared_files_search', array('ShortcodeSharedFilesSearch', 'shared_files_search') );
+        add_shortcode( 'shared_files_categories', array('ShortcodeSharedFilesCategories', 'shared_files_categories') );
+        add_shortcode( 'shared_files_simple', array('Shared_Files_Public', 'shared_files_simple') );
+        add_shortcode( 'shared_files_info', array('ShortcodeSharedFilesInfo', 'shared_files_info') );
+        add_shortcode( 'shared_files_accordion', array('ShortcodeSharedFilesAccordion', 'shared_files_accordion') );
+        add_shortcode( 'shared_files_favorites', array('ShortcodeSharedFilesFavorites', 'shared_files_favorites') );
+        add_shortcode( 'shared_files_restricted', array('ShortcodeSharedFilesRestricted', 'shared_files_restricted') );
+        add_shortcode( 'shared_files_exact_search', array('ShortcodeSharedFilesExactSearch', 'shared_files_exact_search') );
     }
-    
-    public static function shared_files_simple( $atts = array(), $content = null, $tag = '' )
-    {
+
+    public static function shared_files_simple( $atts = [], $content = null, $tag = '' ) {
         $html = '';
         $html .= ShortcodeSharedFilesSimple::view( $atts );
         return $html;
