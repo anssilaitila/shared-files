@@ -16,6 +16,7 @@ class SharedFilesPublicFileCardVertical {
         $password = '';
         $cat_password = '';
         $file_password = '';
+        $file_access_logged_in_only = 0;
         $external_url = ( isset( $c['_sf_external_url'] ) ? esc_url_raw( $c['_sf_external_url'][0] ) : '' );
         $left_style = '';
         if ( isset( $s['hide_file_type_icon_from_card'] ) ) {
@@ -28,7 +29,7 @@ class SharedFilesPublicFileCardVertical {
         if ( !isset( $s['hide_file_type_icon_from_card'] ) ) {
             $html .= '<div class="shared-files-main-elements-top"><img src="' . esc_url_raw( $imagefile ) . '" /></div>';
         }
-        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'thumbnail' ) )) ) {
+        if ( isset( $s['card_featured_image_align'] ) && $s['card_featured_image_align'] == 'left' && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && (!$file_access_logged_in_only || isset( $s['file_access_logged_in_only_show_featured_image'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'thumbnail' ) )) ) {
             $featured_img_width_px = 150;
             $featured_img_height_px = 0;
             $featured_img_style = '';
@@ -41,7 +42,7 @@ class SharedFilesPublicFileCardVertical {
         $data_video_url_redir = '';
         $data_external_url = '';
         $data_image_url = '';
-        if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+        if ( !$password && !SharedFilesPublicHelpers::limitActive( $file_id ) && !$file_access_logged_in_only ) {
             $this_file_type = SharedFilesPublicHelpers::getFileType( $file_id );
             $data_file_type = ' data-file-type="' . esc_attr( SharedFilesPublicHelpers::getFileType( $file_id ) ) . '" ';
             $data_file_url = ' data-file-url="' . esc_url( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" ';
@@ -133,7 +134,7 @@ class SharedFilesPublicFileCardVertical {
         if ( !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             $wait_page_active = 0;
             if ( !$wait_page_active ) {
-                if ( isset( $s['show_download_button'] ) && $password ) {
+                if ( isset( $s['show_download_button'] ) && ($password || $file_access_logged_in_only) ) {
                 } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
                     $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
                 } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
@@ -151,7 +152,7 @@ class SharedFilesPublicFileCardVertical {
         }
         $html .= '</div>';
         $html .= '</div>';
-        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'thumbnail' ) )) ) {
+        if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && (!$file_access_logged_in_only || isset( $s['file_access_logged_in_only_show_featured_image'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'thumbnail' ) )) ) {
             $featured_img_width_px = 150;
             $featured_img_height_px = 0;
             $featured_img_style = '';

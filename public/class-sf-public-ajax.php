@@ -6,6 +6,10 @@ class SharedFilesPublicAjax {
         $tag_slug = '';
         $term_slug = '';
         $atts = [];
+        $restricted = 0;
+        if ( isset( $_POST['restricted'] ) ) {
+            $restricted = intval( $_POST['restricted'] );
+        }
         if ( isset( $_POST['sf_tag'] ) && $_POST['sf_tag'] ) {
             $tag_slug = sanitize_title( $_POST['sf_tag'] );
         }

@@ -201,18 +201,6 @@ class SharedFilesHelpers {
         return $filetypes_ext;
     }
 
-    public static function tagTitleMarkup( $tag_slug, $type = '', $hide_description = 0 ) {
-        $html = '';
-        if ( $tag_slug ) {
-            $current_tag = get_term_by( 'slug', $tag_slug, SHARED_FILES_TAG_SLUG );
-            $html .= '<div class="' . esc_attr( $type ) . '">';
-            $html .= '<span class="shared-files-tag-title">' . sanitize_text_field( $current_tag->name ) . '</span>';
-            $html .= '<a class="shared-files-tags-show-all-files shared-files-tag-link" data-hide-description="' . esc_attr( $hide_description ) . '" href="./?sf_tag=0">' . sanitize_text_field( __( 'Show all files', 'shared-files' ) ) . '</a>';
-            $html .= '</div>';
-        }
-        return $html;
-    }
-
     public static function getSiteBaseURL() {
         $url = esc_url_raw( get_site_url() );
         $url_parts = parse_url( $url );
@@ -238,7 +226,12 @@ class SharedFilesHelpers {
         if ( isset( $s['enable_preview_for_password_protected_files'] ) ) {
             $enable_preview_with_password = 1;
         }
-        if ( isset( $s['hide_preview_button'] ) || $password && $enable_preview_with_password == 0 || SharedFilesPublicHelpers::limitActive( $file_id ) ) {
+        $file_access_logged_in_only = 0;
+        $file_access_logged_in_only_enable_preview = 0;
+        if ( isset( $s['file_access_logged_in_only_enable_preview'] ) ) {
+            $file_access_logged_in_only_enable_preview = 1;
+        }
+        if ( isset( $s['hide_preview_button'] ) || $password && $enable_preview_with_password == 0 || $file_access_logged_in_only && $file_access_logged_in_only_enable_preview == 0 || SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             return '';
         }
         $file = get_post_meta( $file_id, '_sf_file', true );
@@ -272,10 +265,12 @@ class SharedFilesHelpers {
             $data_file_url_attr = ' data-file-url="' . esc_url_raw( $data_file_url ) . '" ';
             if ( $password && $enable_preview_with_password ) {
                 $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+            } elseif ( $file_access_logged_in_only && $file_access_logged_in_only_enable_preview ) {
+                $html .= '<a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id ) ) . '" target="_blank" class="shared-files-preview-button shared-files-preview-image">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             } else {
                 $html .= '<a href="' . esc_url_raw( $image_url ) . '" class="shared-files-preview-button shared-files-preview-image" data-file-type="image" ' . $data_file_url_attr . '>' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             }
-        } elseif ( isset( $s['always_preview_pdf'] ) && !$password && in_array( $filetype, $pdf_types ) ) {
+        } elseif ( isset( $s['always_preview_pdf'] ) && !$password && !$file_access_logged_in_only && in_array( $filetype, $pdf_types ) ) {
             if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                 $file_url = esc_url_raw( $file['url'] );
             } else {

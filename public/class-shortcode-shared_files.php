@@ -17,6 +17,7 @@ class ShortcodeSharedFiles {
         $meta_query_full = [];
         $custom_fields_active = 0;
         $embed_id = ( isset( $atts['embed_id'] ) ? sanitize_title( $atts['embed_id'] ) : 'default' );
+        $include_children = 0;
         if ( isset( $atts['ask_for_email'] ) && $atts['ask_for_email'] == 1 || isset( $atts['ask_for_contact_info'] ) && $atts['ask_for_contact_info'] == 1 ) {
             if ( is_super_admin() ) {
                 $html .= SharedFilesPublicContacts::askForEmailInfo();
