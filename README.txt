@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager
 Requires at least: 5.4.0
 Tested up to: 6.5
-Stable tag: 1.7.21
+Stable tag: 1.7.22
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -252,11 +252,14 @@ Yes, you can use it as a file manager like that. You don't necessarily have to a
 
 == Changelog ==
 
+= 1.7.22 - 2024-05-19 =
+* Added compatibility for WordPress Playground
+
 = 1.7.21 - 2024-05-19 =
-- (All plans) New setting / feature: Only logged in users can open files (see plugin settings, first tab)
-- (All plans) Filters added for restricted file list: [shared_files_restricted show_filters=1]
-- (All plans) New setting: Include subcategories / subtags when using shortcode parameters ending __and + __or (see plugin settings, first tab)
-- (Free + All plans) Bug fixes
+* (All plans) New setting / feature: Only logged in users can open files (see plugin settings, first tab)
+* (All plans) Filters added for restricted file list: [shared_files_restricted show_filters=1]
+* (All plans) New setting: Include subcategories / subtags when using shortcode parameters ending __and + __or (see plugin settings, first tab)
+* (Free + All plans) Bug fixes
 
 = 1.7.20 - 2024-04-26 =
 * Bug fixes

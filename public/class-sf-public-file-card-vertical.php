@@ -134,11 +134,15 @@ class SharedFilesPublicFileCardVertical {
         if ( !SharedFilesPublicHelpers::limitActive( $file_id ) ) {
             $wait_page_active = 0;
             if ( !$wait_page_active ) {
+                $download_attr = 'download';
+                if ( isset( $s['disable_download_attr'] ) ) {
+                    $download_attr = '';
+                }
                 if ( isset( $s['show_download_button'] ) && ($password || $file_access_logged_in_only) ) {
                 } elseif ( SharedFilesPublicHelpers::getFileType( $file_id ) == 'image' ) {
-                    $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
+                    $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button shared-files-download-button-image" ' . $nofollow . ' ' . $download_attr . '>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
                 } elseif ( isset( $s['show_download_button'] ) && SharedFilesPublicHelpers::getFileType( $file_id ) != 'youtube' ) {
-                    $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" ' . $nofollow . ' download>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
+                    $html .= '<div class="shared-files-download-button-container"><a href="' . esc_url_raw( SharedFilesPublicHelpers::getFileURL( $file_id, 1 ) ) . '" class="shared-files-download-button" ' . $nofollow . ' ' . $download_attr . '>' . sanitize_text_field( __( 'Download', 'shared-files' ) ) . '</a></div>';
                 }
             }
         }

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.21\n"
+"Project-Id-Version: Shared Files 1.7.22\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-19T20:46:06+03:00\n"
+"POT-Creation-Date: 2024-05-20T01:14:16+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: shared-files\n"
@@ -62,10 +62,10 @@ msgstr ""
 
 #: admin/class-sf-admin-contacts.php:100
 #: admin/settings/class-sf-admin-settings-tab-wait-countdown.php:83
-#: public/class-sf-public-file-card-default.php:166
-#: public/class-sf-public-file-card-default.php:168
-#: public/class-sf-public-file-card-vertical.php:139
-#: public/class-sf-public-file-card-vertical.php:141
+#: public/class-sf-public-file-card-default.php:170
+#: public/class-sf-public-file-card-default.php:172
+#: public/class-sf-public-file-card-vertical.php:143
+#: public/class-sf-public-file-card-vertical.php:145
 msgid "Download"
 msgstr ""
 
@@ -94,7 +94,7 @@ msgid "File list ID"
 msgstr ""
 
 #: admin/class-sf-admin-contacts.php:151
-#: admin/class-sf-admin-download-log.php:80
+#: admin/class-sf-admin-download-log.php:85
 #: admin/settings/class-sf-admin-settings-field-render.php:620
 #: admin/settings/class-sf-admin-settings-field-render.php:798
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:60
@@ -191,7 +191,7 @@ msgid "Empty download log"
 msgstr ""
 
 #: admin/class-sf-admin-download-log.php:73
-#: admin/class-sf-admin-help-support.php:571
+#: admin/class-sf-admin-help-support.php:584
 msgid "Date"
 msgstr ""
 
@@ -206,28 +206,28 @@ msgstr ""
 msgid "Download count"
 msgstr ""
 
-#: admin/class-sf-admin-download-log.php:79
+#: admin/class-sf-admin-download-log.php:82
 msgid "User ID"
 msgstr ""
 
-#: admin/class-sf-admin-download-log.php:84
+#: admin/class-sf-admin-download-log.php:92
 msgid "IP address"
 msgstr ""
 
-#: admin/class-sf-admin-download-log.php:89
+#: admin/class-sf-admin-download-log.php:100
 msgid "User agent"
 msgstr ""
 
-#: admin/class-sf-admin-download-log.php:93
+#: admin/class-sf-admin-download-log.php:107
 msgid "Referer URL"
 msgstr ""
 
-#: admin/class-sf-admin-download-log.php:182
+#: admin/class-sf-admin-download-log.php:198
 msgid "No files downloaded yet."
 msgstr ""
 
 #: admin/class-sf-admin-help-support.php:7
-#: admin/class-sf-admin-help-support.php:42
+#: admin/class-sf-admin-help-support.php:55
 msgid "How to use Shared Files"
 msgstr ""
 
@@ -235,51 +235,52 @@ msgstr ""
 msgid "Help / Support"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:19
+#: admin/class-sf-admin-help-support.php:20
 msgid "Please note"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:19
-msgid "you have currently \"Plain\" selected in the permalink settings. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!"
+#. translators: %s: link to the support forum
+#: admin/class-sf-admin-help-support.php:24
+msgid "you have currently \"Plain\" selected in <a href=\"%s\">the permalink settings</a>. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:48
+#: admin/class-sf-admin-help-support.php:61
 msgid "Some examples on how you can use different views available at"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:50
+#: admin/class-sf-admin-help-support.php:63
 msgid "sharedfilespro.com"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:59
+#: admin/class-sf-admin-help-support.php:72
 msgid "Any kind of feedback is welcome. You may contact the author at"
 msgstr ""
 
 #. translators: %s: link to the support forum
-#: admin/class-sf-admin-help-support.php:71
+#: admin/class-sf-admin-help-support.php:84
 msgid "Any kind of feedback is welcome. You may contact the author at <a href=\"%s\" target=\"_blank\">the support forum</a>."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:91
+#: admin/class-sf-admin-help-support.php:104
 msgid "Instructions for basic usage"
 msgstr ""
 
 #. translators: %s: link to file management
-#: admin/class-sf-admin-help-support.php:101
+#: admin/class-sf-admin-help-support.php:114
 msgid "Add the files from the <a href=\"%s\" target=\"_blank\">file management</a> page."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:115
+#: admin/class-sf-admin-help-support.php:128
 msgid "Insert one of these shortcodes to any page or post:"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:121
+#: admin/class-sf-admin-help-support.php:134
 msgid "The default file list:"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:131
-#: admin/class-sf-admin-help-support.php:145
-#: admin/class-sf-admin-help-support.php:159
+#: admin/class-sf-admin-help-support.php:144
+#: admin/class-sf-admin-help-support.php:158
+#: admin/class-sf-admin-help-support.php:172
 #: admin/class-sf-admin-list.php:87
 #: admin/class-sf-admin-notifications.php:66
 #: admin/class-sf-admin-notifications.php:71
@@ -374,129 +375,129 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:135
+#: admin/class-sf-admin-help-support.php:148
 msgid "A simpler list of files:"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:149
+#: admin/class-sf-admin-help-support.php:162
 msgid "Front-end file uploader:"
 msgstr ""
 
 #. translators: %s: link to the list of available shortcodes
-#: admin/class-sf-admin-help-support.php:169
+#: admin/class-sf-admin-help-support.php:182
 msgid "A complete list of available shortcodes can be found <a href=\"%s\">here</a>."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:188
+#: admin/class-sf-admin-help-support.php:201
 msgid "Help regarding finding the correct settings"
 msgstr ""
 
 #. translators: %s: link to plugin settings
-#: admin/class-sf-admin-help-support.php:197
+#: admin/class-sf-admin-help-support.php:210
 msgid "In case you are getting 404-errors from file URLs, you should change the following <a href=\"%s\" target=\"_blank\">settings</a> (either one or both):"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:213
+#: admin/class-sf-admin-help-support.php:226
 msgid "Set the file opening method to \"Redirect\"."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:219
+#: admin/class-sf-admin-help-support.php:232
 msgid "Check the checkbox for \"Compatibility mode\"."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:225
+#: admin/class-sf-admin-help-support.php:238
 msgid "Define the \"WordPress location\" if you have WP installed under a subdirectory."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:228
+#: admin/class-sf-admin-help-support.php:241
 msgid "For example: if you have \"https://www.yoursite.com/example\" set for WordPress Address (URL) in the general settings of WordPress, you should set \"/example/\" for WordPress location in the plugin settings."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:236
+#: admin/class-sf-admin-help-support.php:249
 msgid "If the issue still persists, we are happy to help at"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:238
+#: admin/class-sf-admin-help-support.php:251
 msgid "You can just send the debug info below and we will take a look at it."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:240
+#: admin/class-sf-admin-help-support.php:253
 msgid "Thank you!"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:248
+#: admin/class-sf-admin-help-support.php:261
 msgid "Ratings & Reviews"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:253
+#: admin/class-sf-admin-help-support.php:266
 msgid "If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:261
+#: admin/class-sf-admin-help-support.php:274
 msgid "A huge thanks in advance!"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:266
+#: admin/class-sf-admin-help-support.php:279
 msgid "Leave a rating"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:274
+#: admin/class-sf-admin-help-support.php:287
 msgid "Debug Info"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:276
+#: admin/class-sf-admin-help-support.php:289
 #: admin/class-sf-admin-inline-scripts.php:31
 msgid "Open"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:283
+#: admin/class-sf-admin-help-support.php:296
 msgid "This section contains some debug info, which may be useful when trying to solve abnormal behaviour of the plugin."
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:297
+#: admin/class-sf-admin-help-support.php:310
 msgid "Variables"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:324
+#: admin/class-sf-admin-help-support.php:337
 msgid "(not set)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:359
+#: admin/class-sf-admin-help-support.php:372
 msgid "Sample file data (5 newest files)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:393
+#: admin/class-sf-admin-help-support.php:406
 msgid "More detailed data on newest file"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:432
-#: admin/class-sf-admin-help-support.php:519
+#: admin/class-sf-admin-help-support.php:445
+#: admin/class-sf-admin-help-support.php:532
 msgid "(file found)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:438
-#: admin/class-sf-admin-help-support.php:525
+#: admin/class-sf-admin-help-support.php:451
+#: admin/class-sf-admin-help-support.php:538
 msgid "(file not found)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:481
+#: admin/class-sf-admin-help-support.php:494
 msgid "Oldest file"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:558
+#: admin/class-sf-admin-help-support.php:571
 msgid "Debug log"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:574
+#: admin/class-sf-admin-help-support.php:587
 #: public/class-sf-public-file-upload.php:95
 msgid "Title"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:577
+#: admin/class-sf-admin-help-support.php:590
 msgid "Message"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:626
+#: admin/class-sf-admin-help-support.php:639
 msgid "No data logged yet."
 msgstr ""
 
@@ -1981,6 +1982,10 @@ msgstr ""
 msgid "Include subcategories / subtags when using shortcode parameters ending __and + __or"
 msgstr ""
 
+#: admin/settings/class-sf-admin-settings-tab-1.php:415
+msgid "Remove the \"download\" attribute from download links"
+msgstr ""
+
 #: admin/settings/class-sf-admin-settings-tab-admin-list.php:18
 msgid "Hide \"Limit downloads\"-column"
 msgstr ""
@@ -2831,13 +2836,13 @@ msgstr ""
 msgid "Uploaded by a visitor"
 msgstr ""
 
-#: public/class-sf-public-file-card-default.php:177
-#: public/class-sf-public-file-card-vertical.php:150
+#: public/class-sf-public-file-card-default.php:181
+#: public/class-sf-public-file-card-vertical.php:154
 msgid "Are you sure?"
 msgstr ""
 
-#: public/class-sf-public-file-card-default.php:177
-#: public/class-sf-public-file-card-vertical.php:150
+#: public/class-sf-public-file-card-default.php:181
+#: public/class-sf-public-file-card-vertical.php:154
 msgid "Delete"
 msgstr ""
 

@@ -410,6 +410,17 @@ class SharedFilesSettingsTab1Content {
                 'field_name' => $only_pro . 'and_or_include_children',
             )
         );
+        add_settings_field(
+            'shared-files-disable_download_attr',
+            sanitize_text_field( __( 'Remove the "download" attribute from download links', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+                'label_for'  => 'shared-files-disable_download_attr',
+                'field_name' => 'disable_download_attr',
+            )
+        );
     }
 
 }

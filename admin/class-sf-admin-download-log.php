@@ -24,18 +24,18 @@ class SharedFilesAdminDownloadLog {
     <div class="shared-files-help-support wrap">
 
       <h1 style="margin-bottom: 20px;"><?php echo esc_html__('Download log of Shared Files', 'shared-files'); ?></h1>
-  
+
       <div class="shared-files-admin-section shared-files-admin-section-statistics">
-          
+
         <h2><?php echo esc_html__('Downloaded files', 'shared-files') ?></h2>
 
         <br />
 
-        <?php if (isset($_GET['download_log_emptied'])): ?>        
+        <?php if (isset($_GET['download_log_emptied'])): ?>
 
           <?php echo '<div class="shared-files-download-log-success" style="font-weight: 700; color: green;">' . esc_html__('Download log successfully emptied.', 'shared-files') . '</div>'; ?>
 
-        <?php elseif (isset($_GET['download_log_emptied_error'])): ?>        
+        <?php elseif (isset($_GET['download_log_emptied_error'])): ?>
 
           <?php echo '<div class="shared-files-download-log-success-error" style="font-weight: 700; color: crimson;">' . esc_html__('Download log not emptied.', 'shared-files') . '</div>'; ?>
 
@@ -43,31 +43,31 @@ class SharedFilesAdminDownloadLog {
 
           <form method="post" class="shared-files-empty-download-log-form">
           <input type="hidden" name="_shared_files_empty_download_log" value="1" />
-        
+
           <?php echo wp_nonce_field('_shared-files-empty-download-log', '_wpnonce', true, false) ?>
-        
+
           <input type="submit" value="<?php echo esc_attr__('Empty download log', 'shared-files') ?>" class="shared-files-empty-download-log" />
           </form>
 
         <?php endif; ?>
-    
+
         <?php
-   
+
         global $wpdb;
 
         $items_per_page = 200;
         $page = isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1;
         $offset = ( $page * $items_per_page ) - $items_per_page;
-        
+
         $query = "SELECT * FROM {$wpdb->prefix}shared_files_download_log";
-        
+
         $total_query = "SELECT COUNT(1) FROM (${query}) AS combined_table";
         $total = $wpdb->get_var( $total_query );
 
         $results = $wpdb->get_results( $query . ' ORDER BY created_at DESC LIMIT ' . $offset . ', ' .  $items_per_page, OBJECT );
 
         ?>
-        
+
         <table class="shared-files-download-log">
         <tr>
           <th><?php echo esc_html__('Date', 'shared-files') ?></th>
@@ -75,30 +75,46 @@ class SharedFilesAdminDownloadLog {
           <th><?php echo esc_html__('File size', 'shared-files') ?></th>
           <th><?php echo esc_html__('Download count', 'shared-files') ?></th>
 
+          <?php $cols = 3; ?>
+
           <?php if ( isset( $s['log_enable_user_data'] ) ): ?>
+
             <th><?php echo esc_html__('User ID', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
             <th><?php echo esc_html__('Name', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
           <?php endif; ?>
-          
+
           <?php if ( isset( $s['log_enable_ip'] ) ): ?>
+
             <th><?php echo esc_html__('IP address', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
           <?php endif; ?>
-          
-          
+
+
           <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
+
             <th><?php echo esc_html__('User agent', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
           <?php endif; ?>
-          
+
           <?php if ( isset( $s['log_enable_referer_url'] ) ): ?>
+
             <th><?php echo esc_html__('Referer URL', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
           <?php endif; ?>
 
         </tr>
-        
+
         <?php if (sizeof($results) > 0): ?>
-        
+
           <?php foreach ($results as $row): ?>
-        
+
             <tr>
               <td>
                 <?php echo esc_html( $row->created_at ) ?>
@@ -138,8 +154,8 @@ class SharedFilesAdminDownloadLog {
                 </td>
 
               <?php endif; ?>
-              
-              
+
+
               <?php if ( isset( $s['log_enable_ip'] ) ): ?>
 
                 <td>
@@ -149,8 +165,8 @@ class SharedFilesAdminDownloadLog {
                 </td>
 
               <?php endif; ?>
-              
-              
+
+
               <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
 
                 <td>
@@ -160,7 +176,7 @@ class SharedFilesAdminDownloadLog {
                 </td>
 
               <?php endif; ?>
-              
+
               <?php if ( isset( $s['log_enable_referer_url'] ) ): ?>
 
                 <td>
@@ -172,23 +188,23 @@ class SharedFilesAdminDownloadLog {
               <?php endif; ?>
 
             </tr>
-        
+
           <?php endforeach; ?>
-        
+
         <?php else: ?>
-        
+
           <tr>
-            <td colspan="3">
+            <td colspan="<?php echo esc_html( $cols ) ?>">
               <?php echo esc_html__('No files downloaded yet.', 'shared-files') ?>
             </td>
           </tr>
-        
+
         <?php endif; ?>
-        
+
         </table>
 
         <div class="shared-files-admin-pagination-container">
-        
+
           <?php
           echo paginate_links( array(
             'base' => add_query_arg( 'log-page', '%#%' ),
@@ -199,13 +215,13 @@ class SharedFilesAdminDownloadLog {
             'current' => $page
           ));
           ?>
-          
+
         </div>
 
       </div>
 
     </div>
-    
+
     <?php
   }
 

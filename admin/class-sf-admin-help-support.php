@@ -16,7 +16,20 @@ class SharedFilesAdminHelpSupport {
     public static function permalinks_alert() {
         $html = '';
         if ( !get_option( 'permalink_structure' ) ) {
-            $html = '<div class="shared-files-permalinks-alert"><strong>' . sanitize_text_field( __( 'Please note', 'shared-files' ) ) . '</strong>: ' . sanitize_text_field( __( 'you have currently "Plain" selected in the permalink settings. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!', 'shared-files' ) ) . '</div>';
+            $html = '<div class="shared-files-permalinks-alert">';
+            $html .= '<strong>' . sanitize_text_field( __( 'Please note', 'shared-files' ) ) . '</strong>: ';
+            $url = get_admin_url() . 'options-permalink.php';
+            $html .= sprintf( wp_kses( 
+                /* translators: %s: link to the support forum */
+                __( 'you have currently "Plain" selected in <a href="%s">the permalink settings</a>. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!', 'shared-files' ),
+                array(
+                    'a' => array(
+                        'href'   => array(),
+                        'target' => array(),
+                    ),
+                )
+             ), esc_url( $url ) );
+            $html .= '</div>';
         }
         return $html;
     }
@@ -27,11 +40,11 @@ class SharedFilesAdminHelpSupport {
     <?php 
         $s = get_option( 'shared_files_settings' );
         ?>
-    
+
     <?php 
         echo SharedFilesAdminHelpSupport::permalinks_alert();
         ?>
-    
+
     <?php 
         $num = 0;
         ?>
@@ -58,7 +71,7 @@ class SharedFilesAdminHelpSupport {
           <p><?php 
             echo esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' );
             ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-feedback" target="_blank">sharedfilespro.com/support/</a>.</p>
-          
+
         <?php 
         } else {
             ?>
@@ -78,7 +91,7 @@ class SharedFilesAdminHelpSupport {
              ), esc_url( $url ) );
             ?>
           </p>
-                
+
         <?php 
         }
         ?>
@@ -93,7 +106,7 @@ class SharedFilesAdminHelpSupport {
 
         <ol>
           <li>
-  
+
             <?php 
         $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file' );
         echo sprintf( wp_kses( 
@@ -107,14 +120,14 @@ class SharedFilesAdminHelpSupport {
             )
          ), esc_url( $url ) );
         ?>
-          
+
           </li>
           <li>
 
             <?php 
         echo esc_html__( 'Insert one of these shortcodes to any page or post:', 'shared-files' );
         ?><br />
-  
+
             <ul>
 
               <li><?php 
@@ -160,7 +173,7 @@ class SharedFilesAdminHelpSupport {
         ?></button></li>
 
             </ul>
-  
+
             <strong>
             <?php 
         $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-shortcodes' );
@@ -176,10 +189,10 @@ class SharedFilesAdminHelpSupport {
          ), esc_url( $url ) );
         ?>
             </strong>
-            
+
           </li>
         </ol>
-        
+
       </div>
 
       <div class="shared-files-admin-section">
@@ -187,9 +200,9 @@ class SharedFilesAdminHelpSupport {
         <h2><?php 
         echo esc_html__( 'Help regarding finding the correct settings', 'shared-files' );
         ?></h2>
-  
+
         <p>
-          
+
           <?php 
         $url = esc_url_raw( get_admin_url() . 'options-general.php?page=shared-files' );
         echo sprintf( wp_kses( 
@@ -203,9 +216,9 @@ class SharedFilesAdminHelpSupport {
             )
          ), esc_url( $url ) );
         ?>
-        
+
         </p>
-  
+
         <ul>
 
           <li>
@@ -231,7 +244,7 @@ class SharedFilesAdminHelpSupport {
           </li>
 
         </ul>
-        
+
         <p><?php 
         echo esc_html__( 'If the issue still persists, we are happy to help at', 'shared-files' );
         ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>. <?php 
@@ -239,11 +252,11 @@ class SharedFilesAdminHelpSupport {
         ?> <?php 
         echo esc_html__( 'Thank you!', 'shared-files' );
         ?></p>
-        
+
       </div>
 
       <div class="shared-files-admin-section">
-      
+
         <h2><?php 
         echo esc_html__( 'Ratings & Reviews', 'shared-files' );
         ?></h2>
@@ -261,11 +274,11 @@ class SharedFilesAdminHelpSupport {
         echo esc_html__( 'A huge thanks in advance!', 'shared-files' );
         ?>
         </p>
-      
+
         <a href="https://wordpress.org/support/view/plugin-reviews/shared-files/reviews/#new-post" target="_blank" class="button-primary"><?php 
         echo esc_html__( 'Leave a rating', 'shared-files' );
         ?></a>
-        
+
       </div>
 
       <div class="shared-files-admin-section">
@@ -275,15 +288,15 @@ class SharedFilesAdminHelpSupport {
         ?> <button class="shared-files-toggle-debug-info"><?php 
         echo esc_html__( 'Open', 'shared-files' );
         ?></button></h2>
-  
+
         <div class="shared-files-debug-info-container">
-  
+
           <div class="shared-files-info-small">
             <p><?php 
         echo esc_html__( 'This section contains some debug info, which may be useful when trying to solve abnormal behaviour of the plugin.', 'shared-files' );
         ?></a></p>
           </div>
-    
+
           <?php 
         global $wp;
         ?>
@@ -292,7 +305,7 @@ class SharedFilesAdminHelpSupport {
           <?php 
         ?>
 
-    
+
           <h3><?php 
         echo esc_html__( 'Variables', 'shared-files' );
         ?></h3>
@@ -332,19 +345,19 @@ class SharedFilesAdminHelpSupport {
           permalinks: <?php 
         echo esc_html( get_option( 'permalink_structure' ) );
         ?><br />
-          
+
           <?php 
         $zlib = 0;
         if ( function_exists( 'ini_get' ) && ini_get( 'zlib.output_compression' ) ) {
             $zlib = 1;
         }
         ?>
-          
+
           zlib: <?php 
         echo esc_attr( $zlib );
         ?><br />
-          
-    
+
+
           <?php 
         $wp_query = new WP_Query(array(
             'post_type'      => 'shared_file',
@@ -354,7 +367,7 @@ class SharedFilesAdminHelpSupport {
             'order'          => 'DESC',
         ));
         ?>
-    
+
           <h3><?php 
         echo esc_html__( 'Sample file data (5 newest files)', 'shared-files' );
         ?></h3>
@@ -367,13 +380,13 @@ class SharedFilesAdminHelpSupport {
                 $c = get_post_custom( $id );
                 $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
                 ?>
-      
+
               <?php 
                 echo esc_html( $file );
                 ?> | <?php 
                 echo esc_html( get_the_date() );
                 ?><br />
-    
+
             <?php 
             }
         }
@@ -401,7 +414,7 @@ class SharedFilesAdminHelpSupport {
                 $c = get_post_custom( $id );
                 $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
                 ?>
-          
+
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
                 <?php 
                 echo esc_html( $file );
@@ -413,7 +426,7 @@ class SharedFilesAdminHelpSupport {
               <?php 
                 $file = get_post_meta( $id, '_sf_file', true );
                 ?>
-              
+
               <?php 
                 if ( isset( $file['file'] ) ) {
                     ?>
@@ -424,7 +437,7 @@ class SharedFilesAdminHelpSupport {
                 1: <?php 
                     echo esc_html( $filename_with_path );
                     ?><br />
-                
+
                 <?php 
                     if ( file_exists( $filename_with_path ) ) {
                         ?>
@@ -440,14 +453,14 @@ class SharedFilesAdminHelpSupport {
                 <?php 
                     }
                     ?>
-                
+
                 3: <?php 
                     echo esc_html( $file['url'] );
                     ?><br />
                 4: <?php 
                     echo esc_html( $file['type'] );
                     ?><br />
-                
+
                 <?php 
                     if ( isset( $file['error'] ) && $file['error'] ) {
                         ?>
@@ -476,11 +489,11 @@ class SharedFilesAdminHelpSupport {
             'order'          => 'ASC',
         ));
         ?>
-          
+
           <h3><?php 
         echo esc_html__( 'Oldest file', 'shared-files' );
         ?></h3>
-          
+
           <?php 
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
@@ -489,7 +502,7 @@ class SharedFilesAdminHelpSupport {
                 $c = get_post_custom( $id );
                 $file = ( isset( $c['_sf_filename'] ) ? SharedFilesHelpers::sf_root() . '/shared-files/' . $id . '/' . SharedFilesHelpers::wp_engine() . sanitize_text_field( $c['_sf_filename'][0] ) : '' );
                 ?>
-          
+
               <div style="background: #fff; padding: 6px 8px; margin-bottom: 4px;">
                 <?php 
                 echo esc_html( $file );
@@ -497,7 +510,7 @@ class SharedFilesAdminHelpSupport {
                 echo esc_html( get_the_date() );
                 ?>
               </div>
-          
+
               <?php 
                 $file = get_post_meta( $id, '_sf_file', true );
                 ?>
@@ -511,7 +524,7 @@ class SharedFilesAdminHelpSupport {
                 1: <?php 
                     echo esc_html( $filename_with_path );
                     ?><br />
-                
+
                 <?php 
                     if ( file_exists( $filename_with_path ) ) {
                         ?>
@@ -534,7 +547,7 @@ class SharedFilesAdminHelpSupport {
                 4: <?php 
                     echo esc_html( $file['type'] );
                     ?><br />
-                
+
                 <?php 
                     if ( isset( $file['error'] ) && $file['error'] ) {
                         ?>
@@ -544,11 +557,11 @@ class SharedFilesAdminHelpSupport {
                 <?php 
                     }
                     ?>
-                
+
               <?php 
                 }
                 ?>
-                        
+
             <?php 
             }
         }
@@ -557,15 +570,15 @@ class SharedFilesAdminHelpSupport {
           <h3><?php 
         echo esc_html__( 'Debug log', 'shared-files' );
         ?></h3>
-          
+
           <?php 
         global $wpdb;
         $table_name = $wpdb->prefix . 'shared_files_log';
         $msg = $wpdb->get_results( "SELECT * FROM {$table_name} ORDER BY id DESC LIMIT 200" );
         ?>
-          
+
           <table class="shared-files-debug-log" style="min-width: 400px;">
-          
+
           <tr>
             <th><?php 
         echo esc_html__( 'Date', 'shared-files' );
@@ -577,28 +590,28 @@ class SharedFilesAdminHelpSupport {
         echo esc_html__( 'Message', 'shared-files' );
         ?></th>
           </tr>
-          
+
           <?php 
         if ( sizeof( $msg ) > 0 ) {
             ?>
-          
+
             <?php 
             foreach ( $msg as $row ) {
                 ?>
               <tr>
-          
+
                 <td style="white-space: nowrap;">
                   <?php 
                 echo esc_html( $row->created_at );
                 ?>
                 </td>
-          
+
                 <td>
                   <?php 
                 echo esc_html( $row->title );
                 ?><br />
                 </td>
-          
+
                 <td>
                   <?php 
                 if ( isset( $row->message ) ) {
@@ -610,16 +623,16 @@ class SharedFilesAdminHelpSupport {
                 }
                 ?>
                 </td>
-          
+
               </tr>
             <?php 
             }
             ?>
-          
+
           <?php 
         } else {
             ?>
-          
+
             <tr>
               <td colspan="3">
                 <?php 
@@ -627,13 +640,13 @@ class SharedFilesAdminHelpSupport {
             ?>
               </td>
             </tr>
-          
+
           <?php 
         }
         ?>
 
         </div>
-        
+
       </div>
 
     </div>

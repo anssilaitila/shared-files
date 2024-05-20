@@ -520,6 +520,7 @@ class SharedFilesAdminMetadata {
      */
     public function set_upload_dir( $dir ) {
         $s = get_option( 'shared_files_settings' );
+        $full_path_default = realpath( $dir['basedir'] ) . '/shared-files';
         $folder_for_new_files = '';
         if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
             $folder_for_new_files = '/' . sanitize_file_name( $s['folder_for_new_files'] );
@@ -527,6 +528,8 @@ class SharedFilesAdminMetadata {
             if ( !file_exists( $full_path_new ) ) {
                 mkdir( $full_path_new );
             }
+        } elseif ( !file_exists( $full_path_default ) ) {
+            mkdir( $full_path_default );
         }
         return array(
             'path'   => realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files,
