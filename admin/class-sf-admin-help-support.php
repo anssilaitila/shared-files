@@ -434,37 +434,40 @@ class SharedFilesAdminHelpSupport {
                 <?php 
                     $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
                     ?>
-                1: <?php 
+                file: <?php 
+                    echo esc_html( $file['file'] );
+                    ?><br />
+                path: <?php 
                     echo esc_html( $filename_with_path );
                     ?><br />
 
                 <?php 
                     if ( file_exists( $filename_with_path ) ) {
                         ?>
-                  2: <?php 
+                  <div style="color: mediumseagreen; font-weight: 700;"><?php 
                         echo esc_html__( '(file found)', 'shared-files' );
-                        ?><br />
+                        ?></div>
                 <?php 
                     } else {
                         ?>
-                  2: <?php 
+                  <div style="color: crimson; font-weight: 700;"><?php 
                         echo esc_html__( '(file not found)', 'shared-files' );
-                        ?><br />
+                        ?></div>
                 <?php 
                     }
                     ?>
 
-                3: <?php 
+                url: <?php 
                     echo esc_html( $file['url'] );
                     ?><br />
-                4: <?php 
+                type: <?php 
                     echo esc_html( $file['type'] );
                     ?><br />
 
                 <?php 
                     if ( isset( $file['error'] ) && $file['error'] ) {
                         ?>
-                  5: <?php 
+                  error: <?php 
                         echo esc_html( $file['error'] );
                         ?><br />
                 <?php 
@@ -521,43 +524,45 @@ class SharedFilesAdminHelpSupport {
                 <?php 
                     $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilename( $file['file'] );
                     ?>
-                1: <?php 
+                file: <?php 
+                    echo esc_html( $file['file'] );
+                    ?><br />
+                path: <?php 
                     echo esc_html( $filename_with_path );
                     ?><br />
 
                 <?php 
                     if ( file_exists( $filename_with_path ) ) {
                         ?>
-                  2: <?php 
+                  <div style="color: mediumseagreen; font-weight: 700;"><?php 
                         echo esc_html__( '(file found)', 'shared-files' );
-                        ?><br />
+                        ?></div>
                 <?php 
                     } else {
                         ?>
-                  2: <?php 
+                  <div style="color: crimson; font-weight: 700;"><?php 
                         echo esc_html__( '(file not found)', 'shared-files' );
-                        ?><br />
+                        ?></div>
                 <?php 
                     }
                     ?>
 
-                3: <?php 
+                url: <?php 
                     echo esc_html( $file['url'] );
                     ?><br />
-                4: <?php 
+                type: <?php 
                     echo esc_html( $file['type'] );
                     ?><br />
 
                 <?php 
                     if ( isset( $file['error'] ) && $file['error'] ) {
                         ?>
-                  5: <?php 
+                  error: <?php 
                         echo esc_html( $file['error'] );
                         ?><br />
                 <?php 
                     }
                     ?>
-
               <?php 
                 }
                 ?>

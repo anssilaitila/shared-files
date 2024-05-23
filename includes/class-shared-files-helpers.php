@@ -1,6 +1,16 @@
 <?php
 
 class SharedFilesHelpers {
+    public static function getWPSubdir() {
+        $site_url = get_site_url();
+        $site_url_parts = parse_url( $site_url );
+        $wp_subdir = '';
+        if ( isset( $site_url_parts['path'] ) && $site_url_parts['path'] && ($wp_subdir = $site_url_parts['path']) ) {
+            $wp_subdir = rtrim( $wp_subdir, '/' ) . '/';
+        }
+        return $wp_subdir;
+    }
+
     public static function getIPAddress() {
         foreach ( array(
             'HTTP_CLIENT_IP',

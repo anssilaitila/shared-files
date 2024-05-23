@@ -442,9 +442,9 @@ class SharedFilesSettingsFieldRender {
 
       <?php if ($field_name == 'wp_location'): ?>
         <div class="email-info">
-          <?php echo esc_html__('If you\'re getting 404 from file URLs, it may be necessary to set this to the same folder that your WordPress is installed to. If this is set, the file URLs are formatted like so:', 'shared-files') ?><br /><b>/some-folder/shared-files/123/this-is-a-file.pdf</b><br /><br />
-          <?php echo esc_html__('You should usually set this to be the first part of the url, like /some-folder/. This setting may be necessary, if you have installed WordPress in a subdirectory.', 'shared-files') ?><br /><br />
-          <?php echo esc_html__('In some cases there is two extra parts before the /wp-content/... part starts, you should set this to whatever is before /wp-content/ in other url\'s used by your theme.', 'shared-files') ?>
+          <?php echo esc_html__('This setting is required, if you have installed WordPress in a subdirectory.', 'shared-files') ?><br /><br />
+          <?php echo esc_html__('Please check the WordPress Address (URL) of your site from WP admin / Settings / General, if there is a path after the domain, you should add the same path here.', 'shared-files') ?><br /><br />
+          <?php echo esc_html__('If this is set, the file URLs are automatically formatted like so:', 'shared-files') ?><br /><b>/wp-folder/shared-files/123/this-is-a-file.pdf</b>
         </div>
       <?php elseif ($field_name == 'folder_for_new_files'): ?>
         <div class="email-info">

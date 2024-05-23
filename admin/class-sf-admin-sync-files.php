@@ -19,7 +19,7 @@ class SharedFilesAdminSyncFiles {
 
     public function register_page_callback() {
         ?>
-    
+
     <div class="shared-files-sync-files">
       <h1><?php 
         echo esc_html__( 'Sync Files', 'shared-files' );
@@ -50,19 +50,19 @@ class SharedFilesAdminSyncFiles {
       <p>
 
         <form method="post">
-          
+
           <?php 
         $taxonomy_slug = 'shared-file-category';
         ?>
-        
+
           <?php 
         if ( get_taxonomy( $taxonomy_slug ) ) {
             ?>
-  
+
             <span class="shared-files-category-for-new-files"><?php 
             echo esc_html__( 'Category for new files:', 'shared-files' );
             ?></span>
-  
+
             <?php 
             echo wp_dropdown_categories( [
                 'show_option_all' => ' ',
@@ -78,24 +78,24 @@ class SharedFilesAdminSyncFiles {
                 'show_option_all' => sanitize_text_field( __( 'Choose category', 'shared-files' ) ),
             ] );
             ?><br />
-            
+
           <?php 
         }
         ?>
-  
+
           <?php 
         wp_nonce_field( 'sf-sync-files', 'sf-sync-files-nonce' );
         ?>
 
           <input type="hidden" name="shared-files-op" value="sync-files" />
           <input type="hidden" name="add_file" value="all_files" />
-  
+
           <input type="submit" class="shared-files-activate <?php 
         echo ( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' );
         ?>" value="<?php 
         echo esc_html__( 'Activate all inactive files', 'shared-files' );
         ?>" />
-        
+
         </form>
       </p>
 

@@ -114,7 +114,7 @@ class SharedFilesSettingsTab2Content {
             array(
                 'label_for'   => 'shared-files-wp_location',
                 'field_name'  => 'wp_location',
-                'placeholder' => '/some-folder/',
+                'placeholder' => '/wp-folder/',
             )
         );
         add_settings_field(

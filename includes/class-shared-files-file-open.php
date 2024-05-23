@@ -70,12 +70,12 @@ class SharedFilesFileOpen {
         $filename_path_parts = explode('/', $filename_parts['path']);
       }
 
-      $uploads_pos = array_search('shared-files', $filename_path_parts);
+      $uploads_pos = array_search('uploads', $filename_path_parts);
 
       if (is_multisite() && $uploads_pos) {
         $filename_path_parts_sliced = array_slice($filename_path_parts, $uploads_pos);
       } else {
-        $filename_path_parts_sliced = array_slice($filename_path_parts, $uploads_pos);
+        $filename_path_parts_sliced = array_slice($filename_path_parts, -3, 3);
       }
 
       if (is_array($filename_path_parts_sliced) && $filename_path_parts_sliced[0] == 'uploads') {
