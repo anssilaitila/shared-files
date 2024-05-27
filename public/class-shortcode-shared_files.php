@@ -58,7 +58,7 @@ class ShortcodeSharedFiles {
         } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_editable_file'] ) && isset( $_GET['sc'] ) ) {
             $html .= '<div class="shared-files-file-deleted">' . sanitize_text_field( __( 'File successfully deleted.', 'shared-files' ) ) . '</div>';
         }
-        if ( isset( $atts['file_upload'] ) && (is_user_logged_in() || !isset( $s['only_logged_in_users_can_add_files'] )) ) {
+        if ( isset( $atts['file_upload'] ) ) {
             if ( isset( $atts['only_uploaded_files'] ) ) {
                 $meta_query_hide_not_public = array(
                     'relation' => 'AND',
@@ -91,7 +91,9 @@ class ShortcodeSharedFiles {
                     'compare' => 'NOT EXISTS',
                 );
             }
-            $html .= SharedFilesFileUpload::fileUploadMarkup( $atts );
+            if ( is_user_logged_in() || !isset( $s['only_logged_in_users_can_add_files'] ) ) {
+                $html .= SharedFilesFileUpload::fileUploadMarkup( $atts );
+            }
         }
         if ( isset( $atts['file_id'] ) ) {
             $file_id = (int) $atts['file_id'];

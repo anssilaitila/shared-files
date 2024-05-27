@@ -22,9 +22,9 @@ jobs:
 
     strategy:
       matrix:
-        wp-versions: [ 5.8 ]
+        wp-versions: [ 6.4 ]
         php-versions: [ 7.4 ]
-    
+
     name: WP ${{ matrix.wp-versions }} on PHP ${{ matrix.php-versions }}
 
     env:
@@ -56,7 +56,7 @@ jobs:
 
       - name: Install WP tests
         run: |
-          bash bin/install-wp-tests.sh wordpress_test root 'root' localhost 5.8
+          bash bin/install-wp-tests.sh wordpress_test root 'root' localhost 6.4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -67,11 +67,14 @@ jobs:
         env:
           update: true
 
+      - name: Set Composer File
+        run: echo "COMPOSER=composer.testing.json" >> $GITHUB_ENV
+
       - name: Get Composer cache directory
         working-directory: ${{ env.wp-bp-directory }}
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-      
+
       - name: Cache Composer dependencies
         uses: actions/cache@v1
         with:
@@ -82,6 +85,12 @@ jobs:
       - name: Install Composer dependencies
         working-directory: ${{ env.wp-bp-directory }}
         run: composer install -q --prefer-dist --no-progress --ansi --no-interaction --no-suggest
+
+      - name: List installed packages
+        run: composer show
+
+      - name: List the latest versions of all packages
+        run: composer show -l
 
 #      - name: Install NodeJS
 #        uses: actions/setup-node@v1
@@ -101,7 +110,7 @@ jobs:
 #      - name: Install Node dependencies
 #        working-directory: ${{ env.wp-bp-directory }}
 #        run: npm ci
-      
+
       - name: Install phpunit 5.x on PHP 5.6
         if: ${{ matrix.php-versions == '5.6' }}
         run: |
@@ -128,7 +137,7 @@ jobs:
 
       - name: Install PHPUnit Polyfills
         run: |
-          composer global require --dev yoast/phpunit-polyfills:1.0.5
+          composer global require --dev yoast/phpunit-polyfills:1.1.0
 
       - name: Run phpunit tests
         working-directory: ${{ env.wp-bp-directory }}

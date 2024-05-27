@@ -104,7 +104,7 @@ class SharedFilesSettingsFieldRender {
         </div>
       <?php elseif ($args['field_name'] == 'uncheck_hide_from_other_pages'): ?>
         <div class="email-info">
-          <?php echo esc_html__('If checked, all uploaded files will be instantly listed on other shortcodes/pages also.', 'shared-files') ?><br />
+          <?php echo esc_html__('If checked, all uploaded files will be instantly listed on also other shortcodes/pages.', 'shared-files') ?><br />
         </div>
       <?php elseif ($args['field_name'] == 'obfuscate_file_urls' || $show_info): ?>
         <div class="email-info">

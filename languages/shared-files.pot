@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.23\n"
+"Project-Id-Version: Shared Files 1.7.24\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-23T21:10:31+03:00\n"
+"POT-Creation-Date: 2024-05-24T21:01:48+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: shared-files\n"
@@ -125,7 +125,7 @@ msgstr ""
 #: admin/settings/class-sf-admin-settings-field-render.php:941
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:116
 #: public/class-sf-public-contacts.php:52
-#: public/class-sf-public-file-upload.php:547
+#: public/class-sf-public-file-upload.php:553
 #: public/class-sf-public-helpers.php:537
 msgid "Description"
 msgstr ""
@@ -157,8 +157,8 @@ msgstr ""
 #: admin/class-sf-admin-cpt.php:42
 #: public/class-sf-public-ajax.php:211
 #: public/class-sf-public-ajax.php:435
-#: public/class-shortcode-shared_files.php:1066
-#: public/class-shortcode-shared_files.php:1111
+#: public/class-shortcode-shared_files.php:1071
+#: public/class-shortcode-shared_files.php:1116
 #: public/class-shortcode-shared_files_accordion.php:487
 #: public/class-shortcode-shared_files_exact_search.php:228
 #: public/class-shortcode-shared_files_exact_search.php:236
@@ -513,7 +513,7 @@ msgid "Debug log"
 msgstr ""
 
 #: admin/class-sf-admin-help-support.php:436
-#: public/class-sf-public-file-upload.php:488
+#: public/class-sf-public-file-upload.php:494
 #: public/class-sf-public-helpers.php:458
 msgid "Title"
 msgstr ""
@@ -732,9 +732,9 @@ msgid "This date is displayed in the file list instead of the publish date. If e
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:278
-#: public/class-sf-public-file-upload.php:884
-#: public/class-sf-public-file-upload.php:1311
-#: public/class-sf-public-file-upload.php:1529
+#: public/class-sf-public-file-upload.php:894
+#: public/class-sf-public-file-upload.php:1325
+#: public/class-sf-public-file-upload.php:1547
 #: public/class-sf-public-helpers.php:468
 msgid "External URL"
 msgstr ""
@@ -748,7 +748,7 @@ msgid "Note: if the external URL is defined, the local file will not be saved."
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:308
-#: public/class-sf-public-file-upload.php:506
+#: public/class-sf-public-file-upload.php:512
 msgid "Expiration date"
 msgstr ""
 
@@ -773,7 +773,7 @@ msgid "Restrict access"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:369
-#: public/class-sf-public-file-upload.php:223
+#: public/class-sf-public-file-upload.php:229
 msgid "Restrict access for users"
 msgstr ""
 
@@ -802,7 +802,7 @@ msgid "<a href=\"%s\">Important information regarding file permissions &raquo;</
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:488
-#: public/class-sf-public-file-upload.php:270
+#: public/class-sf-public-file-upload.php:276
 msgid "Restrict access for roles"
 msgstr ""
 
@@ -1565,11 +1565,11 @@ msgstr ""
 
 #: admin/class-sf-admin-sync-files.php:67
 #: admin/class-sf-admin-sync-media-library.php:68
-#: public/class-sf-public-file-upload.php:367
+#: public/class-sf-public-file-upload.php:373
 #: public/class-sf-public-shortcode-filters.php:66
 #: public/class-sf-public-shortcode-filters.php:97
-#: public/class-shortcode-shared_files.php:311
-#: public/class-shortcode-shared_files.php:342
+#: public/class-shortcode-shared_files.php:316
+#: public/class-shortcode-shared_files.php:347
 #: public/class-shortcode_shared_files_simple.php:162
 #: public/class-shortcode_shared_files_simple.php:192
 msgid "Choose category"
@@ -1694,7 +1694,7 @@ msgid "New Type Name"
 msgstr ""
 
 #: admin/class-sf-admin-taxonomy.php:20
-#: public/class-sf-public-file-upload.php:482
+#: public/class-sf-public-file-upload.php:488
 #: public/class-sf-public-helpers.php:505
 msgid "Tags"
 msgstr ""
@@ -1731,7 +1731,7 @@ msgstr ""
 #: admin/class-sf-admin-taxonomy.php:70
 #: admin/class-sf-admin-taxonomy.php:71
 #: admin/class-sf-admin-taxonomy.php:83
-#: public/class-sf-public-file-upload.php:341
+#: public/class-sf-public-file-upload.php:347
 #: public/class-sf-public-helpers.php:475
 msgid "Categories"
 msgstr ""
@@ -1773,7 +1773,7 @@ msgid "If you would like to host the files in some other location on the server,
 msgstr ""
 
 #: admin/class-sf-admin-taxonomy.php:186
-#: public/class-sf-public-file-upload.php:495
+#: public/class-sf-public-file-upload.php:501
 #: public/class-sf-public-helpers.php:596
 #: public/class-sf-public-helpers.php:749
 msgid "Password"
@@ -1848,7 +1848,7 @@ msgid "When checked, file lists are readable, but opening and downloading files 
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:107
-msgid "If checked, all uploaded files will be instantly listed on other shortcodes/pages also."
+msgid "If checked, all uploaded files will be instantly listed on also other shortcodes/pages."
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:111
@@ -2297,7 +2297,7 @@ msgstr ""
 #: admin/settings/class-sf-admin-settings-tab-exact-search.php:90
 #: public/class-sf-public-helpers.php:994
 #: public/class-sf-public-shortcode-filters.php:309
-#: public/class-shortcode-shared_files.php:555
+#: public/class-shortcode-shared_files.php:560
 #: public/class-shortcode_shared_files_simple.php:397
 msgid "Custom field"
 msgstr ""
@@ -2458,6 +2458,7 @@ msgid "Hide new tag input"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-edit.php:106
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:264
 #: admin/settings/class-sf-admin-settings-tab-single-file.php:48
 msgid "Hide description"
 msgstr ""
@@ -2551,103 +2552,107 @@ msgid "Disable progress bar / ajax upload"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-upload.php:40
-msgid "Only logged in users can add files using the front-end file uploader"
+msgid "Only logged in users can add files"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-upload.php:49
-msgid "Enable restrict access for users (logged in users only)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:58
-msgid "Enable restrict access for roles (logged in users only)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:67
 msgid "Set the status of uploaded files to \"Pending Review\""
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:76
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:58
 msgid "Hide file uploader info"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:85
-msgid "Hide description field"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:94
-msgid "Enable featured image (a separate file can be added)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:103
-msgid "Make category selection required"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:112
-msgid "Show category checkboxes for front-end file uploader (instead of dropdown)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:121
-msgid "Show category and tag checkboxes on multiple columns"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:130
-msgid "Allow the uploader to create a single new category"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:141
-msgid "Allow the uploader to create multiple new categories"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:150
-msgid "Allow the uploader to create multiple new tags"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:161
-msgid "Show tag dropdown for front-end file uploader"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:170
-msgid "Show tag checkboxes for front-end file uploader"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:179
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:67
 msgid "Uncheck \"Hide from other pages\" for uploaded files"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:188
-msgid "Show External Url on file upload form"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:197
-msgid "Show Expiration date"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:206
-msgid "Text for External URL"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:210
-#: public/class-sf-public-file-upload.php:197
-msgid "Or enter a YouTube URL:"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:215
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:76
 msgid "Restrict accepted file types"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:224
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:85
 msgid "Restrict accepted file extensions"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:233
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:94
+msgid "File field optional"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:103
+msgid "Enable featured image (a separate file can be added)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:112
+msgid "Show External URL"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:121
+msgid "Text for External URL"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:125
+#: public/class-sf-public-file-upload.php:203
+msgid "Or enter a YouTube URL:"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:130
+msgid "Restrict access for users (logged in users only)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:139
+msgid "Restrict access for roles (logged in users only)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:148
+msgid "Category selection required"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:157
+msgid "Show category checkboxes instead of a dropdown"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:166
+msgid "Allow the uploader to create a single new category"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:177
+msgid "Allow the uploader to create multiple new categories"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:188
+msgid "Show tag dropdown"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:197
+msgid "Show tag checkboxes"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:208
+msgid "Allow the uploader to create multiple new tags"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:219
+msgid "Show category and tag checkboxes on multiple columns"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:228
+msgid "File title required"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:237
 msgid "Allow the uploader to define a password for the file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:242
-msgid "Make the file field optional"
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:246
+msgid "Show Expiration date"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:251
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:255
+msgid "Description required"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:273
 msgid "Send and email notify when a file is uploaded and / or send an email to all users having one of the roles below:"
 msgstr ""
 
@@ -3079,31 +3084,31 @@ msgstr ""
 msgid "The exact search targets all files (only their titles by default) and shows the files after enter is pressed."
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:45
+#: includes/class-shared-files-helpers.php:60
 msgid "Please wait, uploading file(s)..."
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:49
+#: includes/class-shared-files-helpers.php:64
 msgid "Processing file(s)..."
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:53
+#: includes/class-shared-files-helpers.php:68
 msgid "Upload complete!"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:59
+#: includes/class-shared-files-helpers.php:74
 msgid "Reload page"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:467
-#: includes/class-shared-files-helpers.php:471
-#: includes/class-shared-files-helpers.php:475
-#: includes/class-shared-files-helpers.php:493
-#: includes/class-shared-files-helpers.php:495
-#: includes/class-shared-files-helpers.php:536
-#: includes/class-shared-files-helpers.php:546
-#: includes/class-shared-files-helpers.php:590
-#: includes/class-shared-files-helpers.php:600
+#: includes/class-shared-files-helpers.php:482
+#: includes/class-shared-files-helpers.php:486
+#: includes/class-shared-files-helpers.php:490
+#: includes/class-shared-files-helpers.php:508
+#: includes/class-shared-files-helpers.php:510
+#: includes/class-shared-files-helpers.php:551
+#: includes/class-shared-files-helpers.php:561
+#: includes/class-shared-files-helpers.php:605
+#: includes/class-shared-files-helpers.php:615
 msgid "Preview"
 msgstr ""
 
@@ -3116,7 +3121,7 @@ msgid "Invalid email"
 msgstr ""
 
 #: public/class-sf-public-contacts.php:127
-#: public/class-sf-public-file-upload.php:555
+#: public/class-sf-public-file-upload.php:561
 #: public/class-sf-public-helpers.php:606
 #: public/class-sf-public-helpers.php:757
 msgid "Submit"
@@ -3172,45 +3177,45 @@ msgstr ""
 msgid "File successfully deleted."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:184
+#: public/class-sf-public-file-upload.php:190
 msgid "Featured image"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:191
+#: public/class-sf-public-file-upload.php:197
 msgid "Maximum file size:"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:386
+#: public/class-sf-public-file-upload.php:392
 msgid "Name for a new category"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:387
+#: public/class-sf-public-file-upload.php:393
 msgid "A new category will be created and the uploaded file is assigned to it."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:404
+#: public/class-sf-public-file-upload.php:410
 msgid "Choose a parent category for the new category (optional)"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:415
+#: public/class-sf-public-file-upload.php:421
 msgid "New categories (comma separated)"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:416
+#: public/class-sf-public-file-upload.php:422
 msgid "New categories will be created and the uploaded file is assigned to them."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:423
+#: public/class-sf-public-file-upload.php:429
 msgid "New tags (comma separated)"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:424
+#: public/class-sf-public-file-upload.php:430
 msgid "New tags will be created and the uploaded file is assigned to them."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:455
+#: public/class-sf-public-file-upload.php:461
 #: public/class-sf-public-shortcode-filters.php:135
-#: public/class-shortcode-shared_files.php:380
+#: public/class-shortcode-shared_files.php:385
 #: public/class-shortcode_shared_files_simple.php:227
 msgid "Choose tag"
 msgstr ""
@@ -3283,7 +3288,7 @@ msgid "Browse more files:"
 msgstr ""
 
 #: public/class-sf-public-shortcode-filters.php:47
-#: public/class-shortcode-shared_files.php:292
+#: public/class-shortcode-shared_files.php:297
 #: public/class-shortcode-shared_files_restricted.php:68
 #: public/class-shortcode_shared_files_simple.php:143
 #: public/class-shortcode_shared_files_simple.php:601
@@ -3301,11 +3306,11 @@ msgstr ""
 msgid "File successfully updated."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:199
+#: public/class-shortcode-shared_files.php:204
 msgid "File not found"
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:261
+#: public/class-shortcode-shared_files.php:266
 #: public/class-shortcode-shared_files_exact_search.php:50
 #: public/class-shortcode-shared_files_restricted.php:153
 #: public/class-shortcode-shared_files_search.php:36
@@ -3314,7 +3319,7 @@ msgstr ""
 msgid "Search files..."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:979
+#: public/class-shortcode-shared_files.php:984
 #: public/class-shortcode-shared_files_restricted.php:279
 #: public/class-shortcode-shared_files_search.php:44
 #: public/class-shortcode-shared_files_search.php:111
@@ -3322,7 +3327,7 @@ msgstr ""
 msgid "file found."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:979
+#: public/class-shortcode-shared_files.php:984
 #: public/class-shortcode-shared_files_exact_search.php:199
 #: public/class-shortcode-shared_files_restricted.php:279
 #: public/class-shortcode-shared_files_search.php:44

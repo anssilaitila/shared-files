@@ -35,6 +35,11 @@ class SharedFilesFileUpload {
         $html .= '<input name="shared-files-upload" value="1" type="hidden" />';
         $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
         $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
+        if ( isset( $atts['only_uploaded_files'] ) && $post_id ) {
+            $html .= '<input name="_SF_ONLY_UPLOADED_FILES" value="1" type="hidden" />';
+        } else {
+            $html .= '<input name="_SF_ONLY_UPLOADED_FILES" value="0" type="hidden" />';
+        }
         $html .= '<input name="_sf_upload_id" value="' . esc_attr( $upload_id ) . '" type="hidden" />';
         if ( $restrict_access ) {
             $html .= '<input name="_sf_restrict_access" value="1" type="hidden" />';
@@ -93,10 +98,10 @@ class SharedFilesFileUpload {
             }
         }
         $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( __( 'Title', 'shared-files' ) ) . '</span>';
-        $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" />';
+        $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" ' . SharedFilesHelpers::fieldAttrRequired( 'file_upload_title_required' ) . ' />';
         if ( !isset( $s['file_upload_hide_description'] ) ) {
             $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( __( 'Description', 'shared-files' ) ) . '</span>';
-            $html .= '<textarea name="_sf_description" class="shared-files-description"></textarea>';
+            $html .= '<textarea name="_sf_description" class="shared-files-description" ' . SharedFilesHelpers::fieldAttrRequired( 'file_upload_description_required' ) . '></textarea>';
         }
         if ( !isset( $s['file_upload_disable_progress_bar'] ) ) {
             $html .= SharedFilesHelpers::ajaxUploadMarkup();
@@ -147,6 +152,8 @@ class SharedFilesFileUpload {
                 update_post_meta( $id, '_sf_not_public', 1 );
             } elseif ( !isset( $s['uncheck_hide_from_other_pages'] ) ) {
                 update_post_meta( $id, '_sf_not_public', 1 );
+            } else {
+                update_post_meta( $id, '_sf_not_public', '' );
             }
             if ( isset( $_POST[SHARED_FILES_TAG_SLUG] ) ) {
                 $cat_slug = sanitize_title( $_POST[SHARED_FILES_TAG_SLUG] );

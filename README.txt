@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download monitor, file manager
 Requires at least: 5.4.0
 Tested up to: 6.5
-Stable tag: 1.7.23
+Stable tag: 1.7.24
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -251,6 +251,9 @@ Yes, you can use it as a file manager like that. You don't necessarily have to a
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.24 - 2024-05-24 =
+* (Free + All plans) New settings for front end uploader: File title required and Description required
 
 = 1.7.23 - 2024-05-23 =
 * (Free + All plans) Bug fixes

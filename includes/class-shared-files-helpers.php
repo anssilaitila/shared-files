@@ -1,6 +1,15 @@
 <?php
 
 class SharedFilesHelpers {
+    public static function fieldAttrRequired( $s_field ) {
+        $s = get_option( 'shared_files_settings' );
+        $required = '';
+        if ( isset( $s[$s_field] ) ) {
+            $required = 'required';
+        }
+        return $required;
+    }
+
     public static function getWPSubdir() {
         $site_url = get_site_url();
         $site_url_parts = parse_url( $site_url );
