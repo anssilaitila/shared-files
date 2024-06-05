@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.24\n"
+"Project-Id-Version: Shared Files 1.7.25\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-05-24T21:01:48+03:00\n"
+"POT-Creation-Date: 2024-06-01T21:56:47+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: shared-files\n"
@@ -159,7 +159,7 @@ msgstr ""
 #: public/class-sf-public-ajax.php:435
 #: public/class-shortcode-shared_files.php:1071
 #: public/class-shortcode-shared_files.php:1116
-#: public/class-shortcode-shared_files_accordion.php:487
+#: public/class-shortcode-shared_files_accordion.php:493
 #: public/class-shortcode-shared_files_exact_search.php:228
 #: public/class-shortcode-shared_files_exact_search.php:236
 #: public/class-shortcode-shared_files_restricted.php:331
@@ -3103,12 +3103,12 @@ msgstr ""
 #: includes/class-shared-files-helpers.php:482
 #: includes/class-shared-files-helpers.php:486
 #: includes/class-shared-files-helpers.php:490
-#: includes/class-shared-files-helpers.php:508
-#: includes/class-shared-files-helpers.php:510
-#: includes/class-shared-files-helpers.php:551
-#: includes/class-shared-files-helpers.php:561
-#: includes/class-shared-files-helpers.php:605
-#: includes/class-shared-files-helpers.php:615
+#: includes/class-shared-files-helpers.php:515
+#: includes/class-shared-files-helpers.php:517
+#: includes/class-shared-files-helpers.php:558
+#: includes/class-shared-files-helpers.php:568
+#: includes/class-shared-files-helpers.php:612
+#: includes/class-shared-files-helpers.php:622
 msgid "Preview"
 msgstr ""
 

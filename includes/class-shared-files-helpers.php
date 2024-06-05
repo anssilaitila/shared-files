@@ -292,13 +292,17 @@ class SharedFilesHelpers {
         } elseif ( isset( $s['always_preview_pdf'] ) && !$password && !$file_access_logged_in_only && in_array( $filetype, $pdf_types ) ) {
             if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                 $file_url = esc_url_raw( $file['url'] );
+                $file_url_parts = parse_url( $file_url );
+                if ( !isset( $file_url_parts['host'] ) ) {
+                    $file_url = esc_url_raw( SharedFilesHelpers::getSiteBaseURL() . $file_url );
+                }
             } else {
                 $file_url = esc_url_raw( SharedFilesHelpers::getSiteBaseURL() . $file_url );
             }
             if ( isset( $s['bypass_preview_pdf'] ) ) {
                 $html .= '<a href="' . esc_url_raw( $file_url ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             } else {
-                $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+                $html .= '<a href="https://docs.google.com/gview?url=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
             }
         } elseif ( isset( $s['preview_service'] ) && $s['preview_service'] == 'microsoft' ) {
             $ok = array(
@@ -344,11 +348,16 @@ class SharedFilesHelpers {
                 }
                 $password_protected = 0;
                 if ( !$password_protected ) {
-                    $html .= '<a href="https://docs.google.com/viewer?embedded=true&url=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
+                    $html .= '<a href="https://docs.google.com/gview?url=' . urlencode( esc_url_raw( $file_url ) ) . '" target="_blank" class="shared-files-preview-button">' . sanitize_text_field( __( 'Preview', 'shared-files' ) ) . '</a>';
                 }
             }
         }
         return $html;
+    }
+
+    public static function getRand() {
+        $rand = substr( md5( mt_rand() ), 0, 6 );
+        return $rand;
     }
 
     public static function getDownloadCounter( $file_id ) {
