@@ -61,7 +61,7 @@ class SharedFilesAdminDownloadLog {
 
         $query = "SELECT * FROM {$wpdb->prefix}shared_files_download_log";
 
-        $total_query = "SELECT COUNT(1) FROM (${query}) AS combined_table";
+        $total_query = "SELECT COUNT(1) FROM ({$query}) AS combined_table";
         $total = $wpdb->get_var( $total_query );
 
         $results = $wpdb->get_results( $query . ' ORDER BY created_at DESC LIMIT ' . $offset . ', ' .  $items_per_page, OBJECT );

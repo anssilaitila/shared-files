@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, document management, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.25
+Stable tag: 1.7.26
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,7 +26,7 @@ You can also optionally collect new leads by asking for contact info before show
 Shared Files provides an interface for uploading and managing a large group of documents and files easily with numerous layout options and shortcodes for inserting downloadable files anywhere on the website.
 
 * Controlled and isolated files from the media library, making it simple to list shared files on the WordPress website
-* Frontend uploader or file management functionality to upload files
+* Frontend uploader or file manager functionality to upload files
 * View supported files in the browser, including photos, movies, and other types of files (including lightbox view)
 * Search functionality to easily and quickly find uploaded documents
 
@@ -54,7 +54,7 @@ Installing and getting started with organizing your files is super simple when y
 
 Start managing your files right inside WordPress admin with 2 steps:
 
-1. Add some documents/files from WP admin > Shared Files > File Management.
+1. Add some documents/files from WP admin > Shared Files > File Manager.
 2. Insert one of these shortcodes to any page or post on your site.
     * [shared_files] (default file list)
     * [shared_files_simple] (simple file list)
@@ -263,6 +263,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.26 - 2024-07-14 =
+* (Free + All plans) Fixed an issue with PHP 8.3
+* (Free + All plans) Bug fixes
 
 = 1.7.25 - 2024-06-01 =
 * (Professional + Business) Added an individual container class to subcategories in the accordion

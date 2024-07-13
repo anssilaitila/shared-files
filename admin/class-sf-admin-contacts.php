@@ -16,36 +16,36 @@ class SharedFilesAdminContacts {
 
   public function register_contacts_page_callback() {
     ?>
-  
+
     <?php echo SharedFilesAdminHelpSupport::permalinks_alert() ?>
-  
+
     <?php $s = get_option('shared_files_settings') ?>
-  
+
     <div class="shared-files-help-support wrap">
-  
+
       <h1 style="margin-bottom: 20px;"><?php echo esc_html__('Leads collected by Shared Files', 'shared-files'); ?></h1>
-  
+
       <div class="shared-files-admin-section shared-files-admin-section-statistics">
-          
+
         <h2><?php echo esc_html__('Leads', 'shared-files') ?></h2>
-        
+
         <div class="shared-files-admin-lead-export">
 
           <h3><?php echo esc_html__('Export leads', 'shared-files') ?></h3>
-      
+
           <p>
             <?php echo esc_html__('You may export the leads to a csv file. There will be one contact per row, columns separated by comma.', 'shared-files') ?>
           </p>
-      
+
           <?php
-          
+
           global $wpdb;
           $contacts = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}shared_files_contacts ORDER BY created_at DESC");
-          
+
           ?>
-          
+
           <p><?php echo sizeof( $contacts ) ?> <?php echo esc_html__('contact(s) found.', 'shared-files') ?></p>
-      
+
           <form action="edit.php" method="get" enctype="multipart/form-data">
             <div class="input-row">
               <input type="hidden" name="post_type" value="shared_file" />
@@ -56,26 +56,26 @@ class SharedFilesAdminContacts {
             </div>
             <div id="labelError"></div>
           </form>
-          
+
         </div>
-    
+
         <?php if (isset($_GET['export'])): ?>
-    
+
           <?php
-    
+
           $path = wp_upload_dir();
           $file_with_path = $path['path'] . '/shared-files-leads.csv';
           $outstream = fopen($file_with_path, 'w');
           fprintf($outstream, chr(0xEF).chr(0xBB).chr(0xBF));
-       
+
           $fields = array('id', 'created_at', 'file_list_id', 'name', 'email', 'phone', 'description', 'url');
-       
+
           fputcsv($outstream, $fields);
-           
+
           $values = array();
 
           foreach ($contacts as $contact) {
-    
+
             $contact_data = [];
 
             $contact_data['id'] = sanitize_text_field( $contact->id );
@@ -86,64 +86,64 @@ class SharedFilesAdminContacts {
             $contact_data['phone'] = sanitize_text_field( $contact->phone );
             $contact_data['description'] = sanitize_text_field( $contact->descr );
             $contact_data['url'] = sanitize_text_field( $contact->referer_url );
-            
+
             fputcsv($outstream, $contact_data);
-    
+
           }
-    
+
           fclose($outstream);
           ?>
-    
+
           <?php if ($outstream && $path['url']): ?>
-    
+
             <p style="font-weight: bold; margin-top: 32px;"><?php echo esc_html__('CSV-file created succesfully:', 'shared-files') ?> <?php echo esc_html( $path['url'] ) ?>/shared-files-leads.csv</p>
             <a href="<?php echo esc_url( $path['url'] ) ?>/shared-files-leads.csv" style="font-weight: bold; font-size: 16px;"><?php echo esc_html__('Download', 'shared-files') ?></a><br /><br /><br />
-    
+
           <?php else: ?>
-    
+
             <p style="color: crimson; font-weight: bold;"><?php echo esc_html__('Error creating file.', 'shared-files') ?></p>
-    
+
           <?php endif; ?>
-    
+
         <?php endif; ?>
 
-        <?php if (isset($_GET['contacts_emptied'])): ?>        
-  
+        <?php if (isset($_GET['contacts_emptied'])): ?>
+
           <?php echo '<div class="shared-files-download-log-success" style="font-weight: 700; color: green;">' . esc_html__('Contacts successfully emptied.', 'shared-files') . '</div>'; ?>
-  
-        <?php elseif (isset($_GET['contacts_emptied_error'])): ?>        
-  
+
+        <?php elseif (isset($_GET['contacts_emptied_error'])): ?>
+
           <?php echo '<div class="shared-files-download-log-success-error" style="font-weight: 700; color: crimson;">' . esc_html__('Contacts not emptied.', 'shared-files') . '</div>'; ?>
-  
+
         <?php else: ?>
-  
+
           <form method="post" class="shared-files-empty-contacts-form">
           <input type="hidden" name="_shared_files_empty_contacts" value="1" />
-        
+
           <?php echo wp_nonce_field('_shared-files-empty-contacts', '_wpnonce', true, false) ?>
-        
+
           <input type="submit" value="<?php echo esc_attr__('Empty contacts', 'shared-files') ?>" class="shared-files-empty-download-log" />
           </form>
-  
+
         <?php endif; ?>
-    
+
         <?php
-   
+
         global $wpdb;
-  
+
         $items_per_page = 200;
         $page = isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1;
         $offset = ( $page * $items_per_page ) - $items_per_page;
-        
+
         $query = "SELECT * FROM {$wpdb->prefix}shared_files_contacts";
-        
-        $total_query = "SELECT COUNT(1) FROM (${query}) AS combined_table";
+
+        $total_query = "SELECT COUNT(1) FROM ({$query}) AS combined_table";
         $total = $wpdb->get_var( $total_query );
-  
+
         $results = $wpdb->get_results( $query . ' ORDER BY created_at DESC LIMIT ' . $offset . ', ' .  $items_per_page, OBJECT );
-  
+
         ?>
-        
+
         <table class="shared-files-download-log">
         <tr>
           <th><?php echo esc_html__('Created at', 'shared-files') ?></th>
@@ -154,11 +154,11 @@ class SharedFilesAdminContacts {
           <th><?php echo esc_html__('Description', 'shared-files') ?></th>
           <th><?php echo esc_html__('URL', 'shared-files') ?></th>
         </tr>
-        
+
         <?php if (sizeof($results) > 0): ?>
-        
+
           <?php foreach ($results as $row): ?>
-        
+
             <tr>
               <td>
                 <?php echo esc_html( $row->created_at ) ?>
@@ -194,25 +194,25 @@ class SharedFilesAdminContacts {
                   <?php echo '<a href="' . esc_url_raw( $referer_url ) . '" target="_blank">' . esc_url_raw( $referer_url ) . '</a>' ?>
                 <?php endif; ?>
               </td>
-  
+
             </tr>
-        
+
           <?php endforeach; ?>
-        
+
         <?php else: ?>
-        
+
           <tr>
             <td colspan="7">
               <?php echo esc_html__('No contacts added yet.', 'shared-files') ?>
             </td>
           </tr>
-        
+
         <?php endif; ?>
-        
+
         </table>
-  
+
         <div class="shared-files-admin-pagination-container">
-        
+
           <?php
           echo paginate_links( array(
             'base' => add_query_arg( 'log-page', '%#%' ),
@@ -223,13 +223,13 @@ class SharedFilesAdminContacts {
             'current' => $page
           ));
           ?>
-          
+
         </div>
-  
+
       </div>
-  
+
     </div>
-    
+
     <?php
   }
 

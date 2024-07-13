@@ -17,7 +17,7 @@ class SharedFilesAdminCPT {
                 'add_new_item'  => sanitize_text_field( __( 'Add New File', 'shared-files' ) ),
                 'edit_item'     => sanitize_text_field( __( 'Edit File', 'shared-files' ) ),
                 'not_found'     => sanitize_text_field( __( 'No files found.', 'shared-files' ) ),
-                'all_items'     => sanitize_text_field( __( 'File Management', 'shared-files' ) ),
+                'all_items'     => sanitize_text_field( __( 'File Manager', 'shared-files' ) ),
                 'add_new'       => sanitize_text_field( __( 'Add New File', 'shared-files' ) ),
                 'search_items'  => sanitize_text_field( __( 'Search Files', 'shared-files' ) ),
             ],

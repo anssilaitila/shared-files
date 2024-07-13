@@ -74,7 +74,12 @@ class Shared_Files_Admin {
                 'all'
             );
         } elseif ( $current_screen_id === 'shared_file_page_shared-files-sync-files' || $current_screen_id === 'shared_file_page_shared-files-sync-media-library' ) {
-            wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap', false );
+            wp_enqueue_style(
+                $this->plugin_name . '-google-fonts',
+                'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap',
+                false,
+                1
+            );
         }
     }
 

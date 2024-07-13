@@ -176,7 +176,7 @@ class SharedFilesAdminShortcodes {
             $url = esc_url_raw( get_admin_url() . 'options-general.php?page=shared-files#shared-files-settings-tab-15' );
             echo sprintf(
               wp_kses(
-                /* translators: %s: link to file management */
+                /* translators: %s: link to file manager */
                 __('Please check the <a href="%s" target="_blank">plugin settings</a> for some options regarding the lead generation.', 'shared-files'),
                 array('a' => array('href' => array(), 'target' => array()))
               ),
@@ -190,7 +190,7 @@ class SharedFilesAdminShortcodes {
             $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-contacts' );
             echo sprintf(
               wp_kses(
-                /* translators: %s: link to file management */
+                /* translators: %s: link to file manager */
                 __('The leads are saved <a href="%s" target="_blank">here</a> and can be exported to a csv file.', 'shared-files'),
                 array('a' => array('href' => array(), 'target' => array()))
               ),
@@ -667,7 +667,7 @@ class SharedFilesAdminShortcodes {
 
             <?php echo esc_html__('Minimal layout:', 'shared-files') ?> <?php $num++ ?><span class="shared-files-shortcode shared-files-shortcode-<?php echo esc_attr( $num ) ?>" data-tooltip-class="shared-files-shortcode-<?php echo esc_attr( $num ) ?>">[shared_files file_id=12345 layout="minimal"]</span><button class="shared-files-copy" data-clipboard-action="copy" data-clipboard-target=".shared-files-shortcode-<?php echo esc_attr( $num ) ?>"><?php echo esc_html__('Copy', 'shared-files') ?></button><br /><br />
 
-            <?php echo esc_html__('The file_id parameter is unique for each file and can be found under the Shortcode column in File Management page.', 'shared-files'); ?>
+            <?php echo esc_html__('The file_id parameter is unique for each file and can be found under the Shortcode column in the File Manager.', 'shared-files'); ?>
 
           </li>
         </ul>

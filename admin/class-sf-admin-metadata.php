@@ -122,6 +122,24 @@ class SharedFilesAdminMetadata {
         }
         echo '<p style="margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         echo '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . esc_html__( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
+        // SUPPORT BOX START
+        $is_premium = 0;
+        if ( !$is_premium ) {
+            $url = 'https://wordpress.org/support/plugin/shared-files/';
+            echo '<div class="shared-files-admin-support-box">';
+            echo sprintf( wp_kses( 
+                /* translators: %s: link to the support forum */
+                __( 'If you have any questions in mind, please contact us at <a href="%s" target="_blank">the support forum</a>.', 'shared-files' ),
+                array(
+                    'a' => array(
+                        'href'   => array(),
+                        'target' => array(),
+                    ),
+                )
+             ), esc_url( $url ) );
+            echo '</div>';
+        }
+        // SUPPORT BOX END
         if ( $upload_id ) {
             echo '<div class="shared-files-admin-upload-id-container">' . esc_html__( 'Upload ID:', 'shared-files' ) . ' <div class="shared-files-admin-upload-id">' . esc_html( $upload_id ) . '</div></div>';
         }
