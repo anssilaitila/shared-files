@@ -68,6 +68,8 @@ class SharedFilesPublicHelpers {
                 case 'jpe':
                 case 'png':
                 case 'gif':
+                case 'webp':
+                case 'avif':
                     $file_type = 'image';
                     break;
                 case 'mp4':

@@ -1,21 +1,21 @@
 === Shared Files – Premium Download Manager & Secure File Sharing with Frontend File Upload ===
 Contributors: anssilaitila, freemius
-Tags: download manager, file sharing, file upload, document management, file manager
+Tags: download manager, file sharing, file upload, download, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.26
+Stable tag: 1.7.27
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Your personal WordPress-based Dropbox! Manage files and documents outside the media library. Upload, track, share and download files effortlessly.
+File management plugin and download manager. Use the file manager to store files outside media library. Frontend file upload and download monitor.
 
 == Description ==
 
-== The best file sharing plugin on the market ==
+== The best file sharing plugin for WordPress ==
 
-Shared Files is a powerful WordPress plugin that allows you to securely share and manage files and documents directly from your WordPress site.
+Shared Files is a powerful WordPress plugin that allows you to securely share and manage files, documents and downloads directly from your WordPress site.
 
-With features like user permissions, file upload, and download tracking, it's the perfect solution for businesses, educational institutions, and anyone needing to share files easily and securely.
+With features like user permissions, frontend file upload, and download tracking, it's the perfect solution for businesses, educational institutions, and anyone needing to share files easily and securely.
 
 Install Shared Files today and enhance your WordPress site's file management capabilities.
 
@@ -26,11 +26,11 @@ You can also optionally collect new leads by asking for contact info before show
 Shared Files provides an interface for uploading and managing a large group of documents and files easily with numerous layout options and shortcodes for inserting downloadable files anywhere on the website.
 
 * Controlled and isolated files from the media library, making it simple to list shared files on the WordPress website
-* Frontend uploader or file manager functionality to upload files
+* Frontend uploader and file manager functionality to upload files
 * View supported files in the browser, including photos, movies, and other types of files (including lightbox view)
 * Search functionality to easily and quickly find uploaded documents
 
-== Shared Files – a free download manager for WordPress ==
+== Download Manager ==
 
 * Top 50 most popular files
 * Collect leads by asking for contact info before showing the file(s)
@@ -41,6 +41,7 @@ Shared Files provides an interface for uploading and managing a large group of d
 * Allow visitors to upload files without logging in
 * Allow only logged in users to upload files
 * Enable support for any file type
+* File manager in the WP admin area
 
 These are just some of the highlights offered by the Shared Files plugin.
 
@@ -48,21 +49,21 @@ These are just some of the highlights offered by the Shared Files plugin.
 * [Documentation](https://www.sharedfilespro.com/docs/)
 * [Blog](https://www.sharedfilespro.com/blog/)
 
-== Getting started ==
+== Getting started with this file management plugin ==
 
 Installing and getting started with organizing your files is super simple when you are using Shared Files plugin. Let's see how!
 
 Start managing your files right inside WordPress admin with 2 steps:
 
-1. Add some documents/files from WP admin > Shared Files > File Manager.
+1. Add some files and documents from WP admin > Shared Files > File Manager.
 2. Insert one of these shortcodes to any page or post on your site.
     * [shared_files] (default file list)
     * [shared_files_simple] (simple file list)
-    * [shared_files file_upload=1] (file list with front end uploader)
+    * [shared_files file_upload=1] (file list with frontend uploader)
 
 That's it! The files are now listed for downloading.
 
-== Shared Files – easy document management for WordPress ==
+== File Management ==
 
 Shared Files for WordPress has a file manager that allows adding files by the following actions:
 
@@ -75,6 +76,18 @@ Shared Files for WordPress has a file manager that allows adding files by the fo
 
 The plugin is extremely simple to use while also being scalable for a big number of files all thanks to a bulk of features offered by Shared Files plugin.
 
+== Host local downloads – an alternative solution to Dropbox, OneDrive or Google Drive ==
+
+Use this download manager plugin as an alternative to Dropbox, OneDrive or Google Drive to list the downloads directly on your WordPress site instead of an external service.
+
+== Media Gallery ==
+
+Create a media gallery of images (JPEG, PNG, GIF, WebP and AVIF are supported formats) and allow users to upload their own images.
+
+== File Manager ==
+
+Use the file manager at WP admin / Shared Files / File manager to add the files. Then use one of the shortcodes listed at WP admin / Shared Files / Shortcodes to list the downloads anywhere on your site.
+
 = Files of any type =
 
 Shared Files is a file sharing solution for WordPress that allows sharing numerous types of files with ease, including
@@ -83,7 +96,7 @@ Shared Files is a file sharing solution for WordPress that allows sharing numero
 * Word
 * PowerPoint
 * XLS
-* Images
+* Images (JPEG, PNG, GIF, WebP and AVIF)
 * YouTube videos
 * Any file type can be activated from the plugin settings
 * File folders - this is particularly important for big teams for effective collaboration
@@ -108,7 +121,7 @@ The best way to stay organized and seated with a bulk of files is to assign them
 
 Shared Files allows adding tags to files, either using the same tags as posts or a custom taxonomy.
 
-= Media / file managing =
+= File management =
 
 If your site is continuously growing there is definitely a need to handle the dozens of files and media you have out there. Luckily if you are using the Shared Files plugin, you don't need any other add-ons.
 
@@ -124,7 +137,7 @@ An exciting feature of the Shared Files WordPress file-sharing plugin is the abi
 
 It is critical to allow both visitors and users to upload files/documents, particularly allowing to do it from the frontend as it requires the least effort.
 
-= Share Files =
+= File sharing =
 
 For a team collaboration or a group of developers working on the same website, it's crucial to be able to constantly share files and be able to preview the files others have shared.
 
@@ -138,7 +151,7 @@ Using an FTP server is a common solution for businesses that want to keep their 
 
 What is more important than having a statistics of your uploads! Shared Files plugin allows you to have constant eye on the uploaded files and documents by providing you with accurate file upload statistics and analysis.
 
-== Shared Files FREE – a simple solution for managing downloads ==
+== Shared Files FREE – a simple solution for file management and download tracking ==
 
 * Fast search of all files targeting all the defined file/document categories, e.g. name and description
 * Frontend file upload with tag support for logged-in users
@@ -151,7 +164,7 @@ What is more important than having a statistics of your uploads! Shared Files pl
 * WordPress Multisite compatible
 * A lead generation tool for WordPress
 
-== Shared Files PRO – a full featured download manager ==
+== Shared Files PRO – a full featured download manager and file management plugin ==
 
 * Search filters based on categories, tags, and custom field data
 * Users and roles with different file-opening permissions
@@ -263,6 +276,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.27 - 2024-07-26 =
+* (Free + All plans) Added support for WebP and AVIF images
 
 = 1.7.26 - 2024-07-14 =
 * (Free + All plans) Fixed an issue with PHP 8.3

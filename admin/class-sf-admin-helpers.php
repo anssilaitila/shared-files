@@ -3,42 +3,42 @@
 class SharedFilesAdminHelpers {
 
   public static function sfProFeatureMarkup() {
-  
+
     $html = '';
-  
+
     $html .= '<div class="sf-admin-pro-feature">';
     $html .= '<span>' . sanitize_text_field( __('This feature is available in the paid plans.', 'shared-files') ) . '</span>';
     $html .= '<a class="shared-files-admin-button-link" href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
     $html .= '</div>';
-    
+
     return $html;
-    
+
   }
-  
+
   public static function sfProMoreFeaturesMarkup() {
-  
+
     $html = '';
-  
+
     $html .= '<div class="sf-admin-pro-feature">';
     $html .= '<span>' . sanitize_text_field( __('More features available in the paid plans.', 'shared-files') ) . '</span>';
     $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
     $html .= '</div>';
-    
+
     return $html;
-    
+
   }
-  
+
   public static function sfProFeatureSettingsMarkup() {
-  
+
     $html = '';
-  
+
     $html .= '<div class="sf-admin-pro-feature">';
     $html .= '<span>' . sanitize_text_field( __('More settings available in the paid plans.', 'shared-files') ) . '</span>';
     $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
     $html .= '</div>';
-    
+
     return $html;
-    
+
   }
 
   public static function get_mime_type($filename) {
@@ -71,6 +71,8 @@ class SharedFilesAdminHelpers {
       'tif' => 'image/tiff',
       'svg' => 'image/svg+xml',
       'svgz' => 'image/svg+xml',
+      'webp' => 'image/webp',
+      'avif' => 'image/avif',
 
       // archives
       'zip' => 'application/zip',
@@ -130,34 +132,34 @@ class SharedFilesAdminHelpers {
   public static function sf_root() {
 
     $s = get_option('shared_files_settings');
-  
+
     $sf_root = '';
-  
+
     if (isset($s['wp_location']) && isset($s['wp_location'])) {
-  
+
       $sf_root = rtrim( sanitize_text_field( $s['wp_location'] ), '/');
-  
+
     } else {
-  
+
       $url_parts = parse_url( esc_url_raw( get_admin_url() ) );
       $path_parts = explode('/', $url_parts['path']);
-      
+
       if (isset($path_parts[2]) && $path_parts[2] == 'wp-admin') {
         $sf_root = '/' . $path_parts[1];
       }
-      
+
     }
-    
+
     if ( is_multisite() ) {
 
       $multisite_path_part = str_replace( '/', '', get_blog_details()->path );
-      
+
       if ($multisite_path_part) {
         $sf_root = '/' . $multisite_path_part . $sf_root;
       }
-      
+
     }
-    
+
     return $sf_root;
 
   }

@@ -107,6 +107,8 @@ class SharedFilesHelpers {
             'image/jpeg'                                                                => 'jpg',
             'image/gif'                                                                 => 'gif',
             'image/svg+xml'                                                             => 'image',
+            'image/webp'                                                                => 'webp',
+            'image/avif'                                                                => 'avif',
             'application/pdf'                                                           => 'pdf',
             'application/postscript'                                                    => 'ai',
             'application/msword'                                                        => 'doc',
@@ -147,6 +149,9 @@ class SharedFilesHelpers {
             'image/png'                                                                 => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
             'image/jpg'                                                                 => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
             'image/jpeg'                                                                => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
+            'image/webp'                                                                => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
+            'image/avif'                                                                => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
+            'image/gif'                                                                 => ( isset( $s['icon_for_image'] ) ? sanitize_text_field( $s['icon_for_image'] ) : '' ),
             'application/pdf'                                                           => ( isset( $s['icon_for_pdf'] ) ? sanitize_text_field( $s['icon_for_pdf'] ) : '' ),
             'application/postscript'                                                    => ( isset( $s['icon_for_ai'] ) ? sanitize_text_field( $s['icon_for_ai'] ) : '' ),
             'application/msword'                                                        => ( isset( $s['icon_for_doc'] ) ? sanitize_text_field( $s['icon_for_doc'] ) : '' ),
@@ -261,7 +266,13 @@ class SharedFilesHelpers {
         } elseif ( $media_library_post_id ) {
         }
         $html = '';
-        $image_types = array('image/jpeg', 'image/png', 'image/gif');
+        $image_types = array(
+            'image/jpeg',
+            'image/png',
+            'image/gif',
+            'image/webp',
+            'image/avif'
+        );
         $pdf_types = array(
             'application/msword',
             'application/pdf',
@@ -597,6 +608,8 @@ class SharedFilesHelpers {
                 case 'image/jpeg':
                 case 'image/png':
                 case 'image/gif':
+                case 'image/webp':
+                case 'image/avif':
                     $new_featured_image = $upload;
                     if ( $copy_to_media_library ) {
                         $new_featured_image = wp_upload_bits( $filename, null, file_get_contents( $new_featured_image['file'] ) );
