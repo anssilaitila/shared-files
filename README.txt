@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.27
+Stable tag: 1.7.28
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -276,6 +276,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.28 - 2024-07-28 =
+* (Free + All plans) Gutenberg block added: Shared Files (category: media)
 
 = 1.7.27 - 2024-07-26 =
 * (Free + All plans) Added support for WebP and AVIF images

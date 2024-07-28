@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "shared-files/files-default",
+	"version": "1.0.0",
+	"title": "Shared Files",
+	"category": "media",
+	"icon": "cloud-saved",
+	"description": "Embed one or all files from Shared Files.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+  "attributes": {
+    "fileId": {
+      "type": "integer",
+      "default": 0
+    },
+    "fileUpload": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+	"textdomain": "shared-files",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

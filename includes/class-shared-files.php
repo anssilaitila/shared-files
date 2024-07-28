@@ -223,9 +223,9 @@ class Shared_Files {
         $this->loader->add_action( 'before_delete_post', $plugin_admin, 'delete_shared_file' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         // Maintenance
+        $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );
         $this->loader->add_action( 'plugins_loaded', $plugin_admin_maintenance, 'update_db_check' );
         $this->loader->add_action( 'init', $plugin_admin_maintenance, 'update_db_check_v2' );
-        $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );
         // Admin operations
         $this->loader->add_filter( 'admin_init', $plugin_admin_operations, 'operations' );
         // CPT
@@ -342,6 +342,15 @@ class Shared_Files {
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public_load, 'public_inline_styles' );
         $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+        $this->loader->add_action( 'enqueue_block_assets', $plugin_public, 'enqueue_block_assets' );
+        $this->loader->add_action( 'init', $plugin_public, 'register_block' );
+        $this->loader->add_filter(
+            'rest_shared_file_query',
+            $plugin_public,
+            'filter_rest_api_query',
+            10,
+            2
+        );
         $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
         $this->loader->add_action( 'init', $plugin_public_load, 'set_cookies' );
         // Ajax

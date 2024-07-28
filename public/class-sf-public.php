@@ -111,10 +111,68 @@ class Shared_Files_Public {
         $js .= "jQuery(document).ready(function(\$) {";
         $js .= "\n      if (typeof ajaxurl === 'undefined') {\n        ajaxurl = '" . esc_url_raw( admin_url( 'admin-ajax.php' ) ) . "'; // get ajaxurl\n      }\n      ";
         if ( !isset( $s['file_upload_file_not_required'] ) && 0 ) {
-            $js .= "\n        \$('.shared-files-frontend-file-upload').submit(function (e) {\n        \n          let elem_class = \$(this).closest('.shared-files-main-container').data('elem-class');\n          \n          if (\$('.' + elem_class + ' #sf_file').prop('files').length == 0) {\n            alert('Please choose the file first.');\n            return false;\n          }\n        \n        });\n        ";
+            $js .= "\n        \$('.shared-files-frontend-file-upload').submit(function (e) {\n\n          let elem_class = \$(this).closest('.shared-files-main-container').data('elem-class');\n\n          if (\$('.' + elem_class + ' #sf_file').prop('files').length == 0) {\n            alert('Please choose the file first.');\n            return false;\n          }\n\n        });\n        ";
         }
         $js .= "});";
         return $js;
+    }
+
+    public function enqueue_block_assets() {
+        if ( !function_exists( 'register_block_type' ) ) {
+            // Gutenberg not active
+            return;
+        }
+        if ( is_admin() ) {
+            wp_enqueue_style(
+                'shared-files-block-editor',
+                SHARED_FILES_URI . 'dist/css/p.css',
+                array('wp-edit-blocks'),
+                filemtime( SHARED_FILES_PATH . 'dist/css/p.css' )
+            );
+        }
+    }
+
+    public function register_block() {
+        if ( !function_exists( 'register_block_type' ) ) {
+            // Gutenberg not active
+            return;
+        }
+        register_block_type( SHARED_FILES_PATH . 'blocks/shared-files/build/block.json', array(
+            'render_callback' => array($this, 'render_block'),
+        ) );
+    }
+
+    public function render_block( $attributes, $content ) {
+        $file_id = ( isset( $attributes['fileId'] ) ? intval( $attributes['fileId'] ) : 0 );
+        $file_upload = ( isset( $attributes['fileUpload'] ) && $attributes['fileUpload'] ? ' file_upload="1"' : '' );
+        $shortcode = '[shared_files';
+        if ( $file_id ) {
+            $shortcode .= ' file_id="' . $file_id . '"';
+        }
+        $shortcode .= $file_upload . ']';
+        return do_shortcode( $shortcode );
+    }
+
+    public function filter_rest_api_query( $args, $request ) {
+        $meta_query = array(
+            'relation' => 'OR',
+        );
+        $meta_query[] = array(
+            'key'     => '_sf_not_public',
+            'compare' => '=',
+            'value'   => '',
+        );
+        $meta_query[] = array(
+            'key'     => '_sf_not_public',
+            'compare' => 'NOT EXISTS',
+        );
+        // Add the meta query to the existing meta queries
+        if ( isset( $args['meta_query'] ) ) {
+            $args['meta_query'][] = $meta_query;
+        } else {
+            $args['meta_query'] = $meta_query;
+        }
+        return $args;
     }
 
     /**

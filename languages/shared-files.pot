@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.27\n"
+"Project-Id-Version: Shared Files 1.7.28\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/shared-files-pro\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-07-26T21:16:46+03:00\n"
+"POT-Creation-Date: 2024-07-28T18:53:10+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: shared-files\n"
@@ -142,6 +142,9 @@ msgstr ""
 #: admin/class-sf-admin-download-log.php:74
 #: admin/class-sf-admin-statistics.php:77
 #: public/class-sf-public-helpers.php:964
+#: blocks/shared-files/build/index.js:164
+#: blocks/shared-files/src/index.js:66
+#: blocks/shared-files/build/index.js:105
 msgid "File"
 msgstr ""
 
@@ -157,8 +160,8 @@ msgstr ""
 #: admin/class-sf-admin-cpt.php:42
 #: public/class-sf-public-ajax.php:211
 #: public/class-sf-public-ajax.php:435
-#: public/class-shortcode-shared_files.php:1071
-#: public/class-shortcode-shared_files.php:1116
+#: public/class-shortcode-shared_files.php:1072
+#: public/class-shortcode-shared_files.php:1117
 #: public/class-shortcode-shared_files_accordion.php:493
 #: public/class-shortcode-shared_files_exact_search.php:228
 #: public/class-shortcode-shared_files_exact_search.php:236
@@ -2302,7 +2305,7 @@ msgstr ""
 #: admin/settings/class-sf-admin-settings-tab-exact-search.php:90
 #: public/class-sf-public-helpers.php:996
 #: public/class-sf-public-shortcode-filters.php:309
-#: public/class-shortcode-shared_files.php:560
+#: public/class-shortcode-shared_files.php:561
 #: public/class-shortcode_shared_files_simple.php:397
 msgid "Custom field"
 msgstr ""
@@ -3089,6 +3092,10 @@ msgstr ""
 msgid "The exact search targets all files (only their titles by default) and shows the files after enter is pressed."
 msgstr ""
 
+#: blocks/shared-files/build/render.php:7
+msgid "Shared Files – hello from a dynamic block!"
+msgstr ""
+
 #: includes/class-shared-files-helpers.php:60
 msgid "Please wait, uploading file(s)..."
 msgstr ""
@@ -3208,7 +3215,7 @@ msgstr ""
 
 #: public/class-sf-public-file-upload.php:461
 #: public/class-sf-public-shortcode-filters.php:135
-#: public/class-shortcode-shared_files.php:385
+#: public/class-shortcode-shared_files.php:386
 #: public/class-shortcode_shared_files_simple.php:227
 msgid "Choose tag"
 msgstr ""
@@ -3320,7 +3327,7 @@ msgstr ""
 msgid "Search files..."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:984
+#: public/class-shortcode-shared_files.php:985
 #: public/class-shortcode-shared_files_restricted.php:279
 #: public/class-shortcode-shared_files_search.php:44
 #: public/class-shortcode-shared_files_search.php:111
@@ -3328,7 +3335,7 @@ msgstr ""
 msgid "file found."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:984
+#: public/class-shortcode-shared_files.php:985
 #: public/class-shortcode-shared_files_exact_search.php:199
 #: public/class-shortcode-shared_files_restricted.php:279
 #: public/class-shortcode-shared_files_search.php:44
@@ -3373,4 +3380,40 @@ msgstr ""
 
 #: public/class-shortcode_shared_files_simple.php:81
 msgid "found"
+msgstr ""
+
+#: blocks/shared-files/build/index.js:57
+#: blocks/shared-files/src/edit.js:35
+#: blocks/shared-files/build/index.js:35
+msgid "Shared Files – hello from the editor!"
+msgstr ""
+
+#: blocks/shared-files/build/index.js:156
+#: blocks/shared-files/src/index.js:58
+#: blocks/shared-files/build/index.js:97
+msgid "Select File"
+msgstr ""
+
+#: blocks/shared-files/build/index.js:158
+#: blocks/shared-files/src/index.js:60
+#: blocks/shared-files/build/index.js:99
+msgid "Enable File Upload"
+msgstr ""
+
+#: blocks/shared-files/build/index.js:167
+#: blocks/shared-files/src/index.js:68
+#: blocks/shared-files/build/index.js:107
+msgid "Select a file"
+msgstr ""
+
+#: blocks/shared-files/build/block.json
+#: blocks/shared-files/src/block.json
+msgctxt "block title"
+msgid "Shared Files"
+msgstr ""
+
+#: blocks/shared-files/build/block.json
+#: blocks/shared-files/src/block.json
+msgctxt "block description"
+msgid "Embed one or all files from Shared Files."
 msgstr ""

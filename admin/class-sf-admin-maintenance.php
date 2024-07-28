@@ -48,7 +48,6 @@ class SharedFilesAdminMaintenance {
                 'lead_show_name'                                          => 'on',
                 'lead_show_phone'                                         => 'on',
                 'lead_show_description'                                   => 'on',
-                'disable_download_attr'                                   => 'on',
                 'wp_location'                                             => $wp_subdir,
             ];
             add_option( 'shared_files_settings', $default_settings );

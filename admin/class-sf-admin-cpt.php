@@ -29,6 +29,7 @@ class SharedFilesAdminCPT {
             'menu_icon'           => 'dashicons-index-card',
             'taxonomies'          => array(SHARED_FILES_TAG_SLUG),
             'exclude_from_search' => $exclude_from_search,
+            'show_in_rest'        => true,
         ] );
         remove_post_type_support( 'shared_file', 'editor' );
     }
