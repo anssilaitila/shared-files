@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.29
+Stable tag: 1.7.30
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -277,7 +277,7 @@ Anyone who can open the page which contains the file list is able to download th
 
 == Changelog ==
 
-= 1.7.29 - 2024-07-30 =
+= 1.7.30 - 2024-07-30 =
 * (Free + Pro) Bug fixes
 
 = 1.7.28 - 2024-07-28 =
