@@ -44,30 +44,28 @@ class SharedFilesSettingsTab4Content {
                     )
                 );
             }
-            if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-                add_settings_field(
-                    'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                    sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
-                    array($field_render, 'checkbox_render'),
-                    'shared-files',
-                    'shared-files_tab_' . $tab,
-                    array(
-                        'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                        'field_name' => $only_pro . 'cf_' . $n . '_use_as_search_filter',
-                    )
-                );
-                add_settings_field(
-                    'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
-                    sanitize_text_field( __( 'Search filter title', 'shared-files' ) ),
-                    array($field_render, 'input_render'),
-                    'shared-files',
-                    'shared-files_tab_' . $tab,
-                    array(
-                        'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
-                        'field_name' => $only_pro . 'cf_' . $n . '_select_title',
-                    )
-                );
-            }
+            add_settings_field(
+                'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                sanitize_text_field( __( 'Use as search filter', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                    'field_name' => $only_pro . 'cf_' . $n . '_use_as_search_filter',
+                )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
+                sanitize_text_field( __( 'Search filter title', 'shared-files' ) ),
+                array($field_render, 'input_render'),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'cf_' . $n . '_select_title',
+                    'field_name' => $only_pro . 'cf_' . $n . '_select_title',
+                )
+            );
             add_settings_field(
                 'shared-files-' . $only_pro . 'cf_' . $n . '_hide_from_frontend_uploader',
                 sanitize_text_field( __( 'Hide from front-end uploader', 'shared-files' ) ),
@@ -92,21 +90,19 @@ class SharedFilesSettingsTab4Content {
                 )
             );
         }
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'custom_fields_cnt',
-                sanitize_text_field( __( 'Number of custom fields', 'shared-files' ) ),
-                array($field_render, 'custom_fields_cnt_render'),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                    'label_for'   => 'shared-files-' . $only_pro . 'custom_fields_cnt',
-                    'field_name'  => $only_pro . 'custom_fields_cnt',
-                    'placeholder' => '',
-                    'class'       => 'shared-files-border-top',
-                )
-            );
-        }
+        add_settings_field(
+            'shared-files-' . $only_pro . 'custom_fields_cnt',
+            sanitize_text_field( __( 'Number of custom fields', 'shared-files' ) ),
+            array($field_render, 'custom_fields_cnt_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'   => 'shared-files-' . $only_pro . 'custom_fields_cnt',
+                'field_name'  => $only_pro . 'custom_fields_cnt',
+                'placeholder' => '',
+                'class'       => 'shared-files-border-top',
+            )
+        );
     }
 
 }

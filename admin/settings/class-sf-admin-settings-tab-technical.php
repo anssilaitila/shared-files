@@ -35,32 +35,28 @@ class SharedFilesSettingsTab2Content {
                 'field_name' => 'wp_engine_compatibility_mode',
             )
         );
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'obfuscate_file_urls',
-                sanitize_text_field( __( 'Obfuscate file urls', 'shared-files' ) ),
-                array($field_render, 'checkbox_render'),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                    'label_for'  => 'shared-files-' . $only_pro . 'obfuscate_file_urls',
-                    'field_name' => $only_pro . 'obfuscate_file_urls',
-                )
-            );
-        }
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'file_sync_interval',
-                sanitize_text_field( __( 'File & category sync interval', 'shared-files' ) ),
-                array($field_render, 'file_sync_interval_render'),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                    'label_for'  => 'shared-files-' . $only_pro . 'file_sync_interval',
-                    'field_name' => $only_pro . 'file_sync_interval',
-                )
-            );
-        }
+        add_settings_field(
+            'shared-files-' . $only_pro . 'obfuscate_file_urls',
+            sanitize_text_field( __( 'Obfuscate file urls', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'obfuscate_file_urls',
+                'field_name' => $only_pro . 'obfuscate_file_urls',
+            )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_sync_interval',
+            sanitize_text_field( __( 'File & category sync interval', 'shared-files' ) ),
+            array($field_render, 'file_sync_interval_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_sync_interval',
+                'field_name' => $only_pro . 'file_sync_interval',
+            )
+        );
         add_settings_field(
             'shared-files-' . $only_pro . 'remove_obsolete_file_metadata_automatically',
             sanitize_text_field( __( 'Remove obsolete file metadata automatically', 'shared-files' ) ),

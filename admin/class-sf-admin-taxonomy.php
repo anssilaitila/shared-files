@@ -70,9 +70,9 @@ class SharedFilesAdminTaxonomy {
       <h2 style="margin-top: 24px;"><?php 
         echo esc_html__( 'Category password protection and file sync in Pro:' );
         ?></h2>
-      
+
       <img src="<?php 
-        echo SHARED_FILES_URI;
+        echo esc_url_raw( SHARED_FILES_URI );
         ?>img/category-password-protection.png" style="max-width: 770px; height: auto; border: 1px solid #bbb;" />
 
     </div>
@@ -82,17 +82,17 @@ class SharedFilesAdminTaxonomy {
     function taxonomy_custom_fields( $term ) {
         ?>
 
-    <tr class="form-field">  
-      <th scope="row" valign="top">  
-      </th>  
-      <td>  
+    <tr class="form-field">
+      <th scope="row" valign="top">
+      </th>
+      <td>
         <div class="shared-files-category-description-info"><b><?php 
         echo esc_html__( 'The description field above can be used to alter the order of the categories in [shared_files_categories]-shortcode.', 'shared-files' );
         ?></b><br /><br /><?php 
         echo esc_html__( 'If a value is entered, the categories are sorted by that.', 'shared-files' );
         ?></div>
-      </td>  
-    </tr>  
+      </td>
+    </tr>
 
     <?php 
         ?>

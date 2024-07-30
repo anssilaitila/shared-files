@@ -9,9 +9,9 @@ class SharedFilesAdminInlineScripts {
         }
         $js = '';
         if ( $current_screen_id == 'shared_file_page_shared-files-download-log' ) {
-            $js .= "jQuery( document ).ready( function(\$) {\n        \n        \$('.shared-files-empty-download-log-form').submit(function() {\n      \n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the download log?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n      \n        });\n      \n      });";
+            $js .= "jQuery( document ).ready( function(\$) {\n\n        \$('.shared-files-empty-download-log-form').submit(function() {\n\n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the download log?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n\n        });\n\n      });";
         } elseif ( $current_screen_id == 'shared_file_page_shared-files-contacts' ) {
-            $js .= "jQuery( document ).ready( function(\$) {\n        \n        \$('.shared-files-empty-contacts-form').submit(function() {\n      \n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the contacts?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n      \n        });\n      \n      });";
+            $js .= "jQuery( document ).ready( function(\$) {\n\n        \$('.shared-files-empty-contacts-form').submit(function() {\n\n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the contacts?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n\n        });\n\n      });";
         } elseif ( $current_screen_id === 'shared_file' ) {
             $post_id = intval( get_the_ID() );
             $file = get_post_meta( $post_id, '_sf_file', true );
@@ -33,10 +33,10 @@ class SharedFilesAdminInlineScripts {
             $js .= "\n        \$(document).on('click', '.shared-files-copy', function (e) {\n          e.preventDefault();\n        });\n      ";
             if ( $current_screen_id != 'shared_file_page_shared-files-shortcodes' ) {
                 if ( !$is_premium ) {
-                    $js .= "\n            \$('.shared-files-copy:not(.shared-files-copy-for-all):not(.shared-files-copy-single)').tipso({\n              content: '" . esc_js( __( 'This feature is available in the paid plans.', 'shared-files' ) ) . "',\n              width: 280,\n              background: '#2271b1',\n            });\n          ";
+                    $js .= "\n            \$('.shared-files-copy:not(.shared-files-copy-for-all):not(.shared-files-copy-single)').tipso({\n              content: '" . esc_js( __( 'This feature is available in the Pro version.', 'shared-files' ) ) . "',\n              width: 280,\n              background: '#2271b1',\n            });\n          ";
                 }
             }
-            $js .= "\n        var clipboard = new ClipboardJS('.shared-files-copy');\n        \n        clipboard.on('success', function(e) {\n        \n          e.clearSelection();\n        \n          let clipboardtarget = jQuery(e.trigger).data('clipboard-target');\n        \n          jQuery(clipboardtarget).tipso({\n            content: '" . esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) . "',\n            width: 240\n          });\n        \n          jQuery(clipboardtarget).tipso('show');\n          \n          setTimeout(function () {\n            showpanel(clipboardtarget);\n          }, 2000);\n          \n          function showpanel(clipboardtarget) {\n            jQuery(clipboardtarget).tipso('hide');\n            jQuery(clipboardtarget).tipso('destroy');\n          }\n          \n        });\n        \n        clipboard.on('error', function(e) {\n        });\n      \n      ";
+            $js .= "\n        var clipboard = new ClipboardJS('.shared-files-copy');\n\n        clipboard.on('success', function(e) {\n\n          e.clearSelection();\n\n          let clipboardtarget = jQuery(e.trigger).data('clipboard-target');\n\n          jQuery(clipboardtarget).tipso({\n            content: '" . esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) . "',\n            width: 240\n          });\n\n          jQuery(clipboardtarget).tipso('show');\n\n          setTimeout(function () {\n            showpanel(clipboardtarget);\n          }, 2000);\n\n          function showpanel(clipboardtarget) {\n            jQuery(clipboardtarget).tipso('hide');\n            jQuery(clipboardtarget).tipso('destroy');\n          }\n\n        });\n\n        clipboard.on('error', function(e) {\n        });\n\n      ";
             $js .= "});";
         }
         return $js;

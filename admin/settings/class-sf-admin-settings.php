@@ -56,12 +56,10 @@ class Shared_Files_Settings {
         $tab_content_admin_list->init();
         // File edit
         $tab_content_file_edit->init();
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            // Favorites
-            $tab_content_favorites->init();
-            // Wait countdown page
-            $tab_content_wait_countdown->init();
-        }
+        // Favorites
+        $tab_content_favorites->init();
+        // Wait countdown page
+        $tab_content_wait_countdown->init();
         // Simple list
         $tab_content_simple_list->init();
         // Custom post type
@@ -70,14 +68,8 @@ class Shared_Files_Settings {
         $tab_content_lead_generation->init();
         // Single file
         $tab_content_single_file->init( 'single-file' );
-        $show_exact_search_tab = 0;
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            $show_exact_search_tab = 1;
-        }
-        if ( $show_exact_search_tab ) {
-            // Exact search
-            $tab_content_exact_search->init( 'exact-search' );
-        }
+        // Exact search
+        $tab_content_exact_search->init( 'exact-search' );
     }
 
 }

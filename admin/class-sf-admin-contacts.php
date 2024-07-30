@@ -47,61 +47,80 @@ class SharedFilesAdminContacts {
           <p><?php echo sizeof( $contacts ) ?> <?php echo esc_html__('contact(s) found.', 'shared-files') ?></p>
 
           <form action="edit.php" method="get" enctype="multipart/form-data">
+
             <div class="input-row">
               <input type="hidden" name="post_type" value="shared_file" />
               <input type="hidden" name="page" value="shared-files-contacts" />
               <input type="hidden" name="export" value="1" />
-              <button type="submit" id="submit" name="import" class="btn-submit shared-files-start-export"><?php echo esc_html__('Start export', 'shared-files') ?></button>
+              <button type="submit" id="submit" class="btn-submit shared-files-start-export"><?php echo esc_html__('Start export', 'shared-files') ?></button>
               <br />
             </div>
+
             <div id="labelError"></div>
+
+            <?php echo wp_nonce_field('_shared-files-export-leads', '_wpnonce', true, false) ?>
+
           </form>
 
         </div>
 
-        <?php if (isset($_GET['export'])): ?>
 
-          <?php
 
-          $path = wp_upload_dir();
-          $file_with_path = $path['path'] . '/shared-files-leads.csv';
-          $outstream = fopen($file_with_path, 'w');
-          fprintf($outstream, chr(0xEF).chr(0xBB).chr(0xBF));
+        <?php if ( isset( $_GET['export'] ) && isset( $_REQUEST['_wpnonce'] ) ): ?>
 
-          $fields = array('id', 'created_at', 'file_list_id', 'name', 'email', 'phone', 'description', 'url');
+          <?php $wp_nonce = sanitize_text_field( $_REQUEST['_wpnonce'] ); ?>
 
-          fputcsv($outstream, $fields);
+          <?php if ( wp_verify_nonce($wp_nonce, '_shared-files-export-leads') ): ?>
 
-          $values = array();
+            <?php
+            $filename_random = SharedFilesHelpers::getExportRandomFilename( 'leads' );
 
-          foreach ($contacts as $contact) {
+            $file_with_path = SharedFilesHelpers::getExportUploadDir() . $filename_random;
+            $file_url = SharedFilesHelpers::getExportUploadURL() . $filename_random;
 
-            $contact_data = [];
+            $outstream = fopen($file_with_path, 'w');
+            fprintf($outstream, chr(0xEF).chr(0xBB).chr(0xBF));
 
-            $contact_data['id'] = sanitize_text_field( $contact->id );
-            $contact_data['created_at'] = sanitize_text_field( $contact->created_at );
-            $contact_data['file_list_id'] = sanitize_text_field( $contact->ask_for_email_id );
-            $contact_data['name'] = sanitize_text_field( $contact->name );
-            $contact_data['email'] = sanitize_text_field( $contact->email );
-            $contact_data['phone'] = sanitize_text_field( $contact->phone );
-            $contact_data['description'] = sanitize_text_field( $contact->descr );
-            $contact_data['url'] = sanitize_text_field( $contact->referer_url );
+            $fields = array('id', 'created_at', 'file_list_id', 'name', 'email', 'phone', 'description', 'url');
 
-            fputcsv($outstream, $contact_data);
+            fputcsv($outstream, $fields);
 
-          }
+            $values = array();
 
-          fclose($outstream);
-          ?>
+            foreach ($contacts as $contact) {
 
-          <?php if ($outstream && $path['url']): ?>
+              $contact_data = [];
 
-            <p style="font-weight: bold; margin-top: 32px;"><?php echo esc_html__('CSV-file created succesfully:', 'shared-files') ?> <?php echo esc_html( $path['url'] ) ?>/shared-files-leads.csv</p>
-            <a href="<?php echo esc_url( $path['url'] ) ?>/shared-files-leads.csv" style="font-weight: bold; font-size: 16px;"><?php echo esc_html__('Download', 'shared-files') ?></a><br /><br /><br />
+              $contact_data['id'] = sanitize_text_field( $contact->id );
+              $contact_data['created_at'] = sanitize_text_field( $contact->created_at );
+              $contact_data['file_list_id'] = sanitize_text_field( $contact->ask_for_email_id );
+              $contact_data['name'] = sanitize_text_field( $contact->name );
+              $contact_data['email'] = sanitize_text_field( $contact->email );
+              $contact_data['phone'] = sanitize_text_field( $contact->phone );
+              $contact_data['description'] = sanitize_text_field( $contact->descr );
+              $contact_data['url'] = sanitize_text_field( $contact->referer_url );
+
+              fputcsv($outstream, $contact_data);
+
+            }
+
+            fclose($outstream);
+            ?>
+
+            <?php if ($outstream && $file_url): ?>
+
+              <p style="font-weight: bold; margin-top: 32px;"><?php echo esc_html__('CSV-file created succesfully:', 'shared-files') ?> <?php echo esc_url_raw( $file_url ) ?></p>
+              <a href="<?php echo esc_url( $file_url ) ?>" style="font-weight: bold; font-size: 16px;"><?php echo esc_html__('Download', 'shared-files') ?></a><br /><br /><br />
+
+            <?php else: ?>
+
+              <p style="color: crimson; font-weight: bold;"><?php echo esc_html__('Error creating file.', 'shared-files') ?></p>
+
+            <?php endif; ?>
 
           <?php else: ?>
 
-            <p style="color: crimson; font-weight: bold;"><?php echo esc_html__('Error creating file.', 'shared-files') ?></p>
+            <p><?php echo esc_html__('Nonce error.', 'shared-files'); ?></p>
 
           <?php endif; ?>
 

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, download, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.28
+Stable tag: 1.7.29
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -260,7 +260,7 @@ Yes, you can use it as a file manager like that. You don't necessarily have to a
 
 = Who can download the files? =
 
-Anyone who can open the page which contains the file list is able to download the files. It is also possible to restrict the permissions in the paid plans of the plugin.
+Anyone who can open the page which contains the file list is able to download the files. It is also possible to restrict the permissions in the Pro version of the plugin.
 
 == Screenshots ==
 
@@ -277,122 +277,125 @@ Anyone who can open the page which contains the file list is able to download th
 
 == Changelog ==
 
+= 1.7.29 - 2024-07-30 =
+* (Free + Pro) Bug fixes
+
 = 1.7.28 - 2024-07-28 =
-* (Free + All plans) Gutenberg block added: Shared Files (category: media)
+* (Free + Pro) Gutenberg block added: Shared Files (category: media)
 
 = 1.7.27 - 2024-07-26 =
-* (Free + All plans) Added support for WebP and AVIF images
+* (Free + Pro) Added support for WebP and AVIF images
 
 = 1.7.26 - 2024-07-14 =
-* (Free + All plans) Fixed an issue with PHP 8.3
-* (Free + All plans) Bug fixes
+* (Free + Pro) Fixed an issue with PHP 8.3
+* (Free + Pro) Bug fixes
 
 = 1.7.25 - 2024-06-01 =
-* (Professional + Business) Added an individual container class to subcategories in the accordion
-* (Free + All plans) Updated Google preview URL
-* (Free + All plans) Fixed an issue where the domain wasn't added to the preview URL
+* (Pro) Added an individual container class to subcategories in the accordion
+* (Free + Pro) Updated Google preview URL
+* (Free + Pro) Fixed an issue where the domain wasn't added to the preview URL
 
 = 1.7.24 - 2024-05-24 =
-* (Free + All plans) New settings for front end uploader: File title required and Description required
+* (Free + Pro) New settings for front end uploader: File title required and Description required
 
 = 1.7.23 - 2024-05-23 =
-* (Free + All plans) Bug fixes
+* (Free + Pro) Bug fixes
 
 = 1.7.22 - 2024-05-19 =
 * Added compatibility for WordPress Playground
 
 = 1.7.21 - 2024-05-19 =
-* (All plans) New setting / feature: Only logged in users can open files (see plugin settings, first tab)
-* (All plans) Filters added for restricted file list: [shared_files_restricted show_filters=1]
-* (All plans) New setting: Include subcategories / subtags when using shortcode parameters ending __and + __or (see plugin settings, first tab)
-* (Free + All plans) Bug fixes
+* (Pro) New setting / feature: Only logged in users can open files (see plugin settings, first tab)
+* (Pro) Filters added for restricted file list: [shared_files_restricted show_filters=1]
+* (Pro) New setting: Include subcategories / subtags when using shortcode parameters ending __and + __or (see plugin settings, first tab)
+* (Free + Pro) Bug fixes
 
 = 1.7.20 - 2024-04-26 =
 * Bug fixes
 
 = 1.7.19 - 2024-03-31 =
-* (Professional + Business) Restrict access for users and roles added for the front end uploader (can be activated from the plugin settings, File upload tab)
-* (All plans) Fixed an issue where the external url was not properly saved when using the front end uploader
-* (Free + All plans) Bug & layout fixes
+* (Pro) Restrict access for users and roles added for the front end uploader (can be activated from the plugin settings, File upload tab)
+* (Pro) Fixed an issue where the external url was not properly saved when using the front end uploader
+* (Free + Pro) Bug & layout fixes
 
 = 1.7.18 - 2024-03-17 =
-* (Professional + Business) It is now possible to search in custom fields in shortcode [shared_files_exact_search] (see plugin settings, Exact search tab)
-* (Free + All plans) Fix: the minimum file card height now works correctly in multiple column layout and smaller card sizes
-* (Free + All plans) Fixed an issue where the file preview url would get first part of path duplicated when WP is installed in a subdirectory
-* (Free + All plans) New setting (File upload tab): Set the status of uploaded files to "Pending Review"
+* (Pro) It is now possible to search in custom fields in shortcode [shared_files_exact_search] (see plugin settings, Exact search tab)
+* (Free + Pro) Fix: the minimum file card height now works correctly in multiple column layout and smaller card sizes
+* (Free + Pro) Fixed an issue where the file preview url would get first part of path duplicated when WP is installed in a subdirectory
+* (Free + Pro) New setting (File upload tab): Set the status of uploaded files to "Pending Review"
 
 = 1.7.17 - 2024-03-07 =
-* (Free + All plans) Bug fixes
+* (Free + Pro) Bug fixes
 
 = 1.7.16 - 2024-02-20 =
-* (Free + All plans) New field for files: Filename. You can now edit the filename in the url after the file has been added.
-* (Free + All plans) Fix: the filename in the url no longer gets "-1", "-2" etc. appended if a file with the same name exists in the same directory
-* (Free + All plans) Bug fixes
+* (Free + Pro) New field for files: Filename. You can now edit the filename in the url after the file has been added.
+* (Free + Pro) Fix: the filename in the url no longer gets "-1", "-2" etc. appended if a file with the same name exists in the same directory
+* (Free + Pro) Bug fixes
 
 = 1.7.15 - 2024-02-08 =
-* (All plans) Featured image is now automatically added for synced image files
-* (All plans) Fixed an issue where [shared_files_search] would not hide the files at first
-* (Free + All plans) Fixed some layout issues on certain type of themes
+* (Pro) Featured image is now automatically added for synced image files
+* (Pro) Fixed an issue where [shared_files_search] would not hide the files at first
+* (Free + Pro) Fixed some layout issues on certain type of themes
 
 = 1.7.14 - 2024-01-18 =
-* (Free + All plans) Bug fixes + tweaks
+* (Free + Pro) Bug fixes + tweaks
 
 = 1.7.13 - 2024-01-14 =
-* (All plans) New feature: search filters added for simple list (can be activated from settings, Simple list tab)
-* (All plans) New setting (Layout tab): File type icon width, default file card (px)
-* (All plans) New setting (Layout tab): File type icon height, vertical view (px)
-* (All plans) New setting (first tab): Search input field targets filtered files rather than all files
-* (Free + All plans) Layout tweaks & fixes
+* (Pro) New feature: search filters added for simple list (can be activated from settings, Simple list tab)
+* (Pro) New setting (Layout tab): File type icon width, default file card (px)
+* (Pro) New setting (Layout tab): File type icon height, vertical view (px)
+* (Pro) New setting (first tab): Search input field targets filtered files rather than all files
+* (Free + Pro) Layout tweaks & fixes
 
 = 1.7.12 - 2023-12-26 =
-* (Free + All plans) Bug fixes + tweaks
+* (Free + Pro) Bug fixes + tweaks
 
 = 1.7.11 - 2023-12-13 =
-* (Professional + Business) Fix: the search form now targets all files in [shared_files_restricted] instead of the files on the current page (when using pagination)
-* (Professional + Business) Fix: users with multiple roles can now successfully open the files with restricted roles, targeted for also their additional roles
-* (Free + All plans) CSS tweaks
+* (Pro) Fix: the search form now targets all files in [shared_files_restricted] instead of the files on the current page (when using pagination)
+* (Pro) Fix: users with multiple roles can now successfully open the files with restricted roles, targeted for also their additional roles
+* (Free + Pro) CSS tweaks
 
 = 1.7.10 - 2023-11-30 =
-* (Professional + Business) Fixed an issue where [shared_files_exact_search] would not work with certain database engines / versions when the setting "Search whole words only" is active
-* (Free + All plans) Minor CSS tweaks
+* (Pro) Fixed an issue where [shared_files_exact_search] would not work with certain database engines / versions when the setting "Search whole words only" is active
+* (Free + Pro) Minor CSS tweaks
 
 = 1.7.9 - 2023-11-28 =
-* (Professional + Business) Added permalink edit for single files when the setting "Enable single file page" is active
-* (Professional + Business) Added the parameter categories__or for the shortcode [shared_files_restricted]
-* (All plans) Fix: the external url is now correctly saved when using the multi file front end uploader
-* (Free + All plans) Fix: the search results are now presented in the same amount of columns as the default file list
-* (Free + All plans) Fix: when the search input value is removed, the default file list is now shown with the pagination, instead of all available files as search results
+* (Pro) Added permalink edit for single files when the setting "Enable single file page" is active
+* (Pro) Added the parameter categories__or for the shortcode [shared_files_restricted]
+* (Pro) Fix: the external url is now correctly saved when using the multi file front end uploader
+* (Free + Pro) Fix: the search results are now presented in the same amount of columns as the default file list
+* (Free + Pro) Fix: when the search input value is removed, the default file list is now shown with the pagination, instead of all available files as search results
 
 = 1.7.8 - 2023-11-02 =
-- (Free + All plans) New fields for contacts / lead generation: name, phone and description (see plugin settings, Lead generation tab)
-- (Free + All plans) CSV export for creating a csv file from all contacts / leads (WP admin / Shared Files / Leads)
-- (Free + All plans) New PHP action shared_files_add_lead, fires when a new lead / contact is added
+- (Free + Pro) New fields for contacts / lead generation: name, phone and description (see plugin settings, Lead generation tab)
+- (Free + Pro) CSV export for creating a csv file from all contacts / leads (WP admin / Shared Files / Leads)
+- (Free + Pro) New PHP action shared_files_add_lead, fires when a new lead / contact is added
 
 = 1.7.7 - 2023-10-21 =
-- (Free + All plans) New feature: ask for an email address before showing the file(s) - add the parameter ask_for_email=1 to a shortcode to ask for an email address before showing the file(s) to the user, these emails can be found from WP admin / Shared Files / Contacts. See also WP admin / Shared Files / Shortcodes for details regarding the shortcodes.
-- (Free + All plans) Number of top downloads increased from 20 to 50
+- (Free + Pro) New feature: ask for an email address before showing the file(s) - add the parameter ask_for_email=1 to a shortcode to ask for an email address before showing the file(s) to the user, these emails can be found from WP admin / Shared Files / Contacts. See also WP admin / Shared Files / Shortcodes for details regarding the shortcodes.
+- (Free + Pro) Number of top downloads increased from 20 to 50
 
 = 1.7.6 - 2023-09-09 =
-* (Professional + Business) It is now possible to set accordion layout using a shortcode parameter: [shared_files_accordion layout=2-columns] (+ 3-columns and 4-columns)
-* (Free + All plans) Bug fixes
+* (Pro) It is now possible to set accordion layout using a shortcode parameter: [shared_files_accordion layout=2-columns] (+ 3-columns and 4-columns)
+* (Free + Pro) Bug fixes
 
 = 1.7.5 - 2023-08-16 =
-- (Professional + Business) New feature for accordion: Show only subcategories under this category and as separate clickable elements, [shared_files_accordion base_category="category-slug"]
-- (Professional + Business) New feature for accordion: Show first category open by default, [shared_files_accordion first_category_open=1]
+- (Pro) New feature for accordion: Show only subcategories under this category and as separate clickable elements, [shared_files_accordion base_category="category-slug"]
+- (Pro) New feature for accordion: Show first category open by default, [shared_files_accordion first_category_open=1]
 
 = 1.7.4 - 2023-08-07 =
-- (Free + All plans) Added the CSS class shared-files-card-12345 to all file cards (the list item, "li") in all shortcodes, where 12345 is the file id
-- (Free + All plans) New setting for simple list: Show download counter
-- (Free + All plans) New setting for simple list: Title for download counter
+- (Free + Pro) Added the CSS class shared-files-card-12345 to all file cards (the list item, "li") in all shortcodes, where 12345 is the file id
+- (Free + Pro) New setting for simple list: Show download counter
+- (Free + Pro) New setting for simple list: Title for download counter
 
 = 1.7.3 - 2023-07-25 =
 * Compatibility for WP 6.3
 
 = 1.7.2 - 2023-07-21 =
-* (Free + All plans) Minor tweaks and fixes
+* (Free + Pro) Minor tweaks and fixes
 
 = 1.7.1 - 2023-07-05 =
-* (All plans) New parameters to be used with the shortcode [shared_files_simple] (see WP admin / Shared Files / Shortcodes):
+* (Pro) New parameters to be used with the shortcode [shared_files_simple] (see WP admin / Shared Files / Shortcodes):
     * Exclude categories (by slug)
     * Show files that belong to all of these categories (you can also hide the search form using the parameter hide_search=1)
     * Show files that belong to all of these tags (can also be used with only one tag)
@@ -400,32 +403,32 @@ Anyone who can open the page which contains the file list is able to download th
     * Show files that belong to any of these tags
 
 = 1.7.0 - 2023-06-30 =
-* (Free + All plans) Various tweaks & fixes
+* (Free + Pro) Various tweaks & fixes
 
 = 1.6.99 - 2023-06-10 =
-* (Free + All plans) Bug fixes
+* (Free + Pro) Bug fixes
 
 = 1.6.98 - 2023-05-06 =
-* (All plans) New setting for file upload: make category selection required (see plugin settings / File upload tab)
-* (Free + All plans) Bug fixes
+* (Pro) New setting for file upload: make category selection required (see plugin settings / File upload tab)
+* (Free + Pro) Bug fixes
 
 = 1.6.97 - 2023-03-19 =
-* (Professional + Business) Fix: if a logged in user has more than 1 role, additional roles are now also counted in permisson restricted file lists
-* (All plans) New parameter to exclude files uploaded by front end uploader: [shared_files_categories exclude_files_uploaded_by_front_end_uploader=1]
-* (Free + All plans) New setting: Prevent search engines from indexing files uploaded using front end uploader
+* (Pro) Fix: if a logged in user has more than 1 role, additional roles are now also counted in permisson restricted file lists
+* (Pro) New parameter to exclude files uploaded by front end uploader: [shared_files_categories exclude_files_uploaded_by_front_end_uploader=1]
+* (Free + Pro) New setting: Prevent search engines from indexing files uploaded using front end uploader
 
 = 1.6.96 - 2023-01-08 =
-* (Business) Wait Countdown Page: Fixed an issue which prevented the file from starting to download
-* (Professional + Business) New column "Restriction" added to file and category management that contains information of set permissions
-* (Professional + Business) Accordion: Subcategories are now shown under the main category instead of the same level. It is also possible to hide the subcategories and their files: [shared_files_accordion hide_subcategories=1]
-* (Free + All plans) New settings for download log: Log downloader user data, Log downloader IP, Log downloader user agent and Log referer url
-* (Free + All plans) New action: shared_files_frontend_file_uploaded (fires when a file has been uploaded using the front end uploader), more information at https://www.sharedfilespro.com/docs/php-actions/
+* (Pro) Wait Countdown Page: Fixed an issue which prevented the file from starting to download
+* (Pro) New column "Restriction" added to file and category management that contains information of set permissions
+* (Pro) Accordion: Subcategories are now shown under the main category instead of the same level. It is also possible to hide the subcategories and their files: [shared_files_accordion hide_subcategories=1]
+* (Free + Pro) New settings for download log: Log downloader user data, Log downloader IP, Log downloader user agent and Log referer url
+* (Free + Pro) New action: shared_files_frontend_file_uploaded (fires when a file has been uploaded using the front end uploader), more information at https://www.sharedfilespro.com/docs/php-actions/
 
 = 1.6.95 - 2022-12-30 =
-* (Free + All plans) Some PHP actions added to enable better customization of the plugin. For more information see https://www.sharedfilespro.com/docs/php-actions/.
+* (Free + Pro) Some PHP actions added to enable better customization of the plugin. For more information see https://www.sharedfilespro.com/docs/php-actions/.
 
 = 1.6.94 - 2022-12-26 =
-* (Free + All plans) New feature / settings: allow more file types. WordPress allows specific file types by default, but you can now allow additional file types from the plugin settings, Allow more file types tab.
+* (Free + Pro) New feature / settings: allow more file types. WordPress allows specific file types by default, but you can now allow additional file types from the plugin settings, Allow more file types tab.
 
 = 1.6.93 - 2022-12-18 =
 * Various tweaks and fixes
@@ -435,20 +438,20 @@ Anyone who can open the page which contains the file list is able to download th
 
 = 1.6.91 - 2022-12-14 =
 * New tab in settings: Custom post type
-* (Professional + Business) Separate pages for single files, e.g. /shared_file/sample-file/ (see settings, Custom post type tab)
-* (Professional + Business) Show files in site search results (also in settings, Custom post type tab)
-* (Free + All plans) You can now activate custom tag taxonomy for files instead of the default post tags (settings, Custom post type tab)
-* (Free + All plans) New section at WP admin / Shared Files / Statistics. Top 20 most downloaded files for now, more coming later (you may request some specific statistics at the support forum for free version, for paid version at https://www.sharedfilespro.com/support/).
-* (Free + All plans) New feature: download log. All downloads are now logged, see WP admin / Shared Files / Download log. Download log can be disabled at plugin settings, first tab.
+* (Pro) Separate pages for single files, e.g. /shared_file/sample-file/ (see settings, Custom post type tab)
+* (Pro) Show files in site search results (also in settings, Custom post type tab)
+* (Free + Pro) You can now activate custom tag taxonomy for files instead of the default post tags (settings, Custom post type tab)
+* (Free + Pro) New section at WP admin / Shared Files / Statistics. Top 20 most downloaded files for now, more coming later (you may request some specific statistics at the support forum for free version, for paid version at https://www.sharedfilespro.com/support/).
+* (Free + Pro) New feature: download log. All downloads are now logged, see WP admin / Shared Files / Download log. Download log can be disabled at plugin settings, first tab.
 
 = 1.6.90 - 2022-12-12 =
-* (Free + All plans) Issue with the debug log filling on multisite installations fixed
+* (Free + Pro) Issue with the debug log filling on multisite installations fixed
 
 = 1.6.89 - 2022-12-11 =
-* (Professional + Business) New parameter for shortcode [shared_files_restricted], show files from specific category: [shared_files_restricted category=category-name]
-* (Professional + Business) New parameter, exclude categories (by slug): [shared_files_restricted exclude_cat="category-1,category-2"]
-* (All plans) Fix: the file field "Notification email" is now saved properly
-* (Free + All plans) Tweaks and fixes
+* (Pro) New parameter for shortcode [shared_files_restricted], show files from specific category: [shared_files_restricted category=category-name]
+* (Pro) New parameter, exclude categories (by slug): [shared_files_restricted exclude_cat="category-1,category-2"]
+* (Pro) Fix: the file field "Notification email" is now saved properly
+* (Free + Pro) Tweaks and fixes
 
 = 1.6.88 - 2022-11-15 =
 * Freemius WordPress SDK update (2.5.2)
@@ -457,184 +460,99 @@ Anyone who can open the page which contains the file list is able to download th
 * WordPress 6.1 compatibility update
 
 = 1.6.86 - 2022-10-25 =
-* (Free + All plans) Fixed a compatibility issue with Windows based WordPress installations
+* (Free + Pro) Fixed a compatibility issue with Windows based WordPress installations
 
 = 1.6.85 - 2022-10-16 =
-* (All plans) Show files that belong to any of these categories: [shared_files categories__or="category-1,category-2"]
-* (Free + All plans) Bug fixes
+* (Pro) Show files that belong to any of these categories: [shared_files categories__or="category-1,category-2"]
+* (Free + Pro) Bug fixes
 
 = 1.6.84 - 2022-09-05 =
-* (Professional + Business) It is now possible to activate restricted permissions for shortcode [shared_files_categories], using a parameter like so: [shared_files_categories restricted=1]
-* (Free + All plans) Various tweaks and fixes
+* (Pro) It is now possible to activate restricted permissions for shortcode [shared_files_categories], using a parameter like so: [shared_files_categories restricted=1]
+* (Free + Pro) Various tweaks and fixes
 
 = 1.6.83 - 2022-06-19 =
 * Bug fixes
 
 = 1.6.82 - 2022-06-19 =
-* (Professional + Business) It is now possible to restrict single file permissions to any number of users
-* (Free + All plans) New setting: Bypass the file exists check on frontend file list (Technical tab)
+* (Pro) It is now possible to restrict single file permissions to any number of users
+* (Free + Pro) New setting: Bypass the file exists check on frontend file list (Technical tab)
 
 = 1.6.81 - 2022-06-05 =
-* (All plans) New setting: Prevent search engines from indexing file urls
-* (Free + All plans) Minor tweaks and fixes
+* (Pro) New setting: Prevent search engines from indexing file urls
+* (Free + Pro) Minor tweaks and fixes
 
 = 1.6.80 - 2022-05-15 =
-* (Free + All plans) New settings for simple list (new tab at the plugin settings)
-* (All plans) Fix: hide_files_first works now correctly
-* (Free + All plans) Minor tweaks and fixes
+* (Free + Pro) New settings for simple list (new tab at the plugin settings)
+* (Pro) Fix: hide_files_first works now correctly
+* (Free + Pro) Minor tweaks and fixes
 
 = 1.6.79 - 2022-04-24 =
-* (Business) New feature / setting: Obfuscate file urls (Technical tab). Generates long random urls for files, like /shared-files/5348-9f13c19ce03475aa0565010094d83678/this-is-a-file.pdf
-* (Professional + Business) New setting: Remove obsolete file metadata automatically (Technical tab)
-* (Free + All plans) Translatable strings updated
+* (Pro) New feature / setting: Obfuscate file urls (Technical tab). Generates long random urls for files, like /shared-files/5348-9f13c19ce03475aa0565010094d83678/this-is-a-file.pdf
+* (Pro) New setting: Remove obsolete file metadata automatically (Technical tab)
+* (Free + Pro) Translatable strings updated
 
 = 1.6.78 - 2022-03-26 =
-* (Free + All plans) Some CSS tweaks for better compatibility with popular themes
-* (All plans) New setting to change the folder icon on [shared_files_categories]: Folder icon (Icons tab)
+* (Free + Pro) Some CSS tweaks for better compatibility with popular themes
+* (Pro) New setting to change the folder icon on [shared_files_categories]: Folder icon (Icons tab)
 
 = 1.6.77 - 2022-03-18 =
-* (All plans) You can now add multiple email addresses to receive the file upload notification
+* (Pro) You can now add multiple email addresses to receive the file upload notification
 
 = 1.6.76 - 2022-03-15 =
-* (Free + All plans) Fix: The video player now opens the video file directly from the redirected url when using the File opening method as Redirect (defined at the plugin settings, Technical tab)
+* (Free + Pro) Fix: The video player now opens the video file directly from the redirected url when using the File opening method as Redirect (defined at the plugin settings, Technical tab)
 
 = 1.6.75 - 2022-03-12 =
-* (Free + All plans) New feature: File upload progress bar added to front end file upload
-* (Free + All plans) New setting: Disable progress bar / ajax upload (plugin settings, File upload tab)
+* (Free + Pro) New feature: File upload progress bar added to front end file upload
+* (Free + Pro) New setting: Disable progress bar / ajax upload (plugin settings, File upload tab)
 
 = 1.6.74 - 2022-03-08 =
-* (Free + All plans) PHP error fix (happened during plugin activation if the plugin Contact List is also installed)
+* (Free + Pro) PHP error fix (happened during plugin activation if the plugin Contact List is also installed)
 
 = 1.6.73 - 2022-03-02 =
-* (Free + All plans) Improved compatibility with site migration tools
-* (Professional + Business) New shortcode: [shared_files_exact_search] (search all files (their titles), files are displayed after enter is pressed)
-* (Professional + Business) New setting: Min. characters for search in [shared_files_exact_search]
-* (Professional + Business) New setting: Search whole words only in [shared_files_exact_search] (default targets also partial text)
+* (Free + Pro) Improved compatibility with site migration tools
+* (Pro) New shortcode: [shared_files_exact_search] (search all files (their titles), files are displayed after enter is pressed)
+* (Pro) New setting: Min. characters for search in [shared_files_exact_search]
+* (Pro) New setting: Search whole words only in [shared_files_exact_search] (default targets also partial text)
 
 = 1.6.72 - 2022-03-01 =
-* (Free + All plans) Fixed an issue where file size was occasionally set to 0 after upload
-* (Free + All plans) Various tweaks and fixes
+* (Free + Pro) Fixed an issue where file size was occasionally set to 0 after upload
+* (Free + Pro) Various tweaks and fixes
 
 = 1.6.71 - 2022-02-13 =
-* (All plans) Edit file -link added to the file upload notification email
-* (Professional + Business) It is now possible to filter files by user permissions in the WP admin file list
-* (Free + All plans) Minor tweaks and fixes
+* (Pro) Edit file -link added to the file upload notification email
+* (Pro) It is now possible to filter files by user permissions in the WP admin file list
+* (Free + Pro) Minor tweaks and fixes
 
 = 1.6.70 - 2022-01-31 =
-* (Professional + Business) Fixed an issue where the logged in user was not given permissions to read the file with restricted permissions
+* (Pro) Fixed an issue where the logged in user was not given permissions to read the file with restricted permissions
 
 = 1.6.69 - 2022-01-30 =
-* (All plans) It is now possible to upload multiple files at once using the front end uploader
-* (Free + All plans) Translatable texts updated
+* (Pro) It is now possible to upload multiple files at once using the front end uploader
+* (Free + Pro) Translatable texts updated
 
 = 1.6.68 - 2022-01-23 =
-* (Professional + Business) Front-end file editor option added to accordion: [shared_files_accordion edit=1]
-* (Professional + Business) New parameter [shared_files_restricted hide_file_list=1]
-* (Professional + Business) New setting to change the file sync interval to 5 or 1 minute(s) (Technical tab)
-* (All plans) Front-end file editor option added to simple list: [shared_files_simple edit=1]
-* (All plans) Fix: The setting "Hide file type icon from card" now works correctly when the setting "Align elements vertically and centered (inside file card)" is also checked
-* (Free + All plans) "Submit" is now translatable in the file uploader
+* (Pro) Front-end file editor option added to accordion: [shared_files_accordion edit=1]
+* (Pro) New parameter [shared_files_restricted hide_file_list=1]
+* (Pro) New setting to change the file sync interval to 5 or 1 minute(s) (Technical tab)
+* (Pro) Front-end file editor option added to simple list: [shared_files_simple edit=1]
+* (Pro) Fix: The setting "Hide file type icon from card" now works correctly when the setting "Align elements vertically and centered (inside file card)" is also checked
+* (Free + Pro) "Submit" is now translatable in the file uploader
 
 = 1.6.67 - 2022-01-09 =
-* (Business) Fixed preview feature when using the wait page
-* (Professional + Business) User dropdown ordered (file edit view)
-* (Free + All plans) New setting: Hide description field (plugin settings, File upload tab)
+* (Pro) Fixed preview feature when using the wait page
+* (Pro) User dropdown ordered (file edit view)
+* (Free + Pro) New setting: Hide description field (plugin settings, File upload tab)
 
 = 1.6.66 - 2022-01-09 =
-* (Business) New feature: Wait countdown page for downloads. You can now define a page in the settings which all download links will be redirected to. There is a certain waiting time and counter in seconds and after that the download will normally occur. There are settings regarding this feature at the plugin settings, Wait page -tab.
-* (Business) New shortcode parameter for activating the wait countdown page for a specific file list: [shared_files use_wait_page=1]
-* (Professional + Business) Added support for files with restricted permissions to the shortcode [shared_files_accordion]. Can be activated like so: [shared_files_accordion restricted=1]
-* (Free + All plans) Some missing translatable texts added to the .pot file
+* (Pro) New feature: Wait countdown page for downloads. You can now define a page in the settings which all download links will be redirected to. There is a certain waiting time and counter in seconds and after that the download will normally occur. There are settings regarding this feature at the plugin settings, Wait page -tab.
+* (Pro) New shortcode parameter for activating the wait countdown page for a specific file list: [shared_files use_wait_page=1]
+* (Pro) Added support for files with restricted permissions to the shortcode [shared_files_accordion]. Can be activated like so: [shared_files_accordion restricted=1]
+* (Free + Pro) Some missing translatable texts added to the .pot file
 
 = 1.6.65 - 2022-01-02 =
-* (Professional + Business) New feature: Restrict file opening permissions to a specific user or roles (see the new fields by editing any file)
-* (Professional + Business) New shortcode: [shared_files_restricted] (list only such files that are readable by the logged in user)
-* (Free + All plans) Minor tweaks and fixes
-
-= 1.6.64 - 2021-12-11 =
-* (Professional + Business) New setting: Remove link from file title (Layout tab)
-* (Professional + Business) New setting: Trigger file downloaded email on (values: "File title link, preview and download buttons" and "Download button only") (Email tab)
-* (All plans) New setting: Show message for download limit reached on file card (General settings tab)
-* (Free + All plans) Minor tweaks and fixes
-
-= 1.6.63 - 2021-11-07 =
-* (Professional + Business) Accordion: The grouping by month and using the "file date" as date now works normally (the shortcode [shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"])
-* (All plans) New setting: Sort tags by (for search filter)
-* (All plans) New setting: Sort categories by (for search filter)
-* (All plans) New minimal layout for listing a single file: [shared_files file_id=12345 layout="minimal"]
-
-= 1.6.62 - 2021-10-17 =
-* (All plans) New parameter for shortcode [shared_files], exclude tags (by slug) from the file uploader: [shared_files file_upload_exclude_tag="tag-1,tag-2"]
-* (Free + All plans) html markup fixes
-
-= 1.6.61 - 2021-10-13 =
-* More bug fixes
-
-= 1.6.60 - 2021-10-11 =
-* Minor bug fixes
-
-= 1.6.59 - 2021-09-20 =
-* (Business) New feature: Favorites. The shortcode [shared_files_favorites] displays user's favorite files. Files can be marked as favorites by first enabling the feature from the plugin settings: "Activate favorite files". After that the file card has a new button: "Add to favorites" (all shortcodes).
-* (All plans) Define an ID for the files and display only these uploaded files, having the same ID: [shared_files file_upload=1 upload_id="name-for-id"]
-* (All plans) New setting for front end file uploader: "Show Expiration date"
-* (All plans) New setting for front end file uploader: "Make the file field optional"
-* (Free + All plans) Fix: There can now be any number of different shortcodes ([shared_files], [shared_files_simple] and [shared_files_search]) on the same page, and the search & filtering works properly on each one
-
-= 1.6.58 - 2021-09-15 =
-* (Professional + Business) New setting: Allow the uploader to create multiple new categories
-* (Professional + Business) New setting: Allow the uploader to create multiple new tags
-* (Professional + Business) New settings to hide sections from the frontend file editor (Settings / File edit)
-* (All plans) Frontend file edit modal replaced with a custom one (for better compatibility with themes and other plugins)
-* (All plans) Next sync timestamp added to category edit page
-* (All plans) Fix: file type is now properly saved when syncing files from folder (preview buttons are shown correctly)
-* (All plans) New shortcode parameter: Show files that belong to any these tags: [shared_files tags__or="tag-1,tag-2,tag-3"]
-* (Free + All plans) New setting: Show download counter on the frontend
-
-= 1.6.57 - 2021-09-13 =
-* Bug fixes
-
-= 1.6.56 - 2021-09-02 =
-* (Business) New feature: Activate any number of custom fields (see Settings / Custom fields tab)
-* (Professional) Max. number of custom fields increased to 5
-* (Professional + Business) All custom fields can now be used as search filters (dropdown contents are automatically generated from file data), see plugin settings / Custom fields tab
-* (All plans) Custom field settings are now on a separate tab (Settings / Custom fields)
-* (All plans) More settings for custom fields
-* (All plans) New parameter for the frontend uploader: hide_category_dropdown=1
-* (All plans) Fix: Logged in user may now delete their own uploaded files properly
-* (Free + All plans) Multisite support added. The files now open normally on multisite subsites.
-* (Free + All plans) Fix: It is no longer possible to submit the frontend file upload form without adding the file
-
-= 1.6.55 - 2021-08-24 =
-* (All plans) Simple list parameters updated, the following parameters are currently available (more information on Shortcodes page): [shared_files_simple hide_search=1 limit=5 category="sample-category-1"]
-* Settings reorganized
-* Missing translatable texts added
-
-= 1.6.54 - 2021-08-24 =
-* (Professional + Business) Multiple accordions can now be placed on one page
-* Fix: The "search files" input no longer submits the form / reloads the page if enter is pressed (the search results are already there)
-
-= 1.6.53 - 2021-08-22 =
-* (Professional + Business) Accordion: Categories are now listed in the same order they are defined in the shortcode
-* (Professional + Business) Accordion: Group and order files by month with shortcode [shared_files_accordion group_files_by_month=1] / [shared_files_accordion group_files_by_month=1 order_by="_sf_main_date"]
-* (Professional + Business) Accordion: Layout updated
-* (Free + All plans) Compatibility added for Infinite Uploads (https://wordpress.org/plugins/infinite-uploads/, https://infiniteuploads.com/)
-* (Free + All plans) Minor tweaks and fixes
-
-= 1.6.52 - 2021-08-11 =
-* (Professional + Business) New shortcode: [shared_files_accordion]. See the Shortcodes page at WP admin / Shared Files and demo at https://www.sharedfilespro.com/shared-files/accordion/
-* (All plans) New setting: Show tags on search results cards (Layout tab)
-* (Free + All plans) Minor tweaks and fixes
-
-= 1.6.51 - 2021-07-30 =
-* (All plans) Download buttons are now shown also on password protected files (if enabled from the settings)
-* (Free + All plans) The redundant "Browse files:" title removed if there are no pagination links
-
-= 1.6.50 - 2021-07-25 =
-* (All plans) New setting: Hide tags (Layout tab)
-* (All plans) New parameter for all shortcodes: hide_tags=1 (hides the tags from the file card)
-* (All plans) Update / new parameter: [shared_files_categories category=”category_slug” show_files_always=1] now lists also the files directly under “category_slug” in addition to the subcategory links (those files are no longer listed by default)
-* (Free + All plans) Improved version of the pagination. The pagination now works with shortcodes on the front page, single post, archive pages etc. (can be activated from the settings, first tab)
-* (Free + All plans) Minor tweaks and fixes
+* (Pro) New feature: Restrict file opening permissions to a specific user or roles (see the new fields by editing any file)
+* (Pro) New shortcode: [shared_files_restricted] (list only such files that are readable by the logged in user)
+* (Free + Pro) Minor tweaks and fixes
 
 = 1.5.0 - 2019-12-09 =
 * New licensing model (separate free and paid version)

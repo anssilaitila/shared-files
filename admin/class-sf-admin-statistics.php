@@ -16,7 +16,7 @@ class SharedFilesAdminStatistics {
 
   public function register_statistics_page_callback() {
     ?>
-    
+
     <?php echo SharedFilesAdminHelpSupport::permalinks_alert() ?>
 
     <?php $s = get_option('shared_files_settings') ?>
@@ -30,7 +30,7 @@ class SharedFilesAdminStatistics {
         <?php if (shared_files_fs()->can_use_premium_code()): ?>
 
           <p><?php echo esc_html__('If you wish to see some other statistics, contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
-          
+
         <?php else: ?>
 
           <p>
@@ -42,32 +42,32 @@ class SharedFilesAdminStatistics {
               __('If you wish to see some other statistics, contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files'),
               array('a' => array('href' => array(), 'target' => array()))
             ),
-            esc_url($url) 
+            esc_url($url)
           );
           ?>
           </p>
-                
+
         <?php endif; ?>
-        
+
       </div>
-  
+
       <div class="shared-files-admin-section shared-files-admin-section-statistics">
-  
+
         <h2><?php echo esc_html__('Top 50 most popular files', 'shared-files') ?></h2>
 
         <?php
         $wp_query = new WP_Query(array(
           'post_type'       => 'shared_file',
           'post_status'     => 'publish',
-        
+
           'posts_per_page'  => 50,
-        
+
           'orderby'         => 'meta_value_num',
           'order'           => 'DESC',
           'meta_key'        => '_sf_load_cnt',
         ));
         ?>
-        
+
         <?php if (isset($wp_query) && $wp_query->have_posts()): ?>
 
           <table>
@@ -81,23 +81,23 @@ class SharedFilesAdminStatistics {
           <?php $row = 1; ?>
 
           <?php while ($wp_query->have_posts()): $wp_query->the_post(); ?>
-        
+
             <?php $id = intval( get_the_id() ); ?>
             <?php $c = get_post_custom($id); ?>
 
             <tr>
               <td style="width: 10px; padding-right: 0; text-align: right;">
-                <?php echo $row ?>.
+                <?php echo esc_html( $row ) ?>.
               </td>
               <td>
-                <a href="<?php echo get_edit_post_link( $id ); ?>"><?php echo sanitize_text_field( get_the_title() ) ?></a>
+                <a href="<?php echo esc_url_raw( get_edit_post_link( $id ) ); ?>"><?php echo esc_html( get_the_title() ) ?></a>
               </td>
               <td style="text-align: right;">
                 <?php $download_cnt = intval( $c['_sf_load_cnt'][0] ); ?>
                 <?php echo esc_html( $download_cnt ); ?>
               </td>
             </tr>
-            
+
             <?php $row++; ?>
 
           <?php endwhile; ?>
@@ -113,7 +113,7 @@ class SharedFilesAdminStatistics {
       </div>
 
     </div>
-    
+
     <?php
   }
 

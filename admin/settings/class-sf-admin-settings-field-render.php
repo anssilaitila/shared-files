@@ -10,7 +10,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'All Plans' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php $show_info = 0 ?>
 
@@ -19,57 +19,57 @@ class SharedFilesSettingsFieldRender {
         <?php $free_class = 'shared-files-setting-container-free' ?>
 
         <?php if (strpos($field_name, '_use_as_search_filter') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_upload_multiple_new_categories') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_upload_multiple_new_tags') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif (strpos($field_name, 'file_edit_hide_external_url') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_edit_hide_category_checkboxes') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_edit_hide_new_categories') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_edit_hide_tag_checkboxes') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_edit_hide_new_tags') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'file_edit_hide_description') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'remove_link_from_file_title') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'exact_search_whole_words_only') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'remove_obsolete_file_metadata_automatically') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'exact_search_more_fields') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'exact_search_custom_field_') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif ($field_name == '_FREE_enable_single_file_page'): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif ($field_name == '_FREE_show_files_in_site_search_results'): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif ($field_name == '_FREE_file_upload_enable_restrict_access_for_users'): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif ($field_name == '_FREE_file_upload_enable_restrict_access_for_roles'): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif (strpos($field_name, 'activate_favorite_files') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'activate_favorite_files_non_logged_in') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'show_title_above_favorite_files') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif (strpos($field_name, 'activate_wait_page') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'wait_page_hide_download_button') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'obfuscate_file_urls') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
           <?php $show_info = 1 ?>
 
         <?php endif; ?>
@@ -170,7 +170,7 @@ class SharedFilesSettingsFieldRender {
         <?php if ($free): ?>
 
           <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
-            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('All Plans', 'shared-files') ?></div></div>
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Pro', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -209,7 +209,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Business' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
@@ -339,7 +339,7 @@ class SharedFilesSettingsFieldRender {
         <?php if ($free): ?>
 
           <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
-            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('All Plans', 'shared-files') ?></div></div>
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Pro', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -373,36 +373,36 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'All Plans' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
         <?php $free_class = 'shared-files-setting-container-free' ?>
 
         <?php if (strpos($field_name, 'cf_') !== false && strpos($field_name, '_select_title') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'exact_search_min_chars') !== false): ?>
-          <?php $plan_required = 'Professional' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif (strpos($field_name, 'favorite_files_text_add_to_favorites') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'favorite_files_text_favorited') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'favorite_files_title_text') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'favorite_files_text_delete_from_favorites') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'favorite_files_text_deleted') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif (strpos($field_name, 'wait_page_text_before_seconds') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'wait_page_countdown_seconds') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'wait_page_text_after_seconds') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'wait_page_download_button_text') !== false): ?>
-          <?php $plan_required = 'Business' ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php endif; ?>
 
@@ -530,7 +530,7 @@ class SharedFilesSettingsFieldRender {
         <?php if ($free): ?>
 
           <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
-            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Business', 'shared-files') ?></div></div>
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Pro', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -596,7 +596,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'All Plans' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
@@ -645,7 +645,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Professional' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
@@ -725,7 +725,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Professional' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
@@ -774,7 +774,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'All Plans' ?>
+      <?php $plan_required = 'Pro' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
