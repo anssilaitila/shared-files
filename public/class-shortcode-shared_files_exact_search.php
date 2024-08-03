@@ -5,6 +5,9 @@ class ShortcodeSharedFilesExactSearch {
         if ( SharedFilesHelpers::isPremium() == 0 ) {
             $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
             return $html;
+        } elseif ( !SharedFilesHelpers::isMin2Pr() ) {
+            $html = '';
+            return $html;
         }
     }
 

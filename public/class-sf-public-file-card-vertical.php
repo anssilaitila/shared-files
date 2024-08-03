@@ -147,6 +147,13 @@ class SharedFilesPublicFileCardVertical {
             }
         }
         $html .= '<div class="shared-files-edit-actions">';
+        if ( is_user_logged_in() && isset( $s['file_upload_show_delete_button'] ) && !isset( $atts['edit'] ) && !$favorites ) {
+            $user = wp_get_current_user();
+            $bare_url = './?_sf_delete_file=' . $file_id;
+            if ( isset( $c['_sf_user_id'] ) && $c['_sf_user_id'][0] && $c['_sf_user_id'][0] == $user->ID ) {
+                $html .= '<a href="' . wp_nonce_url( $bare_url, 'sf_delete_file_' . intval( $user->ID ), 'sc' ) . '" id="shared-files-public-delete-file" class="shared-files-public-delete-file" onclick="return confirm(\'' . esc_js( __( 'Are you sure?', 'shared-files' ) ) . '\')">' . esc_html__( 'Delete', 'shared-files' ) . '</a>';
+            }
+        }
         $html .= '</div>';
         $html .= '</div>';
         if ( (!isset( $s['card_featured_image_align'] ) || $s['card_featured_image_align'] == '') && isset( $s['card_featured_image_as_extra'] ) && (!$password || isset( $s['show_featured_image_for_password_protected_files'] )) && (!$file_access_logged_in_only || isset( $s['file_access_logged_in_only_show_featured_image'] )) && !SharedFilesPublicHelpers::limitActive( $file_id ) && ($featured_img_url = esc_url_raw( get_the_post_thumbnail_url( $file_id, 'thumbnail' ) )) ) {

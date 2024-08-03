@@ -222,16 +222,18 @@ class SharedFilesAdminMetadata {
         /* Notification email END */
         echo '<div style="width: 100%; border-bottom: 1px solid #000; margin-bottom: 24px;"><h2 style="font-weight: 700; font-size: 20px; padding-left: 0;">' . esc_html__( 'Restrict access', 'shared-files' ) . '</h2></div>';
         /* User START */
-        echo '<div class="shared-files-admin-small-field-container">';
-        echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-        echo '<h4>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</h4>';
-        echo '<i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i>';
-        echo '</div>';
-        $pro_field_active = 0;
-        if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+        if ( SharedFilesHelpers::isMin2() ) {
+            echo '<div class="shared-files-admin-small-field-container">';
+            echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
+            echo '<h4>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</h4>';
+            echo '<i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i>';
+            echo '</div>';
+            $pro_field_active = 0;
+            if ( !$pro_field_active ) {
+                echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            }
+            echo '</div>';
         }
-        echo '</div>';
         /* User END */
         /* Password protection START */
         echo '<div class="shared-files-admin-small-field-container">';
@@ -259,16 +261,18 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         /* Password protection END */
         /* Role START */
-        echo '<div class="shared-files-admin-small-field-container">';
-        echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-        echo '<h4>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</h4>';
-        echo '<i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i>';
-        echo '</div>';
-        $pro_field_active = 0;
-        if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+        if ( SharedFilesHelpers::isMin2() ) {
+            echo '<div class="shared-files-admin-small-field-container">';
+            echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
+            echo '<h4>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</h4>';
+            echo '<i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i>';
+            echo '</div>';
+            $pro_field_active = 0;
+            if ( !$pro_field_active ) {
+                echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            }
+            echo '</div>';
         }
-        echo '</div>';
         /* Role END */
         /* Limit downloads START */
         echo '<div class="shared-files-admin-small-field-container">';
