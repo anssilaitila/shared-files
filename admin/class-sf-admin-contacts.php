@@ -21,7 +21,7 @@ class SharedFilesAdminContacts {
 
     <?php $s = get_option('shared_files_settings') ?>
 
-    <div class="shared-files-help-support wrap">
+    <div class="shared-files-help-support wrap shared-files-admin-page">
 
       <h1 style="margin-bottom: 20px;"><?php echo esc_html__('Leads collected by Shared Files', 'shared-files'); ?></h1>
 

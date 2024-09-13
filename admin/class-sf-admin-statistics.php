@@ -21,7 +21,7 @@ class SharedFilesAdminStatistics {
 
     <?php $s = get_option('shared_files_settings') ?>
 
-    <div class="shared-files-help-support wrap">
+    <div class="shared-files-help-support wrap shared-files-admin-page">
 
       <h1><?php echo esc_html__('Statistics of Shared Files', 'shared-files'); ?></h1>
 

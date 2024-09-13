@@ -19,8 +19,8 @@ class SharedFilesAdminSyncMediaLibrary {
 
     public function register_page_callback() {
         ?>
-    
-    <div class="shared-files-sync-files">
+
+    <div class="shared-files-admin-page-content-container shared-files-sync-files">
       <h1><?php 
         echo esc_html__( 'Sync Media Library Files', 'shared-files' );
         ?></h1>
@@ -50,19 +50,19 @@ class SharedFilesAdminSyncMediaLibrary {
       <p>
 
         <form method="post">
-          
+
           <?php 
         $taxonomy_slug = 'shared-file-category';
         ?>
-        
+
           <?php 
         if ( get_taxonomy( $taxonomy_slug ) ) {
             ?>
-  
+
             <span class="shared-files-category-for-new-files"><?php 
             echo esc_html__( 'Category for new files:', 'shared-files' );
             ?></span>
-  
+
             <?php 
             echo wp_dropdown_categories( [
                 'show_option_all' => ' ',
@@ -78,15 +78,15 @@ class SharedFilesAdminSyncMediaLibrary {
                 'show_option_all' => sanitize_text_field( __( 'Choose category', 'shared-files' ) ),
             ] );
             ?><br />
-            
+
           <?php 
         }
         ?>
-  
+
           <?php 
         wp_nonce_field( 'sf-sync-files', 'sf-sync-files-nonce' );
         ?>
-        
+
         </form>
       </p>
 
@@ -168,7 +168,7 @@ class SharedFilesAdminSyncMediaLibrary {
                         echo esc_attr__( 'Activate', 'shared-files' );
                         ?>" />
               </form>
-              
+
               <?php 
                     }
                 }

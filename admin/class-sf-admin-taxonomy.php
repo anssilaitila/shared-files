@@ -58,7 +58,7 @@ class SharedFilesAdminTaxonomy {
     public function register_categories_info_page_callback() {
         ?>
 
-    <div class="wrap">
+    <div class="wrap shared-files-admin-page">
       <h1><?php 
         echo esc_html__( 'Categories', 'shared-files' );
         ?></h1>

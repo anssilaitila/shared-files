@@ -49,7 +49,7 @@ class SharedFilesAdminHelpSupport {
         $num = 0;
         ?>
 
-    <div class="shared-files-help-support wrap">
+    <div class="shared-files-help-support wrap shared-files-admin-page">
 
       <h1><?php 
         echo esc_html__( 'How to use Shared Files', 'shared-files' );

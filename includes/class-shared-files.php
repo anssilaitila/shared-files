@@ -143,6 +143,7 @@ class Shared_Files {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tab-single-file.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tab-exact-search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-notifications.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-toolbar.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-media-library.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-file-handling.php';
@@ -201,6 +202,7 @@ class Shared_Files {
         $plugin_admin_operations = new SharedFilesAdminOperations();
         $plugin_admin_inline_styles = new SharedFilesAdminInlineStyles();
         $plugin_admin_inline_scripts = new SharedFilesAdminInlineScripts();
+        $plugin_admin_toolbar = new SharedFilesAdminToolbar();
         $plugin_admin_shortcodes = new SharedFilesAdminShortcodes();
         $plugin_admin_download_log = new SharedFilesAdminDownloadLog();
         $plugin_admin_statistics = new SharedFilesAdminStatistics();
@@ -221,6 +223,8 @@ class Shared_Files {
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
         $this->loader->add_action( 'before_delete_post', $plugin_admin, 'delete_shared_file' );
+        $this->loader->add_action( 'in_admin_header', $plugin_admin_toolbar, 'admin_header' );
+        $this->loader->add_action( 'admin_body_class', $plugin_admin_toolbar, 'admin_body_class' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         // Maintenance
         $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );

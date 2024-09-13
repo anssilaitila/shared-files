@@ -20,7 +20,7 @@ class SharedFilesAdminSyncFiles {
     public function register_page_callback() {
         ?>
 
-    <div class="shared-files-sync-files">
+    <div class="shared-files-admin-page-content-container shared-files-sync-files">
       <h1><?php 
         echo esc_html__( 'Sync Files', 'shared-files' );
         ?></h1>

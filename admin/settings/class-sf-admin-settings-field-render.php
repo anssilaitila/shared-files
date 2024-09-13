@@ -10,7 +10,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Pro' ?>
+      <?php $plan_required = 'All Plans' ?>
 
       <?php $show_info = 0 ?>
 
@@ -170,7 +170,7 @@ class SharedFilesSettingsFieldRender {
         <?php if ($free): ?>
 
           <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
-            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Pro', 'shared-files') ?></div></div>
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('All Plans', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -339,7 +339,7 @@ class SharedFilesSettingsFieldRender {
         <?php if ($free): ?>
 
           <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
-            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Pro', 'shared-files') ?></div></div>
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('All Plans', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -373,7 +373,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Pro' ?>
+      <?php $plan_required = 'All Plans' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
@@ -596,7 +596,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Pro' ?>
+      <?php $plan_required = 'All Plans' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>
@@ -774,7 +774,7 @@ class SharedFilesSettingsFieldRender {
 
       <?php $free = 0 ?>
       <?php $free_class = '' ?>
-      <?php $plan_required = 'Pro' ?>
+      <?php $plan_required = 'All Plans' ?>
 
       <?php if (substr($field_name, 0, strlen('_FREE_')) === '_FREE_'): ?>
         <?php $free = 1 ?>

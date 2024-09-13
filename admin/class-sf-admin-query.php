@@ -22,10 +22,10 @@ class SharedFilesAdminQuery {
             echo '<pre>' . esc_html( var_dump( $path_parts ) ) . '</pre>';
             if ( sizeof( $path_parts ) > 1 ) {
                 echo '<pre>3</pre>';
-                echo '<pre>' . esc_html( var_dump( esc_html( $path_parts[count( $path_parts ) - 2] ) ) ) . '</pre>';
+                echo '<pre>' . var_dump( esc_html( $path_parts[count( $path_parts ) - 2] ) ) . '</pre>';
             }
             echo '<pre>4</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( end( $path_parts ) ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( end( $path_parts ) ) ) . '</pre>';
         }
         $sf_base = '';
         $sf_base_alt = '';
@@ -75,17 +75,17 @@ class SharedFilesAdminQuery {
         }
         if ( is_super_admin() && isset( $_GET['DEBUG_URL_PARTS'] ) ) {
             echo '<pre>sf_base</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( $path_parts[count( $path_parts ) - 3] ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( $path_parts[count( $path_parts ) - 3] ) ) . '</pre>';
             echo '<pre>sf_base</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( $sf_base ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( $sf_base ) ) . '</pre>';
             echo '<pre>sf_base_alt</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( $sf_base_alt ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( $sf_base_alt ) ) . '</pre>';
             echo '<pre>sf_query</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( $sf_query ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( $sf_query ) ) . '</pre>';
             echo '<pre>file_id</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( $file_id ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( $file_id ) ) . '</pre>';
             echo '<pre>sf_query_filename</pre>';
-            echo '<pre>' . esc_html( var_dump( esc_html( $sf_query_filename ) ) ) . '</pre>';
+            echo '<pre>' . var_dump( esc_html( $sf_query_filename ) ) . '</pre>';
             wp_die();
         }
         $file_id = intval( $file_id );

@@ -7,122 +7,126 @@ class SharedFilesSettingsTabs {
 
     <?php echo SharedFilesAdminHelpSupport::permalinks_alert() ?>
 
-    <form action="options.php" method="post" class="shared-files-settings-form">
+    <div class="shared-files-admin-page-content-container">
 
-      <h1><?php echo esc_html__('Shared Files Settings', 'shared-files') ?></h1>
+      <form action="options.php" method="post" class="shared-files-settings-form shared-files-admin-page">
 
-      <div class="shared-files-settings-tabs-container">
-        <ul class="shared-files-settings-tabs">
+        <h1><?php echo esc_html__('Shared Files Settings', 'shared-files') ?></h1>
 
-          <li class="shared-files-settings-tab-1-title" data-settings-container="shared-files-settings-tab-1">
-            <span><?php echo esc_html__('General settings', 'shared-files')?></span>
-          </li>
+        <div class="shared-files-settings-tabs-container">
+          <ul class="shared-files-settings-tabs">
 
-          <li class="shared-files-settings-tab-2-title" data-settings-container="shared-files-settings-tab-2">
-            <span><?php echo esc_html__('Technical', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-3-title" data-settings-container="shared-files-settings-tab-3">
-            <span><?php echo esc_html__('Layout', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-4-title" data-settings-container="shared-files-settings-tab-4">
-            <span><?php echo esc_html__('Custom fields', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-5-title" data-settings-container="shared-files-settings-tab-5">
-            <span><?php echo esc_html__('File upload', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-51-title" data-settings-container="shared-files-settings-tab-51">
-            <span><?php echo esc_html__('Allow more file types', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-6-title" data-settings-container="shared-files-settings-tab-6">
-            <span><?php echo esc_html__('Icons', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-7-title" data-settings-container="shared-files-settings-tab-7">
-            <span><?php echo esc_html__('Custom icons', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-8-title" data-settings-container="shared-files-settings-tab-8">
-            <span><?php echo esc_html__('Email', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-9-title" data-settings-container="shared-files-settings-tab-9">
-            <span><?php echo esc_html__('Admin list', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-10-title" data-settings-container="shared-files-settings-tab-10">
-            <span><?php echo esc_html__('File edit', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-13-title" data-settings-container="shared-files-settings-tab-13">
-            <span><?php echo esc_html__('Simple list', 'shared-files')?></span>
-          </li>
-
-          <?php if ( SharedFilesHelpers::isMin3() ): ?>
-
-            <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11">
-              <span><?php echo esc_html__('Favorites', 'shared-files')?></span>
+            <li class="shared-files-settings-tab-1-title" data-settings-container="shared-files-settings-tab-1">
+              <span><?php echo esc_html__('General settings', 'shared-files')?></span>
             </li>
 
-            <li class="shared-files-settings-tab-12-title" data-settings-container="shared-files-settings-tab-12">
-              <span><?php echo esc_html__('Wait countdown page', 'shared-files')?></span>
+            <li class="shared-files-settings-tab-2-title" data-settings-container="shared-files-settings-tab-2">
+              <span><?php echo esc_html__('Technical', 'shared-files')?></span>
             </li>
 
-          <?php endif; ?>
-
-          <li class="shared-files-settings-tab-14-title" data-settings-container="shared-files-settings-tab-14">
-            <span><?php echo esc_html__('Custom post type', 'shared-files')?></span>
-          </li>
-
-          <li class="shared-files-settings-tab-15-title" data-settings-container="shared-files-settings-tab-15">
-            <span><?php echo esc_html__('Lead generation', 'shared-files')?></span>
-          </li>
-
-          <?php $slug = 'single-file'; ?>
-          <li class="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>">
-            <span><?php echo esc_html__('Single file', 'shared-files')?></span>
-          </li>
-
-          <?php
-          $show_exact_search_tab = 0;
-
-          if ( SharedFilesHelpers::isMin2() ) {
-
-            $show_exact_search_tab = 1;
-
-          }
-          ?>
-
-          <?php if ( $show_exact_search_tab ): ?>
-
-            <?php $slug = 'exact-search'; ?>
-
-            <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
-              <span><?php echo esc_html__('Exact search', 'shared-files')?></span>
+            <li class="shared-files-settings-tab-3-title" data-settings-container="shared-files-settings-tab-3">
+              <span><?php echo esc_html__('Layout', 'shared-files')?></span>
             </li>
 
-          <?php endif; ?>
+            <li class="shared-files-settings-tab-4-title" data-settings-container="shared-files-settings-tab-4">
+              <span><?php echo esc_html__('Custom fields', 'shared-files')?></span>
+            </li>
 
-          <hr class="clear" />
-        </ul>
-      </div>
+            <li class="shared-files-settings-tab-5-title" data-settings-container="shared-files-settings-tab-5">
+              <span><?php echo esc_html__('File upload', 'shared-files')?></span>
+            </li>
 
-      <div class="shared-files-settings-container">
+            <li class="shared-files-settings-tab-51-title" data-settings-container="shared-files-settings-tab-51">
+              <span><?php echo esc_html__('Allow more file types', 'shared-files')?></span>
+            </li>
 
-        <div class="shared-files-settings-tab-1">
-          <?php settings_fields('shared-files'); ?>
-          <?php do_settings_sections('shared-files'); ?>
+            <li class="shared-files-settings-tab-6-title" data-settings-container="shared-files-settings-tab-6">
+              <span><?php echo esc_html__('Icons', 'shared-files')?></span>
+            </li>
+
+            <li class="shared-files-settings-tab-7-title" data-settings-container="shared-files-settings-tab-7">
+              <span><?php echo esc_html__('Custom icons', 'shared-files')?></span>
+            </li>
+
+            <li class="shared-files-settings-tab-8-title" data-settings-container="shared-files-settings-tab-8">
+              <span><?php echo esc_html__('Email', 'shared-files')?></span>
+            </li>
+
+            <li class="shared-files-settings-tab-9-title" data-settings-container="shared-files-settings-tab-9">
+              <span><?php echo esc_html__('Admin list', 'shared-files')?></span>
+            </li>
+
+            <li class="shared-files-settings-tab-10-title" data-settings-container="shared-files-settings-tab-10">
+              <span><?php echo esc_html__('File edit', 'shared-files')?></span>
+            </li>
+
+            <li class="shared-files-settings-tab-13-title" data-settings-container="shared-files-settings-tab-13">
+              <span><?php echo esc_html__('Simple list', 'shared-files')?></span>
+            </li>
+
+            <?php if ( SharedFilesHelpers::isMin3() ): ?>
+
+              <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11">
+                <span><?php echo esc_html__('Favorites', 'shared-files')?></span>
+              </li>
+
+              <li class="shared-files-settings-tab-12-title" data-settings-container="shared-files-settings-tab-12">
+                <span><?php echo esc_html__('Wait countdown page', 'shared-files')?></span>
+              </li>
+
+            <?php endif; ?>
+
+            <li class="shared-files-settings-tab-14-title" data-settings-container="shared-files-settings-tab-14">
+              <span><?php echo esc_html__('Custom post type', 'shared-files')?></span>
+            </li>
+
+            <li class="shared-files-settings-tab-15-title" data-settings-container="shared-files-settings-tab-15">
+              <span><?php echo esc_html__('Lead generation', 'shared-files')?></span>
+            </li>
+
+            <?php $slug = 'single-file'; ?>
+            <li class="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>">
+              <span><?php echo esc_html__('Single file', 'shared-files')?></span>
+            </li>
+
+            <?php
+            $show_exact_search_tab = 0;
+
+            if ( SharedFilesHelpers::isMin2() ) {
+
+              $show_exact_search_tab = 1;
+
+            }
+            ?>
+
+            <?php if ( $show_exact_search_tab ): ?>
+
+              <?php $slug = 'exact-search'; ?>
+
+              <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
+                <span><?php echo esc_html__('Exact search', 'shared-files')?></span>
+              </li>
+
+            <?php endif; ?>
+
+            <hr class="clear" />
+          </ul>
         </div>
 
-        <?php submit_button(); ?>
+        <div class="shared-files-settings-container">
 
-      </div>
+          <div class="shared-files-settings-tab-1">
+            <?php settings_fields('shared-files'); ?>
+            <?php do_settings_sections('shared-files'); ?>
+          </div>
 
-    </form>
+          <?php submit_button(); ?>
+
+        </div>
+
+      </form>
+
+    </div>
     <?php
   }
 
