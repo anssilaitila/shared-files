@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.33
+Stable tag: 1.7.34
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -276,6 +276,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.34 - 2024-09-24 =
+* (Free + All plans) Tweaks & fixes
+* (All plans) New setting: Show file description in REST API query results (Custom post type tab)
 
 = 1.7.33 - 2024-09-13 =
 * (Free + All plans) Tweaks & fixes

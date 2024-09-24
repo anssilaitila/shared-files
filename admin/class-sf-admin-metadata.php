@@ -129,7 +129,7 @@ class SharedFilesAdminMetadata {
             echo '<div class="shared-files-admin-support-box">';
             echo sprintf( wp_kses( 
                 /* translators: %s: link to the support forum */
-                __( 'If you have any questions in mind, please contact us at <a href="%s" target="_blank">the support forum</a>.', 'shared-files' ),
+                __( 'If you have any questions in mind, please contact the author at <a href="%s" target="_blank">the support forum</a>. The forum is actively monitored and any kind of feedback is welcome.', 'shared-files' ),
                 array(
                     'a' => array(
                         'href'   => array(),
@@ -146,11 +146,21 @@ class SharedFilesAdminMetadata {
         $pro_field_active = 0;
         $field_in_pro_class = 'shared-files-field-in-pro-greyed-out';
         $field_in_pro_more_features_class = 'shared-files-admin-free-more-features';
+        $field_in_all_plans_markup = '<div class="shared-files-field-in-pro-container">';
+        $field_in_all_plans_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
+        $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>All Plans</span></div>';
+        $field_in_all_plans_markup .= '</a>';
+        $field_in_all_plans_markup .= '</div>';
         $field_in_pro_markup = '<div class="shared-files-field-in-pro-container">';
         $field_in_pro_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
         $field_in_pro_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>';
         $field_in_pro_markup .= '</a>';
         $field_in_pro_markup .= '</div>';
+        $field_in_business_markup = '<div class="shared-files-field-in-pro-container">';
+        $field_in_business_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
+        $field_in_business_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Max</span></div>';
+        $field_in_business_markup .= '</a>';
+        $field_in_business_markup .= '</div>';
         $field_in_pro_markup_allowed_tags = [
             'div'  => [
                 'class' => [],
@@ -192,7 +202,7 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
         }
         echo '</div>';
         /* External URL END */
@@ -204,7 +214,7 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
         }
         echo '</div>';
         /* Expiration date END */
@@ -216,7 +226,7 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
         }
         echo '</div>';
         /* Notification email END */
@@ -243,7 +253,7 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
         }
         if ( $pro_field_active ) {
             $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-restrict-access' );
@@ -282,7 +292,7 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         $pro_field_active = 0;
         if ( !$pro_field_active ) {
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
         }
         echo '</div>';
         /* Limit downloads END */
@@ -319,31 +329,31 @@ class SharedFilesAdminMetadata {
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
             echo '<h4>' . esc_html__( 'Custom field 2' ) . '</h4>';
             echo '</div>';
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
             echo '<h4>' . esc_html__( 'Custom field 3' ) . '</h4>';
             echo '</div>';
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
             echo '<h4>' . esc_html__( 'Custom field 4' ) . '</h4>';
             echo '</div>';
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
             echo '<h4>' . esc_html__( 'Custom field 5' ) . '</h4>';
             echo '</div>';
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
             echo '<h4>' . esc_html__( 'Unlimited custom fields' ) . '</h4>';
             echo '</div>';
-            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
+            echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
         }
         /* Custom fields END */

@@ -8,8 +8,10 @@ class SharedFilesAdminCPT {
      */
     public function create_custom_post_type() {
         $s = get_option( 'shared_files_settings' );
+        $cpt_supports = array('title', 'thumbnail');
         $publicly_queryable = false;
         $exclude_from_search = true;
+        $show_description_in_rest_api = false;
         register_post_type( 'shared_file', [
             'labels'              => [
                 'name'          => 'Shared Files',
@@ -21,7 +23,7 @@ class SharedFilesAdminCPT {
                 'add_new'       => sanitize_text_field( __( 'Add New File', 'shared-files' ) ),
                 'search_items'  => sanitize_text_field( __( 'Search Files', 'shared-files' ) ),
             ],
-            'supports'            => array('title', 'thumbnail'),
+            'supports'            => $cpt_supports,
             'public'              => $publicly_queryable,
             'show_ui'             => true,
             'has_archive'         => false,

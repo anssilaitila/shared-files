@@ -38,6 +38,17 @@ class SharedFilesSettingsTabCustomPostType {
             );
         }
         add_settings_field(
+            'shared-files-' . $only_pro . 'show_description_in_rest_api',
+            sanitize_text_field( __( 'Show file description in REST API query results', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'show_description_in_rest_api',
+                'field_name' => $only_pro . 'show_description_in_rest_api',
+            )
+        );
+        add_settings_field(
             'shared-files-tag_slug',
             sanitize_text_field( __( 'Tag taxonomy', 'shared-files' ) ),
             array($field_render, 'tag_slug_render'),

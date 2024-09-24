@@ -32,7 +32,7 @@ class SharedFilesAdminInlineScripts {
                     $url = 'https://wordpress.org/support/plugin/shared-files/';
                     $support_html = sprintf( wp_kses( 
                         /* translators: %s: link to the support forum */
-                        __( 'If you have any questions in mind, please contact us at <a href="%s" target="_blank">the support forum</a>.', 'shared-files' ),
+                        __( 'If you have any questions in mind, please contact the author at <a href="%s" target="_blank">the support forum</a>. The forum is actively monitored and any kind of feedback is welcome.', 'shared-files' ),
                         array(
                             'a' => array(
                                 'href'   => array(),
