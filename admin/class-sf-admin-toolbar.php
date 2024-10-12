@@ -1,8 +1,7 @@
 <?php
 
 class SharedFilesAdminToolbar {
-    public function admin_body_class( $classes ) {
-        $screen = get_current_screen();
+    public static function get_admin_pages() {
         $admin_pages = [
             'edit-shared_file',
             'shared_file',
@@ -21,6 +20,12 @@ class SharedFilesAdminToolbar {
             'shared_file_page_shared-files-support',
             'shared_file_page_shared-files-categories-info',
         ];
+        return $admin_pages;
+    }
+
+    public function admin_body_class( $classes ) {
+        $screen = get_current_screen();
+        $admin_pages = SharedFilesAdminToolbar::get_admin_pages();
         $add_class = 0;
         if ( isset( $screen->id ) && ($screen_id = $screen->id) ) {
             $screen_post_type = '';
@@ -43,24 +48,7 @@ class SharedFilesAdminToolbar {
 
     public function admin_header() {
         $screen = get_current_screen();
-        $admin_pages = [
-            'edit-shared_file',
-            'shared_file',
-            'edit-shared-file-tag',
-            //      'edit-post_tag',
-            'edit-shared-file-category',
-            'shared_file_page_shared-files-sync-files',
-            'shared_file_page_shared-files-sync-media-library',
-            'settings_page_shared-files',
-            'settings_page_shared-files-account',
-            'shared_file_page_shared-files-download-log',
-            'shared_file_page_shared-files-statistics',
-            'shared_file_page_shared-files-contacts',
-            'shared_file_page_shared-files-shortcodes',
-            'shared_file_page_shared-files-restrict-access',
-            'shared_file_page_shared-files-support',
-            'shared_file_page_shared-files-categories-info',
-        ];
+        $admin_pages = SharedFilesAdminToolbar::get_admin_pages();
         $current_admin_page = '';
         $show_toolbar = 0;
         if ( isset( $screen->id ) && ($screen_id = $screen->id) ) {
@@ -321,6 +309,38 @@ class SharedFilesAdminToolbar {
             ?></h1>
       </div>
 
+    <?php 
+        }
+        ?>
+
+    <?php 
+    }
+
+    public function admin_footer() {
+        ?>
+
+    <?php 
+        $screen = get_current_screen();
+        $admin_pages = SharedFilesAdminToolbar::get_admin_pages();
+        $show_box = 0;
+        if ( isset( $screen->id ) && ($screen_id = $screen->id) ) {
+            $screen_post_type = '';
+            if ( isset( $screen->post_type ) ) {
+                $screen_post_type = $screen->post_type;
+            }
+            if ( $screen_post_type == 'shared_file' && $screen_id == 'edit-post_tag' ) {
+                $show_box = 1;
+            } elseif ( in_array( $screen_id, $admin_pages ) ) {
+                $show_box = 1;
+            } else {
+                $show_box = 0;
+            }
+        }
+        ?>
+
+    <?php 
+        if ( $show_box ) {
+            ?>
     <?php 
         }
         ?>

@@ -94,6 +94,13 @@ class SharedFilesAdminDownloadLog {
 
           <?php endif; ?>
 
+          <?php if ( isset( $s['log_enable_country'] ) ): ?>
+
+            <th><?php echo esc_html__('Country', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
+          <?php endif; ?>
+
 
           <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
 
@@ -166,6 +173,15 @@ class SharedFilesAdminDownloadLog {
 
               <?php endif; ?>
 
+              <?php if ( isset( $s['log_enable_country'] ) ): ?>
+
+                <td>
+                  <?php if (isset($row->user_country)): ?>
+                    <?php echo esc_html( $row->user_country ) ?>
+                  <?php endif; ?>
+                </td>
+
+              <?php endif; ?>
 
               <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
 

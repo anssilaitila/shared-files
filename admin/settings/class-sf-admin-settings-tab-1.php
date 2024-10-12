@@ -112,6 +112,30 @@ class SharedFilesSettingsTab1Content {
             )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'log_enable_country',
+            sanitize_text_field( __( 'Log downloader country', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'log_enable_country',
+                'field_name' => $only_pro . 'log_enable_country',
+                'class'      => 'shared-files-new-feature',
+            )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'log_enable_country_logging',
+            sanitize_text_field( __( 'Log debug data from country updates', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'log_enable_country_logging',
+                'field_name' => $only_pro . 'log_enable_country_logging',
+                'class'      => 'shared-files-new-feature',
+            )
+        );
+        add_settings_field(
             'shared-files-log_enable_user_agent',
             sanitize_text_field( __( 'Log downloader user agent', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),

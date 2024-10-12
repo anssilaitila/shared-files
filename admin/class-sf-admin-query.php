@@ -209,6 +209,7 @@ class SharedFilesAdminQuery {
                             'user_agent'   => $user_agent,
                             'referer_url'  => $referer_url,
                         ) );
+                        $inserted_id = $wpdb->insert_id;
                     }
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );

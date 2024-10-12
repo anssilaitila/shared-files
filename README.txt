@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.4.0
 Tested up to: 6.6
-Stable tag: 1.7.34
+Stable tag: 1.7.35
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -182,6 +182,9 @@ What is more important than having a statistics of your uploads! Shared Files pl
 * Set a file's expiration date
 * Limit the number of downloads for each file
 * Display files in the site search results
+* Log downloader's country and show most downloaded files by countries
+
+The country is determined by GeoLite2 data created by MaxMind, available from [maxmind.com](https://www.maxmind.com)
 
 == Demos ==
 
@@ -276,6 +279,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.35 - 2024-10-12 =
+* (Free + All plans) Bug fixes
+* (All plans) New feature: country detector (plugin settings, first tab). When the setting is active, download log will contain the downloader's country and there is also Top 50 list of countries in statistics.
 
 = 1.7.34 - 2024-09-24 =
 * (Free + All plans) Tweaks & fixes

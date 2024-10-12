@@ -65,17 +65,69 @@ class SharedFilesAdminMaintenance {
             $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        title           VARCHAR(255) NOT NULL,\n        message         TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
             // Table for file download log
             $table_name_download_log = $wpdb->prefix . 'shared_files_download_log';
-            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_download_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        file_id         VARCHAR(255) NOT NULL,\n        file_title      VARCHAR(255) NOT NULL,\n        file_name       VARCHAR(255) NOT NULL,\n        file_size       VARCHAR(255) NOT NULL,\n        ip              VARCHAR(255) NOT NULL,\n        download_cnt    MEDIUMINT NOT NULL,\n        report          TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        user_id         BIGINT(20) NOT NULL,\n        user_login      VARCHAR(255) NOT NULL,\n        user_name       VARCHAR(255) NOT NULL,\n        user_country    VARCHAR(255) NOT NULL,\n        user_agent      TEXT NOT NULL,\n        referer_url     TEXT NOT NULL,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
-            $column_exists = $wpdb->get_results( "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" . $table_name_download_log . "' AND column_name = 'user_id'" );
-            if ( !$column_exists ) {
-                $wpdb->query( "ALTER TABLE {$table_name_download_log} " . "ADD user_id      BIGINT(20) NOT NULL, " . "ADD user_login   VARCHAR(255) NOT NULL, " . "ADD user_name    VARCHAR(255) NOT NULL, " . "ADD user_country VARCHAR(255) NOT NULL, " . "ADD user_agent   TEXT NOT NULL, " . "ADD referer_url  TEXT NOT NULL " );
+            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_download_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        file_id         VARCHAR(255) NOT NULL,\n        file_title      VARCHAR(255) NOT NULL,\n        file_name       VARCHAR(255) NOT NULL,\n        file_size       VARCHAR(255) NOT NULL,\n        ip              VARCHAR(255) NOT NULL,\n        download_cnt    MEDIUMINT NOT NULL,\n        report          TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        user_id         BIGINT(20) NOT NULL,\n        user_login      VARCHAR(255) NOT NULL,\n        user_name       VARCHAR(255) NOT NULL,\n        user_country    VARCHAR(255) NOT NULL,\n        user_country_code    VARCHAR(255) NOT NULL,\n        user_agent      TEXT NOT NULL,\n        referer_url     TEXT NOT NULL,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
+            // user_id
+            $column_name = 'user_id';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` BIGINT(20) NOT NULL" );
+            }
+            // user_login
+            $column_name = 'user_login';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // user_name
+            $column_name = 'user_name';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // user_country
+            $column_name = 'user_country';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // user_country_code
+            $column_name = 'user_country_code';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // user_agent
+            $column_name = 'user_agent';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` TEXT NOT NULL" );
+            }
+            // referer_url
+            $column_name = 'referer_url';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` TEXT NOT NULL" );
             }
             // Table for contacts
             $table_name_contacts = $wpdb->prefix . 'shared_files_contacts';
             $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_contacts . " (\n        id                BIGINT(20) NOT NULL auto_increment,\n        file_id           VARCHAR(255) NOT NULL,\n        file_title        VARCHAR(255) NOT NULL,\n        file_name         VARCHAR(255) NOT NULL,\n        file_size         VARCHAR(255) NOT NULL,\n        embed_id          VARCHAR(255) NOT NULL,\n        ask_for_email_id  VARCHAR(255) NOT NULL,\n        email             VARCHAR(255) NOT NULL,\n        ip                VARCHAR(255) NOT NULL,\n        user_country      VARCHAR(255) NOT NULL,\n        user_agent        TEXT NOT NULL,\n        referer_url       TEXT NOT NULL,\n        title             VARCHAR(255) NOT NULL,\n        message           TEXT NOT NULL,\n        created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        name              VARCHAR(255) NOT NULL,\n        phone             VARCHAR(255) NOT NULL,\n        descr             TEXT NOT NULL,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
-            $column_exists = $wpdb->get_results( "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" . $table_name_contacts . "' AND column_name = 'name'" );
-            if ( !$column_exists ) {
-                $wpdb->query( "ALTER TABLE {$table_name_contacts} " . "ADD name   VARCHAR(255) NOT NULL, " . "ADD phone  VARCHAR(255) NOT NULL, " . "ADD descr  TEXT NOT NULL " );
+            // name
+            $column_name = 'name';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_contacts}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_contacts}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // phone
+            $column_name = 'phone';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_contacts}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_contacts}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // descr
+            $column_name = 'descr';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_contacts}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_contacts}` ADD `{$column_name}` TEXT NOT NULL" );
             }
             update_option( 'shared_files_version', SHARED_FILES_VERSION );
             SharedFilesHelpers::writeLog( 'Plugin updated to version ' . SHARED_FILES_VERSION, '' );

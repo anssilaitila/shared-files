@@ -225,6 +225,7 @@ class Shared_Files {
         $this->loader->add_action( 'before_delete_post', $plugin_admin, 'delete_shared_file' );
         $this->loader->add_action( 'in_admin_header', $plugin_admin_toolbar, 'admin_header' );
         $this->loader->add_action( 'admin_body_class', $plugin_admin_toolbar, 'admin_body_class' );
+        $this->loader->add_action( 'in_admin_footer', $plugin_admin_toolbar, 'admin_footer' );
         $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_settings_link' );
         // Maintenance
         $this->loader->add_filter( 'cron_schedules', $plugin_admin_maintenance, 'add_cron_interval' );
@@ -234,6 +235,7 @@ class Shared_Files {
         $this->loader->add_filter( 'admin_init', $plugin_admin_operations, 'operations' );
         // CPT
         $this->loader->add_action( 'init', $plugin_admin_cpt, 'create_custom_post_type' );
+        //    $this->loader->add_action('wp_insert_post', $plugin_admin_cpt, 'insert_post', 10, 3);
         // Custom metadata for a file
         $this->loader->add_action( 'save_post', $plugin_admin_metadata, 'save_custom_meta_data' );
         $this->loader->add_action( 'add_meta_boxes_shared_file', $plugin_admin_metadata, 'adding_custom_meta_boxes' );
