@@ -36,4 +36,25 @@ class SharedFilesAdminCPT {
         remove_post_type_support( 'shared_file', 'editor' );
     }
 
+    public function after_insert_post(
+        $post_id,
+        $post,
+        $update,
+        $post_before
+    ) {
+        $post_type = '';
+        $post_status = '';
+        if ( isset( $post->post_type ) ) {
+            $post_type = $post->post_type;
+        }
+        if ( isset( $post->post_status ) ) {
+            $post_status = $post->post_status;
+        }
+        if ( $post_type != 'shared_file' || $post_status == 'auto-draft' || wp_is_post_revision( $post_id ) ) {
+            return;
+        }
+        if ( $post_type == 'shared_file' && $post_id ) {
+        }
+    }
+
 }

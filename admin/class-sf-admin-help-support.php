@@ -260,13 +260,26 @@ class SharedFilesAdminHelpSupport {
 
         </ul>
 
-        <p><?php 
-        echo esc_html__( 'If the issue still persists, we are happy to help at', 'shared-files' );
-        ?> <a href="https://www.sharedfilespro.com/support/" target="_blank">sharedfilespro.com/support/</a>. <?php 
-        echo esc_html__( 'You can just send the debug info below and we will take a look at it.', 'shared-files' );
-        ?> <?php 
-        echo esc_html__( 'Thank you!', 'shared-files' );
-        ?></p>
+        <?php 
+        $is_premium = 0;
+        ?>
+
+        <?php 
+        ?>
+
+        <?php 
+        if ( !$is_premium ) {
+            ?>
+
+          <p><?php 
+            echo esc_html__( 'If the issue still persists, we are happy to help at', 'shared-files' );
+            ?> <a href="https://wordpress.org/support/plugin/shared-files/" target="_blank">the support forum</a>. <?php 
+            echo esc_html__( 'The forum is actively monitored by the plugin author.', 'shared-files' );
+            ?></p>
+
+        <?php 
+        }
+        ?>
 
       </div>
 
@@ -278,11 +291,14 @@ class SharedFilesAdminHelpSupport {
 
         <p>
           <?php 
-        echo sprintf( wp_kses( __( 'If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating.', 'shared-files' ), array(
+        echo sprintf( wp_kses( __( 'If you like <strong>Shared Files</strong> please consider leaving a ★★★★★ rating. It helps the plugin in getting more audience.', 'shared-files' ), array(
             'strong' => array(),
         ) ) );
         ?>
         </p>
+
+        <?php 
+        ?>
 
         <p>
           <?php 
@@ -296,15 +312,53 @@ class SharedFilesAdminHelpSupport {
 
       </div>
 
+    </div>
+    <?php 
+    }
+
+    public function register_debug_page() {
+        $menu_pos = 4;
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            $menu_pos = 5;
+        }
+        $menu_pos = 1000;
+        add_submenu_page(
+            'edit.php?post_type=shared_file',
+            sanitize_text_field( __( 'Debug info', 'shared-files' ) ),
+            '<span style="font-size: 15px; margin: 0 2px 0 5px;">&#8627;</span> ' . sanitize_text_field( __( 'Debug info', 'shared-files' ) ),
+            'manage_options',
+            'shared-files-debug-info',
+            [$this, 'register_debug_page_callback'],
+            $menu_pos
+        );
+    }
+
+    public function register_debug_page_callback() {
+        ?>
+
+    <?php 
+        $s = get_option( 'shared_files_settings' );
+        ?>
+
+    <?php 
+        echo SharedFilesAdminHelpSupport::permalinks_alert();
+        ?>
+
+    <?php 
+        $num = 0;
+        ?>
+
+    <div class="wrap shared-files-help-support shared-files-admin-page">
+
+      <h2 style="display: none;"></h2>
+
       <div class="shared-files-admin-section">
 
         <h2><?php 
-        echo esc_html__( 'Debug Info', 'shared-files' );
-        ?> <button class="shared-files-toggle-debug-info"><?php 
-        echo esc_html__( 'Open', 'shared-files' );
-        ?></button></h2>
+        echo esc_html__( 'A collection of useful debug information', 'shared-files' );
+        ?></h2>
 
-        <div class="shared-files-debug-info-container">
+        <div>
 
           <div class="shared-files-info-small">
             <p><?php 
@@ -593,8 +647,13 @@ class SharedFilesAdminHelpSupport {
 
           <?php 
         global $wpdb;
-        $table_name = $wpdb->prefix . 'shared_files_log';
-        $msg = $wpdb->get_results( "SELECT * FROM {$table_name} ORDER BY id DESC LIMIT 200" );
+        $items_per_page = 200;
+        $page = ( isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1 );
+        $offset = $page * $items_per_page - $items_per_page;
+        $query = "SELECT * FROM {$wpdb->prefix}shared_files_log";
+        $total_query = "SELECT COUNT(1) FROM ({$query}) AS combined_table";
+        $total = $wpdb->get_var( $total_query );
+        $results = $wpdb->get_results( $query . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $items_per_page, OBJECT );
         ?>
 
           <table class="shared-files-debug-log" style="min-width: 400px;">
@@ -612,11 +671,11 @@ class SharedFilesAdminHelpSupport {
           </tr>
 
           <?php 
-        if ( sizeof( $msg ) > 0 ) {
+        if ( sizeof( $results ) > 0 ) {
             ?>
 
             <?php 
-            foreach ( $msg as $row ) {
+            foreach ( $results as $row ) {
                 ?>
               <tr>
 
@@ -665,11 +724,29 @@ class SharedFilesAdminHelpSupport {
         }
         ?>
 
+          </table>
+
+          <div class="shared-files-admin-pagination-container">
+
+            <?php 
+        echo paginate_links( array(
+            'base'      => add_query_arg( 'log-page', '%#%' ),
+            'format'    => '',
+            'prev_text' => __( '&laquo;' ),
+            'next_text' => __( '&raquo;' ),
+            'total'     => ceil( $total / $items_per_page ),
+            'current'   => $page,
+        ) );
+        ?>
+
+          </div>
+
         </div>
 
       </div>
 
     </div>
+
     <?php 
     }
 

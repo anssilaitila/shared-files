@@ -7,7 +7,7 @@ class SharedFilesAdminHelpers {
     $html = '';
 
     $html .= '<div class="sf-admin-pro-feature">';
-    $html .= '<span>' . sanitize_text_field( __('This feature is available in the Pro version.', 'shared-files') ) . '</span>';
+    $html .= '<span>' . sanitize_text_field( __('This feature is available in the paid plans.', 'shared-files') ) . '</span>';
     $html .= '<a class="shared-files-admin-button-link" href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
     $html .= '</div>';
 
@@ -20,7 +20,7 @@ class SharedFilesAdminHelpers {
     $html = '';
 
     $html .= '<div class="sf-admin-pro-feature">';
-    $html .= '<span>' . sanitize_text_field( __('More features available in the Pro version.', 'shared-files') ) . '</span>';
+    $html .= '<span>' . sanitize_text_field( __('More features available in the paid plans.', 'shared-files') ) . '</span>';
     $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
     $html .= '</div>';
 
@@ -33,7 +33,7 @@ class SharedFilesAdminHelpers {
     $html = '';
 
     $html .= '<div class="sf-admin-pro-feature">';
-    $html .= '<span>' . sanitize_text_field( __('More settings available in the Pro version.', 'shared-files') ) . '</span>';
+    $html .= '<span>' . sanitize_text_field( __('More settings available in the paid plans.', 'shared-files') ) . '</span>';
     $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
     $html .= '</div>';
 

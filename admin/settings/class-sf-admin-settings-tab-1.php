@@ -323,6 +323,17 @@ class SharedFilesSettingsTab1Content {
             )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'default_expiration_date',
+            sanitize_text_field( __( 'Set default expiration date to this date, value added to the file upload date', 'shared-files' ) ),
+            array($field_render, 'expiration_date_render'),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'default_expiration_date',
+                'field_name' => $only_pro . 'default_expiration_date',
+            )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'delete_expired_files',
             sanitize_text_field( __( 'Delete expired files (files will be moved to trash when the expiration date is reached)', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),

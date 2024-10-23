@@ -31,7 +31,7 @@ class SharedFilesAdminShortcodes {
 
           <?php if (shared_files_fs()->can_use_premium_code()): ?>
 
-            <p><?php echo esc_html__('If you have any questions regarding the shortcodes, you may contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
+            <p><?php echo esc_html__('If you have any questions regarding the shortcodes, please contact the author at', 'shared-files') ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
 
           <?php else: ?>
 
@@ -41,7 +41,7 @@ class SharedFilesAdminShortcodes {
             echo sprintf(
               wp_kses(
                 /* translators: %s: link to the support forum */
-                __('If you have any questions regarding the shortcodes, you may contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files'),
+                __('If you have any questions regarding the shortcodes, please contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files'),
                 array('a' => array('href' => array(), 'target' => array()))
               ),
               esc_url($url)

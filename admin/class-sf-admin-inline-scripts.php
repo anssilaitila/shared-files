@@ -10,6 +10,8 @@ class SharedFilesAdminInlineScripts {
         $js = '';
         if ( $current_screen_id == 'shared_file_page_shared-files-download-log' ) {
             $js .= "jQuery( document ).ready( function(\$) {\n\n        \$('.shared-files-empty-download-log-form').submit(function() {\n\n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the download log?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n\n        });\n\n      });";
+        } elseif ( $current_screen_id == 'shared_file_page_shared-files-search-log' ) {
+            $js .= "jQuery( document ).ready( function(\$) {\n\n        \$('.shared-files-empty-search-log-form').submit(function() {\n\n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the search log?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n\n        });\n\n      });";
         } elseif ( $current_screen_id == 'shared_file_page_shared-files-contacts' ) {
             $js .= "jQuery( document ).ready( function(\$) {\n\n        \$('.shared-files-empty-contacts-form').submit(function() {\n\n          return confirm('" . esc_js( __( 'Are you sure that you want to empty the contacts?', 'shared-files' ) ) . ' ' . esc_js( __( 'This action is irreversible.', 'shared-files' ) ) . "');\n\n        });\n\n      });";
         } elseif ( $current_screen_id === 'shared_file' ) {

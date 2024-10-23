@@ -41,7 +41,7 @@ class ShortcodeSharedFilesSimple {
             'key'     => '_sf_not_public',
             'compare' => 'NOT EXISTS',
         );
-        $html .= '<div class="' . $elem_class . ' shared-files-simple-container" />';
+        $html .= '<div class="' . $elem_class . ' shared-files-simple-container" data-search-type="' . sanitize_title( SharedFilesHelpers::searchType() ) . '" data-post-id="' . intval( get_the_ID() ) . '">';
         $html .= '<div class="shared-files-simple-text-contact" style="display: none;">' . sanitize_text_field( __( 'contact', 'shared-files' ) ) . '</div>';
         $html .= '<div class="shared-files-simple-text-contacts" style="display: none;">' . sanitize_text_field( __( 'contacts', 'shared-files' ) ) . '</div>';
         $html .= '<div class="shared-files-simple-text-found" style="display: none;">' . sanitize_text_field( __( 'found', 'shared-files' ) ) . '</div>';

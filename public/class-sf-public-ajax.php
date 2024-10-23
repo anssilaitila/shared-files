@@ -1,6 +1,45 @@
 <?php
 
 class SharedFilesPublicAjax {
+    public function search_log() {
+        $s = get_option( 'shared_files_settings' );
+        if ( isset( $s['enable_search_log'] ) ) {
+            $search_term = '';
+            $user_ip = '';
+            $post_id = 0;
+            $permalink = '';
+            $user_agent = '';
+            $referer_url = '';
+            $min_chars = 3;
+            if ( isset( $s['esl_search_term_min_chars'] ) && $s['esl_search_term_min_chars'] ) {
+                $min_chars = intval( $s['esl_search_term_min_chars'] );
+            }
+            if ( isset( $s['esl_search_term'] ) ) {
+                if ( isset( $_POST['search'] ) && $_POST['search'] ) {
+                    $search_term = sanitize_text_field( $_POST['search'] );
+                }
+            }
+            if ( strlen( $search_term ) >= $min_chars ) {
+                if ( isset( $s['esl_user_agent'] ) ) {
+                    if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
+                        $user_agent = sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] );
+                    }
+                }
+                global $wpdb;
+                $wpdb->insert( $wpdb->prefix . 'shared_files_search_log', array(
+                    'user_ip'     => $user_ip,
+                    'post_id'     => $post_id,
+                    'permalink'   => $permalink,
+                    'search'      => $search_term,
+                    'user_agent'  => $user_agent,
+                    'referer_url' => $referer_url,
+                ) );
+                $inserted_id = $wpdb->insert_id;
+            }
+        }
+        echo '';
+    }
+
     public function sf_get_files() {
         $html = '';
         $tag_slug = '';

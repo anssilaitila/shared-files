@@ -56,6 +56,8 @@ class SharedFilesSettingsFieldRender {
           <?php $plan_required = 'Pro' ?>
         <?php elseif ($field_name == '_FREE_file_upload_enable_restrict_access_for_roles'): ?>
           <?php $plan_required = 'Pro' ?>
+        <?php elseif ($field_name == '_FREE_send_file_uploaded_email_to_users'): ?>
+          <?php $plan_required = 'Pro' ?>
 
         <?php elseif (strpos($field_name, 'activate_favorite_files') !== false): ?>
           <?php $plan_required = 'Max' ?>
@@ -138,7 +140,7 @@ class SharedFilesSettingsFieldRender {
             <?php echo esc_html__("Show the files in the site search results. Proper function requires also the single file pages enabled.", 'shared-files') ?>
           </div>
 
-      <?php elseif ($field_name == 'log_enable_country' || $field_name == '_FREE_log_enable_country'): ?>
+      <?php elseif ($field_name == 'log_enable_country' || $field_name == '_FREE_log_enable_country' || $field_name == 'esl_user_country' || $field_name == '_FREE_esl_user_country'): ?>
 
           <div class="general-info">
             <div class="shared-files-new-feature-container">
@@ -156,7 +158,7 @@ class SharedFilesSettingsFieldRender {
             echo sprintf(
               wp_kses(
                 /* translators: %s: link to maxmind.com, the provider of geographical data */
-                __('The country is determined by GeoLite2 data created by MaxMind, available from <a href="%s" target="_blank">maxmind.com</a>.', 'shared-files'),
+                __('This product includes GeoLite2 data created by MaxMind, available from <a href="%s" target="_blank">maxmind.com</a>.', 'shared-files'),
                 array('a' => array('href' => array(), 'target' => array()))
               ),
               esc_url($url)
@@ -948,6 +950,45 @@ class SharedFilesSettingsFieldRender {
           <option value="post_date" <?php echo $order_by == 'post_date' ? 'selected' : ''; ?>><?php echo esc_html__('File publish date (post date)', 'shared-files'); ?></option>
           <option value="_sf_main_date" <?php echo $order_by == '_sf_main_date' ? 'selected' : ''; ?>><?php echo esc_html__('File date', 'shared-files'); ?></option>
           <option value="title" <?php echo $order_by == 'title' ? 'selected' : ''; ?>><?php echo esc_html__('File title', 'shared-files'); ?></option>
+      </select>
+      <?php
+
+    }
+  }
+
+  public function expiration_date_render($args) {
+
+    if ($args['field_name']) {
+      $options = get_option('shared_files_settings');
+      $val = '';
+
+      if (isset($options[$args['field_name']])) {
+        $val = sanitize_text_field( $options[$args['field_name']] );
+      }
+      ?>
+      <select name="shared_files_settings[<?php echo esc_attr( $args['field_name'] ) ?>]">
+        <option value="" <?php echo $val == 'post_date' ? 'selected' : ''; ?>><?php echo esc_html__('No expiration date', 'shared-files'); ?></option>
+        <option value="1_week"    <?php echo $val == '1_week' ? 'selected' : ''; ?>   ><?php echo esc_html__('1 week', 'shared-files'); ?></option>
+        <option value="2_weeks"   <?php echo $val == '2_weeks' ? 'selected' : ''; ?>  ><?php echo esc_html__('2 weeks', 'shared-files'); ?></option>
+        <option value="3_weeks"   <?php echo $val == '3_weeks' ? 'selected' : ''; ?>  ><?php echo esc_html__('3 weeks', 'shared-files'); ?></option>
+        <option value="4_weeks"   <?php echo $val == '4_weeks' ? 'selected' : ''; ?>  ><?php echo esc_html__('4 weeks', 'shared-files'); ?></option>
+        <option value="30_days"   <?php echo $val == '30_days' ? 'selected' : ''; ?>  ><?php echo esc_html__('30 days', 'shared-files'); ?></option>
+        <option value="1_months"  <?php echo $val == '1_months' ? 'selected' : ''; ?> ><?php echo esc_html__('1 month', 'shared-files'); ?></option>
+        <option value="2_months"  <?php echo $val == '2_months' ? 'selected' : ''; ?> ><?php echo esc_html__('2 months', 'shared-files'); ?></option>
+        <option value="3_months"  <?php echo $val == '3_months' ? 'selected' : ''; ?> ><?php echo esc_html__('3 months', 'shared-files'); ?></option>
+        <option value="4_months"  <?php echo $val == '4_months' ? 'selected' : ''; ?> ><?php echo esc_html__('4 months', 'shared-files'); ?></option>
+        <option value="5_months"  <?php echo $val == '5_months' ? 'selected' : ''; ?> ><?php echo esc_html__('5 months', 'shared-files'); ?></option>
+        <option value="6_months"  <?php echo $val == '6_months' ? 'selected' : ''; ?> ><?php echo esc_html__('6 months', 'shared-files'); ?></option>
+        <option value="7_months"  <?php echo $val == '7_months' ? 'selected' : ''; ?> ><?php echo esc_html__('7 months', 'shared-files'); ?></option>
+        <option value="8_months"  <?php echo $val == '8_months' ? 'selected' : ''; ?> ><?php echo esc_html__('8 months', 'shared-files'); ?></option>
+        <option value="9_months"  <?php echo $val == '9_months' ? 'selected' : ''; ?> ><?php echo esc_html__('9 months', 'shared-files'); ?></option>
+        <option value="10_months" <?php echo $val == '10_months' ? 'selected' : ''; ?>><?php echo esc_html__('10 months', 'shared-files'); ?></option>
+        <option value="11_months" <?php echo $val == '11_months' ? 'selected' : ''; ?>><?php echo esc_html__('11 months', 'shared-files'); ?></option>
+        <option value="1_year" <?php echo $val == '1_year' ? 'selected' : ''; ?>><?php echo esc_html__('1 year', 'shared-files'); ?></option>
+        <option value="2_years" <?php echo $val == '2_years' ? 'selected' : ''; ?>><?php echo esc_html__('2 years', 'shared-files'); ?></option>
+        <option value="3_years" <?php echo $val == '3_years' ? 'selected' : ''; ?>><?php echo esc_html__('3 years', 'shared-files'); ?></option>
+        <option value="4_years" <?php echo $val == '4_years' ? 'selected' : ''; ?>><?php echo esc_html__('4 years', 'shared-files'); ?></option>
+        <option value="5_years" <?php echo $val == '5_years' ? 'selected' : ''; ?>><?php echo esc_html__('5 years', 'shared-files'); ?></option>
       </select>
       <?php
 

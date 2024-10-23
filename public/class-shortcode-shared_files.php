@@ -52,7 +52,7 @@ class ShortcodeSharedFiles {
             'compare' => 'NOT EXISTS',
         );
         //    $meta_query_hide_not_public = array();
-        $html .= '<div class="' . $elem_class . ' shared-files-main-container" data-elem-class="' . $elem_class . '">';
+        $html .= '<div class="' . $elem_class . ' shared-files-main-container" data-elem-class="' . $elem_class . '" data-search-type="' . sanitize_title( SharedFilesHelpers::searchType() ) . '" data-post-id="' . intval( get_the_ID() ) . '">';
         if ( isset( $_GET ) && isset( $_GET['shared-files-update'] ) ) {
             $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __( 'File successfully updated.', 'shared-files' ) ) . '</div>';
         } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_editable_file'] ) && isset( $_GET['sc'] ) ) {

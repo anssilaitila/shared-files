@@ -32,6 +32,7 @@ class Shared_Files_Settings {
         $tab_content_lead_generation = new SharedFilesSettingsTabLeadGeneration();
         $tab_content_single_file = new SharedFilesSettingsTabSingleFile();
         $tab_content_exact_search = new SharedFilesSettingsTabExactSearch();
+        $tab_content_search_log = new SharedFilesSettingsTabSearchLog();
         $only_pro = '_FREE_';
         $s = get_option( 'shared_files_settings' );
         register_setting( 'shared-files', 'shared_files_settings' );
@@ -74,6 +75,7 @@ class Shared_Files_Settings {
             // Exact search
             $tab_content_exact_search->init( 'exact-search' );
         }
+        $tab_content_search_log->init( 'search-log' );
     }
 
 }

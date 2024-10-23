@@ -109,6 +109,12 @@ class SharedFilesSettingsTabs {
 
             <?php endif; ?>
 
+            <?php $slug = 'search-log'; ?>
+
+            <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
+              <span><?php echo esc_html__('Search log', 'shared-files')?></span>
+            </li>
+
             <hr class="clear" />
           </ul>
         </div>
@@ -343,6 +349,19 @@ class SharedFilesSettingsTabs {
   public function shared_files_settings_tab_exact_search_more_callback() {
 
     echo '<hr />';
+
+  }
+
+  public function shared_files_settings_tab_search_log_callback() {
+
+    $slug = 'search-log';
+
+    echo '</div>';
+    echo '<div class="shared-files-settings-tab-' . esc_attr( $slug ) . '">';
+
+    echo '<h2>' . esc_html__('Search log', 'shared-files') . '</h2>';
+
+    echo '<p>' . esc_html__('These settings are valid for all shortcodes and blocks that contain the search input field.', 'contact-list') . '</p>';
 
   }
 

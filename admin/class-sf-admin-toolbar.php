@@ -13,11 +13,13 @@ class SharedFilesAdminToolbar {
             'settings_page_shared-files',
             'settings_page_shared-files-account',
             'shared_file_page_shared-files-download-log',
+            'shared_file_page_shared-files-search-log',
             'shared_file_page_shared-files-statistics',
             'shared_file_page_shared-files-contacts',
             'shared_file_page_shared-files-shortcodes',
             'shared_file_page_shared-files-restrict-access',
             'shared_file_page_shared-files-support',
+            'shared_file_page_shared-files-debug-info',
             'shared_file_page_shared-files-categories-info',
         ];
         return $admin_pages;
@@ -158,12 +160,6 @@ class SharedFilesAdminToolbar {
             }
             ?>
 
-            <a href="<?php 
-            echo esc_url_raw( get_admin_url( null, './edit-tags.php?taxonomy=' . SHARED_FILES_TAG_SLUG . '&post_type=shared_file' ) );
-            ?>"><?php 
-            echo esc_html__( 'Sync Files', 'shared-files' );
-            ?></a>
-
             <span class="shared-files-admin-toolbar-divider"></span>
 
             <a class="shared-files-btn-alt" href="<?php 
@@ -192,21 +188,6 @@ class SharedFilesAdminToolbar {
 
             <span class="shared-files-admin-toolbar-divider"></span>
 
-            <a href="<?php 
-            echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-download-log' ) );
-            ?>"><?php 
-            echo esc_html__( 'Download log', 'shared-files' );
-            ?></a>
-            <a href="<?php 
-            echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-statistics' ) );
-            ?>"><?php 
-            echo esc_html__( 'Statistics', 'shared-files' );
-            ?></a>
-            <a href="<?php 
-            echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-contacts' ) );
-            ?>"><?php 
-            echo esc_html__( 'Leads', 'shared-files' );
-            ?></a>
             <a href="<?php 
             echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-shortcodes' ) );
             ?>"><?php 
@@ -274,6 +255,9 @@ class SharedFilesAdminToolbar {
                 case 'shared_file_page_shared-files-download-log':
                     $page_title = sanitize_text_field( __( 'Download log', 'shared-files' ) );
                     break;
+                case 'shared_file_page_shared-files-search-log':
+                    $page_title = sanitize_text_field( __( 'Search log', 'shared-files' ) );
+                    break;
                 case 'shared_file_page_shared-files-statistics':
                     $page_title = sanitize_text_field( __( 'Statistics', 'shared-files' ) );
                     break;
@@ -288,6 +272,9 @@ class SharedFilesAdminToolbar {
                     break;
                 case 'shared_file_page_shared-files-support':
                     $page_title = sanitize_text_field( __( 'Support', 'shared-files' ) );
+                    break;
+                case 'shared_file_page_shared-files-debug-info':
+                    $page_title = sanitize_text_field( __( 'Debug info', 'shared-files' ) );
                     break;
                 case 'shared_file_page_shared-files-categories-info':
                     $page_title = sanitize_text_field( __( 'Categories', 'shared-files' ) );

@@ -1,6 +1,15 @@
 <?php
 
 class SharedFilesHelpers {
+    public static function searchType() {
+        $s = get_option( 'shared_files_settings' );
+        $type = 0;
+        if ( isset( $s['enable_search_log'] ) ) {
+            $type = 1;
+        }
+        return $type;
+    }
+
     public static function getExportUploadDir() {
         $dir = wp_get_upload_dir()['basedir'] . '/shared-files/_export/';
         $index_file = $dir . 'index.php';

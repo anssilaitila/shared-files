@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.4.0
-Tested up to: 6.6
-Stable tag: 1.7.35
+Tested up to: 6.7
+Stable tag: 1.7.36
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -35,6 +35,7 @@ Shared Files provides an interface for uploading and managing a large group of d
 * Top 50 most popular files
 * Collect leads by asking for contact info before showing the file(s)
 * Download log of all file downloads
+* Search log of all searches made in the front end
 * Download counter for all files
 * Front end search from all files
 * Add tags to files
@@ -184,7 +185,7 @@ What is more important than having a statistics of your uploads! Shared Files pl
 * Display files in the site search results
 * Log downloader's country and show most downloaded files by countries
 
-The country is determined by GeoLite2 data created by MaxMind, available from [maxmind.com](https://www.maxmind.com)
+This product includes GeoLite2 data created by MaxMind, available from [maxmind.com](https://www.maxmind.com)
 
 == Demos ==
 
@@ -280,9 +281,14 @@ Anyone who can open the page which contains the file list is able to download th
 
 == Changelog ==
 
+= 1.7.36 - 2024-10-23 =
+* (All plans) New feature: Send an email notify to users when a file is uploaded (files with restricted permissions) (see plugin settings, Email tab)
+* (All plans) New feature: Set default expiration date to all uploaded files (plugin settings, first tab)
+* (Free + All plans) New feature: Search log. It is now possible to log all searches made in the front end. Can be activated from the plugin settings, Search log tab.
+
 = 1.7.35 - 2024-10-12 =
-* (Free + All plans) Bug fixes
 * (All plans) New feature: country detector (plugin settings, first tab). When the setting is active, download log will contain the downloader's country and there is also Top 50 list of countries in statistics.
+* (Free + All plans) Bug fixes
 
 = 1.7.34 - 2024-09-24 =
 * (Free + All plans) Tweaks & fixes

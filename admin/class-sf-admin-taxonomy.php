@@ -68,12 +68,16 @@ class SharedFilesAdminTaxonomy {
         ?>
 
       <h2 style="margin-top: 24px;"><?php 
-        echo esc_html__( 'Category password protection and file sync in Pro:' );
+        echo esc_html__( 'Category password protection and file sync in the paid plans:' );
         ?></h2>
+
+      <p style="margin-bottom: 18px;"><?php 
+        echo esc_html__( 'It is possible to set password and define a folder for file sync for each category, an example here below when editing a single category.' );
+        ?></p>
 
       <img src="<?php 
         echo esc_url_raw( SHARED_FILES_URI );
-        ?>img/category-password-protection.png" style="max-width: 770px; height: auto; border: 1px solid #bbb;" />
+        ?>img/category-password-protection-v2.png" width="1330" height="1534" style="width: 100%; max-width: 840px; height: auto; border: 1px solid #bbb;" />
 
     </div>
     <?php 

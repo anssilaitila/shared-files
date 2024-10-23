@@ -24,6 +24,17 @@ class SharedFilesSettingsTabEmail {
                 'field_name' => $only_pro . 'send_email',
             )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'send_file_uploaded_email_to_users',
+            sanitize_text_field( __( 'Send an email notify to users when a file is uploaded (files with restricted permissions)', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'send_file_uploaded_email_to_users',
+                'field_name' => $only_pro . 'send_file_uploaded_email_to_users',
+            )
+        );
         if ( SharedFilesHelpers::isMin2() ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'trigger_download_email',

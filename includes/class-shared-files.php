@@ -122,6 +122,7 @@ class Shared_Files {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-contacts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-help-support.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-helpers.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-search-log.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tabs.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-field-render.php';
@@ -142,6 +143,7 @@ class Shared_Files {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tab-lead-generation.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tab-single-file.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tab-exact-search.php';
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/settings/class-sf-admin-settings-tab-search-log.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-notifications.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-toolbar.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-sync-files.php';
@@ -213,6 +215,7 @@ class Shared_Files {
         $plugin_admin_list = new SharedFilesAdminList();
         $plugin_admin_metadata = new SharedFilesAdminMetadata();
         $plugin_admin_notifications = new SharedFilesAdminNotifications();
+        $plugin_admin_search_log = new SharedFilesAdminSearchLog();
         $plugin_admin_sync_files = new SharedFilesAdminSyncFiles();
         $plugin_admin_sync_media_library = new SharedFilesAdminSyncMediaLibrary();
         $plugin_admin_file_handling = new SharedFilesFileHandling();
@@ -235,7 +238,13 @@ class Shared_Files {
         $this->loader->add_filter( 'admin_init', $plugin_admin_operations, 'operations' );
         // CPT
         $this->loader->add_action( 'init', $plugin_admin_cpt, 'create_custom_post_type' );
-        //    $this->loader->add_action('wp_insert_post', $plugin_admin_cpt, 'insert_post', 10, 3);
+        $this->loader->add_action(
+            'wp_after_insert_post',
+            $plugin_admin_cpt,
+            'after_insert_post',
+            0,
+            4
+        );
         // Custom metadata for a file
         $this->loader->add_action( 'save_post', $plugin_admin_metadata, 'save_custom_meta_data' );
         $this->loader->add_action( 'add_meta_boxes_shared_file', $plugin_admin_metadata, 'adding_custom_meta_boxes' );
@@ -306,6 +315,8 @@ class Shared_Files {
         // Sync files
         $this->loader->add_action( 'admin_menu', $plugin_admin_sync_files, 'register_page' );
         $this->loader->add_action( 'admin_menu', $plugin_admin_sync_media_library, 'register_page' );
+        // Search log
+        $this->loader->add_action( 'admin_menu', $plugin_admin_search_log, 'register_search_log_page' );
         // Settings
         $this->loader->add_action( 'admin_menu', $plugin_settings, 'shared_files_add_admin_menu' );
         $this->loader->add_action( 'admin_init', $plugin_settings, 'shared_files_settings_init' );
@@ -321,6 +332,7 @@ class Shared_Files {
         $this->loader->add_action( 'admin_menu', $plugin_admin_shortcodes, 'register_shortcodes_page' );
         // Help & support
         $this->loader->add_action( 'admin_menu', $plugin_admin_help_support, 'register_support_page' );
+        $this->loader->add_action( 'admin_menu', $plugin_admin_help_support, 'register_debug_page' );
         // Restrict access info page
         $this->loader->add_action( 'admin_menu', $plugin_admin_restrict_access, 'register_page' );
         if ( SharedFilesHelpers::isPremium() == 0 ) {
@@ -339,6 +351,7 @@ class Shared_Files {
      * @access   private
      */
     private function define_public_hooks() {
+        $s = get_option( 'shared_files_settings' );
         $plugin_public = new Shared_Files_Public($this->get_plugin_name(), $this->get_version());
         $plugin_public_ajax = new SharedFilesPublicAjax();
         $plugin_public_file_upload = new SharedFilesFileUpload();
@@ -359,6 +372,11 @@ class Shared_Files {
         );
         $this->loader->add_action( 'init', $plugin_public, 'register_shortcodes' );
         $this->loader->add_action( 'init', $plugin_public_load, 'set_cookies' );
+        // Search log
+        if ( isset( $s['enable_search_log'] ) ) {
+            $this->loader->add_action( 'wp_ajax_nopriv_shared_files_search_log', $plugin_public_ajax, 'search_log' );
+            $this->loader->add_action( 'wp_ajax_shared_files_search_log', $plugin_public_ajax, 'search_log' );
+        }
         // Ajax
         $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );

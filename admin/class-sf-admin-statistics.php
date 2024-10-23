@@ -248,7 +248,7 @@ class SharedFilesAdminStatistics {
         $url = 'https://www.maxmind.com';
         echo sprintf( wp_kses( 
             /* translators: %s: link to maxmind.com, the provider of geographical data */
-            __( 'The country is determined by GeoLite2 data created by MaxMind, available from <a href="%s" target="_blank">maxmind.com</a>.', 'shared-files' ),
+            __( 'This product includes GeoLite2 data created by MaxMind, available from <a href="%s" target="_blank">maxmind.com</a>.', 'shared-files' ),
             array(
                 'a' => array(
                     'href'   => array(),
