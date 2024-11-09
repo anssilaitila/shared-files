@@ -25,14 +25,16 @@ class SharedFilesPublicAjax {
                         $user_agent = sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] );
                     }
                 }
+                $user_country = '';
                 global $wpdb;
                 $wpdb->insert( $wpdb->prefix . 'shared_files_search_log', array(
-                    'user_ip'     => $user_ip,
-                    'post_id'     => $post_id,
-                    'permalink'   => $permalink,
-                    'search'      => $search_term,
-                    'user_agent'  => $user_agent,
-                    'referer_url' => $referer_url,
+                    'user_ip'      => $user_ip,
+                    'user_country' => $user_country,
+                    'post_id'      => $post_id,
+                    'permalink'    => $permalink,
+                    'search'       => $search_term,
+                    'user_agent'   => $user_agent,
+                    'referer_url'  => $referer_url,
                 ) );
                 $inserted_id = $wpdb->insert_id;
             }

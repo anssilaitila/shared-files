@@ -41,13 +41,15 @@ class SharedFilesAdminShortcodes {
             echo sprintf(
               wp_kses(
                 /* translators: %s: link to the support forum */
-                __('If you have any questions regarding the shortcodes, please contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files'),
+                __('If you have any questions regarding the shortcodes or the plugin in general, please contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files'),
                 array('a' => array('href' => array(), 'target' => array()))
               ),
               esc_url($url)
             );
             ?>
             </p>
+
+            <p><?php echo esc_html__('The forum is actively monitored and you will get a quick answer.', 'shared-files') ?></p>
 
           <?php endif; ?>
 

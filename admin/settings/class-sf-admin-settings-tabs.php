@@ -164,6 +164,21 @@ class SharedFilesSettingsTabs {
     echo '</span></li>';
 
     echo '</ol>';
+
+    echo '<div class="general-info" style="display: flex; align-items: center; align-content: center; border: 1px solid #333; background: #fff; border-radius: 2px;">';
+
+    echo '<div class="shared-files-new-feature-container" style="margin-bottom: 0;">';
+    echo '<div class="shared-files-new-feature">';
+    echo esc_html__('New', 'shared-files');
+    echo '</div>';
+    echo '</div>';
+
+    echo '<a href="#shared-files-country-detector" style="margin-left: 7px; color: #333; font-weight: 700;">';
+    echo esc_html__("Country detector in download log", 'shared-files');
+    echo '</a>';
+
+    echo '</div>';
+
     echo '</div>';
 
   }
@@ -361,7 +376,7 @@ class SharedFilesSettingsTabs {
 
     echo '<h2>' . esc_html__('Search log', 'shared-files') . '</h2>';
 
-    echo '<p>' . esc_html__('These settings are valid for all shortcodes and blocks that contain the search input field.', 'contact-list') . '</p>';
+    echo '<p>' . esc_html__('These settings are valid for all shortcodes and blocks that contain the search input field.', 'shared-files') . '</p>';
 
   }
 

@@ -194,6 +194,7 @@ class SharedFilesAdminQuery {
                                 }
                             }
                         }
+                        $user_country = '';
                         $wpdb->insert( $wpdb->prefix . 'shared_files_download_log', array(
                             'file_id'      => intval( $file_id ),
                             'file_title'   => sanitize_text_field( get_the_title( $file_id ) ),

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.4.0
 Tested up to: 6.7
-Stable tag: 1.7.36
+Stable tag: 1.7.37
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -281,8 +281,11 @@ Anyone who can open the page which contains the file list is able to download th
 
 == Changelog ==
 
+= 1.7.37 - 2024-10-26 =
+* (Free + All plans) Search log improvements
+
 = 1.7.36 - 2024-10-23 =
-* (All plans) New feature: Send an email notify to users when a file is uploaded (files with restricted permissions) (see plugin settings, Email tab)
+* (Pro + Max) New feature: Send an email notify to users when a file is uploaded (files with restricted permissions) (see plugin settings, Email tab)
 * (All plans) New feature: Set default expiration date to all uploaded files (plugin settings, first tab)
 * (Free + All plans) New feature: Search log. It is now possible to log all searches made in the front end. Can be activated from the plugin settings, Search log tab.
 

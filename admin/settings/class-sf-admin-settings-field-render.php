@@ -140,7 +140,34 @@ class SharedFilesSettingsFieldRender {
             <?php echo esc_html__("Show the files in the site search results. Proper function requires also the single file pages enabled.", 'shared-files') ?>
           </div>
 
-      <?php elseif ($field_name == 'log_enable_country' || $field_name == '_FREE_log_enable_country' || $field_name == 'esl_user_country' || $field_name == '_FREE_esl_user_country'): ?>
+      <?php elseif ($field_name == 'log_enable_country' || $field_name == '_FREE_log_enable_country'): ?>
+
+          <div class="general-info" id="shared-files-country-detector">
+            <div class="shared-files-new-feature-container">
+              <div class="shared-files-new-feature">
+                <?= esc_html__('New', 'shared-files') ?>
+              </div>
+            </div>
+
+            <p><?php echo esc_html__("If enabled, the downloader's country is automatically detected based on the downloader's IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer on an Amazon AWS EC2 instance (region us-east-1).", 'shared-files') ?></p>
+
+            <p><?php echo esc_html__("Using the service requires an active subscription or a lifetime license.", 'shared-files') ?></p>
+
+            <p><?php
+            $url = 'https://www.maxmind.com';
+            echo sprintf(
+              wp_kses(
+                /* translators: %s: link to maxmind.com, the provider of geographical data */
+                __('This product includes GeoLite2 data created by MaxMind, available from <a href="%s" target="_blank">maxmind.com</a>.', 'shared-files'),
+                array('a' => array('href' => array(), 'target' => array()))
+              ),
+              esc_url($url)
+            );
+            ?></p>
+
+          </div>
+
+      <?php elseif ($field_name == 'esl_user_country' || $field_name == '_FREE_esl_user_country'): ?>
 
           <div class="general-info">
             <div class="shared-files-new-feature-container">
@@ -149,7 +176,7 @@ class SharedFilesSettingsFieldRender {
               </div>
             </div>
 
-            <p><?php echo esc_html__("If enabled, the downloader's country is automatically detected based on the downloader's IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer on an Amazon AWS EC2 instance (region us-east-1).", 'shared-files') ?></p>
+            <p><?php echo esc_html__("If enabled, the searcher's country is automatically detected based on the their IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer on an Amazon AWS EC2 instance (region us-east-1).", 'shared-files') ?></p>
 
             <p><?php echo esc_html__("Using the service requires an active subscription or a lifetime license.", 'shared-files') ?></p>
 
