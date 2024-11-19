@@ -65,7 +65,7 @@ class SharedFilesAdminMaintenance {
             $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        title           VARCHAR(255) NOT NULL,\n        message         TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
             // Table for file download log
             $table_name_download_log = $wpdb->prefix . 'shared_files_download_log';
-            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_download_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        file_id         VARCHAR(255) NOT NULL,\n        file_title      VARCHAR(255) NOT NULL,\n        file_name       VARCHAR(255) NOT NULL,\n        file_size       VARCHAR(255) NOT NULL,\n        ip              VARCHAR(255) NOT NULL,\n        download_cnt    MEDIUMINT NOT NULL,\n        report          TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        user_id         BIGINT(20) NOT NULL,\n        user_login      VARCHAR(255) NOT NULL,\n        user_name       VARCHAR(255) NOT NULL,\n        user_country    VARCHAR(255) NOT NULL,\n        user_country_code    VARCHAR(255) NOT NULL,\n        user_agent      TEXT NOT NULL,\n        referer_url     TEXT NOT NULL,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
+            $wpdb->query( "CREATE TABLE IF NOT EXISTS " . $table_name_download_log . " (\n        id              BIGINT(20) NOT NULL auto_increment,\n        file_id         VARCHAR(255) NOT NULL,\n        file_title      VARCHAR(255) NOT NULL,\n        file_name       VARCHAR(255) NOT NULL,\n        file_size       VARCHAR(255) NOT NULL,\n        ip              VARCHAR(255) NOT NULL,\n        download_cnt    MEDIUMINT NOT NULL,\n        report          TEXT NOT NULL,\n        created_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,\n        user_id         BIGINT(20) NOT NULL,\n        user_login      VARCHAR(255) NOT NULL,\n        user_name       VARCHAR(255) NOT NULL,\n        user_country    VARCHAR(255) NOT NULL,\n        user_country_code    VARCHAR(255) NOT NULL,\n        user_city       VARCHAR(255) NOT NULL,\n        user_agent      TEXT NOT NULL,\n        referer_url     TEXT NOT NULL,\n        PRIMARY KEY (id)\n      ) " . $charset_collate . ";" );
             // user_id
             $column_name = 'user_id';
             $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
@@ -92,6 +92,12 @@ class SharedFilesAdminMaintenance {
             }
             // user_country_code
             $column_name = 'user_country_code';
+            $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
+            if ( empty( $column_exists ) ) {
+                $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );
+            }
+            // user_city
+            $column_name = 'user_city';
             $column_exists = $wpdb->get_results( "SHOW COLUMNS FROM `{$table_name_download_log}` LIKE '{$column_name}'" );
             if ( empty( $column_exists ) ) {
                 $wpdb->query( "ALTER TABLE `{$table_name_download_log}` ADD `{$column_name}` VARCHAR(255) NOT NULL" );

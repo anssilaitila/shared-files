@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.4.0
 Tested up to: 6.7
-Stable tag: 1.7.37
+Stable tag: 1.7.38
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -183,7 +183,8 @@ What is more important than having a statistics of your uploads! Shared Files pl
 * Set a file's expiration date
 * Limit the number of downloads for each file
 * Display files in the site search results
-* Log downloader's country and show most downloaded files by countries
+* Log downloader's city and country
+* City and country also in the search log
 
 This product includes GeoLite2 data created by MaxMind, available from [maxmind.com](https://www.maxmind.com)
 
@@ -280,6 +281,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.38 - 2024-11-19 =
+* (Pro & Max) New feature: city detector for download log and search log
+* (Free + All plans) Tweaks and fixes
 
 = 1.7.37 - 2024-10-26 =
 * (Free + All plans) Search log improvements

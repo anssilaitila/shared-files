@@ -59,6 +59,11 @@ class SharedFilesSettingsFieldRender {
         <?php elseif ($field_name == '_FREE_send_file_uploaded_email_to_users'): ?>
           <?php $plan_required = 'Pro' ?>
 
+        <?php elseif (strpos($field_name, 'log_enable_city') !== false): ?>
+          <?php $plan_required = 'Pro' ?>
+        <?php elseif (strpos($field_name, 'esl_user_city') !== false): ?>
+          <?php $plan_required = 'Pro' ?>
+
         <?php elseif (strpos($field_name, 'activate_favorite_files') !== false): ?>
           <?php $plan_required = 'Max' ?>
         <?php elseif (strpos($field_name, 'activate_favorite_files_non_logged_in') !== false): ?>
@@ -149,7 +154,17 @@ class SharedFilesSettingsFieldRender {
               </div>
             </div>
 
-            <p><?php echo esc_html__("If enabled, the downloader's country is automatically detected based on the downloader's IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer on an Amazon AWS EC2 instance (region us-east-1).", 'shared-files') ?></p>
+            <p><?php echo esc_html__("If enabled, the downloader's country is automatically detected based on the downloader's IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer.", 'shared-files') ?></p>
+
+            <p><?php echo esc_html__("The following information is sent to ws.tammersoft.com in the process:", 'shared-files') ?></p>
+
+            <ul class="shared-files-ws-details">
+              <li><?php echo esc_html__('IP address', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Site URL', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Freemius User ID (number)', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Freemius License ID (number)', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Freemius Install ID (number)', 'shared-files') ?></li>
+            </ul>
 
             <p><?php echo esc_html__("Using the service requires an active subscription or a lifetime license.", 'shared-files') ?></p>
 
@@ -167,6 +182,19 @@ class SharedFilesSettingsFieldRender {
 
           </div>
 
+      <?php elseif ($field_name == 'log_enable_city' || $field_name == '_FREE_log_enable_city'): ?>
+
+        <div class="general-info">
+          <div class="shared-files-new-feature-container">
+            <div class="shared-files-new-feature">
+              <?= esc_html__('New', 'shared-files') ?>
+            </div>
+          </div>
+
+          <p><?php echo esc_html__("The city is detected the same way as the country (described above).", 'shared-files') ?></p>
+
+        </div>
+
       <?php elseif ($field_name == 'esl_user_country' || $field_name == '_FREE_esl_user_country'): ?>
 
           <div class="general-info">
@@ -176,7 +204,17 @@ class SharedFilesSettingsFieldRender {
               </div>
             </div>
 
-            <p><?php echo esc_html__("If enabled, the searcher's country is automatically detected based on the their IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer on an Amazon AWS EC2 instance (region us-east-1).", 'shared-files') ?></p>
+            <p><?php echo esc_html__("If enabled, the searcher's country is automatically detected based on the their IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer.", 'shared-files') ?></p>
+
+            <p><?php echo esc_html__("The following information is sent to ws.tammersoft.com in the process:", 'shared-files') ?></p>
+
+            <ul class="shared-files-ws-details">
+              <li><?php echo esc_html__('IP address', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Site URL', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Freemius User ID (number)', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Freemius License ID (number)', 'shared-files') ?></li>
+              <li><?php echo esc_html__('Freemius Install ID (number)', 'shared-files') ?></li>
+            </ul>
 
             <p><?php echo esc_html__("Using the service requires an active subscription or a lifetime license.", 'shared-files') ?></p>
 
@@ -191,6 +229,19 @@ class SharedFilesSettingsFieldRender {
               esc_url($url)
             );
             ?></p>
+
+          </div>
+
+      <?php elseif ($field_name == 'esl_user_city' || $field_name == '_FREE_esl_user_city'): ?>
+
+          <div class="general-info">
+            <div class="shared-files-new-feature-container">
+              <div class="shared-files-new-feature">
+                <?= esc_html__('New', 'shared-files') ?>
+              </div>
+            </div>
+
+            <p><?php echo esc_html__("The city is detected the same way as the country (described above).", 'shared-files') ?></p>
 
           </div>
 

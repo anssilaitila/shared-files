@@ -195,6 +195,7 @@ class SharedFilesAdminQuery {
                             }
                         }
                         $user_country = '';
+                        $user_city = '';
                         $wpdb->insert( $wpdb->prefix . 'shared_files_download_log', array(
                             'file_id'      => intval( $file_id ),
                             'file_title'   => sanitize_text_field( get_the_title( $file_id ) ),
@@ -207,6 +208,7 @@ class SharedFilesAdminQuery {
                             'user_login'   => $user_login,
                             'user_name'    => $user_name,
                             'user_country' => $user_country,
+                            'user_city'    => $user_city,
                             'user_agent'   => $user_agent,
                             'referer_url'  => $referer_url,
                         ) );

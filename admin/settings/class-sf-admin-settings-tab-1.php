@@ -123,9 +123,23 @@ class SharedFilesSettingsTab1Content {
                 'class'      => 'shared-files-new-feature',
             )
         );
+        if ( SharedFilesHelpers::isMin2() ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'log_enable_city',
+                sanitize_text_field( __( 'Log downloader city', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'log_enable_city',
+                    'field_name' => $only_pro . 'log_enable_city',
+                    'class'      => 'shared-files-new-feature',
+                )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'log_enable_country_logging',
-            sanitize_text_field( __( 'Log debug data from country updates', 'shared-files' ) ),
+            sanitize_text_field( __( 'Log debug data from country and city updates', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),
             'shared-files',
             'shared-files_section_general',

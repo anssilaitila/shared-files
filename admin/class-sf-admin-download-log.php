@@ -101,6 +101,13 @@ class SharedFilesAdminDownloadLog {
 
           <?php endif; ?>
 
+          <?php if ( isset( $s['log_enable_city'] ) ): ?>
+
+            <th><?php echo esc_html__('City', 'shared-files') ?></th>
+            <?php $cols++; ?>
+
+          <?php endif; ?>
+
 
           <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
 
@@ -183,6 +190,16 @@ class SharedFilesAdminDownloadLog {
 
               <?php endif; ?>
 
+              <?php if ( isset( $s['log_enable_city'] ) ): ?>
+
+                <td>
+                  <?php if (isset($row->user_city)): ?>
+                    <?php echo esc_html( $row->user_city ) ?>
+                  <?php endif; ?>
+                </td>
+
+              <?php endif; ?>
+
               <?php if ( isset( $s['log_enable_user_agent'] ) ): ?>
 
                 <td>
@@ -239,6 +256,7 @@ class SharedFilesAdminDownloadLog {
     </div>
 
     <?php
+
   }
 
 }

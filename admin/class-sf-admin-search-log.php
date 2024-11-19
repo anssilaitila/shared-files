@@ -77,6 +77,11 @@ class SharedFilesAdminSearchLog {
           <th><?php echo esc_html__('Search container', 'shared-files') ?></th>
           <th><?php echo esc_html__('User IP', 'shared-files') ?></th>
           <th><?php echo esc_html__('Country', 'shared-files') ?></th>
+
+          <?php if ( isset( $s['esl_user_city'] ) ): ?>
+            <th><?php echo esc_html__('City', 'shared-files') ?></th>
+          <?php endif; ?>
+
           <th><?php echo esc_html__('Referer URL', 'shared-files') ?></th>
           <th><?php echo esc_html__('User agent', 'shared-files') ?></th>
         </tr>
@@ -120,6 +125,15 @@ class SharedFilesAdminSearchLog {
                   <?php echo esc_html( $row->user_country ) ?>
                 <?php endif; ?>
               </td>
+
+              <?php if ( isset( $s['esl_user_city'] ) ): ?>
+                <td>
+                  <?php if (isset($row->user_city)): ?>
+                    <?php echo esc_html( $row->user_city ) ?>
+                  <?php endif; ?>
+                </td>
+              <?php endif; ?>
+
               <td>
                 <?php if (isset($row->referer_url)): ?>
                   <?php echo esc_html( $row->referer_url ) ?>
@@ -137,7 +151,7 @@ class SharedFilesAdminSearchLog {
         <?php else: ?>
 
           <tr>
-            <td colspan="7">
+            <td colspan="8">
               <?php echo esc_html__('No search log stored yet.', 'shared-files') ?>
             </td>
           </tr>
