@@ -57,24 +57,29 @@ class SharedFilesAdminHelpSupport {
 
       <div class="shared-files-examples">
 
-        <p><?php 
-        echo esc_html__( 'Some examples on how you can use different views available at', 'shared-files' );
-        ?> <a href="https://www.sharedfilespro.com/shared-files/?utm_source=plugin-examples" target="_blank"><?php 
-        echo esc_html__( 'sharedfilespro.com', 'shared-files' );
-        ?></a>.</p>
-
-
         <?php 
         if ( shared_files_fs()->can_use_premium_code() ) {
             ?>
 
           <p><?php 
+            echo esc_html__( 'Some examples on how you can use different views available at', 'shared-files' );
+            ?> <a href="https://www.sharedfilespro.com/shared-files/?utm_source=Shared+Files+Pro&utm_medium=plugin-examples" target="_blank"><?php 
+            echo esc_html__( 'sharedfilespro.com', 'shared-files' );
+            ?></a>.</p>
+
+          <p><?php 
             echo esc_html__( 'Any kind of feedback is welcome. You may contact the author at', 'shared-files' );
-            ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-feedback" target="_blank">sharedfilespro.com/support/</a>.</p>
+            ?> <a href="https://www.sharedfilespro.com/support/?utm_source=Shared+Files+Pro&utm_medium=plugin-feedback" target="_blank">sharedfilespro.com/support/</a>.</p>
 
         <?php 
         } else {
             ?>
+
+          <p><?php 
+            echo esc_html__( 'Some examples on how you can use different views available at', 'shared-files' );
+            ?> <a href="https://www.sharedfilespro.com/shared-files/?utm_source=Shared+Files+Free&utm_medium=plugin-examples" target="_blank"><?php 
+            echo esc_html__( 'sharedfilespro.com', 'shared-files' );
+            ?></a>.</p>
 
           <p>
           <?php 
@@ -93,7 +98,7 @@ class SharedFilesAdminHelpSupport {
           </p>
           <p>
           <?php 
-            $url = 'https://www.sharedfilespro.com/pricing/?utm_source=plugin-free-support';
+            $url = 'https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-free-support';
             echo sprintf( wp_kses( 
                 /* translators: %s: link to the pricing page of the paid version of the plugin */
                 __( 'The forum is actively monitored by the author, but for more personal support by email, please consider one of the <a href="%s" target="_blank">paid plans</a>.', 'shared-files' ),

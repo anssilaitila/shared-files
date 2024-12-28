@@ -208,11 +208,33 @@ class SharedFilesAdminToolbar {
             if ( SharedFilesHelpers::isPremium() == 0 ) {
                 ?>
 
-            <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=wpadminplugin&utm_campaign=Shared+Files+upgrade&utm_content=header" target="_blank">
-              <?php 
-                echo esc_html__( 'Unlock Extra Features with Shared Files PRO', 'shared-files' );
-                ?> ➜
-            </a>
+            <?php 
+                $week_number = intval( wp_date( 'W' ) );
+                ?>
+
+            <?php 
+                if ( $week_number % 2 == 0 ) {
+                    ?>
+
+              <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=toolbar-button-unlock" target="_blank">
+                <?php 
+                    echo esc_html__( 'Unlock Extra Features with Shared Files PRO', 'shared-files' );
+                    ?> ➜
+              </a>
+
+            <?php 
+                } else {
+                    ?>
+
+              <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=toolbar-button-trial" target="_blank">
+                <?php 
+                    echo esc_html__( 'Start a Free Trial of Shared Files PRO', 'shared-files' );
+                    ?> ➜
+              </a>
+
+            <?php 
+                }
+                ?>
 
           <?php 
             }

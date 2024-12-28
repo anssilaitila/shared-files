@@ -1,9 +1,9 @@
 === Shared Files – Frontend File Upload Form & Secure File Sharing ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
-Requires at least: 5.4.0
+Requires at least: 5.9.0
 Tested up to: 6.7
-Stable tag: 1.7.38
+Stable tag: 1.7.39
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -281,6 +281,12 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.39 - 2024-12-29 =
+* (Pro + Max) Show all / Hide all buttons for accordion
+* (Pro + Max) Fix: tags are now shown in the accordion file cards (unless hidden from settings or by using a shortcode parameter)
+* (Free + All plans) Fix: the download button is now hidden from the file card also for images (if defined so in the settings)
+* (Free + All plans) Tweaks and fixes
 
 = 1.7.38 - 2024-11-19 =
 * (Pro & Max) New feature: city detector for download log and search log
