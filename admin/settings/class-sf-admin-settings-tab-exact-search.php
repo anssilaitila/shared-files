@@ -37,6 +37,17 @@ class SharedFilesSettingsTabExactSearch {
                 'field_name' => $only_pro . 'exact_search_whole_words_only',
             )
         );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'exact_search_ignore_file_extension',
+            sanitize_text_field( __( 'Ignore file extension', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'exact_search_ignore_file_extension',
+                'field_name' => $only_pro . 'exact_search_ignore_file_extension',
+            )
+        );
         $tab = $slug . '_more';
         add_settings_section(
             'shared-files_tab_' . $tab,

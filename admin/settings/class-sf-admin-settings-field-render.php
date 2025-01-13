@@ -41,6 +41,8 @@ class SharedFilesSettingsFieldRender {
           <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'exact_search_whole_words_only') !== false): ?>
           <?php $plan_required = 'Pro' ?>
+        <?php elseif (strpos($field_name, 'exact_search_ignore_file_extension') !== false): ?>
+          <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'remove_obsolete_file_metadata_automatically') !== false): ?>
           <?php $plan_required = 'Pro' ?>
         <?php elseif (strpos($field_name, 'exact_search_more_fields') !== false): ?>
@@ -112,6 +114,10 @@ class SharedFilesSettingsFieldRender {
       <?php elseif ($args['field_name'] == 'uncheck_hide_from_other_pages'): ?>
         <div class="email-info">
           <?php echo esc_html__('If checked, all uploaded files will be instantly listed on also other shortcodes/pages.', 'shared-files') ?><br />
+        </div>
+      <?php elseif ($args['field_name'] == 'exact_search_ignore_file_extension'): ?>
+        <div class="email-info">
+          <?php echo esc_html__('Ignores the last dot and all characters after that in the file title, otherwise an exact match is required when the setting "Search whole words only" is also active.', 'shared-files') ?><br />
         </div>
       <?php elseif ($args['field_name'] == 'obfuscate_file_urls' || $show_info): ?>
         <div class="email-info">

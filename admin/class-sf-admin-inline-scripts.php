@@ -57,6 +57,14 @@ class SharedFilesAdminInlineScripts {
             $js .= "\n        var clipboard = new ClipboardJS('.shared-files-copy');\n\n        clipboard.on('success', function(e) {\n\n          e.clearSelection();\n\n          let clipboardtarget = jQuery(e.trigger).data('clipboard-target');\n\n          jQuery(clipboardtarget).tipso({\n            content: '" . esc_js( __( 'Shortcode copied to clipboard!', 'shared-files' ) ) . "',\n            width: 240\n          });\n\n          jQuery(clipboardtarget).tipso('show');\n\n          setTimeout(function () {\n            showpanel(clipboardtarget);\n          }, 2000);\n\n          function showpanel(clipboardtarget) {\n            jQuery(clipboardtarget).tipso('hide');\n            jQuery(clipboardtarget).tipso('destroy');\n          }\n\n        });\n\n        clipboard.on('error', function(e) {\n        });\n\n      ";
             $js .= "});";
         }
+        $admin_pages = SharedFilesAdminToolbar::get_admin_pages();
+        if ( SharedFilesHelpers::isPremium() == 0 && in_array( $current_screen_id, $admin_pages ) ) {
+            if ( $current_screen_id == 'settings_page_shared-files' ) {
+                $js .= "\n        jQuery( document ).ready( function(\$) {\n          \$( '.shared-files-admin-pro-features-container' ).appendTo( '.shared-files-admin-page-content-container' ).css( 'display', 'block' );\n        });\n        ";
+            } else {
+                $js .= "\n        jQuery( document ).ready( function(\$) {\n          \$( '.shared-files-admin-pro-features-container' ).appendTo( '#wpbody-content .wrap' ).css( 'display', 'block' );\n        });\n        ";
+            }
+        }
         return $js;
     }
 

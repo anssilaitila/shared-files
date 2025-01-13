@@ -6,7 +6,7 @@ class SharedFilesAdminToolbar {
             'edit-shared_file',
             'shared_file',
             'edit-shared-file-tag',
-            //        'edit-post_tag',
+            'edit-post_tag',
             'edit-shared-file-category',
             'shared_file_page_shared-files-sync-files',
             'shared_file_page_shared-files-sync-media-library',
@@ -20,7 +20,7 @@ class SharedFilesAdminToolbar {
             'shared_file_page_shared-files-restrict-access',
             'shared_file_page_shared-files-support',
             'shared_file_page_shared-files-debug-info',
-            'shared_file_page_shared-files-categories-info',
+            'shared_file_page_shared-files-categories-info'
         ];
         return $admin_pages;
     }
@@ -348,8 +348,36 @@ class SharedFilesAdminToolbar {
         ?>
 
     <?php 
-        if ( $show_box ) {
+        if ( SharedFilesHelpers::isPremium() == 0 && $show_box ) {
             ?>
+
+      <?php 
+            $current_date = wp_date( 'Y-m-d' );
+            $start_date = '2025-01-13';
+            $end_date = '2025-01-19';
+            ?>
+
+      <?php 
+            if ( $current_date >= $start_date && $current_date <= $end_date ) {
+                ?>
+
+        <div class="shared-files-admin-pro-features-container">
+
+          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=special-offer" target="_blank" class="shared-files-admin-pro-features">
+            <span><?php 
+                echo esc_html__( 'Special offer: All licenses -30% for Shared Files PRO!', 'shared-files' );
+                ?></span>
+            <span class="shared-files-admin-pro-features-button"><?php 
+                echo esc_html__( 'Buy Now', 'shared-files' );
+                ?></span>
+          </a>
+
+        </div>
+
+      <?php 
+            }
+            ?>
+
     <?php 
         }
         ?>
