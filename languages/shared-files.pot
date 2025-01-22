@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.40\n"
+"Project-Id-Version: Shared Files 1.7.41\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-01-13T19:13:26+02:00\n"
+"POT-Creation-Date: 2025-01-23T00:38:19+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: shared-files\n"
@@ -104,8 +104,8 @@ msgstr ""
 
 #: admin/class-sf-admin-contacts.php:170
 #: admin/class-sf-admin-download-log.php:85
-#: admin/settings/class-sf-admin-settings-field-render.php:733
-#: admin/settings/class-sf-admin-settings-field-render.php:911
+#: admin/settings/class-sf-admin-settings-field-render.php:768
+#: admin/settings/class-sf-admin-settings-field-render.php:961
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:60
 #: public/class-sf-public-contacts.php:49
 msgid "Name"
@@ -125,8 +125,8 @@ msgid "Phone"
 msgstr ""
 
 #: admin/class-sf-admin-contacts.php:173
-#: admin/class-sf-admin-metadata.php:362
-#: admin/settings/class-sf-admin-settings-field-render.php:1093
+#: admin/class-sf-admin-metadata.php:376
+#: admin/settings/class-sf-admin-settings-field-render.php:1143
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:129
 #: public/class-sf-public-contacts.php:52
 #: public/class-sf-public-file-upload.php:103
@@ -224,8 +224,8 @@ msgid "User ID"
 msgstr ""
 
 #: admin/class-sf-admin-download-log.php:92
-#: admin/settings/class-sf-admin-settings-field-render.php:168
-#: admin/settings/class-sf-admin-settings-field-render.php:218
+#: admin/settings/class-sf-admin-settings-field-render.php:173
+#: admin/settings/class-sf-admin-settings-field-render.php:223
 msgid "IP address"
 msgstr ""
 
@@ -320,93 +320,93 @@ msgstr ""
 #: admin/class-sf-admin-notifications.php:66
 #: admin/class-sf-admin-notifications.php:71
 #: admin/class-sf-admin-notifications.php:76
-#: admin/class-sf-admin-shortcodes.php:89
-#: admin/class-sf-admin-shortcodes.php:95
-#: admin/class-sf-admin-shortcodes.php:97
-#: admin/class-sf-admin-shortcodes.php:99
-#: admin/class-sf-admin-shortcodes.php:101
-#: admin/class-sf-admin-shortcodes.php:113
-#: admin/class-sf-admin-shortcodes.php:127
-#: admin/class-sf-admin-shortcodes.php:128
-#: admin/class-sf-admin-shortcodes.php:130
-#: admin/class-sf-admin-shortcodes.php:132
-#: admin/class-sf-admin-shortcodes.php:134
-#: admin/class-sf-admin-shortcodes.php:135
+#: admin/class-sf-admin-shortcodes.php:92
+#: admin/class-sf-admin-shortcodes.php:98
+#: admin/class-sf-admin-shortcodes.php:100
+#: admin/class-sf-admin-shortcodes.php:102
+#: admin/class-sf-admin-shortcodes.php:104
+#: admin/class-sf-admin-shortcodes.php:119
+#: admin/class-sf-admin-shortcodes.php:136
 #: admin/class-sf-admin-shortcodes.php:137
 #: admin/class-sf-admin-shortcodes.php:139
 #: admin/class-sf-admin-shortcodes.php:141
 #: admin/class-sf-admin-shortcodes.php:143
-#: admin/class-sf-admin-shortcodes.php:145
+#: admin/class-sf-admin-shortcodes.php:144
+#: admin/class-sf-admin-shortcodes.php:146
 #: admin/class-sf-admin-shortcodes.php:148
-#: admin/class-sf-admin-shortcodes.php:153
-#: admin/class-sf-admin-shortcodes.php:155
+#: admin/class-sf-admin-shortcodes.php:150
+#: admin/class-sf-admin-shortcodes.php:152
+#: admin/class-sf-admin-shortcodes.php:154
 #: admin/class-sf-admin-shortcodes.php:157
-#: admin/class-sf-admin-shortcodes.php:174
-#: admin/class-sf-admin-shortcodes.php:219
-#: admin/class-sf-admin-shortcodes.php:222
-#: admin/class-sf-admin-shortcodes.php:224
-#: admin/class-sf-admin-shortcodes.php:235
-#: admin/class-sf-admin-shortcodes.php:236
-#: admin/class-sf-admin-shortcodes.php:237
-#: admin/class-sf-admin-shortcodes.php:239
-#: admin/class-sf-admin-shortcodes.php:241
-#: admin/class-sf-admin-shortcodes.php:243
-#: admin/class-sf-admin-shortcodes.php:246
+#: admin/class-sf-admin-shortcodes.php:162
+#: admin/class-sf-admin-shortcodes.php:164
+#: admin/class-sf-admin-shortcodes.php:166
+#: admin/class-sf-admin-shortcodes.php:183
+#: admin/class-sf-admin-shortcodes.php:228
+#: admin/class-sf-admin-shortcodes.php:231
+#: admin/class-sf-admin-shortcodes.php:233
+#: admin/class-sf-admin-shortcodes.php:247
+#: admin/class-sf-admin-shortcodes.php:248
+#: admin/class-sf-admin-shortcodes.php:249
 #: admin/class-sf-admin-shortcodes.php:251
 #: admin/class-sf-admin-shortcodes.php:253
-#: admin/class-sf-admin-shortcodes.php:278
-#: admin/class-sf-admin-shortcodes.php:307
-#: admin/class-sf-admin-shortcodes.php:310
-#: admin/class-sf-admin-shortcodes.php:323
+#: admin/class-sf-admin-shortcodes.php:255
+#: admin/class-sf-admin-shortcodes.php:258
+#: admin/class-sf-admin-shortcodes.php:263
+#: admin/class-sf-admin-shortcodes.php:265
+#: admin/class-sf-admin-shortcodes.php:293
 #: admin/class-sf-admin-shortcodes.php:325
-#: admin/class-sf-admin-shortcodes.php:327
-#: admin/class-sf-admin-shortcodes.php:329
-#: admin/class-sf-admin-shortcodes.php:331
+#: admin/class-sf-admin-shortcodes.php:328
 #: admin/class-sf-admin-shortcodes.php:341
-#: admin/class-sf-admin-shortcodes.php:351
-#: admin/class-sf-admin-shortcodes.php:361
-#: admin/class-sf-admin-shortcodes.php:371
-#: admin/class-sf-admin-shortcodes.php:381
-#: admin/class-sf-admin-shortcodes.php:391
+#: admin/class-sf-admin-shortcodes.php:343
+#: admin/class-sf-admin-shortcodes.php:345
+#: admin/class-sf-admin-shortcodes.php:347
+#: admin/class-sf-admin-shortcodes.php:349
+#: admin/class-sf-admin-shortcodes.php:362
+#: admin/class-sf-admin-shortcodes.php:375
+#: admin/class-sf-admin-shortcodes.php:388
 #: admin/class-sf-admin-shortcodes.php:401
-#: admin/class-sf-admin-shortcodes.php:411
-#: admin/class-sf-admin-shortcodes.php:437
-#: admin/class-sf-admin-shortcodes.php:466
-#: admin/class-sf-admin-shortcodes.php:468
-#: admin/class-sf-admin-shortcodes.php:470
-#: admin/class-sf-admin-shortcodes.php:472
-#: admin/class-sf-admin-shortcodes.php:474
-#: admin/class-sf-admin-shortcodes.php:476
-#: admin/class-sf-admin-shortcodes.php:478
-#: admin/class-sf-admin-shortcodes.php:507
+#: admin/class-sf-admin-shortcodes.php:414
+#: admin/class-sf-admin-shortcodes.php:427
+#: admin/class-sf-admin-shortcodes.php:440
+#: admin/class-sf-admin-shortcodes.php:453
+#: admin/class-sf-admin-shortcodes.php:482
+#: admin/class-sf-admin-shortcodes.php:511
 #: admin/class-sf-admin-shortcodes.php:513
 #: admin/class-sf-admin-shortcodes.php:515
 #: admin/class-sf-admin-shortcodes.php:517
 #: admin/class-sf-admin-shortcodes.php:519
 #: admin/class-sf-admin-shortcodes.php:521
 #: admin/class-sf-admin-shortcodes.php:523
-#: admin/class-sf-admin-shortcodes.php:525
-#: admin/class-sf-admin-shortcodes.php:527
-#: admin/class-sf-admin-shortcodes.php:529
-#: admin/class-sf-admin-shortcodes.php:531
-#: admin/class-sf-admin-shortcodes.php:533
-#: admin/class-sf-admin-shortcodes.php:535
-#: admin/class-sf-admin-shortcodes.php:537
-#: admin/class-sf-admin-shortcodes.php:538
-#: admin/class-sf-admin-shortcodes.php:566
-#: admin/class-sf-admin-shortcodes.php:590
-#: admin/class-sf-admin-shortcodes.php:595
-#: admin/class-sf-admin-shortcodes.php:618
-#: admin/class-sf-admin-shortcodes.php:638
-#: admin/class-sf-admin-shortcodes.php:643
+#: admin/class-sf-admin-shortcodes.php:555
+#: admin/class-sf-admin-shortcodes.php:561
+#: admin/class-sf-admin-shortcodes.php:563
+#: admin/class-sf-admin-shortcodes.php:565
+#: admin/class-sf-admin-shortcodes.php:567
+#: admin/class-sf-admin-shortcodes.php:569
+#: admin/class-sf-admin-shortcodes.php:571
+#: admin/class-sf-admin-shortcodes.php:573
+#: admin/class-sf-admin-shortcodes.php:575
+#: admin/class-sf-admin-shortcodes.php:577
+#: admin/class-sf-admin-shortcodes.php:579
+#: admin/class-sf-admin-shortcodes.php:581
+#: admin/class-sf-admin-shortcodes.php:583
+#: admin/class-sf-admin-shortcodes.php:585
+#: admin/class-sf-admin-shortcodes.php:586
+#: admin/class-sf-admin-shortcodes.php:617
 #: admin/class-sf-admin-shortcodes.php:644
-#: admin/class-sf-admin-shortcodes.php:646
-#: admin/class-sf-admin-shortcodes.php:648
-#: admin/class-sf-admin-shortcodes.php:667
-#: admin/class-sf-admin-shortcodes.php:672
-#: admin/class-sf-admin-shortcodes.php:694
-#: admin/class-sf-admin-shortcodes.php:697
-#: admin/class-sf-admin-shortcodes.php:700
+#: admin/class-sf-admin-shortcodes.php:649
+#: admin/class-sf-admin-shortcodes.php:675
+#: admin/class-sf-admin-shortcodes.php:698
+#: admin/class-sf-admin-shortcodes.php:703
+#: admin/class-sf-admin-shortcodes.php:704
+#: admin/class-sf-admin-shortcodes.php:706
+#: admin/class-sf-admin-shortcodes.php:708
+#: admin/class-sf-admin-shortcodes.php:727
+#: admin/class-sf-admin-shortcodes.php:732
+#: admin/class-sf-admin-shortcodes.php:754
+#: admin/class-sf-admin-shortcodes.php:757
+#: admin/class-sf-admin-shortcodes.php:760
 #: admin/class-sf-admin-taxonomy.php:132
 msgid "Copy"
 msgstr ""
@@ -677,117 +677,129 @@ msgstr ""
 msgid "Upload ID:"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:178
+#: admin/class-sf-admin-metadata.php:192
 #: admin/class-sf-admin-sync-files.php:126
 #: admin/class-sf-admin-sync-media-library.php:111
 msgid "Filename"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:179
+#: admin/class-sf-admin-metadata.php:193
 msgid "The filename in the url changes based on this value."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:184
+#: admin/class-sf-admin-metadata.php:198
 msgid "You can change the filename after publishing a file."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:191
-#: admin/settings/class-sf-admin-settings-field-render.php:1035
+#: admin/class-sf-admin-metadata.php:205
+#: admin/settings/class-sf-admin-settings-field-render.php:1085
 msgid "File date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:192
+#: admin/class-sf-admin-metadata.php:206
 msgid "This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:200
+#: admin/class-sf-admin-metadata.php:214
 #: public/class-sf-public-file-upload.php:241
 msgid "External URL"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:201
+#: admin/class-sf-admin-metadata.php:215
 msgid "Instead of adding a local file, you may provide an external URL to a file located elsewhere."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:201
+#: admin/class-sf-admin-metadata.php:215
 msgid "Note: if the external URL is defined, the local file will not be saved."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:212
+#: admin/class-sf-admin-metadata.php:226
 msgid "Expiration date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:213
+#: admin/class-sf-admin-metadata.php:227
 msgid "When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:213
+#: admin/class-sf-admin-metadata.php:227
 msgid "It's also possible to delete these files automatically (see plugin settings)."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:224
+#: admin/class-sf-admin-metadata.php:238
 msgid "Notification email"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:225
+#: admin/class-sf-admin-metadata.php:239
 msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:233
+#: admin/class-sf-admin-metadata.php:247
 msgid "Restrict access"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:238
+#: admin/class-sf-admin-metadata.php:252
 msgid "Restrict access for users"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:239
+#: admin/class-sf-admin-metadata.php:253
 msgid "Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1]."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:251
+#: admin/class-sf-admin-metadata.php:265
 msgid "Password protection"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:252
+#: admin/class-sf-admin-metadata.php:266
 msgid "Define a password here to enable password protection."
 msgstr ""
 
 #. translators: %s: link to the information page about access restriction
-#: admin/class-sf-admin-metadata.php:262
-#: admin/settings/class-sf-admin-settings-field-render.php:954
+#: admin/class-sf-admin-metadata.php:276
+#: admin/settings/class-sf-admin-settings-field-render.php:1004
 msgid "<a href=\"%s\">Important information regarding file permissions &raquo;</a>"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:277
+#: admin/class-sf-admin-metadata.php:291
 msgid "Restrict access for roles"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:278
+#: admin/class-sf-admin-metadata.php:292
 msgid "Only the users having these roles will see the file listed on the restricted file lists."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:290
+#: admin/class-sf-admin-metadata.php:304
 msgid "Limit downloads"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:291
+#: admin/class-sf-admin-metadata.php:305
 msgid "When this number is reached, the file can't be downloaded anymore and an email notify is sent to the administrator."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:300
+#: admin/class-sf-admin-metadata.php:314
 #: admin/settings/class-sf-admin-settings-tabs.php:32
 #: admin/settings/class-sf-admin-settings-tabs.php:208
 msgid "Custom fields"
 msgstr ""
 
 #. translators: %s: link to plugin settings
-#: admin/class-sf-admin-metadata.php:306
+#: admin/class-sf-admin-metadata.php:320
 msgid "<a href=\"%s\" target=\"_blank\">Settings for custom fields &raquo;</a>"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:319
+#: admin/class-sf-admin-metadata.php:333
 msgid "Custom field 1"
+msgstr ""
+
+#: admin/class-sf-admin-notifications.php:28
+msgid "Hey, I noticed that you have added %s%d files%s with the Shared Files plugin – that's awesome!"
+msgstr ""
+
+#: admin/class-sf-admin-notifications.php:32
+msgid "Could you please do me a BIG favour and give it a 5-star rating on WordPress? It will help to spread the word and boost our motivation."
+msgstr ""
+
+#: admin/class-sf-admin-notifications.php:32
+msgid "plugin author"
 msgstr ""
 
 #: admin/class-sf-admin-notifications.php:32
@@ -875,7 +887,7 @@ msgid "File opening method: Default"
 msgstr ""
 
 #: admin/class-sf-admin-restrict-access.php:41
-#: admin/settings/class-sf-admin-settings-field-render.php:942
+#: admin/settings/class-sf-admin-settings-field-render.php:992
 msgid "Default method means opening the files using the following url format:"
 msgstr ""
 
@@ -892,7 +904,7 @@ msgid "File opening method: Redirect"
 msgstr ""
 
 #: admin/class-sf-admin-restrict-access.php:51
-#: admin/settings/class-sf-admin-settings-field-render.php:944
+#: admin/settings/class-sf-admin-settings-field-render.php:994
 msgid "Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:"
 msgstr ""
 
@@ -987,33 +999,33 @@ msgid "The forum is actively monitored and you will get a quick answer."
 msgstr ""
 
 #: admin/class-sf-admin-shortcodes.php:60
-#: admin/class-sf-admin-shortcodes.php:66
-#: admin/class-sf-admin-shortcodes.php:120
-#: admin/class-sf-admin-shortcodes.php:122
-#: admin/class-sf-admin-shortcodes.php:229
-#: admin/class-sf-admin-shortcodes.php:231
-#: admin/class-sf-admin-shortcodes.php:336
-#: admin/class-sf-admin-shortcodes.php:338
-#: admin/class-sf-admin-shortcodes.php:346
-#: admin/class-sf-admin-shortcodes.php:348
-#: admin/class-sf-admin-shortcodes.php:356
-#: admin/class-sf-admin-shortcodes.php:358
-#: admin/class-sf-admin-shortcodes.php:366
-#: admin/class-sf-admin-shortcodes.php:368
-#: admin/class-sf-admin-shortcodes.php:376
-#: admin/class-sf-admin-shortcodes.php:378
-#: admin/class-sf-admin-shortcodes.php:386
-#: admin/class-sf-admin-shortcodes.php:388
+#: admin/class-sf-admin-shortcodes.php:67
+#: admin/class-sf-admin-shortcodes.php:126
+#: admin/class-sf-admin-shortcodes.php:129
+#: admin/class-sf-admin-shortcodes.php:238
+#: admin/class-sf-admin-shortcodes.php:241
+#: admin/class-sf-admin-shortcodes.php:354
+#: admin/class-sf-admin-shortcodes.php:357
+#: admin/class-sf-admin-shortcodes.php:367
+#: admin/class-sf-admin-shortcodes.php:370
+#: admin/class-sf-admin-shortcodes.php:380
+#: admin/class-sf-admin-shortcodes.php:383
+#: admin/class-sf-admin-shortcodes.php:393
 #: admin/class-sf-admin-shortcodes.php:396
-#: admin/class-sf-admin-shortcodes.php:398
 #: admin/class-sf-admin-shortcodes.php:406
-#: admin/class-sf-admin-shortcodes.php:408
-#: admin/class-sf-admin-shortcodes.php:580
-#: admin/class-sf-admin-shortcodes.php:582
-#: admin/class-sf-admin-shortcodes.php:608
-#: admin/class-sf-admin-shortcodes.php:610
-#: admin/class-sf-admin-shortcodes.php:630
-#: admin/class-sf-admin-shortcodes.php:632
+#: admin/class-sf-admin-shortcodes.php:409
+#: admin/class-sf-admin-shortcodes.php:419
+#: admin/class-sf-admin-shortcodes.php:422
+#: admin/class-sf-admin-shortcodes.php:432
+#: admin/class-sf-admin-shortcodes.php:435
+#: admin/class-sf-admin-shortcodes.php:445
+#: admin/class-sf-admin-shortcodes.php:448
+#: admin/class-sf-admin-shortcodes.php:631
+#: admin/class-sf-admin-shortcodes.php:634
+#: admin/class-sf-admin-shortcodes.php:662
+#: admin/class-sf-admin-shortcodes.php:665
+#: admin/class-sf-admin-shortcodes.php:687
+#: admin/class-sf-admin-shortcodes.php:690
 msgid "Paid plans"
 msgstr ""
 
@@ -1022,426 +1034,425 @@ msgid "means that the shortcode / parameter exists in all paid plans."
 msgstr ""
 
 #. translators: %s: link to the support forum
-#: admin/class-sf-admin-shortcodes.php:71
+#: admin/class-sf-admin-shortcodes.php:74
 msgid "means that the shortcode / parameter exists in all of the <strong>paid</strong> plans."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:84
+#: admin/class-sf-admin-shortcodes.php:87
 msgid "Default file list"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:89
-#: admin/class-sf-admin-shortcodes.php:219
-#: admin/class-sf-admin-shortcodes.php:278
-#: admin/class-sf-admin-shortcodes.php:437
-#: admin/class-sf-admin-shortcodes.php:507
-#: admin/class-sf-admin-shortcodes.php:566
-#: admin/class-sf-admin-shortcodes.php:590
-#: admin/class-sf-admin-shortcodes.php:618
-#: admin/class-sf-admin-shortcodes.php:638
-#: admin/class-sf-admin-shortcodes.php:667
+#: admin/class-sf-admin-shortcodes.php:92
+#: admin/class-sf-admin-shortcodes.php:228
+#: admin/class-sf-admin-shortcodes.php:293
+#: admin/class-sf-admin-shortcodes.php:482
+#: admin/class-sf-admin-shortcodes.php:555
+#: admin/class-sf-admin-shortcodes.php:617
+#: admin/class-sf-admin-shortcodes.php:644
+#: admin/class-sf-admin-shortcodes.php:675
+#: admin/class-sf-admin-shortcodes.php:698
+#: admin/class-sf-admin-shortcodes.php:727
 msgid "Insert the shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:89
+#: admin/class-sf-admin-shortcodes.php:92
 msgid "to the content editor of any page you wish the file list to appear. If there are more than one category, a dropdown of categories will appear above the file list."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:95
+#: admin/class-sf-admin-shortcodes.php:98
 msgid "Hide search form:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:97
+#: admin/class-sf-admin-shortcodes.php:100
 msgid "Hide files first (files are shown when searched or category/tag is selected):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:99
+#: admin/class-sf-admin-shortcodes.php:102
 msgid "Show tag dropdown:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:101
-#: admin/class-sf-admin-shortcodes.php:174
-#: admin/class-sf-admin-shortcodes.php:224
+#: admin/class-sf-admin-shortcodes.php:104
+#: admin/class-sf-admin-shortcodes.php:183
+#: admin/class-sf-admin-shortcodes.php:233
 msgid "Ask for contact info first, then show files (file_list_id is any text to indentify this file list):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:105
+#: admin/class-sf-admin-shortcodes.php:108
 msgid "Use wait countdown page:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:117
-#: admin/class-sf-admin-shortcodes.php:226
+#: admin/class-sf-admin-shortcodes.php:123
+#: admin/class-sf-admin-shortcodes.php:235
 msgid "More parameters:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:127
-#: admin/class-sf-admin-shortcodes.php:235
+#: admin/class-sf-admin-shortcodes.php:136
+#: admin/class-sf-admin-shortcodes.php:247
 msgid "Limit the number of files (and hide pagination):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:128
+#: admin/class-sf-admin-shortcodes.php:137
 msgid "Hide file description:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:130
-#: admin/class-sf-admin-shortcodes.php:343
+#: admin/class-sf-admin-shortcodes.php:139
+#: admin/class-sf-admin-shortcodes.php:364
 msgid "Hide category dropdown:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:132
-#: admin/class-sf-admin-shortcodes.php:535
+#: admin/class-sf-admin-shortcodes.php:141
+#: admin/class-sf-admin-shortcodes.php:583
 msgid "Layout as \"2 columns\":"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:134
-#: admin/class-sf-admin-shortcodes.php:537
+#: admin/class-sf-admin-shortcodes.php:143
+#: admin/class-sf-admin-shortcodes.php:585
 msgid "Layout as \"3 columns\":"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:135
-#: admin/class-sf-admin-shortcodes.php:538
+#: admin/class-sf-admin-shortcodes.php:144
+#: admin/class-sf-admin-shortcodes.php:586
 msgid "Layout as \"4 columns\":"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:137
+#: admin/class-sf-admin-shortcodes.php:146
 msgid "Hide tags:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:139
-#: admin/class-sf-admin-shortcodes.php:239
-#: admin/class-sf-admin-shortcodes.php:478
-#: admin/class-sf-admin-shortcodes.php:643
+#: admin/class-sf-admin-shortcodes.php:148
+#: admin/class-sf-admin-shortcodes.php:251
+#: admin/class-sf-admin-shortcodes.php:523
+#: admin/class-sf-admin-shortcodes.php:703
 msgid "Exclude categories (by slug):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:141
+#: admin/class-sf-admin-shortcodes.php:150
 msgid "Define an embed id (required, if there are multiple instances of [shared_files] on the same page):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:143
-#: admin/class-sf-admin-shortcodes.php:241
+#: admin/class-sf-admin-shortcodes.php:152
+#: admin/class-sf-admin-shortcodes.php:253
 msgid "Show files that belong to all of these categories (you can also hide the search form using the parameter hide_search=1):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:145
-#: admin/class-sf-admin-shortcodes.php:243
+#: admin/class-sf-admin-shortcodes.php:154
+#: admin/class-sf-admin-shortcodes.php:255
 msgid "Show files that belong to all of these tags (can also be used with only one tag):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:148
-#: admin/class-sf-admin-shortcodes.php:246
+#: admin/class-sf-admin-shortcodes.php:157
+#: admin/class-sf-admin-shortcodes.php:258
 msgid "categories__and and tags__and can be combined:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:153
-#: admin/class-sf-admin-shortcodes.php:251
-#: admin/class-sf-admin-shortcodes.php:476
+#: admin/class-sf-admin-shortcodes.php:162
+#: admin/class-sf-admin-shortcodes.php:263
+#: admin/class-sf-admin-shortcodes.php:521
 msgid "Show files that belong to any of these categories:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:155
-#: admin/class-sf-admin-shortcodes.php:253
+#: admin/class-sf-admin-shortcodes.php:164
+#: admin/class-sf-admin-shortcodes.php:265
 msgid "Show files that belong to any of these tags:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:157
+#: admin/class-sf-admin-shortcodes.php:166
 msgid "You can also use multiple parameters:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:169
+#: admin/class-sf-admin-shortcodes.php:178
 #: admin/settings/class-sf-admin-settings-tabs.php:84
 msgid "Lead generation"
 msgstr ""
 
 #. translators: %s: link to file manager
-#: admin/class-sf-admin-shortcodes.php:184
+#: admin/class-sf-admin-shortcodes.php:193
 msgid "Please check the <a href=\"%s\" target=\"_blank\">plugin settings</a> for some options regarding the lead generation."
 msgstr ""
 
 #. translators: %s: link to file manager
-#: admin/class-sf-admin-shortcodes.php:198
+#: admin/class-sf-admin-shortcodes.php:207
 msgid "The leads are saved <a href=\"%s\" target=\"_blank\">here</a> and can be exported to a csv file."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:214
+#: admin/class-sf-admin-shortcodes.php:223
 #: admin/settings/class-sf-admin-settings-tabs.php:64
 #: admin/settings/class-sf-admin-settings-tabs.php:312
 msgid "Simple list"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:219
-#: admin/class-sf-admin-shortcodes.php:278
+#: admin/class-sf-admin-shortcodes.php:228
+#: admin/class-sf-admin-shortcodes.php:293
 msgid "to the content editor of any page you wish the file list to appear."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:222
+#: admin/class-sf-admin-shortcodes.php:231
 msgid "Hide the search:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:236
+#: admin/class-sf-admin-shortcodes.php:248
 msgid "Show files from a category:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:237
+#: admin/class-sf-admin-shortcodes.php:249
 msgid "Enable the front-end file editor:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:265
+#: admin/class-sf-admin-shortcodes.php:277
 msgid "Exact search from all files"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:281
+#: admin/class-sf-admin-shortcodes.php:296
 msgid "This search targets all files (their titles) and shows the files after enter is pressed."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:284
+#: admin/class-sf-admin-shortcodes.php:299
 msgid "Minimum number of characters required for the search to function is defined in the plugin settings (default is 3)."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:296
-#: admin/class-sf-admin-shortcodes.php:298
+#: admin/class-sf-admin-shortcodes.php:311
 msgid "Pro"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:303
+#: admin/class-sf-admin-shortcodes.php:321
 msgid "Enable front-end edit using the following shortcodes (user roles must also be activated from the plugin settings):"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:318
+#: admin/class-sf-admin-shortcodes.php:336
 msgid "Front-end uploader"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:323
+#: admin/class-sf-admin-shortcodes.php:341
 msgid "To enable the uploader insert the shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:325
+#: admin/class-sf-admin-shortcodes.php:343
 msgid "To hide other files use parameter \"only_uploaded_files\" like so:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:327
+#: admin/class-sf-admin-shortcodes.php:345
 msgid "Hide the file list and show only the file upload form:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:329
+#: admin/class-sf-admin-shortcodes.php:347
 msgid "Show tag dropdown for the uploader:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:331
+#: admin/class-sf-admin-shortcodes.php:349
 msgid "Show tag checkboxes for the uploader:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:333
+#: admin/class-sf-admin-shortcodes.php:351
 msgid "Define an ID for the files and display only these uploaded files, having the same ID:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:353
+#: admin/class-sf-admin-shortcodes.php:377
 msgid "Allow the uploader to create a new category:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:363
+#: admin/class-sf-admin-shortcodes.php:390
 msgid "Allow the uploader to create new tags:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:373
+#: admin/class-sf-admin-shortcodes.php:403
 msgid "Pre-define the category and hide category dropdown:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:383
+#: admin/class-sf-admin-shortcodes.php:416
 msgid "Show category checkboxes for the uploader:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:393
+#: admin/class-sf-admin-shortcodes.php:429
 msgid "Exclude categories:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:403
+#: admin/class-sf-admin-shortcodes.php:442
 msgid "Exclude tags:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:413
+#: admin/class-sf-admin-shortcodes.php:455
 msgid "See live demo at"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:424
+#: admin/class-sf-admin-shortcodes.php:466
 msgid "File list restricted by permissions"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:439
+#: admin/class-sf-admin-shortcodes.php:484
 msgid "This shortcode will list only such files that are readable by the logged in user."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:441
+#: admin/class-sf-admin-shortcodes.php:486
 msgid "A file is listed for the logged in user, if any of the following matches:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:444
+#: admin/class-sf-admin-shortcodes.php:489
 msgid "The user was specifically given permissions to read the file (by editing the file)."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:445
+#: admin/class-sf-admin-shortcodes.php:490
 msgid "When a user uploads a file, that user is automatically given permissions to read that file."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:446
+#: admin/class-sf-admin-shortcodes.php:491
 msgid "The logged in user belongs to a role that has permissions to read the file."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:449
+#: admin/class-sf-admin-shortcodes.php:494
 msgid "The following should also be noted:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:452
+#: admin/class-sf-admin-shortcodes.php:497
 msgid "A user having the administrator role can open any file."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:453
+#: admin/class-sf-admin-shortcodes.php:498
 msgid "A caching plugin should not be used for logged in users, to prevent the file list storing in the cache."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:454
+#: admin/class-sf-admin-shortcodes.php:499
 msgid "It is advisable to block direct access to file urls like /wp-content/uploads/shared-files/* on the server level (Apache, Nginx, etc.)"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:454
+#: admin/class-sf-admin-shortcodes.php:499
 msgid "More information &raquo;"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:457
+#: admin/class-sf-admin-shortcodes.php:502
 msgid "If you have any questions regarding the items above, you can always contact us at https://www.sharedfilespro.com/support/ and we'll help."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:462
-#: admin/class-sf-admin-shortcodes.php:509
-#: admin/class-sf-admin-shortcodes.php:592
-#: admin/class-sf-admin-shortcodes.php:640
+#: admin/class-sf-admin-shortcodes.php:507
+#: admin/class-sf-admin-shortcodes.php:557
+#: admin/class-sf-admin-shortcodes.php:646
+#: admin/class-sf-admin-shortcodes.php:700
 msgid "Additional parameters:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:466
+#: admin/class-sf-admin-shortcodes.php:511
 msgid "Show filters"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:468
+#: admin/class-sf-admin-shortcodes.php:513
 msgid "Show the file uploader"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:470
+#: admin/class-sf-admin-shortcodes.php:515
 msgid "Show only the file uploader, hide file list"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:472
+#: admin/class-sf-admin-shortcodes.php:517
 msgid "Enable the front-end editor"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:474
+#: admin/class-sf-admin-shortcodes.php:519
 msgid "Show files from a specific category"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:474
-#: admin/class-sf-admin-shortcodes.php:618
-#: admin/class-sf-admin-shortcodes.php:638
+#: admin/class-sf-admin-shortcodes.php:519
+#: admin/class-sf-admin-shortcodes.php:675
+#: admin/class-sf-admin-shortcodes.php:698
 msgid "You can find / define the category slug by editing the category."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:494
+#: admin/class-sf-admin-shortcodes.php:539
 msgid "Accordion"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:513
+#: admin/class-sf-admin-shortcodes.php:561
 msgid "Ask for contact info first, then show files (file_list_id is any text to indentify this file list)"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:515
+#: admin/class-sf-admin-shortcodes.php:563
 msgid "Show only subcategories under this category and as separate clickable elements"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:517
+#: admin/class-sf-admin-shortcodes.php:565
 msgid "Show first category open by default"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:519
+#: admin/class-sf-admin-shortcodes.php:567
 msgid "Group and order files by month"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:521
+#: admin/class-sf-admin-shortcodes.php:569
 msgid "Group files by month and use the \"file date\" as date (default is file publish date)"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:523
+#: admin/class-sf-admin-shortcodes.php:571
 msgid "Only the following categories"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:525
+#: admin/class-sf-admin-shortcodes.php:573
 msgid "Exclude categories"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:527
+#: admin/class-sf-admin-shortcodes.php:575
 msgid "Hide subcategories"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:529
-#: admin/class-sf-admin-shortcodes.php:646
+#: admin/class-sf-admin-shortcodes.php:577
+#: admin/class-sf-admin-shortcodes.php:706
 msgid "Restrict file list by permissions"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:531
+#: admin/class-sf-admin-shortcodes.php:579
 msgid "Enable the front-end file editor"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:533
+#: admin/class-sf-admin-shortcodes.php:581
 msgid "Show all / hide all buttons"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:553
+#: admin/class-sf-admin-shortcodes.php:601
 msgid "Favorite files"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:577
+#: admin/class-sf-admin-shortcodes.php:628
 msgid "Search form only that targets all the files, sorted by category"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:595
+#: admin/class-sf-admin-shortcodes.php:649
 msgid "Don't sort by categories"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:605
+#: admin/class-sf-admin-shortcodes.php:659
 msgid "List only files in certain category"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:628
+#: admin/class-sf-admin-shortcodes.php:685
 msgid "List categories / list files by category"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:638
+#: admin/class-sf-admin-shortcodes.php:698
 msgid "or"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:644
+#: admin/class-sf-admin-shortcodes.php:704
 msgid "Show files under current category, even if there are subcategories present:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:648
+#: admin/class-sf-admin-shortcodes.php:708
 msgid "Exclude files uploaded by front end uploader"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:661
+#: admin/class-sf-admin-shortcodes.php:721
 msgid "List a single file"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:672
+#: admin/class-sf-admin-shortcodes.php:732
 msgid "Minimal layout:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:674
+#: admin/class-sf-admin-shortcodes.php:734
 msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in the File Manager."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:683
+#: admin/class-sf-admin-shortcodes.php:743
 msgid "How to define the order of the files for each shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:689
+#: admin/class-sf-admin-shortcodes.php:749
 msgid "Choose one value from the list separated by \"|\":"
 msgstr ""
 
@@ -1482,8 +1493,8 @@ msgstr ""
 
 #. translators: %s: link to maxmind.com, the provider of geographical data
 #: admin/class-sf-admin-statistics.php:251
-#: admin/settings/class-sf-admin-settings-field-render.php:182
-#: admin/settings/class-sf-admin-settings-field-render.php:232
+#: admin/settings/class-sf-admin-settings-field-render.php:187
+#: admin/settings/class-sf-admin-settings-field-render.php:237
 msgid "This product includes GeoLite2 data created by MaxMind, available from <a href=\"%s\" target=\"_blank\">maxmind.com</a>."
 msgstr ""
 
@@ -1735,420 +1746,416 @@ msgstr ""
 msgid "Upgrade"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:108
+#: admin/settings/class-sf-admin-settings-field-render.php:113
 msgid "An extra \"?\" is automatically added to the URLs before the filename:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:112
+#: admin/settings/class-sf-admin-settings-field-render.php:117
 msgid "When checked, file lists are readable, but opening and downloading files will require a login."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:116
+#: admin/settings/class-sf-admin-settings-field-render.php:121
 msgid "If checked, all uploaded files will be instantly listed on also other shortcodes/pages."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:120
+#: admin/settings/class-sf-admin-settings-field-render.php:125
 msgid "Ignores the last dot and all characters after that in the file title, otherwise an exact match is required when the setting \"Search whole words only\" is also active."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:124
+#: admin/settings/class-sf-admin-settings-field-render.php:129
 msgid "Generate long random urls for files, like so:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:126
+#: admin/settings/class-sf-admin-settings-field-render.php:131
 msgid "Files can't be opened without knowing the exact long part before the filename."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:130
+#: admin/settings/class-sf-admin-settings-field-render.php:135
 msgid "If a file isn't readable or doesn't exist at all (you may have manually deleted the file from the server), you may want to delete the file metadata automatically, so there won't be an error message in the frontend file list."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:131
+#: admin/settings/class-sf-admin-settings-field-render.php:136
 msgid "If this setting is checked, the related file metadata is automatically moved to trash."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:141
+#: admin/settings/class-sf-admin-settings-field-render.php:146
 msgid "Each file will have their own page under slug 'shared_file', and as content the regular file card, url being like so:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:144
+#: admin/settings/class-sf-admin-settings-field-render.php:149
 msgid "It's also possible to customize the template by having the file single-shared_file.php in your theme."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:151
+#: admin/settings/class-sf-admin-settings-field-render.php:156
 msgid "Show the files in the site search results. Proper function requires also the single file pages enabled."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:159
-#: admin/settings/class-sf-admin-settings-field-render.php:196
-#: admin/settings/class-sf-admin-settings-field-render.php:209
-#: admin/settings/class-sf-admin-settings-field-render.php:246
+#: admin/settings/class-sf-admin-settings-field-render.php:164
+#: admin/settings/class-sf-admin-settings-field-render.php:201
+#: admin/settings/class-sf-admin-settings-field-render.php:214
+#: admin/settings/class-sf-admin-settings-field-render.php:251
 #: admin/settings/class-sf-admin-settings-tabs.php:172
 msgid "New"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:163
+#: admin/settings/class-sf-admin-settings-field-render.php:168
 msgid "If enabled, the downloader's country is automatically detected based on the downloader's IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer."
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:165
-#: admin/settings/class-sf-admin-settings-field-render.php:215
-msgid "The following information is sent to ws.tammersoft.com in the process:"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:169
-#: admin/settings/class-sf-admin-settings-field-render.php:219
-msgid "Site URL"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:170
 #: admin/settings/class-sf-admin-settings-field-render.php:220
-msgid "Freemius User ID (number)"
+msgid "The following information is sent to ws.tammersoft.com in the process:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:171
-#: admin/settings/class-sf-admin-settings-field-render.php:221
-msgid "Freemius License ID (number)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:172
-#: admin/settings/class-sf-admin-settings-field-render.php:222
-msgid "Freemius Install ID (number)"
+#: admin/settings/class-sf-admin-settings-field-render.php:174
+#: admin/settings/class-sf-admin-settings-field-render.php:224
+msgid "Site URL"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:175
 #: admin/settings/class-sf-admin-settings-field-render.php:225
+msgid "Freemius User ID (number)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:176
+#: admin/settings/class-sf-admin-settings-field-render.php:226
+msgid "Freemius License ID (number)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:177
+#: admin/settings/class-sf-admin-settings-field-render.php:227
+msgid "Freemius Install ID (number)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:180
+#: admin/settings/class-sf-admin-settings-field-render.php:230
 msgid "Using the service requires an active subscription or a lifetime license."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:200
-#: admin/settings/class-sf-admin-settings-field-render.php:250
+#: admin/settings/class-sf-admin-settings-field-render.php:205
+#: admin/settings/class-sf-admin-settings-field-render.php:255
 msgid "The city is detected the same way as the country (described above)."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:213
+#: admin/settings/class-sf-admin-settings-field-render.php:218
 msgid "If enabled, the searcher's country is automatically detected based on the their IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:286
-#: admin/settings/class-sf-admin-settings-field-render.php:455
+#: admin/settings/class-sf-admin-settings-field-render.php:293
+#: admin/settings/class-sf-admin-settings-field-render.php:472
 msgid "All Plans"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:295
+#: admin/settings/class-sf-admin-settings-field-render.php:305
 msgid "Any sound file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:296
+#: admin/settings/class-sf-admin-settings-field-render.php:306
 msgid "Any video file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:297
+#: admin/settings/class-sf-admin-settings-field-render.php:307
 msgid "Any image file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:369
+#: admin/settings/class-sf-admin-settings-field-render.php:384
 msgid "Choose a value and save the settings, and the new custom fields will be usable."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:424
+#: admin/settings/class-sf-admin-settings-field-render.php:439
 msgid "Choose a value and save the settings, and the new fields will be usable."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:558
+#: admin/settings/class-sf-admin-settings-field-render.php:583
 msgid "This setting is required, if you have installed WordPress in a subdirectory."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:559
+#: admin/settings/class-sf-admin-settings-field-render.php:584
 msgid "Please check the WordPress Address (URL) of your site from WP admin / Settings / General, if there is a path after the domain, you should add the same path here."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:560
+#: admin/settings/class-sf-admin-settings-field-render.php:585
 msgid "If this is set, the file URLs are automatically formatted like so:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:564
+#: admin/settings/class-sf-admin-settings-field-render.php:589
 msgid "Normally the files are saved under wp-content/uploads/shared-files/."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:565
+#: admin/settings/class-sf-admin-settings-field-render.php:590
 msgid "If you wish the new files to be saved to a subfolder under wp-content/uploads/shared-files/, define the folder name here."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:566
+#: admin/settings/class-sf-admin-settings-field-render.php:591
 msgid "When this folder name is defined, new files will be saved under this path:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:567
+#: admin/settings/class-sf-admin-settings-field-render.php:592
 msgid "wp-content/uploads/shared-files/folder-name/"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:572
+#: admin/settings/class-sf-admin-settings-field-render.php:597
 msgid "The text defined here replaces the default automatically detected maximum file size."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:575
+#: admin/settings/class-sf-admin-settings-field-render.php:600
 msgid "e.g. /wp-content/uploads/2023/01/custom-icon.png"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:578
+#: admin/settings/class-sf-admin-settings-field-render.php:603
 msgid "Enter an email address to receive the notify, or multiple email addresses separated by a comma."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:582
+#: admin/settings/class-sf-admin-settings-field-render.php:607
 msgid "Enter a title here and the custom field (an input field) is automatically activated."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:586
+#: admin/settings/class-sf-admin-settings-field-render.php:611
 msgid "A comma separated list of accepted file extensions and/or file types, for example:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:590
+#: admin/settings/class-sf-admin-settings-field-render.php:615
 msgid "More information"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:590
+#: admin/settings/class-sf-admin-settings-field-render.php:615
 msgid "here"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:611
+#: admin/settings/class-sf-admin-settings-field-render.php:636
 msgid "Default list"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:612
+#: admin/settings/class-sf-admin-settings-field-render.php:637
 msgid "2 columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:613
+#: admin/settings/class-sf-admin-settings-field-render.php:638
 msgid "3 columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:614
+#: admin/settings/class-sf-admin-settings-field-render.php:639
 msgid "4 columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:646
-msgid "Max"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:664
+#: admin/settings/class-sf-admin-settings-field-render.php:694
 msgid "The countdown timer is displayed on the page selected above. It is hooked to the theme's function the_content(), and displayed just before the actual content."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:690
+#: admin/settings/class-sf-admin-settings-field-render.php:720
 msgid "Improved (SVG)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:691
+#: admin/settings/class-sf-admin-settings-field-render.php:721
 msgid "First set"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:781
+#: admin/settings/class-sf-admin-settings-field-render.php:821
 msgid "15 minutes"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:782
+#: admin/settings/class-sf-admin-settings-field-render.php:822
 msgid "5 minutes"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:783
+#: admin/settings/class-sf-admin-settings-field-render.php:823
 msgid "1 minute"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:814
+#: admin/settings/class-sf-admin-settings-field-render.php:854
 msgid "Same as posts have"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:815
+#: admin/settings/class-sf-admin-settings-field-render.php:855
 msgid "Custom taxonomy"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:861
+#: admin/settings/class-sf-admin-settings-field-render.php:906
 msgid "File title link, preview and download buttons"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:862
+#: admin/settings/class-sf-admin-settings-field-render.php:907
 msgid "Download button only"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:937
-#: admin/settings/class-sf-admin-settings-field-render.php:1152
+#: admin/settings/class-sf-admin-settings-field-render.php:987
+#: admin/settings/class-sf-admin-settings-field-render.php:1202
 msgid "Default"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:938
+#: admin/settings/class-sf-admin-settings-field-render.php:988
 msgid "Redirect"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:981
+#: admin/settings/class-sf-admin-settings-field-render.php:1031
 msgid "Original"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:982
+#: admin/settings/class-sf-admin-settings-field-render.php:1032
 msgid "Improved"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:986
+#: admin/settings/class-sf-admin-settings-field-render.php:1036
 msgid "Original type means that the page links are in the following url format:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:988
+#: admin/settings/class-sf-admin-settings-field-render.php:1038
 msgid "Improved type works via GET parameters:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:990
+#: admin/settings/class-sf-admin-settings-field-render.php:1040
 msgid "Improved type must be used, if the shortcode is on the front page or various other types of pages of the site. If you are getting 404 from the page links, use the Improved type."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1010
+#: admin/settings/class-sf-admin-settings-field-render.php:1060
 msgid "Google"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1011
+#: admin/settings/class-sf-admin-settings-field-render.php:1061
 msgid "Microsoft"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1015
+#: admin/settings/class-sf-admin-settings-field-render.php:1065
 msgid "The preview is available for certain file types only and PDF is supported by Google only."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1034
+#: admin/settings/class-sf-admin-settings-field-render.php:1084
 msgid "File publish date (post date)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1036
+#: admin/settings/class-sf-admin-settings-field-render.php:1086
 msgid "File title"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1054
+#: admin/settings/class-sf-admin-settings-field-render.php:1104
 msgid "No expiration date"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1055
+#: admin/settings/class-sf-admin-settings-field-render.php:1105
 msgid "1 week"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1056
+#: admin/settings/class-sf-admin-settings-field-render.php:1106
 msgid "2 weeks"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1057
+#: admin/settings/class-sf-admin-settings-field-render.php:1107
 msgid "3 weeks"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1058
+#: admin/settings/class-sf-admin-settings-field-render.php:1108
 msgid "4 weeks"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1059
+#: admin/settings/class-sf-admin-settings-field-render.php:1109
 msgid "30 days"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1060
+#: admin/settings/class-sf-admin-settings-field-render.php:1110
 msgid "1 month"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1061
+#: admin/settings/class-sf-admin-settings-field-render.php:1111
 msgid "2 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1062
+#: admin/settings/class-sf-admin-settings-field-render.php:1112
 msgid "3 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1063
+#: admin/settings/class-sf-admin-settings-field-render.php:1113
 msgid "4 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1064
+#: admin/settings/class-sf-admin-settings-field-render.php:1114
 msgid "5 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1065
+#: admin/settings/class-sf-admin-settings-field-render.php:1115
 msgid "6 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1066
+#: admin/settings/class-sf-admin-settings-field-render.php:1116
 msgid "7 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1067
+#: admin/settings/class-sf-admin-settings-field-render.php:1117
 msgid "8 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1068
+#: admin/settings/class-sf-admin-settings-field-render.php:1118
 msgid "9 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1069
+#: admin/settings/class-sf-admin-settings-field-render.php:1119
 msgid "10 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1070
+#: admin/settings/class-sf-admin-settings-field-render.php:1120
 msgid "11 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1071
+#: admin/settings/class-sf-admin-settings-field-render.php:1121
 msgid "1 year"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1072
+#: admin/settings/class-sf-admin-settings-field-render.php:1122
 msgid "2 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1073
+#: admin/settings/class-sf-admin-settings-field-render.php:1123
 msgid "3 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1074
+#: admin/settings/class-sf-admin-settings-field-render.php:1124
 msgid "4 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1075
+#: admin/settings/class-sf-admin-settings-field-render.php:1125
 msgid "5 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1094
+#: admin/settings/class-sf-admin-settings-field-render.php:1144
 msgid "Category name"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1112
+#: admin/settings/class-sf-admin-settings-field-render.php:1162
 msgid "Descending"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1113
+#: admin/settings/class-sf-admin-settings-field-render.php:1163
 msgid "Ascending"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1131
+#: admin/settings/class-sf-admin-settings-field-render.php:1181
 msgid "Transparent"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1132
+#: admin/settings/class-sf-admin-settings-field-render.php:1182
 msgid "White"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1133
+#: admin/settings/class-sf-admin-settings-field-render.php:1183
 msgid "Light gray"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1134
+#: admin/settings/class-sf-admin-settings-field-render.php:1184
 msgid "Custom color"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1153
+#: admin/settings/class-sf-admin-settings-field-render.php:1203
 msgid "Roboto"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1154
+#: admin/settings/class-sf-admin-settings-field-render.php:1204
 msgid "Ubuntu"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1173
+#: admin/settings/class-sf-admin-settings-field-render.php:1223
 msgid "Right"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1174
+#: admin/settings/class-sf-admin-settings-field-render.php:1224
 msgid "Left"
 msgstr ""
 
@@ -3100,7 +3107,7 @@ msgid "Insert the shortcode <span class=\"shared-files-mini-shortcode\">[shared_
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tabs.php:177
-msgid "Country detector in download log"
+msgid "Country and city detector in download log"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tabs.php:190

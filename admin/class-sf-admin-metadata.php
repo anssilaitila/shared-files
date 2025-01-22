@@ -147,18 +147,27 @@ class SharedFilesAdminMetadata {
         $field_in_pro_class = 'shared-files-field-in-pro-greyed-out';
         $field_in_pro_more_features_class = 'shared-files-admin-free-more-features';
         $field_in_all_plans_markup = '<div class="shared-files-field-in-pro-container">';
-        $field_in_all_plans_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
-        $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>All Plans</span></div>';
+        $field_in_all_plans_markup .= '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=file-edit" target="_blank">';
+        $field_in_all_plans_markup .= '<div class="shared-files-settings-pro-feature-overlay">';
+        $field_in_all_plans_markup .= '<span>All Plans</span>';
+        $field_in_all_plans_markup .= '<img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" />';
+        $field_in_all_plans_markup .= '</div>';
         $field_in_all_plans_markup .= '</a>';
         $field_in_all_plans_markup .= '</div>';
         $field_in_pro_markup = '<div class="shared-files-field-in-pro-container">';
-        $field_in_pro_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
-        $field_in_pro_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Pro</span></div>';
+        $field_in_pro_markup .= '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=file-edit" target="_blank">';
+        $field_in_pro_markup .= '<div class="shared-files-settings-pro-feature-overlay">';
+        $field_in_pro_markup .= '<span>Pro</span>';
+        $field_in_pro_markup .= '<img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" />';
+        $field_in_pro_markup .= '</div>';
         $field_in_pro_markup .= '</a>';
         $field_in_pro_markup .= '</div>';
         $field_in_business_markup = '<div class="shared-files-field-in-pro-container">';
-        $field_in_business_markup .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">';
-        $field_in_business_markup .= '<div class="shared-files-settings-pro-feature-overlay"><span>Max</span></div>';
+        $field_in_business_markup .= '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=file-edit" target="_blank">';
+        $field_in_business_markup .= '<div class="shared-files-settings-pro-feature-overlay">';
+        $field_in_business_markup .= '<span>Max</span>';
+        $field_in_business_markup .= '<img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" />';
+        $field_in_business_markup .= '</div>';
         $field_in_business_markup .= '</a>';
         $field_in_business_markup .= '</div>';
         $field_in_pro_markup_allowed_tags = [
@@ -167,7 +176,12 @@ class SharedFilesAdminMetadata {
                 'style' => [],
             ],
             'a'    => [
-                'href' => [],
+                'href'   => [],
+                'target' => [],
+            ],
+            'img'  => [
+                'src'   => [],
+                'class' => [],
             ],
             'span' => [],
         ];

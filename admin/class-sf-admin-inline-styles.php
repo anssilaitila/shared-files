@@ -15,6 +15,31 @@ class SharedFilesAdminInlineStyles {
 
     $css = '';
 
+    $css .= '.wp-list-table tr[data-slug="shared-files"] span.upgrade {';
+    $css .= 'display: none !important;';
+    $css .= '}';
+
+    $css .= '.wp-submenu .shared-files-upgrade {';
+    $css .= 'display: none !important;';
+    $css .= '}';
+
+    $css .= 'a[href^="options-general.php?page=shared-files-pricing"] {';
+    $css .= 'display: none !important;';
+    $css .= '}';
+
+    $css .= '.shared-files-pro-only {';
+    $css .= 'display: flex;';
+    $css .= 'justify-content: center;';
+    $css .= 'align-content: center;';
+    $css .= 'align-items: center;';
+    $css .= '}';
+
+    $css .= '.shared-files-external-link-icon {';
+    $css .= 'margin-left: 3px;';
+    $css .= 'margin-bottom: 2px;';
+    $css .= 'width: 13px;';
+    $css .= '}';
+
     $css .= '#menu-posts-shared_file > ul > li:nth-of-type(7) {';
     $css .= 'border-bottom: 1px solid rgb(110, 110, 110);';
     $css .= '}';

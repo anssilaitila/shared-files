@@ -80,7 +80,7 @@ class SharedFilesAdminList {
         $file_id = intval( get_the_ID() );
         switch ( $column_name ) {
             case '_category':
-                echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans' ) . '</div></a>';
+                echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
                 break;
             case 'file_url':
                 echo '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . esc_attr( $post_ID ) . '" title="[shared_files file_id=' . esc_attr( $post_ID ) . ']">[shared_files file_id=' . esc_attr( $post_ID ) . ']</span>';
@@ -107,7 +107,7 @@ class SharedFilesAdminList {
                 break;
             case 'limit_downloads':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans' ) . '</div></a>';
+                    echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
                 }
                 break;
             case 'file_added':
@@ -115,17 +115,17 @@ class SharedFilesAdminList {
                 break;
             case 'last_access':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans' ) . '</div></a>';
+                    echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
                 }
                 break;
             case 'bandwidth_usage':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans' ) . '</div></a>';
+                    echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
                 }
                 break;
             case 'expiration_date':
                 if ( SharedFilesHelpers::isPremium() == 0 ) {
-                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans' ) . '</div></a>';
+                    echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
                 }
                 break;
         }

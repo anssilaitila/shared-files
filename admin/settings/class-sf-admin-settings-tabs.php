@@ -174,7 +174,7 @@ class SharedFilesSettingsTabs {
     echo '</div>';
 
     echo '<a href="#shared-files-country-detector" style="margin-left: 7px; color: #333; font-weight: 700;">';
-    echo esc_html__("Country detector in download log", 'shared-files');
+    echo esc_html__("Country and city detector in download log", 'shared-files');
     echo '</a>';
 
     echo '</div>';
