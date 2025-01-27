@@ -139,17 +139,19 @@ class SharedFilesAdminList {
         $taxonomy_slug = 'shared-file-category';
         $current_category_slug = ( isset( $_GET['shared-file-category'] ) ? sanitize_title( $_GET['shared-file-category'] ) : '' );
         if ( get_taxonomy( $taxonomy_slug ) ) {
-            wp_dropdown_categories( [
-                'show_option_all' => get_taxonomy( $taxonomy_slug )->labels->all_items,
-                'hide_empty'      => 1,
-                'hierarchical'    => 1,
-                'show_count'      => 1,
-                'orderby'         => 'name',
-                'name'            => $taxonomy_slug,
-                'value_field'     => 'slug',
-                'taxonomy'        => $taxonomy_slug,
-                'selected'        => $current_category_slug,
-            ] );
+            if ( has_term( '', $taxonomy_slug ) ) {
+                wp_dropdown_categories( [
+                    'show_option_all' => get_taxonomy( $taxonomy_slug )->labels->all_items,
+                    'hide_empty'      => 1,
+                    'hierarchical'    => 1,
+                    'show_count'      => 1,
+                    'orderby'         => 'name',
+                    'name'            => $taxonomy_slug,
+                    'value_field'     => 'slug',
+                    'taxonomy'        => $taxonomy_slug,
+                    'selected'        => $current_category_slug,
+                ] );
+            }
         }
     }
 

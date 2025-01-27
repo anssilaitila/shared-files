@@ -193,11 +193,31 @@ class SharedFilesAdminToolbar {
             ?>"><?php 
             echo esc_html__( 'Shortcodes', 'shared-files' );
             ?></a>
-            <a href="<?php 
-            echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-support' ) );
-            ?>"><?php 
-            echo esc_html__( 'Support', 'shared-files' );
-            ?></a>
+
+            <?php 
+            if ( SharedFilesHelpers::isPremium() == 0 ) {
+                ?>
+
+              <a class="shared-files-admin-toolbar-support" href="https://wordpress.org/support/plugin/shared-files/" target="_blank"><span><?php 
+                echo esc_html__( 'Support', 'shared-files' );
+                ?></span><img src="<?php 
+                echo esc_url_raw( SHARED_FILES_URI );
+                ?>img/external-link-black.svg" class="shared-files-external-link-icon" /></a>
+
+            <?php 
+            } else {
+                ?>
+
+              <a href="<?php 
+                echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-support' ) );
+                ?>"><?php 
+                echo esc_html__( 'Support', 'shared-files' );
+                ?></a>
+
+            <?php 
+            }
+            ?>
+
           </div>
 
         </div>

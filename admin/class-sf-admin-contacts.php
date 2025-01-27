@@ -163,7 +163,7 @@ class SharedFilesAdminContacts {
 
         ?>
 
-        <table class="shared-files-download-log">
+        <table class="shared-files-admin-log">
         <tr>
           <th><?php echo esc_html__('Created at', 'shared-files') ?></th>
           <th><?php echo esc_html__('File list ID', 'shared-files') ?></th>
