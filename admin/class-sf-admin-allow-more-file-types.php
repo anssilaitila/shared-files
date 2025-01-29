@@ -96,4 +96,33 @@ class SharedFilesAdminAllowMoreFileTypes {
 
   }
 
+  public static function allowed_mime_types( $tmp_name ) {
+
+    $uploaded_file_mime_type = '';
+
+    if ( function_exists('finfo_open') && function_exists('finfo_file') ) {
+
+      $finfo = finfo_open( FILEINFO_MIME_TYPE );
+      $uploaded_file_mime_type = finfo_file( $finfo, $tmp_name );
+      finfo_close( $finfo );
+
+    } elseif ( function_exists('mime_content_type') ) {
+
+      $uploaded_file_mime_type = mime_content_type( $tmp_name );
+
+    }
+
+    $allowed_mime_types = get_allowed_mime_types();
+    $disallowed_mime_types = ['text/html', 'application/ttaf+xml'];
+
+    if ( in_array($uploaded_file_mime_type, $disallowed_mime_types) ) {
+      return false;
+    } elseif ( in_array($uploaded_file_mime_type, $allowed_mime_types) ) {
+      return true;
+    } else {
+      return false;
+    }
+
+  }
+
 }

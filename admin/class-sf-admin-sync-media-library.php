@@ -3,9 +3,7 @@
 class SharedFilesAdminSyncMediaLibrary {
     public function register_page() {
         $menu_pos = 4;
-        if ( SharedFilesHelpers::isPremium() == 1 ) {
-            $menu_pos = 5;
-        }
+
         add_submenu_page(
             'edit.php?post_type=shared_file',
             sanitize_text_field( __( 'Sync Media Library', 'shared-files' ) ),
@@ -21,28 +19,26 @@ class SharedFilesAdminSyncMediaLibrary {
         ?>
 
     <div class="shared-files-admin-page-content-container shared-files-sync-files wrap">
-      <h1><?php 
+      <h1><?php
         echo esc_html__( 'Sync Media Library Files', 'shared-files' );
         ?></h1>
 
-      <?php 
-        if ( SharedFilesHelpers::isPremium() == 0 ) {
+      <?php
             echo SharedFilesAdminHelpers::sfProFeatureMarkup();
-        }
         ?>
 
-      <?php 
+      <?php
         $path = SharedFilesFileHandling::getBaseDir();
         ?>
 
       <p>
-        <?php 
+        <?php
         echo esc_html__( 'You may activate files found in the media library to be used by the plugin, without having to add the files again.', 'shared-files' );
         ?>
       </p>
 
       <p>
-        <?php 
+        <?php
         echo esc_html__( 'If a file is inactive, it means that it exists in the media library, but has not yet been activated for the plugin.', 'shared-files' );
         ?>
       </p>
@@ -51,19 +47,19 @@ class SharedFilesAdminSyncMediaLibrary {
 
         <form method="post">
 
-          <?php 
+          <?php
         $taxonomy_slug = 'shared-file-category';
         ?>
 
-          <?php 
+          <?php
         if ( get_taxonomy( $taxonomy_slug ) ) {
             ?>
 
-            <span class="shared-files-category-for-new-files"><?php 
+            <span class="shared-files-category-for-new-files"><?php
             echo esc_html__( 'Category for new files:', 'shared-files' );
             ?></span>
 
-            <?php 
+            <?php
             echo wp_dropdown_categories( [
                 'show_option_all' => ' ',
                 'hide_empty'      => 0,
@@ -79,11 +75,11 @@ class SharedFilesAdminSyncMediaLibrary {
             ] );
             ?><br />
 
-          <?php 
+          <?php
         }
         ?>
 
-          <?php 
+          <?php
         wp_nonce_field( 'sf-sync-files', 'sf-sync-files-nonce' );
         ?>
 
@@ -91,12 +87,12 @@ class SharedFilesAdminSyncMediaLibrary {
       </p>
 
       <p>
-        <?php 
+        <?php
         echo esc_html__( 'Files found in the media library', 'shared-files' );
         ?>:
       </p>
 
-      <?php 
+      <?php
         if ( isset( $_GET['files'] ) && $_GET['files'] == 'error' ) {
             echo '<p class="shared-files-error">' . esc_html__( 'Error processing file(s).', 'shared-files' ) . '</p>';
         } elseif ( isset( $_GET['files'] ) ) {
@@ -162,14 +158,12 @@ class SharedFilesAdminSyncMediaLibrary {
                         ?>
 
               <form method="post">
-                <input type="submit" class="shared-files-activate <?php 
-                        echo ( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' );
-                        ?>" value="<?php 
+                <input type="submit" class="shared-files-activate shared-files-pro-required" value="<?php
                         echo esc_attr__( 'Activate', 'shared-files' );
                         ?>" />
               </form>
 
-              <?php 
+              <?php
                     }
                 }
                 echo '</td>';
@@ -180,7 +174,7 @@ class SharedFilesAdminSyncMediaLibrary {
         ?>
 
     </div>
-    <?php 
+    <?php
     }
 
 }

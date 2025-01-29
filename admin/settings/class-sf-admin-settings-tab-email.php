@@ -35,19 +35,19 @@ class SharedFilesSettingsTabEmail {
                 'field_name' => $only_pro . 'send_file_uploaded_email_to_users',
             )
         );
-        if ( SharedFilesHelpers::isMin2() ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'trigger_download_email',
-                sanitize_text_field( __( 'Trigger file downloaded email on', 'shared-files' ) ),
-                array($field_render, 'trigger_download_email_render'),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                    'label_for'  => 'shared-files-' . $only_pro . 'trigger_download_email',
-                    'field_name' => $only_pro . 'trigger_download_email',
-                )
-            );
-        }
+
+        add_settings_field(
+            'shared-files-' . $only_pro . 'trigger_download_email',
+            sanitize_text_field( __( 'Trigger file downloaded email on', 'shared-files' ) ),
+            array($field_render, 'trigger_download_email_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'trigger_download_email',
+                'field_name' => $only_pro . 'trigger_download_email',
+            )
+        );
+
         add_settings_field(
             'shared-files-' . $only_pro . 'add_ip_to_file_downloaded_email',
             sanitize_text_field( __( "Add the downloader's IP address to the email", 'shared-files' ) ),

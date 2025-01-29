@@ -585,43 +585,6 @@ class SharedFilesHelpers {
         return $layout;
     }
 
-    public static function isPremium() {
-        $is_premium = 0;
-        return $is_premium;
-    }
-
-    public static function isMin2() {
-        $is_min_2 = 0;
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            $is_min_2 = 1;
-        }
-        return $is_min_2;
-    }
-
-    public static function isMin3() {
-        $is_min_3 = 0;
-        if ( shared_files_fs()->is_free_plan() || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            $is_min_3 = 1;
-        }
-        return $is_min_3;
-    }
-
-    public static function isMin2Pr() {
-        $is_min_2 = 0;
-        if ( shared_files_fs()->is_plan_or_trial( 'pro' ) || shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            $is_min_2 = 1;
-        }
-        return $is_min_2;
-    }
-
-    public static function isMin3Pr() {
-        $is_min_3 = 0;
-        if ( shared_files_fs()->is_plan_or_trial( 'business' ) ) {
-            $is_min_3 = 1;
-        }
-        return $is_min_3;
-    }
-
     public static function getOrder( $atts ) {
         $order = 'DESC';
         $s = get_option( 'shared_files_settings' );

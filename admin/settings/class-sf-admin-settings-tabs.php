@@ -64,17 +64,13 @@ class SharedFilesSettingsTabs {
               <span><?php echo esc_html__('Simple list', 'shared-files')?></span>
             </li>
 
-            <?php if ( SharedFilesHelpers::isMin3() ): ?>
+            <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11">
+              <span><?php echo esc_html__('Favorites', 'shared-files')?></span>
+            </li>
 
-              <li class="shared-files-settings-tab-11-title" data-settings-container="shared-files-settings-tab-11">
-                <span><?php echo esc_html__('Favorites', 'shared-files')?></span>
-              </li>
-
-              <li class="shared-files-settings-tab-12-title" data-settings-container="shared-files-settings-tab-12">
-                <span><?php echo esc_html__('Wait countdown page', 'shared-files')?></span>
-              </li>
-
-            <?php endif; ?>
+            <li class="shared-files-settings-tab-12-title" data-settings-container="shared-files-settings-tab-12">
+              <span><?php echo esc_html__('Wait countdown page', 'shared-files')?></span>
+            </li>
 
             <li class="shared-files-settings-tab-14-title" data-settings-container="shared-files-settings-tab-14">
               <span><?php echo esc_html__('Custom post type', 'shared-files')?></span>
@@ -89,28 +85,12 @@ class SharedFilesSettingsTabs {
               <span><?php echo esc_html__('Single file', 'shared-files')?></span>
             </li>
 
-            <?php
-            $show_exact_search_tab = 0;
-
-            if ( SharedFilesHelpers::isMin2() ) {
-
-              $show_exact_search_tab = 1;
-
-            }
-            ?>
-
-            <?php if ( $show_exact_search_tab ): ?>
-
-              <?php $slug = 'exact-search'; ?>
-
-              <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
-                <span><?php echo esc_html__('Exact search', 'shared-files')?></span>
-              </li>
-
-            <?php endif; ?>
+            <?php $slug = 'exact-search'; ?>
+            <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
+              <span><?php echo esc_html__('Exact search', 'shared-files')?></span>
+            </li>
 
             <?php $slug = 'search-log'; ?>
-
             <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
               <span><?php echo esc_html__('Search log', 'shared-files')?></span>
             </li>

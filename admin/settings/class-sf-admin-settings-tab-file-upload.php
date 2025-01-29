@@ -206,19 +206,19 @@ class SharedFilesSettingsTab5Content {
                 'field_name' => $only_pro . 'file_upload_new_category',
             )
         );
-        if ( SharedFilesHelpers::isMin2() ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
-                sanitize_text_field( __( 'Allow the uploader to create multiple new categories', 'shared-files' ) ),
-                array($field_render, 'checkbox_render'),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                    'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
-                    'field_name' => $only_pro . 'file_upload_multiple_new_categories',
-                )
-            );
-        }
+
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
+            sanitize_text_field( __( 'Allow the uploader to create multiple new categories', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_categories',
+                'field_name' => $only_pro . 'file_upload_multiple_new_categories',
+            )
+        );
+
         add_settings_field(
             'shared-files-show_tag_dropdown_on_file_upload',
             sanitize_text_field( __( 'Show tag dropdown', 'shared-files' ) ),
@@ -241,19 +241,19 @@ class SharedFilesSettingsTab5Content {
                 'field_name' => 'show_tag_checkboxes_on_file_upload',
             )
         );
-        if ( SharedFilesHelpers::isMin2() ) {
-            add_settings_field(
-                'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
-                sanitize_text_field( __( 'Allow the uploader to create multiple new tags', 'shared-files' ) ),
-                array($field_render, 'checkbox_render'),
-                'shared-files',
-                'shared-files_tab_' . $tab,
-                array(
-                    'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
-                    'field_name' => $only_pro . 'file_upload_multiple_new_tags',
-                )
-            );
-        }
+
+        add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
+            sanitize_text_field( __( 'Allow the uploader to create multiple new tags', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_multiple_new_tags',
+                'field_name' => $only_pro . 'file_upload_multiple_new_tags',
+            )
+        );
+
         add_settings_field(
             'shared-files-' . $only_pro . 'show_file_upload_checkboxes_on_multiple_columns',
             sanitize_text_field( __( 'Show category and tag checkboxes on multiple columns', 'shared-files' ) ),

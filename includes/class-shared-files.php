@@ -335,12 +335,11 @@ class Shared_Files {
         $this->loader->add_action( 'admin_menu', $plugin_admin_help_support, 'register_debug_page' );
         // Restrict access info page
         $this->loader->add_action( 'admin_menu', $plugin_admin_restrict_access, 'register_page' );
-        if ( SharedFilesHelpers::isPremium() == 0 ) {
-            $this->loader->add_action( 'admin_menu', $plugin_admin_taxonomy, 'register_categories_info_page' );
-        }
-        if ( SharedFilesHelpers::isPremium() == 0 ) {
-            $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_upgrade_link' );
-        }
+
+        $this->loader->add_action( 'admin_menu', $plugin_admin_taxonomy, 'register_categories_info_page' );
+
+        $this->loader->add_action( 'admin_menu', $plugin_admin, 'add_upgrade_link' );
+
     }
 
     /**

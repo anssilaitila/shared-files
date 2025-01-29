@@ -127,7 +127,7 @@ class SharedFilesAdminMetadata {
         if ( !$is_premium ) {
             $url = 'https://wordpress.org/support/plugin/shared-files/';
             echo '<div class="shared-files-admin-support-box">';
-            echo sprintf( wp_kses( 
+            echo sprintf( wp_kses(
                 /* translators: %s: link to the support forum */
                 __( 'If you have any questions in mind, please contact the author at <a href="%s" target="_blank">the support forum</a>. The forum is actively monitored and any kind of feedback is welcome.', 'shared-files' ),
                 array(
@@ -246,18 +246,18 @@ class SharedFilesAdminMetadata {
         /* Notification email END */
         echo '<div style="width: 100%; border-bottom: 1px solid #000; margin-bottom: 24px;"><h2 style="font-weight: 700; font-size: 20px; padding-left: 0;">' . esc_html__( 'Restrict access', 'shared-files' ) . '</h2></div>';
         /* User START */
-        if ( SharedFilesHelpers::isMin2() ) {
-            echo '<div class="shared-files-admin-small-field-container">';
-            echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</h4>';
-            echo '<i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i>';
-            echo '</div>';
-            $pro_field_active = 0;
-            if ( !$pro_field_active ) {
-                echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
-            }
-            echo '</div>';
+
+        echo '<div class="shared-files-admin-small-field-container">';
+        echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
+        echo '<h4>' . esc_html__( 'Restrict access for users', 'shared-files' ) . '</h4>';
+        echo '<i>' . esc_html__( 'Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1].', 'shared-files' ) . '</i>';
+        echo '</div>';
+        $pro_field_active = 0;
+        if ( !$pro_field_active ) {
+            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
         }
+        echo '</div>';
+
         /* User END */
         /* Password protection START */
         echo '<div class="shared-files-admin-small-field-container">';
@@ -271,7 +271,7 @@ class SharedFilesAdminMetadata {
         }
         if ( $pro_field_active ) {
             $url = esc_url_raw( get_admin_url() . 'edit.php?post_type=shared_file&page=shared-files-restrict-access' );
-            echo '<div style="margin-top: 12px;">' . sprintf( wp_kses( 
+            echo '<div style="margin-top: 12px;">' . sprintf( wp_kses(
                 /* translators: %s: link to the information page about access restriction */
                 __( '<a href="%s">Important information regarding file permissions &raquo;</a>', 'shared-files' ),
                 array(
@@ -285,18 +285,18 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         /* Password protection END */
         /* Role START */
-        if ( SharedFilesHelpers::isMin2() ) {
-            echo '<div class="shared-files-admin-small-field-container">';
-            echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</h4>';
-            echo '<i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i>';
-            echo '</div>';
-            $pro_field_active = 0;
-            if ( !$pro_field_active ) {
-                echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
-            }
-            echo '</div>';
+
+        echo '<div class="shared-files-admin-small-field-container">';
+        echo '<div id="shared-file-user-title" class="shared-files-admin-small-field-title ' . esc_attr( $field_in_pro_class ) . '">';
+        echo '<h4>' . esc_html__( 'Restrict access for roles', 'shared-files' ) . '</h4>';
+        echo '<i>' . esc_html__( 'Only the users having these roles will see the file listed on the restricted file lists.', 'shared-files' ) . '</i>';
+        echo '</div>';
+        $pro_field_active = 0;
+        if ( !$pro_field_active ) {
+            echo wp_kses( $field_in_pro_markup, $field_in_pro_markup_allowed_tags );
         }
+        echo '</div>';
+
         /* Role END */
         /* Limit downloads START */
         echo '<div class="shared-files-admin-small-field-container">';
@@ -315,7 +315,7 @@ class SharedFilesAdminMetadata {
         echo '</div>';
         echo '<div style="width: 100%; margin-bottom: 16px;">';
         $url = esc_url_raw( get_admin_url() . 'options-general.php?page=shared-files#shared-files-settings-tab-4' );
-        echo sprintf( wp_kses( 
+        echo sprintf( wp_kses(
             /* translators: %s: link to plugin settings */
             __( '<a href="%s" target="_blank">Settings for custom fields &raquo;</a>', 'shared-files' ),
             array(
@@ -473,6 +473,14 @@ class SharedFilesAdminMetadata {
                 update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                 update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
             } elseif ( isset( $_FILES['_sf_file']['name'] ) && isset( $_FILES['_sf_file']['tmp_name'] ) && ($tmp_name = $_FILES['_sf_file']['tmp_name']) ) {
+
+                $is_allowed_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name );
+
+                if ( !$is_allowed_mime_type ) {
+                  $error_msg = sanitize_text_field( __('Error: File mime type is not allowed', 'shared-files') );
+                  wp_die( $error_msg );
+                }
+
                 // Get the file type of the upload
                 $arr_file_type = wp_check_filetype( basename( $_FILES['_sf_file']['name'] ) );
                 $uploaded_type = $arr_file_type['type'];
