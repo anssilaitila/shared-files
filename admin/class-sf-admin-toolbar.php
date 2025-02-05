@@ -70,7 +70,7 @@ class SharedFilesAdminToolbar {
         }
         ?>
 
-    <?php
+    <?php 
         if ( $show_toolbar ) {
             ?>
 
@@ -81,74 +81,142 @@ class SharedFilesAdminToolbar {
           <div class="shared-files-admin-toolbar-left-plugin-title">
 
             <span class="shared-files-admin-toolbar-plugin-title">
-              <?php
+              <?php 
             echo esc_html__( 'Shared Files', 'shared-files' );
             ?>
+              <?php 
+            if ( shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+                ?>
+                PRO
+              <?php 
+            } elseif ( shared_files_fs()->is_plan_or_trial( 'pro' ) ) {
+                ?>
+                PRO
+              <?php 
+            } elseif ( shared_files_fs()->is_plan_or_trial( 'personal' ) ) {
+                ?>
+                PRO
+              <?php 
+            }
+            ?>
             </span>
+
+            <?php 
+            if ( shared_files_fs()->is_plan_or_trial( 'business' ) ) {
+                ?>
+              <span class="shared-files-admin-plan-small">MAX</span>
+            <?php 
+            } elseif ( shared_files_fs()->is_plan_or_trial( 'pro' ) ) {
+                ?>
+              <?php 
+                // ...
+                ?>
+            <?php 
+            } elseif ( shared_files_fs()->is_plan_or_trial( 'personal' ) ) {
+                ?>
+              <span class="shared-files-admin-plan-small">LITE</span>
+            <?php 
+            }
+            ?>
 
           </div>
 
           <div class="shared-files-admin-toolbar-left-links">
 
-            <a href="<?php
+            <a href="<?php 
             echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file' ) );
-            ?>"><?php
+            ?>"><?php 
             echo esc_html__( 'All files', 'shared-files' );
             ?></a>
-            <a href="<?php
+            <a href="<?php 
             echo esc_url_raw( get_admin_url( null, './post-new.php?post_type=shared_file' ) );
-            ?>"><?php
+            ?>"><?php 
             echo esc_html__( 'Add new file', 'shared-files' );
             ?></a>
-            <a href="<?php
+            <a href="<?php 
             echo esc_url_raw( get_admin_url( null, './edit-tags.php?taxonomy=' . SHARED_FILES_TAG_SLUG . '&post_type=shared_file' ) );
-            ?>"><?php
+            ?>"><?php 
             echo esc_html__( 'Tags', 'shared-files' );
             ?></a>
 
-            <?php
+            <?php 
             $is_premium = 0;
             ?>
 
-            <?php
+            <?php 
             ?>
 
-            <?php
+            <?php 
             if ( !$is_premium ) {
                 ?>
 
-              <a href="<?php
+              <a href="<?php 
                 echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-categories-info' ) );
-                ?>"><?php
+                ?>"><?php 
                 echo esc_html__( 'Categories', 'shared-files' );
                 ?></a>
 
-            <?php
+            <?php 
             }
             ?>
 
             <span class="shared-files-admin-toolbar-divider"></span>
 
-            <a class="shared-files-btn-alt" href="<?php
+            <a class="shared-files-btn-alt" href="<?php 
             echo esc_url_raw( get_admin_url( null, './options-general.php?page=shared-files' ) );
-            ?>"><?php
+            ?>"><?php 
             echo esc_html__( 'Settings', 'shared-files' );
             ?></a>
 
+            <?php 
+            $freemius_user = shared_files_fs()->get_user();
+            ?>
+
+            <?php 
+            if ( $freemius_user ) {
+                ?>
+
+              <a class="shared-files-btn-alt" href="<?php 
+                echo esc_url_raw( get_admin_url( null, './options-general.php?page=shared-files-account' ) );
+                ?>"><?php 
+                echo esc_html__( 'Account', 'shared-files' );
+                ?></a>
+
+            <?php 
+            }
+            ?>
 
             <span class="shared-files-admin-toolbar-divider"></span>
 
-            <a href="<?php
+            <a href="<?php 
             echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-shortcodes' ) );
-            ?>"><?php
+            ?>"><?php 
             echo esc_html__( 'Shortcodes', 'shared-files' );
             ?></a>
 
-            <a class="shared-files-admin-toolbar-support" href="https://wordpress.org/support/plugin/shared-files/" target="_blank"><span><?php
-              echo esc_html__( 'Support', 'shared-files' );
-              ?></span><img src="<?php
-              echo esc_url_raw( SHARED_FILES_URI );
-              ?>img/external-link-black.svg" class="shared-files-external-link-icon" /></a>
+            <?php 
+            if ( SharedFilesHelpers::isPremium() == 0 ) {
+                ?>
+
+              <a class="shared-files-admin-toolbar-support" href="https://wordpress.org/support/plugin/shared-files/" target="_blank"><span><?php 
+                echo esc_html__( 'Support', 'shared-files' );
+                ?></span><img src="<?php 
+                echo esc_url_raw( SHARED_FILES_URI );
+                ?>img/external-link-black.svg" class="shared-files-external-link-icon" /></a>
+
+            <?php 
+            } else {
+                ?>
+
+              <a href="<?php 
+                echo esc_url_raw( get_admin_url( null, './edit.php?post_type=shared_file&page=shared-files-support' ) );
+                ?>"><?php 
+                echo esc_html__( 'Support', 'shared-files' );
+                ?></a>
+
+            <?php 
+            }
+            ?>
 
           </div>
 
@@ -156,39 +224,25 @@ class SharedFilesAdminToolbar {
 
         <div class="shared-files-admin-toolbar-right">
 
-            <?php
-                $week_number = intval( wp_date( 'W' ) );
+          <?php 
+            if ( SharedFilesHelpers::isPremium() == 0 ) {
                 ?>
 
-            <?php
-                if ( $week_number % 2 == 0 ) {
-                    ?>
+            <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=toolbar-button-trial" target="_blank">
+              <?php 
+                echo esc_html__( 'Start a Free Trial of Shared Files PRO', 'shared-files' );
+                ?> ➜
+            </a>
 
-              <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=toolbar-button-unlock" target="_blank">
-                <?php
-                    echo esc_html__( 'Unlock Extra Features with Shared Files PRO', 'shared-files' );
-                    ?> ➜
-              </a>
-
-            <?php
-                } else {
-                    ?>
-
-              <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=toolbar-button-trial" target="_blank">
-                <?php
-                    echo esc_html__( 'Start a Free Trial of Shared Files PRO', 'shared-files' );
-                    ?> ➜
-              </a>
-
-            <?php
-                }
-                ?>
+          <?php 
+            }
+            ?>
 
         </div>
 
       </div>
 
-      <?php
+      <?php 
             $page_title = sanitize_text_field( __( 'Shared Files', 'shared-files' ) );
             switch ( $current_admin_page ) {
                 case 'edit-shared_file':
@@ -257,22 +311,22 @@ class SharedFilesAdminToolbar {
             ?>
 
       <div class="shared-files-admin-titlebar">
-        <h1><?php
+        <h1><?php 
             echo esc_html( $page_title );
             ?></h1>
       </div>
 
-    <?php
+    <?php 
         }
         ?>
 
-    <?php
+    <?php 
     }
 
     public function admin_footer() {
         ?>
 
-    <?php
+    <?php 
         $screen = get_current_screen();
         $admin_pages = SharedFilesAdminToolbar::get_admin_pages();
         $show_box = 0;
@@ -291,42 +345,42 @@ class SharedFilesAdminToolbar {
         }
         ?>
 
-    <?php
-        if ( $show_box ) {
+    <?php 
+        if ( SharedFilesHelpers::isPremium() == 0 && $show_box ) {
             ?>
 
-      <?php
+      <?php 
             $current_date = wp_date( 'Y-m-d' );
             $start_date = '2025-01-13';
             $end_date = '2025-02-02';
             ?>
 
-      <?php
+      <?php 
             if ( $current_date >= $start_date && $current_date <= $end_date ) {
                 ?>
 
         <div class="shared-files-admin-pro-features-container">
 
           <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=special-offer" target="_blank" class="shared-files-admin-pro-features">
-            <span><?php
+            <span><?php 
                 echo esc_html__( 'Special offer: All licenses -30% for Shared Files PRO!', 'shared-files' );
                 ?></span>
-            <span class="shared-files-admin-pro-features-button"><?php
+            <span class="shared-files-admin-pro-features-button"><?php 
                 echo esc_html__( 'Buy Now', 'shared-files' );
                 ?></span>
           </a>
 
         </div>
 
-      <?php
+      <?php 
             }
             ?>
 
-    <?php
+    <?php 
         }
         ?>
 
-    <?php
+    <?php 
     }
 
 }

@@ -72,20 +72,20 @@ class SharedFilesSettingsTabSearchLog {
                 'class'      => 'shared-files-new-feature',
             )
         );
-
-        add_settings_field(
-            'shared-files-' . $only_pro . 'esl_user_city',
-            sanitize_text_field( __( 'Log user city', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'esl_user_city',
-                'field_name' => $only_pro . 'esl_user_city',
-                'class'      => 'shared-files-new-feature',
-            )
-        );
-
+        if ( SharedFilesHelpers::isMin2() ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'esl_user_city',
+                sanitize_text_field( __( 'Log user city', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'esl_user_city',
+                    'field_name' => $only_pro . 'esl_user_city',
+                    'class'      => 'shared-files-new-feature',
+                )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'esl_search_container',
             sanitize_text_field( __( 'Log search container (page / post information)', 'shared-files' ) ),

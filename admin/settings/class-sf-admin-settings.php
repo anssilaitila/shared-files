@@ -57,12 +57,12 @@ class Shared_Files_Settings {
         $tab_content_admin_list->init();
         // File edit
         $tab_content_file_edit->init();
-
-        // Favorites
-        $tab_content_favorites->init();
-        // Wait countdown page
-        $tab_content_wait_countdown->init();
-
+        if ( SharedFilesHelpers::isMin3() ) {
+            // Favorites
+            $tab_content_favorites->init();
+            // Wait countdown page
+            $tab_content_wait_countdown->init();
+        }
         // Simple list
         $tab_content_simple_list->init();
         // Custom post type
@@ -71,10 +71,10 @@ class Shared_Files_Settings {
         $tab_content_lead_generation->init();
         // Single file
         $tab_content_single_file->init( 'single-file' );
-
-        // Exact search
-        $tab_content_exact_search->init( 'exact-search' );
-
+        if ( SharedFilesHelpers::isMin2() ) {
+            // Exact search
+            $tab_content_exact_search->init( 'exact-search' );
+        }
         $tab_content_search_log->init( 'search-log' );
     }
 

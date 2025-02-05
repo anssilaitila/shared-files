@@ -123,20 +123,20 @@ class SharedFilesSettingsTab1Content {
                 'class'      => 'shared-files-new-feature',
             )
         );
-
-        add_settings_field(
-            'shared-files-' . $only_pro . 'log_enable_city',
-            sanitize_text_field( __( 'Log downloader city', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'log_enable_city',
-                'field_name' => $only_pro . 'log_enable_city',
-                'class'      => 'shared-files-new-feature',
-            )
-        );
-
+        if ( SharedFilesHelpers::isMin2() ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'log_enable_city',
+                sanitize_text_field( __( 'Log downloader city', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'log_enable_city',
+                    'field_name' => $only_pro . 'log_enable_city',
+                    'class'      => 'shared-files-new-feature',
+                )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'log_enable_country_logging',
             sanitize_text_field( __( 'Log debug data from country and city updates', 'shared-files' ) ),
@@ -182,41 +182,75 @@ class SharedFilesSettingsTab1Content {
                 'field_name' => 'show_tag_dropdown',
             )
         );
-
-        add_settings_field(
-            'shared-files-' . $only_pro . 'sort_tags_by',
-            sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
-            array($field_render, 'sort_tags_by_render'),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'sort_tags_by',
-                'field_name' => $only_pro . 'sort_tags_by',
-            )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'show_category_dropdown',
-            sanitize_text_field( __( 'Show category filter', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'show_category_dropdown',
-                'field_name' => $only_pro . 'show_category_dropdown',
-            )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'sort_categories_by',
-            sanitize_text_field( __( 'Sort categories by', 'shared-files' ) ),
-            array($field_render, 'sort_categories_by_render'),
-            'shared-files',
-            'shared-files_section_general',
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'sort_categories_by',
-                'field_name' => $only_pro . 'sort_categories_by',
-            )
-        );
-
+        if ( SharedFilesHelpers::isPremium() == 0 ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'sort_tags_by',
+                sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
+                array($field_render, 'sort_tags_by_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'sort_tags_by',
+                    'field_name' => $only_pro . 'sort_tags_by',
+                )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'show_category_dropdown',
+                sanitize_text_field( __( 'Show category filter', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'show_category_dropdown',
+                    'field_name' => $only_pro . 'show_category_dropdown',
+                )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'sort_categories_by',
+                sanitize_text_field( __( 'Sort categories by', 'shared-files' ) ),
+                array($field_render, 'sort_categories_by_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'sort_categories_by',
+                    'field_name' => $only_pro . 'sort_categories_by',
+                )
+            );
+        } else {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'sort_tags_by',
+                sanitize_text_field( __( 'Sort tags by', 'shared-files' ) ),
+                array($field_render, 'sort_tags_by_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'sort_tags_by',
+                    'field_name' => $only_pro . 'sort_tags_by',
+                )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'hide_category_dropdown',
+                sanitize_text_field( __( 'Hide category filter', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'hide_category_dropdown',
+                    'field_name' => $only_pro . 'hide_category_dropdown',
+                )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'sort_categories_by',
+                sanitize_text_field( __( 'Sort categories by', 'shared-files' ) ),
+                array($field_render, 'sort_categories_by_render'),
+                'shared-files',
+                'shared-files_section_general',
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'sort_categories_by',
+                    'field_name' => $only_pro . 'sort_categories_by',
+                )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'pagination',
             sanitize_text_field( __( 'Pagination (number of files on one page)', 'shared-files' ) ),

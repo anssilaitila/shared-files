@@ -221,10 +221,10 @@ class ShortcodeSharedFiles {
                 );
             }
             if ( isset( $atts['category'] ) ) {
-
-                $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
-                return $html;
-
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    $html = SharedFilesPublicHelpers::proFeaturePublicMarkup();
+                    return $html;
+                }
             } else {
                 if ( isset( $_GET['sf_category'] ) && $_GET['sf_category'] != '0' ) {
                     $term_slug = sanitize_title( $_GET['sf_category'] );

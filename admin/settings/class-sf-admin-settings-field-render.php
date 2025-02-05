@@ -89,13 +89,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>
@@ -287,13 +282,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html__('All Plans', 'shared-files') ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('All Plans', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -343,13 +333,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>
@@ -466,13 +451,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html__('All Plans', 'shared-files') ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('All Plans', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -545,13 +525,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>
@@ -667,13 +642,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span>Max</span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html__('Max', 'shared-files') ?></div></div>
           </a>
 
         <?php else: ?>
@@ -750,13 +720,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>
@@ -804,13 +769,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>
@@ -889,13 +849,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>
@@ -943,13 +898,8 @@ class SharedFilesSettingsFieldRender {
 
         <?php if ($free): ?>
 
-          <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=plugin-settings" target="_blank">
-            <div class="shared-files-settings-pro-feature-overlay">
-              <div>
-                <span><?php echo esc_html( $plan_required ) ?></span>
-                <img src="<?php echo esc_url_raw( SHARED_FILES_URI ) ?>img/external-link-black.svg" class="shared-files-external-link-icon" />
-              </div>
-            </div>
+          <a href="<?php echo esc_url( get_admin_url() ) ?>options-general.php?page=shared-files-pricing">
+            <div class="shared-files-settings-pro-feature-overlay"><div><?php echo esc_html( $plan_required ) ?></div></div>
           </a>
 
         <?php else: ?>

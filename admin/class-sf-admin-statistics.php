@@ -16,26 +16,38 @@ class SharedFilesAdminStatistics {
     public function register_statistics_page_callback() {
         ?>
 
-    <?php
+    <?php 
         echo SharedFilesAdminHelpSupport::permalinks_alert();
         ?>
 
-    <?php
+    <?php 
         $s = get_option( 'shared_files_settings' );
         ?>
 
     <div class="shared-files-help-support wrap shared-files-admin-page">
 
-      <h1><?php
+      <h1><?php 
         echo esc_html__( 'Statistics of Shared Files', 'shared-files' );
         ?></h1>
 
       <div class="shared-files-examples">
 
+        <?php 
+        if ( shared_files_fs()->can_use_premium_code() ) {
+            ?>
+
+          <p><?php 
+            echo esc_html__( 'If you wish to see some other statistics, contact the author at', 'shared-files' );
+            ?> <a href="https://www.sharedfilespro.com/support/?utm_source=plugin-shortcodes" target="_blank">sharedfilespro.com/support/</a>.</p>
+
+        <?php 
+        } else {
+            ?>
+
           <p>
-          <?php
+          <?php 
             $url = 'https://wordpress.org/support/plugin/shared-files/';
-            echo sprintf( wp_kses(
+            echo sprintf( wp_kses( 
                 /* translators: %s: link to the support forum */
                 __( 'If you wish to see some other statistics, contact the author at <a href="%s" target="_blank">the support forum</a>.', 'shared-files' ),
                 array(
@@ -48,17 +60,21 @@ class SharedFilesAdminStatistics {
             ?>
           </p>
 
+        <?php 
+        }
+        ?>
+
       </div>
 
       <div class="shared-files-admin-section-statistics-container">
 
         <div class="shared-files-admin-section shared-files-admin-section-statistics">
 
-          <h2><?php
+          <h2><?php 
         echo esc_html__( 'Top 50 most popular files', 'shared-files' );
         ?></h2>
 
-          <?php
+          <?php 
         $wp_query = new WP_Query(array(
             'post_type'      => 'shared_file',
             'post_status'    => 'publish',
@@ -69,7 +85,7 @@ class SharedFilesAdminStatistics {
         ));
         ?>
 
-          <?php
+          <?php 
         if ( isset( $wp_query ) && $wp_query->have_posts() ) {
             ?>
 
@@ -77,72 +93,72 @@ class SharedFilesAdminStatistics {
 
             <tr>
               <th></th>
-              <th><?php
+              <th><?php 
             echo esc_html__( 'File', 'shared-files' );
             ?></th>
-              <th style="width: 50px;"><?php
+              <th style="width: 50px;"><?php 
             echo esc_html__( 'Downloads', 'shared-files' );
             ?></th>
             </tr>
 
-            <?php
+            <?php 
             $row = 1;
             ?>
 
-            <?php
+            <?php 
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
                 ?>
 
-              <?php
+              <?php 
                 $id = intval( get_the_id() );
                 ?>
-              <?php
+              <?php 
                 $c = get_post_custom( $id );
                 ?>
 
               <tr>
                 <td style="width: 10px; padding-right: 0; text-align: right;">
-                  <?php
+                  <?php 
                 echo esc_html( $row );
                 ?>.
                 </td>
                 <td>
-                  <a href="<?php
+                  <a href="<?php 
                 echo esc_url_raw( get_edit_post_link( $id ) );
-                ?>"><?php
+                ?>"><?php 
                 echo esc_html( get_the_title() );
                 ?></a>
                 </td>
                 <td style="text-align: right; width: 50px;">
-                  <?php
+                  <?php 
                 $download_cnt = intval( $c['_sf_load_cnt'][0] );
                 ?>
-                  <?php
+                  <?php 
                 echo esc_html( $download_cnt );
                 ?>
                 </td>
               </tr>
 
-              <?php
+              <?php 
                 $row++;
                 ?>
 
-            <?php
+            <?php 
             }
             ?>
 
             </table>
 
-          <?php
+          <?php 
         } else {
             ?>
 
-            <p><?php
+            <p><?php 
             echo esc_html__( 'No files added yet.', 'shared-files' );
             ?></p>
 
-          <?php
+          <?php 
         }
         ?>
 
@@ -151,11 +167,11 @@ class SharedFilesAdminStatistics {
 
         <div class="shared-files-admin-section shared-files-admin-section-statistics">
 
-          <h2><?php
+          <h2><?php 
         echo esc_html__( 'Top 50 countries', 'shared-files' );
         ?></h2>
 
-          <?php
+          <?php 
         global $wpdb;
         $msg = $wpdb->get_results( "SELECT user_country, COUNT(user_country) AS ROWS_CNT FROM {$wpdb->prefix}shared_files_download_log WHERE user_country != '' GROUP BY user_country ORDER BY ROWS_CNT DESC LIMIT 50" );
         ?>
@@ -163,74 +179,74 @@ class SharedFilesAdminStatistics {
           <table>
           <tr>
             <th></th>
-            <th><?php
+            <th><?php 
         echo esc_html__( 'Country', 'shared-files' );
         ?></th>
-            <th style="width: 50px;"><?php
+            <th style="width: 50px;"><?php 
         echo esc_html__( 'Downloads', 'shared-files' );
         ?></th>
           </tr>
 
-          <?php
+          <?php 
         $row_num = 1;
         ?>
 
-          <?php
+          <?php 
         if ( sizeof( $msg ) > 0 ) {
             ?>
 
-            <?php
+            <?php 
             foreach ( $msg as $row ) {
                 ?>
 
               <tr>
                 <td style="width: 10px; padding-right: 0; text-align: right;">
-                  <?php
+                  <?php 
                 echo esc_html( $row_num );
                 ?>.
                 </td>
                 <td>
-                  <?php
+                  <?php 
                 echo esc_html( $row->user_country );
                 ?>
                 </td>
                 <td style="text-align: right; width: 50px;">
-                  <?php
+                  <?php 
                 echo esc_html( $row->ROWS_CNT );
                 ?><br />
                 </td>
 
               </tr>
 
-              <?php
+              <?php 
                 $row_num++;
                 ?>
 
-            <?php
+            <?php 
             }
             ?>
 
-          <?php
+          <?php 
         } else {
             ?>
 
             <tr>
               <td colspan="3">
-                <?php
+                <?php 
             echo esc_html__( 'Country data not yet stored.', 'shared-files' );
             ?>
               </td>
             </tr>
 
-          <?php
+          <?php 
         }
         ?>
 
           </table>
 
-          <p style="margin-top: 24px;"><?php
+          <p style="margin-top: 24px;"><?php 
         $url = 'https://www.maxmind.com';
-        echo sprintf( wp_kses(
+        echo sprintf( wp_kses( 
             /* translators: %s: link to maxmind.com, the provider of geographical data */
             __( 'This product includes GeoLite2 data created by MaxMind, available from <a href="%s" target="_blank">maxmind.com</a>.', 'shared-files' ),
             array(
@@ -248,7 +264,7 @@ class SharedFilesAdminStatistics {
 
     </div>
 
-    <?php
+    <?php 
     }
 
 }

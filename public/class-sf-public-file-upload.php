@@ -185,14 +185,11 @@ class SharedFilesFileUpload {
                 update_post_meta( $id, '_sf_description', '' );
             }
             if ( isset( $_FILES['_sf_file']['tmp_name'] ) && ($tmp_name = $_FILES['_sf_file']['tmp_name']) ) {
-
                 $is_allowed_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name );
-
                 if ( !$is_allowed_mime_type ) {
-                  $error_msg = sanitize_text_field( __('Error: file mime type is not allowed', 'shared-files') );
-                  wp_die( $error_msg );
+                    $error_msg = sanitize_text_field( __( 'Error: file mime type is not allowed', 'shared-files' ) );
+                    wp_die( $error_msg );
                 }
-
                 // Get the file type of the upload
                 $arr_file_type = wp_check_filetype( basename( $_FILES['_sf_file']['name'] ) );
                 $uploaded_type = $arr_file_type['type'];

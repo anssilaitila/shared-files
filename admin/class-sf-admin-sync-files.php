@@ -3,7 +3,9 @@
 class SharedFilesAdminSyncFiles {
     public function register_page() {
         $menu_pos = 3;
-
+        if ( SharedFilesHelpers::isPremium() == 1 ) {
+            $menu_pos = 4;
+        }
         add_submenu_page(
             'edit.php?post_type=shared_file',
             sanitize_text_field( __( 'Sync Files', 'shared-files' ) ),
@@ -19,26 +21,28 @@ class SharedFilesAdminSyncFiles {
         ?>
 
     <div class="Xshared-files-admin-page-content-container shared-files-sync-files wrap">
-      <h1><?php
+      <h1><?php 
         echo esc_html__( 'Sync Files', 'shared-files' );
         ?></h1>
 
-      <?php
-        echo SharedFilesAdminHelpers::sfProFeatureMarkup();
+      <?php 
+        if ( SharedFilesHelpers::isPremium() == 0 ) {
+            echo SharedFilesAdminHelpers::sfProFeatureMarkup();
+        }
         ?>
 
-      <?php
+      <?php 
         $path = SharedFilesFileHandling::getBaseDir();
         ?>
 
       <p>
-        <?php
+        <?php 
         echo esc_html__( 'You may transfer many files at once using FTP to the folder mentioned below, and then sync the files here so they will be usable by the plugin.', 'shared-files' );
         ?>
       </p>
 
       <p>
-        <?php
+        <?php 
         echo esc_html__( 'If a file is inactive, it means that it exists on the server, but has not yet been activated for the plugin.', 'shared-files' );
         ?>
       </p>
@@ -47,19 +51,19 @@ class SharedFilesAdminSyncFiles {
 
         <form method="post">
 
-          <?php
+          <?php 
         $taxonomy_slug = 'shared-file-category';
         ?>
 
-          <?php
+          <?php 
         if ( get_taxonomy( $taxonomy_slug ) ) {
             ?>
 
-            <span class="shared-files-category-for-new-files"><?php
+            <span class="shared-files-category-for-new-files"><?php 
             echo esc_html__( 'Category for new files:', 'shared-files' );
             ?></span>
 
-            <?php
+            <?php 
             echo wp_dropdown_categories( [
                 'show_option_all' => ' ',
                 'hide_empty'      => 0,
@@ -75,18 +79,20 @@ class SharedFilesAdminSyncFiles {
             ] );
             ?><br />
 
-          <?php
+          <?php 
         }
         ?>
 
-          <?php
+          <?php 
         wp_nonce_field( 'sf-sync-files', 'sf-sync-files-nonce' );
         ?>
 
           <input type="hidden" name="shared-files-op" value="sync-files" />
           <input type="hidden" name="add_file" value="all_files" />
 
-          <input type="submit" class="shared-files-activate shared-files-pro-required" value="<?php
+          <input type="submit" class="shared-files-activate <?php 
+        echo ( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' );
+        ?>" value="<?php 
         echo esc_html__( 'Activate all inactive files', 'shared-files' );
         ?>" />
 
@@ -94,15 +100,15 @@ class SharedFilesAdminSyncFiles {
       </p>
 
       <p>
-        <?php
+        <?php 
         echo esc_html__( 'Files found on the server at', 'shared-files' );
         ?>
-        <span class="shared-files-path"><?php
+        <span class="shared-files-path"><?php 
         echo esc_html( $path );
         ?></span>:
       </p>
 
-      <?php
+      <?php 
         if ( isset( $_GET['files'] ) && $_GET['files'] == 'error' ) {
             echo '<p class="shared-files-error">' . esc_html__( 'Error processing file(s).', 'shared-files' ) . '</p>';
         } elseif ( isset( $_GET['files'] ) ) {
@@ -141,7 +147,7 @@ class SharedFilesAdminSyncFiles {
         ?>
 
     </div>
-    <?php
+    <?php 
     }
 
     private static function getFileRow( $file, $item ) {
@@ -195,11 +201,12 @@ class SharedFilesAdminSyncFiles {
             wp_reset_postdata();
         } else {
             echo '<span class="shared-files-inactive">' . esc_html__( 'Inactive', 'shared-files' ) . '</span><br />';
-
-            echo '<form method="post">';
-            echo '<input type="submit" class="shared-files-activate shared-files-pro-required" value="' . esc_attr__( 'Activate', 'shared-files' ) . '" />';
-            echo '</form>';
-
+            $is_premium = 0;
+            if ( !$is_premium ) {
+                echo '<form method="post">';
+                echo '<input type="submit" class="shared-files-activate ' . (( SharedFilesHelpers::isPremium() == 0 ? 'shared-files-pro-required' : '' )) . '" value="' . esc_attr__( 'Activate', 'shared-files' ) . '" />';
+                echo '</form>';
+            }
         }
         echo '</td>';
         echo '</tr>';

@@ -155,7 +155,7 @@ class Shared_Files_Admin {
 
     public function add_upgrade_link() {
         global $submenu;
-        $permalink = 'https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=wp-menu-upgrade';
+        $permalink = './options-general.php?page=shared-files-pricing';
         $submenu['edit.php?post_type=shared_file'][] = array(
             sanitize_text_field( __( 'Upgrade', 'shared-files' ) ) . '&nbsp;&nbsp;➤',
             'manage_options',

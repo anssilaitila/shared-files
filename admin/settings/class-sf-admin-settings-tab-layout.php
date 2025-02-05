@@ -35,19 +35,19 @@ class SharedFilesSettingsTab3Content {
                 'field_name' => $only_pro . 'card_align_elements_vertically',
             )
         );
-
-        add_settings_field(
-            'shared-files-' . $only_pro . 'remove_link_from_file_title',
-            sanitize_text_field( __( 'Remove link from file title', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'remove_link_from_file_title',
-                'field_name' => $only_pro . 'remove_link_from_file_title',
-            )
-        );
-
+        if ( SharedFilesHelpers::isMin2() ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'remove_link_from_file_title',
+                sanitize_text_field( __( 'Remove link from file title', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'remove_link_from_file_title',
+                    'field_name' => $only_pro . 'remove_link_from_file_title',
+                )
+            );
+        }
         add_settings_field(
             'shared-files-show_download_button',
             sanitize_text_field( __( 'Show download button', 'shared-files' ) ),

@@ -8,9 +8,9 @@ class SharedFilesAdminList {
      */
     public function shared_file_custom_columns( $defaults ) {
         $s = get_option( 'shared_files_settings' );
-
-        $defaults['_category'] = sanitize_text_field( __( 'Category', 'shared-files' ) );
-
+        if ( SharedFilesHelpers::isPremium() == 0 ) {
+            $defaults['_category'] = sanitize_text_field( __( 'Category', 'shared-files' ) );
+        }
         $defaults['file_url'] = sanitize_text_field( __( 'Shortcode', 'shared-files' ) );
         $defaults['filesize'] = sanitize_text_field( __( 'File size', 'shared-files' ) );
         $defaults['load_cnt'] = sanitize_text_field( __( 'Downloads', 'shared-files' ) );
@@ -80,7 +80,7 @@ class SharedFilesAdminList {
         $file_id = intval( get_the_ID() );
         switch ( $column_name ) {
             case '_category':
-                echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
+                echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans', 'shared-files' ) . '</div></a>';
                 break;
             case 'file_url':
                 echo '<span class="shared-files-shortcode-admin-list shared-files-shortcode-admin-list-file shared-files-shortcode-' . esc_attr( $post_ID ) . '" title="[shared_files file_id=' . esc_attr( $post_ID ) . ']">[shared_files file_id=' . esc_attr( $post_ID ) . ']</span>';
@@ -106,27 +106,27 @@ class SharedFilesAdminList {
                 echo esc_html( get_post_meta( $post_ID, '_sf_load_cnt', true ) );
                 break;
             case 'limit_downloads':
-
-                echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
-
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans', 'shared-files' ) . '</div></a>';
+                }
                 break;
             case 'file_added':
                 echo esc_html( get_post_meta( $post_ID, '_sf_file_added', true ) );
                 break;
             case 'last_access':
-
-                echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
-
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans', 'shared-files' ) . '</div></a>';
+                }
                 break;
             case 'bandwidth_usage':
-
-                echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
-
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans', 'shared-files' ) . '</div></a>';
+                }
                 break;
             case 'expiration_date':
-
-                echo '<a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=admin-list" target="_blank" class="shared-files-pro-only-link"><div class="shared-files-pro-only"><span>' . esc_html__( 'All Plans' ) . '</span><img src="' . esc_url_raw( SHARED_FILES_URI ) . 'img/external-link-black.svg" class="shared-files-external-link-icon" /></div></a>';
-
+                if ( SharedFilesHelpers::isPremium() == 0 ) {
+                    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing"><div class="shared-files-pro-only">' . esc_html__( 'All Plans', 'shared-files' ) . '</div></a>';
+                }
                 break;
         }
     }

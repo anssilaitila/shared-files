@@ -15,18 +15,6 @@ class SharedFilesAdminInlineStyles {
 
     $css = '';
 
-    $css .= '.wp-list-table tr[data-slug="shared-files"] span.upgrade {';
-    $css .= 'display: none !important;';
-    $css .= '}';
-
-    $css .= '.wp-submenu .shared-files-upgrade {';
-    $css .= 'display: none !important;';
-    $css .= '}';
-
-    $css .= 'a[href^="options-general.php?page=shared-files-pricing"] {';
-    $css .= 'display: none !important;';
-    $css .= '}';
-
     $css .= '.shared-files-pro-only {';
     $css .= 'display: flex;';
     $css .= 'justify-content: center;';
@@ -66,7 +54,9 @@ class SharedFilesAdminInlineStyles {
 
     }
 
-    $css .= '.wp-list-table tr[data-slug="shared-files"] .upgrade a { color: #3db634; }';
+    if (SharedFilesHelpers::isPremium() == 0) {
+      $css .= '.wp-list-table tr[data-slug="shared-files"] .upgrade a { color: #3db634; }';
+    }
 
     return $css;
 

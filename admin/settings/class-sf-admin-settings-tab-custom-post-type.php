@@ -13,30 +13,30 @@ class SharedFilesSettingsTabCustomPostType {
             array($tabs, 'shared_files_settings_tab_' . $tab . '_callback'),
             'shared-files'
         );
-
-        add_settings_field(
-            'shared-files-' . $only_pro . 'enable_single_contact_page',
-            sanitize_text_field( __( 'Enable single file page', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'enable_single_file_page',
-                'field_name' => $only_pro . 'enable_single_file_page',
-            )
-        );
-        add_settings_field(
-            'shared-files-' . $only_pro . 'show_files_in_site_search_results',
-            sanitize_text_field( __( 'Show files in site search results', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-                'label_for'  => 'shared-files-' . $only_pro . 'show_files_in_site_search_results',
-                'field_name' => $only_pro . 'show_files_in_site_search_results',
-            )
-        );
-
+        if ( SharedFilesHelpers::isMin2() ) {
+            add_settings_field(
+                'shared-files-' . $only_pro . 'enable_single_contact_page',
+                sanitize_text_field( __( 'Enable single file page', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'enable_single_file_page',
+                    'field_name' => $only_pro . 'enable_single_file_page',
+                )
+            );
+            add_settings_field(
+                'shared-files-' . $only_pro . 'show_files_in_site_search_results',
+                sanitize_text_field( __( 'Show files in site search results', 'shared-files' ) ),
+                array($field_render, 'checkbox_render'),
+                'shared-files',
+                'shared-files_tab_' . $tab,
+                array(
+                    'label_for'  => 'shared-files-' . $only_pro . 'show_files_in_site_search_results',
+                    'field_name' => $only_pro . 'show_files_in_site_search_results',
+                )
+            );
+        }
         add_settings_field(
             'shared-files-' . $only_pro . 'show_description_in_rest_api',
             sanitize_text_field( __( 'Show file description in REST API query results', 'shared-files' ) ),
