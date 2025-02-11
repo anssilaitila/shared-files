@@ -459,10 +459,13 @@ class SharedFilesAdminMetadata {
                 update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                 update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
             } elseif ( isset( $_FILES['_sf_file']['name'] ) && isset( $_FILES['_sf_file']['tmp_name'] ) && ($tmp_name = $_FILES['_sf_file']['tmp_name']) ) {
-                $is_allowed_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name );
-                if ( !$is_allowed_mime_type ) {
+                $basename = sanitize_file_name( basename( $_FILES['_sf_file']['name'] ) );
+                $checked_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name, $basename );
+                if ( !$checked_mime_type[0] ) {
                     $error_msg = sanitize_text_field( __( 'Error: file mime type is not allowed', 'shared-files' ) );
-                    wp_die( $error_msg );
+                    $error_msg .= '<br /><br />';
+                    $error_msg .= sanitize_text_field( __( 'Detected mime type:', 'shared-files' ) . ' ' . $checked_mime_type[1] );
+                    wp_die( wp_kses_post( $error_msg ) );
                 }
                 // Get the file type of the upload
                 $arr_file_type = wp_check_filetype( basename( $_FILES['_sf_file']['name'] ) );

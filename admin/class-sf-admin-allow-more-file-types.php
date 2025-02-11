@@ -96,7 +96,7 @@ class SharedFilesAdminAllowMoreFileTypes {
 
   }
 
-  public static function allowed_mime_types( $tmp_name ) {
+  public static function allowed_mime_types( $tmp_name, $filename ) {
 
     $uploaded_file_mime_type = '';
 
@@ -112,16 +112,31 @@ class SharedFilesAdminAllowMoreFileTypes {
 
     }
 
+    if ( !$uploaded_file_mime_type ) {
+
+      $checked = wp_check_filetype_and_ext( $tmp_name, $filename );
+
+      if ( isset( $checked['type'] ) ) {
+        $uploaded_file_mime_type = sanitize_text_field( $checked['type'] );
+
+      }
+
+    }
+
     $allowed_mime_types = get_allowed_mime_types();
     $disallowed_mime_types = ['text/html', 'application/ttaf+xml'];
 
+    $checked_mime_type = [];
+
     if ( in_array($uploaded_file_mime_type, $disallowed_mime_types) ) {
-      return false;
+      $checked_mime_type = [0, $uploaded_file_mime_type];
     } elseif ( in_array($uploaded_file_mime_type, $allowed_mime_types) ) {
-      return true;
+      $checked_mime_type = [1, $uploaded_file_mime_type];
     } else {
-      return false;
+      $checked_mime_type = [0, $uploaded_file_mime_type];
     }
+
+    return $checked_mime_type;
 
   }
 
