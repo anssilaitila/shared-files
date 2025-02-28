@@ -54,9 +54,7 @@ class SharedFilesAdminInlineStyles {
 
     }
 
-    if (SharedFilesHelpers::isPremium() == 0) {
-      $css .= '.wp-list-table tr[data-slug="shared-files"] .upgrade a { color: #3db634; }';
-    }
+    $css .= '.wp-list-table tr[data-slug="shared-files"] .upgrade a { color: #3db634; }';
 
     return $css;
 

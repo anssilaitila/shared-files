@@ -100,6 +100,8 @@ class SharedFilesAdminAllowMoreFileTypes {
 
     $uploaded_file_mime_type = '';
 
+    add_filter('upload_mimes', [ 'SharedFilesAdminAllowMoreFileTypes', 'add_file_types' ] );
+
     if ( function_exists('finfo_open') && function_exists('finfo_file') ) {
 
       $finfo = finfo_open( FILEINFO_MIME_TYPE );
@@ -135,6 +137,8 @@ class SharedFilesAdminAllowMoreFileTypes {
     } else {
       $checked_mime_type = [0, $uploaded_file_mime_type];
     }
+
+    remove_filter('upload_mimes', [ 'SharedFilesAdminAllowMoreFileTypes', 'add_file_types' ] );
 
     return $checked_mime_type;
 

@@ -6,10 +6,6 @@ class SharedFilesAdminRestrictAccess {
 
     $menu_pos = 11;
 
-    if (SharedFilesHelpers::isPremium() == 1) {
-      $menu_pos = 12;
-    }
-
     add_submenu_page(
       'edit.php?post_type=shared_file',
       sanitize_text_field( __('Restrict access to files', 'shared-files') ),
