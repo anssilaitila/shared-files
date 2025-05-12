@@ -290,8 +290,8 @@ class SharedFilesAdminToolbar {
       <?php
       $current_date = wp_date('Y-m-d');
 
-      $start_date = '2025-01-13';
-      $end_date = '2025-02-02';
+      $start_date = '2025-05-12';
+      $end_date = '2025-05-31';
       ?>
 
       <?php if ($current_date >= $start_date && $current_date <= $end_date): ?>
@@ -299,7 +299,7 @@ class SharedFilesAdminToolbar {
         <div class="shared-files-admin-pro-features-container">
 
           <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=special-offer" target="_blank" class="shared-files-admin-pro-features">
-            <span><?php echo esc_html__('Special offer: All licenses -30% for Shared Files PRO!', 'shared-files') ?></span>
+            <span><?php echo esc_html__('Special offer: All subscriptions -25% for Shared Files PRO!', 'shared-files') ?></span>
             <span class="shared-files-admin-pro-features-button"><?php echo esc_html__('Buy Now', 'shared-files') ?></span>
           </a>
 

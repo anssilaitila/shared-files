@@ -26,10 +26,14 @@ class SharedFilesPublicHelpers {
 
     $html = '';
 
-    if (isset($s['textarea_for_file_description']) && $s['textarea_for_file_description']) {
-      $html .= '<div class="shared-file-description-container">' . wp_kses_post( nl2br($c['_sf_description'][0]) ) . '</div>';
-    } else {
-      $html .= '<div class="shared-file-description-container">' . wp_kses_post( $c['_sf_description'][0] ) . '</div>';
+    if ( isset( $c['_sf_description'][0] ) && $c['_sf_description'][0] ) {
+
+      if (isset($s['textarea_for_file_description']) && $s['textarea_for_file_description']) {
+        $html .= '<div class="shared-file-description-container">' . wp_kses_post( nl2br($c['_sf_description'][0]) ) . '</div>';
+      } else {
+        $html .= '<div class="shared-file-description-container">' . wp_kses_post( $c['_sf_description'][0] ) . '</div>';
+      }
+
     }
 
     return $html;

@@ -2,9 +2,9 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
-Tested up to: 6.7
-Stable tag: 1.7.46
-Requires PHP: 7.4
+Tested up to: 6.8
+Stable tag: 1.7.48
+Requires PHP: 7.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -282,6 +282,12 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.48 - 2025-05-12 =
+* Tweaks and fixes
+
+= 1.7.47 - 2025-05-07 =
+* Tweaks and fixes
 
 = 1.7.46 - 2025-02-28 =
 * Fix: solved an issue with allowing more custom file types for file upload
