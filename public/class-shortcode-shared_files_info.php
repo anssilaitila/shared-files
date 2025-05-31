@@ -1,5 +1,5 @@
 <?php
-
+  
 class ShortcodeSharedFilesInfo {
 
   /**
@@ -12,11 +12,11 @@ class ShortcodeSharedFilesInfo {
     $html = '';
 
     if (isset($_GET) && isset($_GET['shared-files-upload'])) {
-      $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __('File successfully uploaded.', 'shared-files') ) . '</div>';
+      $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __('File successfully uploaded.', 'shared-files') ) . '</div>';      
     } elseif (isset($_GET) && isset($_GET['shared-files-update'])) {
       $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __('File successfully updated.', 'shared-files') ) . '</div>';
     } elseif (isset($_GET) && isset($_GET['_sf_delete_editable_file']) && isset($_GET['sc'])) {
-      $html .= '<div class="shared-files-file-deleted">' . sanitize_text_field( __('File successfully deleted.', 'shared-files') ) . '</div>';
+      $html .= '<div class="shared-files-file-deleted">' . sanitize_text_field( __('File successfully deleted.', 'shared-files') ) . '</div>';      
     }
 
     return $html;

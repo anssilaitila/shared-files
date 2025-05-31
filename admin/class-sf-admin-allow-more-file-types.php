@@ -62,31 +62,29 @@ class SharedFilesAdminAllowMoreFileTypes {
 
   }
 
-  public static function sanitize_file( $tmp_name ) {
+  public static function sanitize_file( $tmp_name, $filename ) {
+
+    $uploaded_ext = pathinfo($filename, PATHINFO_EXTENSION);
 
     $file_contents = file_get_contents( $tmp_name );
 
     $mime_type = '';
 
-    if ( function_exists('finfo_open') && function_exists('finfo_file') ) {
+    $checked = wp_check_filetype_and_ext( $tmp_name, $filename );
 
-      $finfo = finfo_open( FILEINFO_MIME_TYPE );
-      $mime_type = finfo_file( $finfo, $tmp_name );
-      finfo_close( $finfo );
-
-    } elseif ( function_exists('mime_content_type') ) {
-
-      $mime_type = mime_content_type( $tmp_name );
-
+    if ( isset( $checked['type'] ) ) {
+      $mime_type = sanitize_text_field( $checked['type'] );
     }
 
     if ( $mime_type == 'image/svg+xml' ) {
 
       $sanitizer = new Sanitizer();
-
       $file_contents_sanitized = $sanitizer->sanitize( $file_contents );
-
       return $file_contents_sanitized;
+
+    } elseif ( $uploaded_ext != $checked['ext'] ) {
+
+      wp_die( esc_html__( "ERROR: file extension doesn't match mime type", 'shared_files' ) .  ' (' . esc_html( $filename ) . ')' );
 
     } else {
 
@@ -102,27 +100,10 @@ class SharedFilesAdminAllowMoreFileTypes {
 
     add_filter('upload_mimes', [ 'SharedFilesAdminAllowMoreFileTypes', 'add_file_types' ] );
 
-    if ( function_exists('finfo_open') && function_exists('finfo_file') ) {
+    $checked = wp_check_filetype_and_ext( $tmp_name, $filename );
 
-      $finfo = finfo_open( FILEINFO_MIME_TYPE );
-      $uploaded_file_mime_type = finfo_file( $finfo, $tmp_name );
-      finfo_close( $finfo );
-
-    } elseif ( function_exists('mime_content_type') ) {
-
-      $uploaded_file_mime_type = mime_content_type( $tmp_name );
-
-    }
-
-    if ( !$uploaded_file_mime_type ) {
-
-      $checked = wp_check_filetype_and_ext( $tmp_name, $filename );
-
-      if ( isset( $checked['type'] ) ) {
-        $uploaded_file_mime_type = sanitize_text_field( $checked['type'] );
-
-      }
-
+    if ( isset( $checked['type'] ) ) {
+      $uploaded_file_mime_type = sanitize_text_field( $checked['type'] );
     }
 
     $allowed_mime_types = get_allowed_mime_types();

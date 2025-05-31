@@ -9,13 +9,13 @@ class SharedFilesPublicContacts {
     $html = SharedFilesPublicContacts::askForEmailMarkup($embed_id, $atts);
 
     return $html;
-
+    
   }
-
+  
   public static function askForEmailInfo() {
 
     $html = '<div class="shared-files-ask-for-contact-info-for-admin">' . sanitize_text_field( __('Every non-admin will be asked for contact info before showing the file(s).', 'shared-files') ) . '</div>';
-
+    
     return $html;
 
   }
@@ -23,23 +23,23 @@ class SharedFilesPublicContacts {
   public static function askForEmailMarkup($embed_id, $atts) {
 
     $s = get_option('shared_files_settings');
-
+  
     $html = '';
-
+    
     $file_id = 0;
-
+    
     if ( isset($atts['file_id']) && $atts['file_id'] ) {
       $file_id = intval( $atts['file_id'] );
     }
 
     $file_list_id = '';
-
+    
     if ( isset($atts['file_list_id']) && $atts['file_list_id'] ) {
       $file_list_id = sanitize_text_field( $atts['file_list_id'] );
     } elseif ( isset($atts['ask_for_email_id']) && $atts['ask_for_email_id'] ) {
       $file_list_id = sanitize_text_field( $atts['ask_for_email_id'] );
     }
-
+    
     $ask_for_email_form_field = '_sf_email_' . $embed_id;
 
     $name_field = '_sf_email_' . $embed_id;
@@ -74,20 +74,20 @@ class SharedFilesPublicContacts {
     if ( isset($s['lead_description_title']) && $s['lead_description_title'] ) {
       $lead_description_title = sanitize_text_field( $s['lead_description_title'] );
     }
-
+    
     $html .= '<div class="shared-files-ask-for-contact-info-container">';
     $html .= '<div class="shared-files-ask-for-contact-info">';
-
+  
     $html .= '<form method="POST" action="">';
 
     $html .= '<input name="shared-files-add-contact" value="1" type="hidden" />';
-
+    
     $html .= '<h2>' . esc_html( $lead_form_title ) . '</h2>';
 
     if ( $lead_form_description ) {
       $html .= '<p>' . wp_kses_post( nl2br( $lead_form_description ) ) . '</p>';
     }
-
+  
     $html .= wp_nonce_field('_SF_ASK_FOR_EMAIL', '_wpnonce', true, false);
 
     if ( isset($s['lead_show_name']) ) {
@@ -95,8 +95,8 @@ class SharedFilesPublicContacts {
       $html .=   '<div class="shared-files-form-field-left"><label for="name">' . esc_html( $lead_name_title ) . '</label></div>';
       $html .=   '<div class="shared-files-form-field-right"><input name="_sf_name" value="" required /></div>';
       $html .= '</div>';
-    }
-
+    } 
+  
     if ( !isset($s['lead_hide_email']) ) {
       $html .= '<div class="shared-files-form-field">';
       $html .=   '<div class="shared-files-form-field-left"><label for="' . esc_attr( $ask_for_email_form_field ) . '">' . esc_html( $lead_email_title ) . '</label></div>';
@@ -119,28 +119,28 @@ class SharedFilesPublicContacts {
     }
 
     $html .= '<input type="hidden" name="ask_for_email_id" value="' . esc_attr( $file_list_id ) . '" />';
-
+  
     if ( isset( $_POST[$ask_for_email_form_field] ) && !is_email( $_POST[$ask_for_email_form_field] ) ) {
       $html .= '<div class="shared-files-invalid-email">' . esc_html__('Invalid email', 'shared-files') . '</div>';
     }
-
+    
     $html .= '<input type="submit" class="shared-files-form-submit" value="' . esc_html__('Submit', 'shared-files') . '" />';
-
+    
     $html .= '</form>';
 
     $html .= '</div>';
     $html .= '</div>';
-
+    
     return $html;
-
+    
   }
-
+  
   public static function saveEmail($embed_id, $atts) {
 
     if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], '_SF_ASK_FOR_EMAIL')) {
       wp_die('Error in processing form data.');
     }
-
+    
     $name = '';
     $email = '';
     $phone = '';
@@ -148,7 +148,7 @@ class SharedFilesPublicContacts {
 
     if ( isset($_POST['_sf_name']) && $_POST['_sf_name'] ) {
       $name = sanitize_text_field( $_POST['_sf_name'] );
-    }
+    } 
 
     $ask_for_email_form_field = '_sf_email_' . $embed_id;
 
@@ -171,33 +171,33 @@ class SharedFilesPublicContacts {
     }
 
     $file_id = 0;
-
+    
     if ( isset($atts['file_id']) && $atts['file_id'] ) {
-
+    
       $file_id = intval( $atts['file_id'] );
-
+      
     }
-
+    
     $file_title = '';
 
     if ( $file_id ) {
       $file_title = sanitize_text_field( get_the_title( $file_id ) );
     }
-
+    
     $file_list_id = '';
 
     if ( isset($atts['file_list_id']) && $atts['file_list_id'] ) {
-
+    
       $file_list_id = sanitize_text_field( $atts['file_list_id'] );
-
+      
     } elseif ( isset($atts['ask_for_email_id']) && $atts['ask_for_email_id'] ) {
-
+      
       $file_list_id = sanitize_text_field( $atts['ask_for_email_id'] );
-
+      
     }
 
     global $wpdb;
-
+    
     $wpdb->insert($wpdb->prefix . 'shared_files_contacts', array(
       'file_id'           => $file_id,
       'file_title'        => $file_title,
@@ -209,7 +209,7 @@ class SharedFilesPublicContacts {
       'ask_for_email_id'  => $file_list_id,
       'referer_url'       => $referer_url
     ));
-
+    
     $args = [
       'file_id'           => $file_id,
       'file_title'        => $file_title,
@@ -221,9 +221,9 @@ class SharedFilesPublicContacts {
       'ask_for_email_id'  => $file_list_id,
       'referer_url'       => $referer_url
     ];
-
+    
     do_action( 'shared_files_add_lead', $args );
-
+    
   }
 
 }
