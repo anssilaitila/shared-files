@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.49\n"
+"Project-Id-Version: Shared Files 1.7.50\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-31T22:15:52+03:00\n"
+"POT-Creation-Date: 2025-06-11T13:11:30+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: shared-files\n"
@@ -1753,11 +1753,11 @@ msgid "Sync Files / Media Library"
 msgstr ""
 
 #: admin/class-sf-admin-toolbar.php:366
-msgid "Special offer: All licenses -30% for Shared Files PRO!"
+msgid "Special offer: All subscriptions -30% for Shared Files PRO!"
 msgstr ""
 
 #: admin/class-sf-admin-toolbar.php:369
-msgid "Buy Now"
+msgid "Get started"
 msgstr ""
 
 #: admin/class-sf-admin.php:160
