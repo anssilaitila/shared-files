@@ -71,6 +71,7 @@ class Shared_Files_Public {
             $this->version,
             'all'
         );
+        //    wp_enqueue_script('plupload-all');
         if ( isset( $s['card_font'] ) && $s['card_font'] ) {
             if ( $s['card_font'] == 'roboto' ) {
                 wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto&display=swap', false );

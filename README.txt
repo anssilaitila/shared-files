@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
 Tested up to: 6.8
-Stable tag: 1.7.50
+Stable tag: 1.7.51
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -282,6 +282,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.51 - 2025-08-10 =
+* (Free + All plans) New version of the file uploader (WP admin / Shared Files / Add new file)
+* (All plans) New setting: Don't add featured image when adding image files (plugin settings, first tab)
 
 = 1.7.50 - 2025-06-11 =
 * (Free + All plans) Fixed an issue where the additional file types wouldn't activate properly

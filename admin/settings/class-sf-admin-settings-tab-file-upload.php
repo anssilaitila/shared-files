@@ -69,7 +69,7 @@ class SharedFilesSettingsTab5Content {
             )
         );
         add_settings_field(
-            'shared-files-' . $only_pro . 'uncheck_hide_from_other_pages',
+            'shared-files-uncheck_hide_from_other_pages',
             sanitize_text_field( __( 'Uncheck "Hide from other pages" for uploaded files', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),
             'shared-files',

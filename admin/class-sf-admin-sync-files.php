@@ -212,4 +212,54 @@ class SharedFilesAdminSyncFiles {
         echo '</tr>';
     }
 
+    public function handle_file_upload() {
+        check_ajax_referer( 'plupload_nonce' );
+        if ( !empty( $_FILES ) ) {
+            $tmp_name = $_FILES['file']['tmp_name'];
+            $filename_for_custom_field = sanitize_file_name( basename( $_FILES['file']['name'] ) );
+            $checked_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name, $filename_for_custom_field );
+            if ( !$checked_mime_type[0] ) {
+                $error_msg = sanitize_text_field( __( 'File mime type is not allowed.', 'shared-files' ) );
+                wp_send_json_error( [
+                    'error' => $error_msg,
+                ] );
+                wp_die( wp_kses_post( $error_msg ) );
+            }
+            add_filter( 'upload_dir', [$this, 'set_upload_dir'] );
+            add_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
+            $file_contents_sanitized = SharedFilesAdminAllowMoreFileTypes::sanitize_file( $tmp_name, $filename_for_custom_field );
+            $upload = wp_upload_bits( $_FILES['file']['name'], null, $file_contents_sanitized );
+            remove_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
+            remove_filter( 'upload_dir', [$this, 'set_upload_dir'] );
+            wp_send_json_success( $upload );
+            wp_die();
+        }
+        wp_die();
+    }
+
+    /**
+     * Set the custom upload directory.
+     *
+     * @since    1.0.0
+     */
+    public function set_upload_dir( $dir ) {
+        $s = get_option( 'shared_files_settings' );
+        $full_path_default = realpath( $dir['basedir'] ) . '/shared-files';
+        $folder_for_new_files = '';
+        if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
+            $folder_for_new_files = '/' . sanitize_file_name( $s['folder_for_new_files'] );
+            $full_path_new = realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files;
+            if ( !file_exists( $full_path_new ) ) {
+                mkdir( $full_path_new );
+            }
+        } elseif ( !file_exists( $full_path_default ) ) {
+            mkdir( $full_path_default );
+        }
+        return array(
+            'path'   => realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files,
+            'url'    => $dir['baseurl'] . '/shared-files' . $folder_for_new_files,
+            'subdir' => '/shared-files' . $folder_for_new_files,
+        ) + $dir;
+    }
+
 }

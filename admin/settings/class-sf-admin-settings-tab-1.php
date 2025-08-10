@@ -54,6 +54,18 @@ class SharedFilesSettingsTab1Content {
             )
         );
         add_settings_field(
+            'shared-files-' . $only_pro . 'file_upload_disable_featured_image',
+            sanitize_text_field( __( "Don't add featured image when adding image files", 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_section_general',
+            array(
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_disable_featured_image',
+                'field_name' => $only_pro . 'file_upload_disable_featured_image',
+                'class'      => 'shared-files-padding-bottom',
+            )
+        );
+        add_settings_field(
             'shared-files-' . $only_pro . 'file_access_logged_in_only',
             sanitize_text_field( __( 'Only logged in users can open files', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),

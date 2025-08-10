@@ -222,6 +222,7 @@ class Shared_Files {
         $plugin_admin_restrict_access = new SharedFilesAdminRestrictAccess();
         $plugin_admin_allow_more_file_types = new SharedFilesAdminAllowMoreFileTypes();
         $plugin_settings = new Shared_Files_Settings();
+        $this->loader->add_action( 'wp_ajax_shared_files_file_upload', $plugin_admin_sync_files, 'handle_file_upload' );
         // Enqueue CSS + JS (+ other)
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );

@@ -104,8 +104,33 @@ class SharedFilesAdminMetadata {
             } else {
                 echo '<br /><br />';
             }
-            echo '<b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
-            echo '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
+            echo '<div style="margin-bottom: 10px; font-weight: 700;">' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</div>';
+            ?>
+
+      <input name="_sf_file_uploaded_file" class="shared-files-file-uploaded-file" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <input name="_sf_file_uploaded_type" class="shared-files-file-uploaded-type" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <input name="_sf_file_uploaded_url" class="shared-files-file-uploaded-url" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <div id="shared-files-file-uploader-container">
+        <div class="shared-files-file-uploader-left">
+          <button id="browse-button"><?php 
+            echo esc_html__( 'Choose file', 'shared-files' );
+            ?></button>
+        </div>
+        <div class="shared-files-file-uploader-right">
+          <div class="shared-files-progress-bar-wrapper">
+            <div class="shared-files-progress-bar">
+              <span class="shared-files-progress-bar-fill" style="width: 0%;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shared-files-file-upload-status"></div>
+
+      <?php 
         } elseif ( $filename_fallback = get_post_meta( $post_id, '_sf_filename', true ) ) {
             //      $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . intval( get_the_ID() ) . '/' . SharedFilesHelpers::wp_engine() . $filename_fallback;
             $file_url = SharedFilesPublicHelpers::getFileURL( intval( get_the_ID() ) );
@@ -116,11 +141,62 @@ class SharedFilesAdminMetadata {
                 echo '<br /><br />';
             }
             echo '<b>' . esc_html__( 'Replace with a new file', 'shared-files' ) . ':</b><br />';
-            echo '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
+            ?>
+
+      <input name="_sf_file_uploaded_file" class="shared-files-file-uploaded-file" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <input name="_sf_file_uploaded_type" class="shared-files-file-uploaded-type" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <input name="_sf_file_uploaded_url" class="shared-files-file-uploaded-url" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <div id="shared-files-file-uploader-container">
+        <div class="shared-files-file-uploader-left">
+          <button id="browse-button"><?php 
+            echo esc_html__( 'Choose file', 'shared-files' );
+            ?></button>
+        </div>
+        <div class="shared-files-file-uploader-right">
+          <div class="shared-files-progress-bar-wrapper">
+            <div class="shared-files-progress-bar">
+              <span class="shared-files-progress-bar-fill" style="width: 0%;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shared-files-file-upload-status"></div>
+
+      <?php 
         } else {
-            echo '<input type="file" id="sf_file" name="_sf_file" value="" size="25" /><br />';
+            ?>
+
+      <input name="_sf_file_uploaded_file" class="shared-files-file-uploaded-file" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <input name="_sf_file_uploaded_type" class="shared-files-file-uploaded-type" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <input name="_sf_file_uploaded_url" class="shared-files-file-uploaded-url" value="" type="hidden" style="display: block; width: 100%; margin-top: 10px; margin-bottom: 10px;" />
+
+      <div id="shared-files-file-uploader-container">
+        <div class="shared-files-file-uploader-left">
+          <button id="browse-button"><?php 
+            echo esc_html__( 'Choose file', 'shared-files' );
+            ?></button>
+        </div>
+        <div class="shared-files-file-uploader-right">
+          <div class="shared-files-progress-bar-wrapper">
+            <div class="shared-files-progress-bar">
+              <span class="shared-files-progress-bar-fill" style="width: 0%;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="shared-files-file-upload-status"></div>
+
+
+      <?php 
         }
-        echo '<p style="margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
+        echo '<p style="margin-top: 8px; margin-bottom: 3px;">' . esc_html__( 'Maximum size of uploaded file:', 'shared-files' ) . ' <strong>' . esc_html( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         echo '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . esc_html__( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
         // SUPPORT BOX START
         $is_premium = 0;
@@ -380,7 +456,11 @@ class SharedFilesAdminMetadata {
      * @since    1.0.0
      */
     public function save_custom_meta_data( $id ) {
-        if ( isset( $_FILES['_sf_file']['name'] ) ) {
+        $post_type = '';
+        if ( $id ) {
+            $post_type = get_post_type( $id );
+        }
+        if ( $post_type == 'shared_file' ) {
             $s = get_option( 'shared_files_settings' );
             $sf_nonce = '';
             if ( isset( $_POST['_sf_file_nonce'] ) ) {
@@ -458,54 +538,40 @@ class SharedFilesAdminMetadata {
                 update_post_meta( $id, '_sf_load_cnt', 0 );
                 update_post_meta( $id, '_sf_bandwidth_usage', 0 );
                 update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
-            } elseif ( isset( $_FILES['_sf_file']['name'] ) && isset( $_FILES['_sf_file']['tmp_name'] ) && ($tmp_name = $_FILES['_sf_file']['tmp_name']) ) {
-                $basename = sanitize_file_name( basename( $_FILES['_sf_file']['name'] ) );
-                $checked_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name, $basename );
-                if ( !$checked_mime_type[0] ) {
-                    $error_msg = sanitize_text_field( __( 'Error: file mime type is not allowed', 'shared-files' ) );
-                    $error_msg .= '<br /><br />';
-                    $error_msg .= sanitize_text_field( __( 'Detected mime type:', 'shared-files' ) . ' ' . $checked_mime_type[1] );
-                    wp_die( wp_kses_post( $error_msg ) );
+                // NEW:
+            } elseif ( isset( $_POST['_sf_file_uploaded_file'] ) ) {
+                $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
+                $sf_file_uploaded_type = sanitize_text_field( $_POST['_sf_file_uploaded_type'] );
+                $sf_file_uploaded_url = sanitize_text_field( $_POST['_sf_file_uploaded_url'] );
+                $upload = [
+                    'file' => $sf_file_uploaded_file,
+                    'type' => $sf_file_uploaded_type,
+                    'url'  => $sf_file_uploaded_url,
+                ];
+                add_post_meta( $id, '_sf_file', $upload );
+                update_post_meta( $id, '_sf_file', $upload );
+                $uploaded_type = $sf_file_uploaded_type;
+                $filename = basename( $sf_file_uploaded_file );
+                update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
+                $sf_file_size = 0;
+                $upload_file = '';
+                if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
+                    $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
                 }
-                // Get the file type of the upload
-                $arr_file_type = wp_check_filetype( basename( $_FILES['_sf_file']['name'] ) );
-                $uploaded_type = $arr_file_type['type'];
-                $filename_for_custom_field = basename( $_FILES['_sf_file']['name'] );
-                add_filter( 'upload_dir', [$this, 'set_upload_dir'] );
-                add_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
-                // Use the WordPress API to upload the file
-                $file_contents_sanitized = SharedFilesAdminAllowMoreFileTypes::sanitize_file( $tmp_name, $basename );
-                $upload = wp_upload_bits( $_FILES['_sf_file']['name'], null, $file_contents_sanitized );
-                remove_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
-                remove_filter( 'upload_dir', [$this, 'set_upload_dir'] );
-                if ( $upload['error'] ) {
-                    wp_die( esc_html( $upload['error'] ) );
+                if ( isset( $upload['file'] ) && $upload['file'] ) {
+                    $upload_file = sanitize_text_field( $upload['file'] );
                 }
-                if ( isset( $upload['error'] ) && $upload['error'] != 0 ) {
-                    wp_die( 'There was an error uploading your file. The error is: ' . esc_html( $upload['error'] ) );
-                } else {
-                    add_post_meta( $id, '_sf_file', $upload );
-                    update_post_meta( $id, '_sf_file', $upload );
-                    $filename = $filename_for_custom_field;
-                    update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
-                    $sf_file_size = 0;
-                    $upload_file = '';
-                    if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
-                        $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
+                SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
+                update_post_meta( $id, '_sf_load_cnt', 0 );
+                update_post_meta( $id, '_sf_bandwidth_usage', 0 );
+                update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
+                if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
+                    $folder_for_new_files = sanitize_file_name( $s['folder_for_new_files'] );
+                    if ( $folder_for_new_files ) {
+                        update_post_meta( $id, '_sf_subdir', rtrim( $folder_for_new_files, '/' ) );
                     }
-                    if ( isset( $upload['file'] ) && $upload['file'] ) {
-                        $upload_file = sanitize_text_field( $upload['file'] );
-                    }
-                    SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
-                    update_post_meta( $id, '_sf_load_cnt', 0 );
-                    update_post_meta( $id, '_sf_bandwidth_usage', 0 );
-                    update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
-                    if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
-                        $folder_for_new_files = sanitize_file_name( $s['folder_for_new_files'] );
-                        if ( $folder_for_new_files ) {
-                            update_post_meta( $id, '_sf_subdir', rtrim( $folder_for_new_files, '/' ) );
-                        }
-                    }
+                }
+                if ( !isset( $s['file_upload_disable_featured_image'] ) ) {
                     SharedFilesHelpers::addFeaturedImage(
                         $id,
                         $upload,
@@ -513,27 +579,27 @@ class SharedFilesAdminMetadata {
                         $filename,
                         1
                     );
-                    $post_title = '';
-                    if ( isset( $_POST['post_title'] ) ) {
-                        $post_title = sanitize_text_field( $_POST['post_title'] );
-                    }
-                    if ( !$post_title ) {
-                        $my_post = array(
-                            'ID'         => intval( $id ),
-                            'post_title' => sanitize_text_field( $filename ),
-                        );
-                        remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                        wp_update_post( $my_post );
-                        add_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                    } else {
-                        $my_post = array(
-                            'ID'        => intval( $id ),
-                            'post_name' => intval( $id ),
-                        );
-                        remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                        wp_update_post( $my_post );
-                        add_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                    }
+                }
+                $post_title = '';
+                if ( isset( $_POST['post_title'] ) ) {
+                    $post_title = sanitize_text_field( $_POST['post_title'] );
+                }
+                if ( !$post_title ) {
+                    $my_post = array(
+                        'ID'         => intval( $id ),
+                        'post_title' => sanitize_text_field( $filename ),
+                    );
+                    remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                    wp_update_post( $my_post );
+                    add_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                } else {
+                    $my_post = array(
+                        'ID'        => intval( $id ),
+                        'post_name' => intval( $id ),
+                    );
+                    remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                    wp_update_post( $my_post );
+                    add_action( 'save_post', [$this, 'save_custom_meta_data'] );
                 }
             }
         }
