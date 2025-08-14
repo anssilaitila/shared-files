@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
 Tested up to: 6.8
-Stable tag: 1.7.51
+Stable tag: 1.7.52
 Requires PHP: 7.4
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -21,6 +21,8 @@ With features like user permissions, frontend file upload, and download tracking
 Install Shared Files today and enhance your WordPress site's file management capabilities.
 
 You can also optionally collect new leads by asking for contact info before showing the files.
+
+🚀 [Start a free 7-day PRO Trial](https://checkout.freemius.com/mode/dialog/plugin/5144/plan/8308/?trial=free&coupon=AUG2025)
 
 *Get the Shared Files plugin and stay neatly organized and managed with your documents and files.*
 
@@ -282,6 +284,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.52 - 2025-08-13 =
+* (Free + All plans) File uploader tweaks
 
 = 1.7.51 - 2025-08-10 =
 * (Free + All plans) New version of the file uploader (WP admin / Shared Files / Add new file)

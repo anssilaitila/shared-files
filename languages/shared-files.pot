@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.51\n"
+"Project-Id-Version: Shared Files 1.7.52\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-10T12:04:34+03:00\n"
+"POT-Creation-Date: 2025-08-13T23:43:57+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: shared-files\n"
@@ -125,7 +125,7 @@ msgid "Phone"
 msgstr ""
 
 #: admin/class-sf-admin-contacts.php:173
-#: admin/class-sf-admin-metadata.php:438
+#: admin/class-sf-admin-metadata.php:480
 #: admin/settings/class-sf-admin-settings-field-render.php:1093
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:129
 #: public/class-sf-public-contacts.php:52
@@ -594,7 +594,7 @@ msgstr ""
 
 #. translators: %s: link to the support forum
 #: admin/class-sf-admin-inline-scripts.php:34
-#: admin/class-sf-admin-metadata.php:208
+#: admin/class-sf-admin-metadata.php:250
 msgid "If you have any questions in mind, please contact the author at <a href=\"%s\" target=\"_blank\">the support forum</a>. The forum is actively monitored and any kind of feedback is welcome."
 msgstr ""
 
@@ -677,148 +677,169 @@ msgid "Hide from other pages"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:101
-#: admin/class-sf-admin-metadata.php:137
+#: admin/class-sf-admin-metadata.php:151
 msgid "Current file:"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:103
-#: admin/class-sf-admin-metadata.php:139
+#: admin/class-sf-admin-metadata.php:153
 msgid "Server folder:"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:107
-#: admin/class-sf-admin-metadata.php:143
+#: admin/class-sf-admin-metadata.php:157
 msgid "Replace with a new file"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:119
-#: admin/class-sf-admin-metadata.php:155
-#: admin/class-sf-admin-metadata.php:182
+#: admin/class-sf-admin-metadata.php:169
+#: admin/class-sf-admin-metadata.php:210
 msgid "Choose file"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:199
+#: admin/class-sf-admin-metadata.php:135
+#: admin/class-sf-admin-metadata.php:185
+#: admin/class-sf-admin-metadata.php:226
+msgid "Next steps"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:139
+#: admin/class-sf-admin-metadata.php:189
+#: admin/class-sf-admin-metadata.php:230
+msgid "Add any additional data to the fields below"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:142
+#: admin/class-sf-admin-metadata.php:192
+msgid "Click Update to save the changes (blue button on the right)"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:233
+msgid "Click Publish to make the file visible (blue button on the right)"
+msgstr ""
+
+#: admin/class-sf-admin-metadata.php:241
 msgid "Maximum size of uploaded file:"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:200
+#: admin/class-sf-admin-metadata.php:242
 msgid "How to increase the maximum file size"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:220
+#: admin/class-sf-admin-metadata.php:262
 msgid "Upload ID:"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:254
+#: admin/class-sf-admin-metadata.php:296
 #: admin/class-sf-admin-sync-files.php:126
 #: admin/class-sf-admin-sync-media-library.php:111
 msgid "Filename"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:255
+#: admin/class-sf-admin-metadata.php:297
 msgid "The filename in the url changes based on this value."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:260
+#: admin/class-sf-admin-metadata.php:302
 msgid "You can change the filename after publishing a file."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:267
+#: admin/class-sf-admin-metadata.php:309
 #: admin/settings/class-sf-admin-settings-field-render.php:1035
 msgid "File date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:268
+#: admin/class-sf-admin-metadata.php:310
 msgid "This date is displayed in the file list instead of the publish date. If empty, the publish date will be displayed. Both can be hidden from the settings."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:276
-#: public/class-sf-public-file-upload.php:251
+#: admin/class-sf-admin-metadata.php:318
+#: public/class-sf-public-file-upload.php:252
 msgid "External URL"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:277
+#: admin/class-sf-admin-metadata.php:319
 msgid "Instead of adding a local file, you may provide an external URL to a file located elsewhere."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:277
+#: admin/class-sf-admin-metadata.php:319
 msgid "Note: if the external URL is defined, the local file will not be saved."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:288
+#: admin/class-sf-admin-metadata.php:330
 msgid "Expiration date"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:289
+#: admin/class-sf-admin-metadata.php:331
 msgid "When this date is the current date, an email notify is sent to the administrator and the file is highlighted in the admin list."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:289
+#: admin/class-sf-admin-metadata.php:331
 msgid "It's also possible to delete these files automatically (see plugin settings)."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:300
+#: admin/class-sf-admin-metadata.php:342
 msgid "Notification email"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:301
+#: admin/class-sf-admin-metadata.php:343
 msgid "This email address is used for notifications regarding this file. If this is not defined, the email defined in the settings will be used."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:309
+#: admin/class-sf-admin-metadata.php:351
 msgid "Restrict access"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:314
+#: admin/class-sf-admin-metadata.php:356
 msgid "Restrict access for users"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:315
+#: admin/class-sf-admin-metadata.php:357
 msgid "Only these users will see the file listed on shortcode [shared_files_restricted] and [shared_files_accordion restricted=1]."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:327
+#: admin/class-sf-admin-metadata.php:369
 msgid "Password protection"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:328
+#: admin/class-sf-admin-metadata.php:370
 msgid "Define a password here to enable password protection."
 msgstr ""
 
 #. translators: %s: link to the information page about access restriction
-#: admin/class-sf-admin-metadata.php:338
+#: admin/class-sf-admin-metadata.php:380
 #: admin/settings/class-sf-admin-settings-field-render.php:954
 msgid "<a href=\"%s\">Important information regarding file permissions &raquo;</a>"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:353
+#: admin/class-sf-admin-metadata.php:395
 msgid "Restrict access for roles"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:354
+#: admin/class-sf-admin-metadata.php:396
 msgid "Only the users having these roles will see the file listed on the restricted file lists."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:366
+#: admin/class-sf-admin-metadata.php:408
 msgid "Limit downloads"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:367
+#: admin/class-sf-admin-metadata.php:409
 msgid "When this number is reached, the file can't be downloaded anymore and an email notify is sent to the administrator."
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:376
+#: admin/class-sf-admin-metadata.php:418
 #: admin/settings/class-sf-admin-settings-tabs.php:32
 #: admin/settings/class-sf-admin-settings-tabs.php:208
 msgid "Custom fields"
 msgstr ""
 
 #. translators: %s: link to plugin settings
-#: admin/class-sf-admin-metadata.php:382
+#: admin/class-sf-admin-metadata.php:424
 msgid "<a href=\"%s\" target=\"_blank\">Settings for custom fields &raquo;</a>"
 msgstr ""
 
-#: admin/class-sf-admin-metadata.php:395
+#: admin/class-sf-admin-metadata.php:437
 msgid "Custom field 1"
 msgstr ""
 
@@ -1769,11 +1790,11 @@ msgid "Sync Files / Media Library"
 msgstr ""
 
 #: admin/class-sf-admin-toolbar.php:366
-msgid "Special offer: All licenses -30% for Shared Files PRO!"
+msgid "Special offer: All subscriptions -30% for Shared Files PRO!"
 msgstr ""
 
 #: admin/class-sf-admin-toolbar.php:369
-msgid "Buy Now"
+msgid "Get started"
 msgstr ""
 
 #: admin/class-sf-admin.php:160

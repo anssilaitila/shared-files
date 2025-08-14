@@ -130,6 +130,20 @@ class SharedFilesAdminMetadata {
 
       <div class="shared-files-file-upload-status"></div>
 
+      <div class="shared-files-file-upload-status-next-steps">
+        <h2><?php 
+            echo esc_html__( 'Next steps', 'shared-files' );
+            ?>:</h2>
+        <ol>
+          <li><?php 
+            echo esc_html__( 'Add any additional data to the fields below', 'shared-files' );
+            ?></li>
+          <li><?php 
+            echo esc_html__( 'Click Update to save the changes (blue button on the right)', 'shared-files' );
+            ?></li>
+        </ol>
+      </div>
+
       <?php 
         } elseif ( $filename_fallback = get_post_meta( $post_id, '_sf_filename', true ) ) {
             //      $file_url = SharedFilesAdminHelpers::sf_root() . '/shared-files/' . intval( get_the_ID() ) . '/' . SharedFilesHelpers::wp_engine() . $filename_fallback;
@@ -166,6 +180,20 @@ class SharedFilesAdminMetadata {
 
       <div class="shared-files-file-upload-status"></div>
 
+      <div class="shared-files-file-upload-status-next-steps">
+        <h2><?php 
+            echo esc_html__( 'Next steps', 'shared-files' );
+            ?>:</h2>
+        <ol>
+          <li><?php 
+            echo esc_html__( 'Add any additional data to the fields below', 'shared-files' );
+            ?></li>
+          <li><?php 
+            echo esc_html__( 'Click Update to save the changes (blue button on the right)', 'shared-files' );
+            ?></li>
+        </ol>
+      </div>
+
       <?php 
         } else {
             ?>
@@ -192,6 +220,20 @@ class SharedFilesAdminMetadata {
       </div>
 
       <div class="shared-files-file-upload-status"></div>
+
+      <div class="shared-files-file-upload-status-next-steps">
+        <h2><?php 
+            echo esc_html__( 'Next steps', 'shared-files' );
+            ?>:</h2>
+        <ol>
+          <li><?php 
+            echo esc_html__( 'Add any additional data to the fields below', 'shared-files' );
+            ?></li>
+          <li><?php 
+            echo esc_html__( 'Click Publish to make the file visible (blue button on the right)', 'shared-files' );
+            ?></li>
+        </ol>
+      </div>
 
 
       <?php 

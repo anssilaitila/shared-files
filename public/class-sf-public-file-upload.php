@@ -200,6 +200,7 @@ class SharedFilesFileUpload {
                 add_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
                 $file_contents_sanitized = SharedFilesAdminAllowMoreFileTypes::sanitize_file( $tmp_name, $basename );
                 // Use the WordPress API to upload the file
+                $file_contents_sanitized = SharedFilesAdminAllowMoreFileTypes::sanitize_file( $tmp_name, $basename );
                 $upload = wp_upload_bits( $_FILES['_sf_file']['name'], null, $file_contents_sanitized );
                 remove_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
                 remove_filter( 'upload_dir', [$this, 'set_upload_dir'] );
