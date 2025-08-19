@@ -92,7 +92,7 @@ class SharedFilesAdminQuery {
         if ( $sf_query && $file_id ) {
             $post_status = get_post_status( $file_id );
             if ( $post_status && $post_status != 'publish' ) {
-                $msg = sanitize_text_field( __( 'File is no longer available.', 'shared-files' ) );
+                $msg = sanitize_text_field( __( 'File is not currently available (file is not published).', 'shared-files' ) );
                 wp_die( esc_html( $msg ) );
             }
             if ( $file_id ) {

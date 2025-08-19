@@ -116,7 +116,7 @@ class SharedFilesAdminMetadata {
       <div id="shared-files-file-uploader-container">
         <div class="shared-files-file-uploader-left">
           <button id="browse-button"><?php 
-            echo esc_html__( 'Choose file', 'shared-files' );
+            echo esc_html__( 'Upload file', 'shared-files' );
             ?></button>
         </div>
         <div class="shared-files-file-uploader-right">
@@ -166,7 +166,7 @@ class SharedFilesAdminMetadata {
       <div id="shared-files-file-uploader-container">
         <div class="shared-files-file-uploader-left">
           <button id="browse-button"><?php 
-            echo esc_html__( 'Choose file', 'shared-files' );
+            echo esc_html__( 'Upload file', 'shared-files' );
             ?></button>
         </div>
         <div class="shared-files-file-uploader-right">
@@ -207,7 +207,7 @@ class SharedFilesAdminMetadata {
       <div id="shared-files-file-uploader-container">
         <div class="shared-files-file-uploader-left">
           <button id="browse-button"><?php 
-            echo esc_html__( 'Choose file', 'shared-files' );
+            echo esc_html__( 'Upload file', 'shared-files' );
             ?></button>
         </div>
         <div class="shared-files-file-uploader-right">
@@ -582,19 +582,32 @@ class SharedFilesAdminMetadata {
                 update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
                 // NEW:
             } elseif ( isset( $_POST['_sf_file_uploaded_file'] ) ) {
-                $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
-                $sf_file_uploaded_type = sanitize_text_field( $_POST['_sf_file_uploaded_type'] );
-                $sf_file_uploaded_url = sanitize_text_field( $_POST['_sf_file_uploaded_url'] );
-                $upload = [
-                    'file' => $sf_file_uploaded_file,
-                    'type' => $sf_file_uploaded_type,
-                    'url'  => $sf_file_uploaded_url,
-                ];
-                add_post_meta( $id, '_sf_file', $upload );
-                update_post_meta( $id, '_sf_file', $upload );
+                $sf_file_uploaded_file = '';
+                if ( isset( $_POST['_sf_file_uploaded_file'] ) && $_POST['_sf_file_uploaded_file'] ) {
+                    $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
+                }
+                $sf_file_uploaded_type = '';
+                if ( isset( $_POST['_sf_file_uploaded_type'] ) && $_POST['_sf_file_uploaded_type'] ) {
+                    $sf_file_uploaded_type = sanitize_text_field( $_POST['_sf_file_uploaded_type'] );
+                }
+                $sf_file_uploaded_url = '';
+                if ( isset( $_POST['_sf_file_uploaded_url'] ) && $_POST['_sf_file_uploaded_url'] ) {
+                    $sf_file_uploaded_url = sanitize_text_field( $_POST['_sf_file_uploaded_url'] );
+                }
+                if ( $sf_file_uploaded_file && $sf_file_uploaded_type && $sf_file_uploaded_url ) {
+                    $upload = [
+                        'file' => $sf_file_uploaded_file,
+                        'type' => $sf_file_uploaded_type,
+                        'url'  => $sf_file_uploaded_url,
+                    ];
+                    add_post_meta( $id, '_sf_file', $upload );
+                    update_post_meta( $id, '_sf_file', $upload );
+                }
                 $uploaded_type = $sf_file_uploaded_type;
-                $filename = basename( $sf_file_uploaded_file );
-                update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
+                if ( !$custom_filename ) {
+                    $filename = basename( $sf_file_uploaded_file );
+                    update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
+                }
                 $sf_file_size = 0;
                 $upload_file = '';
                 if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
