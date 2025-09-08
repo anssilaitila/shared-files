@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.53\n"
+"Project-Id-Version: Shared Files 1.7.54\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-08-19T14:06:19+03:00\n"
+"POT-Creation-Date: 2025-09-08T22:03:12+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: shared-files\n"
@@ -402,11 +402,12 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:644
 #: admin/class-sf-admin-shortcodes.php:646
 #: admin/class-sf-admin-shortcodes.php:648
-#: admin/class-sf-admin-shortcodes.php:667
-#: admin/class-sf-admin-shortcodes.php:672
-#: admin/class-sf-admin-shortcodes.php:694
-#: admin/class-sf-admin-shortcodes.php:697
-#: admin/class-sf-admin-shortcodes.php:700
+#: admin/class-sf-admin-shortcodes.php:650
+#: admin/class-sf-admin-shortcodes.php:669
+#: admin/class-sf-admin-shortcodes.php:674
+#: admin/class-sf-admin-shortcodes.php:696
+#: admin/class-sf-admin-shortcodes.php:699
+#: admin/class-sf-admin-shortcodes.php:702
 #: admin/class-sf-admin-taxonomy.php:132
 msgid "Copy"
 msgstr ""
@@ -1104,7 +1105,7 @@ msgstr ""
 #: admin/class-sf-admin-shortcodes.php:590
 #: admin/class-sf-admin-shortcodes.php:618
 #: admin/class-sf-admin-shortcodes.php:638
-#: admin/class-sf-admin-shortcodes.php:667
+#: admin/class-sf-admin-shortcodes.php:669
 msgid "Insert the shortcode"
 msgstr ""
 
@@ -1490,23 +1491,27 @@ msgstr ""
 msgid "Exclude files uploaded by front end uploader"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:661
+#: admin/class-sf-admin-shortcodes.php:650
+msgid "Define an embed id (required, if there are multiple instances of [shared_files_categories] on the same page):"
+msgstr ""
+
+#: admin/class-sf-admin-shortcodes.php:663
 msgid "List a single file"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:672
+#: admin/class-sf-admin-shortcodes.php:674
 msgid "Minimal layout:"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:674
+#: admin/class-sf-admin-shortcodes.php:676
 msgid "The file_id parameter is unique for each file and can be found under the Shortcode column in the File Manager."
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:683
+#: admin/class-sf-admin-shortcodes.php:685
 msgid "How to define the order of the files for each shortcode"
 msgstr ""
 
-#: admin/class-sf-admin-shortcodes.php:689
+#: admin/class-sf-admin-shortcodes.php:691
 msgid "Choose one value from the list separated by \"|\":"
 msgstr ""
 

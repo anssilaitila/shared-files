@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: file upload, download manager, file sharing, upload, file manager
 Requires at least: 6.2
 Tested up to: 6.8
-Stable tag: 1.7.53
+Stable tag: 1.7.54
 Requires PHP: 7.4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -200,6 +200,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.54 - 2025-09-08 =
+* (Free + All plans) Update the `enshrined/svg-sanitize` package to `0.22.0`
+* (All plans) There can now be multiple instances of [shared_files_categories] on the same page, just define a different embed_id for each shortcode: [shared_files_categories embed_id="my-files"]
 
 = 1.7.53 - 2025-08-19 =
 * (Free + All plans) Fixed an issue where changing the post / file status from draft to published, and from pending to published would make the file disappear from the post
