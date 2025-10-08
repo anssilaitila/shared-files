@@ -2,7 +2,7 @@
   "name": "anssilaitila/shared-files",
   "description": "Shared Files",
   "require": {
-    "enshrined/svg-sanitize": "^0.18.0"
+    "enshrined/svg-sanitize": "^0.22.0"
   },
   "config": {
     "optimize-autoloader": true
