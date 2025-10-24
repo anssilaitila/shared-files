@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.9
 Tested up to: 6.8
-Stable tag: 1.7.54
+Stable tag: 1.7.55
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -282,6 +282,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.55 - 2025-10-24 =
+* (Free + All plans) Tweaks and fixes
 
 = 1.7.54 - 2025-09-08 =
 * (Free + All plans) Update the `enshrined/svg-sanitize` package to `0.22.0`
