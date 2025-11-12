@@ -602,59 +602,59 @@ class SharedFilesAdminMetadata {
                     ];
                     add_post_meta( $id, '_sf_file', $upload );
                     update_post_meta( $id, '_sf_file', $upload );
-                }
-                $uploaded_type = $sf_file_uploaded_type;
-                if ( !$custom_filename ) {
-                    $filename = basename( $sf_file_uploaded_file );
-                    update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
-                }
-                $sf_file_size = 0;
-                $upload_file = '';
-                if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
-                    $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
-                }
-                if ( isset( $upload['file'] ) && $upload['file'] ) {
-                    $upload_file = sanitize_text_field( $upload['file'] );
-                }
-                SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
-                update_post_meta( $id, '_sf_load_cnt', 0 );
-                update_post_meta( $id, '_sf_bandwidth_usage', 0 );
-                update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
-                if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
-                    $folder_for_new_files = sanitize_file_name( $s['folder_for_new_files'] );
-                    if ( $folder_for_new_files ) {
-                        update_post_meta( $id, '_sf_subdir', rtrim( $folder_for_new_files, '/' ) );
+                    $uploaded_type = $sf_file_uploaded_type;
+                    if ( !$custom_filename ) {
+                        $filename = basename( $sf_file_uploaded_file );
+                        update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
                     }
-                }
-                if ( !isset( $s['file_upload_disable_featured_image'] ) ) {
-                    SharedFilesHelpers::addFeaturedImage(
-                        $id,
-                        $upload,
-                        $uploaded_type,
-                        $filename,
-                        1
-                    );
-                }
-                $post_title = '';
-                if ( isset( $_POST['post_title'] ) ) {
-                    $post_title = sanitize_text_field( $_POST['post_title'] );
-                }
-                if ( !$post_title ) {
-                    $my_post = array(
-                        'ID'         => intval( $id ),
-                        'post_title' => sanitize_text_field( $filename ),
-                    );
-                    remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                    wp_update_post( $my_post );
-                    add_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                } else {
-                    $my_post = array(
-                        'ID'        => intval( $id ),
-                        'post_name' => intval( $id ),
-                    );
-                    remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
-                    wp_update_post( $my_post );
-                    add_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                    $sf_file_size = 0;
+                    $upload_file = '';
+                    if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
+                        $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
+                    }
+                    if ( isset( $upload['file'] ) && $upload['file'] ) {
+                        $upload_file = sanitize_text_field( $upload['file'] );
+                    }
+                    SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
+                    update_post_meta( $id, '_sf_load_cnt', 0 );
+                    update_post_meta( $id, '_sf_bandwidth_usage', 0 );
+                    update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
+                    if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
+                        $folder_for_new_files = sanitize_file_name( $s['folder_for_new_files'] );
+                        if ( $folder_for_new_files ) {
+                            update_post_meta( $id, '_sf_subdir', rtrim( $folder_for_new_files, '/' ) );
+                        }
+                    }
+                    if ( !isset( $s['file_upload_disable_featured_image'] ) ) {
+                        SharedFilesHelpers::addFeaturedImage(
+                            $id,
+                            $upload,
+                            $uploaded_type,
+                            $filename,
+                            1
+                        );
+                    }
+                    $post_title = '';
+                    if ( isset( $_POST['post_title'] ) ) {
+                        $post_title = sanitize_text_field( $_POST['post_title'] );
+                    }
+                    if ( !$post_title ) {
+                        $my_post = array(
+                            'ID'         => intval( $id ),
+                            'post_title' => sanitize_text_field( $filename ),
+                        );
+                        remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                        wp_update_post( $my_post );
+                        add_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                    } else {
+                        $my_post = array(
+                            'ID'        => intval( $id ),
+                            'post_name' => intval( $id ),
+                        );
+                        remove_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                        wp_update_post( $my_post );
+                        add_action( 'save_post', [$this, 'save_custom_meta_data'] );
+                    }
                 }
             }
         }

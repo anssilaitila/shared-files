@@ -351,8 +351,8 @@ class SharedFilesAdminToolbar {
 
       <?php 
             $current_date = wp_date( 'Y-m-d' );
-            $start_date = '2025-10-24';
-            $end_date = '2025-10-31';
+            $start_date = '2025-11-12';
+            $end_date = '2025-11-30';
             ?>
 
       <?php 
@@ -363,7 +363,7 @@ class SharedFilesAdminToolbar {
 
           <a href="https://www.sharedfilespro.com/pricing/?utm_source=Shared+Files+Free&utm_medium=special-offer" target="_blank" class="shared-files-admin-pro-features">
             <span><?php 
-                echo esc_html__( 'Special offer: All subscriptions -30% for Shared Files PRO!', 'shared-files' );
+                echo esc_html__( 'Black Friday Deal: All licenses -30% for Shared Files PRO!', 'shared-files' );
                 ?></span>
             <span class="shared-files-admin-pro-features-button"><?php 
                 echo esc_html__( 'Get started', 'shared-files' );
