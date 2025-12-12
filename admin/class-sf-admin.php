@@ -127,22 +127,25 @@ class Shared_Files_Admin {
     function delete_shared_file( $post_id ) {
         $post_id = intval( $post_id );
         $file = get_post_meta( $post_id, '_sf_file', true );
-        if ( isset( $file['file'] ) && $file['file'] ) {
-            $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilenameOnDisk( $file['file'] );
-            $filename_with_path = str_replace( '../', '', $filename_with_path );
-            if ( file_exists( $filename_with_path ) ) {
-                if ( strpos( $filename_with_path, '/wp-content/uploads/shared-files/' ) !== false ) {
-                    unlink( $filename_with_path );
+        $post_type = get_post_type( $post_id );
+        if ( $post_type == 'shared_file' ) {
+            if ( isset( $file['file'] ) && $file['file'] ) {
+                $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilenameOnDisk( $file['file'] );
+                $filename_with_path = str_replace( '../', '', $filename_with_path );
+                if ( file_exists( $filename_with_path ) ) {
+                    if ( strpos( $filename_with_path, '/wp-content/uploads/shared-files/' ) !== false ) {
+                        unlink( $filename_with_path );
+                    }
+                } else {
+                    //        wp_die( sanitize_text_field( __('File not found:', 'shared-files') ) . '<br />' . $filename_with_path );
                 }
-            } else {
-                //        wp_die( sanitize_text_field( __('File not found:', 'shared-files') ) . '<br />' . $filename_with_path );
             }
-        }
-        if ( has_post_thumbnail( $post_id ) ) {
-            $thumbnail_id = intval( get_post_thumbnail_id( $post_id ) );
-            if ( $thumbnail_id ) {
-                // Delete all thumbnails generated for featured image
-                wp_delete_attachment( $thumbnail_id, true );
+            if ( has_post_thumbnail( $post_id ) ) {
+                $thumbnail_id = intval( get_post_thumbnail_id( $post_id ) );
+                if ( $thumbnail_id ) {
+                    // Delete all thumbnails generated for featured image
+                    wp_delete_attachment( $thumbnail_id, true );
+                }
             }
         }
     }

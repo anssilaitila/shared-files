@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.9
-Tested up to: 6.8
-Stable tag: 1.7.56
+Tested up to: 6.9
+Stable tag: 1.7.57
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -282,6 +282,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.57 - 2025-12-12 =
+* (Free + All plans) Fixed an issue related to deleting the featured image from the media library when deleting a file
 
 = 1.7.56 - 2025-11-12 =
 * (Free + All plans) Fixed an issue where the file size would show 0 after uploading / editing the file

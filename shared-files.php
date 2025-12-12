@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.7.56
+ * Version:           1.7.57
  * Author:            Shared Files – File Upload Form
  * Author URI:        https://www.sharedfilespro.com
  * License:           GPL-2.0+
