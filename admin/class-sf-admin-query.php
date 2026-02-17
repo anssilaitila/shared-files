@@ -131,6 +131,20 @@ class SharedFilesAdminQuery {
                         echo '<pre>' . var_dump( esc_html( $filename_fallback ) ) . '</pre>';
                         wp_die();
                     }
+                    $wp_upload_dir = wp_upload_dir();
+                    $sf_upload_dir = $wp_upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'shared-files' . DIRECTORY_SEPARATOR;
+                    $realFilePath = realpath( $filename );
+                    $realBasePath = realpath( $sf_upload_dir ) . DIRECTORY_SEPARATOR;
+                    if ( $realFilePath === false || strpos( $realFilePath, $realBasePath ) !== 0 ) {
+                        echo '<pre>ERROR CODE: 200152</pre>';
+                        if ( is_super_admin() ) {
+                            echo '<pre>' . esc_html__( 'Debug info for admin:', 'shared-files' ) . '</pre>';
+                            echo '<pre>' . esc_html( var_dump( $filename ) ) . '</pre>';
+                            echo '<pre>' . esc_html( var_dump( $realFilePath ) ) . '</pre>';
+                            echo '<pre>' . esc_html( var_dump( $realBasePath ) ) . '</pre>';
+                        }
+                        wp_die();
+                    }
                     if ( !$redirect && (!isset( $filename ) || !file_exists( $filename )) ) {
                         wp_die( esc_html__( 'File not found:', 'shared-files' ) . '<br />' . $filename );
                     }

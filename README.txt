@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.7.57
+Stable tag: 1.7.58
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -107,7 +107,7 @@ Shared Files is a file sharing solution for WordPress that allows sharing numero
 
 What is the purpose of a file-sharing plugin if not allowing you to easily and quickly find the exact file you're looking for. This is what Shared Files plugin offers to it's users.
 
-Powerful and fast file search functionality based on various defined categories, such as file name, description, and more makes it super easy for Shared Files plugin users to track and find the exact file/document they're looking for.
+Powerful and fast file search functionality based on defined file data, such as file name, description, and more makes it super easy for Shared Files plugin users to track and find the exact file/document they're looking for.
 
 = Previewing files =
 
@@ -155,7 +155,7 @@ What is more important than having a statistics of your uploads! Shared Files pl
 
 == Shared Files FREE – a simple solution for file management and download tracking ==
 
-* Fast search of all files targeting all the defined file/document categories, e.g. name and description
+* Fast search of all files targeting all visible data on the file card, e.g. name and description
 * Frontend file upload with tag support for logged-in users
 * Wait for the Countdown page with a counter and automatic download when the counter reaches zero
 * Any file type upload (audio, video, image, PDF, Word, file folder, etc)
@@ -282,6 +282,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.58 - 2026-01-14 =
+* (Free + All plans) Tweaks and fixes
 
 = 1.7.57 - 2025-12-12 =
 * (Free + All plans) Fixed an issue related to deleting the featured image from the media library when deleting a file
