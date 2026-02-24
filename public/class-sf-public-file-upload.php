@@ -51,9 +51,8 @@ class SharedFilesFileUpload {
         if ( isset( $s['file_upload_file_not_required'] ) ) {
             $file_required = '';
         }
-        if ( !$multiple_files_upload_active ) {
-            $html .= '<input type="file" id="sf_file" accept="' . esc_attr( $accept ) . '" name="_sf_file" size="25" ' . $file_required . ' /><hr class="clear" />';
-        }
+        $html .= SharedFilesHelpers::ajaxUploadMarkupNew();
+        $html .= '<input type="hidden" name="_sf_insert_multiple_files_frontend" value="1" />';
         $html .= '<p style="margin-top: 10px; margin-bottom: 8px;">' . sanitize_text_field( __( 'Maximum file size:', 'shared-files' ) ) . ' <strong>' . sanitize_text_field( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
         if ( isset( $s['file_upload_show_external_url'] ) ) {
             $html .= '<div class="shared-files-file-upload-youtube-container">';
@@ -104,7 +103,7 @@ class SharedFilesFileUpload {
             $html .= '<textarea name="_sf_description" class="shared-files-description" ' . SharedFilesHelpers::fieldAttrRequired( 'file_upload_description_required' ) . '></textarea>';
         }
         if ( !isset( $s['file_upload_disable_progress_bar'] ) ) {
-            $html .= SharedFilesHelpers::ajaxUploadMarkup();
+            //      $html .= SharedFilesHelpers::ajaxUploadMarkup();
         }
         $html .= '<hr class="clear" /><input type="submit" value="' . esc_attr__( 'Submit', 'shared-files' ) . '" class="sf-public-file-upload-submit" />';
         $html .= '</form>';
@@ -264,6 +263,304 @@ class SharedFilesFileUpload {
             $container_url = $goto_url;
             wp_redirect( $goto_url . '?shared-files-upload=1' );
             exit;
+        }
+        return $request;
+    }
+
+    public function file_upload_plup( $request ) {
+        $s = get_option( 'shared_files_settings' );
+        if ( isset( $_GET ) && isset( $_GET['_sf_delete_file'] ) ) {
+            $user = wp_get_current_user();
+            $sc = '';
+            if ( isset( $_GET['sc'] ) ) {
+                $sc = sanitize_text_field( $_GET['sc'] );
+            }
+            if ( !$sc || !wp_verify_nonce( $sc, 'sf_delete_file_' . intval( $user->ID ) ) ) {
+                wp_die( 'Error in processing form data.' );
+            }
+            $file_id = (int) $_GET['_sf_delete_file'];
+            $file = get_post( $file_id );
+            $post_type = get_post_type( $file_id );
+            $c = get_post_custom( $file_id );
+            if ( $file && $user->ID == $c['_sf_user_id'][0] && $post_type == 'shared_file' ) {
+                wp_trash_post( $file_id );
+            }
+        }
+        if ( isset( $_POST ) && isset( $_POST['shared-files-upload'] ) ) {
+            if ( !isset( $_POST['secret_code'] ) || !wp_verify_nonce( $_POST['secret_code'], 'sf_insert_file' ) ) {
+                wp_die( 'Error in processing form data.' );
+            }
+            // NEW START
+            if ( isset( $_POST ) && isset( $_POST['_sf_insert_multiple_files_frontend'] ) ) {
+                $new_cat_term_id = 0;
+                if ( isset( $_POST['_sf_new_category_name'] ) && $_POST['_sf_new_category_name'] ) {
+                    $new_cat_args = [];
+                    if ( isset( $_POST['_sf_new_category_parent_id'] ) && ($parent_id = intval( $_POST['_sf_new_category_parent_id'] )) ) {
+                        $new_cat_args = [
+                            'parent' => intval( $parent_id ),
+                        ];
+                    }
+                    $cat_name = sanitize_text_field( $_POST['_sf_new_category_name'] );
+                    $new_cat = wp_insert_term( $cat_name, 'shared-file-category', $new_cat_args );
+                    if ( isset( $new_cat->errors['term_exists'] ) ) {
+                        // category already exists
+                    } elseif ( isset( $new_cat['term_id'] ) && $new_cat['term_id'] ) {
+                        $new_cat_term_id = intval( $new_cat['term_id'] );
+                    }
+                }
+                $new_cats_term_ids = [];
+                if ( isset( $_POST['_SF_NEW_CATEGORIES'] ) && $_POST['_SF_NEW_CATEGORIES'] ) {
+                    $new_cat_args = [];
+                    $new_cat_names = explode( ',', sanitize_text_field( $_POST['_SF_NEW_CATEGORIES'] ) );
+                    foreach ( $new_cat_names as $new_cat_name ) {
+                        $new_cat = wp_insert_term( $new_cat_name, 'shared-file-category', $new_cat_args );
+                        if ( isset( $new_cat->errors['term_exists'] ) ) {
+                            // category already exists
+                        } elseif ( isset( $new_cat['term_id'] ) && $new_cat['term_id'] ) {
+                            $new_cats_term_ids[] = intval( $new_cat['term_id'] );
+                        }
+                    }
+                }
+                $new_tags_term_ids = [];
+                if ( isset( $_POST['_sf_new_tags'] ) && $_POST['_sf_new_tags'] ) {
+                    $new_tag_args = [];
+                    $tags = explode( ',', sanitize_text_field( $_POST['_sf_new_tags'] ) );
+                    foreach ( $tags as $tag ) {
+                        $tag_name = sanitize_text_field( $tag );
+                        $new_tag = wp_insert_term( $tag_name, SHARED_FILES_TAG_SLUG, $new_tag_args );
+                        if ( isset( $new_tag->errors['term_exists'] ) ) {
+                            // tag already exists
+                        } elseif ( isset( $new_tag['term_id'] ) && $new_tag['term_id'] ) {
+                            $new_tags_term_ids[] = intval( $new_tag['term_id'] );
+                        }
+                    }
+                }
+                $goto_url = '';
+                SharedFilesHelpers::writeLog( 'Start processing files from frontend uploader:' );
+                if ( isset( $_POST['_sf_file_uploaded_file'] ) && is_array( $_POST['_sf_file_uploaded_file'] ) ) {
+                    foreach ( $_POST['_sf_file_uploaded_file'] as $file_id => $data ) {
+                        $file_path = sanitize_text_field( $data['file'] );
+                        $file_type = sanitize_text_field( $data['type'] );
+                        $file_url = esc_url_raw( $data['url'] );
+                        SharedFilesHelpers::writeLog( $file_path );
+                        SharedFilesHelpers::writeLog( $file_type );
+                        SharedFilesHelpers::writeLog( $file_url );
+                    }
+                }
+                if ( isset( $s['file_upload_file_not_required'] ) || isset( $_POST['_sf_file_uploaded_file'] ) && is_array( $_POST['_sf_file_uploaded_file'] ) ) {
+                    $uploaded_files = 0;
+                    if ( isset( $_POST['_sf_file_uploaded_file'] ) && is_array( $_POST['_sf_file_uploaded_file'] ) ) {
+                        $uploaded_files = $_POST['_sf_file_uploaded_file'];
+                    } elseif ( isset( $s['file_upload_file_not_required'] ) ) {
+                        $bogus_array[0] = [
+                            'file' => '',
+                            'type' => '',
+                            'url'  => '',
+                        ];
+                        $uploaded_files = $bogus_array;
+                    }
+                    foreach ( $uploaded_files as $file_id => $data ) {
+                        $file_path = sanitize_text_field( $data['file'] );
+                        $file_type = sanitize_text_field( $data['type'] );
+                        $file_url = esc_url_raw( $data['url'] );
+                        // SINGLE -> MULTIPLE START
+                        $post_status = ( isset( $s['file_upload_set_to_pending'] ) && $s['file_upload_set_to_pending'] ? 'pending' : 'publish' );
+                        $new_post = array(
+                            'post_type'    => 'shared_file',
+                            'post_status'  => $post_status,
+                            'post_title'   => '',
+                            'post_content' => '',
+                        );
+                        $id = wp_insert_post( $new_post );
+                        update_post_meta( $id, '_sf_frontend_uploader', 1 );
+                        update_post_meta( $id, '_sf_embed_post_id', intval( $_POST['_sf_embed_post_id'] ) );
+                        update_post_meta( $id, '_sf_embed_post_title', sanitize_text_field( $_POST['_sf_embed_post_title'] ) );
+                        if ( isset( $_POST['_sf_upload_id'] ) && $_POST['_sf_upload_id'] ) {
+                            update_post_meta( $id, '_sf_upload_id', sanitize_text_field( $_POST['_sf_upload_id'] ) );
+                            update_post_meta( $id, '_sf_not_public', 1 );
+                        } elseif ( !isset( $s['uncheck_hide_from_other_pages'] ) ) {
+                            update_post_meta( $id, '_sf_not_public', 1 );
+                        } else {
+                            update_post_meta( $id, '_sf_not_public', '' );
+                        }
+                        if ( isset( $_POST[SHARED_FILES_TAG_SLUG] ) ) {
+                            $cat_slug = sanitize_title( $_POST[SHARED_FILES_TAG_SLUG] );
+                            $cat = get_term_by( 'slug', sanitize_title( $cat_slug ), SHARED_FILES_TAG_SLUG );
+                            if ( $cat ) {
+                                wp_set_object_terms( $id, intval( $cat->term_id ), SHARED_FILES_TAG_SLUG );
+                            }
+                        }
+                        if ( isset( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) && ($tags = $_POST['tax_input'][SHARED_FILES_TAG_SLUG]) ) {
+                            $tags_int = array_map( function ( $value ) {
+                                return (int) $value;
+                            }, $tags );
+                            wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
+                        }
+                        if ( is_user_logged_in() ) {
+                            $user = wp_get_current_user();
+                            update_post_meta( $id, '_sf_user_id', intval( $user->ID ) );
+                            if ( isset( $_POST['_sf_restrict_access'] ) && $_POST['_sf_restrict_access'] ) {
+                                update_post_meta( $id, '_sf_permission_user_id', intval( $user->ID ) );
+                            }
+                        }
+                        if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
+                            $description = wp_strip_all_tags( balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 ) );
+                            if ( !isset( $s['textarea_for_file_description'] ) ) {
+                                $description = nl2br( $description );
+                            }
+                            update_post_meta( $id, '_sf_description', $description );
+                        } else {
+                            update_post_meta( $id, '_sf_description', '' );
+                        }
+                        //            $filename = $_FILES['_sf_files']['name'][$i];
+                        $filename = '';
+                        $at_least_one_file_uploaded = 0;
+                        // File added using the uploader
+                        if ( $file_path ) {
+                            $tmp_name = $file_path;
+                            $basename = sanitize_file_name( basename( $file_path ) );
+                            $sf_file_uploaded_file = $file_path;
+                            $sf_file_uploaded_type = $file_type;
+                            $sf_file_uploaded_url = $file_url;
+                            $upload = [
+                                'file' => $sf_file_uploaded_file,
+                                'type' => $sf_file_uploaded_type,
+                                'url'  => $sf_file_uploaded_url,
+                            ];
+                            add_post_meta( $id, '_sf_file', $upload );
+                            update_post_meta( $id, '_sf_file', $upload );
+                            $at_least_one_file_uploaded = 1;
+                            $filename = substr( strrchr( $upload['file'], "/" ), 1 );
+                            update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
+                            $sf_file_size = 0;
+                            $upload_file = '';
+                            if ( isset( $upload['file'] ) && $upload['file'] ) {
+                                $upload_file = sanitize_text_field( $upload['file'] );
+                            }
+                            SharedFilesFileUpdate::uFilesize( $id, $sf_file_size, $upload_file );
+                            $featured_image_already_added = 0;
+                            if ( !$featured_image_already_added ) {
+                                if ( !isset( $s['file_upload_disable_featured_image'] ) ) {
+                                    SharedFilesHelpers::addFeaturedImage(
+                                        $id,
+                                        $upload,
+                                        $sf_file_uploaded_type,
+                                        $filename,
+                                        1
+                                    );
+                                }
+                            }
+                        } elseif ( !isset( $s['file_upload_file_not_required'] ) ) {
+                            $error_msg = sanitize_text_field( __( 'File was not successfully uploaded. Please note the maximum file size.', 'shared_files' ) );
+                            wp_die( $error_msg );
+                        }
+                        update_post_meta( $id, '_sf_load_cnt', 0 );
+                        update_post_meta( $id, '_sf_bandwidth_usage', 0 );
+                        update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
+                        update_post_meta( $id, '_sf_main_date', '' );
+                        $post_title = $filename;
+                        if ( isset( $_POST['_sf_title'] ) && $_POST['_sf_title'] ) {
+                            $post_title = sanitize_text_field( $_POST['_sf_title'] );
+                        } elseif ( !$at_least_one_file_uploaded && isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
+                            $post_title = sanitize_text_field( __( 'External URL', 'shared-files' ) );
+                        }
+                        if ( !$at_least_one_file_uploaded && isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
+                            $external_url = esc_url_raw( $_POST['_sf_external_url'] );
+                            update_post_meta( $id, '_sf_external_url', $external_url );
+                            $filename = basename( $external_url );
+                            update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
+                        }
+                        $my_post = array(
+                            'ID'         => $id,
+                            'post_title' => sanitize_text_field( $post_title ),
+                        );
+                        wp_update_post( $my_post );
+                        do_action( 'shared_files_frontend_file_uploaded', $id );
+                        $goto_url = esc_url_raw( get_site_url() );
+                        if ( isset( $_POST['_SF_GOTO'] ) && $_POST['_SF_GOTO'] ) {
+                            $goto_url = esc_url_raw( $_POST['_SF_GOTO'] );
+                        }
+                        $container_url = $goto_url;
+                        // SINGLE -> MULTIPLE END
+                    }
+                } elseif ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
+                    $post_status = ( isset( $s['file_upload_set_to_pending'] ) && $s['file_upload_set_to_pending'] ? 'pending' : 'publish' );
+                    $new_post = array(
+                        'post_type'    => 'shared_file',
+                        'post_status'  => $post_status,
+                        'post_title'   => '',
+                        'post_content' => '',
+                    );
+                    $id = wp_insert_post( $new_post );
+                    update_post_meta( $id, '_sf_frontend_uploader', 1 );
+                    update_post_meta( $id, '_sf_embed_post_id', intval( $_POST['_sf_embed_post_id'] ) );
+                    update_post_meta( $id, '_sf_embed_post_title', sanitize_text_field( $_POST['_sf_embed_post_title'] ) );
+                    if ( isset( $_POST['_sf_upload_id'] ) && $_POST['_sf_upload_id'] ) {
+                        update_post_meta( $id, '_sf_upload_id', sanitize_text_field( $_POST['_sf_upload_id'] ) );
+                        update_post_meta( $id, '_sf_not_public', 1 );
+                    } elseif ( !isset( $s['uncheck_hide_from_other_pages'] ) ) {
+                        update_post_meta( $id, '_sf_not_public', 1 );
+                    } else {
+                        update_post_meta( $id, '_sf_not_public', '' );
+                    }
+                    if ( isset( $_POST[SHARED_FILES_TAG_SLUG] ) ) {
+                        $cat_slug = sanitize_title( $_POST[SHARED_FILES_TAG_SLUG] );
+                        $cat = get_term_by( 'slug', sanitize_title( $cat_slug ), SHARED_FILES_TAG_SLUG );
+                        if ( $cat ) {
+                            wp_set_object_terms( $id, intval( $cat->term_id ), SHARED_FILES_TAG_SLUG );
+                        }
+                    }
+                    if ( isset( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) && ($tags = $_POST['tax_input'][SHARED_FILES_TAG_SLUG]) ) {
+                        $tags_int = array_map( function ( $value ) {
+                            return (int) $value;
+                        }, $tags );
+                        wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
+                    }
+                    if ( is_user_logged_in() ) {
+                        $user = wp_get_current_user();
+                        update_post_meta( $id, '_sf_user_id', intval( $user->ID ) );
+                        if ( isset( $_POST['_sf_restrict_access'] ) && $_POST['_sf_restrict_access'] ) {
+                            update_post_meta( $id, '_sf_permission_user_id', intval( $user->ID ) );
+                        }
+                    }
+                    if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
+                        $description = wp_strip_all_tags( balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 ) );
+                        if ( !isset( $s['textarea_for_file_description'] ) ) {
+                            $description = nl2br( $description );
+                        }
+                        update_post_meta( $id, '_sf_description', $description );
+                    } else {
+                        update_post_meta( $id, '_sf_description', '' );
+                    }
+                    $external_url = esc_url_raw( $_POST['_sf_external_url'] );
+                    update_post_meta( $id, '_sf_external_url', $external_url );
+                    $filename = basename( $external_url );
+                    update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
+                    update_post_meta( $id, '_sf_load_cnt', 0 );
+                    update_post_meta( $id, '_sf_bandwidth_usage', 0 );
+                    update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
+                    update_post_meta( $id, '_sf_main_date', '' );
+                    $post_title = $filename;
+                    if ( isset( $_POST['_sf_title'] ) && $_POST['_sf_title'] ) {
+                        $post_title = sanitize_text_field( $_POST['_sf_title'] );
+                    } elseif ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
+                        $post_title = sanitize_text_field( __( 'External URL', 'shared-files' ) );
+                    }
+                    $my_post = array(
+                        'ID'         => $id,
+                        'post_title' => sanitize_text_field( $post_title ),
+                    );
+                    wp_update_post( $my_post );
+                    do_action( 'shared_files_frontend_file_uploaded', $id );
+                    $goto_url = esc_url_raw( get_site_url() );
+                    if ( isset( $_POST['_SF_GOTO'] ) && $_POST['_SF_GOTO'] ) {
+                        $goto_url = esc_url_raw( $_POST['_SF_GOTO'] );
+                    }
+                    $container_url = $goto_url;
+                }
+                wp_redirect( $goto_url . '?shared-files-upload=1' );
+                exit;
+            }
         }
         return $request;
     }

@@ -94,6 +94,53 @@ class SharedFilesHelpers {
         return $html;
     }
 
+    public static function ajaxUploadMarkupNew() {
+        // buffer the output
+        ob_start();
+        ?>
+
+    <div id="shared-files-file-metadata-entries">
+    </div>
+
+    <?php 
+        $button_title = sanitize_text_field( __( 'Upload file', 'shared-files' ) );
+        ?>
+
+    <div id="shared-files-file-uploader-container">
+      <div class="shared-files-file-uploader-left">
+        <button id="browse-button"><?php 
+        echo esc_html( $button_title );
+        ?></button>
+      </div>
+      <div class="shared-files-file-uploader-right">
+        <div class="shared-files-progress-bar-wrapper">
+          <div class="shared-files-progress-bar">
+            <span class="shared-files-progress-bar-fill" style="width: 0%;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shared-files-file-upload-status"></div>
+
+    <div class="shared-files-file-upload-status-next-steps">
+      <h2><?php 
+        echo esc_html__( 'Next steps', 'shared-files' );
+        ?>:</h2>
+      <ol>
+        <li><?php 
+        echo esc_html__( 'Add any additional data to the fields below', 'shared-files' );
+        ?></li>
+        <li><?php 
+        echo esc_html__( 'Submit the form to save the file', 'shared-files' );
+        ?></li>
+      </ol>
+    </div>
+
+    <?php 
+        return ob_get_clean();
+    }
+
     public static function getText( $text_id, $default_text ) {
         $s = get_option( 'shared_files_settings' );
         $text = sanitize_text_field( $default_text );

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.58\n"
+"Project-Id-Version: Shared Files 1.7.59\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-14T15:46:02+02:00\n"
+"POT-Creation-Date: 2026-02-19T16:08:52+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: shared-files\n"
@@ -129,7 +129,7 @@ msgstr ""
 #: admin/settings/class-sf-admin-settings-field-render.php:1093
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:129
 #: public/class-sf-public-contacts.php:52
-#: public/class-sf-public-file-upload.php:103
+#: public/class-sf-public-file-upload.php:102
 msgid "Description"
 msgstr ""
 
@@ -523,7 +523,7 @@ msgid "Debug log"
 msgstr ""
 
 #: admin/class-sf-admin-help-support.php:671
-#: public/class-sf-public-file-upload.php:100
+#: public/class-sf-public-file-upload.php:99
 msgid "Title"
 msgstr ""
 
@@ -578,18 +578,22 @@ msgid "Please wait"
 msgstr ""
 
 #: admin/class-sf-admin-inline-scripts.php:23
+#: public/class-sf-public.php:121
 msgid "Error"
 msgstr ""
 
 #: admin/class-sf-admin-inline-scripts.php:23
+#: public/class-sf-public.php:121
 msgid "Upload failed: Invalid response from server."
 msgstr ""
 
 #: admin/class-sf-admin-inline-scripts.php:23
+#: public/class-sf-public.php:121
 msgid "Upload failed"
 msgstr ""
 
 #: admin/class-sf-admin-inline-scripts.php:23
+#: public/class-sf-public.php:121
 msgid "File uploaded"
 msgstr ""
 
@@ -695,18 +699,21 @@ msgstr ""
 #: admin/class-sf-admin-metadata.php:119
 #: admin/class-sf-admin-metadata.php:169
 #: admin/class-sf-admin-metadata.php:210
+#: includes/class-shared-files-helpers.php:106
 msgid "Upload file"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:135
 #: admin/class-sf-admin-metadata.php:185
 #: admin/class-sf-admin-metadata.php:226
+#: includes/class-shared-files-helpers.php:128
 msgid "Next steps"
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:139
 #: admin/class-sf-admin-metadata.php:189
 #: admin/class-sf-admin-metadata.php:230
+#: includes/class-shared-files-helpers.php:132
 msgid "Add any additional data to the fields below"
 msgstr ""
 
@@ -755,7 +762,9 @@ msgid "This date is displayed in the file list instead of the publish date. If e
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:318
-#: public/class-sf-public-file-upload.php:252
+#: public/class-sf-public-file-upload.php:251
+#: public/class-sf-public-file-upload.php:465
+#: public/class-sf-public-file-upload.php:547
 msgid "External URL"
 msgstr ""
 
@@ -1705,7 +1714,7 @@ msgstr ""
 #: admin/class-sf-admin-taxonomy.php:17
 #: admin/class-sf-admin-toolbar.php:139
 #: admin/class-sf-admin-toolbar.php:266
-#: public/class-sf-public-file-upload.php:96
+#: public/class-sf-public-file-upload.php:95
 msgid "Tags"
 msgstr ""
 
@@ -2724,7 +2733,7 @@ msgid "Text for External URL"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-upload.php:151
-#: public/class-sf-public-file-upload.php:60
+#: public/class-sf-public-file-upload.php:59
 msgid "Or enter a YouTube URL:"
 msgstr ""
 
@@ -3270,13 +3279,17 @@ msgstr ""
 msgid "Reload page"
 msgstr ""
 
-#: includes/class-shared-files-helpers.php:333
-#: includes/class-shared-files-helpers.php:335
-#: includes/class-shared-files-helpers.php:337
-#: includes/class-shared-files-helpers.php:350
-#: includes/class-shared-files-helpers.php:352
-#: includes/class-shared-files-helpers.php:374
-#: includes/class-shared-files-helpers.php:398
+#: includes/class-shared-files-helpers.php:135
+msgid "Submit the form to save the file"
+msgstr ""
+
+#: includes/class-shared-files-helpers.php:380
+#: includes/class-shared-files-helpers.php:382
+#: includes/class-shared-files-helpers.php:384
+#: includes/class-shared-files-helpers.php:397
+#: includes/class-shared-files-helpers.php:399
+#: includes/class-shared-files-helpers.php:421
+#: includes/class-shared-files-helpers.php:445
 msgid "Preview"
 msgstr ""
 
@@ -3289,7 +3302,7 @@ msgid "Invalid email"
 msgstr ""
 
 #: public/class-sf-public-contacts.php:127
-#: public/class-sf-public-file-upload.php:109
+#: public/class-sf-public-file-upload.php:108
 msgid "Submit"
 msgstr ""
 
@@ -3334,21 +3347,21 @@ msgstr ""
 msgid "File successfully deleted."
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:57
+#: public/class-sf-public-file-upload.php:56
 msgid "Maximum file size:"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:86
+#: public/class-sf-public-file-upload.php:85
 #: public/class-sf-public-shortcode-filters.php:23
 #: public/class-shortcode-shared_files.php:185
 msgid "Choose tag"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:191
+#: public/class-sf-public-file-upload.php:190
 msgid "Error: file mime type is not allowed"
 msgstr ""
 
-#: public/class-sf-public-file-upload.php:193
+#: public/class-sf-public-file-upload.php:192
 msgid "Detected mime type:"
 msgstr ""
 

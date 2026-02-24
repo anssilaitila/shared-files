@@ -382,11 +382,7 @@ class Shared_Files {
         $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         // Front-end file upload
-        // IF MULTIPLE
-        $upload_multiple_files_active = 0;
-        if ( !$upload_multiple_files_active ) {
-            $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload_single_free' );
-        }
+        $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload_plup' );
     }
 
     /**

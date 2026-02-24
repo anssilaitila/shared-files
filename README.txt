@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 5.9
 Tested up to: 6.9
-Stable tag: 1.7.58
+Stable tag: 1.7.59
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -282,6 +282,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.59 - 2026-02-19 =
+* (Free + All plans) New version of the frontend file uploader
 
 = 1.7.58 - 2026-01-14 =
 * (Free + All plans) Tweaks and fixes
