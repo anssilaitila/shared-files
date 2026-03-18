@@ -2,7 +2,8 @@
   "name": "anssilaitila/shared-files",
   "description": "Shared Files",
   "require": {
-    "enshrined/svg-sanitize": "^0.22.0"
+    "enshrined/svg-sanitize": "^0.22.0",
+    "freemius/wordpress-sdk": "^2.13"
   },
   "config": {
     "optimize-autoloader": true

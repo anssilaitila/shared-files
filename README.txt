@@ -1,9 +1,9 @@
 === Shared Files – Frontend File Upload Form & Secure File Sharing ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
-Requires at least: 5.9
-Tested up to: 6.9
-Stable tag: 1.7.59
+Requires at least: 6.0
+Tested up to: 7.0
+Stable tag: 1.7.60
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -282,6 +282,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.60 - 2026-03-10 =
+* (Free + All plans) Tweaks and fixes
 
 = 1.7.59 - 2026-02-19 =
 * (Free + All plans) New version of the frontend file uploader

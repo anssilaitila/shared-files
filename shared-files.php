@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.7.59
+ * Version:           1.7.60
  * Author:            Shared Files – File Upload Form
  * Author URI:        https://www.sharedfilespro.com
  * License:           GPL-2.0+
@@ -44,24 +44,25 @@ if ( function_exists( 'shared_files_fs' ) ) {
             $s = get_option( 'shared_files_settings' );
             if ( !isset( $shared_files_fs ) ) {
                 // Include Freemius SDK.
-                require_once dirname( __FILE__ ) . '/freemius/start.php';
+                // SDK is auto-loaded through Composer
                 $settings_contact = false;
                 $settings_support = true;
                 $shared_files_fs = fs_dynamic_init( array(
-                    'id'             => '5144',
-                    'slug'           => 'shared-files',
-                    'premium_slug'   => 'shared-files-pro',
-                    'type'           => 'plugin',
-                    'public_key'     => 'pk_f414b8738adada8a01641686165dc',
-                    'is_premium'     => false,
-                    'premium_suffix' => 'Pro',
-                    'has_addons'     => false,
-                    'has_paid_plans' => true,
-                    'trial'          => array(
+                    'id'               => '5144',
+                    'slug'             => 'shared-files',
+                    'premium_slug'     => 'shared-files-pro',
+                    'type'             => 'plugin',
+                    'public_key'       => 'pk_f414b8738adada8a01641686165dc',
+                    'is_premium'       => false,
+                    'premium_suffix'   => 'Pro',
+                    'has_addons'       => false,
+                    'has_paid_plans'   => true,
+                    'is_org_compliant' => true,
+                    'trial'            => array(
                         'days'               => 7,
                         'is_require_payment' => true,
                     ),
-                    'menu'           => array(
+                    'menu'             => array(
                         'slug'    => 'shared-files',
                         'contact' => $settings_contact,
                         'support' => $settings_support,
@@ -69,7 +70,7 @@ if ( function_exists( 'shared_files_fs' ) ) {
                             'slug' => 'options-general.php',
                         ),
                     ),
-                    'is_live'        => true,
+                    'is_live'          => true,
                 ) );
             }
             return $shared_files_fs;
@@ -145,7 +146,7 @@ if ( function_exists( 'shared_files_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.7.59' );
+    define( 'SHARED_FILES_VERSION', '1.7.60' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**
