@@ -51,7 +51,7 @@ class ShortcodeSharedFilesSimple {
             if ( !isset( $atts['hide_search_for_all_files'] ) ) {
                 $extra_class = '';
                 $html .= '<div class="shared-files-search-input-container">';
-                $html .= '<input type="text" class="shared-files-simple-search' . $extra_class . '" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '" data-elem-class="' . $elem_class . '">';
+                $html .= '<input type="text" class="shared-files-simple-search' . $extra_class . '" placeholder="' . (( isset( $s['search_contacts'] ) && $s['search_contacts'] ? esc_attr( $s['search_contacts'] ) : esc_attr__( 'Search files...', 'shared-files' ) )) . '" title="' . esc_attr__( 'Search files', 'shared-files' ) . '" aria-label="' . esc_attr__( 'Search files', 'shared-files' ) . '" data-elem-class="' . $elem_class . '">';
                 $html .= '</div>';
             }
             $is_premium = 0;

@@ -169,7 +169,7 @@ class ShortcodeSharedFiles {
                 $html .= '<div class="shared-files-search-form-container"><form class="shared-files-ajax-form" onsubmit="return false;" data-elem-class="' . $elem_class . '">';
                 if ( !isset( $atts['hide_search_for_all_files'] ) ) {
                     $extra_class = '';
-                    $html .= '<div class="shared-files-search-input-container"><input type="text"  class="shared-files-search-files-input shared-files-search-files' . $extra_class . '" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" data-elem-class="' . $elem_class . '" /></div>';
+                    $html .= '<div class="shared-files-search-input-container"><input type="text" class="shared-files-search-files-input shared-files-search-files' . $extra_class . '" placeholder="' . esc_attr__( 'Search files...', 'shared-files' ) . '" value="" title="' . esc_attr__( 'Search files', 'shared-files' ) . '" aria-label="' . esc_attr__( 'Search files', 'shared-files' ) . '" data-elem-class="' . $elem_class . '" /></div>';
                 }
                 $is_premium = 0;
                 if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
