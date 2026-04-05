@@ -504,6 +504,9 @@ class SharedFilesAdminMetadata {
         }
         if ( $post_type == 'shared_file' ) {
             $s = get_option( 'shared_files_settings' );
+            if ( isset( $s['debug_mode'] ) ) {
+                SharedFilesHelpers::writeLog( 'Start metadata update (wp-admin / file update, file_id: ' . $id . ')' );
+            }
             $sf_nonce = '';
             if ( isset( $_POST['_sf_file_nonce'] ) ) {
                 $sf_nonce = sanitize_text_field( $_POST['_sf_file_nonce'] );
@@ -519,6 +522,22 @@ class SharedFilesAdminMetadata {
                 return $id;
             }
             /* - end security verification - */
+            if ( isset( $s['debug_mode'] ) ) {
+                if ( isset( $_POST['_sf_file_uploaded_file'] ) && $_POST['_sf_file_uploaded_file'] ) {
+                    $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
+                    SharedFilesHelpers::writeLog( $sf_file_uploaded_file );
+                    $filesize = sanitize_text_field( filesize( $sf_file_uploaded_file ) );
+                    SharedFilesHelpers::writeLog( SharedFilesFileHandling::human_filesize( $filesize ) );
+                }
+                if ( isset( $_POST['_sf_file_uploaded_type'] ) && $_POST['_sf_file_uploaded_type'] ) {
+                    $sf_file_uploaded_type = sanitize_text_field( $_POST['_sf_file_uploaded_type'] );
+                    SharedFilesHelpers::writeLog( $sf_file_uploaded_type );
+                }
+                if ( isset( $_POST['_sf_file_uploaded_url'] ) && $_POST['_sf_file_uploaded_url'] ) {
+                    $sf_file_uploaded_url = sanitize_text_field( $_POST['_sf_file_uploaded_url'] );
+                    SharedFilesHelpers::writeLog( $sf_file_uploaded_url );
+                }
+            }
             $limit_downloads = '';
             if ( isset( $_POST['_sf_limit_downloads'] ) ) {
                 $limit_downloads = (int) $_POST['_sf_limit_downloads'];
@@ -527,6 +546,9 @@ class SharedFilesAdminMetadata {
                 }
             }
             $expiration_date = '';
+            if ( isset( $s['debug_mode'] ) ) {
+                SharedFilesHelpers::writeLog( 'Before date processing (wp-admin / file update, file_id: ' . $id . ')' );
+            }
             if ( isset( $_POST['_sf_expiration_date'] ) && $_POST['_sf_expiration_date'] ) {
                 $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_expiration_date'] ) );
                 $errors = $dt::getLastErrors();
@@ -541,6 +563,9 @@ class SharedFilesAdminMetadata {
                 if ( $dt !== false && !array_sum( (array) $errors ) ) {
                     $main_date = $dt;
                 }
+            }
+            if ( isset( $s['debug_mode'] ) ) {
+                SharedFilesHelpers::writeLog( 'After date processing (wp-admin / file update, file_id: ' . $id . ')' );
             }
             $not_public = '';
             if ( isset( $_POST['_sf_not_public'] ) && $_POST['_sf_not_public'] ) {
@@ -582,6 +607,9 @@ class SharedFilesAdminMetadata {
                 update_post_meta( $id, '_sf_file_added', current_time( 'Y-m-d H:i:s' ) );
                 // NEW:
             } elseif ( isset( $_POST['_sf_file_uploaded_file'] ) ) {
+                if ( isset( $s['debug_mode'] ) ) {
+                    SharedFilesHelpers::writeLog( 'Start file processing (wp-admin / file update, file_id: ' . $id . ')' );
+                }
                 $sf_file_uploaded_file = '';
                 if ( isset( $_POST['_sf_file_uploaded_file'] ) && $_POST['_sf_file_uploaded_file'] ) {
                     $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
@@ -625,6 +653,9 @@ class SharedFilesAdminMetadata {
                             update_post_meta( $id, '_sf_subdir', rtrim( $folder_for_new_files, '/' ) );
                         }
                     }
+                    if ( isset( $s['debug_mode'] ) ) {
+                        SharedFilesHelpers::writeLog( 'Before featured image processing (wp-admin / file update, file_id: ' . $id . ')' );
+                    }
                     if ( !isset( $s['file_upload_disable_featured_image'] ) ) {
                         SharedFilesHelpers::addFeaturedImage(
                             $id,
@@ -633,6 +664,9 @@ class SharedFilesAdminMetadata {
                             $filename,
                             1
                         );
+                    }
+                    if ( isset( $s['debug_mode'] ) ) {
+                        SharedFilesHelpers::writeLog( 'After featured image processing (wp-admin / file update, file_id: ' . $id . ')' );
                     }
                     $post_title = '';
                     if ( isset( $_POST['post_title'] ) ) {
@@ -656,6 +690,12 @@ class SharedFilesAdminMetadata {
                         add_action( 'save_post', [$this, 'save_custom_meta_data'] );
                     }
                 }
+                if ( isset( $s['debug_mode'] ) ) {
+                    SharedFilesHelpers::writeLog( 'End file processing (wp-admin / file update, file_id: ' . $id . ')' );
+                }
+            }
+            if ( isset( $s['debug_mode'] ) ) {
+                SharedFilesHelpers::writeLog( 'End metadata update (wp-admin / file update, file_id: ' . $id . ')' );
             }
         }
     }

@@ -35,6 +35,17 @@ class SharedFilesSettingsTab2Content {
                 'field_name' => 'wp_engine_compatibility_mode',
             )
         );
+        add_settings_field(
+            'shared-files-debug_mode',
+            sanitize_text_field( __( 'Debug mode', 'shared-files' ) ),
+            array($field_render, 'checkbox_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'  => 'shared-files-debug_mode',
+                'field_name' => 'debug_mode',
+            )
+        );
         if ( SharedFilesHelpers::isMin3() ) {
             add_settings_field(
                 'shared-files-' . $only_pro . 'obfuscate_file_urls',

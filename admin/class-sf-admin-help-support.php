@@ -498,6 +498,20 @@ class SharedFilesAdminHelpSupport {
               </div>
 
               <?php 
+                $content = '';
+                ob_start();
+                var_dump( $c );
+                $content = wp_kses_post( ob_get_contents() );
+                ob_end_clean();
+                ?>
+
+              <div style="background: #fff; color: #000; font-size: 9px; padding: 3px 5px; border: 1px solid #bbb; margin-top: 10px; margin-bottom: 10px;">
+                <?php 
+                echo esc_html( $content );
+                ?>
+              </div>
+
+              <?php 
                 $file = get_post_meta( $id, '_sf_file', true );
                 ?>
 
@@ -585,6 +599,20 @@ class SharedFilesAdminHelpSupport {
                 echo esc_html( $file );
                 ?> | <?php 
                 echo esc_html( get_the_date() );
+                ?>
+              </div>
+
+              <?php 
+                $content = '';
+                ob_start();
+                var_dump( $c );
+                $content = wp_kses_post( ob_get_contents() );
+                ob_end_clean();
+                ?>
+
+              <div style="background: #fff; color: #000; font-size: 9px; padding: 3px 5px; border: 1px solid #bbb; margin-top: 10px; margin-bottom: 10px;">
+                <?php 
+                echo esc_html( $content );
                 ?>
               </div>
 

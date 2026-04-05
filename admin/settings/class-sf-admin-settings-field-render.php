@@ -107,6 +107,10 @@ class SharedFilesSettingsFieldRender {
         <div class="email-info">
           <?php echo esc_html__('An extra "?" is automatically added to the URLs before the filename:', 'shared-files') ?><br /><b>/shared-files/123/?this-is-a-file.pdf</b>
         </div>
+      <?php elseif ($args['field_name'] == 'debug_mode'): ?>
+        <div class="email-info">
+          <?php echo esc_html__('Additional debug info is saved to the debug log.', 'shared-files') ?>
+        </div>
       <?php elseif ($args['field_name'] == 'file_access_logged_in_only' || $args['field_name'] == '_FREE_file_access_logged_in_only'): ?>
         <div class="email-info">
           <?php echo esc_html__('When checked, file lists are readable, but opening and downloading files will require a login.', 'shared-files') ?><br />

@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.62\n"
+"Project-Id-Version: Shared Files 1.7.63\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-04T15:51:55+00:00\n"
+"POT-Creation-Date: 2026-04-05T15:28:10+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: shared-files\n"
@@ -104,8 +104,8 @@ msgstr ""
 
 #: admin/class-sf-admin-contacts.php:170
 #: admin/class-sf-admin-download-log.php:85
-#: admin/settings/class-sf-admin-settings-field-render.php:733
-#: admin/settings/class-sf-admin-settings-field-render.php:911
+#: admin/settings/class-sf-admin-settings-field-render.php:737
+#: admin/settings/class-sf-admin-settings-field-render.php:915
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:60
 #: public/class-sf-public-contacts.php:49
 msgid "Name"
@@ -126,7 +126,7 @@ msgstr ""
 
 #: admin/class-sf-admin-contacts.php:173
 #: admin/class-sf-admin-metadata.php:480
-#: admin/settings/class-sf-admin-settings-field-render.php:1093
+#: admin/settings/class-sf-admin-settings-field-render.php:1097
 #: admin/settings/class-sf-admin-settings-tab-lead-generation.php:129
 #: public/class-sf-public-contacts.php:52
 #: public/class-sf-public-file-upload.php:102
@@ -203,7 +203,7 @@ msgid "Empty download log"
 msgstr ""
 
 #: admin/class-sf-admin-download-log.php:73
-#: admin/class-sf-admin-help-support.php:668
+#: admin/class-sf-admin-help-support.php:696
 #: admin/class-sf-admin-search-log.php:75
 msgid "Date"
 msgstr ""
@@ -224,8 +224,8 @@ msgid "User ID"
 msgstr ""
 
 #: admin/class-sf-admin-download-log.php:92
-#: admin/settings/class-sf-admin-settings-field-render.php:168
-#: admin/settings/class-sf-admin-settings-field-render.php:218
+#: admin/settings/class-sf-admin-settings-field-render.php:172
+#: admin/settings/class-sf-admin-settings-field-render.php:222
 msgid "IP address"
 msgstr ""
 
@@ -510,34 +510,34 @@ msgstr ""
 msgid "More detailed data on newest file"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:522
-#: admin/class-sf-admin-help-support.php:612
+#: admin/class-sf-admin-help-support.php:536
+#: admin/class-sf-admin-help-support.php:640
 msgid "(file found)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:528
-#: admin/class-sf-admin-help-support.php:618
+#: admin/class-sf-admin-help-support.php:542
+#: admin/class-sf-admin-help-support.php:646
 msgid "(file not found)"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:571
+#: admin/class-sf-admin-help-support.php:585
 msgid "Oldest file"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:650
+#: admin/class-sf-admin-help-support.php:678
 msgid "Debug log"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:671
+#: admin/class-sf-admin-help-support.php:699
 #: public/class-sf-public-file-upload.php:99
 msgid "Title"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:674
+#: admin/class-sf-admin-help-support.php:702
 msgid "Message"
 msgstr ""
 
-#: admin/class-sf-admin-help-support.php:723
+#: admin/class-sf-admin-help-support.php:751
 msgid "No data logged yet."
 msgstr ""
 
@@ -658,8 +658,8 @@ msgstr ""
 #: admin/class-sf-admin-list.php:118
 #: admin/class-sf-admin-list.php:123
 #: admin/class-sf-admin-list.php:128
-#: admin/settings/class-sf-admin-settings-field-render.php:286
-#: admin/settings/class-sf-admin-settings-field-render.php:455
+#: admin/settings/class-sf-admin-settings-field-render.php:290
+#: admin/settings/class-sf-admin-settings-field-render.php:459
 msgid "All Plans"
 msgstr ""
 
@@ -760,7 +760,7 @@ msgid "You can change the filename after publishing a file."
 msgstr ""
 
 #: admin/class-sf-admin-metadata.php:309
-#: admin/settings/class-sf-admin-settings-field-render.php:1035
+#: admin/settings/class-sf-admin-settings-field-render.php:1039
 msgid "File date"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr ""
 
 #. translators: %s: link to the information page about access restriction
 #: admin/class-sf-admin-metadata.php:380
-#: admin/settings/class-sf-admin-settings-field-render.php:954
+#: admin/settings/class-sf-admin-settings-field-render.php:958
 #, php-format
 msgid "<a href=\"%s\">Important information regarding file permissions &raquo;</a>"
 msgstr ""
@@ -966,7 +966,7 @@ msgid "File opening method: Default"
 msgstr ""
 
 #: admin/class-sf-admin-restrict-access.php:41
-#: admin/settings/class-sf-admin-settings-field-render.php:942
+#: admin/settings/class-sf-admin-settings-field-render.php:946
 msgid "Default method means opening the files using the following url format:"
 msgstr ""
 
@@ -983,7 +983,7 @@ msgid "File opening method: Redirect"
 msgstr ""
 
 #: admin/class-sf-admin-restrict-access.php:51
-#: admin/settings/class-sf-admin-settings-field-render.php:944
+#: admin/settings/class-sf-admin-settings-field-render.php:948
 msgid "Redirect method means that while the file url is at first the same as it is using the default method, the user will be redirected to the actual location on server like so:"
 msgstr ""
 
@@ -1581,8 +1581,8 @@ msgstr ""
 
 #. translators: %s: link to maxmind.com, the provider of geographical data
 #: admin/class-sf-admin-statistics.php:251
-#: admin/settings/class-sf-admin-settings-field-render.php:182
-#: admin/settings/class-sf-admin-settings-field-render.php:232
+#: admin/settings/class-sf-admin-settings-field-render.php:186
+#: admin/settings/class-sf-admin-settings-field-render.php:236
 #, php-format
 msgid "This product includes GeoLite2 data created by MaxMind, available from <a href=\"%s\" target=\"_blank\">maxmind.com</a>."
 msgstr ""
@@ -1841,410 +1841,414 @@ msgid "An extra \"?\" is automatically added to the URLs before the filename:"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:112
-msgid "When checked, file lists are readable, but opening and downloading files will require a login."
+msgid "Additional debug info is saved to the debug log."
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:116
-msgid "If checked, all uploaded files will be instantly listed on also other shortcodes/pages."
+msgid "When checked, file lists are readable, but opening and downloading files will require a login."
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:120
-msgid "Ignores the last dot and all characters after that in the file title, otherwise an exact match is required when the setting \"Search whole words only\" is also active."
+msgid "If checked, all uploaded files will be instantly listed on also other shortcodes/pages."
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:124
+msgid "Ignores the last dot and all characters after that in the file title, otherwise an exact match is required when the setting \"Search whole words only\" is also active."
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:128
 msgid "Generate long random urls for files, like so:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:126
+#: admin/settings/class-sf-admin-settings-field-render.php:130
 msgid "Files can't be opened without knowing the exact long part before the filename."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:130
+#: admin/settings/class-sf-admin-settings-field-render.php:134
 msgid "If a file isn't readable or doesn't exist at all (you may have manually deleted the file from the server), you may want to delete the file metadata automatically, so there won't be an error message in the frontend file list."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:131
+#: admin/settings/class-sf-admin-settings-field-render.php:135
 msgid "If this setting is checked, the related file metadata is automatically moved to trash."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:141
+#: admin/settings/class-sf-admin-settings-field-render.php:145
 msgid "Each file will have their own page under slug 'shared_file', and as content the regular file card, url being like so:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:144
+#: admin/settings/class-sf-admin-settings-field-render.php:148
 msgid "It's also possible to customize the template by having the file single-shared_file.php in your theme."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:151
+#: admin/settings/class-sf-admin-settings-field-render.php:155
 msgid "Show the files in the site search results. Proper function requires also the single file pages enabled."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:159
-#: admin/settings/class-sf-admin-settings-field-render.php:196
-#: admin/settings/class-sf-admin-settings-field-render.php:209
-#: admin/settings/class-sf-admin-settings-field-render.php:246
+#: admin/settings/class-sf-admin-settings-field-render.php:163
+#: admin/settings/class-sf-admin-settings-field-render.php:200
+#: admin/settings/class-sf-admin-settings-field-render.php:213
+#: admin/settings/class-sf-admin-settings-field-render.php:250
 #: admin/settings/class-sf-admin-settings-tabs.php:172
 msgid "New"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:163
+#: admin/settings/class-sf-admin-settings-field-render.php:167
 msgid "If enabled, the downloader's country is automatically detected based on the downloader's IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer."
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:165
-#: admin/settings/class-sf-admin-settings-field-render.php:215
-msgid "The following information is sent to ws.tammersoft.com in the process:"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:169
 #: admin/settings/class-sf-admin-settings-field-render.php:219
+msgid "The following information is sent to ws.tammersoft.com in the process:"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:173
+#: admin/settings/class-sf-admin-settings-field-render.php:223
 msgid "Site URL"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:170
-#: admin/settings/class-sf-admin-settings-field-render.php:220
+#: admin/settings/class-sf-admin-settings-field-render.php:174
+#: admin/settings/class-sf-admin-settings-field-render.php:224
 msgid "Freemius User ID (number)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:171
-#: admin/settings/class-sf-admin-settings-field-render.php:221
-msgid "Freemius License ID (number)"
-msgstr ""
-
-#: admin/settings/class-sf-admin-settings-field-render.php:172
-#: admin/settings/class-sf-admin-settings-field-render.php:222
-msgid "Freemius Install ID (number)"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-field-render.php:175
 #: admin/settings/class-sf-admin-settings-field-render.php:225
+msgid "Freemius License ID (number)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:176
+#: admin/settings/class-sf-admin-settings-field-render.php:226
+msgid "Freemius Install ID (number)"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-field-render.php:179
+#: admin/settings/class-sf-admin-settings-field-render.php:229
 msgid "Using the service requires an active subscription or a lifetime license."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:200
-#: admin/settings/class-sf-admin-settings-field-render.php:250
+#: admin/settings/class-sf-admin-settings-field-render.php:204
+#: admin/settings/class-sf-admin-settings-field-render.php:254
 msgid "The city is detected the same way as the country (described above)."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:213
+#: admin/settings/class-sf-admin-settings-field-render.php:217
 msgid "If enabled, the searcher's country is automatically detected based on the their IP address by using an external service at ws.tammersoft.com, hosted and maintained by the plugin developer."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:295
+#: admin/settings/class-sf-admin-settings-field-render.php:299
 msgid "Any sound file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:296
+#: admin/settings/class-sf-admin-settings-field-render.php:300
 msgid "Any video file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:297
+#: admin/settings/class-sf-admin-settings-field-render.php:301
 msgid "Any image file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:369
+#: admin/settings/class-sf-admin-settings-field-render.php:373
 msgid "Choose a value and save the settings, and the new custom fields will be usable."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:424
+#: admin/settings/class-sf-admin-settings-field-render.php:428
 msgid "Choose a value and save the settings, and the new fields will be usable."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:558
+#: admin/settings/class-sf-admin-settings-field-render.php:562
 msgid "This setting is required, if you have installed WordPress in a subdirectory."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:559
+#: admin/settings/class-sf-admin-settings-field-render.php:563
 msgid "Please check the WordPress Address (URL) of your site from WP admin / Settings / General, if there is a path after the domain, you should add the same path here."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:560
+#: admin/settings/class-sf-admin-settings-field-render.php:564
 msgid "If this is set, the file URLs are automatically formatted like so:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:564
+#: admin/settings/class-sf-admin-settings-field-render.php:568
 msgid "Normally the files are saved under wp-content/uploads/shared-files/."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:565
+#: admin/settings/class-sf-admin-settings-field-render.php:569
 msgid "If you wish the new files to be saved to a subfolder under wp-content/uploads/shared-files/, define the folder name here."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:566
+#: admin/settings/class-sf-admin-settings-field-render.php:570
 msgid "When this folder name is defined, new files will be saved under this path:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:567
+#: admin/settings/class-sf-admin-settings-field-render.php:571
 msgid "wp-content/uploads/shared-files/folder-name/"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:572
+#: admin/settings/class-sf-admin-settings-field-render.php:576
 msgid "The text defined here replaces the default automatically detected maximum file size."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:575
+#: admin/settings/class-sf-admin-settings-field-render.php:579
 msgid "e.g. /wp-content/uploads/2023/01/custom-icon.png"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:578
+#: admin/settings/class-sf-admin-settings-field-render.php:582
 msgid "Enter an email address to receive the notify, or multiple email addresses separated by a comma."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:582
+#: admin/settings/class-sf-admin-settings-field-render.php:586
 msgid "Enter a title here and the custom field (an input field) is automatically activated."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:586
+#: admin/settings/class-sf-admin-settings-field-render.php:590
 msgid "A comma separated list of accepted file extensions and/or file types, for example:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:590
+#: admin/settings/class-sf-admin-settings-field-render.php:594
 msgid "More information"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:590
+#: admin/settings/class-sf-admin-settings-field-render.php:594
 msgid "here"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:611
+#: admin/settings/class-sf-admin-settings-field-render.php:615
 msgid "Default list"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:612
+#: admin/settings/class-sf-admin-settings-field-render.php:616
 msgid "2 columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:613
+#: admin/settings/class-sf-admin-settings-field-render.php:617
 msgid "3 columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:614
+#: admin/settings/class-sf-admin-settings-field-render.php:618
 msgid "4 columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:646
+#: admin/settings/class-sf-admin-settings-field-render.php:650
 msgid "Max"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:664
+#: admin/settings/class-sf-admin-settings-field-render.php:668
 msgid "The countdown timer is displayed on the page selected above. It is hooked to the theme's function the_content(), and displayed just before the actual content."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:690
+#: admin/settings/class-sf-admin-settings-field-render.php:694
 msgid "Improved (SVG)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:691
+#: admin/settings/class-sf-admin-settings-field-render.php:695
 msgid "First set"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:781
+#: admin/settings/class-sf-admin-settings-field-render.php:785
 msgid "15 minutes"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:782
+#: admin/settings/class-sf-admin-settings-field-render.php:786
 msgid "5 minutes"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:783
+#: admin/settings/class-sf-admin-settings-field-render.php:787
 msgid "1 minute"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:814
+#: admin/settings/class-sf-admin-settings-field-render.php:818
 msgid "Same as posts have"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:815
+#: admin/settings/class-sf-admin-settings-field-render.php:819
 msgid "Custom taxonomy"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:861
+#: admin/settings/class-sf-admin-settings-field-render.php:865
 msgid "File title link, preview and download buttons"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:862
+#: admin/settings/class-sf-admin-settings-field-render.php:866
 msgid "Download button only"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:937
-#: admin/settings/class-sf-admin-settings-field-render.php:1152
+#: admin/settings/class-sf-admin-settings-field-render.php:941
+#: admin/settings/class-sf-admin-settings-field-render.php:1156
 msgid "Default"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:938
+#: admin/settings/class-sf-admin-settings-field-render.php:942
 msgid "Redirect"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:981
+#: admin/settings/class-sf-admin-settings-field-render.php:985
 msgid "Original"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:982
+#: admin/settings/class-sf-admin-settings-field-render.php:986
 msgid "Improved"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:986
+#: admin/settings/class-sf-admin-settings-field-render.php:990
 msgid "Original type means that the page links are in the following url format:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:988
+#: admin/settings/class-sf-admin-settings-field-render.php:992
 msgid "Improved type works via GET parameters:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:990
+#: admin/settings/class-sf-admin-settings-field-render.php:994
 msgid "Improved type must be used, if the shortcode is on the front page or various other types of pages of the site. If you are getting 404 from the page links, use the Improved type."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1010
+#: admin/settings/class-sf-admin-settings-field-render.php:1014
 msgid "Google"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1011
+#: admin/settings/class-sf-admin-settings-field-render.php:1015
 msgid "Microsoft"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1015
+#: admin/settings/class-sf-admin-settings-field-render.php:1019
 msgid "The preview is available for certain file types only and PDF is supported by Google only."
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1034
+#: admin/settings/class-sf-admin-settings-field-render.php:1038
 msgid "File publish date (post date)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1036
+#: admin/settings/class-sf-admin-settings-field-render.php:1040
 msgid "File title"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1054
+#: admin/settings/class-sf-admin-settings-field-render.php:1058
 msgid "No expiration date"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1055
+#: admin/settings/class-sf-admin-settings-field-render.php:1059
 msgid "1 week"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1056
+#: admin/settings/class-sf-admin-settings-field-render.php:1060
 msgid "2 weeks"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1057
+#: admin/settings/class-sf-admin-settings-field-render.php:1061
 msgid "3 weeks"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1058
+#: admin/settings/class-sf-admin-settings-field-render.php:1062
 msgid "4 weeks"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1059
+#: admin/settings/class-sf-admin-settings-field-render.php:1063
 msgid "30 days"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1060
+#: admin/settings/class-sf-admin-settings-field-render.php:1064
 msgid "1 month"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1061
+#: admin/settings/class-sf-admin-settings-field-render.php:1065
 msgid "2 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1062
+#: admin/settings/class-sf-admin-settings-field-render.php:1066
 msgid "3 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1063
+#: admin/settings/class-sf-admin-settings-field-render.php:1067
 msgid "4 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1064
+#: admin/settings/class-sf-admin-settings-field-render.php:1068
 msgid "5 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1065
+#: admin/settings/class-sf-admin-settings-field-render.php:1069
 msgid "6 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1066
+#: admin/settings/class-sf-admin-settings-field-render.php:1070
 msgid "7 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1067
+#: admin/settings/class-sf-admin-settings-field-render.php:1071
 msgid "8 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1068
+#: admin/settings/class-sf-admin-settings-field-render.php:1072
 msgid "9 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1069
+#: admin/settings/class-sf-admin-settings-field-render.php:1073
 msgid "10 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1070
+#: admin/settings/class-sf-admin-settings-field-render.php:1074
 msgid "11 months"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1071
+#: admin/settings/class-sf-admin-settings-field-render.php:1075
 msgid "1 year"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1072
+#: admin/settings/class-sf-admin-settings-field-render.php:1076
 msgid "2 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1073
+#: admin/settings/class-sf-admin-settings-field-render.php:1077
 msgid "3 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1074
+#: admin/settings/class-sf-admin-settings-field-render.php:1078
 msgid "4 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1075
+#: admin/settings/class-sf-admin-settings-field-render.php:1079
 msgid "5 years"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1094
+#: admin/settings/class-sf-admin-settings-field-render.php:1098
 msgid "Category name"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1112
+#: admin/settings/class-sf-admin-settings-field-render.php:1116
 msgid "Descending"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1113
+#: admin/settings/class-sf-admin-settings-field-render.php:1117
 msgid "Ascending"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1131
+#: admin/settings/class-sf-admin-settings-field-render.php:1135
 msgid "Transparent"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1132
+#: admin/settings/class-sf-admin-settings-field-render.php:1136
 msgid "White"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1133
+#: admin/settings/class-sf-admin-settings-field-render.php:1137
 msgid "Light gray"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1134
+#: admin/settings/class-sf-admin-settings-field-render.php:1138
 msgid "Custom color"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1153
+#: admin/settings/class-sf-admin-settings-field-render.php:1157
 msgid "Roboto"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1154
+#: admin/settings/class-sf-admin-settings-field-render.php:1158
 msgid "Ubuntu"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1173
+#: admin/settings/class-sf-admin-settings-field-render.php:1177
 msgid "Right"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-field-render.php:1174
+#: admin/settings/class-sf-admin-settings-field-render.php:1178
 msgid "Left"
 msgstr ""
 
@@ -3065,35 +3069,39 @@ msgstr ""
 msgid "Compatibility mode"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:41
+#: admin/settings/class-sf-admin-settings-tab-technical.php:40
+msgid "Debug mode"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-technical.php:52
 msgid "Obfuscate file urls"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:54
+#: admin/settings/class-sf-admin-settings-tab-technical.php:65
 msgid "File & category sync interval"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:66
+#: admin/settings/class-sf-admin-settings-tab-technical.php:77
 msgid "Remove obsolete file metadata automatically"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:77
+#: admin/settings/class-sf-admin-settings-tab-technical.php:88
 msgid "Bypass the file exists check on frontend file list"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:88
+#: admin/settings/class-sf-admin-settings-tab-technical.php:99
 msgid "Prevent search engines from indexing files uploaded using front end uploader"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:99
+#: admin/settings/class-sf-admin-settings-tab-technical.php:110
 msgid "Prevent search engines from indexing all file urls"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:110
+#: admin/settings/class-sf-admin-settings-tab-technical.php:121
 msgid "WordPress location"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-technical.php:122
+#: admin/settings/class-sf-admin-settings-tab-technical.php:133
 msgid "Pagination type"
 msgstr ""
 
