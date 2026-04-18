@@ -215,11 +215,20 @@ class SharedFilesAdminSyncFiles {
     public function handle_file_upload() {
         check_ajax_referer( 'plupload_nonce' );
         if ( !empty( $_FILES ) ) {
+            $s = get_option( 'shared_files_settings' );
             $tmp_name = $_FILES['file']['tmp_name'];
             $filename_for_custom_field = sanitize_file_name( basename( $_FILES['file']['name'] ) );
             $checked_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name, $filename_for_custom_field );
+            if ( isset( $s['debug_mode'] ) ) {
+                SharedFilesHelpers::writeLog( 'START handle_file_upload' );
+                SharedFilesHelpers::writeLog( 'handle_file_upload 1: ' . $tmp_name );
+                SharedFilesHelpers::writeLog( 'handle_file_upload 2: ' . $filename_for_custom_field );
+            }
             if ( !$checked_mime_type[0] ) {
                 $error_msg = sanitize_text_field( __( 'File mime type is not allowed.', 'shared-files' ) );
+                if ( isset( $s['debug_mode'] ) ) {
+                    SharedFilesHelpers::writeLog( 'handle_file_upload error: ' . $error_msg );
+                }
                 wp_send_json_error( [
                     'error' => $error_msg,
                 ] );
@@ -231,6 +240,9 @@ class SharedFilesAdminSyncFiles {
             $upload = wp_upload_bits( $_FILES['file']['name'], null, $file_contents_sanitized );
             remove_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
             remove_filter( 'upload_dir', [$this, 'set_upload_dir'] );
+            if ( isset( $s['debug_mode'] ) ) {
+                SharedFilesHelpers::writeLog( 'END handle_file_upload' );
+            }
             wp_send_json_success( $upload );
             wp_die();
         }
@@ -254,6 +266,11 @@ class SharedFilesAdminSyncFiles {
             }
         } elseif ( !file_exists( $full_path_default ) ) {
             mkdir( $full_path_default );
+        }
+        if ( isset( $s['debug_mode'] ) ) {
+            SharedFilesHelpers::writeLog( 'set_upload_dir 1: ' . $full_path_default );
+            SharedFilesHelpers::writeLog( 'set_upload_dir 2: ' . $folder_for_new_files );
+            SharedFilesHelpers::writeLog( 'set_upload_dir 3: ' . $full_path_new );
         }
         return array(
             'path'   => realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files,

@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.7.63
+Stable tag: 1.7.64
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -282,6 +282,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.64 - 2026-04-18 =
+* (Free + All plans) More debug info added to debug mode
+* (Free + All plans) Layout tweaks
 
 = 1.7.63 - 2026-04-05 =
 * (Free + All plans) Debug mode added: Settings / Technical -tab
