@@ -17,7 +17,7 @@ class SharedFilesAdminShortcodes {
   public function register_shortcodes_page_callback() {
     ?>
 
-    <?php echo SharedFilesAdminHelpSupport::permalinks_alert() ?>
+    <?php SharedFilesAdminHelpSupport::permalinks_alert(); ?>
 
     <?php $s = get_option('shared_files_settings') ?>
 
@@ -290,7 +290,7 @@ class SharedFilesAdminShortcodes {
         <div class="shared-files-admin-section shared-files-admin-section-shortcodes">
 
           <h2>
-            <?php echo esc_html__('Enable front-end editor for all files') ?>
+            <?php echo esc_html__('Enable front-end editor for all files', 'shared-files') ?>
 
             <?php if (SharedFilesHelpers::isPremium() == 1): ?>
               <span class="shared-files-pro-only-inline-inactive"><?php echo esc_html__('Pro', 'shared-files'); ?></span>

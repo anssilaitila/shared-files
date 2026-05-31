@@ -5,7 +5,7 @@ class SharedFilesSettingsTabs {
   public function settings_page() {
   ?>
 
-    <?php echo SharedFilesAdminHelpSupport::permalinks_alert() ?>
+    <?php SharedFilesAdminHelpSupport::permalinks_alert(); ?>
 
     <div class="shared-files-admin-page-content-container">
 
@@ -103,7 +103,7 @@ class SharedFilesSettingsTabs {
 
               <?php $slug = 'exact-search'; ?>
 
-              <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
+              <li class="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>">
                 <span><?php echo esc_html__('Exact search', 'shared-files')?></span>
               </li>
 
@@ -111,7 +111,7 @@ class SharedFilesSettingsTabs {
 
             <?php $slug = 'search-log'; ?>
 
-            <li class="shared-files-settings-tab-<?= esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?= esc_attr( $slug ) ?>">
+            <li class="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>-title" data-settings-container="shared-files-settings-tab-<?php echo esc_attr( $slug ) ?>">
               <span><?php echo esc_html__('Search log', 'shared-files')?></span>
             </li>
 

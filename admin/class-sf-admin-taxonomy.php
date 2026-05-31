@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 class SharedFilesAdminTaxonomy {
     public function create_shared_files_custom_taxonomy() {
         if ( SHARED_FILES_TAG_SLUG != 'post_tag' ) {
@@ -64,15 +67,15 @@ class SharedFilesAdminTaxonomy {
         ?></h1>
 
       <?php 
-        echo SharedFilesAdminHelpers::sfProFeatureMarkup();
+        SharedFilesAdminHelpers::sfProFeatureMarkup();
         ?>
 
       <h2 style="margin-top: 24px;"><?php 
-        echo esc_html__( 'Category password protection and file sync in the paid plans:' );
+        echo esc_html__( 'Category password protection and file sync in the paid plans:', 'shared-files' );
         ?></h2>
 
       <p style="margin-bottom: 18px;"><?php 
-        echo esc_html__( 'It is possible to set password and define a folder for file sync for each category, an example here below when editing a single category.' );
+        echo esc_html__( 'It is possible to set password and define a folder for file sync for each category, an example here below when editing a single category.', 'shared-files' );
         ?></p>
 
       <img src="<?php 
@@ -110,11 +113,11 @@ class SharedFilesAdminTaxonomy {
         if ( !$columns_set ) {
             $new_columns = array(
                 'cb'          => '<input type="checkbox" />',
-                'name'        => sanitize_text_field( __( 'Name' ) ),
-                'description' => sanitize_text_field( __( 'Description' ) ),
+                'name'        => sanitize_text_field( __( 'Name', 'shared-files' ) ),
+                'description' => sanitize_text_field( __( 'Description', 'shared-files' ) ),
                 'shortcode'   => sanitize_text_field( __( 'Shortcode', 'shared-files' ) ),
-                'slug'        => sanitize_text_field( __( 'Slug' ) ),
-                'posts'       => sanitize_text_field( __( 'Posts' ) ),
+                'slug'        => sanitize_text_field( __( 'Slug', 'shared-files' ) ),
+                'posts'       => sanitize_text_field( __( 'Posts', 'shared-files' ) ),
             );
         }
         return $new_columns;

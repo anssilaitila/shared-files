@@ -10,22 +10,10 @@ class SharedFilesAdminQuery {
         global $wp;
         $s = get_option( 'shared_files_settings' );
         $url = esc_url_raw( home_url( $wp->request ) );
-        $url_parts = parse_url( $url );
+        $url_parts = wp_parse_url( $url );
         $sf_query = 0;
         if ( isset( $url_parts['path'] ) ) {
             $path_parts = explode( '/', $url_parts['path'] );
-        }
-        if ( is_super_admin() && isset( $_GET['DEBUG_URL_PARTS'] ) ) {
-            echo '<pre>1</pre>';
-            echo '<pre>' . esc_html( var_dump( $url_parts ) ) . '</pre>';
-            echo '<pre>2</pre>';
-            echo '<pre>' . esc_html( var_dump( $path_parts ) ) . '</pre>';
-            if ( sizeof( $path_parts ) > 1 ) {
-                echo '<pre>3</pre>';
-                echo '<pre>' . var_dump( esc_html( $path_parts[count( $path_parts ) - 2] ) ) . '</pre>';
-            }
-            echo '<pre>4</pre>';
-            echo '<pre>' . var_dump( esc_html( end( $path_parts ) ) ) . '</pre>';
         }
         $sf_base = '';
         $sf_base_alt = '';
@@ -73,21 +61,6 @@ class SharedFilesAdminQuery {
                 }
             }
         }
-        if ( is_super_admin() && isset( $_GET['DEBUG_URL_PARTS'] ) ) {
-            echo '<pre>sf_base</pre>';
-            echo '<pre>' . var_dump( esc_html( $path_parts[count( $path_parts ) - 3] ) ) . '</pre>';
-            echo '<pre>sf_base</pre>';
-            echo '<pre>' . var_dump( esc_html( $sf_base ) ) . '</pre>';
-            echo '<pre>sf_base_alt</pre>';
-            echo '<pre>' . var_dump( esc_html( $sf_base_alt ) ) . '</pre>';
-            echo '<pre>sf_query</pre>';
-            echo '<pre>' . var_dump( esc_html( $sf_query ) ) . '</pre>';
-            echo '<pre>file_id</pre>';
-            echo '<pre>' . var_dump( esc_html( $file_id ) ) . '</pre>';
-            echo '<pre>sf_query_filename</pre>';
-            echo '<pre>' . var_dump( esc_html( $sf_query_filename ) ) . '</pre>';
-            wp_die();
-        }
         $file_id = intval( $file_id );
         if ( $sf_query && $file_id ) {
             $post_status = get_post_status( $file_id );
@@ -125,28 +98,16 @@ class SharedFilesAdminQuery {
                         $filename_with_path_fallback .= $filename_fallback;
                         $filename = SharedFilesFileOpen::getUpdatedPathAndFilename( sanitize_text_field( $filename_with_path_fallback ) );
                     }
-                    if ( is_super_admin() && isset( $_GET['DEBUG_FILE'] ) ) {
-                        echo '<pre>' . var_dump( esc_html( $file['file'] ) ) . '</pre>';
-                        echo '<pre>' . var_dump( esc_html( $filename ) ) . '</pre>';
-                        echo '<pre>' . var_dump( esc_html( $filename_fallback ) ) . '</pre>';
-                        wp_die();
-                    }
                     $wp_upload_dir = wp_upload_dir();
                     $sf_upload_dir = $wp_upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'shared-files' . DIRECTORY_SEPARATOR;
                     $realFilePath = realpath( $filename );
                     $realBasePath = realpath( $sf_upload_dir ) . DIRECTORY_SEPARATOR;
-                    if ( $realFilePath === false || strpos( $realFilePath, $realBasePath ) !== 0 ) {
+                    if ( !file_exists( $sf_upload_dir ) || $realFilePath === false || strpos( $realFilePath, $realBasePath ) !== 0 ) {
                         echo '<pre>ERROR CODE: 200152</pre>';
-                        if ( is_super_admin() ) {
-                            echo '<pre>' . esc_html__( 'Debug info for admin:', 'shared-files' ) . '</pre>';
-                            echo '<pre>' . esc_html( var_dump( $filename ) ) . '</pre>';
-                            echo '<pre>' . esc_html( var_dump( $realFilePath ) ) . '</pre>';
-                            echo '<pre>' . esc_html( var_dump( $realBasePath ) ) . '</pre>';
-                        }
                         wp_die();
                     }
                     if ( !$redirect && (!isset( $filename ) || !file_exists( $filename )) ) {
-                        wp_die( esc_html__( 'File not found:', 'shared-files' ) . '<br />' . $filename );
+                        wp_die( esc_html__( 'File not found:', 'shared-files' ) . '<br />' . esc_html( $filename ) );
                     }
                     $file_mime = '';
                     if ( function_exists( 'mime_content_type' ) ) {
@@ -176,13 +137,13 @@ class SharedFilesAdminQuery {
                         $user_agent = '';
                         if ( isset( $s['log_enable_user_agent'] ) ) {
                             if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
-                                $user_agent = sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] );
+                                $user_agent = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
                             }
                         }
                         $referer_url = '';
                         if ( isset( $s['log_enable_referer_url'] ) ) {
                             if ( isset( $_SERVER['HTTP_REFERER'] ) ) {
-                                $referer_url = sanitize_text_field( $_SERVER['HTTP_REFERER'] );
+                                $referer_url = sanitize_text_field( wp_unslash( $_SERVER['HTTP_REFERER'] ) );
                             }
                         }
                         $user_id = 0;
@@ -231,9 +192,9 @@ class SharedFilesAdminQuery {
                     if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'redirect' ) {
                         $file = get_post_meta( $file_id, '_sf_file', true );
                         $file_url = esc_url_raw( $file['url'] );
-                        $redirect_url_parts = parse_url( $file_url );
+                        $redirect_url_parts = wp_parse_url( $file_url );
                         $file_uri = $redirect_url_parts['path'];
-                        wp_redirect( esc_url_raw( $file_uri ) );
+                        wp_safe_redirect( esc_url_raw( $file_uri ) );
                         exit;
                     }
                     if ( function_exists( 'ob_start' ) ) {
@@ -272,30 +233,25 @@ class SharedFilesAdminQuery {
                         header( 'X-Accel-Buffering: no' );
                         header( 'Content-Length: ' . filesize( $filename ) );
                     }
-                    if ( isset( $s['file_open_method'] ) && $s['file_open_method'] == 'alt' ) {
-                        set_time_limit( 0 );
-                        $file_alt = @fopen( $filename, 'rb' );
-                        while ( !feof( $file_alt ) ) {
-                            print @fread( $file_alt, 1024 * 8 );
-                            ob_flush();
-                            flush();
+                    if ( function_exists( 'ob_get_level' ) && function_exists( 'ob_end_clean' ) ) {
+                        while ( ob_get_level() ) {
+                            ob_end_clean();
                         }
-                    } else {
-                        if ( function_exists( 'ob_get_level' ) && function_exists( 'ob_end_clean' ) ) {
-                            while ( ob_get_level() ) {
-                                ob_end_clean();
-                            }
-                        }
-                        if ( function_exists( 'flush' ) ) {
-                            flush();
-                        }
-                        readfile( $filename );
                     }
+                    if ( function_exists( 'flush' ) ) {
+                        flush();
+                    }
+                    readfile( $filename );
                     exit;
                 }
             }
         }
         return $request;
+    }
+
+    public function my_allowed_redirect_hosts( $hosts ) {
+        $my_hosts = array('view.officeapps.live.com', 'docs.google.com');
+        return array_merge( $hosts, $my_hosts );
     }
 
 }

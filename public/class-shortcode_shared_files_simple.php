@@ -27,7 +27,7 @@ class ShortcodeSharedFilesSimple {
         }
         $tag_slug = '';
         if ( isset( $_GET['sf_tag'] ) && $_GET['sf_tag'] != '0' ) {
-            $tag_slug = sanitize_title( $_GET['sf_tag'] );
+            $tag_slug = sanitize_title( wp_unslash( $_GET['sf_tag'] ) );
         }
         $meta_query_hide_not_public = array(
             'relation' => 'OR',
@@ -81,7 +81,7 @@ class ShortcodeSharedFilesSimple {
             );
         }
         if ( isset( $_GET['sf_category'] ) && $_GET['sf_category'] != '0' ) {
-            $term_slug = sanitize_title( $_GET['sf_category'] );
+            $term_slug = sanitize_title( wp_unslash( $_GET['sf_category'] ) );
             if ( $term_slug ) {
                 $taxonomy_query[] = array(
                     'taxonomy'         => 'shared-file-category',
@@ -117,7 +117,7 @@ class ShortcodeSharedFilesSimple {
             ));
         } else {
             if ( isset( $_GET['c'] ) && $_GET['c'] != 'all_files' ) {
-                $term_slug = sanitize_title( $_GET['c'] );
+                $term_slug = sanitize_title( wp_unslash( $_GET['c'] ) );
                 if ( $term_slug ) {
                     $taxonomy_query[] = array(
                         'taxonomy'         => 'shared-file-category',
@@ -156,8 +156,8 @@ class ShortcodeSharedFilesSimple {
                 $pagination_active = 1;
                 $paged = 1;
                 if ( $pagination_active ) {
-                    if ( isset( $_GET['_page'] ) && $_GET['_page'] ) {
-                        $paged = (int) $_GET['_page'];
+                    if ( !empty( $_GET['_page'] ) ) {
+                        $paged = intval( wp_unslash( $_GET['_page'] ) );
                     } elseif ( get_query_var( 'paged' ) ) {
                         $paged = absint( get_query_var( 'paged' ) );
                     }

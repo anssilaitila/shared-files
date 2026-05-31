@@ -36,7 +36,7 @@ class ShortcodeSharedFiles {
         }
         $tag_slug = '';
         if ( isset( $_GET['sf_tag'] ) && $_GET['sf_tag'] != '0' ) {
-            $tag_slug = sanitize_title( $_GET['sf_tag'] );
+            $tag_slug = sanitize_title( wp_unslash( $_GET['sf_tag'] ) );
         }
         $limit_posts = 0;
         $meta_query_hide_not_public = array(
@@ -173,7 +173,7 @@ class ShortcodeSharedFiles {
                 }
                 $is_premium = 0;
                 if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
-                    $tag_selected = ( isset( $_GET['sf_tag'] ) ? sanitize_title( $_GET['sf_tag'] ) : '' );
+                    $tag_selected = ( isset( $_GET['sf_tag'] ) ? sanitize_title( wp_unslash( $_GET['sf_tag'] ) ) : '' );
                     $tags_orderby = '';
                     $tags_order = 'ASC';
                     if ( isset( $s['sort_tags_by'] ) && $s['sort_tags_by'] ) {
@@ -227,7 +227,7 @@ class ShortcodeSharedFiles {
                 }
             } else {
                 if ( isset( $_GET['sf_category'] ) && $_GET['sf_category'] != '0' ) {
-                    $term_slug = sanitize_title( $_GET['sf_category'] );
+                    $term_slug = sanitize_title( wp_unslash( $_GET['sf_category'] ) );
                     if ( $term_slug ) {
                         $taxonomy_query[] = array(
                             'taxonomy'         => 'shared-file-category',
@@ -263,7 +263,7 @@ class ShortcodeSharedFiles {
                     ));
                 } else {
                     if ( isset( $_GET['c'] ) && $_GET['c'] != 'all_files' ) {
-                        $term_slug = sanitize_title( $_GET['c'] );
+                        $term_slug = sanitize_title( wp_unslash( $_GET['c'] ) );
                         if ( $term_slug ) {
                             $taxonomy_query[] = array(
                                 'taxonomy'         => 'shared-file-category',

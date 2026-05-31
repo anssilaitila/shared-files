@@ -1,5 +1,9 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 /**
  * Fired during plugin deactivation
  *

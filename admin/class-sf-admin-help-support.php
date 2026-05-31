@@ -14,12 +14,11 @@ class SharedFilesAdminHelpSupport {
     }
 
     public static function permalinks_alert() {
-        $html = '';
         if ( !get_option( 'permalink_structure' ) ) {
-            $html = '<div class="shared-files-permalinks-alert">';
-            $html .= '<strong>' . sanitize_text_field( __( 'Please note', 'shared-files' ) ) . '</strong>: ';
+            echo '<div class="shared-files-permalinks-alert">';
+            echo '<strong>' . esc_html__( 'Please note', 'shared-files' ) . '</strong>: ';
             $url = get_admin_url() . 'options-permalink.php';
-            $html .= sprintf( wp_kses( 
+            echo sprintf( wp_kses( 
                 /* translators: %s: link to the support forum */
                 __( 'you have currently "Plain" selected in <a href="%s">the permalink settings</a>. You should change this to any other available setting to enable the Shared Files to operate normally. Thank you!', 'shared-files' ),
                 array(
@@ -29,9 +28,8 @@ class SharedFilesAdminHelpSupport {
                     ),
                 )
              ), esc_url( $url ) );
-            $html .= '</div>';
+            echo '</div>';
         }
-        return $html;
     }
 
     public function register_support_page_callback() {
@@ -42,7 +40,7 @@ class SharedFilesAdminHelpSupport {
         ?>
 
     <?php 
-        echo SharedFilesAdminHelpSupport::permalinks_alert();
+        SharedFilesAdminHelpSupport::permalinks_alert();
         ?>
 
     <?php 
@@ -346,7 +344,7 @@ class SharedFilesAdminHelpSupport {
         ?>
 
     <?php 
-        echo SharedFilesAdminHelpSupport::permalinks_alert();
+        SharedFilesAdminHelpSupport::permalinks_alert();
         ?>
 
     <?php 
@@ -499,10 +497,6 @@ class SharedFilesAdminHelpSupport {
 
               <?php 
                 $content = '';
-                ob_start();
-                var_dump( $c );
-                $content = wp_kses_post( ob_get_contents() );
-                ob_end_clean();
                 ?>
 
               <div style="background: #fff; color: #000; font-size: 9px; padding: 3px 5px; border: 1px solid #bbb; margin-top: 10px; margin-bottom: 10px;">
@@ -602,12 +596,9 @@ class SharedFilesAdminHelpSupport {
                 ?>
               </div>
 
+
               <?php 
                 $content = '';
-                ob_start();
-                var_dump( $c );
-                $content = wp_kses_post( ob_get_contents() );
-                ob_end_clean();
                 ?>
 
               <div style="background: #fff; color: #000; font-size: 9px; padding: 3px 5px; border: 1px solid #bbb; margin-top: 10px; margin-bottom: 10px;">
@@ -682,11 +673,17 @@ class SharedFilesAdminHelpSupport {
         global $wpdb;
         $items_per_page = 200;
         $page = ( isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1 );
-        $offset = $page * $items_per_page - $items_per_page;
-        $query = "SELECT * FROM {$wpdb->prefix}shared_files_log";
-        $total_query = "SELECT COUNT(1) FROM ({$query}) AS combined_table";
-        $total = $wpdb->get_var( $total_query );
-        $results = $wpdb->get_results( $query . ' ORDER BY id DESC LIMIT ' . $offset . ', ' . $items_per_page, OBJECT );
+        $offset = intval( $page * $items_per_page - $items_per_page );
+        $table_name = $wpdb->prefix . 'shared_files_log';
+        // 1. Prepare and get the total count in one go
+        $total = $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(1) FROM %i", $table_name ) );
+        // 2. Prepare and get the results in one go
+        $results = $wpdb->get_results( $wpdb->prepare(
+            "SELECT * FROM %i ORDER BY id DESC LIMIT %d, %d",
+            $table_name,
+            $offset,
+            $items_per_page
+        ), OBJECT );
         ?>
 
           <table class="shared-files-debug-log" style="min-width: 400px;">
@@ -762,11 +759,12 @@ class SharedFilesAdminHelpSupport {
           <div class="shared-files-admin-pagination-container">
 
             <?php 
+        // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
         echo paginate_links( array(
             'base'      => add_query_arg( 'log-page', '%#%' ),
             'format'    => '',
-            'prev_text' => __( '&laquo;' ),
-            'next_text' => __( '&raquo;' ),
+            'prev_text' => '&laquo;',
+            'next_text' => '&raquo;',
             'total'     => ceil( $total / $items_per_page ),
             'current'   => $page,
         ) );

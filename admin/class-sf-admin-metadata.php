@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 class SharedFilesAdminMetadata {
     /**
      * Custom meta box for file edit view.
@@ -9,7 +12,7 @@ class SharedFilesAdminMetadata {
     public function adding_custom_meta_boxes( $post ) {
         add_meta_box(
             'my-meta-box',
-            sanitize_text_field( __( 'File info' ) ),
+            sanitize_text_field( __( 'File info', 'shared-files' ) ),
             array($this, 'custom_metadata'),
             'shared_file',
             'normal',
@@ -18,7 +21,7 @@ class SharedFilesAdminMetadata {
     }
 
     public function custom_metadata() {
-        echo SharedFilesAdminHelpSupport::permalinks_alert();
+        SharedFilesAdminHelpSupport::permalinks_alert();
         $s = get_option( 'shared_files_settings' );
         wp_nonce_field( 'shared-files-nonce-' . intval( get_current_user_id() ), '_sf_file_nonce' );
         $post_id = intval( get_the_ID() );
@@ -445,31 +448,31 @@ class SharedFilesAdminMetadata {
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Custom field 2' ) . '</h4>';
+            echo '<h4>' . esc_html__( 'Custom field 2', 'shared-files' ) . '</h4>';
             echo '</div>';
             echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Custom field 3' ) . '</h4>';
+            echo '<h4>' . esc_html__( 'Custom field 3', 'shared-files' ) . '</h4>';
             echo '</div>';
             echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Custom field 4' ) . '</h4>';
+            echo '<h4>' . esc_html__( 'Custom field 4', 'shared-files' ) . '</h4>';
             echo '</div>';
             echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Custom field 5' ) . '</h4>';
+            echo '<h4>' . esc_html__( 'Custom field 5', 'shared-files' ) . '</h4>';
             echo '</div>';
             echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
             echo '<div class="shared-files-admin-small-field-container">';
             echo '<div class="shared-files-admin-custom-field-title ' . esc_attr( $field_in_pro_class ) . '">';
-            echo '<h4>' . esc_html__( 'Unlimited custom fields' ) . '</h4>';
+            echo '<h4>' . esc_html__( 'Unlimited custom fields', 'shared-files' ) . '</h4>';
             echo '</div>';
             echo wp_kses( $field_in_all_plans_markup, $field_in_pro_markup_allowed_tags );
             echo '</div>';
@@ -509,7 +512,7 @@ class SharedFilesAdminMetadata {
             }
             $sf_nonce = '';
             if ( isset( $_POST['_sf_file_nonce'] ) ) {
-                $sf_nonce = sanitize_text_field( $_POST['_sf_file_nonce'] );
+                $sf_nonce = sanitize_text_field( wp_unslash( $_POST['_sf_file_nonce'] ) );
             }
             /* --- security verification --- */
             if ( isset( $_POST['post_type'] ) && $_POST['post_type'] != 'shared_file' ) {
@@ -523,18 +526,19 @@ class SharedFilesAdminMetadata {
             }
             /* - end security verification - */
             if ( isset( $s['debug_mode'] ) ) {
-                if ( isset( $_POST['_sf_file_uploaded_file'] ) && $_POST['_sf_file_uploaded_file'] ) {
-                    $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
+                if ( isset( $_POST['_sf_file_uploaded_file'] ) ) {
+                    $sf_file_uploaded_file = sanitize_text_field( wp_unslash( $_POST['_sf_file_uploaded_file'] ) );
+                    $sf_file_uploaded_file = str_replace( '..', '', $sf_file_uploaded_file );
                     SharedFilesHelpers::writeLog( $sf_file_uploaded_file );
                     $filesize = sanitize_text_field( filesize( $sf_file_uploaded_file ) );
                     SharedFilesHelpers::writeLog( SharedFilesFileHandling::human_filesize( $filesize ) );
                 }
-                if ( isset( $_POST['_sf_file_uploaded_type'] ) && $_POST['_sf_file_uploaded_type'] ) {
-                    $sf_file_uploaded_type = sanitize_text_field( $_POST['_sf_file_uploaded_type'] );
+                if ( isset( $_POST['_sf_file_uploaded_type'] ) ) {
+                    $sf_file_uploaded_type = sanitize_text_field( wp_unslash( $_POST['_sf_file_uploaded_type'] ) );
                     SharedFilesHelpers::writeLog( $sf_file_uploaded_type );
                 }
-                if ( isset( $_POST['_sf_file_uploaded_url'] ) && $_POST['_sf_file_uploaded_url'] ) {
-                    $sf_file_uploaded_url = sanitize_text_field( $_POST['_sf_file_uploaded_url'] );
+                if ( isset( $_POST['_sf_file_uploaded_url'] ) ) {
+                    $sf_file_uploaded_url = sanitize_text_field( wp_unslash( $_POST['_sf_file_uploaded_url'] ) );
                     SharedFilesHelpers::writeLog( $sf_file_uploaded_url );
                 }
             }
@@ -549,16 +553,16 @@ class SharedFilesAdminMetadata {
             if ( isset( $s['debug_mode'] ) ) {
                 SharedFilesHelpers::writeLog( 'Before date processing (wp-admin / file update, file_id: ' . $id . ')' );
             }
-            if ( isset( $_POST['_sf_expiration_date'] ) && $_POST['_sf_expiration_date'] ) {
-                $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_expiration_date'] ) );
+            if ( !empty( $_POST['_sf_expiration_date'] ) ) {
+                $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( wp_unslash( $_POST['_sf_expiration_date'] ) ) );
                 $errors = $dt::getLastErrors();
                 if ( $dt !== false && !array_sum( (array) $errors ) ) {
                     $expiration_date = $dt;
                 }
             }
             $main_date = '';
-            if ( isset( $_POST['_sf_main_date'] ) && $_POST['_sf_main_date'] ) {
-                $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( $_POST['_sf_main_date'] ) );
+            if ( !empty( $_POST['_sf_main_date'] ) ) {
+                $dt = DateTime::createFromFormat( "Y-m-d", sanitize_text_field( wp_unslash( $_POST['_sf_main_date'] ) ) );
                 $errors = $dt::getLastErrors();
                 if ( $dt !== false && !array_sum( (array) $errors ) ) {
                     $main_date = $dt;
@@ -568,7 +572,7 @@ class SharedFilesAdminMetadata {
                 SharedFilesHelpers::writeLog( 'After date processing (wp-admin / file update, file_id: ' . $id . ')' );
             }
             $not_public = '';
-            if ( isset( $_POST['_sf_not_public'] ) && $_POST['_sf_not_public'] ) {
+            if ( isset( $_POST['_sf_not_public'] ) ) {
                 $not_public = 1;
             }
             update_post_meta( $id, '_sf_not_public', $not_public );
@@ -577,28 +581,28 @@ class SharedFilesAdminMetadata {
             update_post_meta( $id, '_sf_main_date', $main_date );
             $custom_fields_free = 1;
             if ( $custom_fields_free ) {
-                if ( isset( $_POST['_sf_file_upload_cf_1'] ) && $_POST['_sf_file_upload_cf_1'] ) {
-                    update_post_meta( $id, '_sf_file_upload_cf_1', sanitize_text_field( $_POST['_sf_file_upload_cf_1'] ) );
+                if ( isset( $_POST['_sf_file_upload_cf_1'] ) ) {
+                    update_post_meta( $id, '_sf_file_upload_cf_1', sanitize_text_field( wp_unslash( $_POST['_sf_file_upload_cf_1'] ) ) );
                 }
             }
-            if ( isset( $_POST['_sf_description'] ) && $_POST['_sf_description'] ) {
+            if ( isset( $_POST['_sf_description'] ) ) {
                 if ( isset( $s['textarea_for_file_description'] ) && $s['textarea_for_file_description'] ) {
-                    $description = strip_tags( $_POST['_sf_description'] );
+                    $description = wp_strip_all_tags( wp_unslash( $_POST['_sf_description'] ) );
                     update_post_meta( $id, '_sf_description', $description );
                 } else {
-                    $description = balanceTags( wp_kses_post( $_POST['_sf_description'] ), 1 );
+                    $description = balanceTags( wp_kses_post( wp_unslash( $_POST['_sf_description'] ) ), 1 );
                     update_post_meta( $id, '_sf_description', $description );
                 }
             } else {
                 update_post_meta( $id, '_sf_description', '' );
             }
             $custom_filename = '';
-            if ( isset( $_POST['_sf_filename'] ) && $_POST['_sf_filename'] ) {
-                $custom_filename = sanitize_text_field( $_POST['_sf_filename'] );
+            if ( isset( $_POST['_sf_filename'] ) ) {
+                $custom_filename = sanitize_text_field( wp_unslash( $_POST['_sf_filename'] ) );
                 update_post_meta( $id, '_sf_filename', $custom_filename );
             }
-            if ( isset( $_POST['_sf_external_url'] ) && $_POST['_sf_external_url'] ) {
-                $external_url = esc_url_raw( $_POST['_sf_external_url'] );
+            if ( isset( $_POST['_sf_external_url'] ) ) {
+                $external_url = esc_url_raw( wp_unslash( $_POST['_sf_external_url'] ) );
                 update_post_meta( $id, '_sf_external_url', $external_url );
                 $filename = basename( $external_url );
                 update_post_meta( $id, '_sf_filename', sanitize_text_field( $filename ) );
@@ -611,16 +615,17 @@ class SharedFilesAdminMetadata {
                     SharedFilesHelpers::writeLog( 'Start file processing (wp-admin / file update, file_id: ' . $id . ')' );
                 }
                 $sf_file_uploaded_file = '';
-                if ( isset( $_POST['_sf_file_uploaded_file'] ) && $_POST['_sf_file_uploaded_file'] ) {
-                    $sf_file_uploaded_file = sanitize_text_field( $_POST['_sf_file_uploaded_file'] );
+                if ( isset( $_POST['_sf_file_uploaded_file'] ) ) {
+                    $sf_file_uploaded_file = sanitize_text_field( wp_unslash( $_POST['_sf_file_uploaded_file'] ) );
+                    $sf_file_uploaded_file = str_replace( '..', '', $sf_file_uploaded_file );
                 }
                 $sf_file_uploaded_type = '';
-                if ( isset( $_POST['_sf_file_uploaded_type'] ) && $_POST['_sf_file_uploaded_type'] ) {
-                    $sf_file_uploaded_type = sanitize_text_field( $_POST['_sf_file_uploaded_type'] );
+                if ( isset( $_POST['_sf_file_uploaded_type'] ) ) {
+                    $sf_file_uploaded_type = sanitize_text_field( wp_unslash( $_POST['_sf_file_uploaded_type'] ) );
                 }
                 $sf_file_uploaded_url = '';
-                if ( isset( $_POST['_sf_file_uploaded_url'] ) && $_POST['_sf_file_uploaded_url'] ) {
-                    $sf_file_uploaded_url = sanitize_text_field( $_POST['_sf_file_uploaded_url'] );
+                if ( isset( $_POST['_sf_file_uploaded_url'] ) ) {
+                    $sf_file_uploaded_url = sanitize_text_field( wp_unslash( $_POST['_sf_file_uploaded_url'] ) );
                 }
                 if ( $sf_file_uploaded_file && $sf_file_uploaded_type && $sf_file_uploaded_url ) {
                     $upload = [
@@ -637,7 +642,7 @@ class SharedFilesAdminMetadata {
                     }
                     $sf_file_size = 0;
                     $upload_file = '';
-                    if ( isset( $_FILES['_sf_file']['size'] ) && $_FILES['_sf_file']['size'] ) {
+                    if ( isset( $_FILES['_sf_file']['size'] ) ) {
                         $sf_file_size = sanitize_text_field( $_FILES['_sf_file']['size'] );
                     }
                     if ( isset( $upload['file'] ) && $upload['file'] ) {
@@ -670,7 +675,7 @@ class SharedFilesAdminMetadata {
                     }
                     $post_title = '';
                     if ( isset( $_POST['post_title'] ) ) {
-                        $post_title = sanitize_text_field( $_POST['post_title'] );
+                        $post_title = sanitize_text_field( wp_unslash( $_POST['post_title'] ) );
                     }
                     if ( !$post_title ) {
                         $my_post = array(
@@ -713,10 +718,10 @@ class SharedFilesAdminMetadata {
             $folder_for_new_files = '/' . sanitize_file_name( $s['folder_for_new_files'] );
             $full_path_new = realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files;
             if ( !file_exists( $full_path_new ) ) {
-                mkdir( $full_path_new );
+                SharedFilesHelpers::createDir( $full_path_new );
             }
         } elseif ( !file_exists( $full_path_default ) ) {
-            mkdir( $full_path_default );
+            SharedFilesHelpers::createDir( $full_path_default );
         }
         return array(
             'path'   => realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files,

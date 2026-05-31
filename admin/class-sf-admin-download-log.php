@@ -17,7 +17,7 @@ class SharedFilesAdminDownloadLog {
   public function register_download_log_page_callback() {
     ?>
 
-    <?php echo SharedFilesAdminHelpSupport::permalinks_alert() ?>
+    <?php SharedFilesAdminHelpSupport::permalinks_alert(); ?>
 
     <?php $s = get_option('shared_files_settings') ?>
 
@@ -44,7 +44,7 @@ class SharedFilesAdminDownloadLog {
           <form method="post" class="shared-files-empty-download-log-form">
           <input type="hidden" name="_shared_files_empty_download_log" value="1" />
 
-          <?php echo wp_nonce_field('_shared-files-empty-download-log', '_wpnonce', true, false) ?>
+          <?php wp_nonce_field('_shared-files-empty-download-log', '_wpnonce', true, false) ?>
 
           <input type="submit" value="<?php echo esc_attr__('Empty download log', 'shared-files') ?>" class="shared-files-empty-download-log" />
           </form>
@@ -56,15 +56,21 @@ class SharedFilesAdminDownloadLog {
         global $wpdb;
 
         $items_per_page = 200;
-        $page = isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1;
-        $offset = ( $page * $items_per_page ) - $items_per_page;
+        $page           = isset( $_GET['log-page'] ) ? abs( (int) $_GET['log-page'] ) : 1;
+        $offset         = intval( ( $page * $items_per_page ) - $items_per_page );
 
-        $query = "SELECT * FROM {$wpdb->prefix}shared_files_download_log";
+        $table_name = $wpdb->prefix . 'shared_files_download_log';
 
-        $total_query = "SELECT COUNT(1) FROM ({$query}) AS combined_table";
-        $total = $wpdb->get_var( $total_query );
+        // 1. Prepare and get the total count in one go
+        $total = $wpdb->get_var(
+          $wpdb->prepare( "SELECT COUNT(1) FROM %i", $table_name )
+        );
 
-        $results = $wpdb->get_results( $query . ' ORDER BY created_at DESC LIMIT ' . $offset . ', ' .  $items_per_page, OBJECT );
+        // 2. Prepare and get the results in one go
+        $results = $wpdb->get_results(
+          $wpdb->prepare( "SELECT * FROM %i ORDER BY created_at DESC LIMIT %d, %d", $table_name, $offset, $items_per_page ),
+          OBJECT
+        );
 
         ?>
 
@@ -135,7 +141,7 @@ class SharedFilesAdminDownloadLog {
               </td>
               <td>
                 <?php if (isset($row->file_title)): ?>
-                  <a href="<?php echo get_edit_post_link( $row->file_id ); ?>"><?php echo sanitize_text_field( $row->file_title ) ?></a>
+                  <a href="<?php echo esc_url_raw( get_edit_post_link( $row->file_id ) ); ?>"><?php echo esc_html( $row->file_title ) ?></a>
                 <?php endif; ?>
               </td>
               <td>
@@ -239,13 +245,14 @@ class SharedFilesAdminDownloadLog {
         <div class="shared-files-admin-pagination-container">
 
           <?php
+          // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
           echo paginate_links( array(
             'base' => add_query_arg( 'log-page', '%#%' ),
             'format' => '',
-            'prev_text' => __('&laquo;'),
-            'next_text' => __('&raquo;'),
-            'total' => ceil($total / $items_per_page),
-            'current' => $page
+            'prev_text' => '&laquo;',
+            'next_text' => '&raquo;',
+            'total' => esc_attr( ceil($total / $items_per_page) ),
+            'current' => esc_attr( $page )
           ));
           ?>
 

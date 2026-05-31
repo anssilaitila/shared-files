@@ -7,7 +7,7 @@ class SharedFilesFileOpen {
     $file = get_post_meta( $file_id, '_sf_file', true );
     $file_url = esc_url_raw( $file['url'] );
 
-    $redirect_url_parts = parse_url($file_url);
+    $redirect_url_parts = wp_parse_url($file_url);
     $file_uri = $redirect_url_parts['path'];
 
     return $file_uri;
@@ -21,7 +21,7 @@ class SharedFilesFileOpen {
     if (substr( $filename_with_path, 1, 1 ) === ':') {
 
       $wp_upload_dir = wp_upload_dir();
-      $filename_parts = parse_url($filename_with_path);
+      $filename_parts = wp_parse_url($filename_with_path);
 
       if (isset($filename_parts['path'])) {
         $filename_path_parts = explode('/', $filename_parts['path']);
@@ -37,7 +37,7 @@ class SharedFilesFileOpen {
     } elseif (substr( $filename_with_path, 0, 5 ) === 'iu://') {
 
       $wp_upload_dir = wp_upload_dir();
-      $filename_parts = parse_url($filename_with_path);
+      $filename_parts = wp_parse_url($filename_with_path);
 
       if (isset($filename_parts['path'])) {
         $filename_path_parts = explode('/', $filename_parts['path']);
@@ -64,7 +64,7 @@ class SharedFilesFileOpen {
 
       $parts_spliced = array_splice($parts, -2);
 
-      $filename_parts = parse_url($filename_with_path);
+      $filename_parts = wp_parse_url($filename_with_path);
 
       if (isset($filename_parts['path'])) {
         $filename_path_parts = explode('/', $filename_parts['path']);
@@ -96,7 +96,7 @@ class SharedFilesFileOpen {
   public static function getUpdatedPathAndFilenameV2($filename_with_path = '') {
 
     $wp_upload_dir = wp_upload_dir();
-    $filename_parts = parse_url($filename_with_path);
+    $filename_parts = wp_parse_url($filename_with_path);
 
     if (isset($filename_parts['path'])) {
       $filename_path_parts = explode('/', $filename_parts['path']);
@@ -126,7 +126,7 @@ class SharedFilesFileOpen {
 
     $parts_spliced = array_splice($parts, -2);
 
-    $filename_parts = parse_url($filename_with_path);
+    $filename_parts = wp_parse_url($filename_with_path);
 
     if (isset($filename_parts['path'])) {
       $filename_path_parts = explode('/', $filename_parts['path']);

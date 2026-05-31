@@ -4,6 +4,15 @@ class SharedFilesAdminHelpers {
 
   public static function sfProFeatureMarkup() {
 
+    echo '<div class="sf-admin-pro-feature">';
+    echo '<span>' . esc_html__('This feature is available in the paid plans.', 'shared-files') . '</span>';
+    echo '<a class="shared-files-admin-button-link" href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
+    echo '</div>';
+
+  }
+
+  public static function sfProFeatureMarkupFrontend() {
+
     $html = '';
 
     $html .= '<div class="sf-admin-pro-feature">';
@@ -17,27 +26,19 @@ class SharedFilesAdminHelpers {
 
   public static function sfProMoreFeaturesMarkup() {
 
-    $html = '';
-
-    $html .= '<div class="sf-admin-pro-feature">';
-    $html .= '<span>' . sanitize_text_field( __('More features available in the paid plans.', 'shared-files') ) . '</span>';
-    $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
-    $html .= '</div>';
-
-    return $html;
+    echo '<div class="sf-admin-pro-feature">';
+    echo '<span>' . esc_html__('More features available in the paid plans.', 'shared-files') . '</span>';
+    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
+    echo '</div>';
 
   }
 
   public static function sfProFeatureSettingsMarkup() {
 
-    $html = '';
-
-    $html .= '<div class="sf-admin-pro-feature">';
-    $html .= '<span>' . sanitize_text_field( __('More settings available in the paid plans.', 'shared-files') ) . '</span>';
-    $html .= '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . sanitize_text_field( __('Upgrade here', 'shared-files') ) . '</a>';
-    $html .= '</div>';
-
-    return $html;
+    echo '<div class="sf-admin-pro-feature">';
+    echo '<span>' . esc_html__('More settings available in the paid plans.', 'shared-files') . '</span>';
+    echo '<a href="' . esc_url_raw( get_admin_url() ) . 'options-general.php?page=shared-files-pricing">' . esc_html__('Upgrade here', 'shared-files') . '</a>';
+    echo '</div>';
 
   }
 
@@ -141,7 +142,7 @@ class SharedFilesAdminHelpers {
 
     } else {
 
-      $url_parts = parse_url( esc_url_raw( get_admin_url() ) );
+      $url_parts = wp_parse_url( esc_url_raw( get_admin_url() ) );
       $path_parts = explode('/', $url_parts['path']);
 
       if (isset($path_parts[2]) && $path_parts[2] == 'wp-admin') {

@@ -6,7 +6,7 @@ class SharedFilesAdminOperations {
 
     if (isset($_POST) && isset($_POST['_shared_files_empty_download_log']) && isset($_REQUEST['_wpnonce']) && is_super_admin()) {
 
-      $wp_nonce = sanitize_text_field( $_REQUEST['_wpnonce'] );
+      $wp_nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) );
 
       if ( wp_verify_nonce($wp_nonce, '_shared-files-empty-download-log')) {
 
@@ -29,7 +29,7 @@ class SharedFilesAdminOperations {
 
     } elseif (isset($_POST) && isset($_POST['_shared_files_empty_contacts']) && isset($_REQUEST['_wpnonce']) && is_super_admin()) {
 
-      $wp_nonce = sanitize_text_field( $_REQUEST['_wpnonce'] );
+      $wp_nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) );
 
       if ( wp_verify_nonce($wp_nonce, '_shared-files-empty-contacts')) {
 
@@ -52,7 +52,7 @@ class SharedFilesAdminOperations {
 
    } elseif (isset($_POST) && isset($_POST['_shared_files_empty_search_log']) && isset($_REQUEST['_wpnonce']) && is_super_admin()) {
 
-     $wp_nonce = sanitize_text_field( $_REQUEST['_wpnonce'] );
+     $wp_nonce = sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) );
 
      if ( wp_verify_nonce($wp_nonce, '_shared-files-empty-search-log')) {
 

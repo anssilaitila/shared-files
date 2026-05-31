@@ -27,7 +27,7 @@ class SharedFilesAdminSyncMediaLibrary {
 
       <?php 
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            echo SharedFilesAdminHelpers::sfProFeatureMarkup();
+            SharedFilesAdminHelpers::sfProFeatureMarkup();
         }
         ?>
 

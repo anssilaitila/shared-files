@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.7.64
+ * Version:           1.7.66
  * Author:            Shared Files – File Upload Form
  * Author URI:        https://www.sharedfilespro.com
  * License:           GPL-2.0+
@@ -31,17 +31,16 @@ if ( function_exists( 'shared_files_fs' ) ) {
     shared_files_fs()->set_basename( false, __FILE__ );
 } else {
     require_once dirname( __FILE__ ) . '/vendor/autoload.php';
-    $s = get_option( 'shared_files_settings' );
-    $tag_slug = 'post_tag';
-    if ( isset( $s['tag_slug'] ) && $s['tag_slug'] ) {
-        $tag_slug = sanitize_title( $s['tag_slug'] );
+    $shared_files_settings = get_option( 'shared_files_settings' );
+    $shared_files_tag_slug = 'post_tag';
+    if ( isset( $shared_files_settings['tag_slug'] ) && $shared_files_settings['tag_slug'] ) {
+        $shared_files_tag_slug = sanitize_title( $shared_files_settings['tag_slug'] );
     }
-    define( 'SHARED_FILES_TAG_SLUG', $tag_slug );
+    define( 'SHARED_FILES_TAG_SLUG', $shared_files_tag_slug );
     if ( !function_exists( 'shared_files_fs' ) ) {
         // Create a helper function for easy SDK access.
         function shared_files_fs() {
             global $shared_files_fs;
-            $s = get_option( 'shared_files_settings' );
             if ( !isset( $shared_files_fs ) ) {
                 // Include Freemius SDK.
                 // SDK is auto-loaded through Composer
@@ -82,9 +81,9 @@ if ( function_exists( 'shared_files_fs' ) ) {
         do_action( 'shared_files_fs_loaded' );
     }
     function shared_files_fs_custom_connect_message(  $message, $user_first_name  ) {
-        return sprintf( 
+        return sprintf(
             /* translators: %1$s: user's first name */
-            __( 'Hey %1$s' ) . ',<br>' . __( 'never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.' ),
+            __( 'Hey %1$s', 'shared-files' ) . ',<br>' . __( 'never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.', 'shared-files' ),
             $user_first_name
          );
     }
@@ -121,7 +120,7 @@ if ( function_exists( 'shared_files_fs' ) ) {
     ) {
         return sprintf(
             /* translators: %1$s: user's first name */
-            __( 'Hey %1$s' ) . ',<br>' . __( 'Please help us improve %2$s! If you opt-in, some data about your usage of %2$s will be sent to %5$s. If you skip this, that\'s okay! %2$s will still work just fine.' ),
+            __( 'Hey %1$s', 'shared-files' ) . ',<br>' . __( 'Please help us improve %2$s! If you opt-in, some data about your usage of %2$s will be sent to %5$s. If you skip this, that\'s okay! %2$s will still work just fine.', 'shared-files' ),
             $user_first_name,
             '<b>' . $plugin_title . '</b>',
             '<b>' . $user_login . '</b>',
@@ -146,7 +145,7 @@ if ( function_exists( 'shared_files_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.7.64' );
+    define( 'SHARED_FILES_VERSION', '1.7.66' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**

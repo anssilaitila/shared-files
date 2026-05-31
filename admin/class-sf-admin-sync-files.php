@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 class SharedFilesAdminSyncFiles {
     public function register_page() {
         $menu_pos = 3;
@@ -27,7 +30,7 @@ class SharedFilesAdminSyncFiles {
 
       <?php 
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            echo SharedFilesAdminHelpers::sfProFeatureMarkup();
+            SharedFilesAdminHelpers::sfProFeatureMarkup();
         }
         ?>
 
@@ -162,7 +165,7 @@ class SharedFilesAdminSyncFiles {
         echo '<tr>';
         echo '<td>' . esc_html( implode( '/', $item_array_sliced ) ) . '</td>';
         echo '<td>' . esc_html( SharedFilesFileHandling::human_filesize( filesize( $item ) ) ) . '</td>';
-        echo '<td>' . esc_html( date( "Y-m-d", filemtime( $item ) ) ) . '</td>';
+        echo '<td>' . esc_html( wp_date( "Y-m-d", filemtime( $item ) ) ) . '</td>';
         echo '<td>';
         $meta_query = array(
             'relation' => 'AND',
@@ -216,8 +219,14 @@ class SharedFilesAdminSyncFiles {
         check_ajax_referer( 'plupload_nonce' );
         if ( !empty( $_FILES ) ) {
             $s = get_option( 'shared_files_settings' );
-            $tmp_name = $_FILES['file']['tmp_name'];
-            $filename_for_custom_field = sanitize_file_name( basename( $_FILES['file']['name'] ) );
+            $tmp_name = '';
+            $filename_for_custom_field = '';
+            if ( isset( $_FILES['file']['tmp_name'] ) ) {
+                $tmp_name = sanitize_text_field( $_FILES['file']['tmp_name'] );
+            }
+            if ( isset( $_FILES['file']['name'] ) ) {
+                $filename_for_custom_field = sanitize_file_name( basename( sanitize_text_field( $_FILES['file']['name'] ) ) );
+            }
             $checked_mime_type = SharedFilesAdminAllowMoreFileTypes::allowed_mime_types( $tmp_name, $filename_for_custom_field );
             if ( isset( $s['debug_mode'] ) ) {
                 SharedFilesHelpers::writeLog( 'START handle_file_upload' );
@@ -237,7 +246,7 @@ class SharedFilesAdminSyncFiles {
             add_filter( 'upload_dir', [$this, 'set_upload_dir'] );
             add_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
             $file_contents_sanitized = SharedFilesAdminAllowMoreFileTypes::sanitize_file( $tmp_name, $filename_for_custom_field );
-            $upload = wp_upload_bits( $_FILES['file']['name'], null, $file_contents_sanitized );
+            $upload = wp_upload_bits( $filename_for_custom_field, null, $file_contents_sanitized );
             remove_filter( 'upload_mimes', ['SharedFilesAdminAllowMoreFileTypes', 'add_file_types'] );
             remove_filter( 'upload_dir', [$this, 'set_upload_dir'] );
             if ( isset( $s['debug_mode'] ) ) {
@@ -258,14 +267,15 @@ class SharedFilesAdminSyncFiles {
         $s = get_option( 'shared_files_settings' );
         $full_path_default = realpath( $dir['basedir'] ) . '/shared-files';
         $folder_for_new_files = '';
+        $full_path_new = '';
         if ( isset( $s['folder_for_new_files'] ) && $s['folder_for_new_files'] ) {
             $folder_for_new_files = '/' . sanitize_file_name( $s['folder_for_new_files'] );
             $full_path_new = realpath( $dir['basedir'] ) . '/shared-files' . $folder_for_new_files;
             if ( !file_exists( $full_path_new ) ) {
-                mkdir( $full_path_new );
+                SharedFilesHelpers::createDir( $full_path_new );
             }
         } elseif ( !file_exists( $full_path_default ) ) {
-            mkdir( $full_path_default );
+            SharedFilesHelpers::createDir( $full_path_default );
         }
         if ( isset( $s['debug_mode'] ) ) {
             SharedFilesHelpers::writeLog( 'set_upload_dir 1: ' . $full_path_default );

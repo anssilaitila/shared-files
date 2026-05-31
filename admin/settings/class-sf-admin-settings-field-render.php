@@ -160,7 +160,7 @@ class SharedFilesSettingsFieldRender {
           <div class="general-info" id="shared-files-country-detector">
             <div class="shared-files-new-feature-container">
               <div class="shared-files-new-feature">
-                <?= esc_html__('New', 'shared-files') ?>
+                <?php echo esc_html__('New', 'shared-files') ?>
               </div>
             </div>
 
@@ -197,7 +197,7 @@ class SharedFilesSettingsFieldRender {
         <div class="general-info">
           <div class="shared-files-new-feature-container">
             <div class="shared-files-new-feature">
-              <?= esc_html__('New', 'shared-files') ?>
+              <?php echo esc_html__('New', 'shared-files') ?>
             </div>
           </div>
 
@@ -210,7 +210,7 @@ class SharedFilesSettingsFieldRender {
           <div class="general-info">
             <div class="shared-files-new-feature-container">
               <div class="shared-files-new-feature">
-                <?= esc_html__('New', 'shared-files') ?>
+                <?php echo esc_html__('New', 'shared-files') ?>
               </div>
             </div>
 
@@ -247,7 +247,7 @@ class SharedFilesSettingsFieldRender {
           <div class="general-info">
             <div class="shared-files-new-feature-container">
               <div class="shared-files-new-feature">
-                <?= esc_html__('New', 'shared-files') ?>
+                <?php echo esc_html__('New', 'shared-files') ?>
               </div>
             </div>
 
@@ -572,7 +572,7 @@ class SharedFilesSettingsFieldRender {
         </div>
       <?php elseif ($field_name == 'maximum_size_text'): ?>
         <div class="email-info">
-          <?php echo esc_html__('This is for informational purposes only.') ?><br />
+          <?php echo esc_html__('This is for informational purposes only.', 'shared-files') ?><br />
           <?php echo esc_html__('The text defined here replaces the default automatically detected maximum file size.', 'shared-files') ?>
         </div>
       <?php elseif ($field_name == 'icon_for_image' || $field_name == 'custom_1_icon' || $field_name == 'folder_icon_uri'): ?>
@@ -654,15 +654,11 @@ class SharedFilesSettingsFieldRender {
 
           <div class="shared-files-setting">
 
-            <?php
-            $pages_args = [
-              'name'              => "shared_files_settings[" . esc_attr( $args['field_name'] ) . "]",
-              'selected'          => $val,
-              'show_option_none'  => ' '
-            ];
-            ?>
-
-            <?php wp_dropdown_pages( $pages_args ); ?>
+            <?php wp_dropdown_pages( [
+                'name'              => "shared_files_settings[" . esc_attr( $args['field_name'] ) . "]",
+                'selected'          => esc_attr( $val ),
+                'show_option_none'  => ' '
+              ] ); ?>
 
             <div class="email-info">
               <?php echo esc_html__("The countdown timer is displayed on the page selected above. It is hooked to the theme's function the_content(), and displayed just before the actual content.", "shared-files") ?>

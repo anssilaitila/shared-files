@@ -74,9 +74,19 @@ class Shared_Files_Public {
         wp_enqueue_script( 'plupload-all' );
         if ( isset( $s['card_font'] ) && $s['card_font'] ) {
             if ( $s['card_font'] == 'roboto' ) {
-                wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Roboto&display=swap', false );
+                wp_enqueue_style(
+                    $this->plugin_name . '-google-fonts',
+                    'https://fonts.googleapis.com/css?family=Roboto&display=swap',
+                    false,
+                    1
+                );
             } elseif ( $s['card_font'] == 'ubuntu' ) {
-                wp_enqueue_style( $this->plugin_name . '-google-fonts', 'https://fonts.googleapis.com/css?family=Ubuntu&display=swap', false );
+                wp_enqueue_style(
+                    $this->plugin_name . '-google-fonts',
+                    'https://fonts.googleapis.com/css?family=Ubuntu&display=swap',
+                    false,
+                    1
+                );
             }
         }
     }
@@ -115,7 +125,11 @@ class Shared_Files_Public {
             $js .= "\n        \$('.shared-files-frontend-file-upload').submit(function (e) {\n\n          let elem_class = \$(this).closest('.shared-files-main-container').data('elem-class');\n\n          if (\$('.' + elem_class + ' .shared-files-file-metadata-entry').length == 0) {\n            alert('Please choose the file first.');\n            return false;\n          }\n\n        });\n        ";
         }
         // NEW FILE UPLOAD
-        if ( 1 ) {
+        $upload_active = 1;
+        if ( isset( $s['only_logged_in_users_can_add_files'] ) && !is_user_logged_in() ) {
+            $upload_active = 0;
+        }
+        if ( $upload_active ) {
             $plupload_nonce = wp_create_nonce( "plupload_nonce" );
             $multi_selection = 'false';
             $debug_mode = '';
@@ -196,7 +210,6 @@ class Shared_Files_Public {
         add_shortcode( 'shared_files_search', array('ShortcodeSharedFilesSearch', 'shared_files_search') );
         add_shortcode( 'shared_files_categories', array('ShortcodeSharedFilesCategories', 'shared_files_categories') );
         add_shortcode( 'shared_files_simple', array('Shared_Files_Public', 'shared_files_simple') );
-        add_shortcode( 'shared_files_info', array('ShortcodeSharedFilesInfo', 'shared_files_info') );
         add_shortcode( 'shared_files_accordion', array('ShortcodeSharedFilesAccordion', 'shared_files_accordion') );
         add_shortcode( 'shared_files_favorites', array('ShortcodeSharedFilesFavorites', 'shared_files_favorites') );
         add_shortcode( 'shared_files_restricted', array('ShortcodeSharedFilesRestricted', 'shared_files_restricted') );

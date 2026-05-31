@@ -1,9 +1,9 @@
 === Shared Files – Frontend File Upload Form & Secure File Sharing ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
-Requires at least: 6.0
+Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.7.64
+Stable tag: 1.7.66
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,8 +20,6 @@ With features like user permissions, frontend file upload, and download tracking
 
 Install Shared Files today and enhance your WordPress site's file management capabilities.
 
-You can also optionally collect new leads by asking for contact info before showing the files.
-
 *Get the Shared Files plugin and stay neatly organized and managed with your documents and files.*
 
 Shared Files provides an interface for uploading and managing a large group of documents and files easily with numerous layout options and shortcodes for inserting downloadable files anywhere on the website.
@@ -34,7 +32,6 @@ Shared Files provides an interface for uploading and managing a large group of d
 == Download Manager ==
 
 * Top 50 most popular files
-* Collect leads by asking for contact info before showing the file(s)
 * Download log of all file downloads
 * Search log of all searches made in the front end
 * Download counter for all files
@@ -282,6 +279,12 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.66 - 2026-05-31 =
+* (Free + All plans) Bug fixes
+
+= 1.7.65 - 2026-05-31 =
+* (Free + All plans) Bug fixes
 
 = 1.7.64 - 2026-04-18 =
 * (Free + All plans) More debug info added to debug mode

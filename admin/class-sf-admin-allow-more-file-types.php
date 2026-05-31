@@ -1,5 +1,9 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+  exit;
+}
+
 use enshrined\svgSanitize\Sanitizer;
 
 class SharedFilesAdminAllowMoreFileTypes {
@@ -84,7 +88,7 @@ class SharedFilesAdminAllowMoreFileTypes {
 
     } elseif ( $uploaded_ext != $checked['ext'] ) {
 
-      wp_die( esc_html__( "ERROR: file extension doesn't match mime type", 'shared_files' ) .  ' (' . esc_html( $filename ) . ')' );
+      wp_die( esc_html__( "ERROR: file extension doesn't match mime type", 'shared-files' ) .  ' (' . esc_html( $filename ) . ')' );
 
     } else {
 

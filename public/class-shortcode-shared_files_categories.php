@@ -3,7 +3,7 @@
 class ShortcodeSharedFilesCategories {
     public static function shared_files_categories( $atts = [], $content = null, $tag = '' ) {
         if ( SharedFilesHelpers::isPremium() == 0 ) {
-            $html = SharedFilesAdminHelpers::sfProFeatureMarkup();
+            $html = SharedFilesAdminHelpers::sfProFeatureMarkupFrontend();
             return $html;
         } elseif ( isset( $atts['restricted'] ) && $atts['restricted'] && !is_user_logged_in() ) {
             $html = '<div style="background: #fff; border: 1px solid #bbb; color: #000; padding: 10px 20px; border-radius: 5px;">' . esc_html__( 'Only logged in users can list these files.', 'shared-files' ) . '</div>';

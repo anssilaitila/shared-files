@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 /**
  * The admin-specific functionality of the plugin.
  *
@@ -134,7 +137,7 @@ class Shared_Files_Admin {
                 $filename_with_path = str_replace( '../', '', $filename_with_path );
                 if ( file_exists( $filename_with_path ) ) {
                     if ( strpos( $filename_with_path, '/wp-content/uploads/shared-files/' ) !== false ) {
-                        unlink( $filename_with_path );
+                        wp_delete_file( $filename_with_path );
                     }
                 } else {
                     //        wp_die( sanitize_text_field( __('File not found:', 'shared-files') ) . '<br />' . $filename_with_path );

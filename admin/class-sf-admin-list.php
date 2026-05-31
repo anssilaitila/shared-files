@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 class SharedFilesAdminList {
     /**
      * Custom columns for shared file.
@@ -45,26 +48,26 @@ class SharedFilesAdminList {
         if ( is_admin() && $pagenow == 'edit.php' && isset( $_GET['post_type'] ) && $_GET['post_type'] == 'shared_file' && isset( $_GET['orderby'] ) && $_GET['orderby'] != 'None' ) {
             if ( $_GET['orderby'] == '_sf_expiration_date' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
+                $query->query_vars['meta_key'] = sanitize_title( wp_unslash( $_GET['orderby'] ) );
             } elseif ( $_GET['orderby'] == '_sf_file_added' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
+                $query->query_vars['meta_key'] = sanitize_title( wp_unslash( $_GET['orderby'] ) );
                 $query->query_vars['meta_type'] = 'DATETIME';
             } elseif ( $_GET['orderby'] == '_sf_last_access' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
+                $query->query_vars['meta_key'] = sanitize_title( wp_unslash( $_GET['orderby'] ) );
                 $query->query_vars['meta_type'] = 'DATETIME';
             } elseif ( $_GET['orderby'] == '_sf_load_cnt' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
+                $query->query_vars['meta_key'] = sanitize_title( wp_unslash( $_GET['orderby'] ) );
                 $query->query_vars['meta_type'] = 'numeric';
             } elseif ( $_GET['orderby'] == '_sf_limit_downloads' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
+                $query->query_vars['meta_key'] = sanitize_title( wp_unslash( $_GET['orderby'] ) );
                 $query->query_vars['meta_type'] = 'numeric';
             } elseif ( $_GET['orderby'] == '_sf_filesize' ) {
                 $query->query_vars['orderby'] = 'meta_value';
-                $query->query_vars['meta_key'] = sanitize_title( $_GET['orderby'] );
+                $query->query_vars['meta_key'] = sanitize_title( wp_unslash( $_GET['orderby'] ) );
                 $query->query_vars['meta_type'] = 'numeric';
             }
         }
@@ -137,7 +140,7 @@ class SharedFilesAdminList {
             return;
         }
         $taxonomy_slug = 'shared-file-category';
-        $current_category_slug = ( isset( $_GET['shared-file-category'] ) ? sanitize_title( $_GET['shared-file-category'] ) : '' );
+        $current_category_slug = ( isset( $_GET['shared-file-category'] ) ? sanitize_title( wp_unslash( $_GET['shared-file-category'] ) ) : '' );
         if ( get_taxonomy( $taxonomy_slug ) ) {
             if ( has_term( '', $taxonomy_slug ) ) {
                 wp_dropdown_categories( [

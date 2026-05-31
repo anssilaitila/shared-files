@@ -3,7 +3,7 @@
 class SharedFilesShortcodeFilters {
     public static function getFilters( $className, $atts ) {
         if ( !class_exists( $className ) || !method_exists( $className, 'setMetaQuery' ) || !method_exists( $className, 'addToMetaQuery' ) ) {
-            wp_die( 'Error in ' . $className );
+            wp_die( 'Error in ' . esc_html( $className ) );
         }
         $s = get_option( 'shared_files_settings' );
         $custom_fields_active = 0;
@@ -11,7 +11,7 @@ class SharedFilesShortcodeFilters {
         $html = '';
         $is_premium = 0;
         if ( isset( $s['show_tag_dropdown'] ) || isset( $atts['show_tag_dropdown'] ) ) {
-            $tag_selected = ( isset( $_GET['sf_tag'] ) ? sanitize_title( $_GET['sf_tag'] ) : '' );
+            $tag_selected = ( isset( $_GET['sf_tag'] ) ? sanitize_title( wp_unslash( $_GET['sf_tag'] ) ) : '' );
             $tags_orderby = '';
             $tags_order = 'ASC';
             if ( isset( $s['sort_tags_by'] ) && $s['sort_tags_by'] ) {

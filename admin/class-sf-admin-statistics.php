@@ -17,7 +17,7 @@ class SharedFilesAdminStatistics {
         ?>
 
     <?php 
-        echo SharedFilesAdminHelpSupport::permalinks_alert();
+        SharedFilesAdminHelpSupport::permalinks_alert();
         ?>
 
     <?php 

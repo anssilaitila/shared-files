@@ -25,11 +25,11 @@ class SharedFilesAdminNotifications {
                     $dismiss_url_with_nonce = add_query_arg( '_shared_files_ignore_rating_notify_' . intval( $user_id ), wp_create_nonce( 'shared_files_ignore_rating_notify' ), $dismiss_url );
                     $later_url_with_nonce = add_query_arg( '_shared_files_ignore_rating_notify_' . intval( $user_id ), wp_create_nonce( 'shared_files_ignore_rating_notify' ), $later_url );
                     echo "\n            <div class='sf_notice sf_review_notice'>\n              <div class='shared-files-notice-text'>\n                " . '<div style=\'margin-bottom: 8px;\'><p style=\'font-size: 15px;\'>' . sprintf(
-                        __( "Hey, I noticed that you have added %s%d files%s with the Shared Files plugin – that's awesome!", 'shared-files' ),
+                        esc_html__( "Hey, I noticed that you have added %1\$s%2\$d files%3\$s with the Shared Files plugin – that's awesome!", 'shared-files' ),
                         '<strong style=\'font-weight: 700;\'>',
                         esc_attr( $file_cnt ),
                         '</strong>'
-                    ) . '</p></div>' . '<div style=\'margin-bottom: 8px;\'><p style=\'font-size: 15px;\'>' . sprintf( __( "Could you please do me a BIG favour and give it a 5-star rating on WordPress? It will help to spread the word and boost our motivation.", 'shared-files' ) ) . '</p></div>' . '<p style=\'font-size: 15px;\'>– Anssi (' . esc_html__( 'plugin author', 'shared-files' ) . ')</p>' . "\n                <p class='links'>\n                  <a class='sf_notice_dismiss' style='border: 1px solid green; background: green; color: #fff; font-weight: 700; padding: 5px 10px; border-radius: 3px; text-decoration: none; margin-right: 10px;' href='https://wordpress.org/support/plugin/shared-files/reviews/#new-post' target='_blank'>" . esc_html__( 'Sure, I\'d love to!', 'shared-files' ) . "</a>\n                  &middot;\n                  <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url_with_nonce ) . "'>" . esc_html__( 'No thanks', 'shared-files' ) . "</a>\n                  &middot;\n                  <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url_with_nonce ) . "'>" . esc_html__( 'I\'ve already given a review', 'shared-files' ) . "</a>\n                  &middot;\n                  <a class='sf_notice_dismiss' href='" . esc_url( $later_url_with_nonce ) . "'>" . esc_html__( 'Ask Me Later', 'shared-files' ) . "</a>\n                </p>\n              </div>\n              <a class='sf_notice_close' href='" . esc_url( $dismiss_url_with_nonce ) . "'>x</a>\n            </div>";
+                    ) . '</p></div>' . '<div style=\'margin-bottom: 8px;\'><p style=\'font-size: 15px;\'>' . sprintf( esc_html__( "Could you please do me a BIG favour and give it a 5-star rating on WordPress? It will help to spread the word and boost our motivation.", 'shared-files' ) ) . '</p></div>' . '<p style=\'font-size: 15px;\'>– Anssi (' . esc_html__( 'plugin author', 'shared-files' ) . ')</p>' . "\n                <p class='links'>\n                  <a class='sf_notice_dismiss' style='border: 1px solid green; background: green; color: #fff; font-weight: 700; padding: 5px 10px; border-radius: 3px; text-decoration: none; margin-right: 10px;' href='https://wordpress.org/support/plugin/shared-files/reviews/#new-post' target='_blank'>" . esc_html__( 'Sure, I\'d love to!', 'shared-files' ) . "</a>\n                  &middot;\n                  <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url_with_nonce ) . "'>" . esc_html__( 'No thanks', 'shared-files' ) . "</a>\n                  &middot;\n                  <a class='sf_notice_dismiss' href='" . esc_url( $dismiss_url_with_nonce ) . "'>" . esc_html__( 'I\'ve already given a review', 'shared-files' ) . "</a>\n                  &middot;\n                  <a class='sf_notice_dismiss' href='" . esc_url( $later_url_with_nonce ) . "'>" . esc_html__( 'Ask Me Later', 'shared-files' ) . "</a>\n                </p>\n              </div>\n              <a class='sf_notice_close' href='" . esc_url( $dismiss_url_with_nonce ) . "'>x</a>\n            </div>";
                 }
             }
             if ( isset( $screen->id ) && $screen->id == 'edit-shared_file' ) {
@@ -44,7 +44,7 @@ class SharedFilesAdminNotifications {
                     echo '<form method="GET" action="' . esc_url_raw( get_admin_url() . 'edit.php' ) . '">';
                     echo '<input name="post_type" value="shared_file" type="hidden" />';
                     $user_id = intval( get_current_user_id() );
-                    echo wp_nonce_field(
+                    wp_nonce_field(
                         'shared_files_ignore_how_to_notify',
                         '_shared_files_ignore_how_to_notify_' . intval( $user_id ),
                         true,
@@ -121,7 +121,7 @@ class SharedFilesAdminNotifications {
             $nonce_field_name = '_shared_files_ignore_rating_notify_' . $user_id;
             $sf_rating_current_status = get_option( 'shared_files_rating_notice_status_v2' );
             if ( isset( $_GET[$nonce_field_name] ) ) {
-                $sf_nonce = sanitize_text_field( $_GET[$nonce_field_name] );
+                $sf_nonce = sanitize_text_field( wp_unslash( $_GET[$nonce_field_name] ) );
                 if ( $sf_nonce && wp_verify_nonce( $sf_nonce, 'shared_files_ignore_rating_notify' ) ) {
                     if ( isset( $_GET['sf_ignore_rating_notice_notify'] ) ) {
                         if ( (int) $_GET['sf_ignore_rating_notice_notify'] === 1 ) {
@@ -138,7 +138,7 @@ class SharedFilesAdminNotifications {
             $sf_nonce = '';
             $nonce_field_name = '_shared_files_ignore_how_to_notify_' . $user_id;
             if ( isset( $_GET[$nonce_field_name] ) ) {
-                $sf_nonce = sanitize_text_field( $_GET[$nonce_field_name] );
+                $sf_nonce = sanitize_text_field( wp_unslash( $_GET[$nonce_field_name] ) );
                 if ( $sf_nonce && wp_verify_nonce( $sf_nonce, 'shared_files_ignore_how_to_notify' ) ) {
                     update_option( 'shared_files_how_to_show_notice', 0, false );
                 }

@@ -1,5 +1,8 @@
 <?php
 
+if ( !defined( 'ABSPATH' ) ) {
+    exit;
+}
 /**
  * The file that defines the core plugin class
  *
@@ -69,7 +72,6 @@ class Shared_Files {
         }
         $this->plugin_name = 'shared-files';
         $this->load_dependencies();
-        $this->set_locale();
         $this->define_admin_hooks();
         $this->define_public_hooks();
     }
@@ -80,7 +82,6 @@ class Shared_Files {
      * Include the following files that make up the plugin:
      *
      * - Shared_Files_Loader. Orchestrates the hooks of the plugin.
-     * - Shared_Files_i18n. Defines internationalization functionality.
      * - Shared_Files_Admin. Defines all hooks for the admin area.
      * - Shared_Files_Public. Defines all hooks for the public side of the site.
      *
@@ -100,7 +101,6 @@ class Shared_Files {
          * The class responsible for defining internationalization functionality
          * of the plugin.
          */
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-i18n.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-file-open.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-shared-files-file-update.php';
@@ -119,7 +119,6 @@ class Shared_Files {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-shortcodes.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-download-log.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-statistics.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-contacts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-help-support.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-helpers.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sf-admin-search-log.php';
@@ -160,32 +159,16 @@ class Shared_Files {
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-default.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-file-card-vertical.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-hooks.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-contacts.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sf-public-shortcode-filters.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_search.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_categories.php';
-        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_info.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode_shared_files_simple.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_accordion.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_favorites.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_restricted.php';
         require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-shortcode-shared_files_exact_search.php';
         $this->loader = new Shared_Files_Loader();
-    }
-
-    /**
-     * Define the locale for this plugin for internationalization.
-     *
-     * Uses the Shared_Files_i18n class in order to set the domain and to register the hook
-     * with WordPress.
-     *
-     * @since    1.0.0
-     * @access   private
-     */
-    private function set_locale() {
-        $plugin_i18n = new Shared_Files_i18n();
-        $this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
     }
 
     /**
@@ -208,7 +191,6 @@ class Shared_Files {
         $plugin_admin_shortcodes = new SharedFilesAdminShortcodes();
         $plugin_admin_download_log = new SharedFilesAdminDownloadLog();
         $plugin_admin_statistics = new SharedFilesAdminStatistics();
-        $plugin_admin_contacts = new SharedFilesAdminContacts();
         $plugin_admin_help_support = new SharedFilesAdminHelpSupport();
         $plugin_admin_query = new SharedFilesAdminQuery();
         $plugin_admin_send_mail = new SharedFilesAdminSendMail();
@@ -222,7 +204,9 @@ class Shared_Files {
         $plugin_admin_restrict_access = new SharedFilesAdminRestrictAccess();
         $plugin_admin_allow_more_file_types = new SharedFilesAdminAllowMoreFileTypes();
         $plugin_settings = new Shared_Files_Settings();
-        $this->loader->add_action( 'wp_ajax_nopriv_shared_files_file_upload', $plugin_admin_sync_files, 'handle_file_upload' );
+        if ( !isset( $s['only_logged_in_users_can_add_files'] ) ) {
+            $this->loader->add_action( 'wp_ajax_nopriv_shared_files_file_upload', $plugin_admin_sync_files, 'handle_file_upload' );
+        }
         $this->loader->add_action( 'wp_ajax_shared_files_file_upload', $plugin_admin_sync_files, 'handle_file_upload' );
         // Enqueue CSS + JS (+ other)
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -328,8 +312,6 @@ class Shared_Files {
         }
         // Statistics
         $this->loader->add_action( 'admin_menu', $plugin_admin_statistics, 'register_statistics_page' );
-        // Contacts
-        $this->loader->add_action( 'admin_menu', $plugin_admin_contacts, 'register_contacts_page' );
         // Shortcodes
         $this->loader->add_action( 'admin_menu', $plugin_admin_shortcodes, 'register_shortcodes_page' );
         // Help & support

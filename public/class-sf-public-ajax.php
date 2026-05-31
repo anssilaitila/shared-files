@@ -15,14 +15,14 @@ class SharedFilesPublicAjax {
                 $min_chars = intval( $s['esl_search_term_min_chars'] );
             }
             if ( isset( $s['esl_search_term'] ) ) {
-                if ( isset( $_POST['search'] ) && $_POST['search'] ) {
-                    $search_term = sanitize_text_field( $_POST['search'] );
+                if ( !empty( $_POST['search'] ) ) {
+                    $search_term = sanitize_text_field( wp_unslash( $_POST['search'] ) );
                 }
             }
             if ( strlen( $search_term ) >= $min_chars ) {
                 if ( isset( $s['esl_user_agent'] ) ) {
                     if ( isset( $_SERVER['HTTP_USER_AGENT'] ) ) {
-                        $user_agent = sanitize_text_field( $_SERVER['HTTP_USER_AGENT'] );
+                        $user_agent = sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) );
                     }
                 }
                 $user_country = '';
@@ -53,12 +53,12 @@ class SharedFilesPublicAjax {
         if ( isset( $_POST['restricted'] ) ) {
             $restricted = intval( $_POST['restricted'] );
         }
-        if ( isset( $_POST['sf_tag'] ) && $_POST['sf_tag'] ) {
-            $tag_slug = sanitize_title( $_POST['sf_tag'] );
+        if ( isset( $_POST['sf_tag'] ) ) {
+            $tag_slug = sanitize_title( wp_unslash( $_POST['sf_tag'] ) );
         }
-        if ( isset( $_POST['sf_category'] ) && $_POST['sf_category'] ) {
-            $term_slug = sanitize_title( $_POST['sf_category'] );
-        } elseif ( isset( $atts['category'] ) && $atts['category'] ) {
+        if ( isset( $_POST['sf_category'] ) ) {
+            $term_slug = sanitize_title( wp_unslash( $_POST['sf_category'] ) );
+        } elseif ( isset( $atts['category'] ) ) {
             $term_slug = sanitize_title( $atts['category'] );
         }
         $cf_active = 0;
@@ -123,7 +123,7 @@ class SharedFilesPublicAjax {
                 'meta_query'     => $meta_query_full,
             ));
         }
-        $hide_description = ( isset( $_POST['hide_description'] ) && $_POST['hide_description'] ? 1 : '' );
+        $hide_description = ( !empty( $_POST['hide_description'] ) ? 1 : '' );
         if ( $wp_query->have_posts() ) {
             while ( $wp_query->have_posts() ) {
                 $wp_query->the_post();
