@@ -245,7 +245,8 @@ class SharedFilesAdminMetadata {
         echo '<p style="margin-top: 3px; margin-bottom: 20px;"><a href="https://www.sharedfilespro.com/how-to-increase-maximum-media-library-file-upload-size-in-wordpress-3-different-ways/" target="_blank">' . esc_html__( 'How to increase the maximum file size', 'shared-files' ) . '&raquo;</a></p>';
         // SUPPORT BOX START
         $is_premium = 0;
-        if ( !$is_premium ) {
+        $show_support_forum_info = 0;
+        if ( !$is_premium && $show_support_forum_info ) {
             $url = 'https://wordpress.org/support/plugin/shared-files/';
             echo '<div class="shared-files-admin-support-box">';
             echo sprintf( wp_kses( 
@@ -597,11 +598,11 @@ class SharedFilesAdminMetadata {
                 update_post_meta( $id, '_sf_description', '' );
             }
             $custom_filename = '';
-            if ( isset( $_POST['_sf_filename'] ) ) {
+            if ( !empty( $_POST['_sf_filename'] ) ) {
                 $custom_filename = sanitize_text_field( wp_unslash( $_POST['_sf_filename'] ) );
                 update_post_meta( $id, '_sf_filename', $custom_filename );
             }
-            if ( isset( $_POST['_sf_external_url'] ) ) {
+            if ( !empty( $_POST['_sf_external_url'] ) ) {
                 $external_url = esc_url_raw( wp_unslash( $_POST['_sf_external_url'] ) );
                 update_post_meta( $id, '_sf_external_url', $external_url );
                 $filename = basename( $external_url );

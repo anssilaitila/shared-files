@@ -15,8 +15,8 @@
  * @wordpress-plugin
  * Plugin Name:       Shared Files
  * Description:       A simple yet effective tool to list downloadable files on your site.
- * Version:           1.7.66
- * Author:            Shared Files – File Upload Form
+ * Version:           1.7.67
+ * Author:            Shared Files – File Upload & Download Manager
  * Author URI:        https://www.sharedfilespro.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
@@ -81,7 +81,7 @@ if ( function_exists( 'shared_files_fs' ) ) {
         do_action( 'shared_files_fs_loaded' );
     }
     function shared_files_fs_custom_connect_message(  $message, $user_first_name  ) {
-        return sprintf(
+        return sprintf( 
             /* translators: %1$s: user's first name */
             __( 'Hey %1$s', 'shared-files' ) . ',<br>' . __( 'never miss an important update -- opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com.', 'shared-files' ),
             $user_first_name
@@ -145,7 +145,7 @@ if ( function_exists( 'shared_files_fs' ) ) {
      * Start at version 1.0.0 and use SemVer - https://semver.org
      * Rename this for your plugin and update it as you release new versions.
      */
-    define( 'SHARED_FILES_VERSION', '1.7.66' );
+    define( 'SHARED_FILES_VERSION', '1.7.67' );
     define( 'SHARED_FILES_URI', plugin_dir_url( __FILE__ ) );
     define( 'SHARED_FILES_PATH', plugin_dir_path( __FILE__ ) );
     /**

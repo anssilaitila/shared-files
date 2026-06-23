@@ -31,8 +31,9 @@ class SharedFilesAdminInlineScripts {
         } elseif ( $current_screen_id === 'edit-shared_file' || $current_screen_id === 'edit-shared-file-category' || $current_screen_id === 'shared_file_page_shared-files-shortcodes' || $current_screen_id === 'shared_file_page_shared-files-support' ) {
             $is_premium = 0;
             $js .= "jQuery( document ).ready( function(\$) {";
+            $show_support_forum_info = 0;
             if ( $current_screen_id === 'edit-shared_file' ) {
-                if ( !$is_premium ) {
+                if ( !$is_premium && $show_support_forum_info ) {
                     $url = 'https://wordpress.org/support/plugin/shared-files/';
                     $support_html = sprintf( wp_kses( 
                         /* translators: %s: link to the support forum */

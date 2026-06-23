@@ -1,14 +1,14 @@
-=== Shared Files – Frontend File Upload Form & Secure File Sharing ===
+=== Shared Files – File Upload & Download Manager ===
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.7.66
+Stable tag: 1.7.67
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-File management plugin featuring frontend file upload form, download manager, statistics and download log.
+File management plugin featuring file upload, download manager, statistics and download log.
 
 == Description ==
 
@@ -29,7 +29,7 @@ Shared Files provides an interface for uploading and managing a large group of d
 * View supported files in the browser, including photos, movies, and other types of files (including lightbox view)
 * Search functionality to easily and quickly find uploaded documents
 
-== Download Manager ==
+== Download Manager for WordPress ==
 
 * Top 50 most popular files
 * Download log of all file downloads
@@ -153,7 +153,6 @@ What is more important than having a statistics of your uploads! Shared Files pl
 == Shared Files FREE – a simple solution for file management and download tracking ==
 
 * Fast search of all files targeting all visible data on the file card, e.g. name and description
-* Frontend file upload with tag support for logged-in users
 * Wait for the Countdown page with a counter and automatic download when the counter reaches zero
 * Any file type upload (audio, video, image, PDF, Word, file folder, etc)
 * SVG icons of high quality for 25 various file types, plus individual custom icons for various file types
@@ -161,14 +160,13 @@ What is more important than having a statistics of your uploads! Shared Files pl
 * Lightbox view for images and videos (, YouTube, mp4, webm, ogg, mov)
 * Functions as a file explorer, download manager, and file manager
 * WordPress Multisite compatible
-* A lead generation tool for WordPress
 
 == Shared Files PRO – a full featured download manager and file management plugin ==
 
 * Search filters based on categories, tags, and custom field data
 * Users and roles with different file-opening permissions
 * Downloads wait countdown page
-* More features for the frontend file uploader
+* Frontend file uploader
 * Visitors/users can upload and add files to new categories
 * FTP files can be uploaded and activated with a single click
 * Upload multiple files
@@ -268,7 +266,7 @@ Anyone who can open the page which contains the file list is able to download th
 == Screenshots ==
 
 1. List of files available for download
-2. Frontend file upload
+2. Frontend file upload (Pro)
 3. Files listed in 2 columns (more layout options available)
 4. File manager in admin area
 5. Edit a single file
@@ -279,6 +277,10 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.67 - 2026-06-22 =
+* (All plans) Fixed an issue where frontend upload failed when tag checkboxes were selected
+* (Free + All plans) Tweaks and fixes
 
 = 1.7.66 - 2026-05-31 =
 * (Free + All plans) Bug fixes

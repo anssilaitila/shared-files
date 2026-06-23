@@ -351,8 +351,8 @@ class SharedFilesAdminToolbar {
 
       <?php 
             $current_date = wp_date( 'Y-m-d' );
-            $start_date = '2026-03-10';
-            $end_date = '2026-03-31';
+            $start_date = '2026-06-22';
+            $end_date = '2026-07-10';
             ?>
 
       <?php 

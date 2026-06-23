@@ -4,115 +4,6 @@ if ( !defined( 'ABSPATH' ) ) {
     exit;
 }
 class SharedFilesFileUpload {
-    public static function fileUploadMarkup( $atts, $restrict_access = 0 ) {
-        $html = '';
-        $s = get_option( 'shared_files_settings' );
-        if ( !function_exists( 'wp_terms_checklist' ) ) {
-            include ABSPATH . 'wp-admin/includes/template.php';
-        }
-        $upload_id = '';
-        $post_id = intval( get_the_id() );
-        $post_title = sanitize_text_field( get_the_title() );
-        if ( isset( $_GET ) && isset( $_GET['shared-files-upload'] ) ) {
-            $multiple_files_upload_active = 0;
-            if ( !$multiple_files_upload_active ) {
-                $html .= '<div class="shared-files-upload-complete">' . sanitize_text_field( __( 'File successfully uploaded.', 'shared-files' ) ) . '</div>';
-            }
-        } elseif ( isset( $_GET ) && isset( $_GET['_sf_delete_file'] ) && isset( $_GET['sc'] ) ) {
-            $html .= '<div class="shared-files-file-deleted">' . sanitize_text_field( __( 'File successfully deleted.', 'shared-files' ) ) . '</div>';
-        }
-        $exclude_cat = [];
-        $exclude_tag = [];
-        $ajax_class = '';
-        if ( !isset( $s['file_upload_disable_progress_bar'] ) ) {
-            $ajax_class = ' shared-files-frontend-file-upload-ajax-active';
-        }
-        $html .= '<div class="sf-public-file-upload-container">';
-        $html .= '<form method="post" enctype="multipart/form-data" class="shared-files-frontend-file-upload' . $ajax_class . '">';
-        $html .= wp_nonce_field(
-            'sf_insert_file',
-            'secret_code',
-            true,
-            false
-        );
-        $html .= '<input name="shared-files-upload" value="1" type="hidden" />';
-        $html .= '<input name="_sf_embed_post_id" value="' . esc_attr( $post_id ) . '" type="hidden" />';
-        $html .= '<input name="_sf_embed_post_title" value="' . esc_attr( $post_title ) . '" type="hidden" />';
-        if ( isset( $atts['only_uploaded_files'] ) && $post_id ) {
-            $html .= '<input name="_SF_ONLY_UPLOADED_FILES" value="1" type="hidden" />';
-        } else {
-            $html .= '<input name="_SF_ONLY_UPLOADED_FILES" value="0" type="hidden" />';
-        }
-        $html .= '<input name="_sf_upload_id" value="' . esc_attr( $upload_id ) . '" type="hidden" />';
-        if ( $restrict_access ) {
-            $html .= '<input name="_sf_restrict_access" value="1" type="hidden" />';
-        }
-        $html .= '<input name="_SF_GOTO" value="' . esc_url_raw( get_permalink() ) . '" type="hidden" />';
-        $accept = '';
-        $multiple_files_upload_active = 0;
-        $file_required = 'required';
-        if ( isset( $s['file_upload_file_not_required'] ) ) {
-            $file_required = '';
-        }
-        $html .= SharedFilesHelpers::ajaxUploadMarkupNew();
-        $html .= '<input type="hidden" name="_sf_insert_multiple_files_frontend" value="1" />';
-        $html .= '<p style="margin-top: 10px; margin-bottom: 8px;">' . sanitize_text_field( __( 'Maximum file size:', 'shared-files' ) ) . ' <strong>' . sanitize_text_field( SharedFilesHelpers::maxUploadSize() ) . '</strong></p>';
-        if ( isset( $s['file_upload_show_external_url'] ) ) {
-            $html .= '<div class="shared-files-file-upload-youtube-container">';
-            $external_url_title = sanitize_text_field( __( 'Or enter a YouTube URL:', 'shared-files' ) );
-            if ( isset( $s['file_upload_external_url_title'] ) && $s['file_upload_external_url_title'] ) {
-                $external_url_title = sanitize_text_field( $s['file_upload_external_url_title'] );
-            }
-            $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( $external_url_title ) . '</span>';
-            $html .= '<input type="text" name="_sf_external_url" class="shared-files-external-url" value="" />';
-            $html .= '</div>';
-        }
-        $tag_slug_for_dropdown = SHARED_FILES_TAG_SLUG;
-        $tag_count = wp_count_terms( SHARED_FILES_TAG_SLUG );
-        if ( $tag_count ) {
-            if ( isset( $atts['tag_dropdown'] ) || isset( $s['show_tag_dropdown_on_file_upload'] ) ) {
-                if ( get_taxonomy( $tag_slug_for_dropdown ) ) {
-                    $html .= wp_dropdown_categories( [
-                        'show_option_all' => ' ',
-                        'hide_empty'      => 0,
-                        'hierarchical'    => 0,
-                        'show_count'      => 0,
-                        'orderby'         => 'name',
-                        'name'            => $tag_slug_for_dropdown,
-                        'value_field'     => 'slug',
-                        'taxonomy'        => $tag_slug_for_dropdown,
-                        'echo'            => 0,
-                        'class'           => 'select_v2',
-                        'show_option_all' => sanitize_text_field( __( 'Choose tag', 'shared-files' ) ),
-                        'exclude'         => $exclude_tag,
-                    ] );
-                }
-            } else {
-                if ( isset( $atts['tag_checkboxes'] ) || isset( $s['show_tag_checkboxes_on_file_upload'] ) ) {
-                    $taglist_args = [
-                        'taxonomy' => SHARED_FILES_TAG_SLUG,
-                        'echo'     => 0,
-                    ];
-                    $html .= '<span class="sf-taglist-title">' . sanitize_text_field( __( 'Tags', 'shared-files' ) ) . '</span><ul class="sf-taglist">' . wp_terms_checklist( 0, $taglist_args ) . '</ul>';
-                }
-            }
-        }
-        $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( __( 'Title', 'shared-files' ) ) . '</span>';
-        $html .= '<input type="text" name="_sf_title" class="shared-files-title" value="" ' . SharedFilesHelpers::fieldAttrRequired( 'file_upload_title_required' ) . ' />';
-        if ( !isset( $s['file_upload_hide_description'] ) ) {
-            $html .= '<span class="shared-files-upload-field-title">' . sanitize_text_field( __( 'Description', 'shared-files' ) ) . '</span>';
-            $html .= '<textarea name="_sf_description" class="shared-files-description" ' . SharedFilesHelpers::fieldAttrRequired( 'file_upload_description_required' ) . '></textarea>';
-        }
-        if ( !isset( $s['file_upload_disable_progress_bar'] ) ) {
-            //      $html .= SharedFilesHelpers::ajaxUploadMarkup();
-        }
-        $html .= '<hr class="clear" /><input type="submit" value="' . esc_attr__( 'Submit', 'shared-files' ) . '" class="sf-public-file-upload-submit" />';
-        $html .= '</form>';
-        // .sf-public-file-upload-container
-        $html .= '</div>';
-        return $html;
-    }
-
     public function file_upload_plup( $request ) {
         $s = get_option( 'shared_files_settings' );
         if ( isset( $_GET ) && isset( $_GET['_sf_delete_file'] ) ) {
@@ -209,11 +100,13 @@ class SharedFilesFileUpload {
                             }
                         }
                         if ( isset( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) ) {
-                            $tags = sanitize_text_field( wp_unslash( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) );
-                            $tags_int = array_map( function ( $value ) {
-                                return (int) $value;
-                            }, $tags );
-                            wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
+                            $tags = wp_unslash( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] );
+                            if ( is_array( $tags ) ) {
+                                $tags_int = array_map( function ( $value ) {
+                                    return (int) $value;
+                                }, $tags );
+                                wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
+                            }
                         }
                         if ( is_user_logged_in() ) {
                             $user = wp_get_current_user();
@@ -327,11 +220,13 @@ class SharedFilesFileUpload {
                         }
                     }
                     if ( isset( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) ) {
-                        $tags = sanitize_text_field( wp_unslash( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] ) );
-                        $tags_int = array_map( function ( $value ) {
-                            return (int) $value;
-                        }, $tags );
-                        wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
+                        $tags = wp_unslash( $_POST['tax_input'][SHARED_FILES_TAG_SLUG] );
+                        if ( is_array( $tags ) ) {
+                            $tags_int = array_map( function ( $value ) {
+                                return (int) $value;
+                            }, $tags );
+                            wp_set_post_terms( $id, $tags_int, SHARED_FILES_TAG_SLUG );
+                        }
                     }
                     if ( is_user_logged_in() ) {
                         $user = wp_get_current_user();

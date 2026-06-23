@@ -204,9 +204,6 @@ class Shared_Files {
         $plugin_admin_restrict_access = new SharedFilesAdminRestrictAccess();
         $plugin_admin_allow_more_file_types = new SharedFilesAdminAllowMoreFileTypes();
         $plugin_settings = new Shared_Files_Settings();
-        if ( !isset( $s['only_logged_in_users_can_add_files'] ) ) {
-            $this->loader->add_action( 'wp_ajax_nopriv_shared_files_file_upload', $plugin_admin_sync_files, 'handle_file_upload' );
-        }
         $this->loader->add_action( 'wp_ajax_shared_files_file_upload', $plugin_admin_sync_files, 'handle_file_upload' );
         // Enqueue CSS + JS (+ other)
         $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -364,8 +361,6 @@ class Shared_Files {
         // Ajax
         $this->loader->add_action( 'wp_ajax_nopriv_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
         $this->loader->add_action( 'wp_ajax_sf_get_files', $plugin_public_ajax, 'sf_get_files' );
-        // Front-end file upload
-        $this->loader->add_filter( 'request', $plugin_public_file_upload, 'file_upload_plup' );
     }
 
     /**

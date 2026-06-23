@@ -14,25 +14,14 @@ class SharedFilesSettingsTab5Content {
             'shared-files'
         );
         add_settings_field(
-            'shared-files-file_upload_disable_progress_bar',
-            sanitize_text_field( __( 'Disable progress bar / ajax upload', 'shared-files' ) ),
-            array($field_render, 'checkbox_render'),
-            'shared-files',
-            'shared-files_tab_' . $tab,
-            array(
-                'label_for'  => 'shared-files-file_upload_disable_progress_bar',
-                'field_name' => 'file_upload_disable_progress_bar',
-            )
-        );
-        add_settings_field(
             'shared-files-only_logged_in_users_can_add_files',
             sanitize_text_field( __( 'Only logged in users can add files', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-only_logged_in_users_can_add_files',
-                'field_name' => 'only_logged_in_users_can_add_files',
+                'label_for'  => 'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
+                'field_name' => $only_pro . 'only_logged_in_users_can_add_files',
             )
         );
         add_settings_field(
@@ -42,8 +31,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-file_upload_show_delete_button',
-                'field_name' => 'file_upload_show_delete_button',
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_show_delete_button',
+                'field_name' => $only_pro . 'file_upload_show_delete_button',
             )
         );
         add_settings_field(
@@ -53,8 +42,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-file_upload_set_to_pending',
-                'field_name' => 'file_upload_set_to_pending',
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_set_to_pending',
+                'field_name' => $only_pro . 'file_upload_set_to_pending',
             )
         );
         add_settings_field(
@@ -64,8 +53,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-hide_file_uploader_info',
-                'field_name' => 'hide_file_uploader_info',
+                'label_for'  => 'shared-files-' . $only_pro . 'hide_file_uploader_info',
+                'field_name' => $only_pro . 'hide_file_uploader_info',
             )
         );
         add_settings_field(
@@ -75,8 +64,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-uncheck_hide_from_other_pages',
-                'field_name' => 'uncheck_hide_from_other_pages',
+                'label_for'  => 'shared-files-' . $only_pro . 'uncheck_hide_from_other_pages',
+                'field_name' => $only_pro . 'uncheck_hide_from_other_pages',
             )
         );
         add_settings_field(
@@ -226,8 +215,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-show_tag_dropdown_on_file_upload',
-                'field_name' => 'show_tag_dropdown_on_file_upload',
+                'label_for'  => 'shared-files-' . $only_pro . 'show_tag_dropdown_on_file_upload',
+                'field_name' => $only_pro . 'show_tag_dropdown_on_file_upload',
             )
         );
         add_settings_field(
@@ -237,8 +226,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-show_tag_checkboxes_on_file_upload',
-                'field_name' => 'show_tag_checkboxes_on_file_upload',
+                'label_for'  => 'shared-files-' . $only_pro . 'show_tag_checkboxes_on_file_upload',
+                'field_name' => $only_pro . 'show_tag_checkboxes_on_file_upload',
             )
         );
         if ( SharedFilesHelpers::isMin2() ) {
@@ -272,8 +261,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-file_upload_title_required',
-                'field_name' => 'file_upload_title_required',
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_title_required',
+                'field_name' => $only_pro . 'file_upload_title_required',
             )
         );
         add_settings_field(
@@ -306,8 +295,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-file_upload_description_required',
-                'field_name' => 'file_upload_description_required',
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_description_required',
+                'field_name' => $only_pro . 'file_upload_description_required',
             )
         );
         add_settings_field(
@@ -317,8 +306,8 @@ class SharedFilesSettingsTab5Content {
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-file_upload_hide_description',
-                'field_name' => 'file_upload_hide_description',
+                'label_for'  => 'shared-files-' . $only_pro . 'file_upload_hide_description',
+                'field_name' => $only_pro . 'file_upload_hide_description',
                 'class'      => 'shared-files-padding-bottom',
             )
         );

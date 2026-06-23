@@ -91,9 +91,6 @@ class ShortcodeSharedFiles {
                     'compare' => 'NOT EXISTS',
                 );
             }
-            if ( is_user_logged_in() || !isset( $s['only_logged_in_users_can_add_files'] ) ) {
-                $html .= SharedFilesFileUpload::fileUploadMarkup( $atts );
-            }
         }
         if ( isset( $atts['file_id'] ) ) {
             $file_id = (int) $atts['file_id'];
