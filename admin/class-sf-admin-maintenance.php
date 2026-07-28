@@ -17,6 +17,7 @@ class SharedFilesAdminMaintenance {
         //    wp_clear_scheduled_hook('cron_remove_obsolete_file_metadata_automatically');
         if ( !wp_next_scheduled( 'check_expired_files' ) ) {
             wp_schedule_event( time(), 'daily', 'check_expired_files' );
+            //      wp_schedule_event(time(), 'every_min', 'check_expired_files');
         }
         //    wp_die(wp_next_scheduled('cron_remove_obsolete_file_metadata_automatically'));
         //    delete_option('shared_files_settings');

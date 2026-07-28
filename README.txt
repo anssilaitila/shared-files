@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.7.67
+Stable tag: 1.7.68
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -277,6 +277,12 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.68 - 2026-07-28 =
+* (Free + All plans) Bug fixes
+* (All plans) Fixed an issue where PHP warnings would appear in automatically sent email content
+* (All plans) New setting for front-end uploader: Rate limit: max. uploads per window (plugin settings, File upload tab)
+* (All plans) New setting for front-end uploader: Rate limit window size (in seconds)
 
 = 1.7.67 - 2026-06-22 =
 * (All plans) Fixed an issue where frontend upload failed when tag checkboxes were selected

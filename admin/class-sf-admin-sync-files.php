@@ -217,6 +217,12 @@ class SharedFilesAdminSyncFiles {
 
     public function handle_file_upload() {
         check_ajax_referer( 'plupload_nonce' );
+        $limit = $this->check_rate_limit();
+        if ( is_wp_error( $limit ) ) {
+            wp_send_json_error( [
+                'error' => $limit->get_error_message(),
+            ], 429 );
+        }
         if ( !empty( $_FILES ) ) {
             $s = get_option( 'shared_files_settings' );
             $tmp_name = '';
@@ -256,6 +262,34 @@ class SharedFilesAdminSyncFiles {
             wp_die();
         }
         wp_die();
+    }
+
+    private function check_rate_limit() {
+        $s = get_option( 'shared_files_settings' );
+        $max_uploads = ( !empty( $s['frontend_upload_max_per_window'] ) ? absint( $s['frontend_upload_max_per_window'] ) : 20 );
+        $window = ( !empty( $s['frontend_upload_window_seconds'] ) ? absint( $s['frontend_upload_window_seconds'] ) : HOUR_IN_SECONDS );
+        if ( is_admin() ) {
+            $max_uploads = 1000;
+            $window = 3600;
+        }
+        if ( is_user_logged_in() ) {
+            $key = 'shared_files_upl_u_' . get_current_user_id();
+        } else {
+            // Fallback for anonymous uploads; hash the IP so raw IPs aren't stored
+            $ip = ( isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : '' );
+            $key = 'shared_files_upl_ip_' . md5( $ip . wp_salt() );
+        }
+        $count = (int) get_transient( $key );
+        if ( $count >= $max_uploads ) {
+            $error_msg = sanitize_text_field( __( 'Upload limit reached. Please try again later.', 'shared-files' ) );
+            SharedFilesHelpers::writeLog( $error_msg, '' );
+            return new WP_Error('rate_limited', $error_msg);
+        }
+        // Increment. Note: transient TTL resets on set, so this is a rolling window
+        // from the last upload. If you want a fixed window, store the window start
+        // time alongside the count instead.
+        set_transient( $key, $count + 1, $window );
+        return true;
     }
 
     /**

@@ -4,6 +4,7 @@ class SharedFilesPublicAjax {
     public function search_log() {
         $s = get_option( 'shared_files_settings' );
         if ( isset( $s['enable_search_log'] ) ) {
+            check_ajax_referer( 'shared_files_search_log', 'shared_files_search_log_nonce' );
             $search_term = '';
             $user_ip = '';
             $post_id = 0;

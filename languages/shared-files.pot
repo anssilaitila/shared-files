@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Shared Files 1.7.67\n"
+"Project-Id-Version: Shared Files 1.7.68\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trunk\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-06-22T20:51:17+03:00\n"
+"POT-Creation-Date: 2026-07-28T17:22:06+03:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: shared-files\n"
@@ -59,9 +59,9 @@ msgid "Edit File"
 msgstr ""
 
 #: admin/class-sf-admin-cpt.php:21
-#: public/class-sf-public-ajax.php:145
-#: public/class-shortcode-shared_files.php:411
-#: public/class-shortcode-shared_files.php:446
+#: public/class-sf-public-ajax.php:146
+#: public/class-shortcode-shared_files.php:412
+#: public/class-shortcode-shared_files.php:447
 #: public/class-shortcode_shared_files_simple.php:194
 #: public/class-shortcode_shared_files_simple.php:212
 msgid "No files found."
@@ -1561,8 +1561,13 @@ msgstr ""
 msgid "Activate"
 msgstr ""
 
-#: admin/class-sf-admin-sync-files.php:237
+#: admin/class-sf-admin-sync-files.php:243
 msgid "File mime type is not allowed."
+msgstr ""
+
+#: admin/class-sf-admin-sync-files.php:284
+#: public/class-sf-public.php:139
+msgid "Upload limit reached. Please try again later."
 msgstr ""
 
 #: admin/class-sf-admin-sync-media-library.php:11
@@ -1709,7 +1714,7 @@ msgstr ""
 
 #: admin/class-sf-admin-toolbar.php:168
 #: admin/class-sf-admin-toolbar.php:303
-#: admin/class-sf-admin.php:159
+#: admin/class-sf-admin.php:157
 msgid "Settings"
 msgstr ""
 
@@ -1752,7 +1757,7 @@ msgstr ""
 msgid "Get started"
 msgstr ""
 
-#: admin/class-sf-admin.php:166
+#: admin/class-sf-admin.php:164
 msgid "Upgrade"
 msgstr ""
 
@@ -2541,7 +2546,7 @@ msgid "Hide new tag input"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-edit.php:98
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:304
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:330
 msgid "Hide description"
 msgstr ""
 
@@ -2658,82 +2663,90 @@ msgid "Restrict accepted file extensions"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-upload.php:98
-msgid "File field optional"
+msgid "Rate limit: max. uploads per window"
 msgstr ""
 
 #: admin/settings/class-sf-admin-settings-tab-file-upload.php:111
+msgid "Rate limit window size (in seconds) "
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:124
+msgid "File field optional"
+msgstr ""
+
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:137
 msgid "Enable featured image (a separate file can be added)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:122
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:148
 msgid "Show External URL"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:133
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:159
 msgid "Text for External URL"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:140
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:166
 msgid "Or enter a YouTube URL:"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:145
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:171
 msgid "Restrict access for users (logged in users only)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:156
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:182
 msgid "Restrict access for roles (logged in users only)"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:167
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:193
 msgid "Category selection required"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:178
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:204
 msgid "Show category checkboxes instead of a dropdown"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:189
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:215
 msgid "Allow the uploader to create a single new category"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:201
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:227
 msgid "Allow the uploader to create multiple new categories"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:213
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:239
 msgid "Show tag dropdown"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:224
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:250
 msgid "Show tag checkboxes"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:236
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:262
 msgid "Allow the uploader to create multiple new tags"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:248
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:274
 msgid "Show category and tag checkboxes on multiple columns"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:259
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:285
 msgid "File title required"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:270
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:296
 msgid "Allow the uploader to define a password for the file"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:282
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:308
 msgid "Show Expiration date"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:293
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:319
 msgid "Description required"
 msgstr ""
 
-#: admin/settings/class-sf-admin-settings-tab-file-upload.php:316
+#: admin/settings/class-sf-admin-settings-tab-file-upload.php:342
 msgid "Send an email notify when a file is uploaded and / or send an email to all users having one of the roles below:"
 msgstr ""
 
@@ -3312,38 +3325,42 @@ msgid "Browse more files:"
 msgstr ""
 
 #: public/class-sf-public-shortcode-filters.php:23
-#: public/class-shortcode-shared_files.php:182
+#: public/class-shortcode-shared_files.php:183
 msgid "Choose tag"
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:57
+#: public/class-sf-public.php:139
+msgid "You are not allowed to upload files."
+msgstr ""
+
+#: public/class-shortcode-shared_files.php:58
 msgid "File successfully updated."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:59
+#: public/class-shortcode-shared_files.php:60
 msgid "File successfully deleted."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:140
+#: public/class-shortcode-shared_files.php:141
 msgid "File not found"
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:169
+#: public/class-shortcode-shared_files.php:170
 #: public/class-shortcode_shared_files_simple.php:54
 msgid "Search files..."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:169
+#: public/class-shortcode-shared_files.php:170
 #: public/class-shortcode_shared_files_simple.php:54
 msgid "Search files"
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:366
+#: public/class-shortcode-shared_files.php:367
 #: public/class-shortcode_shared_files_simple.php:192
 msgid "file found."
 msgstr ""
 
-#: public/class-shortcode-shared_files.php:366
+#: public/class-shortcode-shared_files.php:367
 #: public/class-shortcode_shared_files_simple.php:192
 msgid "files found."
 msgstr ""
@@ -3390,17 +3407,16 @@ msgid "Select Options"
 msgstr ""
 
 #: blocks/shared-files/build/index.js:1
-#: blocks/shared-files/src/index.js:60
-msgid "Enable File Upload"
-msgstr ""
-
-#: blocks/shared-files/build/index.js:1
 #: blocks/shared-files/src/index.js:68
 msgid "Select a file"
 msgstr ""
 
 #: blocks/shared-files/src/edit.js:35
 msgid "Shared Files – hello from the editor!"
+msgstr ""
+
+#: blocks/shared-files/src/index.js:60
+msgid "Enable File Upload"
 msgstr ""
 
 #: blocks/shared-files/build/block.json

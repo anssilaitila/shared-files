@@ -134,13 +134,11 @@ class Shared_Files_Admin {
         if ( $post_type == 'shared_file' ) {
             if ( isset( $file['file'] ) && $file['file'] ) {
                 $filename_with_path = SharedFilesFileOpen::getUpdatedPathAndFilenameOnDisk( $file['file'] );
-                $filename_with_path = str_replace( '../', '', $filename_with_path );
-                if ( file_exists( $filename_with_path ) ) {
-                    if ( strpos( $filename_with_path, '/wp-content/uploads/shared-files/' ) !== false ) {
-                        wp_delete_file( $filename_with_path );
-                    }
-                } else {
-                    //        wp_die( sanitize_text_field( __('File not found:', 'shared-files') ) . '<br />' . $filename_with_path );
+                $upload_dir = wp_upload_dir();
+                $base_dir = realpath( trailingslashit( $upload_dir['basedir'] ) . 'shared-files' );
+                $real_path = realpath( $filename_with_path );
+                if ( $base_dir !== false && $real_path !== false && strpos( $real_path, $base_dir . DIRECTORY_SEPARATOR ) === 0 && is_file( $real_path ) ) {
+                    wp_delete_file( $real_path );
                 }
             }
             if ( has_post_thumbnail( $post_id ) ) {
