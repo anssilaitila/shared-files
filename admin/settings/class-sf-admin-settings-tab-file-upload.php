@@ -90,12 +90,12 @@ class SharedFilesSettingsTab5Content {
                 'label_for'   => 'shared-files-' . $only_pro . 'file_upload_restrict_file_extensions',
                 'field_name'  => $only_pro . 'file_upload_restrict_file_extensions',
                 'placeholder' => '.gif, .jpg, .png, .doc',
-                'class'       => '',
+                'class'       => 'shared-files-padding-bottom',
             )
         );
         add_settings_field(
             'shared-files-' . $only_pro . 'frontend_upload_max_per_window',
-            sanitize_text_field( __( 'Rate limit: max. uploads per window', 'shared-files' ) ),
+            sanitize_text_field( __( 'Rate limit: max. uploads per window, for non-logged in users', 'shared-files' ) ),
             array($field_render, 'input_render'),
             'shared-files',
             'shared-files_tab_' . $tab,
@@ -108,13 +108,39 @@ class SharedFilesSettingsTab5Content {
         );
         add_settings_field(
             'shared-files-' . $only_pro . 'frontend_upload_window_seconds',
-            sanitize_text_field( __( 'Rate limit window size (in seconds) ', 'shared-files' ) ),
+            sanitize_text_field( __( 'Rate limit window size (in seconds), for non-logged in users', 'shared-files' ) ),
             array($field_render, 'input_render'),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
                 'label_for'   => 'shared-files-' . $only_pro . 'frontend_upload_window_seconds',
                 'field_name'  => $only_pro . 'frontend_upload_window_seconds',
+                'placeholder' => '3600',
+                'class'       => 'shared-files-padding-bottom',
+            )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'frontend_upload_max_per_window_logged_in',
+            sanitize_text_field( __( 'Rate limit: max. uploads per window, for logged in users', 'shared-files' ) ),
+            array($field_render, 'input_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'   => 'shared-files-' . $only_pro . 'frontend_upload_max_per_window_logged_in',
+                'field_name'  => $only_pro . 'frontend_upload_max_per_window_logged_in',
+                'placeholder' => '20',
+                'class'       => '',
+            )
+        );
+        add_settings_field(
+            'shared-files-' . $only_pro . 'frontend_upload_window_seconds_logged_in',
+            sanitize_text_field( __( 'Rate limit window size (in seconds), for logged in users', 'shared-files' ) ),
+            array($field_render, 'input_render'),
+            'shared-files',
+            'shared-files_tab_' . $tab,
+            array(
+                'label_for'   => 'shared-files-' . $only_pro . 'frontend_upload_window_seconds_logged_in',
+                'field_name'  => $only_pro . 'frontend_upload_window_seconds_logged_in',
                 'placeholder' => '3600',
                 'class'       => 'shared-files-padding-bottom',
             )

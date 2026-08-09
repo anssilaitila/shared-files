@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
 Tested up to: 7.0
-Stable tag: 1.7.68
+Stable tag: 1.7.69
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -278,15 +278,24 @@ Anyone who can open the page which contains the file list is able to download th
 
 == Changelog ==
 
+= 1.7.69 - 2026-08-10 =
+* (All plans) New setting for front-end uploader: Rate limit: max. uploads per window (plugin settings, File upload tab), for logged in users
+* (All plans) New setting for front-end uploader: Rate limit window size (in seconds), for logged in users
+* (All plans) Fixed an issue with the rate limit settings for non-logged in users
+* (All plans) Security: uploads for non-logged in users are now disabled by default (disabled on plugin activation). Reported by hoangphuong via WPScan.
+
 = 1.7.68 - 2026-07-28 =
 * (Free + All plans) Bug fixes
 * (All plans) Fixed an issue where PHP warnings would appear in automatically sent email content
-* (All plans) New setting for front-end uploader: Rate limit: max. uploads per window (plugin settings, File upload tab)
-* (All plans) New setting for front-end uploader: Rate limit window size (in seconds)
+* (All plans) New setting for front-end uploader: Rate limit: max. uploads per window (plugin settings, File upload tab), for non-logged in users
+* (All plans) New setting for front-end uploader: Rate limit window size (in seconds), for non-logged in users
+* (All plans) Security: fixed an arbitrary file deletion issue via path traversal in the file deletion routine. Reported by Huynh Kien Minh via WPScan.
 
 = 1.7.67 - 2026-06-22 =
 * (All plans) Fixed an issue where frontend upload failed when tag checkboxes were selected
 * (Free + All plans) Tweaks and fixes
+* (Free) Security: fixed an arbitrary file deletion issue via path traversal in the file deletion routine. Reported by Huynh Kien Minh via WPScan.
+* (Free) Security: fixed missing authorization on the file upload handler. Reported by hoangphuong via WPScan.
 
 = 1.7.66 - 2026-05-31 =
 * (Free + All plans) Bug fixes
