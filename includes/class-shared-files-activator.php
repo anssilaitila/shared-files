@@ -9,6 +9,7 @@
  * @package    Shared_Files
  * @subpackage Shared_Files/includes
  */
+
 /**
  * Fired during plugin activation.
  *
@@ -20,10 +21,12 @@
  * @author     Anssi Laitila <anssi.laitila@gmail.com>
  */
 class Shared_Files_Activator {
-    /**
-     * @since    1.0.0
-     */
-    public static function activate() {
-    }
+
+  /**
+   * @since    1.0.0
+   */
+  public static function activate() {
+
+  }
 
 }

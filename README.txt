@@ -2,8 +2,8 @@
 Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
-Tested up to: 7.0
-Stable tag: 1.7.69
+Tested up to: 7.1
+Stable tag: 1.7.70
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ File management plugin featuring file upload, download manager, statistics and d
 
 Shared Files is a powerful WordPress plugin that allows you to securely share and manage files, documents and downloads directly from your WordPress site.
 
-With features like user permissions, frontend file upload, and download tracking, it's the perfect solution for businesses, educational institutions, and anyone needing to share files easily and securely.
+With features like file upload and download tracking it's the perfect solution for businesses, educational institutions, and anyone needing to share files easily and securely.
 
 Install Shared Files today and enhance your WordPress site's file management capabilities.
 
@@ -25,7 +25,7 @@ Install Shared Files today and enhance your WordPress site's file management cap
 Shared Files provides an interface for uploading and managing a large group of documents and files easily with numerous layout options and shortcodes for inserting downloadable files anywhere on the website.
 
 * Controlled and isolated files from the media library, making it simple to list shared files on the WordPress website
-* Frontend uploader and file manager functionality to upload files
+* Upload and manage files from WP admin area
 * View supported files in the browser, including photos, movies, and other types of files (including lightbox view)
 * Search functionality to easily and quickly find uploaded documents
 
@@ -58,7 +58,7 @@ Start managing your files right inside WordPress admin with 2 steps:
 2. Insert one of these shortcodes to any page or post on your site.
     * [shared_files] (default file list)
     * [shared_files_simple] (simple file list)
-    * [shared_files file_upload=1] (file list with frontend uploader)
+    * All shortcodes can be found from WP admin / Shared Files / Shortcodes
 
 That's it! The files are now listed for downloading.
 
@@ -130,7 +130,7 @@ File managing solution Shared Files not only helps to upload and organize files,
 
 Shared Files plugin offers the feature of opening YouTube videos or image files in a lightbox preview. Lightbox previews offer a number of benefits including the ability to customize, add content and update it when necessary, flexibility in location placement, and most importantly high visibility.
 
-= File upload =
+= Front end file upload (in paid plans) =
 
 An exciting feature of the Shared Files WordPress file-sharing plugin is the ability of users or visitors to upload files. So any of the users having access can upload files right from the front end having their own contribution to a vast depository of website files.
 
@@ -278,11 +278,14 @@ Anyone who can open the page which contains the file list is able to download th
 
 == Changelog ==
 
+= 1.7.70 - 2026-08-20 =
+* (Free + All plans) Security: fixed an issue regarding unallowed file path when adding featured image. Reported by WPScan.
+* (All plans) Security: Front end uploads for non-logged in users is now disabled by default, and needs to be activated by this setting on the File upload tab: Non-logged in users can upload files. Reported by hoangphuong via WPScan.
+
 = 1.7.69 - 2026-08-10 =
 * (All plans) New setting for front-end uploader: Rate limit: max. uploads per window (plugin settings, File upload tab), for logged in users
 * (All plans) New setting for front-end uploader: Rate limit window size (in seconds), for logged in users
 * (All plans) Fixed an issue with the rate limit settings for non-logged in users
-* (All plans) Security: uploads for non-logged in users are now disabled by default (disabled on plugin activation). Reported by hoangphuong via WPScan.
 
 = 1.7.68 - 2026-07-28 =
 * (Free + All plans) Bug fixes

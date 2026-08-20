@@ -217,6 +217,12 @@ class SharedFilesAdminSyncFiles {
 
     public function handle_file_upload() {
         check_ajax_referer( 'plupload_nonce' );
+        if ( !is_user_logged_in() ) {
+            $error_msg = sanitize_text_field( __( 'Insufficient permissions.', 'shared-files' ) );
+            wp_send_json_error( [
+                'error' => $error_msg,
+            ], 403 );
+        }
         $limit = $this->check_rate_limit();
         if ( is_wp_error( $limit ) ) {
             wp_send_json_error( [

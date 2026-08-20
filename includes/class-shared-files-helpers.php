@@ -742,7 +742,6 @@ class SharedFilesHelpers {
         if ( !function_exists( 'wp_crop_image' ) ) {
             include ABSPATH . 'wp-admin/includes/image.php';
         }
-        // if ! x 2 ...
         if ( $file_id && $upload && $uploaded_type && $filename ) {
             switch ( $uploaded_type ) {
                 case 'image/jpeg':
@@ -751,6 +750,13 @@ class SharedFilesHelpers {
                 case 'image/webp':
                 case 'image/avif':
                     $new_featured_image = $upload;
+                    $validated_path = self::validateSharedFilePath( $new_featured_image['file'] );
+                    if ( !$validated_path ) {
+                        SharedFilesHelpers::writeLog( 'Rejected featured image path: ' . $new_featured_image['file'] );
+                        return;
+                    }
+                    $new_featured_image['file'] = $validated_path;
+                    SharedFilesHelpers::writeLog( 'Proceed with featured image upload: ' . $new_featured_image['file'] );
                     if ( $copy_to_media_library ) {
                         $new_featured_image = wp_upload_bits( $filename, null, file_get_contents( $new_featured_image['file'] ) );
                     }
@@ -772,6 +778,36 @@ class SharedFilesHelpers {
                     break;
             }
         }
+    }
+
+    /**
+     * Returns the canonical path if $path points to an existing file inside
+     * wp-uploads/shared-files (or any subdirectory), otherwise false.
+     */
+    private static function validateSharedFilePath( $path ) {
+        if ( !is_string( $path ) || $path === '' ) {
+            return false;
+        }
+        $upload_dir = wp_upload_dir();
+        $base = realpath( trailingslashit( $upload_dir['basedir'] ) . 'shared-files' );
+        if ( $base === false ) {
+            return false;
+            // shared-files dir doesn't exist
+        }
+        $real = realpath( $path );
+        if ( $real === false || !is_file( $real ) ) {
+            return false;
+            // file doesn't exist (realpath fails on nonexistent paths)
+        }
+        // Normalize separators for Windows hosts
+        $base = wp_normalize_path( $base );
+        $real = wp_normalize_path( $real );
+        // Must be strictly inside the base dir. The trailing slash prevents
+        // "shared-files-evil" from matching "shared-files".
+        if ( strpos( $real, trailingslashit( $base ) ) !== 0 ) {
+            return false;
+        }
+        return $real;
     }
 
 }

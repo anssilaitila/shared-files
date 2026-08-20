@@ -14,14 +14,14 @@ class SharedFilesSettingsTab5Content {
             'shared-files'
         );
         add_settings_field(
-            'shared-files-only_logged_in_users_can_add_files',
-            sanitize_text_field( __( 'Only logged in users can add files', 'shared-files' ) ),
+            'shared-files-non_logged_in_users_can_upload_files',
+            sanitize_text_field( __( 'Non-logged in users can upload files', 'shared-files' ) ),
             array($field_render, 'checkbox_render'),
             'shared-files',
             'shared-files_tab_' . $tab,
             array(
-                'label_for'  => 'shared-files-' . $only_pro . 'only_logged_in_users_can_add_files',
-                'field_name' => $only_pro . 'only_logged_in_users_can_add_files',
+                'label_for'  => 'shared-files-' . $only_pro . 'non_logged_in_users_can_upload_files',
+                'field_name' => $only_pro . 'non_logged_in_users_can_upload_files',
             )
         );
         add_settings_field(
