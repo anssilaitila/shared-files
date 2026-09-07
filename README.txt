@@ -3,7 +3,7 @@ Contributors: anssilaitila, freemius
 Tags: download manager, file sharing, file upload, upload, file manager
 Requires at least: 6.2
 Tested up to: 7.1
-Stable tag: 1.7.70
+Stable tag: 1.7.71
 Requires PHP: 7.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -277,6 +277,9 @@ Anyone who can open the page which contains the file list is able to download th
 10. List files by category (Pro)
 
 == Changelog ==
+
+= 1.7.71 - 2026-09-07 =
+* (Free + All plans) Fixed an issue where saving a page containing the shortcode [shared_files] would return an error
 
 = 1.7.70 - 2026-08-20 =
 * (Free + All plans) Security: fixed an issue regarding unallowed file path when adding featured image. Reported by WPScan.
